@@ -59,8 +59,8 @@ public final class PackFinder implements IPackFinder {
                 final String packName = this.type.path + "/" + packCandidate.getName();
                 final Supplier<IResourcePack> pack = this.getAsPack(packCandidate);
                 final PackMeta meta = getPackMeta(packName, pack);
-                RpmtwUpdateMod.LOGGER.info("載入 {} {}.", this.type.displayName, packName);
-                RpmtwUpdateMod.LOGGER.debug("載入 {} 使用 {}.", packName, meta);
+                RpmtwUpdateMod.LOGGER.info("載入 {} {}。", this.type.displayName, packName);
+                RpmtwUpdateMod.LOGGER.debug("載入 {} 使用 {}。", packName, meta);
                 final ResourcePackInfo packInfo = ResourcePackInfo.createResourcePack(packName, meta.isBuiltIn, pack, factory, meta.priority, IPackNameDecorator.PLAIN);
 
                 if (packInfo != null) {
