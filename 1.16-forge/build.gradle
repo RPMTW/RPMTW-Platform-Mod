@@ -5,7 +5,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("javax.ws.rs:javax.ws.rs-api:2.1")
+        classpath("javax.ws.rs:javax.ws.rs-api:2.1.1")
         classpath group: 'org.glassfish.jersey.inject', name: 'jersey-hk2', version: '2.30.1', changing: true
         classpath group: 'org.glassfish.jersey.media', name: 'jersey-media-json-jackson', version: '2.30.1', changing: true
         classpath group: 'org.glassfish.jersey.core', name: 'jersey-client', version: '2.30.1', changing: true
