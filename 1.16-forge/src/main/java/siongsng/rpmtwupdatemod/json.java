@@ -37,5 +37,3 @@ public class json {
         return aaa.get("tag_name");
     }
 }
-
-// https://api.github.com/repos/SiongSng/ResourcePack-Mod-zh_tw/releases/latest
