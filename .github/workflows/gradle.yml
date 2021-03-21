@@ -30,4 +30,4 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: rpmtw_update_mod-1.0.0-Forge-${{ github.run_number }}.jar
-        path: ${{ github.workspace }}/build/libs
+        path: ${{ github.workspace }}/1.16-forge/build/libs
