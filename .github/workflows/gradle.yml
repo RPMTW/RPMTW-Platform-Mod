@@ -23,9 +23,9 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./1.16-forge/gradlew build
     - name: "Upload Artifact"
       uses: actions/upload-artifact@v1
       with:
         name: rpmtw_update_mod-1.0.0-Forge-${{ github.run_number }}.jar
-        path: build/libs
+        path: ./1.16-forge/build/libs
