@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/json.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/json.java" afterDir="false" />
-    </list>
+    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -256,7 +252,7 @@
       <workItem from="1616291867291" duration="3720000" />
       <workItem from="1616296839848" duration="74000" />
       <workItem from="1616296924915" duration="6822000" />
-      <workItem from="1616307201443" duration="14211000" />
+      <workItem from="1616307201443" duration="14616000" />
     </task>
     <servers />
   </component>
