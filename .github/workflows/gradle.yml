@@ -25,7 +25,7 @@ jobs:
     - name: Build with Gradle
       run: |
          cd ${{ github.workspace }}/1.16-forge
-         sudo ./gradlew build
+         ./gradlew build
     - name: "Upload Artifact"
       uses: actions/upload-artifact@v1
       with:
