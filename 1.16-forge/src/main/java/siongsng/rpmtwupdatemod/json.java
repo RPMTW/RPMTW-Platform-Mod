@@ -1,19 +1,30 @@
 package siongsng.rpmtwupdatemod;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.MediaType;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 
 import net.sf.json.JSONObject;
 
 public class json {
     public static JSONObject get() {
-        Client client = ClientBuilder.newClient();
-        Response response = client.target("https://api.github.com/repos/SiongSng/ResourcePack-Mod-zh_tw/releases/latest")
-                .request(MediaType.APPLICATION_JSON)
-                .get();
-        return JSONObject.fromObject(response.readEntity(String.class));
+        StringBuilder json = new StringBuilder();
+        try {
+            URL urlObject = new URL("https://api.github.com/repos/SiongSng/ResourcePack-Mod-zh_tw/releases/latest");
+            URLConnection uc = urlObject.openConnection();
+            BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream()));
+            String inputLine = null;
+            while ( (inputLine = in.readLine()) != null) {
+                json.append(inputLine);
+            }
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return JSONObject.fromObject(json.toString());
     }
 
     public static Object loadJson() {
@@ -26,3 +37,5 @@ public class json {
         return aaa.get("tag_name");
     }
 }
+
+// https://api.github.com/repos/SiongSng/ResourcePack-Mod-zh_tw/releases/latest
