@@ -24,14 +24,14 @@ public class RpmtwUpdateMod {
             Minecraft.getInstance().getResourcePackList().addPackFinder(PackFinder.RESOUCE);
             Minecraft.getInstance().gameSettings.language = "zh_tw"; //將語言設定為繁體中文
         }
-        LOGGER.info("正在準備進行更新資源包，最新版本:" + json.ver().toString());
+        LOGGER.info("正在準備進行更新資源包，最新版本:");
     }
     @SubscribeEvent
     public static void onClientStarting(FMLClientSetupEvent event) {
         Minecraft.getInstance().getLanguageManager().setCurrentLanguage(new Language("zh_tw", "TW", "繁體中文", false));
         String path = System.getProperty("user.home") + "/.rpmtw/1.16";
         try {
-            FileDownloadManager g = new FileDownloadManager("https://github.com/SiongSng/ResourcePack-Mod-zh_tw/releases/download/RPMTW-1.16-V1901/RPMTW-1.16-V1901.zip", "rpmtw-1.16.zip", path);
+            FileDownloadManager g = new FileDownloadManager("https://github.com/SiongSng/ResourcePack-Mod-zh_tw/releases/latest/download/RPMTW-1.16.zip", "rpmtw-1.16.zip", path);
             g.start("go");
         } catch (Exception e) {
             e.printStackTrace();
