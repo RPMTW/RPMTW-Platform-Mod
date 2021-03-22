@@ -18,6 +18,10 @@ group = 'siongsng.rpmtwupdatemod'
 version = '1.0.0'
 archivesBaseName = 'rpmtw_update_mod'
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = "sources"
+    from sourceSets.main.allSource
+}
 minecraft {
     mappings channel: 'snapshot', version: '20210309-1.16.5'
     runs {
@@ -68,6 +72,7 @@ jar {
         attributes([
                 "Specification-Title"     : "rpmtwupdatemod",
                 "Specification-Vendor"    : "SiongSng",
+                "LICENSE"                 : "MIT",
                 "Specification-Version"   : "1",
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : version,
