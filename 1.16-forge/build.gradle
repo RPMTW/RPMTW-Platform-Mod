@@ -7,6 +7,7 @@ buildscript {
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
         classpath('net.sf.json-lib:json-lib:2.4:jdk15')
+        classpath('commons-lang:commons-lang:2.6')
     }
 }
 tasks.withType(JavaCompile) {
@@ -60,7 +61,7 @@ dependencies {
     implementation('net.sf.ezmorph:ezmorph:1.0.6')
     implementation('commons-collections:commons-collections:3.2.2')
     implementation('commons-beanutils:commons-beanutils:1.8.0')
-    minecraft 'net.minecraftforge:forge:1.16.5-36.1.1'
+    minecraft 'net.minecraftforge:forge:1.16.5-36.1.2'
 }
 jar {
     manifest {

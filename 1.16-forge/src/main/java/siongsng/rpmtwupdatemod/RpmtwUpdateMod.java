@@ -24,7 +24,7 @@ public class RpmtwUpdateMod {
             Minecraft.getInstance().getResourcePackList().addPackFinder(PackFinder.RESOUCE);
             Minecraft.getInstance().gameSettings.language = "zh_tw"; //將語言設定為繁體中文
         }
-        LOGGER.info("正在準備進行更新資源包，最新版本:");
+        LOGGER.info("正在準備進行更新資源包，最新版本:" + json.ver().toString());
     }
     @SubscribeEvent
     public static void onClientStarting(FMLClientSetupEvent event) {

@@ -21,7 +21,7 @@ public class json {
                 json.append(inputLine);
             }
             in.close();
-            System.out.print(json);
+           // System.out.print(json);
         } catch (IOException e) {
             e.printStackTrace();
         }
