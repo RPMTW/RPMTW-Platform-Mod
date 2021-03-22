@@ -13,6 +13,10 @@ buildscript {
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
+configurations {
+    embed
+    compile.extendsFrom(embed)
+}
 apply plugin: 'net.minecraftforge.gradle'
 group = 'siongsng.rpmtwupdatemod'
 version = '1.0.0'
@@ -60,11 +64,11 @@ minecraft {
 }
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 dependencies {
-    implementation('net.sf.json-lib:json-lib:2.4:jdk15')
-    implementation('commons-lang:commons-lang:2.6')
-    implementation('net.sf.ezmorph:ezmorph:1.0.6')
-    implementation('commons-collections:commons-collections:3.2.2')
-    implementation('commons-beanutils:commons-beanutils:1.8.0')
+    implementation ('net.sf.json-lib:json-lib:2.4:jdk15')
+    implementation ('commons-lang:commons-lang:2.6')
+    implementation ('net.sf.ezmorph:ezmorph:1.0.6')
+    implementation ('commons-collections:commons-collections:3.2.2')
+    implementation ('commons-beanutils:commons-beanutils:1.8.0')
     minecraft 'net.minecraftforge:forge:1.16.5-36.1.2'
 }
 jar {

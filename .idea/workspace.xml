@@ -100,7 +100,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="問題" />
+    <property name="project.structure.last.edited" value="庫" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="Errors" />
@@ -254,7 +254,7 @@
       <workItem from="1616307201443" duration="27666000" />
       <workItem from="1616336856088" duration="221000" />
       <workItem from="1616339567353" duration="459000" />
-      <workItem from="1616409321577" duration="3990000" />
+      <workItem from="1616409321577" duration="7672000" />
     </task>
     <servers />
   </component>
