@@ -7,8 +7,6 @@ buildscript {
     dependencies {
         classpath 'com.github.jengelman.gradle.plugins:shadow:6.1.0'
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.+', changing: true
-        classpath('net.sf.json-lib:json-lib:2.4:jdk15')
-        classpath('commons-lang:commons-lang:2.6')
     }
 }
 tasks.withType(JavaCompile) {
@@ -23,14 +21,10 @@ apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'java'
 group = 'siongsng.rpmtwupdatemod'
 version = '1.0.0'
-archivesBaseName = 'rpmtw_update_mod'
+archivesBaseName = 'RPMTW-Update-Mod-1.16'
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 task sourcesJar(type: Jar, dependsOn: classes) {
     from sourceSets.main.allSource
-}
-configurations {
-    embed
-    compile.extendsFrom(embed)
 }
 minecraft {
     mappings channel: 'snapshot', version: '20210309-1.16.5'
@@ -48,15 +42,14 @@ minecraft {
     }
 }
 dependencies {
-    compile('net.sf.json-lib:json-lib:2.4:jdk15')
-    compile('commons-lang:commons-lang:2.6')
-    compile('net.sf.ezmorph:ezmorph:1.0.6')
-    compile('commons-collections:commons-collections:3.2.2')
-    compile('commons-beanutils:commons-beanutils:1.8.0')
+    implementation('net.sf.json-lib:json-lib:2.4:jdk15')
+    implementation('commons-lang:commons-lang:2.6')
+    implementation('net.sf.ezmorph:ezmorph:1.0.6')
+    implementation('commons-collections:commons-collections:3.2.2')
+    implementation('commons-beanutils:commons-beanutils:1.8.0')
     minecraft 'net.minecraftforge:forge:1.16.5-36.1.2'
 }
 jar {
-    from configurations.embed.collect { it.isDirectory() ? it : zipTree(it) }
     manifest {
         attributes([
                 "Specification-Title"     : "rpmtwupdatemod",
