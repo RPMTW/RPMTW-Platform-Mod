@@ -31,7 +31,7 @@ public class RpmtwUpdateMod {
         Minecraft.getInstance().getLanguageManager().setCurrentLanguage(new Language("zh_tw", "TW", "繁體中文", false));
         String path = System.getProperty("user.home") + "/.rpmtw/1.16";
         try {
-            FileDownloadManager g = new FileDownloadManager("https://github.com/SiongSng/ResourcePack-Mod-zh_tw/releases/latest/download/RPMTW-1.16.zip", "rpmtw-1.16.zip", path);
+            FileDownloadManager g = new FileDownloadManager(json.loadJson().toString(), "rpmtw-1.16.zip", path);
             g.start("go");
         } catch (Exception e) {
             e.printStackTrace();

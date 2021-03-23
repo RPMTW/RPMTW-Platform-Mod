@@ -5,7 +5,8 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+        classpath 'com.github.jengelman.gradle.plugins:shadow:6.1.0'
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.+', changing: true
         classpath('net.sf.json-lib:json-lib:2.4:jdk15')
         classpath('commons-lang:commons-lang:2.6')
     }
@@ -18,13 +19,18 @@ configurations {
     compile.extendsFrom(embed)
 }
 apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'java'
 group = 'siongsng.rpmtwupdatemod'
 version = '1.0.0'
 archivesBaseName = 'rpmtw_update_mod'
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = "sources"
     from sourceSets.main.allSource
+}
+configurations {
+    embed
+    compile.extendsFrom(embed)
 }
 minecraft {
     mappings channel: 'snapshot', version: '20210309-1.16.5'
@@ -39,39 +45,18 @@ minecraft {
                 }
             }
         }
-        server {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-            property 'forge.logging.console.level', 'debug'
-            mods {
-                rpmtwupdatemod {
-                    source sourceSets.main
-                }
-            }
-        }
-        data {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-            property 'forge.logging.console.level', 'debug'
-            args '--mod', 'rpmtwupdatemod', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-            mods {
-                rpmtwupdatemod {
-                    source sourceSets.main
-                }
-            }
-        }
     }
 }
-sourceSets.main.resources { srcDir 'src/generated/resources' }
 dependencies {
-    implementation ('net.sf.json-lib:json-lib:2.4:jdk15')
-    implementation ('commons-lang:commons-lang:2.6')
-    implementation ('net.sf.ezmorph:ezmorph:1.0.6')
-    implementation ('commons-collections:commons-collections:3.2.2')
-    implementation ('commons-beanutils:commons-beanutils:1.8.0')
+    compile('net.sf.json-lib:json-lib:2.4:jdk15')
+    compile('commons-lang:commons-lang:2.6')
+    compile('net.sf.ezmorph:ezmorph:1.0.6')
+    compile('commons-collections:commons-collections:3.2.2')
+    compile('commons-beanutils:commons-beanutils:1.8.0')
     minecraft 'net.minecraftforge:forge:1.16.5-36.1.2'
 }
 jar {
+    from configurations.embed.collect { it.isDirectory() ? it : zipTree(it) }
     manifest {
         attributes([
                 "Specification-Title"     : "rpmtwupdatemod",
@@ -86,3 +71,41 @@ jar {
     }
 }
 jar.finalizedBy('reobfJar')
+shadowJar {
+    dependencies {
+        include(dependency('net.sf.json-lib:json-lib:2.4:jdk15'))
+        include(dependency('commons-lang:commons-lang:2.6'))
+        include(dependency('net.sf.ezmorph:ezmorph:1.0.6'))
+        include(dependency('commons-collections:commons-collections:3.2.2'))
+        include(dependency('commons-beanutils:commons-beanutils:1.8.0'))
+    }
+    relocate('net.sf.json', 'siongsng.rpmtwupdatemod.sf.json')
+    relocate('net.sf.ezmorph', 'siongsng.rpmtwupdatemod.sf.ezmorph')
+    relocate('org.apache.commons.lang', 'siongsng.rpmtwupdatemod.commons.lang')
+    relocate('org.apache.commons.collections', 'siongsng.rpmtwupdatemod.commons.collections')
+    relocate('org.apache.commons.beanutils', 'siongsng.rpmtwupdatemod.commons.beanutils')
+    classifier = ''
+}
+shadowJar.doLast {
+    task ->
+        ant.checksum file: task.archivePath
+}
+
+afterEvaluate {
+    reobf {
+        shadowJar {
+            mappings = createMcpToSrg.output
+        }
+    }
+}
+
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'dev'
+}
+
+artifacts {
+    archives deobfJar
+}
+
+build.dependsOn(shadowJar)
