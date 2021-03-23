@@ -22,8 +22,7 @@ public class RpmtwUpdateMod {
     public RpmtwUpdateMod() {
         MinecraftForge.EVENT_BUS.register(this);
         if (!ping.isConnect()) {
-            JOptionPane.showMessageDialog(null, "test", "test",
-                    JOptionPane.QUESTION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "您當前處於無網路狀態\n因此無法使用RPMTW自動更新模組\n請連結網路後重新啟動此模組。");
         }
 
         if (FMLEnvironment.dist == Dist.CLIENT) {

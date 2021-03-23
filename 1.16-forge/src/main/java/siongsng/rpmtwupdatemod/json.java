@@ -15,7 +15,7 @@ public class json {
             URL urlObject = new URL("https://api.github.com/repos/SiongSng/ResourcePack-Mod-zh_tw/releases/latest");
             URLConnection uc = urlObject.openConnection();
             BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream()));
-            String inputLine = null;
+            String inputLine;
             while ( (inputLine = in.readLine()) != null) {
                 json.append(inputLine);
             }
