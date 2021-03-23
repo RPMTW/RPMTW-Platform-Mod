@@ -71,7 +71,7 @@ shadowJar {
         include(dependency('commons-lang:commons-lang:2.6'))
         include(dependency('net.sf.ezmorph:ezmorph:1.0.6'))
         include(dependency('commons-collections:commons-collections:3.2.2'))
-        include(dependency('commons-beanutils:commons-beanutils:1.8.0'))
+        include(dependency('commons-beanutils:commons-beanutils:1.9.4'))
     }
     relocate('net.sf.json', 'siongsng.rpmtwupdatemod.sf.json')
     relocate('net.sf.ezmorph', 'siongsng.rpmtwupdatemod.sf.ezmorph')

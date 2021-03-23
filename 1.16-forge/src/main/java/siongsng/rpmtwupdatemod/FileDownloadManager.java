@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 
-public class FileDownloadManager implements FileDownloadManager_1 {
+public class FileDownloadManager{
     private Thread downloadThread;
     private MainDownloader downloader;
     private DownloadStatus status = DownloadStatus.IDLE;
