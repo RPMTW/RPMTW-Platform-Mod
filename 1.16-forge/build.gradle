@@ -24,6 +24,7 @@ version = '1.0.0'
 archivesBaseName = 'RPMTW-Update-Mod-1.16'
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
     from sourceSets.main.allSource
 }
 minecraft {
