@@ -1,6 +1,5 @@
 package siongsng.rpmtwupdatemod;
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -21,7 +20,6 @@ public class json {
                 json.append(inputLine);
             }
             in.close();
-           // System.out.print(json);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -29,12 +27,10 @@ public class json {
     }
 
     public static Object loadJson() {
-        JSONObject aaa = get();
-        return aaa.getJSONArray("assets").getJSONObject(0).get("browser_download_url");
+        return get().getJSONArray("assets").getJSONObject(0).get("browser_download_url");
     }
 
     public static Object ver() {
-        JSONObject aaa = get();
-        return aaa.get("tag_name");
+        return get().get("tag_name");
     }
 }

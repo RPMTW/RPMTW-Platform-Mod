@@ -21,7 +21,7 @@ public class RpmtwUpdateMod {
 
     public RpmtwUpdateMod() {
         MinecraftForge.EVENT_BUS.register(this);
-        if (ping.isConnect()) {
+        if (!ping.isConnect()) {
             JOptionPane.showMessageDialog(null, "test", "test",
                     JOptionPane.QUESTION_MESSAGE);
         }
