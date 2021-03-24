@@ -10,8 +10,7 @@ on:
     branches: [ master ]
 
 jobs:
-  forge-Build-1.16:
-
+  Forge-1.16:
     runs-on: windows-latest
 
     steps:
@@ -31,7 +30,7 @@ jobs:
       with:
         name: RPMTWUpdateMod-1.16-Forge-${{ github.run_number }}
         path: ${{ github.workspace }}/1.16-forge/build/libs
-  Fabric-Build-1.16:
+  Fabric-1.16:
 
     runs-on: windows-latest
 
