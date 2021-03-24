@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "rpmtw_update_mod",
+  "version": "${version}",
+  "name": "RpmtwUpdateMod",
+  "description": "This is a mod that can automatically download and load the RPMTW Traditional Chinese resource pack.",
+  "authors": [
+    "SiongSng"
+  ],
+  "contact": {
+    "website": "https://www.rpmtw.ga",
+    "repo": "https://github.com/SiongSng/ResourcePack-Mod-zh_tw"
+  },
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "siongsng.rpmtwupdatemod.RpmtwUpdateModClient"
+    ]
+  },
+  "mixins": [
+    "RpmtwUpdateMod.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*",
+    "minecraft": "1.16.5"
+  }
+}

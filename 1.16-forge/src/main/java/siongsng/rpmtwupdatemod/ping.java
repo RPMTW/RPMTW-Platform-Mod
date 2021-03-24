@@ -16,17 +16,15 @@ public class ping {
             InputStream is = process.getInputStream();
             InputStreamReader isr = new InputStreamReader(is,"GBK");
             BufferedReader br = new BufferedReader(isr);
-            String line = null;
+            String line;
             StringBuffer sb = new StringBuffer();
             while ((line = br.readLine()) != null) {
                 sb.append(line);
             }
-            System.out.println("ping: "+sb);
             is.close();
             isr.close();
             br.close();
-            if (null != sb && !sb.toString().equals("")) {
-                String logString = "";
+            if (!sb.toString().equals("")) {
                 connect = sb.toString().indexOf("TTL") > 0;
             }
         } catch (IOException e) {

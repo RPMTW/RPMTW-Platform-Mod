@@ -22,12 +22,11 @@ public class RpmtwUpdateMod {
     public RpmtwUpdateMod() {
         MinecraftForge.EVENT_BUS.register(this);
         if (!ping.isConnect()) {
-            JOptionPane.showMessageDialog(null, "您當前處於無網路狀態\n因此無法使用RPMTW自動更新模組\n請連結網路後重新啟動此模組。");
+            LOGGER.info("您當前處於無網路狀態\n因此無法使用RPMTW自動更新模組\n請連結網路後重新啟動此模組。");
         }
 
         if (FMLEnvironment.dist == Dist.CLIENT) {
-
-            Minecraft.getInstance().getResourcePackList().addPackFinder(PackFinder.RESOUCE);
+            Minecraft.getInstance().getResourcePackList().addPackFinder(PackFinder.RESOUCE); //載入資源包
             Minecraft.getInstance().gameSettings.language = "zh_tw"; //將語言設定為繁體中文
         }
         LOGGER.info("正在準備進行更新資源包，最新版本:" + json.ver().toString());
@@ -45,6 +44,3 @@ public class RpmtwUpdateMod {
         }
     }
 }
-//您當前處於無網路狀態
-//因此無法使用RPMTW自動更新模組
-//請連結網路後重新啟動此模組。
