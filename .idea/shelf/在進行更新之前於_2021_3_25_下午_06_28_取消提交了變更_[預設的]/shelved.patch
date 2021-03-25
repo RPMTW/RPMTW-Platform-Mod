@@ -1,0 +1,106 @@
+Index: 1.16-forge/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package siongsng.rpmtwupdatemod;\r\n\r\nimport net.minecraft.client.Minecraft;\r\nimport net.minecraft.client.resources.Language;\r\nimport net.minecraftforge.api.distmarker.Dist;\r\nimport net.minecraftforge.common.MinecraftForge;\r\nimport net.minecraftforge.eventbus.api.SubscribeEvent;\r\nimport net.minecraftforge.fml.common.Mod;\r\nimport net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;\r\nimport net.minecraftforge.fml.loading.FMLEnvironment;\r\nimport org.apache.logging.log4j.LogManager;\r\nimport org.apache.logging.log4j.Logger;\r\n\r\nimport javax.swing.*;\r\n\r\n@Mod(\"rpmtw_update_mod\")\r\n@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)\r\npublic class RpmtwUpdateMod {\r\n\r\n    public static final Logger LOGGER = LogManager.getLogger();\r\n\r\n    public RpmtwUpdateMod() {\r\n        MinecraftForge.EVENT_BUS.register(this);\r\n        if (!ping.isConnect()) {\r\n            LOGGER.info(\"您當前處於無網路狀態\\n因此無法使用RPMTW自動更新模組\\n請連結網路後重新啟動此模組。\");\r\n        }\r\n\r\n        if (FMLEnvironment.dist == Dist.CLIENT) {\r\n            Minecraft.getInstance().getResourcePackList().addPackFinder(PackFinder.RESOUCE); //載入資源包\r\n            Minecraft.getInstance().gameSettings.language = \"zh_tw\"; //將語言設定為繁體中文\r\n        }\r\n        LOGGER.info(\"正在準備進行更新資源包，最新版本:\" + json.ver().toString());\r\n    }\r\n\r\n    @SubscribeEvent\r\n    public static void onClientStarting(FMLClientSetupEvent event) {\r\n        Minecraft.getInstance().getLanguageManager().setCurrentLanguage(new Language(\"zh_tw\", \"TW\", \"繁體中文\", false));\r\n        String path = System.getProperty(\"user.home\") + \"/.rpmtw/1.16\";\r\n        try {\r\n            FileDownloadManager g = new FileDownloadManager(json.loadJson().toString(), \"rpmtw-1.16.zip\", path);\r\n            g.start(\"go\");\r\n        } catch (Exception e) {\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java b/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java
+--- a/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java	
++++ b/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java	
+@@ -2,22 +2,37 @@
+ 
+ import net.minecraft.client.Minecraft;
+ import net.minecraft.client.resources.Language;
++import net.minecraft.resources.FilePack;
++import net.minecraft.resources.IPackNameDecorator;
++import net.minecraft.resources.ResourcePackInfo;
+ import net.minecraftforge.api.distmarker.Dist;
+ import net.minecraftforge.common.MinecraftForge;
+ import net.minecraftforge.eventbus.api.SubscribeEvent;
+ import net.minecraftforge.fml.common.Mod;
+ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+ import net.minecraftforge.fml.loading.FMLEnvironment;
++import org.apache.commons.io.FileUtils;
+ import org.apache.logging.log4j.LogManager;
+ import org.apache.logging.log4j.Logger;
+ 
+-import javax.swing.*;
++import java.io.IOException;
++import java.net.URL;
++import java.nio.file.Files;
++import java.nio.file.Path;
++import java.nio.file.Paths;
++import java.util.concurrent.TimeUnit;
++import java.util.function.Consumer;
+ 
+ @Mod("rpmtw_update_mod")
+ @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+ public class RpmtwUpdateMod {
+ 
+     public static final Logger LOGGER = LogManager.getLogger();
++    public final static Path CACHE_DIR = Paths.get(System.getProperty("user.home") + "/.rpmtw/1.16");
++    public final static Path LANGUAGE_PACK = CACHE_DIR.resolve("RPMTW-1.16.zip");
++    public final static String LINK = json.loadJson().toString();
++    public final static long MAX_INTERVAL_DAYS = 7;
++
+ 
+     public RpmtwUpdateMod() {
+         MinecraftForge.EVENT_BUS.register(this);
+@@ -26,10 +41,55 @@
+         }
+ 
+         if (FMLEnvironment.dist == Dist.CLIENT) {
+-            Minecraft.getInstance().getResourcePackList().addPackFinder(PackFinder.RESOUCE); //載入資源包
+             Minecraft.getInstance().gameSettings.language = "zh_tw"; //將語言設定為繁體中文
+         }
+         LOGGER.info("正在準備進行更新資源包，最新版本:" + json.ver().toString());
++
++        if (!Files.isDirectory(CACHE_DIR)) {
++            try {
++                Files.createDirectories(CACHE_DIR);
++            } catch (IOException e) {
++                e.printStackTrace();
++            }
++        }
++
++        if (Files.exists(LANGUAGE_PACK)) {
++            try {
++                long fileTime = Files.getLastModifiedTime(LANGUAGE_PACK).toMillis();
++                long nowTime = System.currentTimeMillis();
++                if (TimeUnit.MILLISECONDS.toDays(nowTime - fileTime) < MAX_INTERVAL_DAYS) {
++                    Minecraft.getInstance().getResourcePackList().addPackFinder(new PackFinder() {
++                        public void findPacks(Consumer<ResourcePackInfo> consumer, ResourcePackInfo.IFactory iFactory) {
++                            ResourcePackInfo packInfo = ResourcePackInfo.createResourcePack("RPMTW-1.16.zip",
++                                    true, () -> new FilePack(LANGUAGE_PACK.toFile()),
++                                    iFactory, ResourcePackInfo.Priority.TOP, IPackNameDecorator.BUILTIN);
++                            if (packInfo != null) {
++                                consumer.accept(packInfo);
++                            }
++                        }
++                    });
++                }
++            } catch (IOException e) {
++                e.printStackTrace();
++            }
++        } else {
++            try {
++                FileUtils.copyURLToFile(new URL(LINK), LANGUAGE_PACK.toFile());
++                Minecraft.getInstance().getResourcePackList().addPackFinder(new PackFinder() {
++                    @Override
++                    public void findPacks(Consumer<ResourcePackInfo> consumer, ResourcePackInfo.IFactory iFactory) {
++                        ResourcePackInfo packInfo = ResourcePackInfo.createResourcePack("RPMTW-1.16.zip",
++                                true, () -> new FilePack(LANGUAGE_PACK.toFile()),
++                                iFactory, ResourcePackInfo.Priority.TOP, IPackNameDecorator.BUILTIN);
++                        if (packInfo != null) {
++                            consumer.accept(packInfo);
++                        }
++                    }
++                });
++            } catch (IOException e) {
++                e.printStackTrace();
++            }
++        }
+     }
+ 
+     @SubscribeEvent

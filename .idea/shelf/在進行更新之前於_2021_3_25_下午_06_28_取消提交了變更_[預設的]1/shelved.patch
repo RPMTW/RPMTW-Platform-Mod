@@ -1,0 +1,324 @@
+Index: 1.16-forge/src/main/java/siongsng/rpmtwupdatemod/PackFinder.java
+===================================================================
+diff --git a/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/PackFinder.java b/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/PackFinder.java
+deleted file mode 100644
+--- a/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/PackFinder.java	
++++ /dev/null	
+@@ -1,166 +0,0 @@
+-package siongsng.rpmtwupdatemod;
+-
+-import java.io.File;
+-import java.io.IOException;
+-import java.nio.file.Files;
+-import java.util.function.BooleanSupplier;
+-import java.util.function.Consumer;
+-
+-import com.google.common.base.Supplier;
+-import com.google.gson.JsonObject;
+-import com.google.gson.JsonParseException;
+-
+-import net.minecraft.resources.FilePack;
+-import net.minecraft.resources.FolderPack;
+-import net.minecraft.resources.IPackFinder;
+-import net.minecraft.resources.IPackNameDecorator;
+-import net.minecraft.resources.IResourcePack;
+-import net.minecraft.resources.ResourcePackInfo;
+-import net.minecraft.resources.ResourcePackInfo.IFactory;
+-import net.minecraft.resources.ResourcePackInfo.Priority;
+-import net.minecraft.resources.data.IMetadataSectionSerializer;
+-import net.minecraft.util.JSONUtils;
+-
+-public final class PackFinder implements IPackFinder {
+-
+-    private static final IMetadataSectionSerializer<PackMeta> META_SERIALIZER = new PackMetaSerializer();
+-    public static final PackFinder RESOUCE = new PackFinder(Type.RESOURCES);
+-
+-    public static class Configuration {
+-        public static boolean allowDataPacks() {
+-            return true;
+-        }
+-    }
+-
+-    private final Type type;
+-    private final File loaderDirectory;
+-
+-    private PackFinder(Type type) {
+-        this.type = type;
+-        this.loaderDirectory = new File(type.path);
+-        try {
+-            Files.createDirectories(this.loaderDirectory.toPath());
+-        } catch (final IOException e) {
+-            RpmtwUpdateMod.LOGGER.error("初始化載入器失敗", e);
+-        }
+-    }
+-
+-    @Override
+-    public void findPacks(Consumer<ResourcePackInfo> packs, IFactory factory) {
+-        if (!this.type.enabled.getAsBoolean()) {
+-            RpmtwUpdateMod.LOGGER.info("{} 透過config禁止載入", this.type.displayName);
+-            return;
+-        }
+-
+-        for (final File packCandidate : getFilesFromDir(this.loaderDirectory)) {
+-            final boolean isFilePack = packCandidate.isFile() && packCandidate.getName().startsWith("rpmtw-1.16.zip");
+-            final boolean isFolderPack = !isFilePack && packCandidate.isDirectory() && new File(packCandidate, "pack.mcmeta").isFile();
+-            if (isFilePack || isFolderPack) {
+-                final String packName = this.type.path + "/" + packCandidate.getName();
+-                final Supplier<IResourcePack> pack = this.getAsPack(packCandidate);
+-                final PackMeta meta = getPackMeta(packName, pack);
+-                RpmtwUpdateMod.LOGGER.info("載入 {} {}。", this.type.displayName, packName);
+-                RpmtwUpdateMod.LOGGER.debug("載入 {} 使用 {}。", packName, meta);
+-                final ResourcePackInfo packInfo = ResourcePackInfo.createResourcePack(packName, meta.isBuiltIn, pack, factory, meta.priority, IPackNameDecorator.PLAIN);
+-
+-                if (packInfo != null) {
+-                    packs.accept(packInfo);
+-                }
+-            } else {
+-                RpmtwUpdateMod.LOGGER.error("Failed to load {} from {}. Archive packs must be zips. Folder packs must have a valid pack.mcmeta file.", this.type.displayName, packCandidate.getAbsolutePath());
+-            }
+-        }
+-    }
+-
+-    public static PackMeta getPackMeta(String packName, Supplier<IResourcePack> pack) {
+-        try (IResourcePack packData = pack.get()) {
+-            final PackMeta meta = packData.getMetadata(META_SERIALIZER);
+-            if (meta != null) {
+-                return meta;
+-            }
+-        } catch (final IOException e) {
+-            RpmtwUpdateMod.LOGGER.warn("Could not load pack meta from {}!", packName);
+-            RpmtwUpdateMod.LOGGER.catching(e);
+-        }
+-        return new PackMeta(true, Priority.TOP, true);
+-    }
+-
+-    private Supplier<IResourcePack> getAsPack(File file) {
+-        return file.isDirectory() ? () -> new FolderPack(file) : () -> new FilePack(file);
+-    }
+-
+-    private static File[] getFilesFromDir(File file) {
+-        File[] files = new File[0];
+-        if (file == null) {
+-            RpmtwUpdateMod.LOGGER.error("Attempted to read from a null file.");
+-        } else if (!file.isDirectory()) {
+-            RpmtwUpdateMod.LOGGER.error("Can not read from {}. It's not a directory.", file.getAbsolutePath());
+-        } else {
+-            try {
+-                final File[] readFiles = file.listFiles();
+-                if (readFiles == null) {
+-                    RpmtwUpdateMod.LOGGER.error("Could not read from {} due to a system error. This is likely an issue with your computer.", file.getAbsolutePath());
+-                } else {
+-                    files = readFiles;
+-                }
+-            } catch (final SecurityException e) {
+-                RpmtwUpdateMod.LOGGER.error("Could not read from {}. Blocked by system level security. This is likely an issue with your computer.", file.getAbsolutePath(), e);
+-            }
+-        }
+-        return files;
+-    }
+-
+-    public static enum Type {
+-
+-        RESOURCES("PRMTW繁體中文資源包", System.getProperty("user.home") + "/.rpmtw/1.16", Configuration::allowDataPacks);
+-
+-        final String displayName;
+-        final String path;
+-        final BooleanSupplier enabled;
+-
+-        Type(String name, String path, BooleanSupplier enabled) {
+-            this.displayName = name;
+-            this.path = path;
+-            this.enabled = enabled;
+-        }
+-    }
+-
+-    static class PackMetaSerializer implements IMetadataSectionSerializer<PackMeta> {
+-
+-        @Override
+-        public String getSectionName() {
+-            return "rpmtw";
+-        }
+-
+-        @Override
+-        public PackMeta deserialize(JsonObject json) {
+-
+-            final boolean builtin = JSONUtils.getBoolean(json, "builtin", true);
+-            final String priorityName = JSONUtils.getString(json, "priority", "top").toLowerCase();
+-            final Priority priority = "top".equalsIgnoreCase(priorityName) ? Priority.TOP : "bottom".equalsIgnoreCase(priorityName) ? Priority.BOTTOM : null;
+-            final boolean defaultEnabled = JSONUtils.getBoolean(json, "defaultEnabled", true);
+-
+-            if (priority == null) {
+-                throw new JsonParseException("Expected priority to be \"top\" or \"bottom\". " + priorityName + " is not a valid value!");
+-            }
+-            return new PackMeta(builtin, priority, defaultEnabled);
+-        }
+-    }
+-
+-    public static class PackMeta {
+-        public final boolean isBuiltIn;
+-        public final Priority priority;
+-        public final boolean defaultEnabled;
+-
+-        public PackMeta(boolean isBuiltIn, Priority priority, boolean defaultEnabled) {
+-            this.isBuiltIn = isBuiltIn;
+-            this.priority = priority;
+-            this.defaultEnabled = defaultEnabled;
+-        }
+-
+-        @Override
+-        public String toString() {
+-            return "PackMeta [isBuiltIn=" + this.isBuiltIn + ", priority=" + this.priority + ", defaultEnabled=" + this.defaultEnabled + "]";
+-        }
+-    }
+-}
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"30b4f263-aea8-4892-b346-eec82d676593\" name=\"預設的\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/ping.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/ping.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ExternalProjectsData\">\r\n    <projectState path=\"$PROJECT_DIR$\">\r\n      <ProjectState />\r\n    </projectState>\r\n    <projectState path=\"$PROJECT_DIR$/1.16-Fabric\">\r\n      <ProjectState />\r\n    </projectState>\r\n    <projectState path=\"$PROJECT_DIR$/1.16-forge\">\r\n      <ProjectState />\r\n    </projectState>\r\n  </component>\r\n  <component name=\"ExternalProjectsManager\">\r\n    <system id=\"GRADLE\">\r\n      <state>\r\n        <task path=\"$PROJECT_DIR$\">\r\n          <activation />\r\n        </task>\r\n        <task path=\"$PROJECT_DIR$/1.16-forge\">\r\n          <activation />\r\n        </task>\r\n        <task path=\"$PROJECT_DIR$/1.16-Fabric\">\r\n          <activation />\r\n        </task>\r\n        <projects_view>\r\n          <tree_state>\r\n            <expand>\r\n              <path>\r\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\r\n                <item name=\"1.16-Fabric\" type=\"f1a62948:ProjectNode\" />\r\n              </path>\r\n              <path>\r\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\r\n                <item name=\"1.16-Fabric\" type=\"f1a62948:ProjectNode\" />\r\n                <item name=\"Tasks\" type=\"e4a08cd1:TasksNode\" />\r\n              </path>\r\n              <path>\r\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\r\n                <item name=\"1.16-Fabric\" type=\"f1a62948:ProjectNode\" />\r\n                <item name=\"Tasks\" type=\"e4a08cd1:TasksNode\" />\r\n                <item name=\"build\" type=\"c8890929:TasksNode$1\" />\r\n              </path>\r\n              <path>\r\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\r\n                <item name=\"1.16-Fabric\" type=\"f1a62948:ProjectNode\" />\r\n                <item name=\"Tasks\" type=\"e4a08cd1:TasksNode\" />\r\n                <item name=\"fabric\" type=\"c8890929:TasksNode$1\" />\r\n              </path>\r\n            </expand>\r\n            <select />\r\n          </tree_state>\r\n        </projects_view>\r\n      </state>\r\n    </system>\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n        <option value=\"Interface\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitSEFilterConfiguration\">\r\n    <file-type-list>\r\n      <filtered-out-file-type name=\"LOCAL_BRANCH\" />\r\n      <filtered-out-file-type name=\"REMOTE_BRANCH\" />\r\n      <filtered-out-file-type name=\"TAG\" />\r\n      <filtered-out-file-type name=\"COMMIT_BY_MESSAGE\" />\r\n    </file-type-list>\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"1q2xdFnLWApS158xzXXbcfwDhoJ\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"Downloaded.Files.Path.Enabled\" value=\"false\" />\r\n    <property name=\"Repository.Attach.Annotations\" value=\"false\" />\r\n    <property name=\"Repository.Attach.JavaDocs\" value=\"true\" />\r\n    <property name=\"Repository.Attach.Sources\" value=\"false\" />\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\r\n    <property name=\"SHARE_PROJECT_CONFIGURATION_FILES\" value=\"true\" />\r\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\r\n    <property name=\"aspect.path.notification.shown\" value=\"true\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$/1.16-forge/libs/json-lib-2.4-jdk15.jar\" />\r\n    <property name=\"node.js.detected.package.eslint\" value=\"true\" />\r\n    <property name=\"node.js.detected.package.tslint\" value=\"true\" />\r\n    <property name=\"node.js.path.for.package.eslint\" value=\"project\" />\r\n    <property name=\"node.js.path.for.package.tslint\" value=\"project\" />\r\n    <property name=\"node.js.selected.package.eslint\" value=\"(autodetect)\" />\r\n    <property name=\"node.js.selected.package.tslint\" value=\"(autodetect)\" />\r\n    <property name=\"nodejs_package_manager_path\" value=\"npm\" />\r\n    <property name=\"project.structure.last.edited\" value=\"庫\" />\r\n    <property name=\"project.structure.proportion\" value=\"0.15\" />\r\n    <property name=\"project.structure.side.proportion\" value=\"0.2\" />\r\n    <property name=\"settings.editor.selected.configurable\" value=\"preferences.lookFeel\" />\r\n  </component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"ExtractSuperBase.RECENT_KEYS\">\r\n      <recent name=\"siongsng.rpmtwupdatemod.packs\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunAnythingCache\">\r\n    <option name=\"myCommands\">\r\n      <command value=\"gradle\" />\r\n      <command value=\"gradle --build-cache\" />\r\n      <command value=\"gradle --gradle-user-home\" />\r\n    </option>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Gradle.1.16-Fabric [build]\">\r\n    <configuration default=\"true\" type=\"ArquillianJUnit\" factoryName=\"\" nameIsGenerated=\"true\">\r\n      <option name=\"arquillianRunConfiguration\">\r\n        <value>\r\n          <option name=\"containerStateName\" value=\"\" />\r\n        </value>\r\n      </option>\r\n      <option name=\"TEST_OBJECT\" value=\"class\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"1.16-Fabric [build]\" type=\"GradleRunConfiguration\" factoryName=\"Gradle\" temporary=\"true\">\r\n      <ExternalSystemSettings>\r\n        <option name=\"executionName\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$/1.16-Fabric\" />\r\n        <option name=\"externalSystemIdString\" value=\"GRADLE\" />\r\n        <option name=\"scriptParameters\" />\r\n        <option name=\"taskDescriptions\">\r\n          <list />\r\n        </option>\r\n        <option name=\"taskNames\">\r\n          <list>\r\n            <option value=\"build\" />\r\n          </list>\r\n        </option>\r\n        <option name=\"vmOptions\" />\r\n      </ExternalSystemSettings>\r\n      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>\r\n      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>\r\n      <DebugAllEnabled>false</DebugAllEnabled>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"1.16-Fabric [runClient]\" type=\"GradleRunConfiguration\" factoryName=\"Gradle\" temporary=\"true\">\r\n      <ExternalSystemSettings>\r\n        <option name=\"executionName\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$/1.16-Fabric\" />\r\n        <option name=\"externalSystemIdString\" value=\"GRADLE\" />\r\n        <option name=\"scriptParameters\" />\r\n        <option name=\"taskDescriptions\">\r\n          <list />\r\n        </option>\r\n        <option name=\"taskNames\">\r\n          <list>\r\n            <option value=\"runClient\" />\r\n          </list>\r\n        </option>\r\n        <option name=\"vmOptions\" />\r\n      </ExternalSystemSettings>\r\n      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>\r\n      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>\r\n      <DebugAllEnabled>false</DebugAllEnabled>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"1.16-forge [build]\" type=\"GradleRunConfiguration\" factoryName=\"Gradle\" temporary=\"true\">\r\n      <ExternalSystemSettings>\r\n        <option name=\"executionName\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$/1.16-forge\" />\r\n        <option name=\"externalSystemIdString\" value=\"GRADLE\" />\r\n        <option name=\"scriptParameters\" />\r\n        <option name=\"taskDescriptions\">\r\n          <list />\r\n        </option>\r\n        <option name=\"taskNames\">\r\n          <list>\r\n            <option value=\"build\" />\r\n          </list>\r\n        </option>\r\n        <option name=\"vmOptions\" />\r\n      </ExternalSystemSettings>\r\n      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>\r\n      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>\r\n      <DebugAllEnabled>false</DebugAllEnabled>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"1.16-forge [runClient]\" type=\"GradleRunConfiguration\" factoryName=\"Gradle\" temporary=\"true\">\r\n      <ExternalSystemSettings>\r\n        <option name=\"executionName\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$/1.16-forge\" />\r\n        <option name=\"externalSystemIdString\" value=\"GRADLE\" />\r\n        <option name=\"scriptParameters\" />\r\n        <option name=\"taskDescriptions\">\r\n          <list />\r\n        </option>\r\n        <option name=\"taskNames\">\r\n          <list>\r\n            <option value=\"runClient\" />\r\n          </list>\r\n        </option>\r\n        <option name=\"vmOptions\" />\r\n      </ExternalSystemSettings>\r\n      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>\r\n      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>\r\n      <DebugAllEnabled>false</DebugAllEnabled>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"1.16-forge [shadowJar]\" type=\"GradleRunConfiguration\" factoryName=\"Gradle\" temporary=\"true\">\r\n      <ExternalSystemSettings>\r\n        <option name=\"executionName\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$/1.16-forge\" />\r\n        <option name=\"externalSystemIdString\" value=\"GRADLE\" />\r\n        <option name=\"scriptParameters\" />\r\n        <option name=\"taskDescriptions\">\r\n          <list />\r\n        </option>\r\n        <option name=\"taskNames\">\r\n          <list>\r\n            <option value=\"shadowJar\" />\r\n          </list>\r\n        </option>\r\n        <option name=\"vmOptions\" />\r\n      </ExternalSystemSettings>\r\n      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>\r\n      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>\r\n      <DebugAllEnabled>false</DebugAllEnabled>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Gradle.1.16-Fabric [build]\" />\r\n        <item itemvalue=\"Gradle.1.16-Fabric [runClient]\" />\r\n        <item itemvalue=\"Gradle.1.16-forge [build]\" />\r\n        <item itemvalue=\"Gradle.1.16-forge [runClient]\" />\r\n        <item itemvalue=\"Gradle.1.16-forge [shadowJar]\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"預設任務\">\r\n      <changelist id=\"30b4f263-aea8-4892-b346-eec82d676593\" name=\"預設的\" comment=\"\" />\r\n      <created>1616291575326</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1616291575326</updated>\r\n      <workItem from=\"1616291577245\" duration=\"264000\" />\r\n      <workItem from=\"1616291867291\" duration=\"3720000\" />\r\n      <workItem from=\"1616296839848\" duration=\"74000\" />\r\n      <workItem from=\"1616296924915\" duration=\"6822000\" />\r\n      <workItem from=\"1616307201443\" duration=\"27666000\" />\r\n      <workItem from=\"1616336856088\" duration=\"221000\" />\r\n      <workItem from=\"1616339567353\" duration=\"459000\" />\r\n      <workItem from=\"1616409321577\" duration=\"8860000\" />\r\n      <workItem from=\"1616493526302\" duration=\"12771000\" />\r\n      <workItem from=\"1616579279828\" duration=\"1391000\" />\r\n      <workItem from=\"1616596358169\" duration=\"4223000\" />\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -6,8 +6,8 @@
+   <component name="ChangeListManager">
+     <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/PackFinder.java" beforeDir="false" />
+       <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/ping.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/ping.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -42,24 +42,24 @@
+             <expand>
+               <path>
+                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+-                <item name="1.16-Fabric" type="f1a62948:ProjectNode" />
++                <item name="RpmtwUpdateMod" type="f1a62948:ProjectNode" />
+               </path>
+               <path>
+                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+-                <item name="1.16-Fabric" type="f1a62948:ProjectNode" />
++                <item name="RpmtwUpdateMod" type="f1a62948:ProjectNode" />
+                 <item name="Tasks" type="e4a08cd1:TasksNode" />
+               </path>
+               <path>
+                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+-                <item name="1.16-Fabric" type="f1a62948:ProjectNode" />
++                <item name="RpmtwUpdateMod" type="f1a62948:ProjectNode" />
+                 <item name="Tasks" type="e4a08cd1:TasksNode" />
+                 <item name="build" type="c8890929:TasksNode$1" />
+               </path>
+               <path>
+                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+-                <item name="1.16-Fabric" type="f1a62948:ProjectNode" />
++                <item name="RpmtwUpdateMod" type="f1a62948:ProjectNode" />
+                 <item name="Tasks" type="e4a08cd1:TasksNode" />
+-                <item name="fabric" type="c8890929:TasksNode$1" />
++                <item name="fg_runs" type="c8890929:TasksNode$1" />
+               </path>
+             </expand>
+             <select />
+@@ -128,14 +128,16 @@
+       <command value="gradle --gradle-user-home" />
+     </option>
+   </component>
+-  <component name="RunManager" selected="Gradle.1.16-Fabric [build]">
+-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
++  <component name="RunManager" selected="Gradle.1.16-forge [runClient]">
++    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+       <option name="arquillianRunConfiguration">
+         <value>
+           <option name="containerStateName" value="" />
+         </value>
+       </option>
+-      <option name="TEST_OBJECT" value="class" />
++      <option name="TEST_OBJECT" value="CLASS" />
++      <properties />
++      <listeners />
+       <method v="2">
+         <option name="Make" enabled="true" />
+       </method>
+@@ -182,10 +184,10 @@
+       <DebugAllEnabled>false</DebugAllEnabled>
+       <method v="2" />
+     </configuration>
+-    <configuration name="1.16-forge [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++    <configuration name="1.16-Fabric [runServer]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+-        <option name="externalProjectPath" value="$PROJECT_DIR$/1.16-forge" />
++        <option name="externalProjectPath" value="$PROJECT_DIR$/1.16-Fabric" />
+         <option name="externalSystemIdString" value="GRADLE" />
+         <option name="scriptParameters" />
+         <option name="taskDescriptions">
+@@ -193,7 +195,7 @@
+         </option>
+         <option name="taskNames">
+           <list>
+-            <option value="build" />
++            <option value="runServer" />
+           </list>
+         </option>
+         <option name="vmOptions" />
+@@ -203,7 +205,7 @@
+       <DebugAllEnabled>false</DebugAllEnabled>
+       <method v="2" />
+     </configuration>
+-    <configuration name="1.16-forge [runClient]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++    <configuration name="1.16-forge [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$/1.16-forge" />
+@@ -214,7 +216,7 @@
+         </option>
+         <option name="taskNames">
+           <list>
+-            <option value="runClient" />
++            <option value="build" />
+           </list>
+         </option>
+         <option name="vmOptions" />
+@@ -224,7 +226,7 @@
+       <DebugAllEnabled>false</DebugAllEnabled>
+       <method v="2" />
+     </configuration>
+-    <configuration name="1.16-forge [shadowJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
++    <configuration name="1.16-forge [runClient]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$/1.16-forge" />
+@@ -235,7 +237,7 @@
+         </option>
+         <option name="taskNames">
+           <list>
+-            <option value="shadowJar" />
++            <option value="runClient" />
+           </list>
+         </option>
+         <option name="vmOptions" />
+@@ -247,11 +249,11 @@
+     </configuration>
+     <recent_temporary>
+       <list>
++        <item itemvalue="Gradle.1.16-forge [runClient]" />
++        <item itemvalue="Gradle.1.16-Fabric [runServer]" />
+         <item itemvalue="Gradle.1.16-Fabric [build]" />
+         <item itemvalue="Gradle.1.16-Fabric [runClient]" />
+         <item itemvalue="Gradle.1.16-forge [build]" />
+-        <item itemvalue="Gradle.1.16-forge [runClient]" />
+-        <item itemvalue="Gradle.1.16-forge [shadowJar]" />
+       </list>
+     </recent_temporary>
+   </component>
+@@ -274,6 +276,7 @@
+       <workItem from="1616493526302" duration="12771000" />
+       <workItem from="1616579279828" duration="1391000" />
+       <workItem from="1616596358169" duration="4223000" />
++      <workItem from="1616663577550" duration="3346000" />
+     </task>
+     <servers />
+   </component>
