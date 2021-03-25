@@ -12,4 +12,5 @@ public class RpmtwUpdateMod {
         private void init(CallbackInfo info) {
             System.out.println("This line is printed by an example mod mixin!");
     }
+
 }

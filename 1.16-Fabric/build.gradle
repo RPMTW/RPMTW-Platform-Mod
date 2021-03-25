@@ -6,9 +6,14 @@ plugins {
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-archivesBaseName = project.archives_base_name
+archivesBaseName = "RPMTW-Update-Mod-Fabric-1.16"
 version = project.mod_version
 group = project.maven_group
+
+configurations {
+    shadow
+    compile.extendsFrom(shadow)
+}
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
@@ -16,6 +21,11 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    shadow('net.sf.json-lib:json-lib:2.4:jdk15')
+    shadow('commons-lang:commons-lang:2.6')
+    shadow('net.sf.ezmorph:ezmorph:1.0.6')
+    shadow('commons-collections:commons-collections:3.2.2')
+    shadow('commons-beanutils:commons-beanutils:1.9.4')
 
 }
 
@@ -43,6 +53,9 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 
 jar {
     from "LICENSE"
+    from {
+        configurations.shadow.collect { it.toString().contains("guava") ? null : it.isDirectory() ? it : zipTree(it) }
+    }
 }
 
 publishing {
@@ -58,4 +71,8 @@ publishing {
     }
     repositories {
     }
+}
+remapJar.doLast {
+    task ->
+        ant.checksum file: task.archivePath
 }

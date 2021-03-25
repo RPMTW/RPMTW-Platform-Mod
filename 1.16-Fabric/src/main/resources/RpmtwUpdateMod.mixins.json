@@ -4,9 +4,11 @@
   "package": "siongsng.rpmtwupdatemod.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "ResourcePackManagerMixin",
+    "RpmtwUpdateMod_mixin"
   ],
   "client": [
-    "RpmtwUpdateMod"
+    "RpmtwUpdateModClient"
   ],
   "injectors": {
     "defaultRequire": 1

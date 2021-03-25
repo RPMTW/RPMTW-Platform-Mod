@@ -15,7 +15,7 @@
   "environment": "*",
   "entrypoints": {
     "client": [
-      "siongsng.rpmtwupdatemod.RpmtwUpdateModClient"
+      "siongsng.rpmtwupdatemod.RpmtwUpdateMod"
     ]
   },
   "mixins": [

@@ -21,7 +21,7 @@ apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'java'
 group = 'siongsng.rpmtwupdatemod'
 version = '1.0.0'
-archivesBaseName = 'RPMTW-Update-Mod-1.16'
+archivesBaseName = 'RPMTW-Update-Mod-Forge-1.16'
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 task sourcesJar(type: Jar, dependsOn: classes) {
     classifier = 'sources'
