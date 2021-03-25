@@ -23,7 +23,7 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: |
-         ${{ github.workspace }}/1.16-forge gradlew build
+         gradlew build ${{ github.workspace }}/1.16-forge
     - name: "Upload Artifact"
       uses: actions/upload-artifact@v1
       with:
@@ -43,7 +43,7 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: |
-        ${{ github.workspace }}/1.16-Fabric gradlew build
+        gradlew build ${{ github.workspace }}/1.16-Fabric
     - name: "Upload Artifact"
       uses: actions/upload-artifact@v1
       with:
