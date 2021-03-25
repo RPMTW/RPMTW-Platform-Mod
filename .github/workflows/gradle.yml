@@ -11,7 +11,7 @@ on:
 
 jobs:
   Forge-Build-116:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -23,7 +23,8 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: |
-         ${{ github.workspace }}/1.16-forge & ./gradlew build
+         ${{ github.workspace }}/1.16-forge
+         ./gradlew build
     - name: "Upload Artifact"
       uses: actions/upload-artifact@v1
       with:
@@ -31,7 +32,7 @@ jobs:
         path: ${{ github.workspace }}/1.16-forge/build/libs
         
   Fabric-Build-116:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -43,7 +44,8 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: |
-       cd ${{ github.workspace }}/1.16-Fabric & ./gradlew build
+       cd ${{ github.workspace }}/1.16-Fabric
+       ./gradlew build
     - name: "Upload Artifact"
       uses: actions/upload-artifact@v1
       with:
