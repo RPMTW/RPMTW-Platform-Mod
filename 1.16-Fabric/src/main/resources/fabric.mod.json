@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "rpmtw_update_mod",
-  "version": "${version}",
+  "version": "1.0.0",
   "name": "RpmtwUpdateMod",
   "description": "This is a mod that can automatically download and load the RPMTW Traditional Chinese resource pack.",
   "authors": [
@@ -22,8 +22,8 @@
     "RpmtwUpdateMod.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.11.3",
+    "fabricloader": ">=0.10.6",
     "fabric": "*",
-    "minecraft": "1.16.5"
+    "minecraft": ">=1.16"
   }
 }
