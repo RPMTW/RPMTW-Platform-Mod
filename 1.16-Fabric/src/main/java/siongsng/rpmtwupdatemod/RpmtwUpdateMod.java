@@ -5,6 +5,8 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import siongsng.rpmtwupdatemod.crowdin.key;
+
 
 @Environment(EnvType.CLIENT)
 public class RpmtwUpdateMod implements ClientModInitializer {
@@ -13,9 +15,10 @@ public class RpmtwUpdateMod implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         if (!ping.isConnect()) {
-            LOGGER.info("您當前處於無網路狀態\n因此無法使用RPMTW自動更新模組\n請連結網路後重新啟動此模組。");
+            LOGGER.error("您當前處於無網路狀態，因此無法使用RPMTW自動更新模組，請連結網路後重新啟動此模組。(此偵測僅對Windows作業系統有效)");
         }
         LOGGER.info("Hello RPMTW world!");
-        LOGGER.info("正在準備進行更新資源包，最新版本:" + json.ver().toString());
+        key.onInitializeClient();
     }
+
 }
