@@ -11,8 +11,15 @@ import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import org.apache.commons.io.FileUtils;
 import org.lwjgl.glfw.GLFW;
+import siongsng.rpmtwupdatemod.PackFinder;
+import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
 import siongsng.rpmtwupdatemod.config.Configer;
+import siongsng.rpmtwupdatemod.json;
+
+import java.io.IOException;
+import java.net.URL;
 
 public final class key {
     private static final KeyBinding crowdin = new KeyBinding("key.rpmtw_update_mod.crowdin", KeyConflictContext.UNIVERSAL, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_V, "key.categories.rpmtw");
@@ -66,9 +73,15 @@ public final class key {
         }
         if (Configer.rpmtw_reloadpack.get()) {
             if (reloadpack.isPressed()) {
+                try {
+                    FileUtils.copyURLToFile(new URL(json.loadJson().toString()), RpmtwUpdateMod.PACK_NAME.toFile()); //下載資源包檔案
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+                Minecraft.getInstance().getResourcePackList().addPackFinder(new PackFinder());
                 Minecraft.getInstance().getLanguageManager().onResourceManagerReload(Minecraft.getInstance().getResourceManager());
                 assert Minecraft.getInstance().player != null;
-                Minecraft.getInstance().player.sendMessage(new StringTextComponent("§6重新載入RPMTW繁體中文化資源包完畢"), Minecraft.getInstance().player.getUniqueID());
+                Minecraft.getInstance().player.sendMessage(new StringTextComponent("§6重新下載最新資源包並且載入RPMTW繁體中文化資源包完畢"), Minecraft.getInstance().player.getUniqueID());
             }
         }
         if (Configer.report_translation.get()) {

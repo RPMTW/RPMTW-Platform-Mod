@@ -29,7 +29,7 @@ import java.util.concurrent.TimeUnit;
 @Mixin(ResourcePackManager.class)
 public abstract class ResourcePackManagerMixin {
     private final static Path CACHE_DIR = Paths.get(System.getProperty("user.home") + "/.rpmtw/1.16");
-    private final static Path PACK_NAME = CACHE_DIR.resolve("RPMTW-1.16.zip");
+    private static final Path PACK_NAME = CACHE_DIR.resolve("RPMTW-1.16.zip");
     private final static String Update_Path = CACHE_DIR + "/Update.txt";
     private final static String Latest_ver = json.ver().toString();
     private final static String Latest_ver_n = Latest_ver.split("RPMTW-1.16-V")[1];

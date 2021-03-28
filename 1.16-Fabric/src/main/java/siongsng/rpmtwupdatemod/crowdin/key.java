@@ -9,7 +9,18 @@ import net.minecraft.item.Item;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.Util;
 import net.minecraft.util.registry.Registry;
+import org.apache.commons.io.FileUtils;
 import org.lwjgl.glfw.GLFW;
+import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
+import siongsng.rpmtwupdatemod.json;
+import siongsng.rpmtwupdatemod.mixins.ResourcePackManagerMixin;
+
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.net.URL;
+import java.nio.file.Paths;
+import java.util.HashSet;
+import java.util.Set;
 
 public class key {
     private static final KeyBinding crowdin = new KeyBinding("key.rpmtw_update_mod.crowdin", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_V, "key.categories.rpmtw");
@@ -46,9 +57,15 @@ public class key {
                 Util.getOperatingSystem().open(url);   //使用預設瀏覽器開啟網頁
             }
             while (reloadpack.wasPressed()) {
+                try {
+                    FileUtils.copyURLToFile(new URL(json.loadJson().toString()), Paths.get(System.getProperty("user.home") + "/.rpmtw/1.16/RPMTW-1.16.zip").toFile()); //下載資源包檔案
+                    Class.forName("siongsng.rpmtwupdatemod.packs.LoadPack").getMethod("init", Set.class).invoke(null, new HashSet(new HashSet()));
+                } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException | ClassNotFoundException | IOException e) {
+                    e.printStackTrace();
+                }
                 MinecraftClient.getInstance().reloadResources();
                 assert MinecraftClient.getInstance().player != null;
-                MinecraftClient.getInstance().player.sendMessage(new LiteralText("§6重新載入RPMTW繁體中文化資源包完畢"), false);
+                MinecraftClient.getInstance().player.sendMessage(new LiteralText("§6重新下載最新資源包並且載入RPMTW繁體中文化資源包完畢"), false);
             }
             while (report_translation.wasPressed()) {
                 assert client.player != null;
