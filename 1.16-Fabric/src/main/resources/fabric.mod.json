@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "rpmtw_update_mod",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "name": "RpmtwUpdateMod",
   "description": "This is a mod that can automatically download and load the RPMTW Traditional Chinese resource pack.",
   "authors": [

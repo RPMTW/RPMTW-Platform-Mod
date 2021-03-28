@@ -2,5 +2,6 @@
   "key.categories.rpmtw": "RPMTW Shortcuts",
   "key.rpmtw_update_mod.crowdin": "Open the translation page",
   "key.rpmtw_update_mod.reloadpack": "Reload the RPMTW Traditional Resource Pack",
+  "key.rpmtw_update_mod.report_translation": "Report translation error",
   "menu.rpmtw": "RPMTW settings"
 }

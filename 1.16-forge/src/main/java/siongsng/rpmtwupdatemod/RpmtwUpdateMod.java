@@ -38,7 +38,7 @@ public class RpmtwUpdateMod {
 
     @SubscribeEvent
     public void init(final FMLClientSetupEvent e) {
-        MinecraftForge.EVENT_BUS.register(GuiHandler.class); //選單註冊
+        //   MinecraftForge.EVENT_BUS.register(GuiHandler.class); //選單註冊
         MinecraftForge.EVENT_BUS.register(new key()); //快捷鍵註冊
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT, "rpmtw_update_mod-client.toml");
@@ -64,7 +64,7 @@ public class RpmtwUpdateMod {
             Files.createFile(Paths.get(CACHE_DIR + "/Update.txt")); //建立更新檔案
             File_Writer.Writer(Latest_ver_n, Update_Path); //寫入最新版本
         }
-        if (Files.exists(PACK_NAME)) { //如果有資源包檔案
+        if (Files.exists(PACK_NAME) || !Files.exists(Paths.get(CACHE_DIR + "/RPMTW-1.16.zip"))) { //如果有資源包檔案
             FileReader fr = new FileReader(Update_Path);
             BufferedReader br = new BufferedReader(fr);
             int Old_ver = 0;
@@ -73,7 +73,7 @@ public class RpmtwUpdateMod {
                 System.out.println(br.readLine());
             }
             fr.close();
-            if (Integer.parseInt(Latest_ver_n) > Old_ver) {
+            if (Integer.parseInt(Latest_ver_n) > Old_ver || !Files.exists(Paths.get(CACHE_DIR + "/RPMTW-1.16.zip"))) {
                 LOGGER.info("偵測到資源包版本過舊，正在進行更新中...\n最新版本為" + Latest_ver_n);
                 File_Writer.Writer(Latest_ver_n, Update_Path); //寫入最新版本
                 FileUtils.copyURLToFile(new URL(json.loadJson().toString()), PACK_NAME.toFile()); //下載資源包檔案

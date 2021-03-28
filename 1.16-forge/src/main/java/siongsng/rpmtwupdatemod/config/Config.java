@@ -14,8 +14,7 @@ public class Config {
     public static final ForgeConfigSpec CLIENT;
 
     static {
-        crowdinConfig.init(CLIENT_BUILDER);
-        reloadpackConfig.init(CLIENT_BUILDER);
+        Configer.init(CLIENT_BUILDER);
         CLIENT = CLIENT_BUILDER.build();
     }
 

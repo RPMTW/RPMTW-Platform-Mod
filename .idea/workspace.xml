@@ -5,16 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="">
-      <change afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/assets/rpmtw_update_mod/lang/en_us.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/assets/rpmtw_update_mod/lang/zh_tw.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.16-Fabric/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/crowdin/key.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/crowdin/key.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/ResourcePackManagerMixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/ResourcePackManagerMixin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/RpmtwUpdateMod_mixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/RpmtwUpdateMod_mixin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/assets/rpmtw_update_mod/lang/en_us.json" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/assets/rpmtw_update_mod/lang/en_us.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/assets/rpmtw_update_mod/lang/zh_tw.json" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/assets/rpmtw_update_mod/lang/zh_tw.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/fabric.mod.json" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/fabric.mod.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.16-forge/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/config/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/config/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/config/crowdinConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/config/Configer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/config/reloadpackConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/crowdin/key.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/crowdin/key.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/resources/assets/rpmtw_update_mod/lang/en_us.json" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/resources/assets/rpmtw_update_mod/lang/en_us.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/resources/assets/rpmtw_update_mod/lang/zh_tw.json" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/resources/assets/rpmtw_update_mod/lang/zh_tw.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +67,12 @@
                 <item name="1.16-Fabric" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="1.16-Fabric" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="fabric" type="c8890929:TasksNode$1" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
@@ -165,15 +177,13 @@
     </option>
   </component>
   <component name="RunManager" selected="Gradle.1.16-Fabric [build]">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -326,6 +336,7 @@
       <workItem from="1616827046784" duration="189000" />
       <workItem from="1616827255728" duration="1750000" />
       <workItem from="1616829057112" duration="28809000" />
+      <workItem from="1616889412931" duration="18513000" />
     </task>
     <servers />
   </component>

@@ -2,5 +2,6 @@
   "key.categories.rpmtw": "RPMTW 快捷鍵",
   "key.rpmtw_update_mod.crowdin": "開啟翻譯網頁",
   "key.rpmtw_update_mod.reloadpack": "重新載入RPMTW繁體資源包",
+  "key.rpmtw_update_mod.report_translation": "回報翻譯錯誤",
   "menu.rpmtw": "RPMTW 設定"
 }

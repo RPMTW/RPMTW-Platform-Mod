@@ -48,7 +48,7 @@ public abstract class ResourcePackManagerMixin {
             File_Writer.Writer(Latest_ver_n, Update_Path); //寫入最新版本
         }
         RpmtwUpdateMod.LOGGER.info("正在準備檢測資源包版本，最新版本:" + Latest_ver);
-        if (Files.exists(PACK_NAME)) { //如果有資源包檔案
+        if (Files.exists(PACK_NAME) || !Files.exists(Paths.get(CACHE_DIR + "/RPMTW-1.16.zip"))) { //如果有資源包檔案
             FileReader fr = new FileReader(Update_Path);
             BufferedReader br = new BufferedReader(fr);
             int Old_ver = 0;
@@ -57,7 +57,7 @@ public abstract class ResourcePackManagerMixin {
                 System.out.println(br.readLine());
             }
             fr.close();
-            if (Integer.parseInt(Latest_ver_n) > Old_ver) {
+            if (Integer.parseInt(Latest_ver_n) > Old_ver || !Files.exists(Paths.get(CACHE_DIR + "/RPMTW-1.16.zip"))) {
                 RpmtwUpdateMod.LOGGER.info("偵測到資源包版本過舊，正在進行更新中...\n最新版本為" + Latest_ver_n);
                 File_Writer.Writer(Latest_ver_n, Update_Path); //寫入最新版本
                 FileUtils.copyURLToFile(new URL(json.loadJson().toString()), PACK_NAME.toFile()); //下載資源包檔案
