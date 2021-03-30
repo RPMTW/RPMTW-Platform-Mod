@@ -58,7 +58,6 @@ public final class key {
                 String mod_id = item.getCreatorModId(p.getHeldItemMainhand().getStack()); //物品所屬的模組ID
                 String item_key = item.getTranslationKey(); //物品的命名空間
                 String item_DisplayName = item.getName().getString(); //物品的顯示名稱
-              // 一直處理不好  String item_not_localized = ; //物品尚未翻譯的名稱
                 if (item_key.equals("block.minecraft.air")) {
                     p.sendMessage(new StringTextComponent("§4請手持物品後再使用此功能。"), p.getUniqueID()); //發送訊息
                     return;
@@ -68,7 +67,7 @@ public final class key {
                                 "§b模組ID: §a%s\n" +
                                 "§b顯示名稱: §a%s\n" +
                                 "§b命名空間: §a%s\n" +
-                                "§c-------------------------", mod_id,item_DisplayName, item_key);
+                                "§c-------------------------", mod_id, item_DisplayName, item_key);
                 p.sendMessage(new StringTextComponent(msg), p.getUniqueID()); //發送訊息
 
                 String url = "https://translate.rpmtw.ga/translate/resourcepack-mod-zhtw/all/en-zhtw?filter=basic&value=0#q=" + item_key;
@@ -85,7 +84,6 @@ public final class key {
                 }
                 Minecraft.getInstance().getResourcePackList().addPackFinder(new PackFinder());
                 Minecraft.getInstance().getResourcePackList().reloadPacksFromFinders();
-                //    Minecraft.getInstance().getLanguageManager().onResourceManagerReload(Minecraft.getInstance().getResourceManager());
                 assert Minecraft.getInstance().player != null;
                 Minecraft.getInstance().player.sendMessage(new StringTextComponent("§6重新下載最新資源包並且載入RPMTW繁體中文化資源包完畢"), Minecraft.getInstance().player.getUniqueID());
             }
@@ -103,7 +101,7 @@ public final class key {
                     return;
                 }
                 String url = String.format("https://docs.google.com/forms/d/e/1FAIpQLSelkP16fMms-_3q4ewdVLaDO14YdmmupcZ2Yl1V0sPtuC-v_g/viewform?usp=pp_url&entry.412976727=%s&entry.2706446=%s", mod_id, item_key);
-                p.sendMessage(new StringTextComponent(String.format("§6即將開啟回報錯誤的網頁中...\n§9即將回報翻譯錯誤的物品/方塊: §e%s(%s)", item_DisplayName, item_key)), p.getUniqueID()); //發送訊息
+                p.sendMessage(new StringTextComponent(String.format("§6即將開啟回報錯誤的網頁中...\n回報的物品: §e%s", item_DisplayName)), p.getUniqueID()); //發送訊息
                 Util.getOSType().openURI(url); //使用預設瀏覽器開啟網頁
             }
         }

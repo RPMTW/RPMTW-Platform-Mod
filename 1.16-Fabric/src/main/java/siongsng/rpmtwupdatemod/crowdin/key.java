@@ -7,6 +7,8 @@ import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.item.Item;
 import net.minecraft.text.LiteralText;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Language;
 import net.minecraft.util.Util;
 import net.minecraft.util.registry.Registry;
 import org.apache.commons.io.FileUtils;
@@ -40,6 +42,7 @@ public class key {
                 String mod_id = Registry.ITEM.getId(item).getNamespace();//物品所屬的模組ID
                 String item_key = item.getTranslationKey(); //物品的命名空間
                 String item_DisplayName = item.getName().getString(); //物品的顯示名稱
+                // String item_not_localized = ; //物品尚未翻譯的名稱
                 if (item_key.equals("block.minecraft.air")) {
                     client.player.sendMessage(new LiteralText("§4請手持物品後再使用此功能。"), false);
                     return;
@@ -80,7 +83,7 @@ public class key {
                 }
 
                 String url = String.format("https://docs.google.com/forms/d/e/1FAIpQLSelkP16fMms-_3q4ewdVLaDO14YdmmupcZ2Yl1V0sPtuC-v_g/viewform?usp=pp_url&entry.412976727=%s&entry.2706446=%s", mod_id, item_key);
-                client.player.sendMessage(new LiteralText((String.format("§6即將開啟回報錯誤的網頁中...\n§9即將回報翻譯錯誤的物品/方塊: §e%s(%s)", item_DisplayName, item_key))), false);
+                client.player.sendMessage(new LiteralText((String.format("§6即將開啟回報錯誤的網頁中...\n§9回報的物品: §e%s", item_DisplayName))), false);
                 Util.getOperatingSystem().open(url);   //使用預設瀏覽器開啟網頁
             }
         });

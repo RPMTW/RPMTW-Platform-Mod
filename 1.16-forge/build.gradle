@@ -48,7 +48,7 @@ dependencies {
     implementation('net.sf.ezmorph:ezmorph:1.0.6')
     implementation('commons-collections:commons-collections:3.2.2')
     implementation('commons-beanutils:commons-beanutils:1.9.4')
-    minecraft 'net.minecraftforge:forge:1.16.5-36.1.2'
+    minecraft 'net.minecraftforge:forge:1.16.5-36.1.3'
 }
 jar {
     manifest {

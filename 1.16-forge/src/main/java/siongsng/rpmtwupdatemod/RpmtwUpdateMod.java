@@ -14,6 +14,7 @@ import net.minecraftforge.fml.loading.FMLPaths;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import siongsng.rpmtwupdatemod.commands.AddToken;
 import siongsng.rpmtwupdatemod.config.Config;
 import siongsng.rpmtwupdatemod.crowdin.key;
 import siongsng.rpmtwupdatemod.function.File_Writer;
@@ -40,6 +41,7 @@ public class RpmtwUpdateMod {
     public void init(final FMLClientSetupEvent e) {
         //   MinecraftForge.EVENT_BUS.register(GuiHandler.class); //選單註冊
         MinecraftForge.EVENT_BUS.register(new key()); //快捷鍵註冊
+        MinecraftForge.EVENT_BUS.register(new AddToken()); //指令註冊
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT, "rpmtw_update_mod-client.toml");
         Config.loadConfig(Config.CLIENT, FMLPaths.CONFIGDIR.get().resolve("rpmtw_update_mod-client.toml").toString());
