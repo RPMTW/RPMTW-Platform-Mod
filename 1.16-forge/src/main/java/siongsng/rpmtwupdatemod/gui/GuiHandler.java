@@ -1,7 +1,6 @@
 package siongsng.rpmtwupdatemod.gui;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.IngameGui;
 import net.minecraft.client.gui.screen.IngameMenuScreen;
 import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.client.gui.widget.button.Button;

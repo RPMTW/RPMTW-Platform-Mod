@@ -80,7 +80,6 @@ public class RpmtwUpdateMod {
             int Old_ver = 0;
             while (br.ready()) {
                 Old_ver = Integer.parseInt(br.readLine());
-                System.out.println(br.readLine());
             }
             fr.close();
             if (Integer.parseInt(Latest_ver_n) > Old_ver || !Files.exists(Paths.get(CACHE_DIR + "/RPMTW-1.16.zip"))) {
