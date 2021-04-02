@@ -11,7 +11,6 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
-import net.minecraftforge.fml.loading.FMLPaths;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -53,7 +52,7 @@ public class RpmtwUpdateMod {
         );
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT, "rpmtw_update_mod-client.toml");
-        Config.loadConfig(Config.CLIENT, FMLPaths.CONFIGDIR.get().resolve("rpmtw_update_mod-client.toml").toString());
+        Config.loadConfig(Config.CLIENT);
     }
 
     public RpmtwUpdateMod() throws IOException {

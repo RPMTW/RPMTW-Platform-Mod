@@ -26,6 +26,7 @@ dependencies {
     shadow('net.sf.ezmorph:ezmorph:1.0.6')
     shadow('commons-collections:commons-collections:3.2.2')
     shadow('commons-beanutils:commons-beanutils:1.9.4')
+    shadow('com.terraformersmc.modmenu:terraformersmc-modmenu:1.16.8')
 
 }
 
