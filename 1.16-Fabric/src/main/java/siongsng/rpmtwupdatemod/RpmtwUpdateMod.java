@@ -26,7 +26,7 @@ public class RpmtwUpdateMod implements ClientModInitializer {
         LOGGER.info("Hello RPMTW world!");
         key.onInitializeClient();
         CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
-            dispatcher.register(literal("crowdin-token").then(argument("token", StringArgumentType.greedyString())).executes(AddToken::execute));
+            dispatcher.register(literal("crowdin-token").then(argument("token", StringArgumentType.greedyString())).executes(AddToken::execute).executes(AddToken::execute));
         });
     }
 

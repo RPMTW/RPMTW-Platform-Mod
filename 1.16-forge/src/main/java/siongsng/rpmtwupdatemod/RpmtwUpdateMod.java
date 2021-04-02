@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ExtensionPoint;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -16,6 +17,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import siongsng.rpmtwupdatemod.commands.AddToken;
 import siongsng.rpmtwupdatemod.config.Config;
+import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.crowdin.key;
 import siongsng.rpmtwupdatemod.function.File_Writer;
 import siongsng.rpmtwupdatemod.gui.GuiHandler;
@@ -31,17 +33,24 @@ import java.nio.file.Paths;
 public class RpmtwUpdateMod {
 
     public static final Logger LOGGER = LogManager.getLogger();
+    public final static String Mod_ID = "rpmtw_update_mod";
     public final static Path CACHE_DIR = Paths.get(System.getProperty("user.home") + "/.rpmtw/1.16");
     public final static Path PACK_NAME = CACHE_DIR.resolve("RPMTW-1.16.zip");
     public final static String Update_Path = CACHE_DIR + "/Update.txt";
     public final static String Latest_ver = json.ver().toString();
     public final static String Latest_ver_n = Latest_ver.split("RPMTW-1.16-V")[1];
 
+
     @SubscribeEvent
     public void init(final FMLClientSetupEvent e) {
-        //   MinecraftForge.EVENT_BUS.register(GuiHandler.class); //選單註冊
+        MinecraftForge.EVENT_BUS.register(GuiHandler.class); //設定Gui註冊
         MinecraftForge.EVENT_BUS.register(new key()); //快捷鍵註冊
         MinecraftForge.EVENT_BUS.register(new AddToken()); //指令註冊
+
+        ModLoadingContext.get().registerExtensionPoint(
+                ExtensionPoint.CONFIGGUIFACTORY,
+                () -> (mc, screen) -> new ConfigScreen()
+        );
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT, "rpmtw_update_mod-client.toml");
         Config.loadConfig(Config.CLIENT, FMLPaths.CONFIGDIR.get().resolve("rpmtw_update_mod-client.toml").toString());

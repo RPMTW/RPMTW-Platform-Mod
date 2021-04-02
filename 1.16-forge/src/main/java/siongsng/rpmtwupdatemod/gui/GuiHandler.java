@@ -1,6 +1,7 @@
 package siongsng.rpmtwupdatemod.gui;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.IngameGui;
 import net.minecraft.client.gui.screen.IngameMenuScreen;
 import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.client.gui.widget.button.Button;
@@ -8,7 +9,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.client.gui.screen.ModListScreen;
+import siongsng.rpmtwupdatemod.config.ConfigScreen;
 
 public class GuiHandler {
     @SubscribeEvent
@@ -20,7 +21,7 @@ public class GuiHandler {
                 Button returnToMenu = (Button) e.getWidgetList().get(7);
                 Button shareToLan = (Button) e.getWidgetList().get(6);
                 if (shareToLan != null) {
-                    e.addWidget(new Button(shareToLan.x, shareToLan.y + (gmrmflag ? 0 : 24), shareToLan.getWidth(), shareToLan.getHeight(), new TranslationTextComponent("menu.rpmtw"), (n) -> Minecraft.getInstance().displayGuiScreen(new ModListScreen(e.getGui()))));
+                    e.addWidget(new Button(shareToLan.x, shareToLan.y + (gmrmflag ? 0 : 24), shareToLan.getWidth(), shareToLan.getHeight(), new TranslationTextComponent("menu.rpmtw"), (n) -> Minecraft.getInstance().displayGuiScreen(new ConfigScreen())));
                     shareToLan.x = e.getGui().width / 2 - 102;
                     shareToLan.setWidth(204);
                     if (gmrmflag)

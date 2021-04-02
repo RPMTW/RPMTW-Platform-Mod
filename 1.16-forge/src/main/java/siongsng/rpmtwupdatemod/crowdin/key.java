@@ -26,9 +26,9 @@ import java.io.IOException;
 import java.net.URL;
 
 public final class key {
-    private static final KeyBinding crowdin = new KeyBinding("key.rpmtw_update_mod.crowdin", KeyConflictContext.UNIVERSAL, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_V, "key.categories.rpmtw");
-    private static final KeyBinding reloadpack = new KeyBinding("key.rpmtw_update_mod.reloadpack", KeyConflictContext.UNIVERSAL, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_R, "key.categories.rpmtw");
-    private static final KeyBinding report_translation = new KeyBinding("key.rpmtw_update_mod.report_translation", KeyConflictContext.UNIVERSAL, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_U, "key.categories.rpmtw");
+    public static final KeyBinding crowdin = new KeyBinding("key.rpmtw_update_mod.crowdin", KeyConflictContext.UNIVERSAL, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_V, "key.categories.rpmtw");
+    public static final KeyBinding reloadpack = new KeyBinding("key.rpmtw_update_mod.reloadpack", KeyConflictContext.UNIVERSAL, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_R, "key.categories.rpmtw");
+    public static final KeyBinding report_translation = new KeyBinding("key.rpmtw_update_mod.report_translation", KeyConflictContext.UNIVERSAL, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_U, "key.categories.rpmtw");
     private boolean showed = false;
 
     public key() {
