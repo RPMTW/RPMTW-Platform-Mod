@@ -2,7 +2,8 @@ package siongsng.rpmtwupdatemod.mixins;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.resource.*;
+import net.minecraft.resource.ResourcePackManager;
+import net.minecraft.resource.ResourcePackProvider;
 import org.apache.commons.io.FileUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -23,7 +24,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 @Environment(EnvType.CLIENT)
 @Mixin(ResourcePackManager.class)

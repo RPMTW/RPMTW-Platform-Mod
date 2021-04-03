@@ -13,6 +13,7 @@ import siongsng.rpmtwupdatemod.gui.ConfigScreen;
 @Environment(EnvType.CLIENT)
 public class RpmtwUpdateMod implements ClientModInitializer {
     public static final Logger LOGGER = LogManager.getLogger("rpmtw_update_mod");
+    public final static String Mod_ID = "rpmtw_update_mod";
 
     @Override
     public void onInitializeClient() {
