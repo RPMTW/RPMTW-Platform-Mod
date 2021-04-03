@@ -16,8 +16,8 @@ sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 archivesBaseName = "RPMTW-Update-Mod-Fabric-1.16"
-version = project.mod_version
-group = project.maven_group
+version = project.mod_version as Object
+group = project.maven_group as Object
 
 configurations {
     shadow

@@ -2,10 +2,8 @@ package siongsng.rpmtwupdatemod.config;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.gui.widget.list.OptionsRowList;
 import net.minecraft.client.settings.BooleanOption;
-import net.minecraft.util.Util;
 import net.minecraft.util.text.StringTextComponent;
 
 import javax.annotation.Nonnull;
@@ -22,9 +20,6 @@ public final class ConfigScreen extends Screen {
     private static final int OPTIONS_LIST_TOP_HEIGHT = 24;
     private static final int OPTIONS_LIST_BOTTOM_OFFSET = 32;
     private static final int OPTIONS_LIST_ITEM_HEIGHT = 25;
-    private static final int BOTTOM_BUTTON_WIDTH = 150;
-    static final int BUTTON_HEIGHT = 20;
-    private static final int BOTTOM_BUTTON_HEIGHT_OFFSET = 26;
     private OptionsRowList optionsRowList;
 
     public ConfigScreen() {
@@ -58,13 +53,6 @@ public final class ConfigScreen extends Screen {
         ));
 
         this.children.add(optionsRowList);
-        this.addButton(new Button(
-                this.width / 3,
-                this.height - BOTTOM_BUTTON_HEIGHT_OFFSET,
-                BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
-                new StringTextComponent("更多資訊"),
-                button -> Util.getOSType().openURI("https://www.rpmtw.ga"))
-        );
     }
 
     @Override

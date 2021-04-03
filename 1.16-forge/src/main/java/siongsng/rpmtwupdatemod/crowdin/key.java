@@ -15,6 +15,7 @@ import org.apache.commons.io.FileUtils;
 import org.lwjgl.glfw.GLFW;
 import siongsng.rpmtwupdatemod.PackFinder;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
+import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.config.Configer;
 import siongsng.rpmtwupdatemod.json;
 
@@ -25,6 +26,7 @@ public final class key {
     public static final KeyBinding crowdin = new KeyBinding("key.rpmtw_update_mod.crowdin", KeyConflictContext.UNIVERSAL, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_V, "key.categories.rpmtw");
     public static final KeyBinding reloadpack = new KeyBinding("key.rpmtw_update_mod.reloadpack", KeyConflictContext.UNIVERSAL, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_R, "key.categories.rpmtw");
     public static final KeyBinding report_translation = new KeyBinding("key.rpmtw_update_mod.report_translation", KeyConflictContext.UNIVERSAL, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_U, "key.categories.rpmtw");
+    public static final KeyBinding open_config = new KeyBinding("key.rpmtw_update_mod.open_config", KeyConflictContext.UNIVERSAL, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_O, "key.categories.rpmtw");
     private boolean showed = false;
 
     public key() {
@@ -38,7 +40,7 @@ public final class key {
         PlayerEntity p = Minecraft.getInstance().player;
         if (showed) { //防止重複開啟
             try {
-                if (!crowdin.isKeyDown() && !reloadpack.isKeyDown() && !report_translation.isKeyDown()) {
+                if (!crowdin.isKeyDown() && !reloadpack.isKeyDown() && !report_translation.isKeyDown() && !open_config.isKeyDown()) {
                     showed = false;
                 }
             } catch (IndexOutOfBoundsException ex) {
@@ -46,8 +48,11 @@ public final class key {
             }
             return;
         }
+        if (open_config.isPressed()) {
+            Minecraft.getInstance().displayGuiScreen(new ConfigScreen());
+        }
         if (Configer.rpmtw_crowdin.get()) {
-            if (crowdin.isPressed()) { //手拿著物品右鍵點擊物品又同時點擊快捷鍵
+            if (crowdin.isPressed()) {
                 assert p != null;
                 Item item = p.getHeldItemMainhand().getItem(); //拿的物品
 

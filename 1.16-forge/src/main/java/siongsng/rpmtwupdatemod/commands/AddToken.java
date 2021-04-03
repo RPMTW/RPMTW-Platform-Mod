@@ -12,11 +12,13 @@ import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.function.File_Writer;
+import siongsng.rpmtwupdatemod.function.SendMsg;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 public class AddToken {
     @SubscribeEvent
     public void registerCommands(RegisterCommandsEvent event) {
@@ -25,7 +27,7 @@ public class AddToken {
 
     private LiteralArgumentBuilder<CommandSource> customCommand() {
         return LiteralArgumentBuilder.<CommandSource>literal("crowdin-token")
-                .then(Commands.argument("token", StringArgumentType.greedyString()).executes(this::execute)).executes(this::execute);
+                .then(Commands.argument("token", StringArgumentType.greedyString()).executes(this::execute)).executes(this::exe);
     }
 
     private int execute(CommandContext<CommandSource> ctx) {
@@ -47,4 +49,8 @@ public class AddToken {
         return 0;
     }
 
+    private int exe(CommandContext<CommandSource> ctx) {
+        SendMsg.send("§c請輸入參數，§b/Crowdin-token <您的Token>");
+        return 0;
+    }
 }

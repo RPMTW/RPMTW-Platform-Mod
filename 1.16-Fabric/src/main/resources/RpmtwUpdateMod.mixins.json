@@ -4,6 +4,7 @@
   "package": "siongsng.rpmtwupdatemod.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "PlayJoinMixin",
     "ResourcePackManagerMixin",
     "RpmtwUpdateMod_mixin"
   ],

@@ -15,11 +15,12 @@ import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import siongsng.rpmtwupdatemod.commands.AddToken;
+import siongsng.rpmtwupdatemod.commands.noticeCMD;
 import siongsng.rpmtwupdatemod.config.Config;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.crowdin.key;
 import siongsng.rpmtwupdatemod.function.File_Writer;
-import siongsng.rpmtwupdatemod.gui.GuiHandler;
+import siongsng.rpmtwupdatemod.notice.notice;
 
 import java.io.*;
 import java.net.URL;
@@ -42,9 +43,11 @@ public class RpmtwUpdateMod {
 
     @SubscribeEvent
     public void init(final FMLClientSetupEvent e) {
-        MinecraftForge.EVENT_BUS.register(GuiHandler.class); //設定Gui註冊
-        MinecraftForge.EVENT_BUS.register(new key()); //快捷鍵註冊
-        MinecraftForge.EVENT_BUS.register(new AddToken()); //指令註冊
+        //   MinecraftForge.EVENT_BUS.register(GuiHandler.class); //設定Gui註冊
+        MinecraftForge.EVENT_BUS.register(new key());  //快捷鍵註冊
+        MinecraftForge.EVENT_BUS.register(new AddToken()); //AddToken指令註冊
+        MinecraftForge.EVENT_BUS.register(new notice()); //玩家加入事件註冊
+        MinecraftForge.EVENT_BUS.register(new noticeCMD()); //noticeCMD指令註冊
 
         ModLoadingContext.get().registerExtensionPoint(
                 ExtensionPoint.CONFIGGUIFACTORY,
@@ -61,7 +64,7 @@ public class RpmtwUpdateMod {
         LOGGER.info("Hello RPMTW world!");
         LOGGER.info(Integer.parseInt(Latest_ver_n));
         if (!ping.isConnect()) {
-            LOGGER.error("您當前處於無網路狀態，因此無法使用RPMTW自動更新模組，請連結網路後重新啟動此模組。(此偵測僅對Windows作業系統有效)");
+            LOGGER.error("您當前處於無網路狀態，因此無法使用RPMTW自動更新模組，請連結網路後重新啟動此模組。");
         }
         if (FMLEnvironment.dist == Dist.CLIENT) {
             Minecraft.getInstance().gameSettings.language = "zh_tw"; //將語言設定為繁體中文

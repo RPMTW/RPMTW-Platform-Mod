@@ -9,8 +9,6 @@ import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.item.Item;
 import net.minecraft.text.LiteralText;
-import net.minecraft.text.TranslatableText;
-import net.minecraft.util.Language;
 import net.minecraft.util.Util;
 import net.minecraft.util.registry.Registry;
 import org.apache.commons.io.FileUtils;
