@@ -12,6 +12,7 @@ import net.minecraft.util.Util;
 import net.minecraft.util.registry.Registry;
 import org.apache.commons.io.FileUtils;
 import org.lwjgl.glfw.GLFW;
+import siongsng.rpmtwupdatemod.function.SendMsg;
 import siongsng.rpmtwupdatemod.gui.ConfigScreen;
 import siongsng.rpmtwupdatemod.json;
 
@@ -70,13 +71,11 @@ public class key {
                 while (reloadpack.wasPressed()) {
                     try {
                         FileUtils.copyURLToFile(new URL(json.loadJson().toString()), Paths.get(System.getProperty("user.home") + "/.rpmtw/1.16/RPMTW-1.16.zip").toFile()); //下載資源包檔案
-                        Class.forName("siongsng.rpmtwupdatemod.packs.LoadPack").getMethod("init", Set.class).invoke(null, new HashSet(new HashSet()));
-                    } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException | ClassNotFoundException | IOException e) {
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
                     MinecraftClient.getInstance().reloadResources();
-                    assert MinecraftClient.getInstance().player != null;
-                    MinecraftClient.getInstance().player.sendMessage(new LiteralText("§6重新下載最新資源包並且載入RPMTW繁體中文化資源包完畢"), false);
+                    SendMsg.send("§6重新下載最新資源包並且載入RPMTW繁體中文化資源包完畢");
                 }
             }
             if (config.report_translation) {
@@ -87,7 +86,7 @@ public class key {
                     String mod_id = Registry.ITEM.getId(item).getNamespace();//物品所屬的模組ID
                     String item_key = item.getTranslationKey(); //物品的命名空間
                     String item_DisplayName = item.getName().getString(); //物品的顯示名稱
-                    String Game_ver = MinecraftClient.getInstance().getVersionType() + "+" + MinecraftClient.getInstance().getGame().getVersion(); //遊戲版本
+                    String Game_ver = MinecraftClient.getInstance().getVersionType() + "+" + MinecraftClient.getInstance().getGame().getVersion().getPackVersion(); //遊戲版本
                     if (item_key.equals("block.minecraft.air")) {
                         client.player.sendMessage(new LiteralText("§4請手持要回報翻譯錯誤的物品或方塊..."), false);
                         return;

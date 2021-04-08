@@ -101,5 +101,4 @@ task deobfJar(type: Jar) {
 artifacts {
     archives deobfJar
 }
-
 build.dependsOn(shadowJar)

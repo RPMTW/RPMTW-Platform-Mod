@@ -5,6 +5,7 @@ import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.InputMappings;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.client.event.InputEvent;
@@ -17,6 +18,7 @@ import siongsng.rpmtwupdatemod.PackFinder;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.config.Configer;
+import siongsng.rpmtwupdatemod.function.SendMsg;
 import siongsng.rpmtwupdatemod.json;
 
 import java.io.IOException;
@@ -33,6 +35,7 @@ public final class key {
         ClientRegistry.registerKeyBinding(crowdin);
         ClientRegistry.registerKeyBinding(reloadpack);
         ClientRegistry.registerKeyBinding(report_translation);
+        ClientRegistry.registerKeyBinding(open_config);
     }
 
     @SubscribeEvent
@@ -72,8 +75,9 @@ public final class key {
                 p.sendMessage(new StringTextComponent(msg), p.getUniqueID()); //發送訊息
 
                 String url = "https://translate.rpmtw.ga/translate/resourcepack-mod-zhtw/all/en-zhtw?filter=basic&value=0#q=" + item_key;
-                p.sendMessage(new StringTextComponent("§6開啟翻譯平台網頁中..."), p.getUniqueID()); //發送訊息
-                Util.getOSType().openURI(url); //使用預設瀏覽器開啟網頁
+
+                 p.sendMessage(new StringTextComponent("§6開啟翻譯平台網頁中..."), p.getUniqueID()); //發送訊息
+                 Util.getOSType().openURI(url); //使用預設瀏覽器開啟網頁
             }
         }
         if (Configer.rpmtw_reloadpack.get()) {
@@ -83,10 +87,8 @@ public final class key {
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
-                Minecraft.getInstance().getResourcePackList().addPackFinder(new PackFinder());
-                Minecraft.getInstance().getResourcePackList().reloadPacksFromFinders();
-                assert Minecraft.getInstance().player != null;
-                Minecraft.getInstance().player.sendMessage(new StringTextComponent("§6重新下載最新資源包並且載入RPMTW繁體中文化資源包完畢"), Minecraft.getInstance().player.getUniqueID());
+                Minecraft.getInstance().reloadResources();
+                SendMsg.send("§6重新下載最新資源包並且載入RPMTW繁體中文化資源包完畢");
             }
         }
         if (Configer.report_translation.get()) {
