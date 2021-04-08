@@ -99,7 +99,7 @@ public final class key {
                 String mod_id = item.getCreatorModId(p.getHeldItemMainhand().getStack()); //物品所屬的模組ID
                 String item_key = item.getTranslationKey(); //物品的命名空間
                 String item_DisplayName = item.getName().getString(); //物品的顯示名稱
-                String Game_ver = Minecraft.getInstance().getVersionType() + "+" + Minecraft.getInstance().getMinecraftGame().getVersion(); //遊戲版本
+                String Game_ver = "Forge-" + Minecraft.getInstance().getMinecraftGame().getVersion().getReleaseTarget(); //遊戲版本
                 if (item_key.equals("block.minecraft.air")) {
                     p.sendMessage(new StringTextComponent("§4請手持要回報翻譯錯誤的物品或方塊..."), p.getUniqueID()); //發送訊息
                     return;
