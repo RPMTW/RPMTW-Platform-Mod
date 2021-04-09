@@ -21,7 +21,7 @@ public class RpmtwUpdateMod implements ClientModInitializer {
         key.onInitializeClient(); //註冊快捷鍵
 
         if (!ping.isConnect()) {
-            LOGGER.error("您當前處於無網路狀態，因此無法使用RPMTW自動更新模組，請連結網路後重新啟動此模組。");
+            LOGGER.error("你目前處於無網路狀態，因此無法使用RPMTW自動更新模組，請連結網路後重新啟動此模組。");
         }
         LOGGER.info("Hello RPMTW world!");
     }

@@ -62,9 +62,8 @@ public class RpmtwUpdateMod {
         MinecraftForge.EVENT_BUS.register(this);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::init);
         LOGGER.info("Hello RPMTW world!");
-        LOGGER.info(Integer.parseInt(Latest_ver_n));
         if (!ping.isConnect()) {
-            LOGGER.error("您當前處於無網路狀態，因此無法使用RPMTW自動更新模組，請連結網路後重新啟動此模組。");
+            LOGGER.error("你目前處於無網路狀態，因此無法使用RPMTW自動更新模組，請連結網路後重新啟動此模組。");
         }
         if (FMLEnvironment.dist == Dist.CLIENT) {
             Minecraft.getInstance().gameSettings.language = "zh_tw"; //將語言設定為繁體中文
@@ -86,11 +85,11 @@ public class RpmtwUpdateMod {
             }
             fr.close();
             if (Integer.parseInt(Latest_ver_n) > Old_ver || !Files.exists(Paths.get(CACHE_DIR + "/RPMTW-1.16.zip"))) {
-                LOGGER.info("偵測到資源包版本過舊，正在進行更新中...\n最新版本為" + Latest_ver_n);
+                LOGGER.info("偵測到資源包版本過舊，正在進行更新中...。最新版本為" + Latest_ver_n);
                 File_Writer.Writer(Latest_ver_n, Update_Path); //寫入最新版本
                 FileUtils.copyURLToFile(new URL(json.loadJson().toString()), PACK_NAME.toFile()); //下載資源包檔案
             } else {
-                LOGGER.info("您目前的版本已經是最新的了!!");
+                LOGGER.info("目前的RPMTW版本已經是最新的了!!");
             }
             Minecraft.getInstance().getResourcePackList().addPackFinder(new PackFinder());
         }
