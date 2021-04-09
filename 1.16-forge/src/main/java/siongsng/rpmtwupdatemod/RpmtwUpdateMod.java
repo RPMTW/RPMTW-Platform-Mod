@@ -18,6 +18,7 @@ import siongsng.rpmtwupdatemod.commands.AddToken;
 import siongsng.rpmtwupdatemod.commands.noticeCMD;
 import siongsng.rpmtwupdatemod.config.Config;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
+import siongsng.rpmtwupdatemod.config.Configer;
 import siongsng.rpmtwupdatemod.crowdin.key;
 import siongsng.rpmtwupdatemod.function.File_Writer;
 import siongsng.rpmtwupdatemod.notice.notice;
@@ -40,14 +41,15 @@ public class RpmtwUpdateMod {
     public final static String Latest_ver = json.ver().toString();
     public final static String Latest_ver_n = Latest_ver.split("RPMTW-1.16-V")[1];
 
-
     @SubscribeEvent
     public void init(final FMLClientSetupEvent e) {
         //   MinecraftForge.EVENT_BUS.register(GuiHandler.class); //設定Gui註冊
         MinecraftForge.EVENT_BUS.register(new key());  //快捷鍵註冊
         MinecraftForge.EVENT_BUS.register(new AddToken()); //AddToken指令註冊
-        MinecraftForge.EVENT_BUS.register(new notice()); //玩家加入事件註冊
         MinecraftForge.EVENT_BUS.register(new noticeCMD()); //noticeCMD指令註冊
+        if (Configer.notice.get()) { //判斷Config
+            MinecraftForge.EVENT_BUS.register(new notice()); //玩家加入事件註冊
+        }
 
         ModLoadingContext.get().registerExtensionPoint(
                 ExtensionPoint.CONFIGGUIFACTORY,

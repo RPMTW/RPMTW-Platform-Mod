@@ -12,4 +12,6 @@ public class ConfigScreen implements ConfigData {
     public boolean reloadpack = true;
     @Comment("是否啟用使用快捷鍵(預設為U)回報翻譯錯誤。")
     public boolean report_translation = true;
+    @Comment("進入世界時，是否自動發送公告。(此變更須重啟遊戲後生效)")
+    public boolean notice = true;
 }

@@ -3,7 +3,7 @@ package siongsng.rpmtwupdatemod.config;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public class Configer {
-    public static ForgeConfigSpec.BooleanValue rpmtw_crowdin, rpmtw_reloadpack, report_translation;
+    public static ForgeConfigSpec.BooleanValue rpmtw_crowdin, rpmtw_reloadpack, report_translation, notice;
 
     public static void init(ForgeConfigSpec.Builder client) {
         rpmtw_crowdin = client
@@ -17,5 +17,8 @@ public class Configer {
         report_translation = client
                 .comment("report_translation = 是否啟用使用快捷鍵(預設為U)回報翻譯錯誤。")
                 .define("rpmtw.report_translation", true);
+        notice = client
+                .comment("notice = 進入世界時，是否自動發送公告。(此變更須重啟遊戲後生效)")
+                .define("rpmtw.notice", true);
     }
 }

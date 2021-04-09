@@ -51,6 +51,11 @@ public final class ConfigScreen extends Screen {
                 unused -> Configer.report_translation.get(),
                 (unused, newValue) -> Configer.report_translation.set(newValue)
         ));
+        optionsRowList.addOption(new BooleanOption(
+                "進入世界時自動發送公告",
+                unused -> Configer.notice.get(),
+                (unused, newValue) -> Configer.notice.set(newValue)
+        ));
 
         this.children.add(optionsRowList);
     }
