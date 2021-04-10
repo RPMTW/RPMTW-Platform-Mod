@@ -23,7 +23,9 @@ import siongsng.rpmtwupdatemod.crowdin.key;
 import siongsng.rpmtwupdatemod.function.File_Writer;
 import siongsng.rpmtwupdatemod.notice.notice;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -55,14 +57,13 @@ public class RpmtwUpdateMod {
                 ExtensionPoint.CONFIGGUIFACTORY,
                 () -> (mc, screen) -> new ConfigScreen()
         );
-
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT, "rpmtw_update_mod-client.toml");
-        Config.loadConfig(Config.CLIENT);
     }
 
     public RpmtwUpdateMod() throws IOException {
         MinecraftForge.EVENT_BUS.register(this);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::init);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT, "rpmtw_update_mod-client.toml");
+        Config.loadConfig(Config.CLIENT);
         LOGGER.info("Hello RPMTW world!");
         if (!ping.isConnect()) {
             LOGGER.error("你目前處於無網路狀態，因此無法使用RPMTW自動更新模組，請連結網路後重新啟動此模組。");
@@ -86,14 +87,18 @@ public class RpmtwUpdateMod {
                 Old_ver = Integer.parseInt(br.readLine());
             }
             fr.close();
-            if (Integer.parseInt(Latest_ver_n) > Old_ver || !Files.exists(Paths.get(CACHE_DIR + "/RPMTW-1.16.zip"))) {
-                LOGGER.info("偵測到資源包版本過舊，正在進行更新中...。最新版本為" + Latest_ver_n);
-                File_Writer.Writer(Latest_ver_n, Update_Path); //寫入最新版本
-                FileUtils.copyURLToFile(new URL(json.loadJson().toString()), PACK_NAME.toFile()); //下載資源包檔案
-            } else {
-                LOGGER.info("目前的RPMTW版本已經是最新的了!!");
+            try {
+                if (Integer.parseInt(Latest_ver_n) > Old_ver + Configer.Update_interval.get() || !Files.exists(Paths.get(CACHE_DIR + "/RPMTW-1.16.zip"))) {
+                    LOGGER.info("偵測到資源包版本過舊，正在進行更新中...。最新版本為" + Latest_ver_n);
+                    File_Writer.Writer(Latest_ver_n, Update_Path); //寫入最新版本
+                    FileUtils.copyURLToFile(new URL(json.loadJson().toString()), PACK_NAME.toFile()); //下載資源包檔案
+                } else {
+                    LOGGER.info("目前的RPMTW版本已經是最新的了!!");
+                }
+                Minecraft.getInstance().getResourcePackList().addPackFinder(new PackFinder());
+            } catch (Exception e) {
+                LOGGER.error(e);
             }
-            Minecraft.getInstance().getResourcePackList().addPackFinder(new PackFinder());
         }
     }
 }

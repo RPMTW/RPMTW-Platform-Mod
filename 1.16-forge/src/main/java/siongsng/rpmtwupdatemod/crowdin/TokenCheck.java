@@ -3,7 +3,6 @@ package siongsng.rpmtwupdatemod.crowdin;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Util;
-import net.minecraft.util.text.StringTextComponent;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;

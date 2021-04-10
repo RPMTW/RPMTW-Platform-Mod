@@ -14,4 +14,6 @@ public class ConfigScreen implements ConfigData {
     public boolean report_translation = true;
     @Comment("進入世界時，是否自動發送公告。(此變更須重啟遊戲後生效)")
     public boolean notice = true;
+    @Comment("每次啟動遊戲時，自動RPMTW更新時所檢查的版本間隔。(此變更須重啟遊戲後生效)")
+    public int Update_interval = 0;
 }

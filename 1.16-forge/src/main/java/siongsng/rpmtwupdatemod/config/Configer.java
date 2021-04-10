@@ -4,6 +4,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
 
 public class Configer {
     public static ForgeConfigSpec.BooleanValue rpmtw_crowdin, rpmtw_reloadpack, report_translation, notice;
+    public static ForgeConfigSpec.IntValue Update_interval;
 
     public static void init(ForgeConfigSpec.Builder client) {
         rpmtw_crowdin = client
@@ -20,5 +21,8 @@ public class Configer {
         notice = client
                 .comment("notice = 進入世界時，是否自動發送公告。(此變更須重啟遊戲後生效)")
                 .define("rpmtw.notice", true);
+        Update_interval = client
+                .comment("Update_interval = 每次啟動遊戲時，自動RPMTW更新時所檢查的版本間隔。(此變更須重啟遊戲後生效)")
+                .defineInRange("rpmtw.Update_interval", 0, 0, 20);
     }
 }

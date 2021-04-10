@@ -4,6 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.list.OptionsRowList;
 import net.minecraft.client.settings.BooleanOption;
+import net.minecraft.client.settings.SliderPercentageOption;
 import net.minecraft.util.text.StringTextComponent;
 
 import javax.annotation.Nonnull;
@@ -56,6 +57,12 @@ public final class ConfigScreen extends Screen {
                 unused -> Configer.notice.get(),
                 (unused, newValue) -> Configer.notice.set(newValue)
         ));
+        optionsRowList.addOption(new SliderPercentageOption(
+                "自動檢查更新版本間隔",
+                0.0F, 20, 1.0F,
+                unused -> (double) Configer.Update_interval.get(),
+                (unused, newValue) -> Configer.Update_interval.set(newValue.intValue()),
+                (gs, option) -> new StringTextComponent("自動檢查更新版本間隔" + ": " + (int) option.get(gs))));
 
         this.children.add(optionsRowList);
     }
@@ -72,8 +79,7 @@ public final class ConfigScreen extends Screen {
 
     @Override
     public void onClose() {
-        // 儲存模組設定
-        Config.save();
-        super.onClose();
+        Config.save(); // 儲存模組設定
+        super.onClose(); //關閉此Gui
     }
 }

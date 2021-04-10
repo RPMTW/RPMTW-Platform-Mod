@@ -1,5 +1,7 @@
 package siongsng.rpmtwupdatemod.mixins;
 
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.resource.ResourcePackManager;
@@ -12,6 +14,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
 import siongsng.rpmtwupdatemod.function.File_Writer;
+import siongsng.rpmtwupdatemod.gui.ConfigScreen;
 import siongsng.rpmtwupdatemod.json;
 
 import java.io.BufferedReader;
@@ -28,6 +31,7 @@ import java.util.Set;
 @Environment(EnvType.CLIENT)
 @Mixin(ResourcePackManager.class)
 public abstract class ResourcePackManagerMixin {
+
     private final static Path CACHE_DIR = Paths.get(System.getProperty("user.home") + "/.rpmtw/1.16");
     private static final Path PACK_NAME = CACHE_DIR.resolve("RPMTW-1.16.zip");
     private final static String Update_Path = CACHE_DIR + "/Update.txt";
@@ -38,6 +42,8 @@ public abstract class ResourcePackManagerMixin {
 
     @Inject(method = "<init>", at = @At("TAIL"))
     private void registerLoader(CallbackInfo info) throws IOException {
+        AutoConfig.register(ConfigScreen.class, Toml4jConfigSerializer::new); //註冊Config Gui
+        ConfigScreen config = AutoConfig.getConfigHolder(ConfigScreen.class).getConfig();
 
         this.providers = new HashSet(this.providers);
         if (!Files.isDirectory(CACHE_DIR)) {
@@ -57,13 +63,18 @@ public abstract class ResourcePackManagerMixin {
                 System.out.println(br.readLine());
             }
             fr.close();
-            if (Integer.parseInt(Latest_ver_n) > Old_ver || !Files.exists(Paths.get(CACHE_DIR + "/RPMTW-1.16.zip"))) {
-                RpmtwUpdateMod.LOGGER.info("偵測到資源包版本過舊，正在進行更新中...。最新版本為" + Latest_ver_n);
-                File_Writer.Writer(Latest_ver_n, Update_Path); //寫入最新版本
-                FileUtils.copyURLToFile(new URL(json.loadJson().toString()), PACK_NAME.toFile()); //下載資源包檔案
-            } else {
-                RpmtwUpdateMod.LOGGER.info("目前的RPMTW版本已經是最新的了!!");
+            try {
+                if (Integer.parseInt(Latest_ver_n) > Old_ver + config.Update_interval || !Files.exists(Paths.get(CACHE_DIR + "/RPMTW-1.16.zip"))) {
+                    RpmtwUpdateMod.LOGGER.info("偵測到資源包版本過舊，正在進行更新中...。最新版本為" + Latest_ver_n);
+                    File_Writer.Writer(Latest_ver_n, Update_Path); //寫入最新版本
+                    FileUtils.copyURLToFile(new URL(json.loadJson().toString()), PACK_NAME.toFile()); //下載資源包檔案
+                } else {
+                    RpmtwUpdateMod.LOGGER.info("目前的RPMTW版本已經是最新的了!!");
+                }
+            } catch (Exception e) {
+                RpmtwUpdateMod.LOGGER.error(e);
             }
+
             try {
                 Class.forName("siongsng.rpmtwupdatemod.packs.LoadPack").getMethod("init", Set.class).invoke(null, this.providers);
             } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException | ClassNotFoundException e) {

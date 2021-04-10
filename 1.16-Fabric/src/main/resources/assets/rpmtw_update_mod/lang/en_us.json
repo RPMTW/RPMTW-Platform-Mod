@@ -8,5 +8,7 @@
   "text.autoconfig.rpmtw_update_mod.option.crowdin": "開啟對應翻譯網頁",
   "text.autoconfig.rpmtw_update_mod.option.reloadpack": "快速重新載入資源包",
   "text.autoconfig.rpmtw_update_mod.option.report_translation": "回報翻譯錯誤",
+  "text.autoconfig.rpmtw_update_mod.option.notice": "進入世界時自動發送公告",
+  "text.autoconfig.rpmtw_update_mod.option.Update_interval": "自動檢查更新版本間隔",
   "menu.rpmtw": "RPMTW settings"
 }

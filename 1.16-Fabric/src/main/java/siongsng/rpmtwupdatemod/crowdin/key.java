@@ -17,11 +17,8 @@ import siongsng.rpmtwupdatemod.gui.ConfigScreen;
 import siongsng.rpmtwupdatemod.json;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.nio.file.Paths;
-import java.util.HashSet;
-import java.util.Set;
 
 public class key {
     private static final KeyBinding crowdin = new KeyBinding("key.rpmtw_update_mod.crowdin", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_V, "key.categories.rpmtw");

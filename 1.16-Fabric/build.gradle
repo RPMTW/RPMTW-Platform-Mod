@@ -35,7 +35,7 @@ dependencies {
     shadow('net.sf.ezmorph:ezmorph:1.0.6')
     shadow('commons-collections:commons-collections:3.2.2')
     shadow('commons-beanutils:commons-beanutils:1.9.4')
-    modImplementation("me.shedaniel.cloth:cloth-config-fabric:4.11.18") {
+    modImplementation("me.shedaniel.cloth:cloth-config-fabric:4.11.19") {
         exclude(group: "net.fabricmc.fabric-api")
     }
     modImplementation("com.terraformersmc:modmenu:1.16.8")
