@@ -8,7 +8,7 @@ license="MIT"
 # The modid of the mod
 modId="rpmtw_update_mod"
 
-version="1.0.0-bata"
+version="1.0.4"
 # A display name for the mod
 displayName="RpmtwUpdateMod"
 
@@ -34,6 +34,6 @@ This is a mod that can automatically download and load the RPMTW Traditional Chi
    modId="minecraft"
    mandatory=true
    # This version range declares a minimum of the current minecraft version up to but not including the next major version
-   versionRange="[1.16.1,1.17)"
+   versionRange="[1.16.1,1.16.5)"
    ordering="NONE"
    side="BOTH"
