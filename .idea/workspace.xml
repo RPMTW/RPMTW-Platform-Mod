@@ -4,26 +4,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="上傳剛剛忘記提交的。">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries-with-intellij-classes.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="新增啟動遊戲時，自動更新翻譯的版本間距(#10)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-Fabric/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/crowdin/key.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/crowdin/key.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/gui/ConfigScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/gui/ConfigScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/json.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/json.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/ResourcePackManagerMixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/ResourcePackManagerMixin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/RpmtwUpdateModClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/RpmtwUpdateModClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/RpmtwUpdateMod_mixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/RpmtwUpdateMod_mixin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/packs/LoadPack.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/packs/LoadPack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/assets/rpmtw_update_mod/lang/en_us.json" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/assets/rpmtw_update_mod/lang/en_us.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/config/ConfigScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/config/ConfigScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/config/Configer.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/config/Configer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/crowdin/TokenCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/crowdin/TokenCheck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/crowdin/key.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/crowdin/key.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/ping.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/ping.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/notice/notice.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/notice/notice.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +168,7 @@
       <command value="gradle --gradle-user-home" />
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.1.16-Fabric [runClient]">
+  <component name="RunManager" selected="Gradle.1.16-forge [runClient]">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -313,8 +296,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.1.16-Fabric [runClient]" />
         <item itemvalue="Gradle.1.16-forge [runClient]" />
+        <item itemvalue="Gradle.1.16-Fabric [runClient]" />
         <item itemvalue="Gradle.1.16-forge [build]" />
         <item itemvalue="Gradle.1.16-Fabric [build]" />
         <item itemvalue="Gradle.1.16-Fabric [remapSourcesJar]" />
@@ -370,7 +353,7 @@
       <workItem from="1617873537855" duration="860000" />
       <workItem from="1617874431492" duration="5434000" />
       <workItem from="1617962786846" duration="3086000" />
-      <workItem from="1618011236751" duration="5729000" />
+      <workItem from="1618011236751" duration="7150000" />
     </task>
     <task id="LOCAL-00001" summary="修改一下字詞">
       <created>1617963669695</created>
@@ -393,7 +376,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618012329716</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="新增啟動遊戲時，自動更新翻譯的版本間距(#10)">
+      <created>1618017141062</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1618017141062</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -412,10 +402,14 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="修改一些字詞" />
     <MESSAGE value="新增進入世界時，是否自動發送公告的Config選項。" />
     <MESSAGE value="上傳剛剛忘記提交的。" />
-    <option name="LAST_COMMIT_MESSAGE" value="上傳剛剛忘記提交的。" />
+    <MESSAGE value="新增啟動遊戲時，自動更新翻譯的版本間距(#10)" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增啟動遊戲時，自動更新翻譯的版本間距(#10)" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
