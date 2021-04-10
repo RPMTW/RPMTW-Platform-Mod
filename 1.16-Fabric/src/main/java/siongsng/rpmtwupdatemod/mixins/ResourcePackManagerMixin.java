@@ -1,7 +1,6 @@
 package siongsng.rpmtwupdatemod.mixins;
 
 import me.shedaniel.autoconfig.AutoConfig;
-import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.resource.ResourcePackManager;
@@ -42,10 +41,8 @@ public abstract class ResourcePackManagerMixin {
 
     @Inject(method = "<init>", at = @At("TAIL"))
     private void registerLoader(CallbackInfo info) throws IOException {
-        AutoConfig.register(ConfigScreen.class, Toml4jConfigSerializer::new); //註冊Config Gui
-        ConfigScreen config = AutoConfig.getConfigHolder(ConfigScreen.class).getConfig();
-
         this.providers = new HashSet(this.providers);
+
         if (!Files.isDirectory(CACHE_DIR)) {
             Files.createDirectories(CACHE_DIR);
         }
@@ -64,7 +61,8 @@ public abstract class ResourcePackManagerMixin {
             }
             fr.close();
             try {
-                if (Integer.parseInt(Latest_ver_n) > Old_ver + config.Update_interval || !Files.exists(Paths.get(CACHE_DIR + "/RPMTW-1.16.zip"))) {
+                ConfigScreen config = AutoConfig.getConfigHolder(ConfigScreen.class).getConfig();
+                if (Integer.parseInt(Latest_ver_n) > Old_ver || !Files.exists(Paths.get(CACHE_DIR + "/RPMTW-1.16.zip"))) {
                     RpmtwUpdateMod.LOGGER.info("偵測到資源包版本過舊，正在進行更新中...。最新版本為" + Latest_ver_n);
                     File_Writer.Writer(Latest_ver_n, Update_Path); //寫入最新版本
                     FileUtils.copyURLToFile(new URL(json.loadJson().toString()), PACK_NAME.toFile()); //下載資源包檔案

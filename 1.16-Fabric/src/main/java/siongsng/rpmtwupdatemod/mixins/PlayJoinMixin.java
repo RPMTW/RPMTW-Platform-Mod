@@ -13,10 +13,9 @@ import siongsng.rpmtwupdatemod.notice.notice;
 
 @Mixin(PlayerManager.class)
 public class PlayJoinMixin {
-    static ConfigScreen config = AutoConfig.getConfigHolder(ConfigScreen.class).getConfig();
-
     @Inject(method = "onPlayerConnect", at = @At("TAIL"), cancellable = false)
     private void playerJoin(ClientConnection connection, ServerPlayerEntity player, CallbackInfo ci) {
+        ConfigScreen config = AutoConfig.getConfigHolder(ConfigScreen.class).getConfig();
         if (config.notice) { //判斷Config
             notice.send(player);
         }

@@ -1,8 +1,6 @@
 package siongsng.rpmtwupdatemod.mixins;
 
 
-import me.shedaniel.autoconfig.AutoConfig;
-import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.RunArgs;
@@ -12,7 +10,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import siongsng.rpmtwupdatemod.commands.AddToken;
 import siongsng.rpmtwupdatemod.commands.noticeCMD;
-import siongsng.rpmtwupdatemod.gui.ConfigScreen;
 
 @Mixin(MinecraftClient.class)
 public class RpmtwUpdateModClient {
