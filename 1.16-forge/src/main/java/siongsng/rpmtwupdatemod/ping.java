@@ -8,7 +8,7 @@ import java.net.URLConnection;
 public class ping {
     public static boolean isConnect() {
         try {
-            final URL url = new URL("http://www.google.com");
+            final URL url = new URL("https://www.google.com");
             final URLConnection conn = url.openConnection();
             conn.connect();
             conn.getInputStream().close();

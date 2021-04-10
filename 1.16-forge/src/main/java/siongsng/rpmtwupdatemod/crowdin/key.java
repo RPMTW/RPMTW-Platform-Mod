@@ -74,8 +74,8 @@ public final class key {
 
                 String url = "https://translate.rpmtw.ga/translate/resourcepack-mod-zhtw/all/en-zhtw?filter=basic&value=0#q=" + item_key;
 
-                 p.sendMessage(new StringTextComponent("§6開啟翻譯平台網頁中..."), p.getUniqueID()); //發送訊息
-                 Util.getOSType().openURI(url); //使用預設瀏覽器開啟網頁
+                p.sendMessage(new StringTextComponent("§6開啟翻譯平台網頁中..."), p.getUniqueID()); //發送訊息
+                Util.getOSType().openURI(url); //使用預設瀏覽器開啟網頁
             }
         }
         if (Configer.rpmtw_reloadpack.get()) {

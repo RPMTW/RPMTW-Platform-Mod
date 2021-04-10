@@ -5,13 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="新增啟動遊戲時，自動更新翻譯的版本間距(#10)">
+      <change beforePath="$PROJECT_DIR$/.idea/modules/1.16-Fabric.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/1.16-Fabric.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2021_3_25__06_28____.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2021_3_25__06_28____.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/notice/notice.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/notice/notice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/ping.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/ping.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/crowdin/key.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/crowdin/key.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/ping.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/ping.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
@@ -93,6 +100,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -105,10 +113,18 @@
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
-        <option name="accountId" value="c0256a08-c58a-4dbe-9539-97ecd744609c" />
+        <option name="accountId" value="84210665-5234-4268-bab8-6d036dea08b9" />
         <option name="url" value="https://github.com/SiongSng/RPMTW-Update-Mod.git" />
       </UrlAndAccount>
     </option>
+  </component>
+  <component name="InvalidFacetManager">
+    <ignored-facets>
+      <facet id="1.16-Fabric.main/invalid/Minecraft" />
+      <facet id="1.16-Fabric.test/invalid/Minecraft" />
+      <facet id="1.16-Forge.main/invalid/Minecraft" />
+      <facet id="1.16-Forge.test/invalid/Minecraft" />
+    </ignored-facets>
   </component>
   <component name="ProjectId" id="1q2xdFnLWApS158xzXXbcfwDhoJ" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -128,7 +144,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.openapi.externalSystem.service.settings.ExternalSystemGroupConfigurable" value="ALL" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/1.16-Fabric/build.gradle" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -139,7 +155,7 @@
     <property name="project.structure.last.edited" value="模块" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="discord-application" />
+    <property name="settings.editor.selected.configurable" value="shared-indexes" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -168,20 +184,7 @@
       <command value="gradle --gradle-user-home" />
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.1.16-forge [runClient]">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Gradle.1.16-Fabric [build]">
     <configuration name="1.16-Fabric [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -296,10 +299,10 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.1.16-forge [runClient]" />
-        <item itemvalue="Gradle.1.16-Fabric [runClient]" />
-        <item itemvalue="Gradle.1.16-forge [build]" />
         <item itemvalue="Gradle.1.16-Fabric [build]" />
+        <item itemvalue="Gradle.1.16-Fabric [runClient]" />
+        <item itemvalue="Gradle.1.16-forge [runClient]" />
+        <item itemvalue="Gradle.1.16-forge [build]" />
         <item itemvalue="Gradle.1.16-Fabric [remapSourcesJar]" />
       </list>
     </recent_temporary>
@@ -354,6 +357,17 @@
       <workItem from="1617874431492" duration="5434000" />
       <workItem from="1617962786846" duration="3086000" />
       <workItem from="1618011236751" duration="7150000" />
+      <workItem from="1618020634787" duration="478000" />
+      <workItem from="1618021331533" duration="611000" />
+      <workItem from="1618021978165" duration="788000" />
+      <workItem from="1618022795518" duration="243000" />
+      <workItem from="1618023053844" duration="59000" />
+      <workItem from="1618023126881" duration="488000" />
+      <workItem from="1618023634126" duration="629000" />
+      <workItem from="1618024310967" duration="533000" />
+      <workItem from="1618024862525" duration="524000" />
+      <workItem from="1618025483517" duration="281000" />
+      <workItem from="1618025780317" duration="389000" />
     </task>
     <task id="LOCAL-00001" summary="修改一下字詞">
       <created>1617963669695</created>
