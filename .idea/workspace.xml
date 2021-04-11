@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="修正無法正常載入數據包錯誤，並且重新開啟問題#10">
-      <change beforePath="$PROJECT_DIR$/.idea/modules/1.16-Fabric.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/1.16-Fabric.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/1.16-Forge.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/1.16-Forge.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/1.16-Forge.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/1.16-Forge.test.iml" afterDir="false" />
+    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="1.0.4">
+      <change afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/function/VersionCheck.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-Fabric/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/fabric.mod.json" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/fabric.mod.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/resources/META-INF/mods.toml" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/resources/META-INF/mods.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/ResourcePackManagerMixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/ResourcePackManagerMixin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +52,12 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="1.16-Fabric" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="1.16-Fabric" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
@@ -190,6 +192,17 @@
     </option>
   </component>
   <component name="RunManager" selected="Gradle.1.16-Fabric [runClient]">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="1.16-Fabric [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -305,10 +318,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.1.16-Fabric [runClient]" />
-        <item itemvalue="Gradle.1.16-Fabric [remapSourcesJar]" />
-        <item itemvalue="Gradle.1.16-Fabric [build]" />
         <item itemvalue="Gradle.1.16-forge [runClient]" />
+        <item itemvalue="Gradle.1.16-Fabric [build]" />
         <item itemvalue="Gradle.1.16-forge [build]" />
+        <item itemvalue="Gradle.1.16-Fabric [remapSourcesJar]" />
       </list>
     </recent_temporary>
   </component>
@@ -373,7 +386,8 @@
       <workItem from="1618024862525" duration="524000" />
       <workItem from="1618025483517" duration="281000" />
       <workItem from="1618025780317" duration="389000" />
-      <workItem from="1618050535719" duration="135000" />
+      <workItem from="1618050535719" duration="1502000" />
+      <workItem from="1618108772817" duration="6028000" />
     </task>
     <task id="LOCAL-00001" summary="修改一下字詞">
       <created>1617963669695</created>
@@ -410,7 +424,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618034789053</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="1.0.4">
+      <created>1618050698081</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1618050698081</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -436,7 +457,8 @@
     <MESSAGE value="上傳剛剛忘記提交的。" />
     <MESSAGE value="新增啟動遊戲時，自動更新翻譯的版本間距(#10)" />
     <MESSAGE value="修正無法正常載入數據包錯誤，並且重新開啟問題#10" />
-    <option name="LAST_COMMIT_MESSAGE" value="修正無法正常載入數據包錯誤，並且重新開啟問題#10" />
+    <MESSAGE value="1.0.4" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.0.4" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
