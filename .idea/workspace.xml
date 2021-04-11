@@ -4,21 +4,8 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="">
-      <change afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/discord/Chat.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/discord/OnDiscordChat.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/OnChat.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/discord/Chat.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/discord/OnChat.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/discord/OnDiscordChat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-Fabric/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/RpmtwUpdateModClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/RpmtwUpdateModClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/RpmtwUpdateModServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/RpmtwUpdateModServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/RpmtwUpdateMod.mixins.json" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/RpmtwUpdateMod.mixins.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" afterDir="false" />
+    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="新增聊天室功能與Discord串聯">
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/discord/Chat.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/discord/Chat.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -398,7 +385,7 @@
       <workItem from="1618025483517" duration="281000" />
       <workItem from="1618025780317" duration="389000" />
       <workItem from="1618050535719" duration="1502000" />
-      <workItem from="1618108772817" duration="29084000" />
+      <workItem from="1618108772817" duration="29407000" />
     </task>
     <task id="LOCAL-00001" summary="修改一下字詞">
       <created>1617963669695</created>
@@ -477,7 +464,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618130941708</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="新增聊天室功能與Discord串聯">
+      <created>1618144930856</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1618144930856</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -509,7 +503,8 @@
     <MESSAGE value="【Forge】新增掛機功能並載入新翻譯(#12)" />
     <MESSAGE value="【Fabric】新增掛機功能並載入新翻譯(#12)" />
     <MESSAGE value="更新自述" />
-    <option name="LAST_COMMIT_MESSAGE" value="更新自述" />
+    <MESSAGE value="新增聊天室功能與Discord串聯" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增聊天室功能與Discord串聯" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
