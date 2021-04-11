@@ -46,7 +46,6 @@ public class VersionCheck {
             } catch (Exception e) {
                 RpmtwUpdateMod.LOGGER.error(e);
             }
-
             try {
                 Class.forName("siongsng.rpmtwupdatemod.packs.LoadPack").getMethod("init", Set.class).invoke(null, providers);
             } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException | ClassNotFoundException e) {
