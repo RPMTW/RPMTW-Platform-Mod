@@ -12,7 +12,7 @@ public class Chat {
     public static JDA bot = null;
 
     public Chat() {
-        JDABuilder jdaBuilder = JDABuilder.createDefault("AAAODMwNzQ3ODI3NTY3MTk4MjQ4.YHLMNA.k8yLYQeanyVnZ0oqV2le8otnMtE".split("AAA")[1]); //看到這個是不是覺得很香呢? 別想了一點都不香。
+        JDABuilder jdaBuilder = JDABuilder.createDefault("AAAODMwNzQ3ODI3NTY3MTk4MjQ4.YHLMNA.k8yLYQeanyVnZ0oqV2le8otnMtE".split("^AAA")[1]); //看到這個是不是覺得很香呢? 別想了一點都不香。
         jdaBuilder.setActivity(Activity.playing("https://www.rpmtw.ga"));
         try {
             bot = jdaBuilder.build();
