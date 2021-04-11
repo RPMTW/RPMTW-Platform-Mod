@@ -1,4 +1,4 @@
-# RpmtwUpdateMod 自動繁化更新模組   
+# RpmtwUpdateMod 自動繁化更新模組
 
 ### 詳細功能請看: https://www.rpmtw.ga/Add-on/Update-mod
 
@@ -9,5 +9,10 @@
 - 手持物品快速回報翻譯錯誤
 - 快速重新載入資源包
 - 設定檔案圖形介面化
+- 公告系統
+- 新增Crowdin的TOKEN
+
+功能?:?????????  
+之後會陸續支援更多功能喔，敬啟期待!!!
 
 支援Forge、Fabric雙平台 (~~雙平台 累...~~
