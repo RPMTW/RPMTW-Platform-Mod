@@ -1,6 +1,5 @@
 package siongsng.rpmtwupdatemod.mixins;
 
-
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.RunArgs;

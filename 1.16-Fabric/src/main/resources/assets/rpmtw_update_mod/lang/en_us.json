@@ -9,6 +9,8 @@
   "text.autoconfig.rpmtw_update_mod.option.reloadpack": "快速重新載入資源包",
   "text.autoconfig.rpmtw_update_mod.option.report_translation": "回報翻譯錯誤",
   "text.autoconfig.rpmtw_update_mod.option.notice": "進入世界時自動發送公告",
+  "text.autoconfig.rpmtw_update_mod.option.afk": "是否啟用掛機偵測",
   "text.autoconfig.rpmtw_update_mod.option.Update_interval": "自動檢查更新版本間隔",
+  "text.autoconfig.rpmtw_update_mod.option.afkTime": "開始掛機模式所需時間(秒)",
   "menu.rpmtw": "RPMTW settings"
 }

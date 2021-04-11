@@ -10,32 +10,15 @@ import net.minecraft.item.Item;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.Util;
 import net.minecraft.util.registry.Registry;
-import org.apache.commons.io.FileUtils;
 import org.lwjgl.glfw.GLFW;
-import siongsng.rpmtwupdatemod.function.File_Writer;
-import siongsng.rpmtwupdatemod.function.SendMsg;
+import siongsng.rpmtwupdatemod.function.ReloadPack;
 import siongsng.rpmtwupdatemod.gui.ConfigScreen;
-import siongsng.rpmtwupdatemod.json;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class key {
     private static final KeyBinding crowdin = new KeyBinding("key.rpmtw_update_mod.crowdin", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_V, "key.categories.rpmtw");
     private static final KeyBinding reloadpack = new KeyBinding("key.rpmtw_update_mod.reloadpack", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_R, "key.categories.rpmtw");
     private static final KeyBinding report_translation = new KeyBinding("key.rpmtw_update_mod.report_translation", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_U, "key.categories.rpmtw");
     private static final KeyBinding open_config = new KeyBinding("key.rpmtw_update_mod.open_config", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_O, "key.categories.rpmtw");
-
-    private final static Path CACHE_DIR = Paths.get(System.getProperty("user.home") + "/.rpmtw/1.16");
-    private static final Path PACK_NAME = CACHE_DIR.resolve("RPMTW-1.16.zip");
-    private final static String Update_Path = CACHE_DIR + "/Update.txt";
-    private final static String Latest_ver = json.ver().toString();
-    private final static String Latest_ver_n = Latest_ver.split("RPMTW-1.16-V")[1];
-
 
     static ConfigScreen config = AutoConfig.getConfigHolder(ConfigScreen.class).getConfig();
 
@@ -76,26 +59,7 @@ public class key {
             }
             if (config.reloadpack) {
                 while (reloadpack.wasPressed()) {
-                    try {
-                        FileReader fr = new FileReader(Update_Path);
-                        BufferedReader br = new BufferedReader(fr);
-                        int Old_ver = 0;
-                        while (br.ready()) {
-                            Old_ver = Integer.parseInt(br.readLine());
-                        }
-                        fr.close();
-                        if (Integer.parseInt(Latest_ver_n) > Old_ver + config.Update_interval) {
-                            SendMsg.send("§6偵測到資源包版本過舊，正在進行更新並重新載入中...。最新版本為" + Latest_ver_n);
-                            File_Writer.Writer(Latest_ver_n, Update_Path); //寫入最新版本
-                            FileUtils.copyURLToFile(new URL(json.loadJson().toString()), PACK_NAME.toFile()); //下載資源包檔案
-                            MinecraftClient.getInstance().reloadResources();
-                        } else {
-                            SendMsg.send("§a目前的RPMTW版本已經是最新的了!!因此不重新載入翻譯。");
-                        }
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                    SendMsg.send("§a處理完成。");
+                    new ReloadPack();
                 }
             }
             if (config.report_translation) {

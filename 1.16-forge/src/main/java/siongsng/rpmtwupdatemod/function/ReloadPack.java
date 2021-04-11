@@ -32,6 +32,6 @@ public class ReloadPack {
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
-        SendMsg.send("§a處理完成。");
+        SendMsg.send("§b處理完成。");
     }
 }

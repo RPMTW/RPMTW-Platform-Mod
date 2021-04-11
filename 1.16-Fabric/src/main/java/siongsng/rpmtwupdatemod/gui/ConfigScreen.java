@@ -14,6 +14,10 @@ public class ConfigScreen implements ConfigData {
     public boolean report_translation = true;
     @Comment("進入世界時，是否自動發送公告。(此變更須重啟遊戲後生效)")
     public boolean notice = true;
+    @Comment("是否啟用掛機偵測，啟用後當掛機時會自動更新翻譯。")
+    public boolean afk = true;
     @Comment("每次啟動遊戲時，自動RPMTW更新時所檢查的版本間隔。(此變更須重啟遊戲後生效)")
     public int Update_interval = 0;
+    @Comment("此數值用來設定過多久沒有活動才會進入掛機模式。(以秒為單位)")
+    public int afkTime = 600;
 }
