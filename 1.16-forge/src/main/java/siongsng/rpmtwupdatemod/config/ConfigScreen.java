@@ -13,7 +13,7 @@ import java.util.Objects;
 public final class ConfigScreen extends Screen {
 
     /**
-     * 此類部分原始碼取至:
+     * 此類別部分原始碼取至:
      * https://leo3418.github.io/zh/2020/09/09/forge-mod-config-screen.html
      */
 
@@ -57,12 +57,23 @@ public final class ConfigScreen extends Screen {
                 unused -> Configer.notice.get(),
                 (unused, newValue) -> Configer.notice.set(newValue)
         ));
+        optionsRowList.addOption(new BooleanOption(
+                "是否啟用掛機偵測",
+                unused -> Configer.afk.get(),
+                (unused, newValue) -> Configer.afk.set(newValue)
+        ));
         optionsRowList.addOption(new SliderPercentageOption(
                 "自動檢查更新版本間隔",
                 0.0F, 20, 1.0F,
                 unused -> (double) Configer.Update_interval.get(),
                 (unused, newValue) -> Configer.Update_interval.set(newValue.intValue()),
                 (gs, option) -> new StringTextComponent("自動檢查更新版本間隔" + ": " + (int) option.get(gs))));
+        optionsRowList.addOption(new SliderPercentageOption(
+                "開始掛機模式所需時間(秒)",
+                10.0F, 3600, 1.0F,
+                unused -> (double) Configer.afkTime.get(),
+                (unused, newValue) -> Configer.afkTime.set(newValue.intValue()),
+                (gs, option) -> new StringTextComponent("開始掛機模式所需時間(秒)" + ": " + (int) option.get(gs))));
 
         this.children.add(optionsRowList);
     }

@@ -19,6 +19,7 @@ import siongsng.rpmtwupdatemod.config.Config;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.config.Configer;
 import siongsng.rpmtwupdatemod.crowdin.key;
+import siongsng.rpmtwupdatemod.function.AFK;
 import siongsng.rpmtwupdatemod.function.VersionCheck;
 import siongsng.rpmtwupdatemod.notice.notice;
 
@@ -47,6 +48,7 @@ public class RpmtwUpdateMod {
         if (Configer.notice.get()) { //判斷Config
             MinecraftForge.EVENT_BUS.register(new notice()); //玩家加入事件註冊
         }
+        MinecraftForge.EVENT_BUS.register(new AFK()); //掛機事件註冊
 
         ModLoadingContext.get().registerExtensionPoint(
                 ExtensionPoint.CONFIGGUIFACTORY,

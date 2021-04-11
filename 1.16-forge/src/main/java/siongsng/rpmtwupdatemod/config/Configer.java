@@ -3,8 +3,8 @@ package siongsng.rpmtwupdatemod.config;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public class Configer {
-    public static ForgeConfigSpec.BooleanValue rpmtw_crowdin, rpmtw_reloadpack, report_translation, notice;
-    public static ForgeConfigSpec.IntValue Update_interval;
+    public static ForgeConfigSpec.BooleanValue rpmtw_crowdin, rpmtw_reloadpack, report_translation, notice, afk;
+    public static ForgeConfigSpec.IntValue Update_interval, afkTime;
 
     public static void init(ForgeConfigSpec.Builder client) {
         rpmtw_crowdin = client
@@ -21,8 +21,14 @@ public class Configer {
         notice = client
                 .comment("notice = 進入世界時，是否自動發送公告。(此變更須重啟遊戲後生效)")
                 .define("rpmtw.notice", true);
+        afk = client
+                .comment("afk = 是否啟用掛機偵測，啟用後當掛機時會自動更新翻譯。")
+                .define("rpmtw.afk", true);
         Update_interval = client
                 .comment("Update_interval = 每次啟動遊戲時，自動RPMTW更新時所檢查的版本間隔。(此變更須重啟遊戲後生效)")
                 .defineInRange("rpmtw.Update_interval", 0, 0, 20);
+        afkTime = client
+                .comment("afkTime = 此數值用來設定過多久沒有活動才會進入掛機模式。(以秒為單位)")
+                .defineInRange("rpmtw.afkTime", 600, 10, 3600);
     }
 }
