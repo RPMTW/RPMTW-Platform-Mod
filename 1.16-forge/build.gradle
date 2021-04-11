@@ -8,7 +8,7 @@ repositories {
         url 'https://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-releases/'
     }
     maven {
-        url 'https://repo1.maven.org/maven2'
+        url 'https://repo1.maven.org/maven2/'
     }
 }
 buildscript {
@@ -63,12 +63,6 @@ dependencies {
     implementation('net.sf.ezmorph:ezmorph:1.0.6')
     implementation('commons-collections:commons-collections:3.2.2')
     implementation('commons-beanutils:commons-beanutils:1.9.4')
-    implementation('net.dv8tion:JDA:4.2.1_253')
-    implementation files('libs/trove-3.0.3.jar')
-    implementation files('libs/slf4j-api-1.7.25.jar')
-    implementation files('libs/commons-collections4-4.1.jar')
-    implementation files('libs/commons-logging-1.2.jar')
- //   implementation files('libs/okhttp-3.13.0.jar')
     minecraft 'net.minecraftforge:forge:1.16.5-36.1.4'
 }
 jar {
@@ -93,19 +87,10 @@ shadowJar {
         include(dependency('net.sf.ezmorph:ezmorph:1.0.6'))
         include(dependency('commons-collections:commons-collections:3.2.2'))
         include(dependency('commons-beanutils:commons-beanutils:1.9.4'))
-        include(dependency(('net.dv8tion:JDA:4.2.1_253')))
-        include(dependency(('gnu.trove:trove:jar:3.0.3')))
-        include(dependency(('org.slf4j:slf4j-api:jar:1.7.25')))
-        include(dependency(('org.apache.commons:commons-collections4:jar:4.1')))
-        include(dependency(('commons-logging:commons-logging:jar:1.2')))
-    //    include(dependency(('com.squareup.okhttp3:okhttp:jar:3.13.0')))
-        include(dependency(('com.neovisionaries:nv-websocket-client:2.14')))
     }
-    relocate('net', 'siongsng.rpmtwupdatemod.net')
-    relocate('org', 'siongsng.rpmtwupdatemod.org')
-    relocate('gnu.trove', 'siongsng.rpmtwupdatemod.gnu.trove')
-    relocate('com', 'siongsng.rpmtwupdatemod.com')
- //   relocate('okhttp3', 'siongsng.rpmtwupdatemod.okhttp3')
+    relocate('net.sf.json', 'siongsng.rpmtwupdatemod.sf.json')
+    relocate('net.sf.ezmorph', 'siongsng.rpmtwupdatemod.sf.ezmorph')
+    relocate('org.apache.commons', 'siongsng.rpmtwupdatemod.commons')
     classifier = ''
 }
 shadowJar.doLast {
