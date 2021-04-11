@@ -1,8 +1,17 @@
+repositories {
+    mavenCentral()
+    maven {
+        name 'm2-dv8tion'
+        url 'https://m2.dv8tion.net/releases'
+    }
+}
 buildscript {
     repositories {
-        maven { url = 'https://files.minecraftforge.net/maven' }
-        jcenter()
         mavenCentral()
+        maven {
+            url = 'https://files.minecraftforge.net/maven'
+        }
+        jcenter()
     }
     dependencies {
         classpath 'com.github.jengelman.gradle.plugins:shadow:6.1.0'
@@ -48,6 +57,7 @@ dependencies {
     implementation('net.sf.ezmorph:ezmorph:1.0.6')
     implementation('commons-collections:commons-collections:3.2.2')
     implementation('commons-beanutils:commons-beanutils:1.9.4')
+    implementation('net.dv8tion:JDA:4.2.1_253')
     minecraft 'net.minecraftforge:forge:1.16.5-36.1.4'
 }
 jar {
@@ -72,12 +82,14 @@ shadowJar {
         include(dependency('net.sf.ezmorph:ezmorph:1.0.6'))
         include(dependency('commons-collections:commons-collections:3.2.2'))
         include(dependency('commons-beanutils:commons-beanutils:1.9.4'))
+        include(dependency(('net.dv8tion:JDA:4.2.1_253')))
     }
     relocate('net.sf.json', 'siongsng.rpmtwupdatemod.sf.json')
     relocate('net.sf.ezmorph', 'siongsng.rpmtwupdatemod.sf.ezmorph')
     relocate('org.apache.commons.lang', 'siongsng.rpmtwupdatemod.commons.lang')
     relocate('org.apache.commons.collections', 'siongsng.rpmtwupdatemod.commons.collections')
     relocate('org.apache.commons.beanutils', 'siongsng.rpmtwupdatemod.commons.beanutils')
+    relocate('net.dv8tion', 'siongsng.rpmtwupdatemod.net.dv8tion')
     classifier = ''
 }
 shadowJar.doLast {

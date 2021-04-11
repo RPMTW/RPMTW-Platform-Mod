@@ -10,6 +10,13 @@ repositories {
             includeGroup "com.terraformersmc"
         }
     }
+    maven {
+        name 'm2-dv8tion'
+        url 'https://m2.dv8tion.net/releases'
+        content {
+            includeGroup "net.dv8tion"
+        }
+    }
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -35,6 +42,9 @@ dependencies {
     shadow('net.sf.ezmorph:ezmorph:1.0.6')
     shadow('commons-collections:commons-collections:3.2.2')
     shadow('commons-beanutils:commons-beanutils:1.9.4')
+    shadow('net.dv8tion:JDA:4.2.1_253') {
+        exclude module: 'opus-java'
+    }
     modImplementation("me.shedaniel.cloth:cloth-config-fabric:4.11.19") {
         exclude(group: "net.fabricmc.fabric-api")
     }

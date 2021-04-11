@@ -12,9 +12,9 @@ import siongsng.rpmtwupdatemod.gui.ConfigScreen;
 @Mixin(MinecraftServer.class)
 public class RpmtwUpdateModServer {
     @Inject(method = "tick", at = @At("HEAD"))
-    public void onTick(CallbackInfo ci) {
+    public void onTick(CallbackInfo ci) {  //伺服器Tick事件
         ConfigScreen config = AutoConfig.getConfigHolder(ConfigScreen.class).getConfig();
-        if (config.afk) {
+        if (config.afk) { //讀取Config是否開啟掛機模式
             AFK.tickAfkStatus();
         }
     }

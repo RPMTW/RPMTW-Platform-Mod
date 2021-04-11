@@ -4,9 +4,21 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="【Fabric】新增掛機功能並載入新翻譯(#12)">
+    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="">
+      <change afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/discord/Chat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/discord/OnDiscordChat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/OnChat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/discord/Chat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/discord/OnChat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/discord/OnDiscordChat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/RpmtwUpdateModClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/RpmtwUpdateModClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/RpmtwUpdateModServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/RpmtwUpdateModServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/RpmtwUpdateMod.mixins.json" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/RpmtwUpdateMod.mixins.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,7 +161,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.openapi.externalSystem.service.settings.ExternalSystemGroupConfigurable" value="ALL" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -157,13 +169,14 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="模块" />
+    <property name="project.structure.last.edited" value="库" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="shared-indexes" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\code\coding\Java\RpmtwUpdateMod\1.16-Fabric\src\main\java\siongsng\rpmtwupdatemod" />
       <recent name="D:\code\coding\Java\RpmtwUpdateMod\1.16-Fabric\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -316,9 +329,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.1.16-Fabric [runClient]" />
+        <item itemvalue="Gradle.1.16-forge [build]" />
         <item itemvalue="Gradle.1.16-forge [runClient]" />
         <item itemvalue="Gradle.1.16-Fabric [build]" />
-        <item itemvalue="Gradle.1.16-forge [build]" />
         <item itemvalue="Gradle.1.16-Fabric [remapSourcesJar]" />
       </list>
     </recent_temporary>
@@ -385,7 +398,7 @@
       <workItem from="1618025483517" duration="281000" />
       <workItem from="1618025780317" duration="389000" />
       <workItem from="1618050535719" duration="1502000" />
-      <workItem from="1618108772817" duration="16561000" />
+      <workItem from="1618108772817" duration="29084000" />
     </task>
     <task id="LOCAL-00001" summary="修改一下字詞">
       <created>1617963669695</created>
@@ -457,7 +470,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618129789970</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="更新自述">
+      <created>1618130941708</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1618130941708</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -488,7 +508,8 @@
     <MESSAGE value="重新下載並載入資源時，新增檢測版本功能。" />
     <MESSAGE value="【Forge】新增掛機功能並載入新翻譯(#12)" />
     <MESSAGE value="【Fabric】新增掛機功能並載入新翻譯(#12)" />
-    <option name="LAST_COMMIT_MESSAGE" value="【Fabric】新增掛機功能並載入新翻譯(#12)" />
+    <MESSAGE value="更新自述" />
+    <option name="LAST_COMMIT_MESSAGE" value="更新自述" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
