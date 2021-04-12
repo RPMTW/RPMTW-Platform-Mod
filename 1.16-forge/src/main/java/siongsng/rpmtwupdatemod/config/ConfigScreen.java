@@ -2,6 +2,7 @@ package siongsng.rpmtwupdatemod.config;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.gui.widget.list.OptionsRowList;
 import net.minecraft.client.settings.BooleanOption;
 import net.minecraft.client.settings.SliderPercentageOption;
@@ -22,6 +23,12 @@ public final class ConfigScreen extends Screen {
     private static final int OPTIONS_LIST_BOTTOM_OFFSET = 32;
     private static final int OPTIONS_LIST_ITEM_HEIGHT = 25;
     private OptionsRowList optionsRowList;
+
+
+    private static final int BOTTOM_BUTTON_HEIGHT_OFFSET = 26;
+    private static final int BOTTOM_BUTTON_WIDTH = 150;
+    static final int BUTTONS_INTERVAL = 4;
+    static final int BUTTON_HEIGHT = 20;
 
     public ConfigScreen() {
         super(new StringTextComponent("RPMTW自動繁化模組 設定選單"));
@@ -76,6 +83,22 @@ public final class ConfigScreen extends Screen {
                 (gs, option) -> new StringTextComponent("開始掛機模式所需時間(秒)" + ": " + (int) option.get(gs))));
 
         this.children.add(optionsRowList);
+
+        this.addButton(new Button(
+                this.width / 2,
+                this.height - BOTTOM_BUTTON_HEIGHT_OFFSET,
+                BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
+                new StringTextComponent("重置設定"),
+                button -> {
+                    Configer.rpmtw_crowdin.set(true);
+                    Configer.rpmtw_reloadpack.set(true);
+                    Configer.report_translation.set(true);
+                    Configer.notice.set(true);
+                    Configer.afk.set(true);
+                    Configer.Update_interval.set(0);
+                    Configer.afkTime.set(600);
+                })
+        );
     }
 
     @Override

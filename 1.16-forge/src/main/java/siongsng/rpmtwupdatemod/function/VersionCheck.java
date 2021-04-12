@@ -25,7 +25,6 @@ public class VersionCheck {
             Files.createFile(Paths.get(CACHE_DIR + "/Update.txt")); //建立更新檔案
             File_Writer.Writer(Latest_ver_n, Update_Path); //寫入最新版本
         }
-        if (Files.exists(PACK_NAME) || !Files.exists(Paths.get(CACHE_DIR + "/RPMTW-1.16.zip"))) { //如果有資源包檔案
             FileReader fr = new FileReader(Update_Path);
             BufferedReader br = new BufferedReader(fr);
             int Old_ver = 0;
@@ -34,7 +33,7 @@ public class VersionCheck {
             }
             fr.close();
             try {
-                if (Integer.parseInt(Latest_ver_n) > Old_ver + Configer.Update_interval.get() || !Files.exists(Paths.get(CACHE_DIR + "/RPMTW-1.16.zip"))) {
+                if (Integer.parseInt(Latest_ver_n) > Old_ver + Configer.Update_interval.get() || !Files.exists(PACK_NAME)) {
                     RpmtwUpdateMod.LOGGER.info("偵測到資源包版本過舊，正在進行更新中...。最新版本為" + Latest_ver_n);
                     File_Writer.Writer(Latest_ver_n, Update_Path); //寫入最新版本
                     FileUtils.copyURLToFile(new URL(json.loadJson().toString()), PACK_NAME.toFile()); //下載資源包檔案
@@ -45,7 +44,5 @@ public class VersionCheck {
             } catch (Exception e) {
                 RpmtwUpdateMod.LOGGER.error(e);
             }
-        }
     }
-
 }
