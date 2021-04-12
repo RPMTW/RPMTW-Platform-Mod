@@ -7,9 +7,6 @@ repositories {
     maven {
         url 'https://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-releases/'
     }
-    maven {
-        url 'https://repo1.maven.org/maven2/'
-    }
 }
 buildscript {
     repositories {
@@ -63,6 +60,7 @@ dependencies {
     implementation('net.sf.ezmorph:ezmorph:1.0.6')
     implementation('commons-collections:commons-collections:3.2.2')
     implementation('commons-beanutils:commons-beanutils:1.9.4')
+    implementation files('libs/commons-logging-1.2.jar')
     minecraft 'net.minecraftforge:forge:1.16.5-36.1.4'
 }
 jar {
@@ -87,6 +85,7 @@ shadowJar {
         include(dependency('net.sf.ezmorph:ezmorph:1.0.6'))
         include(dependency('commons-collections:commons-collections:3.2.2'))
         include(dependency('commons-beanutils:commons-beanutils:1.9.4'))
+        include(dependency('commons-logging:commons-logging:jar:1.2'))
     }
     relocate('net.sf.json', 'siongsng.rpmtwupdatemod.sf.json')
     relocate('net.sf.ezmorph', 'siongsng.rpmtwupdatemod.sf.ezmorph')

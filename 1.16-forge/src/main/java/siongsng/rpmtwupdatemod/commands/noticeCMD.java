@@ -19,7 +19,11 @@ public class noticeCMD {
     }
 
     private int exe(CommandContext<CommandSource> ctx) {
-        SendMsg.send(noticeGet.get().replace("\\n", "\n"));
+        try {
+            SendMsg.send(noticeGet.get().replace("\\n", "\n"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 }

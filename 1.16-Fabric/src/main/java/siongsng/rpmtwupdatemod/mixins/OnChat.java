@@ -20,10 +20,10 @@ public class OnChat {
         if (message.startsWith("!")) {
             times++;
             TextChannel textChannel = Chat.bot.getTextChannelById(815819581440262146L);
-            textChannel.sendMessage(String.format("**%s** >> %s", MinecraftClient.getInstance().player.getDisplayName().getString(), message.split("^!")[1])).queue();
+            textChannel.sendMessage(String.format("[宇宙通訊] **%s** >> %s", MinecraftClient.getInstance().player.getDisplayName().getString(), message.split("^!")[1])).queue();
         }
         if (message.startsWith("!") && times == 1) {
-            SendMsg.send("§b提醒您使用本功能(RPMTW Discord串流聊天)需遵守§cDiscord使用者及社群條款§b，還有§c不得以任何形式騷擾別人§b，如違反皆須附上§c法律責任§b。");
+            SendMsg.send("§b提醒您使用§9宇宙通訊§b功能需遵守§cDiscord使用者及社群條款\n§b以及§c不得以任何形式騷擾別人§b，違反者皆可能須附上§c法律責任§b。");
         }
     }
 }

@@ -3,6 +3,7 @@ plugins {
     id 'maven-publish'
 }
 repositories {
+    mavenCentral()
     maven { url "https://maven.shedaniel.me/" }
     maven {
         url "https://maven.terraformersmc.com/releases/"
