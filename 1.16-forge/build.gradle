@@ -55,6 +55,7 @@ dependencies {
     shade('net.sf.ezmorph:ezmorph:1.0.6')
     shade('commons-collections:commons-collections:3.2.2')
     shade('commons-beanutils:commons-beanutils:1.9.4')
+    shade('commons-io:commons-io:2.8.0')
     shade files('libs/commons-logging-1.2.jar')
     shade('net.dv8tion:JDA:4.2.1_253') { //Java Discord Api Library
         exclude module: 'opus-java'

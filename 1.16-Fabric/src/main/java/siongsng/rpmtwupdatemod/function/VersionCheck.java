@@ -8,7 +8,6 @@ import siongsng.rpmtwupdatemod.json;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -25,7 +24,6 @@ public class VersionCheck {
             File_Writer.Writer(Latest_ver_n, Update_Path); //寫入最新版本
         }
         RpmtwUpdateMod.LOGGER.info("正在準備檢測資源包版本，最新版本:" + Latest_ver);
-        if (Files.exists(PACK_NAME) || !Files.exists(Paths.get(CACHE_DIR + "/RPMTW-1.16.zip"))) { //如果有資源包檔案
             FileReader fr = new FileReader(Update_Path);
             BufferedReader br = new BufferedReader(fr);
             int Old_ver = 0;
@@ -36,8 +34,8 @@ public class VersionCheck {
             fr.close();
             try {
                 //  ConfigScreen config = AutoConfig.getConfigHolder(ConfigScreen.class).getConfig();
-                if (Integer.parseInt(Latest_ver_n) > Old_ver || !Files.exists(Paths.get(CACHE_DIR + "/RPMTW-1.16.zip"))) {
-                    RpmtwUpdateMod.LOGGER.info("偵測到資源包版本過舊，正在進行更新中...。最新版本為" + Latest_ver_n);
+                if (Integer.parseInt(Latest_ver_n) > Old_ver || !Files.exists(PACK_NAME)) {
+                    SendMsg.send("§6偵測到資源包版本過舊，正在進行更新並重新載入中...。目前版本為:" + Old_ver + "最新版本為:" + Latest_ver_n);
                     File_Writer.Writer(Latest_ver_n, Update_Path); //寫入最新版本
                     FileUtils.copyURLToFile(new URL(json.loadJson().toString()), PACK_NAME.toFile()); //下載資源包檔案
                 } else {
@@ -46,11 +44,10 @@ public class VersionCheck {
             } catch (Exception e) {
                 RpmtwUpdateMod.LOGGER.error(e);
             }
-            try {
-                Class.forName("siongsng.rpmtwupdatemod.packs.LoadPack").getMethod("init", Set.class).invoke(null, providers);
-            } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
+        try {
+            Class.forName("siongsng.rpmtwupdatemod.packs.LoadPack").getMethod("init", Set.class).invoke(null, providers);
+        } catch (Exception e) {
+            RpmtwUpdateMod.LOGGER.error("發生未知錯誤" + e);
         }
-    }
+        }
 }
