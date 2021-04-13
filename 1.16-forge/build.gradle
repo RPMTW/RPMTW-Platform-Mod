@@ -1,12 +1,8 @@
 repositories {
     mavenCentral()
-    maven {
-        name 'm2-dv8tion'
-        url 'https://m2.dv8tion.net/releases'
-    }
-    maven {
-        url 'https://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-releases/'
-    }
+    jcenter()
+    maven { url 'https://m2.dv8tion.net/releases' }
+    maven { url 'https://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-releases/' }
 }
 buildscript {
     repositories {
@@ -25,14 +21,13 @@ tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
 configurations {
-    embed
-    compile.extendsFrom(embed)
+    shade
+    compile.extendsFrom(shade)
 }
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'java'
 group = 'siongsng.rpmtwupdatemod'
-version = '1.0.4'
 archivesBaseName = 'RPMTW-Update-Mod-Forge-1.16'
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 task sourcesJar(type: Jar, dependsOn: classes) {
@@ -55,12 +50,15 @@ minecraft {
     }
 }
 dependencies {
-    implementation('net.sf.json-lib:json-lib:2.4:jdk15')
-    implementation('commons-lang:commons-lang:2.6')
-    implementation('net.sf.ezmorph:ezmorph:1.0.6')
-    implementation('commons-collections:commons-collections:3.2.2')
-    implementation('commons-beanutils:commons-beanutils:1.9.4')
-    implementation files('libs/commons-logging-1.2.jar')
+    shade('net.sf.json-lib:json-lib:2.4:jdk15') //Json Library
+    shade('commons-lang:commons-lang:2.6')
+    shade('net.sf.ezmorph:ezmorph:1.0.6')
+    shade('commons-collections:commons-collections:3.2.2')
+    shade('commons-beanutils:commons-beanutils:1.9.4')
+    shade files('libs/commons-logging-1.2.jar')
+    shade('net.dv8tion:JDA:4.2.1_253') { //Java Discord Api Library
+        exclude module: 'opus-java'
+    }
     minecraft 'net.minecraftforge:forge:1.16.5-36.1.4'
 }
 jar {
@@ -71,7 +69,7 @@ jar {
                 "LICENSE"                 : "MIT",
                 "Specification-Version"   : "1",
                 "Implementation-Title"    : project.name,
-                "Implementation-Version"  : version,
+                "Implementation-Version"  : project.version,
                 "Implementation-Vendor"   : "SiongSng",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
@@ -79,38 +77,24 @@ jar {
 }
 jar.finalizedBy('reobfJar')
 shadowJar {
-    dependencies {
-        include(dependency('net.sf.json-lib:json-lib:2.4:jdk15'))
-        include(dependency('commons-lang:commons-lang:2.6'))
-        include(dependency('net.sf.ezmorph:ezmorph:1.0.6'))
-        include(dependency('commons-collections:commons-collections:3.2.2'))
-        include(dependency('commons-beanutils:commons-beanutils:1.9.4'))
-        include(dependency('commons-logging:commons-logging:jar:1.2'))
-    }
-    relocate('net.sf.json', 'siongsng.rpmtwupdatemod.sf.json')
-    relocate('net.sf.ezmorph', 'siongsng.rpmtwupdatemod.sf.ezmorph')
+    configurations = [project.configurations.shade]
     relocate('org.apache.commons', 'siongsng.rpmtwupdatemod.commons')
+    relocate('gnu', 'siongsng.rpmtwupdatemod.gnu')
     classifier = ''
 }
-shadowJar.doLast {
-    task ->
-        ant.checksum file: task.archivePath
-}
-
-afterEvaluate {
-    reobf {
-        shadowJar {
-            mappings = createMcpToSrg.output
-        }
+reobf {
+    shadowJar {
+        dependsOn tasks.createMcpToSrg
+        mappings = tasks.createMcpToSrg.outputs.files.singleFile
     }
 }
-
+artifacts {
+    archives tasks.shadowJar
+}
 task deobfJar(type: Jar) {
     from sourceSets.main.output
     classifier = 'dev'
 }
-
 artifacts {
     archives deobfJar
 }
-build.dependsOn(shadowJar)

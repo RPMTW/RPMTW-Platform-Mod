@@ -25,24 +25,25 @@ public class VersionCheck {
             Files.createFile(Paths.get(CACHE_DIR + "/Update.txt")); //建立更新檔案
             File_Writer.Writer(Latest_ver_n, Update_Path); //寫入最新版本
         }
-            FileReader fr = new FileReader(Update_Path);
-            BufferedReader br = new BufferedReader(fr);
-            int Old_ver = 0;
-            while (br.ready()) {
-                Old_ver = Integer.parseInt(br.readLine());
-            }
-            fr.close();
-            try {
-                if (Integer.parseInt(Latest_ver_n) > Old_ver + Configer.Update_interval.get() || !Files.exists(PACK_NAME)) {
-                    RpmtwUpdateMod.LOGGER.info("偵測到資源包版本過舊，正在進行更新中...。最新版本為" + Latest_ver_n);
-                    File_Writer.Writer(Latest_ver_n, Update_Path); //寫入最新版本
-                    FileUtils.copyURLToFile(new URL(json.loadJson().toString()), PACK_NAME.toFile()); //下載資源包檔案
-                } else {
-                    RpmtwUpdateMod.LOGGER.info("目前的RPMTW版本已經是最新的了!!");
-                }
+        FileReader fr = new FileReader(Update_Path);
+        BufferedReader br = new BufferedReader(fr); //讀取舊的版本
+        int Old_ver = 0;
+        while (br.ready()) {
+            Old_ver = Integer.parseInt(br.readLine());
+        }
+        fr.close();
+        try {
+            if (Integer.parseInt(Latest_ver_n) > Old_ver + Configer.Update_interval.get() || !Files.exists(PACK_NAME)) {
+                RpmtwUpdateMod.LOGGER.info("偵測到資源包版本過舊，正在進行更新中...。最新版本為" + Latest_ver_n);
+                File_Writer.Writer(Latest_ver_n, Update_Path); //寫入最新版本
+                FileUtils.copyURLToFile(new URL(json.loadJson().toString()), PACK_NAME.toFile()); //下載資源包檔案
                 Minecraft.getInstance().getResourcePackList().addPackFinder(new PackFinder());
-            } catch (Exception e) {
-                RpmtwUpdateMod.LOGGER.error(e);
+            } else {
+                RpmtwUpdateMod.LOGGER.info("目前的RPMTW版本已經是最新的了!!");
+                Minecraft.getInstance().getResourcePackList().addPackFinder(new PackFinder());
             }
+        } catch (Exception e) {
+            RpmtwUpdateMod.LOGGER.error("發生未知錯誤" + e);
+        }
     }
 }

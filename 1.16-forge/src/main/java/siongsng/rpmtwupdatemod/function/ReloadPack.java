@@ -22,7 +22,7 @@ public class ReloadPack {
             }
             fr.close();
             if (Integer.parseInt(RpmtwUpdateMod.Latest_ver_n) > Old_ver + Configer.Update_interval.get()) {
-                SendMsg.send("§6偵測到資源包版本過舊，正在進行更新並重新載入中...。最新版本為" + RpmtwUpdateMod.Latest_ver_n);
+                SendMsg.send("§6偵測到資源包版本過舊，正在進行更新並重新載入中...。目前版本為:" + Old_ver + "最新版本為:" + RpmtwUpdateMod.Latest_ver_n);
                 File_Writer.Writer(RpmtwUpdateMod.Latest_ver_n, RpmtwUpdateMod.Update_Path); //寫入最新版本
                 FileUtils.copyURLToFile(new URL(json.loadJson().toString()), RpmtwUpdateMod.PACK_NAME.toFile()); //下載資源包檔案
                 Minecraft.getInstance().reloadResources(); //重新載入資源

@@ -19,6 +19,8 @@ import siongsng.rpmtwupdatemod.config.Config;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.config.Configer;
 import siongsng.rpmtwupdatemod.crowdin.key;
+import siongsng.rpmtwupdatemod.discord.Chat;
+import siongsng.rpmtwupdatemod.discord.OnChat;
 import siongsng.rpmtwupdatemod.function.AFK;
 import siongsng.rpmtwupdatemod.function.VersionCheck;
 import siongsng.rpmtwupdatemod.notice.notice;
@@ -49,6 +51,7 @@ public class RpmtwUpdateMod {
             MinecraftForge.EVENT_BUS.register(new notice()); //玩家加入事件註冊
         }
         MinecraftForge.EVENT_BUS.register(new AFK()); //掛機事件註冊
+        MinecraftForge.EVENT_BUS.register(new OnChat()); //聊天事件
 
         ModLoadingContext.get().registerExtensionPoint(
                 ExtensionPoint.CONFIGGUIFACTORY,
@@ -69,5 +72,6 @@ public class RpmtwUpdateMod {
             Minecraft.getInstance().gameSettings.language = "zh_tw"; //將語言設定為繁體中文
         }
         new VersionCheck(Latest_ver, Latest_ver_n, CACHE_DIR, Update_Path, PACK_NAME);
+        new Chat();
     }
 }
