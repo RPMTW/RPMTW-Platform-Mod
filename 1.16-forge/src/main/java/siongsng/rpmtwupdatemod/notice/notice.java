@@ -6,6 +6,8 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import siongsng.rpmtwupdatemod.config.Configer;
+import siongsng.rpmtwupdatemod.discord.Chat;
 
 public class notice {
     private static World world;
@@ -24,6 +26,9 @@ public class notice {
                             "§c目前本模組仍處於Bata狀態，但是已經新增許多功能，歡迎大家測試\n" +
                             "§0----------------------------------------------------\n"), ep.getUniqueID());
             world = e.getWorld();
+            if (Configer.discord.get()) {
+                Chat.bot.getTextChannelById("831494456913428501").sendMessage(String.format(":clap_tone2: 熱烈掌聲www，讓我們一起歡迎 **%s** 來到RPMTW的世界!", ep.getDisplayName().getString())).queue();
+            }
         }
     }
 }

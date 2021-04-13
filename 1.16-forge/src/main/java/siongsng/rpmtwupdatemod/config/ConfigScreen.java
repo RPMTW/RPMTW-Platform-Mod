@@ -27,7 +27,6 @@ public final class ConfigScreen extends Screen {
 
     private static final int BOTTOM_BUTTON_HEIGHT_OFFSET = 26;
     private static final int BOTTOM_BUTTON_WIDTH = 150;
-    static final int BUTTONS_INTERVAL = 4;
     static final int BUTTON_HEIGHT = 20;
 
     public ConfigScreen() {
@@ -81,11 +80,16 @@ public final class ConfigScreen extends Screen {
                 unused -> (double) Configer.afkTime.get(),
                 (unused, newValue) -> Configer.afkTime.set(newValue.intValue()),
                 (gs, option) -> new StringTextComponent("開始掛機模式所需時間(秒)" + ": " + (int) option.get(gs))));
+        optionsRowList.addOption(new BooleanOption(
+                "是否啟用宇宙通訊系統",
+                unused -> Configer.discord.get(),
+                (unused, newValue) -> Configer.discord.set(newValue)
+        ));
 
         this.children.add(optionsRowList);
 
         this.addButton(new Button(
-                this.width / 2,
+                (this.width / 2),
                 this.height - BOTTOM_BUTTON_HEIGHT_OFFSET,
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
                 new StringTextComponent("重置設定"),
@@ -95,6 +99,7 @@ public final class ConfigScreen extends Screen {
                     Configer.report_translation.set(true);
                     Configer.notice.set(true);
                     Configer.afk.set(true);
+                    Configer.discord.set(true);
                     Configer.Update_interval.set(0);
                     Configer.afkTime.set(600);
                 })

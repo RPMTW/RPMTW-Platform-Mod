@@ -19,6 +19,6 @@ public class Chat {
         } catch (LoginException | InterruptedException e) {
             e.printStackTrace();
         }
-        Chat.bot.addEventListener(new OnDiscordChat());
+        bot.addEventListener(new OnDiscordChat());
     }
 }

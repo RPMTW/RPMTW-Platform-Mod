@@ -3,7 +3,7 @@ package siongsng.rpmtwupdatemod.config;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public class Configer {
-    public static ForgeConfigSpec.BooleanValue rpmtw_crowdin, rpmtw_reloadpack, report_translation, notice, afk;
+    public static ForgeConfigSpec.BooleanValue rpmtw_crowdin, rpmtw_reloadpack, report_translation, notice, afk, discord;
     public static ForgeConfigSpec.IntValue Update_interval, afkTime;
 
     public static void init(ForgeConfigSpec.Builder client) {
@@ -24,6 +24,9 @@ public class Configer {
         afk = client
                 .comment("afk = 是否啟用掛機偵測，啟用後當掛機時會自動更新翻譯。")
                 .define("rpmtw.afk", true);
+        discord = client
+                .comment("discord = 是否啟用宇宙通訊系統。")
+                .define("rpmtw.discord", true);
         Update_interval = client
                 .comment("Update_interval = 每次啟動遊戲時，自動RPMTW更新時所檢查的版本間隔。(此變更須重啟遊戲後生效)")
                 .defineInRange("rpmtw.Update_interval", 0, 0, 20);

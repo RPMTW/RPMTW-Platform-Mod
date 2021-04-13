@@ -4,12 +4,19 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="努力修復Bug">
+    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="修復兩個Bug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/function/ReloadPack.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/function/ReloadPack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/function/VersionCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/function/VersionCheck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/function/VersionCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/function/VersionCheck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/discord/Chat.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/discord/Chat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/discord/OnDiscordChat.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/discord/OnDiscordChat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/gui/ConfigScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/gui/ConfigScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/OnChat.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/OnChat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/PlayJoinMixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/PlayJoinMixin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/assets/rpmtw_update_mod/lang/en_us.json" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/assets/rpmtw_update_mod/lang/en_us.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/config/ConfigScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/config/ConfigScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/config/Configer.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/config/Configer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/discord/OnChat.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/discord/OnChat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/discord/OnDiscordChat.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/discord/OnDiscordChat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/notice/notice.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/notice/notice.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,7 +200,7 @@
       <command value="gradle --gradle-user-home" />
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.1.16-forge [build]">
+  <component name="RunManager" selected="Gradle.1.16-Fabric [build]">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -205,31 +212,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="1.16-Fabric [runClient]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="1.16-Fabric [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/1.16-Fabric" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="runClient" />
-          </list>
-        </option>
-        <option name="vmOptions" value="-Dfile.encoding=UTF-8" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="1.16-forge [assemble]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/1.16-forge" />
         <option name="externalSystemIdString" value="GRADLE" />
         <option name="scriptParameters" />
         <option name="taskDescriptions">
@@ -237,7 +223,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="assemble" />
+            <option value="build" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -247,10 +233,10 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="1.16-forge [buildDependents]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="1.16-Fabric [remapSourcesJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/1.16-forge" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/1.16-Fabric" />
         <option name="externalSystemIdString" value="GRADLE" />
         <option name="scriptParameters" />
         <option name="taskDescriptions">
@@ -258,7 +244,28 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="buildDependents" />
+            <option value="remapSourcesJar" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="1.16-Fabric [runClient]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/1.16-Fabric" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="runClient" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -294,7 +301,7 @@
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/1.16-forge" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
+        <option name="scriptParameters" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -303,7 +310,7 @@
             <option value="runClient" />
           </list>
         </option>
-        <option name="vmOptions" value="-Dfile.encoding=UTF-8" />
+        <option name="vmOptions" />
       </ExternalSystemSettings>
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
@@ -312,18 +319,18 @@
     </configuration>
     <list>
       <item itemvalue="Gradle.1.16-Fabric [runClient]" />
-      <item itemvalue="Gradle.1.16-forge [buildDependents]" />
-      <item itemvalue="Gradle.1.16-forge [build]" />
+      <item itemvalue="Gradle.1.16-Fabric [remapSourcesJar]" />
       <item itemvalue="Gradle.1.16-forge [runClient]" />
-      <item itemvalue="Gradle.1.16-forge [assemble]" />
+      <item itemvalue="Gradle.1.16-forge [build]" />
+      <item itemvalue="Gradle.1.16-Fabric [build]" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.1.16-Fabric [build]" />
         <item itemvalue="Gradle.1.16-forge [build]" />
         <item itemvalue="Gradle.1.16-forge [runClient]" />
-        <item itemvalue="Gradle.1.16-forge [assemble]" />
-        <item itemvalue="Gradle.1.16-forge [buildDependents]" />
         <item itemvalue="Gradle.1.16-Fabric [runClient]" />
+        <item itemvalue="Gradle.1.16-Fabric [remapSourcesJar]" />
       </list>
     </recent_temporary>
   </component>
@@ -393,7 +400,7 @@
       <workItem from="1618152494184" duration="934000" />
       <workItem from="1618219097052" duration="16400000" />
       <workItem from="1618307347219" duration="131000" />
-      <workItem from="1618307502262" duration="4651000" />
+      <workItem from="1618307502262" duration="12618000" />
     </task>
     <task id="LOCAL-00001" summary="修改一下字詞">
       <created>1617963669695</created>
@@ -521,7 +528,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618311580230</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="修復兩個Bug">
+      <created>1618312213361</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1618312213361</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -560,7 +574,8 @@
     <MESSAGE value="修復一些Bug，但又發現好多Bug。" />
     <MESSAGE value="修復一些Bug" />
     <MESSAGE value="努力修復Bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="努力修復Bug" />
+    <MESSAGE value="修復兩個Bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="修復兩個Bug" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
