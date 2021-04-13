@@ -13,7 +13,7 @@ public class notice {
                     "§b查看本模組功能: https://www.rpmtw.ga/Add-on/Update-mod\n" +
                     "§e官方Discord: https://discord.gg/5xApZtgV2u\n" +
                     "§e官方網站: https://www.rpmtw.ga\n" +
-                    "§c目前本模組仍處於Bata狀態，但是已經新增許多功能，歡迎大家測試\n" +
+                    "§9如果有些功能不需要也可以打開設定選單關閉喔(預設快捷鍵為O)\n" +
                     "§0----------------------------------------------------\n"), false);
         } catch (Exception e) {
             RpmtwUpdateMod.LOGGER.error("取得公告失敗，錯誤原因:" + e.getMessage());
