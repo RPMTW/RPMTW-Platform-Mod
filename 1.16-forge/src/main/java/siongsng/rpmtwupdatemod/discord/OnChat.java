@@ -20,7 +20,7 @@ public class OnChat {
             message = message.replace("OAO", "<:OAO:827917219312828457>").replace("oao", "<:OAO:827917219312828457>");
         }
         textChannel.sendMessage(String.format("[宇宙通訊] **%s** >> %s", Minecraft.getInstance().player.getDisplayName().getString(), message)).queue();
-        if (message.startsWith("!") && times == 1) {
+        if (times == 1) {
             SendMsg.send("§b提醒您使用§9宇宙通訊§b功能需遵守§cDiscord使用者及社群條款\n§b以及§c不得以任何形式騷擾別人§b，違反者皆可能須附上§c法律責任§b。");
         }
     }
