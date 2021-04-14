@@ -9,14 +9,14 @@ import java.net.URL;
 import java.net.URLConnection;
 
 public class json {
-    public static JSONObject get() {
+    public static JSONObject get(String url) {
         StringBuilder json = new StringBuilder();
         try {
-            URL urlObject = new URL("https://api.github.com/repos/SiongSng/ResourcePack-Mod-zh_tw/releases/latest");
+            URL urlObject = new URL(url);
             URLConnection uc = urlObject.openConnection();
             BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream()));
             String inputLine;
-            while ( (inputLine = in.readLine()) != null) {
+            while ((inputLine = in.readLine()) != null) {
                 json.append(inputLine);
             }
             in.close();
@@ -26,11 +26,11 @@ public class json {
         return JSONObject.fromObject(json.toString());
     }
 
-    public static Object loadJson() {
-        return get().getJSONArray("assets").getJSONObject(0).get("browser_download_url");
+    public static Object loadJson(String url) {
+        return get(url).getJSONArray("assets").getJSONObject(0).get("browser_download_url");
     }
 
-    public static Object ver() {
-        return get().get("tag_name");
+    public static Object ver(String url) {
+        return get(url).get("tag_name");
     }
 }

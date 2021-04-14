@@ -19,7 +19,7 @@ public class ReloadPack {
     private final static Path CACHE_DIR = Paths.get(System.getProperty("user.home") + "/.rpmtw/1.16");
     private static final Path PACK_NAME = CACHE_DIR.resolve("RPMTW-1.16.zip");
     private final static String Update_Path = CACHE_DIR + "/Update.txt";
-    private final static String Latest_ver = json.ver().toString();
+    private final static String Latest_ver = json.ver("https://api.github.com/repos/SiongSng/ResourcePack-Mod-zh_tw/releases/latest").toString();
     private final static String Latest_ver_n = Latest_ver.split("RPMTW-1.16-V")[1];
 
     public ReloadPack() {
@@ -34,7 +34,7 @@ public class ReloadPack {
             if (Integer.parseInt(Latest_ver_n) > Old_ver + config.Update_interval) {
                 SendMsg.send("§6偵測到資源包版本過舊，正在進行更新並重新載入中...。目前版本為:" + Old_ver + "最新版本為:" + Latest_ver_n);
                 File_Writer.Writer(Latest_ver_n, Update_Path); //寫入最新版本
-                FileUtils.copyURLToFile(new URL(json.loadJson().toString()), PACK_NAME.toFile()); //下載資源包檔案
+                FileUtils.copyURLToFile(new URL(json.loadJson("https://api.github.com/repos/SiongSng/ResourcePack-Mod-zh_tw/releases/latest").toString()), PACK_NAME.toFile()); //下載資源包檔案
                 MinecraftClient.getInstance().reloadResources();
             } else {
                 SendMsg.send("§a目前的RPMTW版本已經是最新的了!!因此不重新載入翻譯。");

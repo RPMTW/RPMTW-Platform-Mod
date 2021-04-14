@@ -22,7 +22,7 @@ import siongsng.rpmtwupdatemod.crowdin.key;
 import siongsng.rpmtwupdatemod.discord.Chat;
 import siongsng.rpmtwupdatemod.discord.OnChat;
 import siongsng.rpmtwupdatemod.function.AFK;
-import siongsng.rpmtwupdatemod.function.VersionCheck;
+import siongsng.rpmtwupdatemod.function.PackVersionCheck;
 import siongsng.rpmtwupdatemod.notice.notice;
 
 import java.io.IOException;
@@ -38,7 +38,7 @@ public class RpmtwUpdateMod {
     public final static Path CACHE_DIR = Paths.get(System.getProperty("user.home") + "/.rpmtw/1.16");
     public final static Path PACK_NAME = CACHE_DIR.resolve("RPMTW-1.16.zip");
     public final static String Update_Path = CACHE_DIR + "/Update.txt";
-    public final static String Latest_ver = json.ver().toString();
+    public final static String Latest_ver = json.ver("https://api.github.com/repos/SiongSng/ResourcePack-Mod-zh_tw/releases/latest").toString();
     public final static String Latest_ver_n = Latest_ver.split("RPMTW-1.16-V")[1];
 
     @SubscribeEvent
@@ -71,7 +71,7 @@ public class RpmtwUpdateMod {
         if (FMLEnvironment.dist == Dist.CLIENT) {
             Minecraft.getInstance().gameSettings.language = "zh_tw"; //將語言設定為繁體中文
         }
-        new VersionCheck(Latest_ver, Latest_ver_n, CACHE_DIR, Update_Path, PACK_NAME);
+        new PackVersionCheck(Latest_ver, Latest_ver_n, CACHE_DIR, Update_Path, PACK_NAME);
         new Chat();
     }
 }

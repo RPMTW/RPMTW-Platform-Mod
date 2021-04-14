@@ -17,6 +17,10 @@ public class OnDiscordChat extends ListenerAdapter {
                 (e.getMessage().getContentDisplay().startsWith(":clap_tone2: 熱烈掌聲www，讓我們一起歡迎 **")))
             return;
 
-        SendMsg.send(String.format("§9[宇宙通訊] §c<§e%s§c> §f%s", e.getAuthor().getAsTag(), e.getMessage()));
+        String msg = String.format("§9[宇宙通訊] §c§l%s §b>> §f%s", e.getAuthor().getAsTag(), e.getMessage());
+        if (e.getAuthor().getId().equals("830747827567198248") && e.getMessage().getContentDisplay().startsWith("[宇宙通訊] **")) {
+            msg = e.getMessage().getContentDisplay();
+        }
+        SendMsg.send(msg);
     }
 }
