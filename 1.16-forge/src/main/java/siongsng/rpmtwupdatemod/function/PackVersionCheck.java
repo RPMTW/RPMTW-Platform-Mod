@@ -34,7 +34,7 @@ public class PackVersionCheck {
         fr.close();
         try {
             if (Integer.parseInt(Latest_ver_n) > Old_ver + Configer.Update_interval.get() || !Files.exists(PACK_NAME)) {
-                SendMsg.send("§6偵測到資源包版本過舊，正在進行更新並重新載入中...。目前版本為:" + Old_ver + "最新版本為:" + Latest_ver_n);
+                RpmtwUpdateMod.LOGGER.info("§6偵測到資源包版本過舊，正在進行更新並重新載入中...。目前版本為:" + Old_ver + "最新版本為:" + Latest_ver_n);
                 File_Writer.Writer(Latest_ver_n, Update_Path); //寫入最新版本
                 FileUtils.copyURLToFile(new URL(json.loadJson("https://api.github.com/repos/SiongSng/ResourcePack-Mod-zh_tw/releases/latest").toString()), PACK_NAME.toFile()); //下載資源包檔案
             } else {
