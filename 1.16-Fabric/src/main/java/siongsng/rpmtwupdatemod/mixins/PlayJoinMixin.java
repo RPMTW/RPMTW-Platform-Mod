@@ -8,7 +8,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
 import siongsng.rpmtwupdatemod.gui.ConfigScreen;
 import siongsng.rpmtwupdatemod.notice.notice;
 
@@ -20,6 +19,5 @@ public class PlayJoinMixin {
         if (config.notice) { //判斷Config
             notice.send(player);
         }
-        RpmtwUpdateMod.LOGGER.info("你好");
     }
 }

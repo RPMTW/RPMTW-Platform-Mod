@@ -20,7 +20,7 @@ public class OnDiscordChat extends ListenerAdapter {
 
         String msg = String.format("§9[宇宙通訊] §c§l%s §b>> §f%s", e.getAuthor().getAsTag(), e.getMessage());
         if (e.getAuthor().getId().equals("830747827567198248") && e.getMessage().getContentDisplay().startsWith("[宇宙通訊] **")) {
-            msg = e.getMessage().getContentDisplay();
+            msg = "§9[宇宙通訊] §c§l" + e.getMessage().getContentDisplay().split("\\*\\*")[1] + " §b>> §f" + e.getMessage().getContentDisplay().split("\\*\\*")[2].split(">> ")[1];
         }
         SendMsg.send(msg);
     }
