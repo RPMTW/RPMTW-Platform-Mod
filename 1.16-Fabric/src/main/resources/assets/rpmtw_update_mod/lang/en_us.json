@@ -13,5 +13,6 @@
   "text.autoconfig.rpmtw_update_mod.option.Update_interval": "自動檢查更新版本間隔",
   "text.autoconfig.rpmtw_update_mod.option.afkTime": "開始掛機模式所需時間(秒)",
   "text.autoconfig.rpmtw_update_mod.option.discord": "是否啟用宇宙通訊系統",
+  "text.autoconfig.rpmtw_update_mod.option.DiscordPrefix": "是否啟用宇宙通訊系統發送訊息時需要前綴",
   "menu.rpmtw": "RPMTW settings"
 }

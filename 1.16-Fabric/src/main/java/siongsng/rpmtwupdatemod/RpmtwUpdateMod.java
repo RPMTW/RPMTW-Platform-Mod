@@ -8,7 +8,7 @@ import net.fabricmc.api.Environment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import siongsng.rpmtwupdatemod.crowdin.key;
-import siongsng.rpmtwupdatemod.gui.ConfigScreen;
+import siongsng.rpmtwupdatemod.config.ConfigScreen;
 
 @Environment(EnvType.CLIENT)
 public class RpmtwUpdateMod implements ClientModInitializer {

@@ -1,4 +1,4 @@
-package siongsng.rpmtwupdatemod.gui;
+package siongsng.rpmtwupdatemod.config;
 
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
@@ -18,6 +18,8 @@ public class ConfigScreen implements ConfigData {
     public boolean afk = true;
     @Comment("是否啟用宇宙通訊系統。")
     public boolean discord = true;
+    @Comment("前綴預設為!")
+    public static boolean DiscordPrefix = true;
     @Comment("每次啟動遊戲時，自動RPMTW更新時所檢查的版本間隔。(此變更須重啟遊戲後生效)")
     public int Update_interval = 0;
     @Comment("此數值用來設定過多久沒有活動才會進入掛機模式。(以秒為單位)")

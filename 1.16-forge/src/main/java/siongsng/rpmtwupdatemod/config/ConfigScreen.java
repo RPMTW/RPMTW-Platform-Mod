@@ -69,21 +69,26 @@ public final class ConfigScreen extends Screen {
                 (unused, newValue) -> Configer.afk.set(newValue)
         ));
         optionsRowList.addOption(new SliderPercentageOption(
-                "自動檢查更新版本間隔",
-                0.0F, 20, 1.0F,
-                unused -> (double) Configer.Update_interval.get(),
-                (unused, newValue) -> Configer.Update_interval.set(newValue.intValue()),
-                (gs, option) -> new StringTextComponent("自動檢查更新版本間隔" + ": " + (int) option.get(gs))));
-        optionsRowList.addOption(new SliderPercentageOption(
                 "開始掛機模式所需時間(秒)",
                 10.0F, 3600, 1.0F,
                 unused -> (double) Configer.afkTime.get(),
                 (unused, newValue) -> Configer.afkTime.set(newValue.intValue()),
                 (gs, option) -> new StringTextComponent("開始掛機模式所需時間(秒)" + ": " + (int) option.get(gs))));
+        optionsRowList.addOption(new SliderPercentageOption(
+                "自動檢查更新版本間隔",
+                0.0F, 20, 1.0F,
+                unused -> (double) Configer.Update_interval.get(),
+                (unused, newValue) -> Configer.Update_interval.set(newValue.intValue()),
+                (gs, option) -> new StringTextComponent("自動檢查更新版本間隔" + ": " + (int) option.get(gs))));
         optionsRowList.addOption(new BooleanOption(
                 "是否啟用宇宙通訊系統",
                 unused -> Configer.discord.get(),
                 (unused, newValue) -> Configer.discord.set(newValue)
+        ));
+        optionsRowList.addOption(new BooleanOption(
+                "是否啟用宇宙通訊系統發送訊息時需要前綴(預設為!)",
+                unused -> Configer.DiscordPrefix.get(),
+                (unused, newValue) -> Configer.DiscordPrefix.set(newValue)
         ));
 
         this.children.add(optionsRowList);

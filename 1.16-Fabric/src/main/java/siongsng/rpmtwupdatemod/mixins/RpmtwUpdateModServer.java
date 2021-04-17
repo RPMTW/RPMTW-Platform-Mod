@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import siongsng.rpmtwupdatemod.function.AFK;
-import siongsng.rpmtwupdatemod.gui.ConfigScreen;
+import siongsng.rpmtwupdatemod.config.ConfigScreen;
 
 @Mixin(MinecraftServer.class)
 public class RpmtwUpdateModServer {

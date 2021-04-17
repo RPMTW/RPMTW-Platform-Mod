@@ -2,7 +2,7 @@ package siongsng.rpmtwupdatemod.function;
 
 
 import me.shedaniel.autoconfig.AutoConfig;
-import siongsng.rpmtwupdatemod.gui.ConfigScreen;
+import siongsng.rpmtwupdatemod.config.ConfigScreen;
 
 public class AFK {
     static ConfigScreen config = AutoConfig.getConfigHolder(ConfigScreen.class).getConfig();

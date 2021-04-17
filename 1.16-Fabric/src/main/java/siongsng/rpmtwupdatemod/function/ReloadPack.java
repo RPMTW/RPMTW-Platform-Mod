@@ -3,7 +3,7 @@ package siongsng.rpmtwupdatemod.function;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.client.MinecraftClient;
 import org.apache.commons.io.FileUtils;
-import siongsng.rpmtwupdatemod.gui.ConfigScreen;
+import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.json;
 
 import java.io.BufferedReader;
