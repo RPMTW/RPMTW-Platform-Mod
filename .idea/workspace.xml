@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="修復議題(#10)">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-Fabric/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/build.gradle" afterDir="false" />
+    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="修復議題(#15)和更新JDA版本">
       <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/notice/notice.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/notice/notice.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -398,7 +395,7 @@
       <workItem from="1618477864003" duration="7661000" />
       <workItem from="1618580877611" duration="1759000" />
       <workItem from="1618585806271" duration="1086000" />
-      <workItem from="1618618855882" duration="2332000" />
+      <workItem from="1618618855882" duration="2470000" />
     </task>
     <task id="LOCAL-00001" summary="修改一下字詞">
       <created>1617963669695</created>
@@ -582,7 +579,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618499521938</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="修復議題(#15)和更新JDA版本">
+      <created>1618621223187</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1618621223187</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -603,7 +607,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="新增進入世界時，是否自動發送公告的Config選項。" />
     <MESSAGE value="上傳剛剛忘記提交的。" />
     <MESSAGE value="新增啟動遊戲時，自動更新翻譯的版本間距(#10)" />
     <MESSAGE value="修正無法正常載入數據包錯誤，並且重新開啟問題#10" />
@@ -628,7 +631,8 @@
     <MESSAGE value="修復議題(#14)的錯誤" />
     <MESSAGE value="將宇宙通訊系統使用者體驗優化" />
     <MESSAGE value="修復議題(#10)" />
-    <option name="LAST_COMMIT_MESSAGE" value="修復議題(#10)" />
+    <MESSAGE value="修復議題(#15)和更新JDA版本" />
+    <option name="LAST_COMMIT_MESSAGE" value="修復議題(#15)和更新JDA版本" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
