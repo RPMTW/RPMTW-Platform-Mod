@@ -35,11 +35,11 @@ public class RpmtwUpdateMod {
 
     public static final Logger LOGGER = LogManager.getLogger();
     public final static String Mod_ID = "rpmtw_update_mod";
-    public final static Path CACHE_DIR = Paths.get(System.getProperty("user.home") + "/.rpmtw/1.16");
-    public final static Path PACK_NAME = CACHE_DIR.resolve("RPMTW-1.16.zip");
-    public final static String Update_Path = CACHE_DIR + "/Update.txt";
-    public final static String Latest_ver = json.ver("https://api.github.com/repos/SiongSng/ResourcePack-Mod-zh_tw/releases/latest").toString();
-    public final static String Latest_ver_n = Latest_ver.split("RPMTW-1.16-V")[1];
+    public static Path CACHE_DIR = Paths.get(System.getProperty("user.home") + "/.rpmtw/1.16");
+    public static Path PACK_NAME = CACHE_DIR.resolve("RPMTW-1.16.zip");
+    public static String Update_Path = CACHE_DIR + "/Update.txt";
+    public static String Latest_ver = json.ver("https://api.github.com/repos/SiongSng/ResourcePack-Mod-zh_tw/releases/latest").toString();
+    public static String Latest_ver_n = Latest_ver.split("RPMTW-1.16-V")[1];
 
     @SubscribeEvent
     public void init(final FMLClientSetupEvent e) {
