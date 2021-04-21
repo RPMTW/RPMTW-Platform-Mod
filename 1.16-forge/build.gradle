@@ -60,7 +60,7 @@ dependencies {
     shade('net.dv8tion:JDA:4.2.1_257') { //Java Discord Api Library
         exclude module: 'opus-java'
     }
-    minecraft 'net.minecraftforge:forge:1.16.5-36.1.4'
+    minecraft 'net.minecraftforge:forge:1.16.5-36.1.6'
 }
 jar {
     manifest {
