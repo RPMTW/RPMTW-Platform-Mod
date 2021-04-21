@@ -73,8 +73,8 @@ public class AFK {
                     info.getValue().afkTime = 0;
                     if (info.getValue().isAfk) {
                         SendMsg.send("§a你不再掛機了!");
+                        info.getValue().isAfk = false;
                     }
-                    info.getValue().isAfk = false;
                 }
             }
         }

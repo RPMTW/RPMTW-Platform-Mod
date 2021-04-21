@@ -14,5 +14,6 @@
   "text.autoconfig.rpmtw_update_mod.option.afkTime": "開始掛機模式所需時間(秒)",
   "text.autoconfig.rpmtw_update_mod.option.discord": "是否啟用宇宙通訊系統",
   "text.autoconfig.rpmtw_update_mod.option.DiscordPrefix": "是否啟用宇宙通訊系統發送訊息時需要前綴",
+  "gui.notice": "§0----------------------------------------------------\n§aRPMTW自動繁化更新模組-公告\n§e歡迎您使用本模組，如果遇到任何問題可以參考一下說明\n§e官方Discord: https://discord.gg/5xApZtgV2u\n§e查看本模組功能: https://www.rpmtw.ga/Add-on/Update-mod\n§b如果有些功能不需要也可以打開設定選單關閉喔(預設快捷鍵為O)\n§0----------------------------------------------------",
   "menu.rpmtw": "RPMTW settings"
 }

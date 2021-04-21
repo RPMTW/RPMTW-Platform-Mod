@@ -16,11 +16,10 @@ public class RpmtwUpdateModClient {
     @Inject(method = "<init>", at = @At("RETURN"))
     public void init(RunArgs args, CallbackInfo ci) {
         MinecraftClient.getInstance().options.language = "zh_tw";
-
         CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> { //註冊指令
             AddToken.register(dispatcher); //新增Token指令
             noticeCMD.register(dispatcher); //獲取公告指令
-            new Chat();
         });
+        new Chat();
     }
 }
