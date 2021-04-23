@@ -16,8 +16,12 @@ public class OnDiscordChat extends ListenerAdapter {
                 Minecraft.getInstance().player.getDisplayName().getString())) ||
                 (e.getMessage().getContentDisplay().startsWith(":clap_tone2: 熱烈掌聲www，讓我們一起歡迎 **")))
             return;
+        String AsTag = e.getAuthor().getAsTag();
+        if (AsTag.equals("菘菘#8663")) {
+            AsTag = "RPMTW維護者";
+        }
 
-        String msg = String.format("§9[宇宙通訊] §c§l%s §b>> §f%s", e.getAuthor().getAsTag(), e.getMessage());
+        String msg = String.format("§9[宇宙通訊] §c§l%s §b>> §f%s", AsTag, e.getMessage());
         if (e.getAuthor().getId().equals("830747827567198248") && e.getMessage().getContentDisplay().startsWith("[宇宙通訊] **")) {
             msg = "§9[宇宙通訊] §c§l" + e.getMessage().getContentDisplay().split("\\*\\*")[1] + " §b>> §f" + e.getMessage().getContentDisplay().split("\\*\\*")[2].split(">> ")[1];
         }
