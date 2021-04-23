@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="1.0.8-Bate &amp; Update Forge ver to 36.1.6">
+    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="模組版本檢測">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/notice/notice.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/notice/notice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/notice/notice.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/notice/notice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/OnChat.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/OnChat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/discord/OnChat.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/discord/OnChat.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -389,7 +389,8 @@
       <workItem from="1618618855882" duration="9970000" />
       <workItem from="1618666806570" duration="235000" />
       <workItem from="1618669331013" duration="211000" />
-      <workItem from="1619097490719" duration="526000" />
+      <workItem from="1619097490719" duration="1098000" />
+      <workItem from="1619191158382" duration="310000" />
     </task>
     <task id="LOCAL-00001" summary="修改一下字詞">
       <created>1617963669695</created>
@@ -622,7 +623,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619008011423</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="模組版本檢測">
+      <created>1619098052653</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1619098052653</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -655,7 +663,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="【Forge】新增掛機功能並載入新翻譯(#12)" />
     <MESSAGE value="【Fabric】新增掛機功能並載入新翻譯(#12)" />
     <MESSAGE value="更新自述" />
     <MESSAGE value="新增聊天室功能與Discord串聯" />
@@ -680,7 +687,8 @@
     <MESSAGE value="1.0.8" />
     <MESSAGE value="臨時解決方案，從網路抓取動態公告。" />
     <MESSAGE value="1.0.8-Bate &amp; Update Forge ver to 36.1.6" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.0.8-Bate &amp; Update Forge ver to 36.1.6" />
+    <MESSAGE value="模組版本檢測" />
+    <option name="LAST_COMMIT_MESSAGE" value="模組版本檢測" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">

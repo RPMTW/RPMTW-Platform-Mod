@@ -27,6 +27,7 @@ public class OnChat {
             SendMsg.send("§c您目前的§bRPMTW繁化更新模組§c版本過舊，因此無法使用§9宇宙通訊§c功能。");
             return;
         }
+        if (message.startsWith("/") && DiscordPrefix.get(message).equals("!")) return;
         times++;
         TextChannel textChannel = Chat.bot.getTextChannelById("831494456913428501");
         if (message.contains("OAO") || message.contains("oao")) {
