@@ -35,7 +35,6 @@ public class RpmtwUpdateMod {
 
     public static final Logger LOGGER = LogManager.getLogger();
     public final static String Mod_ID = "rpmtw_update_mod";
-    private static final String PROTOCOL_VERSION = "1";
 
     public static Path CACHE_DIR = Paths.get(System.getProperty("user.home") + "/.rpmtw/1.16");
     public static Path PACK_NAME = CACHE_DIR.resolve("RPMTW-1.16.zip");

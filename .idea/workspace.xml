@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="新增測試">
+    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="Update JDA to 261">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/ModElements.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/crowdin/CrowdinGui.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/crowdin/CrowdinGuiWindow.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/crowdin/OpenCorwidn.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/crowdin/OpenCrowdinKeyBinding.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -325,8 +320,8 @@
       <list>
         <item itemvalue="Gradle.1.16-forge [runClient]" />
         <item itemvalue="Gradle.1.16-Fabric [runClient]" />
-        <item itemvalue="Gradle.1.16-forge [build]" />
         <item itemvalue="Gradle.1.16-Fabric [build]" />
+        <item itemvalue="Gradle.1.16-forge [build]" />
         <item itemvalue="Gradle.1.16-Fabric [remapSourcesJar]" />
       </list>
     </recent_temporary>
@@ -410,7 +405,7 @@
       <workItem from="1619191158382" duration="1521000" />
       <workItem from="1619223353300" duration="2586000" />
       <workItem from="1619273897862" duration="5520000" />
-      <workItem from="1619306939535" duration="7243000" />
+      <workItem from="1619306939535" duration="9998000" />
     </task>
     <task id="LOCAL-00001" summary="修改一下字詞">
       <created>1617963669695</created>
@@ -678,7 +673,21 @@
       <option name="project" value="LOCAL" />
       <updated>1619317774418</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="test">
+      <created>1619324680042</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1619324680042</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Update JDA to 261">
+      <created>1619324883871</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1619324883871</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -711,8 +720,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="備份" />
-    <MESSAGE value="放棄治療Forge" />
     <MESSAGE value="修復一些Bug，但又發現好多Bug。" />
     <MESSAGE value="修復一些Bug" />
     <MESSAGE value="努力修復Bug" />
@@ -736,7 +743,9 @@
     <MESSAGE value="偵測到DCTag為菘菘#8663自動改為RPMTW維護者" />
     <MESSAGE value="修改一些內容、嵌入翻譯功能似乎無效" />
     <MESSAGE value="新增測試" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增測試" />
+    <MESSAGE value="test" />
+    <MESSAGE value="Update JDA to 261" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update JDA to 261" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
