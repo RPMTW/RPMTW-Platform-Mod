@@ -22,6 +22,6 @@ public class ConfigScreen implements ConfigData {
     public static boolean DiscordPrefix = true;
     @Comment("每次啟動遊戲時，自動RPMTW更新時所檢查的版本間隔。(此變更須重啟遊戲後生效)")
     public int Update_interval = 0;
-    @Comment("此數值用來設定過多久沒有活動才會進入掛機模式。(以秒為單位)")
+    @Comment("數值以秒為單位")
     public int afkTime = 600;
 }

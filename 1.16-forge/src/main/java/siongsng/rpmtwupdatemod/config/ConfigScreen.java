@@ -49,7 +49,7 @@ public final class ConfigScreen extends Screen {
                 (unused, newValue) -> Configer.rpmtw_crowdin.set(newValue)
         ));
         optionsRowList.addOption(new BooleanOption(
-                "快速重新載入資源包",
+                "重新載入翻譯包",
                 unused -> Configer.rpmtw_reloadpack.get(),
                 (unused, newValue) -> Configer.rpmtw_reloadpack.set(newValue)
         ));
@@ -64,16 +64,16 @@ public final class ConfigScreen extends Screen {
                 (unused, newValue) -> Configer.notice.set(newValue)
         ));
         optionsRowList.addOption(new BooleanOption(
-                "是否啟用掛機偵測",
+                "啟用掛機偵測",
                 unused -> Configer.afk.get(),
                 (unused, newValue) -> Configer.afk.set(newValue)
         ));
         optionsRowList.addOption(new SliderPercentageOption(
-                "開始掛機模式所需時間(秒)",
+                "開始偵測掛機間隔時間(秒)",
                 10.0F, 3600, 1.0F,
                 unused -> (double) Configer.afkTime.get(),
                 (unused, newValue) -> Configer.afkTime.set(newValue.intValue()),
-                (gs, option) -> new StringTextComponent("開始掛機模式所需時間(秒)" + ": " + (int) option.get(gs))));
+                (gs, option) -> new StringTextComponent("開始偵測掛機間隔時間(秒)" + ": " + (int) option.get(gs))));
         optionsRowList.addOption(new SliderPercentageOption(
                 "自動檢查更新版本間隔",
                 0.0F, 20, 1.0F,
@@ -81,12 +81,12 @@ public final class ConfigScreen extends Screen {
                 (unused, newValue) -> Configer.Update_interval.set(newValue.intValue()),
                 (gs, option) -> new StringTextComponent("自動檢查更新版本間隔" + ": " + (int) option.get(gs))));
         optionsRowList.addOption(new BooleanOption(
-                "是否啟用宇宙通訊系統",
+                "啟用宇宙通訊系統",
                 unused -> Configer.discord.get(),
                 (unused, newValue) -> Configer.discord.set(newValue)
         ));
         optionsRowList.addOption(new BooleanOption(
-                "是否啟用宇宙通訊系統發送訊息時需要前綴(預設為!)",
+                "啟用宇宙通訊發送訊息時需要前綴(!)",
                 unused -> Configer.DiscordPrefix.get(),
                 (unused, newValue) -> Configer.DiscordPrefix.set(newValue)
         ));
