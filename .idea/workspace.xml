@@ -4,10 +4,14 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="修復議題(#20)">
+    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="偵測到DCTag為菘菘#8663自動改為RPMTW維護者">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/discord/OnDiscordChat.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/discord/OnDiscordChat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/discord/OnDiscordChat.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/discord/OnDiscordChat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/notice/notice.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/notice/notice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/notice/notice.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/notice/notice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/resources/assets/rpmtw_update_mod/lang/en_us.json" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/resources/assets/rpmtw_update_mod/lang/en_us.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,7 +195,20 @@
       <command value="gradle --gradle-user-home" />
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.1.16-Fabric [runClient]">
+  <component name="RunManager" selected="Gradle.1.16-forge [runClient]">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="1.16-Fabric [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -306,8 +323,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.1.16-Fabric [runClient]" />
         <item itemvalue="Gradle.1.16-forge [runClient]" />
+        <item itemvalue="Gradle.1.16-Fabric [runClient]" />
         <item itemvalue="Gradle.1.16-forge [build]" />
         <item itemvalue="Gradle.1.16-Fabric [build]" />
         <item itemvalue="Gradle.1.16-Fabric [remapSourcesJar]" />
@@ -390,7 +407,10 @@
       <workItem from="1618666806570" duration="235000" />
       <workItem from="1618669331013" duration="211000" />
       <workItem from="1619097490719" duration="1098000" />
-      <workItem from="1619191158382" duration="953000" />
+      <workItem from="1619191158382" duration="1521000" />
+      <workItem from="1619223353300" duration="2586000" />
+      <workItem from="1619273897862" duration="5520000" />
+      <workItem from="1619306939535" duration="4378000" />
     </task>
     <task id="LOCAL-00001" summary="修改一下字詞">
       <created>1617963669695</created>
@@ -637,7 +657,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619191598512</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="偵測到DCTag為菘菘#8663自動改為RPMTW維護者">
+      <created>1619192170058</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1619192170058</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -670,7 +697,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="更新自述" />
     <MESSAGE value="新增聊天室功能與Discord串聯" />
     <MESSAGE value="test" />
     <MESSAGE value="備份" />
@@ -695,7 +721,8 @@
     <MESSAGE value="1.0.8-Bate &amp; Update Forge ver to 36.1.6" />
     <MESSAGE value="模組版本檢測" />
     <MESSAGE value="修復議題(#20)" />
-    <option name="LAST_COMMIT_MESSAGE" value="修復議題(#20)" />
+    <MESSAGE value="偵測到DCTag為菘菘#8663自動改為RPMTW維護者" />
+    <option name="LAST_COMMIT_MESSAGE" value="偵測到DCTag為菘菘#8663自動改為RPMTW維護者" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">

@@ -12,7 +12,7 @@ public class notice {
 
         if (!new CheckChat().get()) {
             p.sendMessage(new LiteralText(
-                    "偵測到您目前的§c §eRPMTW繁中化自動更新模組版本過舊§c 建議您更新版本，以獲得最佳體驗。"), false);
+                    "偵測到您目前的§c §eRPMTW繁中化自動更新模組版本過舊§c\n建議您更新版本，以獲得最佳體驗。"), false);
         }
     }
 }
