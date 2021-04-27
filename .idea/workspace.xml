@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="1.0.8-RC1">
+    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="修改一些敘述(1.0.8-RC2)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/config/ConfigScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/config/ConfigScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/assets/rpmtw_update_mod/lang/en_us.json" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/assets/rpmtw_update_mod/lang/en_us.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/config/ConfigScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/config/ConfigScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/resources/assets/rpmtw_update_mod/lang/en_us.json" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/resources/assets/rpmtw_update_mod/lang/en_us.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/function/PackVersionCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/function/PackVersionCheck.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,7 +149,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.openapi.externalSystem.service.settings.ExternalSystemGroupConfigurable" value="ALL" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../MCreator" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -193,16 +190,14 @@
       <command value="gradle --gradle-user-home" />
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.1.16-forge [runClient]">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+  <component name="RunManager" selected="Gradle.1.16-Fabric [runClient]">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -321,11 +316,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.1.16-forge [runClient]" />
         <item itemvalue="Gradle.1.16-Fabric [runClient]" />
-        <item itemvalue="Gradle.1.16-Fabric [build]" />
-        <item itemvalue="Gradle.1.16-forge [build]" />
         <item itemvalue="Gradle.1.16-Fabric [remapSourcesJar]" />
+        <item itemvalue="Gradle.1.16-forge [build]" />
+        <item itemvalue="Gradle.1.16-Fabric [build]" />
+        <item itemvalue="Gradle.1.16-forge [runClient]" />
       </list>
     </recent_temporary>
   </component>
@@ -408,7 +403,9 @@
       <workItem from="1619191158382" duration="1521000" />
       <workItem from="1619223353300" duration="2586000" />
       <workItem from="1619273897862" duration="5520000" />
-      <workItem from="1619306939535" duration="10322000" />
+      <workItem from="1619306939535" duration="11565000" />
+      <workItem from="1619346366779" duration="130000" />
+      <workItem from="1619534660523" duration="934000" />
     </task>
     <task id="LOCAL-00001" summary="修改一下字詞">
       <created>1617963669695</created>
@@ -697,7 +694,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619329103016</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="修改一些敘述(1.0.8-RC2)">
+      <created>1619329534912</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1619329534912</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -730,7 +734,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="修復一些Bug" />
     <MESSAGE value="努力修復Bug" />
     <MESSAGE value="修復兩個Bug" />
     <MESSAGE value="新增了一些功能，修了不知道多少Bug" />
@@ -755,7 +758,8 @@
     <MESSAGE value="test" />
     <MESSAGE value="Update JDA to 261" />
     <MESSAGE value="1.0.8-RC1" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.0.8-RC1" />
+    <MESSAGE value="修改一些敘述(1.0.8-RC2)" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改一些敘述(1.0.8-RC2)" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
