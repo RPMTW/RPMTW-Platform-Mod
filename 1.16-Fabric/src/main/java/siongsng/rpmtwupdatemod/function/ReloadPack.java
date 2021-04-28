@@ -32,7 +32,7 @@ public class ReloadPack {
             fr.close();
             if (Integer.parseInt(Latest_ver_n) > Old_ver + config.Update_interval) {
                 SendMsg.send("§6偵測到資源包版本過舊，正在進行更新並重新載入中...。目前版本為:" + Old_ver + "最新版本為:" + Latest_ver_n);
-                File_Writer.Writer(Latest_ver_n, Update_Path); //寫入最新版本
+                FileWriter.Writer(Latest_ver_n, Update_Path); //寫入最新版本
                 FileUtils.copyURLToFile(new URL(json.loadJson("https://api.github.com/repos/SiongSng/ResourcePack-Mod-zh_tw/releases/latest").toString()), PACK_NAME.toFile()); //下載資源包檔案
                 MinecraftClient.getInstance().reloadResources();
             } else {

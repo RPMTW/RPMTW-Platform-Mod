@@ -1,6 +1,5 @@
 package siongsng.rpmtwupdatemod.function;
 
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -23,13 +22,13 @@ public class AFK {
     public static final Map<UUID, PlayerInfo> PLAYER_INFOS = new HashMap<UUID, PlayerInfo>();
 
     @SubscribeEvent
-    public void onPlayerConnect(PlayerEvent.PlayerLoggedInEvent connected) {
+    public void onPlayerConnect(PlayerEvent.PlayerLoggedInEvent connected) { //玩家連線
         if (!Configer.afk.get()) return;
         PLAYER_INFOS.put(connected.getPlayer().getGameProfile().getId(), new PlayerInfo(connected.getPlayer()));
     }
 
     @SubscribeEvent
-    public void onPlayerDisconect(PlayerEvent.PlayerLoggedOutEvent disconnected) {
+    public void onPlayerDisconect(PlayerEvent.PlayerLoggedOutEvent disconnected) { //玩家斷開連線
         if (!Configer.afk.get()) return;
         for (Entry<UUID, PlayerInfo> info : PLAYER_INFOS.entrySet()) {
             if (info.getKey() == disconnected.getPlayer().getGameProfile().getId()) {
@@ -40,7 +39,7 @@ public class AFK {
     }
 
     @SubscribeEvent
-    public void chatty(ServerChatEvent chat) {
+    public void chatty(ServerChatEvent chat) { //伺服器聊天事件
         if (!Configer.afk.get()) return;
         PlayerInfo info = PLAYER_INFOS.get(chat.getPlayer().getGameProfile().getId());
         if (info == null) {
@@ -54,7 +53,7 @@ public class AFK {
     }
 
     @SubscribeEvent
-    public void onServerTick(TickEvent.ServerTickEvent event) {
+    public void onServerTick(TickEvent.ServerTickEvent event) { //伺服器Tick事件
         if (!Configer.afk.get()) return;
         if (event.phase == TickEvent.Phase.START) {
             Iterator<Entry<UUID, PlayerInfo>> it = PLAYER_INFOS.entrySet().iterator();

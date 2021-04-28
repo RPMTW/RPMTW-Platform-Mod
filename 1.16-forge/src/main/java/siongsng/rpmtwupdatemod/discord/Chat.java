@@ -12,13 +12,13 @@ public class Chat {
 
     public Chat() {
         JDABuilder jdaBuilder = JDABuilder.createDefault("AAAODMwNzQ3ODI3NTY3MTk4MjQ4.YHLMNA.k8yLYQeanyVnZ0oqV2le8otnMtE".split("^AAA")[1]); //看到這個是不是覺得很香呢? 別想了一點都不香。
-        jdaBuilder.setActivity(Activity.playing("https://www.rpmtw.ga"));
+        jdaBuilder.setActivity(Activity.playing("https://www.rpmtw.ga")); //設定遊玩內容
         try {
             bot = jdaBuilder.build();
             bot.awaitReady();
         } catch (LoginException | InterruptedException e) {
             e.printStackTrace();
         }
-        Chat.bot.addEventListener(new OnDiscordChat());
+        Chat.bot.addEventListener(new OnDiscordChat()); //註冊Discord發送訊息事件
     }
 }

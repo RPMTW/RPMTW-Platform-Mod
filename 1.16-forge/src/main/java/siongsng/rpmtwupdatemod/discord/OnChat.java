@@ -17,11 +17,11 @@ public class OnChat {
         String message = e.getMessage();
         if (message.equals(DiscordPrefix.Prefix()) || !message.startsWith(DiscordPrefix.Prefix()) || !Configer.discord.get())
             return;//關閉宇宙通訊系統
-        if (!new CheckChat().get()) {
+        if (!new CheckChat().get()) { //如果版本過舊
             SendMsg.send("§c您目前的§bRPMTW繁化更新模組§c版本過舊，因此無法使用§9宇宙通訊§c功能。");
             return;
         }
-        if (message.startsWith("/") && DiscordPrefix.get(message).equals("!")) return;
+        if (message.startsWith("/") && DiscordPrefix.get(message).equals("!")) return; //如果訊息開頭是 / 並且僅前綴發送訊息關閉
         times++;
         TextChannel textChannel = Chat.bot.getTextChannelById("831494456913428501");
         if (message.contains("OAO") || message.contains("oao")) {

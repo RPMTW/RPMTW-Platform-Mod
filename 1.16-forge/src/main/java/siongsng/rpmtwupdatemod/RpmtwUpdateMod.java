@@ -26,37 +26,29 @@ import siongsng.rpmtwupdatemod.function.PackVersionCheck;
 import siongsng.rpmtwupdatemod.notice.notice;
 
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 @Mod("rpmtw_update_mod")
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class RpmtwUpdateMod {
 
-    public static final Logger LOGGER = LogManager.getLogger();
-    public final static String Mod_ID = "rpmtw_update_mod";
-
-    public static Path CACHE_DIR = Paths.get(System.getProperty("user.home") + "/.rpmtw/1.16");
-    public static Path PACK_NAME = CACHE_DIR.resolve("RPMTW-1.16.zip");
-    public static String Update_Path = CACHE_DIR + "/Update.txt";
-    public static String Latest_ver = json.ver("https://api.github.com/repos/SiongSng/ResourcePack-Mod-zh_tw/releases/latest").toString();
-    public static String Latest_ver_n = Latest_ver.split("RPMTW-1.16-V")[1];
-
+    public static final Logger LOGGER = LogManager.getLogger(); //註冊紀錄器
+    public final static String Mod_ID = "rpmtw_update_mod"; //模組ID
 
     public RpmtwUpdateMod() throws IOException {
         MinecraftForge.EVENT_BUS.register(this);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::init);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT, "rpmtw_update_mod-client.toml");
-        Config.loadConfig(Config.CLIENT);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::init); //註冊監聽事件
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT, "rpmtw_update_mod-client.toml"); //註冊組態
+        Config.loadConfig(Config.CLIENT); //載入客戶端組態
+
         LOGGER.info("Hello RPMTW world!");
-        if (!ping.isConnect()) {
+        if (!ping.isConnect()) { //判斷是否有網路
             LOGGER.error("你目前處於無網路狀態，因此無法使用RPMTW自動更新模組，請連結網路後重新啟動此模組。");
         }
         if (FMLEnvironment.dist == Dist.CLIENT) {
             Minecraft.getInstance().gameSettings.language = "zh_tw"; //將語言設定為繁體中文
         }
-        new PackVersionCheck(Latest_ver, Latest_ver_n, CACHE_DIR, Update_Path, PACK_NAME);
-        new Chat();
+        new PackVersionCheck(); //資源包版本檢查
+        new Chat(); //JDA帳號登入
     }
 
     @SubscribeEvent
@@ -69,9 +61,9 @@ public class RpmtwUpdateMod {
             MinecraftForge.EVENT_BUS.register(new notice()); //玩家加入事件註冊
         }
         MinecraftForge.EVENT_BUS.register(new AFK()); //掛機事件註冊
-        MinecraftForge.EVENT_BUS.register(new OnChat()); //聊天事件
+        MinecraftForge.EVENT_BUS.register(new OnChat()); //客戶端聊天事件
 
-        ModLoadingContext.get().registerExtensionPoint(
+        ModLoadingContext.get().registerExtensionPoint( //註冊組態螢幕至Forge模組設定
                 ExtensionPoint.CONFIGGUIFACTORY,
                 () -> (mc, screen) -> new ConfigScreen()
         );
