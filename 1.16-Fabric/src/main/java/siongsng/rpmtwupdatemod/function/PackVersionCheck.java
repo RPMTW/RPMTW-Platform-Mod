@@ -40,10 +40,6 @@ public class PackVersionCheck {
             } else {
                 RpmtwUpdateMod.LOGGER.info("目前的RPMTW版本已經是最新的了!!");
             }
-        } catch (Exception e) {
-            RpmtwUpdateMod.LOGGER.error("發生未知錯誤: " + e);
-        }
-        try {
             Class.forName("siongsng.rpmtwupdatemod.packs.LoadPack").getMethod("init", Set.class).invoke(null, providers);
         } catch (Exception e) {
             RpmtwUpdateMod.LOGGER.error("發生未知錯誤: " + e);

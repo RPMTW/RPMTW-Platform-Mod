@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="修改一些敘述(1.0.8-RC2)">
+    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="修復 Fabric 首次啟動時無法載入翻譯資源包 (#23)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/function/PackVersionCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/function/PackVersionCheck.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,13 +190,15 @@
     </option>
   </component>
   <component name="RunManager" selected="Gradle.1.16-Fabric [runClient]">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -405,7 +406,8 @@
       <workItem from="1619273897862" duration="5520000" />
       <workItem from="1619306939535" duration="11565000" />
       <workItem from="1619346366779" duration="130000" />
-      <workItem from="1619534660523" duration="934000" />
+      <workItem from="1619534660523" duration="1130000" />
+      <workItem from="1619601994247" duration="779000" />
     </task>
     <task id="LOCAL-00001" summary="修改一下字詞">
       <created>1617963669695</created>
@@ -701,7 +703,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619329534912</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="修復 Fabric 首次啟動時無法載入翻譯資源包 (#23)">
+      <created>1619535738992</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1619535738992</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -734,7 +743,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="努力修復Bug" />
     <MESSAGE value="修復兩個Bug" />
     <MESSAGE value="新增了一些功能，修了不知道多少Bug" />
     <MESSAGE value="1.0.5-rc1" />
@@ -759,7 +767,8 @@
     <MESSAGE value="Update JDA to 261" />
     <MESSAGE value="1.0.8-RC1" />
     <MESSAGE value="修改一些敘述(1.0.8-RC2)" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改一些敘述(1.0.8-RC2)" />
+    <MESSAGE value="修復 Fabric 首次啟動時無法載入翻譯資源包 (#23)" />
+    <option name="LAST_COMMIT_MESSAGE" value="修復 Fabric 首次啟動時無法載入翻譯資源包 (#23)" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
