@@ -46,6 +46,7 @@ public final class key {
         if (open_config.isPressed()) {
             Minecraft.getInstance().displayGuiScreen(new ConfigScreen());
         }
+        /*
         if (Configer.rpmtw_crowdin.get()) {
             if (crowdin.isPressed()) {
                 assert p != null;
@@ -71,7 +72,7 @@ public final class key {
                 p.sendMessage(new StringTextComponent("§6開啟翻譯平台網頁中..."), p.getUniqueID()); //發送訊息
                 Util.getOSType().openURI(url); //使用預設瀏覽器開啟網頁
             }
-        }
+        }*/
         if (Configer.rpmtw_reloadpack.get()) {
             if (reloadpack.isPressed()) {
                 new ReloadPack();

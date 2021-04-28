@@ -1,6 +1,7 @@
 package siongsng.rpmtwupdatemod;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -9,8 +10,11 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.minecraftforge.fml.network.NetworkRegistry;
+import net.minecraftforge.fml.network.simple.SimpleChannel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import siongsng.rpmtwupdatemod.commands.AddToken;
@@ -34,7 +38,16 @@ public class RpmtwUpdateMod {
     public static final Logger LOGGER = LogManager.getLogger(); //註冊紀錄器
     public final static String Mod_ID = "rpmtw_update_mod"; //模組ID
 
+    private static final String PROTOCOL_VERSION = "1";
+    public static final SimpleChannel PACKET_HANDLER = NetworkRegistry.newSimpleChannel(new ResourceLocation("rpmtw_update_mod", "rpmtw_update_mod"),
+            () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
+    public ModElements elements;
+
     public RpmtwUpdateMod() throws IOException {
+        elements = new ModElements();
+        MinecraftForge.EVENT_BUS.register(new ModFMLBusEvents(this));
+
+
         MinecraftForge.EVENT_BUS.register(this);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::init); //註冊監聽事件
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT, "rpmtw_update_mod-client.toml"); //註冊組態
@@ -67,5 +80,18 @@ public class RpmtwUpdateMod {
                 ExtensionPoint.CONFIGGUIFACTORY,
                 () -> (mc, screen) -> new ConfigScreen()
         );
+    }
+
+    private static class ModFMLBusEvents {
+        private final RpmtwUpdateMod parent;
+
+        ModFMLBusEvents(RpmtwUpdateMod parent) {
+            this.parent = parent;
+        }
+
+        @SubscribeEvent
+        public void serverLoad(FMLServerStartingEvent event) {
+            this.parent.elements.getElements().forEach(element -> element.serverLoad(event));
+        }
     }
 }
