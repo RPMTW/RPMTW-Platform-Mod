@@ -4,8 +4,8 @@ import me.shedaniel.autoconfig.AutoConfig;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.minecraft.client.MinecraftClient;
-import siongsng.rpmtwupdatemod.function.SendMsg;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
+import siongsng.rpmtwupdatemod.function.SendMsg;
 
 public class OnDiscordChat extends ListenerAdapter {
     @Override

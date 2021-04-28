@@ -13,8 +13,8 @@ import java.nio.file.Paths;
 
 @Mod.EventBusSubscriber
 public class Config {
-    private static final ForgeConfigSpec.Builder CLIENT_BUILDER = new ForgeConfigSpec.Builder();
     public static final ForgeConfigSpec CLIENT;
+    private static final ForgeConfigSpec.Builder CLIENT_BUILDER = new ForgeConfigSpec.Builder();
     private static final Path CONFIG_PATH = Paths.get(FMLPaths.CONFIGDIR.get().resolve("rpmtw_update_mod-client.toml").toString());
 
     static {

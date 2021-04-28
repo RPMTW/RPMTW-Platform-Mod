@@ -11,8 +11,8 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.util.Util;
 import net.minecraft.util.registry.Registry;
 import org.lwjgl.glfw.GLFW;
-import siongsng.rpmtwupdatemod.function.ReloadPack;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
+import siongsng.rpmtwupdatemod.function.ReloadPack;
 
 public class key {
     private static final KeyBinding crowdin = new KeyBinding("key.rpmtw_update_mod.crowdin", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_V, "key.categories.rpmtw");

@@ -8,11 +8,11 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.config.DiscordPrefix;
 import siongsng.rpmtwupdatemod.discord.Chat;
 import siongsng.rpmtwupdatemod.function.CheckChat;
 import siongsng.rpmtwupdatemod.function.SendMsg;
-import siongsng.rpmtwupdatemod.config.ConfigScreen;
 
 @Mixin(ClientPlayerEntity.class)
 public class OnChat {

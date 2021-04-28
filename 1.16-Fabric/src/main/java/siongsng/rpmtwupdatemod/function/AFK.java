@@ -5,10 +5,9 @@ import me.shedaniel.autoconfig.AutoConfig;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
 
 public class AFK {
-    static ConfigScreen config = AutoConfig.getConfigHolder(ConfigScreen.class).getConfig();
-
-    private static boolean wasAfk = false;
     public static long afkTime = 0;
+    static ConfigScreen config = AutoConfig.getConfigHolder(ConfigScreen.class).getConfig();
+    private static boolean wasAfk = false;
     private static long lastUpdate = 0;
 
     public static void tickAfkStatus() {

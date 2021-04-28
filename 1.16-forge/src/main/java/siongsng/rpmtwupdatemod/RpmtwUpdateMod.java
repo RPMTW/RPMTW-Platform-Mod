@@ -43,6 +43,22 @@ public class RpmtwUpdateMod {
     public static String Latest_ver_n = Latest_ver.split("RPMTW-1.16-V")[1];
 
 
+    public RpmtwUpdateMod() throws IOException {
+        MinecraftForge.EVENT_BUS.register(this);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::init);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT, "rpmtw_update_mod-client.toml");
+        Config.loadConfig(Config.CLIENT);
+        LOGGER.info("Hello RPMTW world!");
+        if (!ping.isConnect()) {
+            LOGGER.error("你目前處於無網路狀態，因此無法使用RPMTW自動更新模組，請連結網路後重新啟動此模組。");
+        }
+        if (FMLEnvironment.dist == Dist.CLIENT) {
+            Minecraft.getInstance().gameSettings.language = "zh_tw"; //將語言設定為繁體中文
+        }
+        new PackVersionCheck(Latest_ver, Latest_ver_n, CACHE_DIR, Update_Path, PACK_NAME);
+        new Chat();
+    }
+
     @SubscribeEvent
     public void init(final FMLClientSetupEvent e) {
         FMLJavaModLoadingContext.get().getModEventBus().register(this);
@@ -59,21 +75,5 @@ public class RpmtwUpdateMod {
                 ExtensionPoint.CONFIGGUIFACTORY,
                 () -> (mc, screen) -> new ConfigScreen()
         );
-    }
-
-    public RpmtwUpdateMod() throws IOException {
-        MinecraftForge.EVENT_BUS.register(this);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::init);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT, "rpmtw_update_mod-client.toml");
-        Config.loadConfig(Config.CLIENT);
-        LOGGER.info("Hello RPMTW world!");
-        if (!ping.isConnect()) {
-            LOGGER.error("你目前處於無網路狀態，因此無法使用RPMTW自動更新模組，請連結網路後重新啟動此模組。");
-        }
-        if (FMLEnvironment.dist == Dist.CLIENT) {
-            Minecraft.getInstance().gameSettings.language = "zh_tw"; //將語言設定為繁體中文
-        }
-        new PackVersionCheck(Latest_ver, Latest_ver_n, CACHE_DIR, Update_Path, PACK_NAME);
-        new Chat();
     }
 }

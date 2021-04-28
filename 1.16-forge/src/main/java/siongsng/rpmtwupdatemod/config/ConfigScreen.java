@@ -13,6 +13,7 @@ import java.util.Objects;
 
 public final class ConfigScreen extends Screen {
 
+    static final int BUTTON_HEIGHT = 20;
     /**
      * 此類別部分原始碼取至:
      * https://leo3418.github.io/zh/2020/09/09/forge-mod-config-screen.html
@@ -22,12 +23,9 @@ public final class ConfigScreen extends Screen {
     private static final int OPTIONS_LIST_TOP_HEIGHT = 24;
     private static final int OPTIONS_LIST_BOTTOM_OFFSET = 32;
     private static final int OPTIONS_LIST_ITEM_HEIGHT = 25;
-    private OptionsRowList optionsRowList;
-
-
     private static final int BOTTOM_BUTTON_HEIGHT_OFFSET = 26;
     private static final int BOTTOM_BUTTON_WIDTH = 150;
-    static final int BUTTON_HEIGHT = 20;
+    private OptionsRowList optionsRowList;
 
     public ConfigScreen() {
         super(new StringTextComponent("RPMTW自動繁化模組 設定選單"));

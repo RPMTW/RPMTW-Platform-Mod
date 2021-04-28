@@ -25,7 +25,7 @@ public class AFK {
     @SubscribeEvent
     public void onPlayerConnect(PlayerEvent.PlayerLoggedInEvent connected) {
         if (!Configer.afk.get()) return;
-        PLAYER_INFOS.put(connected.getPlayer().getGameProfile().getId(), new PlayerInfo((PlayerEntity) connected.getPlayer()));
+        PLAYER_INFOS.put(connected.getPlayer().getGameProfile().getId(), new PlayerInfo(connected.getPlayer()));
     }
 
     @SubscribeEvent

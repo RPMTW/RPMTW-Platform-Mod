@@ -33,7 +33,7 @@ public class AddToken {
             return Command.SINGLE_SUCCESS;
         })).executes(context -> {
             SendMsg.send("§c請輸入參數，§b/Crowdin-token <您的Token>");
-         return Command.SINGLE_SUCCESS;
+            return Command.SINGLE_SUCCESS;
         }));
     }
 }
