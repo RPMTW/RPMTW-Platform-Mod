@@ -3,12 +3,12 @@ package siongsng.rpmtwupdatemod.config;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public class Configer {
-
-
     public static ForgeConfigSpec.BooleanValue rpmtw_crowdin, rpmtw_reloadpack, report_translation, notice, afk, discord, DiscordPrefix;
     public static ForgeConfigSpec.IntValue Update_interval, afkTime;
+    public static ForgeConfigSpec.ConfigValue<String> Token;
 
     public static void init(ForgeConfigSpec.Builder client) {
+
         rpmtw_crowdin = client
                 .comment("crowdin = 是否啟用點擊指定快捷鍵(預設為V)後開啟翻譯網頁，並顯示相關資訊。")
                 .define("rpmtw.crowdin", true);
@@ -38,5 +38,8 @@ public class Configer {
         afkTime = client
                 .comment("afkTime = 此數值用來設定過多久沒有活動才會進入掛機模式。(以秒為單位)")
                 .defineInRange("rpmtw.afkTime", 600, 10, 3600);
+        Token = client
+                .comment("Crowdin Token (翻譯平台登入權杖)")
+                .define("rpmtw.token", "");
     }
 }

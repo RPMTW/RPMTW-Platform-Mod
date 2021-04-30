@@ -15,10 +15,22 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.network.NetworkEvent;
+import net.sf.json.JSONObject;
+import org.apache.http.HttpHeaders;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.methods.RequestBuilder;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.lwjgl.glfw.GLFW;
 import siongsng.rpmtwupdatemod.ModElements;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
+import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
+import siongsng.rpmtwupdatemod.function.SendMsg;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
@@ -27,6 +39,7 @@ import java.util.function.Supplier;
 public class OpenCrowdinKeyBinding extends ModElements.ModElement {
     @OnlyIn(Dist.CLIENT)
     private KeyBinding keys;
+
 
     public OpenCrowdinKeyBinding(ModElements instance) {
         super(instance, 4);
@@ -42,23 +55,54 @@ public class OpenCrowdinKeyBinding extends ModElements.ModElement {
         MinecraftForge.EVENT_BUS.register(this);
     }
 
+    public static String getText() {
+        String item_key = Minecraft.getInstance().player.getHeldItemMainhand().getItem().getTranslationKey(); //拿的物品
+        String Text = "";
+        String responseBody = null;
+        try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
+            HttpUriRequest request = RequestBuilder.get()
+                    .setUri("https://api.crowdin.com/api/v2/projects/442446/strings?filter=" + item_key)
+                    .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
+                    .build();
+            try (CloseableHttpResponse response = httpClient.execute(request)) {
+                responseBody = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
+            }
+        } catch (IOException e) {
+            Text = "無法取得";
+        }
+        Text = JSONObject.fromObject(responseBody).getJSONArray("data").getJSONObject(0).getJSONObject("data").get("text").toString();
+        return Text;
+    }
+
     @SubscribeEvent
     @OnlyIn(Dist.CLIENT)
     public void onKeyInput(InputEvent.KeyInputEvent event) {
         if (Minecraft.getInstance().currentScreen == null) {
             if (event.getKey() == keys.getKey().getKeyCode()) {
                 if (event.getAction() == GLFW.GLFW_PRESS) {
-                    PlayerEntity p = Minecraft.getInstance().player;
-                    Item item = p.getHeldItemMainhand().getItem(); //拿的物品
+                    try {
+                        PlayerEntity p = Minecraft.getInstance().player;
+                        Item item = p.getHeldItemMainhand().getItem(); //拿的物品
 
-                    String item_key = item.getTranslationKey(); //物品的命名空間
-                    if (item_key.equals("block.minecraft.air")) {
-                        p.sendMessage(new StringTextComponent("§4請手持物品後再使用此功能。"), p.getUniqueID()); //發送訊息
-                        return;
+
+                        String item_key = item.getTranslationKey(); //物品的命名空間
+                        if (item_key.equals("block.minecraft.air")) {
+                            p.sendMessage(new StringTextComponent("§4請手持物品後再使用此功能。"), p.getUniqueID()); //發送訊息
+                            return;
+                        } else if (!new TokenCheck().isCheck) {
+                            SendMsg.send("§c請先新增Crowdin(翻譯平台)的登入權杖新增，再使用該功能或至RPMTW官方Discord群組尋求協助。\n§aRPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
+                            return;
+                        } else if (getText().equals("無法取得")) {
+                            SendMsg.send("§6由於你目前手持想要翻譯的物品，數據不在資料庫內\n因此無法進行翻譯，想了解更多資訊請前往RPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
+                            return;
+                        }
+
+
+                        RpmtwUpdateMod.PACKET_HANDLER.sendToServer(new KeyBindingPressedMessage(0, 0));
+                        pressAction(p, 0, 0);
+                    } catch (Exception e) {
+                        RpmtwUpdateMod.LOGGER.error("發生未知錯誤: " + e); //錯誤處理
                     }
-
-                    RpmtwUpdateMod.PACKET_HANDLER.sendToServer(new KeyBindingPressedMessage(0, 0));
-                    pressAction(Minecraft.getInstance().player, 0, 0);
                 }
             }
         }

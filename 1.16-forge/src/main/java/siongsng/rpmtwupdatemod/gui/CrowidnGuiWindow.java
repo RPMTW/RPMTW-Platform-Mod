@@ -24,6 +24,14 @@ public class CrowidnGuiWindow extends ContainerScreen<CrowdinGui.GuiContainerMod
     private int x, y, z;
     private PlayerEntity entity;
     TextFieldWidget ttanslation;
+    public static final String Text = OpenCrowdinKeyBinding.getText();
+
+    PlayerEntity p = container.entity;
+    Item item = p.getHeldItemMainhand().getItem(); //拿的物品
+
+    String mod_id = item.getCreatorModId(p.getHeldItemMainhand().getStack()); //物品所屬的模組ID
+    String item_key = item.getTranslationKey(); //物品的命名空間
+    String item_DisplayName = item.getName().getString(); //物品的顯示名稱
 
     public CrowidnGuiWindow(CrowdinGui.GuiContainerMod container, PlayerInventory inventory, ITextComponent text) {
         super(container, inventory, text);
@@ -75,21 +83,15 @@ public class CrowidnGuiWindow extends ContainerScreen<CrowdinGui.GuiContainerMod
         ttanslation.tick();
     }
 
+
     @Override
     protected void drawGuiContainerForegroundLayer(MatrixStack ms, int mouseX, int mouseY) {
-        PlayerEntity p = container.entity;
-        Item item = p.getHeldItemMainhand().getItem(); //拿的物品
-
-        String mod_id = item.getCreatorModId(p.getHeldItemMainhand().getStack()); //物品所屬的模組ID
-        String item_key = item.getTranslationKey(); //物品的命名空間
-        String item_DisplayName = item.getName().getString(); //物品的顯示名稱
-
-        this.font.drawString(ms, "RPMTW 物品翻譯介面", 150, 4, -10066177);
-        this.font.drawString(ms, "譯文:", 138, 101, -12829636);
-        this.font.drawString(ms, "原文 : 無法取得", 143, 38, -12829636);
+        this.font.drawString(ms, "RPMTW 物品翻譯介面", 148, 4, -10066177);
+        this.font.drawString(ms, "譯文: ", 127, 101, -12829636);
+        this.font.drawString(ms, "原文 : " + Text, 143, 38, -12829636);
         this.font.drawString(ms, "語系鍵: " + item_key, 143, 22, -12829636);
         this.font.drawString(ms, "顯示名稱: " + item_DisplayName, 143, 67, -12829636);
-        this.font.drawString(ms, "所屬模組 ID:" + mod_id, 143, 53, -12829636);
+        this.font.drawString(ms, "所屬模組 ID: " + mod_id, 143, 53, -12829636);
     }
 
     @Override
@@ -130,7 +132,11 @@ public class CrowidnGuiWindow extends ContainerScreen<CrowdinGui.GuiContainerMod
         this.children.add(this.ttanslation);
         this.addButton(new Button(this.guiLeft + 181, this.guiTop + 147, 57, 20, new StringTextComponent("提交翻譯"), e -> {
 
-            SendMsg.send("已成功提交翻譯，將 xxx 翻譯為 " + ttanslation.getText() + "。");
+            if (ttanslation.getText().equals("")) {
+                SendMsg.send("譯文不能是空的呦!");
+            } else {
+                SendMsg.send("已成功提交翻譯，將 " + Text + " 翻譯為 " + ttanslation.getText() + " 。");
+            }
 
             RpmtwUpdateMod.PACKET_HANDLER.sendToServer(new CrowdinGui.ButtonPressedMessage(0, x, y, z));
             CrowdinGui.handleButtonAction(entity, 0, x, y, z);

@@ -103,6 +103,7 @@ public final class ConfigScreen extends Screen {
                     Configer.notice.set(true);
                     Configer.afk.set(true);
                     Configer.discord.set(true);
+                    Configer.DiscordPrefix.set(true);
                     Configer.Update_interval.set(0);
                     Configer.afkTime.set(600);
                 })

@@ -6,26 +6,19 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
-import siongsng.rpmtwupdatemod.function.FileWriter;
 import siongsng.rpmtwupdatemod.function.SendMsg;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class AddToken {
+    public static String token;
+
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(CommandManager.literal("Crowdin-token").then(CommandManager.argument("token", StringArgumentType.greedyString()).executes(context -> {
             String cmd = context.getInput().split("\\s+")[1];
-            Path path = Paths.get(System.getProperty("user.home") + "/.rpmtw/crowdin-token.txt");
+            token = cmd;
+            SendMsg.send("§bCrowdin Token 新增完畢，正在準備開始檢查Token是否為有效的。");
             try {
-                if (!Files.exists(path)) { //如果沒有Token檔案
-                    Files.createFile(path); //建立Token檔案
-                    FileWriter.Writer(cmd, String.valueOf(path)); //寫入Crowdin-Token
-                }
-                FileWriter.Writer(cmd, String.valueOf(path)); //寫入Crowdin-Token
-                SendMsg.send("§bCrowdin Token 新增完畢，正在準備開始檢查Token是否為有效的。");
                 new TokenCheck().Check(cmd); //檢測Token
             } catch (IOException e) {
                 e.printStackTrace();

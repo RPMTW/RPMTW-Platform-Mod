@@ -21,10 +21,10 @@ public class TokenCheck {
                 .build();
         HttpResponse response = client.execute(request);
         if (response.getStatusLine().getStatusCode() == 200) {
-            SendMsg.send("§a檢測成功，您的Token是有效的。");
+            SendMsg.send("§a檢測成功，您的Token(登入權杖)是有效的。");
         } else {
-            SendMsg.send("§c檢測失敗，Token無效，請再嘗試新增或至RPMTW官方網站尋求幫助。");
-            Util.getOperatingSystem().open("https://www.rpmtw.ga");
+            SendMsg.send("§c檢測失敗，Token(登入權杖)無效，請再嘗試新增或至RPMTW官方Discord群組尋求協助。\n官方Discord群組:https://discord.gg/5xApZtgV2u");
+            Util.getOperatingSystem().open("https://discord.gg/5xApZtgV2u");
         }
     }
 }
