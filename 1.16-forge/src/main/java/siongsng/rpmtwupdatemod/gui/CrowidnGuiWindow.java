@@ -15,8 +15,17 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.sf.json.JSONObject;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
+import siongsng.rpmtwupdatemod.config.Configer;
 import siongsng.rpmtwupdatemod.function.SendMsg;
+
+import java.io.IOException;
 
 @OnlyIn(Dist.CLIENT)
 public class CrowidnGuiWindow extends ContainerScreen<CrowdinGui.GuiContainerMod> {
@@ -136,6 +145,20 @@ public class CrowidnGuiWindow extends ContainerScreen<CrowdinGui.GuiContainerMod
                 SendMsg.send("譯文不能是空的呦!");
             } else {
                 SendMsg.send("已成功提交翻譯，將 " + Text + " 翻譯為 " + ttanslation.getText() + " 。");
+            }
+
+            CloseableHttpClient httpClient = HttpClients.createDefault();
+            StringEntity requestEntity = new StringEntity(
+                    "{\"stringId\":\"" + JSONObject.fromObject(OpenCrowdinKeyBinding.responseBody).getJSONArray("data").getJSONObject(0).getJSONObject("data").get("id").toString() + "\",\"languageId\":\"zh-TW\",\"text\": \" " + ttanslation.getText() + "\"}",
+                    ContentType.APPLICATION_JSON);
+
+            HttpPost postMethod = new HttpPost("https://api.crowdin.com/api/v2/projects/442446/translations");
+            postMethod.setHeader("Authorization", "Bearer " + Configer.Token.get());
+            postMethod.setEntity(requestEntity);
+            try {
+                httpClient.execute(postMethod);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
             }
 
             RpmtwUpdateMod.PACKET_HANDLER.sendToServer(new CrowdinGui.ButtonPressedMessage(0, x, y, z));

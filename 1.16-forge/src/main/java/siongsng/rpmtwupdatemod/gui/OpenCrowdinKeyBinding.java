@@ -26,10 +26,10 @@ import org.apache.http.util.EntityUtils;
 import org.lwjgl.glfw.GLFW;
 import siongsng.rpmtwupdatemod.ModElements;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
+import siongsng.rpmtwupdatemod.config.Configer;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.function.SendMsg;
 
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,7 +39,7 @@ import java.util.function.Supplier;
 public class OpenCrowdinKeyBinding extends ModElements.ModElement {
     @OnlyIn(Dist.CLIENT)
     private KeyBinding keys;
-
+    public static String responseBody = "";
 
     public OpenCrowdinKeyBinding(ModElements instance) {
         super(instance, 4);
@@ -58,7 +58,6 @@ public class OpenCrowdinKeyBinding extends ModElements.ModElement {
     public static String getText() {
         String item_key = Minecraft.getInstance().player.getHeldItemMainhand().getItem().getTranslationKey(); //拿的物品
         String Text = "";
-        String responseBody = null;
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
             HttpUriRequest request = RequestBuilder.get()
                     .setUri("https://api.crowdin.com/api/v2/projects/442446/strings?filter=" + item_key)
@@ -67,10 +66,10 @@ public class OpenCrowdinKeyBinding extends ModElements.ModElement {
             try (CloseableHttpResponse response = httpClient.execute(request)) {
                 responseBody = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
             }
-        } catch (IOException e) {
+            Text = JSONObject.fromObject(responseBody).getJSONArray("data").getJSONObject(0).getJSONObject("data").get("text").toString();
+        } catch (Exception e) {
             Text = "無法取得";
         }
-        Text = JSONObject.fromObject(responseBody).getJSONArray("data").getJSONObject(0).getJSONObject("data").get("text").toString();
         return Text;
     }
 
@@ -89,7 +88,7 @@ public class OpenCrowdinKeyBinding extends ModElements.ModElement {
                         if (item_key.equals("block.minecraft.air")) {
                             p.sendMessage(new StringTextComponent("§4請手持物品後再使用此功能。"), p.getUniqueID()); //發送訊息
                             return;
-                        } else if (!new TokenCheck().isCheck) {
+                        } else if (!new TokenCheck().isCheck && Configer.Token.get().equals("")) {
                             SendMsg.send("§c請先新增Crowdin(翻譯平台)的登入權杖新增，再使用該功能或至RPMTW官方Discord群組尋求協助。\n§aRPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
                             return;
                         } else if (getText().equals("無法取得")) {
