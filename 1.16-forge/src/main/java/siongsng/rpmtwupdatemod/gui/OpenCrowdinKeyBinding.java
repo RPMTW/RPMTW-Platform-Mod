@@ -119,7 +119,7 @@ public class OpenCrowdinKeyBinding extends ModElements.ModElement {
                         } else if (!new TokenCheck().isCheck && Configer.Token.get().equals("")) {
                             SendMsg.send("§c請先新增Crowdin(翻譯平台)的登入權杖新增，再使用該功能或至RPMTW官方Discord群組尋求協助。\n§aRPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
                             return;
-                        } else if (getText().equals("無法取得") && !Configer.Token.get().equals("")) {
+                        } else if (getText().equals("無法取得") && new TokenCheck().isCheck) {
                             SendMsg.send("§6由於你目前手持想要翻譯的物品，數據不在資料庫內\n因此無法進行翻譯，想了解更多資訊請前往RPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
                             return;
                         }

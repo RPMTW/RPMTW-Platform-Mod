@@ -8,7 +8,10 @@ import net.fabricmc.api.Environment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
+import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.crowdin.key;
+
+import java.io.IOException;
 
 @Environment(EnvType.CLIENT)
 public class RpmtwUpdateMod implements ClientModInitializer {
@@ -24,8 +27,21 @@ public class RpmtwUpdateMod implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        ConfigScreen config = AutoConfig.getConfigHolder(ConfigScreen.class).getConfig();
+
         key.onInitializeClient(); //註冊快捷鍵
         LOGGER.info("Hello RPMTW world!");
+        AutoConfig.getConfigHolder(ConfigScreen.class).registerSaveListener((var1, sava) -> {
+            if (!sava.Token.equals(config.Token)) {
+                System.out.print("你好");
+            }
+            try {
+                new TokenCheck().Check(sava.Token);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        });
     }
 
 }

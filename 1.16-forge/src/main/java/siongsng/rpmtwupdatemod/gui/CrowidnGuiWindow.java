@@ -97,7 +97,6 @@ public class CrowidnGuiWindow extends ContainerScreen<CrowdinGui.GuiContainerMod
     @Override
     protected void drawGuiContainerForegroundLayer(MatrixStack ms, int mouseX, int mouseY) {
         this.font.drawString(ms, "RPMTW 物品翻譯介面", 155, 12, -65536);
-        this.font.drawString(ms, "譯文: ", 124, 103, -16777216);
         this.font.drawString(ms, "原文: " + Text, 143, 43, -16777216);
         this.font.drawString(ms, "語系鍵: " + item_key, 143, 27, -16777216);
         this.font.drawString(ms, "顯示名稱: " + item_DisplayName, 143, 72, -16777216);
