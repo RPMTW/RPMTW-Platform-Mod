@@ -50,7 +50,7 @@ public class OpenCrowdinKeyBinding extends ModElements.ModElement {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void initElements() {
-        keys = new KeyBinding("key.rpmtw_update_mod.open_crowdin", GLFW.GLFW_KEY_G, "key.categories.rpmtw");
+        keys = new KeyBinding("key.rpmtw_update_mod.open_crowdin", GLFW.GLFW_KEY_V, "key.categories.rpmtw");
         ClientRegistry.registerKeyBinding(keys);
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -62,14 +62,21 @@ public class OpenCrowdinKeyBinding extends ModElements.ModElement {
             HttpUriRequest request = RequestBuilder.get()
                     .setUri("https://api.crowdin.com/api/v2/projects/442446/strings?filter=" + item_key)
                     .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
+                    .setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + Configer.Token.get())
                     .build();
             try (CloseableHttpResponse response = httpClient.execute(request)) {
                 responseBody = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
             }
+        } catch (Exception ignored) {
+        }
+
+        try {
             Text = JSONObject.fromObject(responseBody).getJSONArray("data").getJSONObject(0).getJSONObject("data").get("text").toString();
         } catch (Exception e) {
             Text = "無法取得";
+            RpmtwUpdateMod.LOGGER.error("讀取翻譯資訊時發生錯誤: " + e.getMessage());
         }
+
         return Text;
     }
 
@@ -91,12 +98,10 @@ public class OpenCrowdinKeyBinding extends ModElements.ModElement {
                         } else if (!new TokenCheck().isCheck && Configer.Token.get().equals("")) {
                             SendMsg.send("§c請先新增Crowdin(翻譯平台)的登入權杖新增，再使用該功能或至RPMTW官方Discord群組尋求協助。\n§aRPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
                             return;
-                        } else if (getText().equals("無法取得")) {
+                        } else if (getText().equals("無法取得") && !Configer.Token.get().equals("")) {
                             SendMsg.send("§6由於你目前手持想要翻譯的物品，數據不在資料庫內\n因此無法進行翻譯，想了解更多資訊請前往RPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
                             return;
                         }
-
-
                         RpmtwUpdateMod.PACKET_HANDLER.sendToServer(new KeyBindingPressedMessage(0, 0));
                         pressAction(p, 0, 0);
                     } catch (Exception e) {

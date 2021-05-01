@@ -14,6 +14,7 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IWorld;
 import net.minecraftforge.fml.network.NetworkHooks;
 import siongsng.rpmtwupdatemod.ModElements;
+import siongsng.rpmtwupdatemod.function.SendMsg;
 
 import java.util.Map;
 
@@ -24,6 +25,7 @@ public class OpenCorwidnProcedure extends ModElements.ModElement {
     }
 
     public static void executeProcedure(Map<String, Object> dependencies) {
+        SendMsg.send("請稍後，正在開啟物品翻譯界面中...");
         Entity entity = (Entity) dependencies.get("entity");
         double x = dependencies.get("x") instanceof Integer ? (int) dependencies.get("x") : (double) dependencies.get("x");
         double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");

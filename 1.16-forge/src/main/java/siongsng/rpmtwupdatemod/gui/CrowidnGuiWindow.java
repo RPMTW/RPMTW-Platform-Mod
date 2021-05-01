@@ -10,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Util;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
@@ -33,7 +34,7 @@ public class CrowidnGuiWindow extends ContainerScreen<CrowdinGui.GuiContainerMod
     private int x, y, z;
     private PlayerEntity entity;
     TextFieldWidget ttanslation;
-    public static final String Text = OpenCrowdinKeyBinding.getText();
+    String Text = OpenCrowdinKeyBinding.getText();
 
     PlayerEntity p = container.entity;
     Item item = p.getHeldItemMainhand().getItem(); //拿的物品
@@ -41,6 +42,7 @@ public class CrowidnGuiWindow extends ContainerScreen<CrowdinGui.GuiContainerMod
     String mod_id = item.getCreatorModId(p.getHeldItemMainhand().getStack()); //物品所屬的模組ID
     String item_key = item.getTranslationKey(); //物品的命名空間
     String item_DisplayName = item.getName().getString(); //物品的顯示名稱
+    String stringID = JSONObject.fromObject(OpenCrowdinKeyBinding.responseBody).getJSONArray("data").getJSONObject(0).getJSONObject("data").get("id").toString();
 
     public CrowidnGuiWindow(CrowdinGui.GuiContainerMod container, PlayerInventory inventory, ITextComponent text) {
         super(container, inventory, text);
@@ -95,12 +97,12 @@ public class CrowidnGuiWindow extends ContainerScreen<CrowdinGui.GuiContainerMod
 
     @Override
     protected void drawGuiContainerForegroundLayer(MatrixStack ms, int mouseX, int mouseY) {
-        this.font.drawString(ms, "RPMTW 物品翻譯介面", 148, 4, -10066177);
-        this.font.drawString(ms, "譯文: ", 127, 101, -12829636);
-        this.font.drawString(ms, "原文 : " + Text, 143, 38, -12829636);
-        this.font.drawString(ms, "語系鍵: " + item_key, 143, 22, -12829636);
-        this.font.drawString(ms, "顯示名稱: " + item_DisplayName, 143, 67, -12829636);
-        this.font.drawString(ms, "所屬模組 ID: " + mod_id, 143, 53, -12829636);
+        this.font.drawString(ms, "RPMTW 物品翻譯介面", 155, 12, -65536);
+        this.font.drawString(ms, "譯文: ", 124, 106, -16777216);
+        this.font.drawString(ms, "原文 : " + Text, 143, 43, -16777216);
+        this.font.drawString(ms, "語系鍵: " + item_key, 143, 27, -16777216);
+        this.font.drawString(ms, "顯示名稱: " + item_DisplayName, 143, 72, -16777216);
+        this.font.drawString(ms, "所屬模組 ID: " + mod_id, 143, 58, -16777216);
     }
 
     @Override
@@ -142,16 +144,14 @@ public class CrowidnGuiWindow extends ContainerScreen<CrowdinGui.GuiContainerMod
         this.addButton(new Button(this.guiLeft + 181, this.guiTop + 147, 57, 20, new StringTextComponent("提交翻譯"), e -> {
 
             if (ttanslation.getText().equals("")) {
-                SendMsg.send("譯文不能是空的呦!");
+                SendMsg.send("§4譯文不能是空的呦!");
             } else {
-                SendMsg.send("已成功提交翻譯，將 " + Text + " 翻譯為 " + ttanslation.getText() + " 。");
+                SendMsg.send("§b已成功提交翻譯，將 §e" + Text + " §b翻譯為 §e" + ttanslation.getText() + "§b 。");
             }
-
             CloseableHttpClient httpClient = HttpClients.createDefault();
             StringEntity requestEntity = new StringEntity(
-                    "{\"stringId\":\"" + JSONObject.fromObject(OpenCrowdinKeyBinding.responseBody).getJSONArray("data").getJSONObject(0).getJSONObject("data").get("id").toString() + "\",\"languageId\":\"zh-TW\",\"text\": \" " + ttanslation.getText() + "\"}",
+                    "{\"stringId\":\"" + stringID + "\",\"languageId\":\"zh-TW\",\"text\": \"" + ttanslation.getText() + "\"}",
                     ContentType.APPLICATION_JSON);
-
             HttpPost postMethod = new HttpPost("https://api.crowdin.com/api/v2/projects/442446/translations");
             postMethod.setHeader("Authorization", "Bearer " + Configer.Token.get());
             postMethod.setEntity(requestEntity);
@@ -160,7 +160,22 @@ public class CrowidnGuiWindow extends ContainerScreen<CrowdinGui.GuiContainerMod
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
+            Minecraft.getInstance().displayGuiScreen(null);
+            Minecraft.getInstance().keyboardListener.enableRepeatEvents(false);
+            RpmtwUpdateMod.PACKET_HANDLER.sendToServer(new CrowdinGui.ButtonPressedMessage(0, x, y, z));
+            CrowdinGui.handleButtonAction(entity, 0, x, y, z);
+        }));
+        this.addButton(new Button(this.guiLeft + 253, this.guiTop + 147, 57, 20, new StringTextComponent("Crowdin"), e -> {
+            String url = "https://translate.rpmtw.ga/translate/resourcepack-mod-zhtw/all/en-zhtw?filter=basic&value=0#q=" + stringID;
 
+            p.sendMessage(new StringTextComponent("§6開啟翻譯平台網頁中..."), p.getUniqueID()); //發送訊息
+            Util.getOSType().openURI(url); //使用預設瀏覽器開啟網頁
+            RpmtwUpdateMod.PACKET_HANDLER.sendToServer(new CrowdinGui.ButtonPressedMessage(0, x, y, z));
+            CrowdinGui.handleButtonAction(entity, 0, x, y, z);
+        }));
+        this.addButton(new Button(this.guiLeft + 109, this.guiTop + 147, 57, 20, new StringTextComponent("關閉介面"), e -> {
+            Minecraft.getInstance().displayGuiScreen(null);
+            Minecraft.getInstance().keyboardListener.enableRepeatEvents(false);
             RpmtwUpdateMod.PACKET_HANDLER.sendToServer(new CrowdinGui.ButtonPressedMessage(0, x, y, z));
             CrowdinGui.handleButtonAction(entity, 0, x, y, z);
         }));

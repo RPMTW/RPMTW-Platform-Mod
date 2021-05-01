@@ -4,10 +4,15 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="測試階段-2">
+    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="瘋狂註解+優化Code">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/crowdin/key.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/crowdin/key.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/CrowidnGuiWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/CrowidnGuiWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/OpenCorwidnProcedure.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/OpenCorwidnProcedure.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/OpenCrowdinKeyBinding.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/OpenCrowdinKeyBinding.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/resources/assets/rpmtw_update_mod/lang/en_us.json" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/resources/assets/rpmtw_update_mod/lang/en_us.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/resources/assets/rpmtw_update_mod/textures/crowdin_gui.png" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/resources/assets/rpmtw_update_mod/textures/crowdin_gui.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,14 +196,16 @@
       <command value="gradle --gradle-user-home" />
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.1.16-forge [runClient]">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+  <component name="RunManager" selected="Gradle.1.16-forge [build]">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -317,9 +324,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.1.16-forge [build]" />
         <item itemvalue="Gradle.1.16-forge [runClient]" />
         <item itemvalue="Gradle.1.16-forge [prepareRuns]" />
-        <item itemvalue="Gradle.1.16-forge [build]" />
         <item itemvalue="Gradle.1.16-Fabric [runClient]" />
         <item itemvalue="Gradle.1.16-Fabric [remapSourcesJar]" />
       </list>
@@ -410,14 +417,8 @@
       <workItem from="1619601994247" duration="16454000" />
       <workItem from="1619689308969" duration="3027000" />
       <workItem from="1619783035317" duration="65000" />
-      <workItem from="1619783130965" duration="13295000" />
-    </task>
-    <task id="LOCAL-00002" summary="新增進入世界時，是否自動發送公告的Config選項。">
-      <created>1618012278313</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1618012278313</updated>
+      <workItem from="1619783130965" duration="13340000" />
+      <workItem from="1619824079225" duration="12516000" />
     </task>
     <task id="LOCAL-00003" summary="上傳剛剛忘記提交的。">
       <created>1618012329716</created>
@@ -755,7 +756,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619796123328</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="Forge版本嵌入翻譯基礎功能開發完畢，繼續除錯+優化+支援Fabric">
+      <created>1619798330367</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1619798330367</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -788,7 +796,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="修復議題(#14)的錯誤" />
     <MESSAGE value="將宇宙通訊系統使用者體驗優化" />
     <MESSAGE value="修復議題(#10)" />
     <MESSAGE value="修復議題(#15)和更新JDA版本" />
@@ -813,7 +820,8 @@
     <MESSAGE value="瘋狂註解+優化Code" />
     <MESSAGE value="測試內嵌翻譯功能中..." />
     <MESSAGE value="測試階段-2" />
-    <option name="LAST_COMMIT_MESSAGE" value="測試階段-2" />
+    <MESSAGE value="Forge版本嵌入翻譯基礎功能開發完畢，繼續除錯+優化+支援Fabric" />
+    <option name="LAST_COMMIT_MESSAGE" value="Forge版本嵌入翻譯基礎功能開發完畢，繼續除錯+優化+支援Fabric" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
