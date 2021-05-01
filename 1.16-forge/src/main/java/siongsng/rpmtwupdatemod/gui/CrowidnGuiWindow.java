@@ -30,6 +30,11 @@ import java.io.IOException;
 @OnlyIn(Dist.CLIENT)
 public class CrowidnGuiWindow extends ContainerScreen<CrowdinGui.GuiContainerMod> {
     private static final ResourceLocation texture = new ResourceLocation("rpmtw_update_mod:textures/crowdin_gui.png");
+    private final World world;
+    private final int x;
+    private final int y;
+    private final int z;
+    private final PlayerEntity entity;
     TextFieldWidget ttanslation;
     String Text = OpenCrowdinKeyBinding.getText();
     PlayerEntity p = container.entity;
@@ -38,12 +43,6 @@ public class CrowidnGuiWindow extends ContainerScreen<CrowdinGui.GuiContainerMod
     String item_key = item.getTranslationKey(); //物品的命名空間
     String item_DisplayName = item.getName().getString(); //物品的顯示名稱
     String stringID = JSONObject.fromObject(OpenCrowdinKeyBinding.responseBody).getJSONArray("data").getJSONObject(0).getJSONObject("data").get("id").toString();
-
-    private final World world;
-    private final int x;
-    private final int y;
-    private final int z;
-    private final PlayerEntity entity;
 
     public CrowidnGuiWindow(CrowdinGui.GuiContainerMod container, PlayerInventory inventory, ITextComponent text) {
         super(container, inventory, text);

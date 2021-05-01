@@ -74,12 +74,12 @@ public class CrowdinGui extends ModElements.ModElement {
     }
 
     public static class GuiContainerMod extends Container implements Supplier<Map<Integer, Slot>> {
-        World world;
-        PlayerEntity entity;
-        int x, y, z;
         private final IItemHandler internal;
         private final Map<Integer, Slot> customSlots = new HashMap<>();
         private final boolean bound = false;
+        World world;
+        PlayerEntity entity;
+        int x, y, z;
 
         public GuiContainerMod(int id, PlayerInventory inv, PacketBuffer extraData) {
             super(containerType, id);
