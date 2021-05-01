@@ -18,6 +18,10 @@ repositories {
             includeGroup "net.dv8tion"
         }
     }
+    maven {
+        name = "CottonMC"
+        url = "https://server.bbkr.space/artifactory/libs-release"
+    }
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -49,6 +53,7 @@ dependencies {
     modImplementation("me.shedaniel.cloth:cloth-config-fabric:4.11.19") {
         exclude(group: "net.fabricmc.fabric-api")
     }
+    modImplementation include("io.github.cottonmc:LibGui:3.4.0+1.16.5")
     modImplementation("com.terraformersmc:modmenu:1.16.8")
 }
 

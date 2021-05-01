@@ -13,6 +13,10 @@ import net.minecraft.util.registry.Registry;
 import org.lwjgl.glfw.GLFW;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.function.ReloadPack;
+import siongsng.rpmtwupdatemod.function.SendMsg;
+import siongsng.rpmtwupdatemod.gui.CrowdinGui;
+import siongsng.rpmtwupdatemod.gui.CrowdinGuiProcedure;
+import siongsng.rpmtwupdatemod.gui.CrowdinGuiScreen;
 
 public class key {
     private static final KeyBinding crowdin = new KeyBinding("key.rpmtw_update_mod.crowdin", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_V, "key.categories.rpmtw");
@@ -28,6 +32,7 @@ public class key {
         KeyBindingHelper.registerKeyBinding(report_translation);
         KeyBindingHelper.registerKeyBinding(open_config);
 
+
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (open_config.wasPressed()) {
                 MinecraftClient.getInstance().openScreen(AutoConfig.getConfigScreen(ConfigScreen.class, MinecraftClient.getInstance().currentScreen).get());
@@ -36,25 +41,19 @@ public class key {
                 while (crowdin.wasPressed()) {
                     assert client.player != null;
                     Item item = client.player.getMainHandStack().getItem();
-
-                    String mod_id = Registry.ITEM.getId(item).getNamespace();//物品所屬的模組ID
                     String item_key = item.getTranslationKey(); //物品的命名空間
-                    String item_DisplayName = item.getName().getString(); //物品的顯示名稱
                     if (item_key.equals("block.minecraft.air")) {
-                        client.player.sendMessage(new LiteralText("§4請手持物品後再使用此功能。"), false);
+                        SendMsg.send("§4請手持物品後再使用此功能。");
                         return;
+                    } else if (!new TokenCheck().isCheck && config.Token.equals("")) {
+                        SendMsg.send("§c請先新增Crowdin(翻譯平台)的登入權杖新增，再使用該功能或至RPMTW官方Discord群組尋求協助。\n§aRPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
+                        return;
+                    } else if (CrowdinGuiProcedure.getText().equals("無法取得") && !config.Token.equals("")) {
+                        SendMsg.send("§6由於你目前手持想要翻譯的物品，數據不在資料庫內\n因此無法進行翻譯，想了解更多資訊請前往RPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
+                        // return;
                     }
-                    String msg = String.format( //訊息內容
-                            "§c-------------------------\n" +
-                                    "§b模組ID: §a%s\n" +
-                                    "§b顯示名稱: §a%s\n" +
-                                    "§b命名空間: §a%s\n" +
-                                    "§c-------------------------", mod_id, item_DisplayName, item_key);
-                    client.player.sendMessage(new LiteralText(msg), false);
-
-                    String url = "https://translate.rpmtw.ga/translate/resourcepack-mod-zhtw/all/en-zhtw?filter=basic&value=0#q=" + item_key;
-                    client.player.sendMessage(new LiteralText("§6開啟翻譯平台網頁中..."), false);
-                    Util.getOperatingSystem().open(url);   //使用預設瀏覽器開啟網頁
+                    SendMsg.send("請稍後，正在開啟物品翻譯界面中...");
+                    MinecraftClient.getInstance().openScreen(new CrowdinGuiScreen(new CrowdinGui()));
                 }
             }
             if (config.reloadpack) {

@@ -24,4 +24,6 @@ public class ConfigScreen implements ConfigData {
     public int Update_interval = 0;
     @Comment("數值以秒為單位")
     public int afkTime = 600;
+    @Comment("在遊戲內使用翻譯功能所需的Crowdin Token (登入權杖)")
+    public String Token = "";
 }

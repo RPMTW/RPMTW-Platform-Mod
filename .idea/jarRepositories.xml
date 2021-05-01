@@ -96,5 +96,10 @@
       <option name="name" value="maven3" />
       <option name="url" value="https://maven.minecraftforge.net/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="CottonMC" />
+      <option name="name" value="CottonMC" />
+      <option name="url" value="https://server.bbkr.space/artifactory/libs-release" />
+    </remote-repository>
   </component>
 </project>

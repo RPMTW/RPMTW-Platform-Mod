@@ -27,4 +27,5 @@ public class RpmtwUpdateMod implements ClientModInitializer {
         key.onInitializeClient(); //註冊快捷鍵
         LOGGER.info("Hello RPMTW world!");
     }
+
 }

@@ -4,13 +4,18 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="繼續優化中">
+    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="格式化程式碼">
+      <change afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/assets/rpmtw_update_mod/textures/crowdin_gui.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/assets/rpmtw_update_mod/textures/crowdin_gui.psd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/commands/AddToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/commands/AddToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/crowdin/TokenCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/crowdin/TokenCheck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/commands/AddToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/commands/AddToken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/config/ConfigScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/config/ConfigScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/crowdin/TokenCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/crowdin/TokenCheck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/crowdin/key.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/crowdin/key.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/CrowidnGuiWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/CrowidnGuiWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/OpenCorwidnProcedure.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/OpenCorwidnProcedure.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/OpenCrowdinKeyBinding.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/OpenCrowdinKeyBinding.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,7 +158,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.openapi.externalSystem.service.settings.ExternalSystemGroupConfigurable" value="ALL" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../MCreator" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/1.16-Fabric/src/main/resources/assets/rpmtw_update_mod" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -168,6 +173,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\code\coding\Java\RpmtwUpdateMod\1.16-Fabric\src\main\resources\assets\rpmtw_update_mod" />
+      <recent name="D:\code\coding\Java\RpmtwUpdateMod\1.16-Fabric\src\main\java\siongsng\rpmtwupdatemod\gui" />
       <recent name="D:\code\coding\Java\RpmtwUpdateMod\1.16-Fabric\src\main\java\siongsng\rpmtwupdatemod" />
       <recent name="D:\code\coding\Java\RpmtwUpdateMod\1.16-Fabric\src\main\resources" />
     </key>
@@ -194,7 +201,7 @@
       <command value="gradle --gradle-user-home" />
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.1.16-forge [build]">
+  <component name="RunManager" selected="Gradle.1.16-Fabric [runClient]">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -250,6 +257,27 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="1.16-Fabric [runServer]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/1.16-Fabric" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="runServer" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="1.16-forge [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -262,27 +290,6 @@
         <option name="taskNames">
           <list>
             <option value="build" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="1.16-forge [prepareRuns]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/1.16-forge" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="prepareRuns" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -314,19 +321,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Gradle.1.16-Fabric [remapSourcesJar]" />
       <item itemvalue="Gradle.1.16-Fabric [runClient]" />
       <item itemvalue="Gradle.1.16-forge [build]" />
       <item itemvalue="Gradle.1.16-forge [runClient]" />
-      <item itemvalue="Gradle.1.16-forge [prepareRuns]" />
+      <item itemvalue="Gradle.1.16-Fabric [runServer]" />
+      <item itemvalue="Gradle.1.16-Fabric [remapSourcesJar]" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.1.16-forge [build]" />
-        <item itemvalue="Gradle.1.16-forge [runClient]" />
-        <item itemvalue="Gradle.1.16-forge [prepareRuns]" />
         <item itemvalue="Gradle.1.16-Fabric [runClient]" />
         <item itemvalue="Gradle.1.16-Fabric [remapSourcesJar]" />
+        <item itemvalue="Gradle.1.16-Fabric [runServer]" />
+        <item itemvalue="Gradle.1.16-forge [runClient]" />
+        <item itemvalue="Gradle.1.16-forge [build]" />
       </list>
     </recent_temporary>
   </component>
@@ -416,21 +423,7 @@
       <workItem from="1619689308969" duration="3027000" />
       <workItem from="1619783035317" duration="65000" />
       <workItem from="1619783130965" duration="13340000" />
-      <workItem from="1619824079225" duration="14572000" />
-    </task>
-    <task id="LOCAL-00004" summary="新增啟動遊戲時，自動更新翻譯的版本間距(#10)">
-      <created>1618017141062</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1618017141062</updated>
-    </task>
-    <task id="LOCAL-00005" summary="修正無法正常載入數據包錯誤，並且重新開啟問題#10">
-      <created>1618034789053</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1618034789053</updated>
+      <workItem from="1619824079225" duration="36312000" />
     </task>
     <task id="LOCAL-00006" summary="1.0.4">
       <created>1618050698081</created>
@@ -761,7 +754,21 @@
       <option name="project" value="LOCAL" />
       <updated>1619840895792</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="繼續優化中">
+      <created>1619843512679</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1619843512679</updated>
+    </task>
+    <task id="LOCAL-00054" summary="格式化程式碼">
+      <created>1619843565559</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1619843565559</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -794,8 +801,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="修復議題(#10)" />
-    <MESSAGE value="修復議題(#15)和更新JDA版本" />
     <MESSAGE value="刪除多餘Code" />
     <MESSAGE value="新增設定選項，是否要使用前綴發送宇宙通訊訊息" />
     <MESSAGE value="上傳忘記提交的部分" />
@@ -819,7 +824,9 @@
     <MESSAGE value="測試階段-2" />
     <MESSAGE value="Forge版本嵌入翻譯基礎功能開發完畢，繼續除錯+優化+支援Fabric" />
     <MESSAGE value="修正一些錯誤" />
-    <option name="LAST_COMMIT_MESSAGE" value="修正一些錯誤" />
+    <MESSAGE value="繼續優化中" />
+    <MESSAGE value="格式化程式碼" />
+    <option name="LAST_COMMIT_MESSAGE" value="格式化程式碼" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
