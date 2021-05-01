@@ -14,7 +14,6 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IWorld;
 import net.minecraftforge.fml.network.NetworkHooks;
 import siongsng.rpmtwupdatemod.ModElements;
-import siongsng.rpmtwupdatemod.function.SendMsg;
 
 import java.util.Map;
 

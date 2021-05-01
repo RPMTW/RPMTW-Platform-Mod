@@ -24,12 +24,13 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class ModElements {
+    public static Map<ResourceLocation, net.minecraft.util.SoundEvent> sounds = new HashMap<>();
     public final List<ModElement> elements = new ArrayList<>();
     public final List<Supplier<Block>> blocks = new ArrayList<>();
     public final List<Supplier<Item>> items = new ArrayList<>();
     public final List<Supplier<EntityType<?>>> entities = new ArrayList<>();
     public final List<Supplier<Enchantment>> enchantments = new ArrayList<>();
-    public static Map<ResourceLocation, net.minecraft.util.SoundEvent> sounds = new HashMap<>();
+    private int messageID = 0;
 
     public ModElements() {
         try {
@@ -53,8 +54,6 @@ public class ModElements {
         for (Map.Entry<ResourceLocation, net.minecraft.util.SoundEvent> sound : sounds.entrySet())
             event.getRegistry().register(sound.getValue().setRegistryName(sound.getKey()));
     }
-
-    private int messageID = 0;
 
     public <T> void addNetworkMessage(Class<T> messageType, BiConsumer<T, PacketBuffer> encoder, Function<PacketBuffer, T> decoder,
                                       BiConsumer<T, Supplier<NetworkEvent.Context>> messageConsumer) {
@@ -83,10 +82,6 @@ public class ModElements {
     }
 
     public static class ModElement implements Comparable<ModElement> {
-        @Retention(RetentionPolicy.RUNTIME)
-        public @interface Tag {
-        }
-
         protected final ModElements elements;
         protected final int sortid;
 
@@ -111,6 +106,10 @@ public class ModElements {
         @Override
         public int compareTo(ModElement other) {
             return this.sortid - other.sortid;
+        }
+
+        @Retention(RetentionPolicy.RUNTIME)
+        public @interface Tag {
         }
     }
 }

@@ -3,6 +3,7 @@ package siongsng.rpmtwupdatemod.gui;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.gui.widget.button.Button;
@@ -30,19 +31,20 @@ import java.io.IOException;
 
 @OnlyIn(Dist.CLIENT)
 public class CrowidnGuiWindow extends ContainerScreen<CrowdinGui.GuiContainerMod> {
-    private World world;
-    private int x, y, z;
-    private PlayerEntity entity;
+    private static final ResourceLocation texture = new ResourceLocation("rpmtw_update_mod:textures/crowdin_gui.png");
     TextFieldWidget ttanslation;
     String Text = OpenCrowdinKeyBinding.getText();
-
     PlayerEntity p = container.entity;
     Item item = p.getHeldItemMainhand().getItem(); //拿的物品
-
     String mod_id = item.getCreatorModId(p.getHeldItemMainhand().getStack()); //物品所屬的模組ID
     String item_key = item.getTranslationKey(); //物品的命名空間
     String item_DisplayName = item.getName().getString(); //物品的顯示名稱
     String stringID = JSONObject.fromObject(OpenCrowdinKeyBinding.responseBody).getJSONArray("data").getJSONObject(0).getJSONObject("data").get("id").toString();
+    private final World world;
+    private final int x;
+    private final int y;
+    private final int z;
+    private final PlayerEntity entity;
 
     public CrowidnGuiWindow(CrowdinGui.GuiContainerMod container, PlayerInventory inventory, ITextComponent text) {
         super(container, inventory, text);
@@ -54,8 +56,6 @@ public class CrowidnGuiWindow extends ContainerScreen<CrowdinGui.GuiContainerMod
         this.xSize = 405;
         this.ySize = 227;
     }
-
-    private static final ResourceLocation texture = new ResourceLocation("rpmtw_update_mod:textures/crowdin_gui.png");
 
     @Override
     public void render(MatrixStack ms, int mouseX, int mouseY, float partialTicks) {
@@ -73,7 +73,7 @@ public class CrowidnGuiWindow extends ContainerScreen<CrowdinGui.GuiContainerMod
         Minecraft.getInstance().getTextureManager().bindTexture(texture);
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
-        this.blit(ms, k, l, 0, 0, this.xSize, this.ySize, this.xSize, this.ySize);
+        blit(ms, k, l, 0, 0, this.xSize, this.ySize, this.xSize, this.ySize);
         RenderSystem.disableBlend();
     }
 

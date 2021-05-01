@@ -41,16 +41,30 @@ public class CrowdinGui extends ModElements.ModElement {
         FMLJavaModLoadingContext.get().getModEventBus().register(new ContainerRegisterHandler());
     }
 
-    private static class ContainerRegisterHandler {
-        @SubscribeEvent
-        public void registerContainer(RegistryEvent.Register<ContainerType<?>> event) {
-            event.getRegistry().register(containerType.setRegistryName("crowdin_gui"));
-        }
+    static void handleButtonAction(PlayerEntity entity, int buttonID, int x, int y, int z) {
+        World world = entity.world;
+        // security measure to prevent arbitrary chunk generation
+        if (!world.isBlockLoaded(new BlockPos(x, y, z)))
+            return;
+    }
+
+    private static void handleSlotAction(PlayerEntity entity, int slotID, int changeType, int meta, int x, int y, int z) {
+        World world = entity.world;
+        // security measure to prevent arbitrary chunk generation
+        if (!world.isBlockLoaded(new BlockPos(x, y, z)))
+            return;
     }
 
     @OnlyIn(Dist.CLIENT)
     public void initElements() {
         DeferredWorkQueue.runLater(() -> ScreenManager.registerFactory(containerType, CrowidnGuiWindow::new));
+    }
+
+    private static class ContainerRegisterHandler {
+        @SubscribeEvent
+        public void registerContainer(RegistryEvent.Register<ContainerType<?>> event) {
+            event.getRegistry().register(containerType.setRegistryName("crowdin_gui"));
+        }
     }
 
     public static class GuiContainerModFactory implements IContainerFactory {
@@ -63,9 +77,9 @@ public class CrowdinGui extends ModElements.ModElement {
         World world;
         PlayerEntity entity;
         int x, y, z;
-        private IItemHandler internal;
-        private Map<Integer, Slot> customSlots = new HashMap<>();
-        private boolean bound = false;
+        private final IItemHandler internal;
+        private final Map<Integer, Slot> customSlots = new HashMap<>();
+        private final boolean bound = false;
 
         public GuiContainerMod(int id, PlayerInventory inv, PacketBuffer extraData) {
             super(containerType, id);
@@ -173,20 +187,6 @@ public class CrowdinGui extends ModElements.ModElement {
             });
             context.setPacketHandled(true);
         }
-    }
-
-    static void handleButtonAction(PlayerEntity entity, int buttonID, int x, int y, int z) {
-        World world = entity.world;
-        // security measure to prevent arbitrary chunk generation
-        if (!world.isBlockLoaded(new BlockPos(x, y, z)))
-            return;
-    }
-
-    private static void handleSlotAction(PlayerEntity entity, int slotID, int changeType, int meta, int x, int y, int z) {
-        World world = entity.world;
-        // security measure to prevent arbitrary chunk generation
-        if (!world.isBlockLoaded(new BlockPos(x, y, z)))
-            return;
     }
 }
 

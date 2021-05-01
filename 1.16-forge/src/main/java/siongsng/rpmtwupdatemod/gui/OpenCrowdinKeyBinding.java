@@ -37,22 +37,14 @@ import java.util.function.Supplier;
 
 @ModElements.ModElement.Tag
 public class OpenCrowdinKeyBinding extends ModElements.ModElement {
+    public static String responseBody = "";
     @OnlyIn(Dist.CLIENT)
     private KeyBinding keys;
-    public static String responseBody = "";
 
     public OpenCrowdinKeyBinding(ModElements instance) {
         super(instance, 4);
         elements.addNetworkMessage(KeyBindingPressedMessage.class, KeyBindingPressedMessage::buffer, KeyBindingPressedMessage::new,
                 KeyBindingPressedMessage::handler);
-    }
-
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    public void initElements() {
-        keys = new KeyBinding("key.rpmtw_update_mod.open_crowdin", GLFW.GLFW_KEY_V, "key.categories.rpmtw");
-        ClientRegistry.registerKeyBinding(keys);
-        MinecraftForge.EVENT_BUS.register(this);
     }
 
     public static String getText() {
@@ -78,6 +70,35 @@ public class OpenCrowdinKeyBinding extends ModElements.ModElement {
         }
 
         return Text;
+    }
+
+    private static void pressAction(PlayerEntity entity, int type, int pressedms) {
+        World world = entity.world;
+        double x = entity.getPosX();
+        double y = entity.getPosY();
+        double z = entity.getPosZ();
+        // security measure to prevent arbitrary chunk generation
+        if (!world.isBlockLoaded(new BlockPos(x, y, z)))
+            return;
+        if (type == 0) {
+            {
+                Map<String, Object> $_dependencies = new HashMap<>();
+                $_dependencies.put("entity", entity);
+                $_dependencies.put("x", x);
+                $_dependencies.put("y", y);
+                $_dependencies.put("z", z);
+                $_dependencies.put("world", world);
+                OpenCorwidnProcedure.executeProcedure($_dependencies);
+            }
+        }
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void initElements() {
+        keys = new KeyBinding("key.rpmtw_update_mod.open_crowdin", GLFW.GLFW_KEY_V, "key.categories.rpmtw");
+        ClientRegistry.registerKeyBinding(keys);
+        MinecraftForge.EVENT_BUS.register(this);
     }
 
     @SubscribeEvent
@@ -138,27 +159,6 @@ public class OpenCrowdinKeyBinding extends ModElements.ModElement {
                 pressAction(context.getSender(), message.type, message.pressedms);
             });
             context.setPacketHandled(true);
-        }
-    }
-
-    private static void pressAction(PlayerEntity entity, int type, int pressedms) {
-        World world = entity.world;
-        double x = entity.getPosX();
-        double y = entity.getPosY();
-        double z = entity.getPosZ();
-        // security measure to prevent arbitrary chunk generation
-        if (!world.isBlockLoaded(new BlockPos(x, y, z)))
-            return;
-        if (type == 0) {
-            {
-                Map<String, Object> $_dependencies = new HashMap<>();
-                $_dependencies.put("entity", entity);
-                $_dependencies.put("x", x);
-                $_dependencies.put("y", y);
-                $_dependencies.put("z", z);
-                $_dependencies.put("world", world);
-                OpenCorwidnProcedure.executeProcedure($_dependencies);
-            }
         }
     }
 }
