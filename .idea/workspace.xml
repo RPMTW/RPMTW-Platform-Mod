@@ -4,15 +4,13 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="瘋狂註解+優化Code">
+    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="繼續優化中">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/crowdin/key.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/crowdin/key.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/commands/AddToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/commands/AddToken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/crowdin/TokenCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/crowdin/TokenCheck.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/CrowidnGuiWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/CrowidnGuiWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/OpenCorwidnProcedure.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/OpenCorwidnProcedure.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/OpenCrowdinKeyBinding.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/OpenCrowdinKeyBinding.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/resources/assets/rpmtw_update_mod/lang/en_us.json" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/resources/assets/rpmtw_update_mod/lang/en_us.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/resources/assets/rpmtw_update_mod/textures/crowdin_gui.png" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/resources/assets/rpmtw_update_mod/textures/crowdin_gui.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -418,14 +416,7 @@
       <workItem from="1619689308969" duration="3027000" />
       <workItem from="1619783035317" duration="65000" />
       <workItem from="1619783130965" duration="13340000" />
-      <workItem from="1619824079225" duration="12516000" />
-    </task>
-    <task id="LOCAL-00003" summary="上傳剛剛忘記提交的。">
-      <created>1618012329716</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1618012329716</updated>
+      <workItem from="1619824079225" duration="14572000" />
     </task>
     <task id="LOCAL-00004" summary="新增啟動遊戲時，自動更新翻譯的版本間距(#10)">
       <created>1618017141062</created>
@@ -763,7 +754,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619798330367</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="修正一些錯誤">
+      <created>1619840895792</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1619840895792</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -796,7 +794,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="將宇宙通訊系統使用者體驗優化" />
     <MESSAGE value="修復議題(#10)" />
     <MESSAGE value="修復議題(#15)和更新JDA版本" />
     <MESSAGE value="刪除多餘Code" />
@@ -821,7 +818,8 @@
     <MESSAGE value="測試內嵌翻譯功能中..." />
     <MESSAGE value="測試階段-2" />
     <MESSAGE value="Forge版本嵌入翻譯基礎功能開發完畢，繼續除錯+優化+支援Fabric" />
-    <option name="LAST_COMMIT_MESSAGE" value="Forge版本嵌入翻譯基礎功能開發完畢，繼續除錯+優化+支援Fabric" />
+    <MESSAGE value="修正一些錯誤" />
+    <option name="LAST_COMMIT_MESSAGE" value="修正一些錯誤" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">

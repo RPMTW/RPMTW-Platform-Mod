@@ -10,7 +10,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import siongsng.rpmtwupdatemod.config.Configer;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.function.SendMsg;
 
@@ -30,7 +29,6 @@ public class AddToken {
     private int execute(CommandContext<CommandSource> ctx) {
         String cmd = ctx.getInput().split("\\s+")[1];
         try {
-            Configer.Token.set(cmd);
             PlayerEntity p = Minecraft.getInstance().player;
             assert p != null;
             p.sendMessage(new StringTextComponent("§bCrowdin Token 新增完畢，正在準備開始檢查Token是否為有效的。"), p.getUniqueID());
