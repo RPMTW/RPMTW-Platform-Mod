@@ -48,11 +48,10 @@ public class OpenCrowdinKeyBinding extends ModElements.ModElement {
     }
 
     public static String getText() {
-        String item_key = Minecraft.getInstance().player.getHeldItemMainhand().getItem().getTranslationKey(); //拿的物品
         String Text = "";
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
             HttpUriRequest request = RequestBuilder.get()
-                    .setUri("https://api.crowdin.com/api/v2/projects/442446/strings?filter=" + item_key)
+                    .setUri("https://api.crowdin.com/api/v2/projects/442446/strings?filter=" + Minecraft.getInstance().player.getHeldItemMainhand().getItem().getTranslationKey())
                     .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
                     .setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + Configer.Token.get())
                     .build();

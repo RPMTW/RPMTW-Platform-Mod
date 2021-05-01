@@ -27,16 +27,15 @@ public class RpmtwUpdateMod implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        ConfigScreen config = AutoConfig.getConfigHolder(ConfigScreen.class).getConfig();
+        final ConfigScreen config = AutoConfig.getConfigHolder(ConfigScreen.class).getConfig();
 
         key.onInitializeClient(); //註冊快捷鍵
         LOGGER.info("Hello RPMTW world!");
         AutoConfig.getConfigHolder(ConfigScreen.class).registerSaveListener((var1, sava) -> {
-            if (!sava.Token.equals(config.Token)) {
-                System.out.print("你好");
-            }
             try {
-                new TokenCheck().Check(sava.Token);
+                if (!sava.Token.equals("")) {
+                    new TokenCheck().Check(sava.Token);
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }

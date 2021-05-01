@@ -26,10 +26,10 @@ public class TokenCheck {
         PlayerEntity p = MinecraftClient.getInstance().player;
         assert p != null;
         if (response.getStatusLine().getStatusCode() == 200) {
-            SendMsg.send("§a檢測成功，您的Token(登入權杖)是有效的。");
+            SendMsg.send("§9[Crowdin權杖自動檢測系統]§a檢測成功，您的Token(登入權杖)是有效的。");
             isCheck = true;
         } else {
-            SendMsg.send("§c檢測失敗，Token(登入權杖)無效，請再嘗試新增或至RPMTW官方Discord群組尋求協助。\n官方Discord群組:https://discord.gg/5xApZtgV2u");
+            SendMsg.send("§9[Crowdin權杖自動檢測系統]§c檢測失敗，Token(登入權杖)無效，請再嘗試新增或至RPMTW官方Discord群組尋求協助。\n官方Discord群組:https://discord.gg/5xApZtgV2u");
             isCheck = false;
         }
     }

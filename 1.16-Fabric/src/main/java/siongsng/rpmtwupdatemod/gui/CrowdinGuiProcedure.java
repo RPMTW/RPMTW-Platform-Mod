@@ -19,12 +19,10 @@ public class CrowdinGuiProcedure {
     public static String stringID = "";
 
     public static String getText() {
-        assert MinecraftClient.getInstance().player != null;
-        String item_key = MinecraftClient.getInstance().player.getMainHandStack().getItem().getTranslationKey(); //拿的物品
         String Text = "";
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
             HttpUriRequest request = RequestBuilder.get()
-                    .setUri("https://api.crowdin.com/api/v2/projects/442446/strings?filter=" + item_key)
+                    .setUri("https://api.crowdin.com/api/v2/projects/442446/strings?filter=" + MinecraftClient.getInstance().player.getMainHandStack().getItem().getTranslationKey())
                     .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
                     .setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + Configer.config.Token)
                     .build();

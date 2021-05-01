@@ -22,7 +22,6 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
 import siongsng.rpmtwupdatemod.config.Configer;
 import siongsng.rpmtwupdatemod.function.SendMsg;
 
@@ -39,6 +38,7 @@ public class CrowidnGuiWindow extends ContainerScreen<CrowdinGui.GuiContainerMod
     String item_key = item.getTranslationKey(); //物品的命名空間
     String item_DisplayName = item.getName().getString(); //物品的顯示名稱
     String stringID = JSONObject.fromObject(OpenCrowdinKeyBinding.responseBody).getJSONArray("data").getJSONObject(0).getJSONObject("data").get("id").toString();
+
     private final World world;
     private final int x;
     private final int y;
@@ -160,7 +160,6 @@ public class CrowidnGuiWindow extends ContainerScreen<CrowdinGui.GuiContainerMod
             }
             Minecraft.getInstance().displayGuiScreen(null);
             Minecraft.getInstance().keyboardListener.enableRepeatEvents(false);
-            RpmtwUpdateMod.PACKET_HANDLER.sendToServer(new CrowdinGui.ButtonPressedMessage(0, x, y, z));
             CrowdinGui.handleButtonAction(entity, 0, x, y, z);
         }));
         this.addButton(new Button(this.guiLeft + 253, this.guiTop + 147, 57, 20, new StringTextComponent("Crowdin"), e -> {
@@ -168,13 +167,11 @@ public class CrowidnGuiWindow extends ContainerScreen<CrowdinGui.GuiContainerMod
 
             p.sendMessage(new StringTextComponent("§6開啟翻譯平台網頁中..."), p.getUniqueID()); //發送訊息
             Util.getOSType().openURI(url); //使用預設瀏覽器開啟網頁
-            RpmtwUpdateMod.PACKET_HANDLER.sendToServer(new CrowdinGui.ButtonPressedMessage(0, x, y, z));
             CrowdinGui.handleButtonAction(entity, 0, x, y, z);
         }));
         this.addButton(new Button(this.guiLeft + 109, this.guiTop + 147, 57, 20, new StringTextComponent("關閉介面"), e -> {
             Minecraft.getInstance().displayGuiScreen(null);
             Minecraft.getInstance().keyboardListener.enableRepeatEvents(false);
-            RpmtwUpdateMod.PACKET_HANDLER.sendToServer(new CrowdinGui.ButtonPressedMessage(0, x, y, z));
             CrowdinGui.handleButtonAction(entity, 0, x, y, z);
         }));
     }

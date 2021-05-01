@@ -19,13 +19,11 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
 import siongsng.rpmtwupdatemod.config.Configer;
 import siongsng.rpmtwupdatemod.function.SendMsg;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
 import static io.github.cottonmc.cotton.gui.client.BackgroundPainter.createNinePatch;
 
@@ -81,8 +79,10 @@ public class CrowdinGui extends LightweightGuiDescription {
             postMethod.setEntity(requestEntity);
             try {
                 CloseableHttpResponse response = httpClient.execute(postMethod);
+                /*
                 String responseBody = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
                 System.out.print(responseBody);
+                */
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
@@ -93,7 +93,6 @@ public class CrowdinGui extends LightweightGuiDescription {
             SendMsg.send("§6開啟翻譯平台網頁中...");
             Util.getOperatingSystem().open(url);   //使用預設瀏覽器開啟網頁
         });
-
         gui.validate(this);
     }
 
