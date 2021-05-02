@@ -113,7 +113,7 @@ public final class ConfigScreen extends Screen {
                 (this.width - 4) / 2 - BOTTOM_BUTTON_WIDTH,
                 this.height - BOTTOM_BUTTON_HEIGHT_OFFSET,
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
-                new StringTextComponent("完成"),
+                new StringTextComponent("儲存設定"),
                 button -> {
                     Config.save(); // 儲存模組設定
                     Minecraft.getInstance().displayGuiScreen(null);
