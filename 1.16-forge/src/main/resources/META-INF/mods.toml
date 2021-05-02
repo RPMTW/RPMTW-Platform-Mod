@@ -17,7 +17,7 @@ authors = "SiongSng" #optional
 description = '''
 This is a mod that can automatically download and load the RPMTW Traditional Chinese resource pack.
 '''
-icon = "assets/rpmtw_update_mod/icon.png"
+logoFile = "icon.png"
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.rpmtw_update_mod]] #optional
 # the modid of the dependency

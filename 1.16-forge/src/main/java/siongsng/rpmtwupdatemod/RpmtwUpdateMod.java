@@ -22,6 +22,7 @@ import siongsng.rpmtwupdatemod.commands.noticeCMD;
 import siongsng.rpmtwupdatemod.config.Config;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.config.Configer;
+import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.crowdin.key;
 import siongsng.rpmtwupdatemod.discord.Chat;
 import siongsng.rpmtwupdatemod.discord.OnChat;
@@ -62,6 +63,14 @@ public class RpmtwUpdateMod {
         }
         new PackVersionCheck(); //資源包版本檢查
         new Chat(); //JDA帳號登入
+
+        if (!Configer.Token.get().equals("")) { //如果Token不是空的
+            try {
+                new TokenCheck().Check(Configer.Token.get()); //開始檢測
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @SubscribeEvent

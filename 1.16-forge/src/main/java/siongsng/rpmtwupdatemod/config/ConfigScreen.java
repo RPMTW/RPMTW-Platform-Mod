@@ -1,6 +1,7 @@
 package siongsng.rpmtwupdatemod.config;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.gui.widget.list.OptionsRowList;
@@ -106,6 +107,16 @@ public final class ConfigScreen extends Screen {
                     Configer.DiscordPrefix.set(true);
                     Configer.Update_interval.set(0);
                     Configer.afkTime.set(600);
+                }));
+
+        this.addButton(new Button(
+                (this.width - 4) / 2 - BOTTOM_BUTTON_WIDTH,
+                this.height - BOTTOM_BUTTON_HEIGHT_OFFSET,
+                BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
+                new StringTextComponent("完成"),
+                button -> {
+                    Config.save(); // 儲存模組設定
+                    Minecraft.getInstance().displayGuiScreen(null);
                 })
         );
     }

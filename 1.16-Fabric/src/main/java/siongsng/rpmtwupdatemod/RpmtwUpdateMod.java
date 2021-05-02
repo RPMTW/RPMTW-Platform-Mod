@@ -8,6 +8,7 @@ import net.fabricmc.api.Environment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
+import siongsng.rpmtwupdatemod.config.Configer;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.crowdin.key;
 
@@ -27,11 +28,10 @@ public class RpmtwUpdateMod implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        final ConfigScreen config = AutoConfig.getConfigHolder(ConfigScreen.class).getConfig();
 
         key.onInitializeClient(); //註冊快捷鍵
         LOGGER.info("Hello RPMTW world!");
-        AutoConfig.getConfigHolder(ConfigScreen.class).registerSaveListener((var1, sava) -> {
+        AutoConfig.getConfigHolder(ConfigScreen.class).registerSaveListener((var1, sava) -> { //監聽儲存Config事件
             try {
                 if (!sava.Token.equals("")) {
                     new TokenCheck().Check(sava.Token);
@@ -41,6 +41,15 @@ public class RpmtwUpdateMod implements ClientModInitializer {
             }
             return null;
         });
+
+        if (!Configer.config.Token.equals("")) { //如果Token不是空的
+            try {
+                new TokenCheck().Check(Configer.config.Token); //開始檢測
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
 }
