@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="瘋狂註解+優化Code">
+    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="修正Fabric版本儲存Token時會崩潰">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-Fabric/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -414,14 +414,7 @@
       <workItem from="1619783035317" duration="65000" />
       <workItem from="1619783130965" duration="13340000" />
       <workItem from="1619824079225" duration="50380000" />
-      <workItem from="1619919955286" duration="1242000" />
-    </task>
-    <task id="LOCAL-00012" summary="新增聊天室功能與Discord串聯">
-      <created>1618144930856</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1618144930856</updated>
+      <workItem from="1619919955286" duration="1550000" />
     </task>
     <task id="LOCAL-00013" summary="test">
       <created>1618145285553</created>
@@ -759,7 +752,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619880601576</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="修正Fabric版本儲存Token時會崩潰">
+      <created>1619921467908</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1619921467908</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -792,7 +792,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="1.0.8-Bate &amp; Update Forge ver to 36.1.6" />
     <MESSAGE value="模組版本檢測" />
     <MESSAGE value="修復議題(#20)" />
     <MESSAGE value="偵測到DCTag為菘菘#8663自動改為RPMTW維護者" />
@@ -817,7 +816,8 @@
     <MESSAGE value="優劃一些訊息內容及變數。" />
     <MESSAGE value="Update" />
     <MESSAGE value="格式化程式碼" />
-    <option name="LAST_COMMIT_MESSAGE" value="格式化程式碼" />
+    <MESSAGE value="修正Fabric版本儲存Token時會崩潰" />
+    <option name="LAST_COMMIT_MESSAGE" value="修正Fabric版本儲存Token時會崩潰" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
