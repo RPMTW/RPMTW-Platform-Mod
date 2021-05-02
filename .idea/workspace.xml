@@ -4,8 +4,15 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="添加名稱">
-      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/function/ReloadPack.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/function/ReloadPack.java" afterDir="false" />
+    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="修正檢測版本錯誤">
+      <change afterPath="$PROJECT_DIR$/1.16-forge/src/main/resources/assets/rpmtw_update_mod/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/crowdin/key.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/crowdin/key.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/fabric.mod.json" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/fabric.mod.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/CrowidnGuiWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/CrowidnGuiWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/OpenCrowdinKeyBinding.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/OpenCrowdinKeyBinding.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/resources/META-INF/mods.toml" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/resources/META-INF/mods.toml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +155,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.openapi.externalSystem.service.settings.ExternalSystemGroupConfigurable" value="ALL" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/1.16-Fabric/src/main/resources/assets/rpmtw_update_mod/textures" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/1.16-forge/src/main/resources/assets/rpmtw_update_mod" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -163,11 +170,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\code\coding\Java\RpmtwUpdateMod\1.16-forge\src\main\resources\assets\rpmtw_update_mod" />
       <recent name="D:\code\coding\Java\RpmtwUpdateMod\1.16-Fabric\src\main\resources\assets\rpmtw_update_mod\textures" />
       <recent name="D:\code\coding\Java\RpmtwUpdateMod\1.16-forge\src\main\resources\assets\rpmtw_update_mod\textures" />
       <recent name="D:\code\coding\Java\RpmtwUpdateMod\1.16-Fabric\src\main\resources\assets\rpmtw_update_mod" />
       <recent name="D:\code\coding\Java\RpmtwUpdateMod\1.16-Fabric\src\main\java\siongsng\rpmtwupdatemod\gui" />
-      <recent name="D:\code\coding\Java\RpmtwUpdateMod\1.16-Fabric\src\main\java\siongsng\rpmtwupdatemod" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\code\coding\Java\RpmtwUpdateMod\1.16-Fabric\src\main\resources\assets\rpmtw_update_mod" />
@@ -192,14 +199,16 @@
       <command value="gradle --gradle-user-home" />
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.1.16-Fabric [build]">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+  <component name="RunManager" selected="Gradle.1.16-forge [runClient]">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -318,10 +327,10 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.1.16-Fabric [build]" />
-        <item itemvalue="Gradle.1.16-Fabric [runClient]" />
-        <item itemvalue="Gradle.1.16-forge [build]" />
         <item itemvalue="Gradle.1.16-forge [runClient]" />
+        <item itemvalue="Gradle.1.16-Fabric [build]" />
+        <item itemvalue="Gradle.1.16-forge [build]" />
+        <item itemvalue="Gradle.1.16-Fabric [runClient]" />
         <item itemvalue="Gradle.1.16-Fabric [remapSourcesJar]" />
       </list>
     </recent_temporary>
@@ -413,14 +422,8 @@
       <workItem from="1619783035317" duration="65000" />
       <workItem from="1619783130965" duration="13340000" />
       <workItem from="1619824079225" duration="50380000" />
-      <workItem from="1619919955286" duration="2846000" />
-    </task>
-    <task id="LOCAL-00015" summary="放棄治療Forge">
-      <created>1618151776326</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1618151776326</updated>
+      <workItem from="1619919955286" duration="3362000" />
+      <workItem from="1619933504114" duration="1602000" />
     </task>
     <task id="LOCAL-00016" summary="修復一些Bug，但又發現好多Bug。">
       <created>1618235330277</created>
@@ -758,7 +761,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619922066689</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="修正檢測版本錯誤">
+      <created>1619926756742</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1619926756742</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -791,7 +801,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="偵測到DCTag為菘菘#8663自動改為RPMTW維護者" />
     <MESSAGE value="修改一些內容、嵌入翻譯功能似乎無效" />
     <MESSAGE value="新增測試" />
     <MESSAGE value="test" />
@@ -816,7 +825,8 @@
     <MESSAGE value="修正Fabric版本儲存Token時會崩潰" />
     <MESSAGE value="Forge也修正" />
     <MESSAGE value="添加名稱" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加名稱" />
+    <MESSAGE value="修正檢測版本錯誤" />
+    <option name="LAST_COMMIT_MESSAGE" value="修正檢測版本錯誤" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">

@@ -38,6 +38,7 @@ import java.util.function.Supplier;
 @ModElements.ModElement.Tag
 public class OpenCrowdinKeyBinding extends ModElements.ModElement {
     public static String responseBody = "";
+    public static String stringID;
     @OnlyIn(Dist.CLIENT)
     private KeyBinding keys;
 
@@ -63,8 +64,10 @@ public class OpenCrowdinKeyBinding extends ModElements.ModElement {
 
         try {
             Text = JSONObject.fromObject(responseBody).getJSONArray("data").getJSONObject(0).getJSONObject("data").get("text").toString();
+            stringID = JSONObject.fromObject(responseBody).getJSONArray("data").getJSONObject(0).getJSONObject("data").get("id").toString();
         } catch (Exception e) {
             Text = "無法取得";
+            stringID = "無法取得";
             RpmtwUpdateMod.LOGGER.error("讀取翻譯資訊時發生錯誤: " + e.getMessage());
         }
 
@@ -115,7 +118,7 @@ public class OpenCrowdinKeyBinding extends ModElements.ModElement {
                         if (item_key.equals("block.minecraft.air")) {
                             p.sendMessage(new StringTextComponent("§4請手持物品後再使用此功能。"), p.getUniqueID()); //發送訊息
                             return;
-                        } else if (!new TokenCheck().isCheck && Configer.Token.get().equals("")) {
+                        } else if (!new TokenCheck().isCheck && !Configer.Token.equals("")) {
                             SendMsg.send("§c請先新增Crowdin(翻譯平台)的登入權杖新增，再使用該功能或至RPMTW官方Discord群組尋求協助。\n§aRPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
                             return;
                         } else if (getText().equals("無法取得") && new TokenCheck().isCheck) {

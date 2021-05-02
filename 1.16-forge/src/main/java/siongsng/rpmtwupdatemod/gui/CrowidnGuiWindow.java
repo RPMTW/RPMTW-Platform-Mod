@@ -16,7 +16,6 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.sf.json.JSONObject;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
@@ -42,7 +41,7 @@ public class CrowidnGuiWindow extends ContainerScreen<CrowdinGui.GuiContainerMod
     String mod_id = item.getCreatorModId(p.getHeldItemMainhand().getStack()); //物品所屬的模組ID
     String item_key = item.getTranslationKey(); //物品的命名空間
     String item_DisplayName = item.getName().getString(); //物品的顯示名稱
-    String stringID = JSONObject.fromObject(OpenCrowdinKeyBinding.responseBody).getJSONArray("data").getJSONObject(0).getJSONObject("data").get("id").toString();
+    String stringID = OpenCrowdinKeyBinding.stringID;
 
     public CrowidnGuiWindow(CrowdinGui.GuiContainerMod container, PlayerInventory inventory, ITextComponent text) {
         super(container, inventory, text);

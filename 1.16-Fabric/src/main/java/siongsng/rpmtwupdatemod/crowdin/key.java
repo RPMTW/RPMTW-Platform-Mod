@@ -45,7 +45,7 @@ public class key {
                     if (item_key.equals("block.minecraft.air")) {
                         SendMsg.send("§4請手持物品後再使用此功能。");
                         return;
-                    } else if (!new TokenCheck().isCheck && config.Token.equals("")) {
+                    } else if (!new TokenCheck().isCheck && !config.Token.equals("")) {
                         SendMsg.send("§c請先新增Crowdin(翻譯平台)的登入權杖新增，再使用該功能或至RPMTW官方Discord群組尋求協助。\n§aRPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
                         return;
                     } else if (CrowdinGuiProcedure.getText().equals("無法取得") && new TokenCheck().isCheck) {
