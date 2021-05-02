@@ -3,7 +3,7 @@ package siongsng.rpmtwupdatemod.function;
 import siongsng.rpmtwupdatemod.json;
 
 public class CheckChat {
-    public String ver = "1.0.8";
+    public String ver = "1.0.9";
     public String NewVer;
 
     public boolean get() {
