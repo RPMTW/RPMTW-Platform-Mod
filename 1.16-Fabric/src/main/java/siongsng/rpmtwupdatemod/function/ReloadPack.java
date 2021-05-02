@@ -14,11 +14,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class ReloadPack {
-    private final static Path CACHE_DIR = Paths.get(System.getProperty("user.home") + "/.rpmtw/1.16");
-    private static final Path PACK_NAME = CACHE_DIR.resolve("RPMTW-1.16.zip");
-    private final static String Update_Path = CACHE_DIR + "/Update.txt";
-    private final static String Latest_ver = json.ver("https://api.github.com/repos/SiongSng/ResourcePack-Mod-zh_tw/releases/latest").toString();
-    private final static String Latest_ver_n = Latest_ver.split("RPMTW-1.16-V")[1];
+    final static Path CACHE_DIR = Paths.get(System.getProperty("user.home") + "/.rpmtw/1.16");
+    final static Path PACK_NAME = CACHE_DIR.resolve("RPMTW-1.16.zip");
+    final static String Update_Path = CACHE_DIR + "/Update.txt";
+    String Latest_ver = json.ver("https://api.github.com/repos/SiongSng/ResourcePack-Mod-zh_tw/releases/latest").toString();
+    String Latest_ver_n = Latest_ver.split("RPMTW-1.16-V")[1];
     static ConfigScreen config = AutoConfig.getConfigHolder(ConfigScreen.class).getConfig();
 
     public ReloadPack() {
