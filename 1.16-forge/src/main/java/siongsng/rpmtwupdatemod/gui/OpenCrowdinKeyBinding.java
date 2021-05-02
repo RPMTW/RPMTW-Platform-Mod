@@ -4,7 +4,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
@@ -14,7 +13,6 @@ import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.network.NetworkEvent;
 import net.sf.json.JSONObject;
 import org.apache.http.HttpHeaders;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -33,7 +31,6 @@ import siongsng.rpmtwupdatemod.function.SendMsg;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Supplier;
 
 @ModElements.ModElement.Tag
 public class OpenCrowdinKeyBinding extends ModElements.ModElement {
@@ -44,8 +41,6 @@ public class OpenCrowdinKeyBinding extends ModElements.ModElement {
 
     public OpenCrowdinKeyBinding(ModElements instance) {
         super(instance, 4);
-        elements.addNetworkMessage(KeyBindingPressedMessage.class, KeyBindingPressedMessage::buffer, KeyBindingPressedMessage::new,
-                KeyBindingPressedMessage::handler);
     }
 
     public static String getText() {
@@ -128,40 +123,12 @@ public class OpenCrowdinKeyBinding extends ModElements.ModElement {
                             SendMsg.send("請稍後，正在開啟物品翻譯界面中...");
                         }
 
-                        RpmtwUpdateMod.PACKET_HANDLER.sendToServer(new KeyBindingPressedMessage(0, 0));
                         pressAction(p, 0, 0);
                     } catch (Exception e) {
                         RpmtwUpdateMod.LOGGER.error("發生未知錯誤: " + e); //錯誤處理
                     }
                 }
             }
-        }
-    }
-
-    public static class KeyBindingPressedMessage {
-        int type, pressedms;
-
-        public KeyBindingPressedMessage(int type, int pressedms) {
-            this.type = type;
-            this.pressedms = pressedms;
-        }
-
-        public KeyBindingPressedMessage(PacketBuffer buffer) {
-            this.type = buffer.readInt();
-            this.pressedms = buffer.readInt();
-        }
-
-        public static void buffer(KeyBindingPressedMessage message, PacketBuffer buffer) {
-            buffer.writeInt(message.type);
-            buffer.writeInt(message.pressedms);
-        }
-
-        public static void handler(KeyBindingPressedMessage message, Supplier<NetworkEvent.Context> contextSupplier) {
-            NetworkEvent.Context context = contextSupplier.get();
-            context.enqueueWork(() -> {
-                pressAction(context.getSender(), message.type, message.pressedms);
-            });
-            context.setPacketHandled(true);
         }
     }
 }

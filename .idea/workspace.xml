@@ -6,10 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="修正檢測版本錯誤">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/function/CheckChat.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/function/CheckChat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/notice/notice.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/notice/notice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/function/CheckChat.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/function/CheckChat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/notice/notice.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/notice/notice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/ModElements.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/ModElements.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/CrowdinGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/CrowdinGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/OpenCrowdinKeyBinding.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/OpenCrowdinKeyBinding.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -203,7 +203,18 @@
       <command value="gradle --gradle-user-home" />
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.1.16-Fabric [build]">
+  <component name="RunManager" selected="Gradle.1.16-forge [runClient]">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="1.16-Fabric [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -318,10 +329,10 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.1.16-Fabric [build]" />
-        <item itemvalue="Gradle.1.16-forge [build]" />
-        <item itemvalue="Gradle.1.16-Fabric [runClient]" />
         <item itemvalue="Gradle.1.16-forge [runClient]" />
+        <item itemvalue="Gradle.1.16-forge [build]" />
+        <item itemvalue="Gradle.1.16-Fabric [build]" />
+        <item itemvalue="Gradle.1.16-Fabric [runClient]" />
         <item itemvalue="Gradle.1.16-Fabric [remapSourcesJar]" />
       </list>
     </recent_temporary>
@@ -415,14 +426,8 @@
       <workItem from="1619824079225" duration="50380000" />
       <workItem from="1619919955286" duration="3362000" />
       <workItem from="1619933504114" duration="8411000" />
-      <workItem from="1619959788835" duration="1497000" />
-    </task>
-    <task id="LOCAL-00022" summary="1.0.5-rc2">
-      <created>1618324225335</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1618324225335</updated>
+      <workItem from="1619959788835" duration="2794000" />
+      <workItem from="1619966735488" duration="665000" />
     </task>
     <task id="LOCAL-00023" summary="1.0.6">
       <created>1618412070591</created>
@@ -760,7 +765,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619953812052</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="修復讀取最新版本錯誤">
+      <created>1619961917386</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1619961917386</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -793,7 +805,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="修復 Fabric 首次啟動時無法載入翻譯資源包 (#23)" />
     <MESSAGE value="修復 Fabric版本錯誤&amp;宇宙通訊" />
     <MESSAGE value="優化程式碼" />
     <MESSAGE value="瘋狂註解+優化Code" />
@@ -818,7 +829,8 @@
     <MESSAGE value="修復一些錯誤和新增一些特性" />
     <MESSAGE value="Fix 4 Bugs" />
     <MESSAGE value="Update to 1.0.9" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update to 1.0.9" />
+    <MESSAGE value="修復讀取最新版本錯誤" />
+    <option name="LAST_COMMIT_MESSAGE" value="修復讀取最新版本錯誤" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">

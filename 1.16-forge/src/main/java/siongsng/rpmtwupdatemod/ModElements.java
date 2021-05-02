@@ -4,7 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -13,14 +12,11 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
-import net.minecraftforge.fml.network.NetworkEvent;
 import net.minecraftforge.forgespi.language.ModFileScanData;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.*;
-import java.util.function.BiConsumer;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class ModElements {
@@ -55,11 +51,6 @@ public class ModElements {
             event.getRegistry().register(sound.getValue().setRegistryName(sound.getKey()));
     }
 
-    public <T> void addNetworkMessage(Class<T> messageType, BiConsumer<T, PacketBuffer> encoder, Function<PacketBuffer, T> decoder,
-                                      BiConsumer<T, Supplier<NetworkEvent.Context>> messageConsumer) {
-        RpmtwUpdateMod.PACKET_HANDLER.registerMessage(messageID, messageType, encoder, decoder, messageConsumer);
-        messageID++;
-    }
 
     public List<ModElement> getElements() {
         return elements;
