@@ -14,6 +14,7 @@
   "text.autoconfig.rpmtw_update_mod.option.afkTime": "開始偵測掛機模式間隔時間",
   "text.autoconfig.rpmtw_update_mod.option.discord": "啟用宇宙通訊系統",
   "text.autoconfig.rpmtw_update_mod.option.DiscordPrefix": "啟用宇宙通訊系統發送訊息時需要前綴",
+  "text.autoconfig.rpmtw_update_mod.option.Token": "Crowdin 登入權杖(TOKEN)",
   "gui.notice": "無法讀取公告。請查看 https://www.rpmtw.ga 取得幫助",
   "menu.rpmtw": "RPMTW settings"
 }
