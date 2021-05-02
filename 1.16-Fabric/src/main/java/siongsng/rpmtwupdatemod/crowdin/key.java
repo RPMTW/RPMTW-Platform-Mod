@@ -46,7 +46,7 @@ public class key {
                         SendMsg.send("§4請手持物品後再使用此功能。");
                         return;
                     } else if (!new TokenCheck().isCheck && !config.Token.equals("")) {
-                        SendMsg.send("§c請先新增Crowdin(翻譯平台)的登入權杖新增，再使用該功能或至RPMTW官方Discord群組尋求協助。\n§aRPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
+                        SendMsg.send("§c請先新增Crowdin登入權杖(詳情請看: https://www.rpmtw.ga/Wiki/RPMTW-Update-Mod-Related#h.x230ggwx63l4)。\n§a或者到RPMTW官方Discord群組尋求協助:https://discord.gg/5xApZtgV2u");
                         return;
                     } else if (CrowdinGuiProcedure.getText().equals("無法取得") && new TokenCheck().isCheck) {
                         SendMsg.send("§6由於你目前手持想要翻譯的物品，數據不在資料庫內\n因此無法進行翻譯，想了解更多資訊請前往RPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
