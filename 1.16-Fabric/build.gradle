@@ -50,6 +50,7 @@ dependencies {
     shadow('net.dv8tion:JDA:4.2.1_261') {
         exclude module: 'opus-java'
     }
+    shadow('org.apache.httpcomponents:httpclient:4.5.13')
     modImplementation("me.shedaniel.cloth:cloth-config-fabric:4.11.19") {
         exclude(group: "net.fabricmc.fabric-api")
     }
