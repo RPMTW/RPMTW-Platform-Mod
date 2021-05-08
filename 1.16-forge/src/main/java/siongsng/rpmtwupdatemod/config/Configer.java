@@ -3,7 +3,7 @@ package siongsng.rpmtwupdatemod.config;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public class Configer {
-    public static ForgeConfigSpec.BooleanValue rpmtw_crowdin, rpmtw_reloadpack, report_translation, notice, afk, discord, DiscordPrefix;
+    public static ForgeConfigSpec.BooleanValue rpmtw_crowdin, rpmtw_reloadpack, report_translation, notice, afk, discord, DiscordPrefix, isCheck;
     public static ForgeConfigSpec.IntValue Update_interval, afkTime;
     public static ForgeConfigSpec.ConfigValue<String> Token;
 
@@ -32,6 +32,8 @@ public class Configer {
         DiscordPrefix = client
                 .comment("DiscordPrefix = 是否啟用宇宙通訊系統發送訊息時需要前綴(預設為!)")
                 .define("rpmtw.DiscordPrefix", true);
+        isCheck = client
+                .define("rpmtw.isCheck", true);
         Update_interval = client
                 .comment("Update_interval = 每次啟動遊戲時，自動RPMTW更新時所檢查的版本間隔。(此變更須重啟遊戲後生效)")
                 .defineInRange("rpmtw.Update_interval", 0, 0, 20);

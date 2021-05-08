@@ -13,7 +13,6 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.registry.Registry;
-import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
@@ -78,8 +77,9 @@ public class CrowdinGui extends LightweightGuiDescription {
             postMethod.setHeader("Authorization", "Bearer " + Configer.config.Token);
             postMethod.setEntity(requestEntity);
             try {
-                CloseableHttpResponse response = httpClient.execute(postMethod);
+                httpClient.execute(postMethod);
                 /*
+                CloseableHttpResponse response = httpClient.execute(postMethod);
                 String responseBody = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
                 System.out.print(responseBody);
                 */

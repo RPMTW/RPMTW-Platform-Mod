@@ -27,7 +27,6 @@ import org.lwjgl.glfw.GLFW;
 import siongsng.rpmtwupdatemod.ModElements;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
 import siongsng.rpmtwupdatemod.config.Configer;
-import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.function.SendMsg;
 
 import java.nio.charset.StandardCharsets;
@@ -115,10 +114,10 @@ public class OpenCrowdinKeyBinding extends ModElements.ModElement {
                         if (item_key.equals("block.minecraft.air")) {
                             p.sendMessage(new StringTextComponent("§4請手持物品後再使用此功能。"), p.getUniqueID()); //發送訊息
                             return;
-                        } else if (!TokenCheck.isCheck && !Configer.Token.equals("")) {
+                        } else if (!Configer.isCheck.get()) {
                             SendMsg.send("§c請先新增Crowdin登入權杖(詳情請看: https://www.rpmtw.ga/Wiki/RPMTW-Update-Mod-Related#h.x230ggwx63l4)。\n§a或者到RPMTW官方Discord群組尋求協助:https://discord.gg/5xApZtgV2u");
                             return;
-                        } else if (getText().equals("無法取得") && TokenCheck.isCheck) {
+                        } else if (getText().equals("無法取得") && !Configer.isCheck.get()) {
                             SendMsg.send("§6由於你目前手持想要翻譯的物品，數據不在資料庫內\n因此無法進行翻譯，想了解更多資訊請前往RPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
                             return;
                         } else {
