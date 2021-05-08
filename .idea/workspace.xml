@@ -4,17 +4,8 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="修正連線伺服器時，會出現同步錯誤。">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2021_3_25__06_28____.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2021_3_25__06_28____.xml" afterDir="false" />
+    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="修復一些問題">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/RpmtwUpdateModClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/RpmtwUpdateModClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/ModElements.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/ModElements.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/crowdin/TokenCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/crowdin/TokenCheck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/CrowdinGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/CrowdinGui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/CrowidnGuiWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/CrowidnGuiWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/OpenCorwidnProcedure.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/OpenCorwidnProcedure.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/OpenCrowdinKeyBinding.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/OpenCrowdinKeyBinding.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -435,14 +426,7 @@
       <workItem from="1620214893946" duration="3840000" />
       <workItem from="1620303911143" duration="2300000" />
       <workItem from="1620378228720" duration="10387000" />
-      <workItem from="1620429888682" duration="20188000" />
-    </task>
-    <task id="LOCAL-00022" summary="1.0.5-rc2">
-      <created>1618324225335</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1618324225335</updated>
+      <workItem from="1620429888682" duration="21787000" />
     </task>
     <task id="LOCAL-00023" summary="1.0.6">
       <created>1618412070591</created>
@@ -780,7 +764,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619953812052</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="修復一些問題">
+      <created>1620474079741</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1620474079741</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -813,7 +804,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="修復 Fabric 首次啟動時無法載入翻譯資源包 (#23)" />
     <MESSAGE value="修復 Fabric版本錯誤&amp;宇宙通訊" />
     <MESSAGE value="優化程式碼" />
     <MESSAGE value="瘋狂註解+優化Code" />
@@ -838,7 +828,8 @@
     <MESSAGE value="修復一些錯誤和新增一些特性" />
     <MESSAGE value="Fix 4 Bugs" />
     <MESSAGE value="Update to 1.0.9" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update to 1.0.9" />
+    <MESSAGE value="修復一些問題" />
+    <option name="LAST_COMMIT_MESSAGE" value="修復一些問題" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
