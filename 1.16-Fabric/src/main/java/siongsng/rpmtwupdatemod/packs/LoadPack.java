@@ -24,7 +24,7 @@ public class LoadPack implements ResourcePackProvider {
     }
 
     public void register(Consumer<ResourcePackProfile> consumer, ResourcePackProfile.Factory factory) {
-        final String packName = "RPMTW-1.16";
+        final String packName = "RPMTW 1.16 模組繁體中文化";
         final ResourcePackProfile packInfo = ResourcePackProfile.of(packName, true, () -> new ZipResourcePack(loaderDirectory), factory, ResourcePackProfile.InsertionPosition.TOP, ResourcePackSource.field_25347);
         if (packInfo != null) {
             consumer.accept(packInfo);
