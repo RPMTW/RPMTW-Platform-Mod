@@ -10,7 +10,6 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.fml.network.NetworkRegistry;
@@ -44,10 +43,8 @@ public class RpmtwUpdateMod {
             () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
     public ModElements elements;
 
-    public RpmtwUpdateMod() throws IOException {
+    public RpmtwUpdateMod() {
         elements = new ModElements();
-        MinecraftForge.EVENT_BUS.register(new ModFMLBusEvents(this));
-
 
         MinecraftForge.EVENT_BUS.register(this);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::init); //註冊監聽事件
@@ -91,16 +88,4 @@ public class RpmtwUpdateMod {
         );
     }
 
-    private static class ModFMLBusEvents {
-        private final RpmtwUpdateMod parent;
-
-        ModFMLBusEvents(RpmtwUpdateMod parent) {
-            this.parent = parent;
-        }
-
-        @SubscribeEvent
-        public void serverLoad(FMLServerStartingEvent event) {
-            this.parent.elements.getElements().forEach(element -> element.serverLoad(event));
-        }
-    }
 }

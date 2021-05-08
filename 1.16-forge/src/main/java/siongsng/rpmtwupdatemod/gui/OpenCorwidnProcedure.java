@@ -11,8 +11,8 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.IWorld;
 import net.minecraftforge.fml.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 import siongsng.rpmtwupdatemod.ModElements;
 
 import java.util.Map;
@@ -28,24 +28,22 @@ public class OpenCorwidnProcedure extends ModElements.ModElement {
         double x = dependencies.get("x") instanceof Integer ? (int) dependencies.get("x") : (double) dependencies.get("x");
         double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
         double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
-        IWorld world = (IWorld) dependencies.get("world");
         {
-            Entity _ent = entity;
-            if (_ent instanceof ServerPlayerEntity) {
+            if (entity instanceof PlayerEntity) {
 
                 BlockPos _bpos = new BlockPos((int) x, (int) y, (int) z);
-                NetworkHooks.openGui((ServerPlayerEntity) _ent, new INamedContainerProvider() {
+                NetworkHooks.openGui((ServerPlayerEntity) entity, new INamedContainerProvider() {
                     @Override
-                    public ITextComponent getDisplayName() {
+                    public @NotNull ITextComponent getDisplayName() {
                         return new StringTextComponent("crowdin_gui");
                     }
 
                     @Override
-                    public Container createMenu(int id, PlayerInventory inventory, PlayerEntity player) {
-
+                    public Container createMenu(int id, @NotNull PlayerInventory inventory, @NotNull PlayerEntity player) {
                         return new CrowdinGui.GuiContainerMod(id, inventory, new PacketBuffer(Unpooled.buffer()).writeBlockPos(_bpos));
                     }
                 }, _bpos);
+
             }
         }
     }

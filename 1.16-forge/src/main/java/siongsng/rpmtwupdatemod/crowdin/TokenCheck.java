@@ -8,6 +8,7 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.methods.RequestBuilder;
 import org.apache.http.impl.client.HttpClients;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
+import siongsng.rpmtwupdatemod.config.Configer;
 import siongsng.rpmtwupdatemod.function.SendMsg;
 
 import java.io.IOException;
@@ -29,6 +30,7 @@ public class TokenCheck {
                 SendMsg.send("§9[Crowdin權杖自動檢測系統]§a檢測成功，您的Token(登入權杖)是有效的。");
             }
             RpmtwUpdateMod.LOGGER.info("[Crowdin權杖自動檢測系統]§a檢測成功，您的Token(登入權杖)是有效的。");
+            Configer.Token.set(token);
             isCheck = true;
         } else {
             if (Minecraft.getInstance().player != null) {

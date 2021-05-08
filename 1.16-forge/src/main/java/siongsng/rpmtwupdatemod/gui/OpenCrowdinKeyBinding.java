@@ -39,6 +39,7 @@ import java.util.function.Supplier;
 public class OpenCrowdinKeyBinding extends ModElements.ModElement {
     public static String responseBody = "";
     public static String stringID;
+
     @OnlyIn(Dist.CLIENT)
     private KeyBinding keys;
 
@@ -46,6 +47,9 @@ public class OpenCrowdinKeyBinding extends ModElements.ModElement {
         super(instance, 4);
         elements.addNetworkMessage(KeyBindingPressedMessage.class, KeyBindingPressedMessage::buffer, KeyBindingPressedMessage::new,
                 KeyBindingPressedMessage::handler);
+        keys = new KeyBinding("key.rpmtw_update_mod.open_crowdin", GLFW.GLFW_KEY_V, "key.categories.rpmtw");
+        ClientRegistry.registerKeyBinding(keys);
+        MinecraftForge.EVENT_BUS.register(this);
     }
 
     public static String getText() {
@@ -95,13 +99,6 @@ public class OpenCrowdinKeyBinding extends ModElements.ModElement {
         }
     }
 
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    public void initElements() {
-        keys = new KeyBinding("key.rpmtw_update_mod.open_crowdin", GLFW.GLFW_KEY_V, "key.categories.rpmtw");
-        ClientRegistry.registerKeyBinding(keys);
-        MinecraftForge.EVENT_BUS.register(this);
-    }
 
     @SubscribeEvent
     @OnlyIn(Dist.CLIENT)
@@ -118,18 +115,23 @@ public class OpenCrowdinKeyBinding extends ModElements.ModElement {
                         if (item_key.equals("block.minecraft.air")) {
                             p.sendMessage(new StringTextComponent("§4請手持物品後再使用此功能。"), p.getUniqueID()); //發送訊息
                             return;
-                        } else if (!new TokenCheck().isCheck && !Configer.Token.equals("")) {
+                        } else if (!TokenCheck.isCheck && !Configer.Token.equals("")) {
                             SendMsg.send("§c請先新增Crowdin登入權杖(詳情請看: https://www.rpmtw.ga/Wiki/RPMTW-Update-Mod-Related#h.x230ggwx63l4)。\n§a或者到RPMTW官方Discord群組尋求協助:https://discord.gg/5xApZtgV2u");
                             return;
-                        } else if (getText().equals("無法取得") && new TokenCheck().isCheck) {
+                        } else if (getText().equals("無法取得") && TokenCheck.isCheck) {
                             SendMsg.send("§6由於你目前手持想要翻譯的物品，數據不在資料庫內\n因此無法進行翻譯，想了解更多資訊請前往RPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
                             return;
                         } else {
                             SendMsg.send("請稍後，正在開啟物品翻譯界面中...");
                         }
 
+                        assert Minecraft.getInstance().world != null;
+                        if (!Minecraft.getInstance().world.isRemote) {
+                            SendMsg.send("此功能只能在單人遊戲模式下使用");
+                            return;
+                        }
                         RpmtwUpdateMod.PACKET_HANDLER.sendToServer(new KeyBindingPressedMessage(0, 0));
-                        pressAction(p, 0, 0);
+
                     } catch (Exception e) {
                         RpmtwUpdateMod.LOGGER.error("發生未知錯誤: " + e); //錯誤處理
                     }

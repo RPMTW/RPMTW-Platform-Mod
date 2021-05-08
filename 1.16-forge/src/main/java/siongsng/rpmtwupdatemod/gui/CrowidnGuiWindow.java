@@ -158,19 +158,16 @@ public class CrowidnGuiWindow extends ContainerScreen<CrowdinGui.GuiContainerMod
             }
             Minecraft.getInstance().displayGuiScreen(null);
             Minecraft.getInstance().keyboardListener.enableRepeatEvents(false);
-            CrowdinGui.handleButtonAction(entity, 0, x, y, z);
         }));
         this.addButton(new Button(this.guiLeft + 253, this.guiTop + 147, 57, 20, new StringTextComponent("Crowdin"), e -> {
             String url = "https://translate.rpmtw.ga/translate/resourcepack-mod-zhtw/all/en-zhtw?filter=basic&value=0#q=" + stringID;
 
             p.sendMessage(new StringTextComponent("§6開啟翻譯平台網頁中..."), p.getUniqueID()); //發送訊息
             Util.getOSType().openURI(url); //使用預設瀏覽器開啟網頁
-            CrowdinGui.handleButtonAction(entity, 0, x, y, z);
         }));
         this.addButton(new Button(this.guiLeft + 109, this.guiTop + 147, 57, 20, new StringTextComponent("關閉介面"), e -> {
             Minecraft.getInstance().displayGuiScreen(null);
             Minecraft.getInstance().keyboardListener.enableRepeatEvents(false);
-            CrowdinGui.handleButtonAction(entity, 0, x, y, z);
         }));
     }
 }
