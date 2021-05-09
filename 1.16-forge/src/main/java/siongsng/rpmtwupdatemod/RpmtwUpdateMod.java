@@ -28,8 +28,8 @@ import siongsng.rpmtwupdatemod.discord.OnChat;
 import siongsng.rpmtwupdatemod.function.AFK;
 import siongsng.rpmtwupdatemod.function.PackVersionCheck;
 import siongsng.rpmtwupdatemod.notice.notice;
-
 import java.io.IOException;
+
 
 @Mod("rpmtw_update_mod")
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)

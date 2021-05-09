@@ -101,5 +101,10 @@
       <option name="name" value="CottonMC" />
       <option name="url" value="https://server.bbkr.space/artifactory/libs-release" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="UserLocalRemappedMods" />
+      <option name="name" value="UserLocalRemappedMods" />
+      <option name="url" value="file:$PROJECT_DIR$/1.16-Fabric/.gradle/loom-cache/remapped_mods/" />
+    </remote-repository>
   </component>
 </project>

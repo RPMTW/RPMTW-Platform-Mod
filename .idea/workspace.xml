@@ -4,11 +4,110 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="修一些小錯誤">
+    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="格式化程式碼+修正Fabric版本進入遊戲不會自動選擇語言">
+      <change beforePath="$PROJECT_DIR$/.github/dependabot.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/dependabot.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/gradle.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/gradle.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries-with-intellij-classes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries-with-intellij-classes.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/commons_lang_commons_lang_2_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/commons_lang_commons_lang_2_4.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/json_lib_2_4_jdk15.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/json_lib_2_4_jdk15.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/org_apache_httpcomponents_httpclient_4_5_13.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/org_apache_httpcomponents_httpclient_4_5_13.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/1.16-Fabric.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/1.16-Fabric.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/1.16-Fabric.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/1.16-Fabric.main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/1.16-Fabric.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/1.16-Fabric.test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/1.16-Forge.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/1.16-Forge.main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/1.16-Forge.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/1.16-Forge.test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/1.16-forge.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/1.16-forge.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/siongsng.rpmtwupdatemod.RpmtwUpdateMod.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/siongsng.rpmtwupdatemod.RpmtwUpdateMod.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/gradlew.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/commands/noticeCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/commands/noticeCMD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/config/ConfigScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/config/ConfigScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/config/Configer.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/config/Configer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/config/DiscordPrefix.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/config/DiscordPrefix.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/crowdin/TokenCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/crowdin/TokenCheck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/crowdin/key.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/crowdin/key.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/discord/Chat.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/discord/Chat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/discord/OnDiscordChat.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/discord/OnDiscordChat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/function/AFK.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/function/AFK.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/function/CheckChat.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/function/CheckChat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/function/FileWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/function/FileWriter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/function/PackVersionCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/function/PackVersionCheck.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/function/ReloadPack.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/function/ReloadPack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/function/SendMsg.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/function/SendMsg.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/gui/CrowdinGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/gui/CrowdinGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/gui/CrowdinGuiProcedure.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/gui/CrowdinGuiProcedure.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/gui/CrowdinGuiScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/gui/CrowdinGuiScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/gui/ModMenuIntegration.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/gui/ModMenuIntegration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/json.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/json.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/InputMixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/InputMixin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/OnChat.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/OnChat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/PlayJoinMixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/PlayJoinMixin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/ResourcePackManagerMixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/ResourcePackManagerMixin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/RpmtwUpdateModClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/RpmtwUpdateModClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/RpmtwUpdateModServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/RpmtwUpdateModServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/RpmtwUpdateMod_mixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/mixins/RpmtwUpdateMod_mixin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/notice/notice.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/notice/notice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/notice/noticeGet.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/notice/noticeGet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/packs/LoadPack.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/packs/LoadPack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/ping.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/java/siongsng/rpmtwupdatemod/ping.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/RpmtwUpdateMod.mixins.json" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/RpmtwUpdateMod.mixins.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/assets/rpmtw_update_mod/lang/en_us.json" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/assets/rpmtw_update_mod/lang/en_us.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/assets/rpmtw_update_mod/lang/zh_tw.json" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/assets/rpmtw_update_mod/lang/zh_tw.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/fabric.mod.json" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-Fabric/src/main/resources/fabric.mod.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/gradlew.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/ModElements.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/ModElements.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/PackFinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/PackFinder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/RpmtwUpdateMod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/commands/AddToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/commands/AddToken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/commands/noticeCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/commands/noticeCMD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/config/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/config/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/config/ConfigScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/config/ConfigScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/config/Configer.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/config/Configer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/config/DiscordPrefix.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/config/DiscordPrefix.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/crowdin/TokenCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/crowdin/TokenCheck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/crowdin/key.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/crowdin/key.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/discord/Chat.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/discord/Chat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/discord/OnChat.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/discord/OnChat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/discord/OnDiscordChat.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/discord/OnDiscordChat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/function/AFK.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/function/AFK.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/function/CheckChat.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/function/CheckChat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/function/FileWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/function/FileWriter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/function/PackVersionCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/function/PackVersionCheck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/function/PlayerInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/function/PlayerInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/function/ReloadPack.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/function/ReloadPack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/function/SendMsg.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/function/SendMsg.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/CrowdinGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/CrowdinGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/CrowidnGuiWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/CrowidnGuiWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/OpenCorwidnProcedure.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/OpenCorwidnProcedure.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/OpenCrowdinKeyBinding.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/OpenCrowdinKeyBinding.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/json.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/json.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/notice/notice.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/notice/notice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/notice/noticeGet.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/notice/noticeGet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/ping.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/ping.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/resources/assets/rpmtw_update_mod/lang/en_us.json" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/resources/assets/rpmtw_update_mod/lang/en_us.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/resources/assets/rpmtw_update_mod/lang/zh_tw.json" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/resources/assets/rpmtw_update_mod/lang/zh_tw.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,9 +226,6 @@
       </UrlAndAccount>
     </option>
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="jar://$USER_HOME$/.gradle/caches/fabric-loom/1.16.5-mapped-net.fabricmc.yarn-1.16.5+build.5-v2/minecraft-1.16.5-mapped-net.fabricmc.yarn-1.16.5+build.5-v2-sources.jar!/net/minecraft/resource/ResourcePackManager.java" root0="SKIP_INSPECTION" />
-  </component>
   <component name="InvalidFacetManager">
     <ignored-facets>
       <facet id="1.16-Fabric.main/invalid/Minecraft" />
@@ -157,7 +253,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.openapi.externalSystem.service.settings.ExternalSystemGroupConfigurable" value="ALL" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/1.16-forge/src/main/resources/assets/rpmtw_update_mod" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -165,10 +261,10 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="库" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -203,17 +299,6 @@
     </option>
   </component>
   <component name="RunManager" selected="Gradle.1.16-Fabric [runClient]">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="1.16-Fabric [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -431,14 +516,9 @@
       <workItem from="1620378228720" duration="10387000" />
       <workItem from="1620429888682" duration="23267000" />
       <workItem from="1620483775347" duration="1550000" />
-      <workItem from="1620520698170" duration="3258000" />
-    </task>
-    <task id="LOCAL-00026" summary="修復議題(#10)">
-      <created>1618499521938</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1618499521938</updated>
+      <workItem from="1620520698170" duration="4316000" />
+      <workItem from="1620568258020" duration="1521000" />
+      <workItem from="1620569824985" duration="668000" />
     </task>
     <task id="LOCAL-00027" summary="修復議題(#15)和更新JDA版本">
       <created>1618621223187</created>
@@ -776,7 +856,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620484518150</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="格式化程式碼+修正Fabric版本進入遊戲不會自動選擇語言">
+      <created>1620524561061</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1620524561061</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -809,7 +896,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="瘋狂註解+優化Code" />
     <MESSAGE value="測試內嵌翻譯功能中..." />
     <MESSAGE value="測試階段-2" />
     <MESSAGE value="Forge版本嵌入翻譯基礎功能開發完畢，繼續除錯+優化+支援Fabric" />
@@ -834,7 +920,8 @@
     <MESSAGE value="修復一些問題" />
     <MESSAGE value="修改名稱" />
     <MESSAGE value="修一些小錯誤" />
-    <option name="LAST_COMMIT_MESSAGE" value="修一些小錯誤" />
+    <MESSAGE value="格式化程式碼+修正Fabric版本進入遊戲不會自動選擇語言" />
+    <option name="LAST_COMMIT_MESSAGE" value="格式化程式碼+修正Fabric版本進入遊戲不會自動選擇語言" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
