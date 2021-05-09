@@ -40,7 +40,7 @@ public class OpenCrowdinKeyBinding extends ModElements.ModElement {
     public static String stringID;
 
     @OnlyIn(Dist.CLIENT)
-    private KeyBinding keys;
+    private final KeyBinding keys;
 
     public OpenCrowdinKeyBinding(ModElements instance) {
         super(instance, 4);

@@ -17,9 +17,9 @@ public class ReloadPack {
     final static Path CACHE_DIR = Paths.get(System.getProperty("user.home") + "/.rpmtw/1.16");
     final static Path PACK_NAME = CACHE_DIR.resolve("RPMTW-1.16.zip");
     final static String Update_Path = CACHE_DIR + "/Update.txt";
+    static ConfigScreen config = AutoConfig.getConfigHolder(ConfigScreen.class).getConfig();
     String Latest_ver = json.ver("https://api.github.com/repos/SiongSng/ResourcePack-Mod-zh_tw/releases/latest").toString();
     String Latest_ver_n = Latest_ver.split("RPMTW-1.16-V")[1];
-    static ConfigScreen config = AutoConfig.getConfigHolder(ConfigScreen.class).getConfig();
 
     public ReloadPack() {
         try {
