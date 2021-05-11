@@ -82,7 +82,6 @@ public class OpenCrowdinKeyBinding extends ModElements.ModElement {
         double x = entity.getPosX();
         double y = entity.getPosY();
         double z = entity.getPosZ();
-        // security measure to prevent arbitrary chunk generation
         if (!world.isBlockLoaded(new BlockPos(x, y, z)))
             return;
         if (type == 0) {
@@ -111,7 +110,7 @@ public class OpenCrowdinKeyBinding extends ModElements.ModElement {
 
 
                         String item_key = item.getTranslationKey(); //物品的命名空間
-                        if (item_key.equals("block.minecraft.air")) {
+                        if (item_key.equals("block.minecraft.air")) { //
                             p.sendMessage(new StringTextComponent("§4請手持物品後再使用此功能。"), p.getUniqueID()); //發送訊息
                             return;
                         } else if (!Configer.isCheck.get()) {
