@@ -1,7 +1,6 @@
 package siongsng.rpmtwupdatemod;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -12,8 +11,6 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
-import net.minecraftforge.fml.network.NetworkRegistry;
-import net.minecraftforge.fml.network.simple.SimpleChannel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import siongsng.rpmtwupdatemod.commands.AddToken;
@@ -26,6 +23,7 @@ import siongsng.rpmtwupdatemod.crowdin.key;
 import siongsng.rpmtwupdatemod.function.AFK;
 import siongsng.rpmtwupdatemod.function.PackVersionCheck;
 import siongsng.rpmtwupdatemod.notice.notice;
+
 import java.io.IOException;
 
 
@@ -37,12 +35,12 @@ public class RpmtwUpdateMod {
     public final static String Mod_ID = "rpmtw_update_mod"; //模組ID
 
     private static final String PROTOCOL_VERSION = "1";
-    public static final SimpleChannel PACKET_HANDLER = NetworkRegistry.newSimpleChannel(new ResourceLocation("rpmtw_update_mod", "rpmtw_update_mod"),
+   /* public static final SimpleChannel PACKET_HANDLER = NetworkRegistry.newSimpleChannel(new ResourceLocation("rpmtw_update_mod", "rpmtw_update_mod"),
             () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
-    public ModElements elements;
+    public ModElements elements;*/
 
     public RpmtwUpdateMod() {
-        elements = new ModElements();
+        //  elements = new ModElements();
 
         MinecraftForge.EVENT_BUS.register(this);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::init); //註冊監聽事件

@@ -1,5 +1,5 @@
 package siongsng.rpmtwupdatemod.gui;
-
+/*
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.PlayerEntity;
@@ -33,7 +33,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
-
+@OnlyIn(Dist.CLIENT)
 @ModElements.ModElement.Tag
 public class OpenCrowdinKeyBinding extends ModElements.ModElement {
     public static String responseBody = "";
@@ -52,7 +52,7 @@ public class OpenCrowdinKeyBinding extends ModElements.ModElement {
     }
 
     public static String getText() {
-        String Text = "";
+        String Text;
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
             HttpUriRequest request = RequestBuilder.get()
                     .setUri("https://api.crowdin.com/api/v2/projects/442446/strings?filter=" + Minecraft.getInstance().player.getHeldItemMainhand().getItem().getTranslationKey())
@@ -108,6 +108,7 @@ public class OpenCrowdinKeyBinding extends ModElements.ModElement {
                         PlayerEntity p = Minecraft.getInstance().player;
                         Item item = p.getHeldItemMainhand().getItem(); //拿的物品
 
+                        SendMsg.send(String.valueOf(p.world.isRemote));
 
                         String item_key = item.getTranslationKey(); //物品的命名空間
                         if (item_key.equals("block.minecraft.air")) { //
@@ -128,6 +129,7 @@ public class OpenCrowdinKeyBinding extends ModElements.ModElement {
                             SendMsg.send("此功能只能在單人遊戲模式下使用");
                             return;
                         }
+
                         RpmtwUpdateMod.PACKET_HANDLER.sendToServer(new KeyBindingPressedMessage(0, 0));
 
                     } catch (Exception e) {
@@ -165,3 +167,4 @@ public class OpenCrowdinKeyBinding extends ModElements.ModElement {
         }
     }
 }
+*/

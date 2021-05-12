@@ -1,27 +1,7 @@
 package siongsng.rpmtwupdatemod.gui;
 
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScreenManager;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.DeferredWorkQueue;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.network.IContainerFactory;
-import siongsng.rpmtwupdatemod.ModElements;
-
-import java.util.HashMap;
-
+/*
 @ModElements.ModElement.Tag
 public class CrowdinGui extends ModElements.ModElement {
     public static HashMap guistate = new HashMap();
@@ -78,5 +58,5 @@ public class CrowdinGui extends ModElements.ModElement {
         }
     }
 }
-
+*/
 

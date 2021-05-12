@@ -1,21 +1,7 @@
 package siongsng.rpmtwupdatemod;
 
-import net.minecraft.network.PacketBuffer;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.network.NetworkEvent;
-import net.minecraftforge.forgespi.language.ModFileScanData;
-
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-import java.util.function.BiConsumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
-
 public class ModElements {
+    /*
     public final List<ModElement> elements = new ArrayList<>();
     private int messageID = 0;
 
@@ -43,11 +29,6 @@ public class ModElements {
         messageID++;
     }
 
-    public List<ModElement> getElements() {
-        return elements;
-    }
-
-
     public static class ModElement implements Comparable<ModElement> {
         protected final ModElements elements;
         protected final int sortid;
@@ -69,4 +50,5 @@ public class ModElements {
         public @interface Tag {
         }
     }
+     */
 }
