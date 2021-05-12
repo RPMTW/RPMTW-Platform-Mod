@@ -23,8 +23,6 @@ import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.config.Configer;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.crowdin.key;
-import siongsng.rpmtwupdatemod.discord.Chat;
-import siongsng.rpmtwupdatemod.discord.OnChat;
 import siongsng.rpmtwupdatemod.function.AFK;
 import siongsng.rpmtwupdatemod.function.PackVersionCheck;
 import siongsng.rpmtwupdatemod.notice.notice;
@@ -59,7 +57,6 @@ public class RpmtwUpdateMod {
             Minecraft.getInstance().gameSettings.language = "zh_tw"; //將語言設定為繁體中文
         }
         new PackVersionCheck(); //資源包版本檢查
-        new Chat(); //JDA帳號登入
 
         if (!Configer.Token.get().equals("")) { //如果Token不是空的
             try {
@@ -80,7 +77,6 @@ public class RpmtwUpdateMod {
             MinecraftForge.EVENT_BUS.register(new notice()); //玩家加入事件註冊
         }
         MinecraftForge.EVENT_BUS.register(new AFK()); //掛機事件註冊
-        MinecraftForge.EVENT_BUS.register(new OnChat()); //客戶端聊天事件
 
         ModLoadingContext.get().registerExtensionPoint( //註冊組態螢幕至Forge模組設定
                 ExtensionPoint.CONFIGGUIFACTORY,

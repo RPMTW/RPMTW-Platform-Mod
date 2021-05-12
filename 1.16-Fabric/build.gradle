@@ -47,9 +47,6 @@ dependencies {
     shadow('net.sf.ezmorph:ezmorph:1.0.6')
     shadow('commons-collections:commons-collections:3.2.2')
     shadow('commons-beanutils:commons-beanutils:1.9.4')
-    shadow('net.dv8tion:JDA:4.2.1_261') {
-        exclude module: 'opus-java'
-    }
     shadow('org.apache.httpcomponents:httpclient:4.5.13')
     modImplementation include("me.shedaniel.cloth:cloth-config-fabric:4.11.19") {
         exclude(group: "net.fabricmc.fabric-api")

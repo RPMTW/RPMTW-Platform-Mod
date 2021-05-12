@@ -18,7 +18,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.network.IContainerFactory;
-import org.jetbrains.annotations.NotNull;
 import siongsng.rpmtwupdatemod.ModElements;
 
 import java.util.HashMap;
@@ -74,7 +73,7 @@ public class CrowdinGui extends ModElements.ModElement {
 
 
         @Override
-        public boolean canInteractWith(@NotNull PlayerEntity player) {
+        public boolean canInteractWith(PlayerEntity player) {
             return true;
         }
     }

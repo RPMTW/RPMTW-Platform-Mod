@@ -5,7 +5,6 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "InputMixin",
-    "OnChat",
     "PlayJoinMixin",
     "ResourcePackManagerMixin",
     "RpmtwUpdateMod_mixin",

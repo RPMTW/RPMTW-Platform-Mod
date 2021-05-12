@@ -57,9 +57,6 @@ dependencies {
     shade('commons-beanutils:commons-beanutils:1.9.4')
     shade('commons-io:commons-io:2.8.0')
     shade files('libs/commons-logging-1.2.jar')
-    shade('net.dv8tion:JDA:4.2.1_262') { //Java Discord Api Library
-        exclude module: 'opus-java'
-    }
     minecraft 'net.minecraftforge:forge:1.16.5-36.1.16'
 }
 jar {

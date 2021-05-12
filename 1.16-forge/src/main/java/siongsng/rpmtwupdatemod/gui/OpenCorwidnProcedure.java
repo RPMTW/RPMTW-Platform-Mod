@@ -12,7 +12,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.fml.network.NetworkHooks;
-import org.jetbrains.annotations.NotNull;
 import siongsng.rpmtwupdatemod.ModElements;
 
 import java.util.Map;
@@ -34,12 +33,12 @@ public class OpenCorwidnProcedure extends ModElements.ModElement {
                 BlockPos _bpos = new BlockPos((int) x, (int) y, (int) z);
                 NetworkHooks.openGui((ServerPlayerEntity) entity, new INamedContainerProvider() {
                     @Override
-                    public @NotNull ITextComponent getDisplayName() {
+                    public ITextComponent getDisplayName() {
                         return new StringTextComponent("crowdin_gui");
                     }
 
                     @Override
-                    public Container createMenu(int id, @NotNull PlayerInventory inventory, @NotNull PlayerEntity player) {
+                    public Container createMenu(int id, PlayerInventory inventory, PlayerEntity player) {
                         return new CrowdinGui.GuiContainerMod(id, inventory, new PacketBuffer(Unpooled.buffer()).writeBlockPos(_bpos));
                     }
                 }, _bpos);

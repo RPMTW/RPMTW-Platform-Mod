@@ -9,7 +9,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import siongsng.rpmtwupdatemod.commands.noticeCMD;
-import siongsng.rpmtwupdatemod.discord.Chat;
 
 @Mixin(MinecraftClient.class)
 public class RpmtwUpdateModClient {
@@ -20,6 +19,5 @@ public class RpmtwUpdateModClient {
         CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> { //註冊指令
             noticeCMD.register(dispatcher); //獲取公告指令
         });
-        new Chat();
     }
 }
