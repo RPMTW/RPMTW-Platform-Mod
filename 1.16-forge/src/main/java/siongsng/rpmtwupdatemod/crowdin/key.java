@@ -15,17 +15,24 @@ import org.lwjgl.glfw.GLFW;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.config.Configer;
 import siongsng.rpmtwupdatemod.function.ReloadPack;
+import siongsng.rpmtwupdatemod.function.SendMsg;
+import siongsng.rpmtwupdatemod.gui.CorwidnProcedure;
+import siongsng.rpmtwupdatemod.gui.CrowdinScreen;
 
 public final class key {
     public static final KeyBinding reloadpack = new KeyBinding("key.rpmtw_update_mod.reloadpack", KeyConflictContext.UNIVERSAL, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_R, "key.categories.rpmtw");
     public static final KeyBinding report_translation = new KeyBinding("key.rpmtw_update_mod.report_translation", KeyConflictContext.UNIVERSAL, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_U, "key.categories.rpmtw");
     public static final KeyBinding open_config = new KeyBinding("key.rpmtw_update_mod.open_config", KeyConflictContext.UNIVERSAL, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_O, "key.categories.rpmtw");
+    public static final KeyBinding Crowdin = new KeyBinding("key.rpmtw_update_mod.open_crowdin", GLFW.GLFW_KEY_V, "key.categories.rpmtw");
+
+
     private boolean showed = false;
 
     public key() {
         ClientRegistry.registerKeyBinding(reloadpack);
         ClientRegistry.registerKeyBinding(report_translation);
         ClientRegistry.registerKeyBinding(open_config);
+        ClientRegistry.registerKeyBinding(Crowdin);
     }
 
     @SubscribeEvent
@@ -33,7 +40,7 @@ public final class key {
         PlayerEntity p = Minecraft.getInstance().player;
         if (showed) { //防止重複開啟
             try {
-                if (!reloadpack.isKeyDown() && !report_translation.isKeyDown() && !open_config.isKeyDown()) {
+                if (!reloadpack.isKeyDown() && !report_translation.isKeyDown() && !open_config.isKeyDown() && !Crowdin.isKeyDown()) {
                     showed = false;
                 }
             } catch (IndexOutOfBoundsException ex) {
@@ -41,6 +48,24 @@ public final class key {
             }
             return;
         }
+        if (Crowdin.isPressed()) {
+            Item item = p.getHeldItemMainhand().getItem(); //拿的物品
+            String item_key = item.getTranslationKey(); //物品的命名空間
+            if (item_key.equals("block.minecraft.air")) { //
+                p.sendMessage(new StringTextComponent("§4請手持物品後再使用此功能。"), p.getUniqueID()); //發送訊息
+                return;
+            } else if (!Configer.isCheck.get()) {
+                SendMsg.send("§c請先新增Crowdin登入權杖(詳情請看: https://www.rpmtw.ga/Wiki/RPMTW-Update-Mod-Related#h.x230ggwx63l4)。\n§a或者到RPMTW官方Discord群組尋求協助:https://discord.gg/5xApZtgV2u");
+                return;
+            } else if (CorwidnProcedure.getText().equals("無法取得") && !Configer.isCheck.get()) {
+                SendMsg.send("§6由於你目前手持想要翻譯的物品，數據不在資料庫內\n因此無法進行翻譯，想了解更多資訊請前往RPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
+                //return;
+            } else {
+                SendMsg.send("請稍後，正在開啟物品翻譯界面中...");
+            }
+            Minecraft.getInstance().displayGuiScreen(new CrowdinScreen());
+        }
+
         if (open_config.isPressed()) {
             Minecraft.getInstance().displayGuiScreen(new ConfigScreen());
         }

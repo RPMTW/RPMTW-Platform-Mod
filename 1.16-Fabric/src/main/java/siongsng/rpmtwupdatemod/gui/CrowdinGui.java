@@ -89,7 +89,7 @@ public class CrowdinGui extends LightweightGuiDescription {
             MinecraftClient.getInstance().openScreen(null);
         });
         Crowdin.setOnClick(() -> {
-            String url = "https://translate.rpmtw.ga/translate/resourcepack-mod-zhtw/all/en-zhtw?filter=basic&value=0#q=" + stringID;
+            String url = "https://crowdin.com/translate/resourcepack-mod-zhtw/all/en-zhtw?filter=basic&value=0#q=" + stringID;
             SendMsg.send("§6開啟翻譯平台網頁中...");
             Util.getOperatingSystem().open(url);   //使用預設瀏覽器開啟網頁
         });

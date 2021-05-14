@@ -28,7 +28,6 @@ public class RpmtwUpdateMod implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-
         key.onInitializeClient(); //註冊快捷鍵
         LOGGER.info("Hello RPMTW world!");
         AutoConfig.getConfigHolder(ConfigScreen.class).registerSaveListener((var1, sava) -> { //監聽儲存Config事件

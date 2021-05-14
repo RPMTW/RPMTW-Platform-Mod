@@ -12,8 +12,13 @@ import siongsng.rpmtwupdatemod.function.SendMsg;
 
 import java.io.IOException;
 
-public class TokenCheck {
+public class TokenCheck extends Thread {
     public static Boolean isCheck = false;
+
+    public TokenCheck() {
+        this.setDaemon(true);
+        this.start();
+    }
 
     public void Check(String token) throws IOException {
         HttpClient client = HttpClients.custom().build();
