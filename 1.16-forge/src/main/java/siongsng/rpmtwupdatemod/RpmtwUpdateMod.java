@@ -34,13 +34,7 @@ public class RpmtwUpdateMod {
     public static final Logger LOGGER = LogManager.getLogger(); //註冊紀錄器
     public final static String Mod_ID = "rpmtw_update_mod"; //模組ID
 
-    private static final String PROTOCOL_VERSION = "1";
-/*    public static final SimpleChannel PACKET_HANDLER = NetworkRegistry.newSimpleChannel(new ResourceLocation("rpmtw_update_mod", "rpmtw_update_mod"),
-            () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
-    public ModElements elements;*/
-
     public RpmtwUpdateMod() {
-//          elements = new ModElements();
 
         MinecraftForge.EVENT_BUS.register(this);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::init); //註冊監聽事件
