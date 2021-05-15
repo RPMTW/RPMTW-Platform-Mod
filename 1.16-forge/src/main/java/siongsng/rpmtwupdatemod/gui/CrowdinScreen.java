@@ -51,7 +51,7 @@ public final class CrowdinScreen extends Screen {
 
         this.addButton(new Button(
                 (this.width / 2 + 50),
-                this.height - BOTTOM_BUTTON_HEIGHT_OFFSET,
+                (this.height / 2) + 80,
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
                 new StringTextComponent("Crowdin"),
                 button -> {
@@ -63,7 +63,7 @@ public final class CrowdinScreen extends Screen {
 
         this.addButton(new Button(
                 (this.width - 4) / 2 - BOTTOM_BUTTON_WIDTH + 50,
-                this.height - BOTTOM_BUTTON_HEIGHT_OFFSET,
+                (this.height / 2) + 80,
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
                 new StringTextComponent("提交翻譯"),
                 button -> {
@@ -88,14 +88,14 @@ public final class CrowdinScreen extends Screen {
                 }));
         this.addButton(new Button(
                 (this.width - 100) / 2 - BOTTOM_BUTTON_WIDTH,
-                this.height - BOTTOM_BUTTON_HEIGHT_OFFSET,
+                (this.height / 2) + 80,
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
                 new StringTextComponent("取消"),
                 button -> {
                     Minecraft.getInstance().displayGuiScreen(null);
                 }));
 
-        Translation = new TextFieldWidget(this.font, this.xSize - 220, this.ySize - 97, 120, 20, new StringTextComponent("請輸入譯文")) {
+        Translation = new TextFieldWidget(this.font, (this.width / 2) - 50, (this.height / 2) + 10, 120, 20, new StringTextComponent("請輸入譯文")) {
             {
                 setSuggestion("請輸入譯文");
             }
@@ -156,13 +156,17 @@ public final class CrowdinScreen extends Screen {
         RenderSystem.disableBlend();
         this.renderBackground(matrixStack);
 
-        this.font.drawString(matrixStack, "RPMTW 物品翻譯介面", (this.width / 2) - 50, (this.height / 2) - 90, -65536);
-        this.font.drawString(matrixStack, "原文: " + Text, 183, 60, -256);
-        this.font.drawString(matrixStack, "語系鍵: " + item_key, 183, 44, -256);
-        this.font.drawString(matrixStack, "顯示名稱: " + item_DisplayName, 183, 90, -256);
-        this.font.drawString(matrixStack, "所屬模組 ID: " + mod_id, 183, 75, -256);
+        int width = (this.width / 2);
+        int height = (this.height / 2);
+        int TextColor = -256;
 
-        Translation.render(matrixStack, mouseX, mouseY, partialTicks);
+        this.font.drawString(matrixStack, "RPMTW 物品翻譯介面", width - 50, height - 105, -65536);
+        this.font.drawString(matrixStack, "原文: " + Text, width - 50, height - 80, TextColor);
+        this.font.drawString(matrixStack, "語系鍵: " + item_key, width - 50, height - 65, TextColor);
+        this.font.drawString(matrixStack, "顯示名稱: " + item_DisplayName, width - 50, height - 50, TextColor);
+        this.font.drawString(matrixStack, "所屬模組 ID: " + mod_id, width - 50, height - 35, TextColor);
+
+        Translation.render(matrixStack, mouseX, mouseY, partialTicks);//渲染文字框
 
         drawCenteredString(matrixStack, this.font, this.title.getString(),
                 this.width / 2, TITLE_HEIGHT, 0xFFFFFF);
