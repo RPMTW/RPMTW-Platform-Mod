@@ -24,10 +24,9 @@ import java.io.IOException;
 
 public final class CrowdinScreen extends Screen {
 
-    private static final ResourceLocation texture = new ResourceLocation("rpmtw_update_mod:textures/crowdin_gui.png");
     static final int BUTTON_HEIGHT = 20;
+    private static final ResourceLocation texture = new ResourceLocation("rpmtw_update_mod:textures/crowdin_gui.png");
     private static final int TITLE_HEIGHT = 8;
-    private static final int BOTTOM_BUTTON_HEIGHT_OFFSET = 26;
     private static final int BOTTOM_BUTTON_WIDTH = 95;
     TextFieldWidget Translation;
     int xSize = 405;
@@ -121,8 +120,6 @@ public final class CrowdinScreen extends Screen {
         this.children.add(Translation);
         Translation.setMaxStringLength(32767);
     }
-
-    ;
 
     @Override
     public void tick() {

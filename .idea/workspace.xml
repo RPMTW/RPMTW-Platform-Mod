@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="重寫Forge遊戲內翻譯，剩下動態GUI">
+    <list default="true" id="30b4f263-aea8-4892-b346-eec82d676593" name="預設的" comment="校正UI縮放時會歪掉問題">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/CrowdinScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/1.16-forge/src/main/java/siongsng/rpmtwupdatemod/gui/CrowdinScreen.java" afterDir="false" />
     </list>
@@ -198,7 +198,7 @@
       <command value="gradle --gradle-user-home" />
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.1.16-forge [runClient]">
+  <component name="RunManager" selected="Gradle.1.16-forge [build]">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -233,27 +233,6 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="1.16-Fabric [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/1.16-Fabric" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="build" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
     <configuration name="1.16-Fabric [runClient]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -266,6 +245,27 @@
         <option name="taskNames">
           <list>
             <option value="runClient" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="1.16-forge [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/1.16-forge" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -318,19 +318,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Gradle.1.16-Fabric [build]" />
       <item itemvalue="Gradle.1.16-Fabric [runClient]" />
       <item itemvalue="Gradle.1.16-forge [runClient]" />
       <item itemvalue="Gradle.1.16-forge [prepareRuns]" />
       <item itemvalue="Gradle.1.16-Fabric [buildDependents]" />
+      <item itemvalue="Gradle.1.16-forge [build]" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.1.16-forge [build]" />
         <item itemvalue="Gradle.1.16-forge [runClient]" />
         <item itemvalue="Gradle.1.16-Fabric [buildDependents]" />
         <item itemvalue="Gradle.1.16-Fabric [runClient]" />
         <item itemvalue="Gradle.1.16-forge [prepareRuns]" />
-        <item itemvalue="Gradle.1.16-Fabric [build]" />
       </list>
     </recent_temporary>
   </component>
@@ -441,14 +441,7 @@
       <workItem from="1620821636576" duration="3393000" />
       <workItem from="1620913280693" duration="4443000" />
       <workItem from="1620985966155" duration="13824000" />
-      <workItem from="1621035241716" duration="3719000" />
-    </task>
-    <task id="LOCAL-00033" summary="1.0.8-Bate &amp; Update Forge ver to 36.1.6">
-      <created>1619008011423</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1619008011423</updated>
+      <workItem from="1621035241716" duration="4678000" />
     </task>
     <task id="LOCAL-00034" summary="模組版本檢測">
       <created>1619098052653</created>
@@ -786,7 +779,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621006041520</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="校正UI縮放時會歪掉問題">
+      <created>1621039882975</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1621039882975</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -819,7 +819,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="上傳忘記上傳的" />
     <MESSAGE value="繼續優化" />
     <MESSAGE value="優劃一些訊息內容及變數。" />
     <MESSAGE value="Update" />
@@ -844,7 +843,8 @@
     <MESSAGE value="復，刪除宇宙通訊系統。" />
     <MESSAGE value="臨時修復錯誤" />
     <MESSAGE value="重寫Forge遊戲內翻譯，剩下動態GUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="重寫Forge遊戲內翻譯，剩下動態GUI" />
+    <MESSAGE value="校正UI縮放時會歪掉問題" />
+    <option name="LAST_COMMIT_MESSAGE" value="校正UI縮放時會歪掉問題" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">

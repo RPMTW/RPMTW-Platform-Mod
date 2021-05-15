@@ -50,13 +50,12 @@ public class RpmtwUpdateMod {
         }
         new PackVersionCheck(); //資源包版本檢查
 
-        if (!Configer.Token.get().equals("")) { //如果Token不是空的
-            try {
-                new TokenCheck().Check(Configer.Token.get()); //開始檢測
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            new TokenCheck().Check(Configer.Token.get()); //開始檢測
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
     }
 
     @SubscribeEvent
