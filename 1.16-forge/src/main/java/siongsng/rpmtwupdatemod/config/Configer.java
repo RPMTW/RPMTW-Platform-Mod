@@ -33,7 +33,7 @@ public class Configer {
                 .comment("DiscordPrefix = 是否啟用宇宙通訊系統發送訊息時需要前綴(預設為!)")
                 .define("rpmtw.DiscordPrefix", true);
         isCheck = client
-                .define("rpmtw.isCheck", true);
+                .define("rpmtw.isCheck", false);
         Update_interval = client
                 .comment("Update_interval = 每次啟動遊戲時，自動RPMTW更新時所檢查的版本間隔。(此變更須重啟遊戲後生效)")
                 .defineInRange("rpmtw.Update_interval", 0, 0, 20);

@@ -50,8 +50,9 @@ public class RpmtwUpdateMod {
         }
         new PackVersionCheck(); //資源包版本檢查
 
+
         try {
-            new TokenCheck().Check(Configer.Token.get()); //開始檢測
+            new TokenCheck().Check(Configer.Token.get()); //開始檢測權杖
         } catch (IOException e) {
             e.printStackTrace();
         }

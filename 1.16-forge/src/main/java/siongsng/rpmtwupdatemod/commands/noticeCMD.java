@@ -3,10 +3,10 @@ package siongsng.rpmtwupdatemod.commands;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.command.CommandSource;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import siongsng.rpmtwupdatemod.function.SendMsg;
-import siongsng.rpmtwupdatemod.notice.noticeGet;
 
 public class noticeCMD {
     @SubscribeEvent
@@ -20,7 +20,7 @@ public class noticeCMD {
 
     private int exe(CommandContext<CommandSource> ctx) {
         try {
-            SendMsg.send(noticeGet.get().replace("\\n", "\n"));
+            SendMsg.send(new TranslationTextComponent("gui.notice").toString());
         } catch (Exception e) {
             e.printStackTrace();
         }

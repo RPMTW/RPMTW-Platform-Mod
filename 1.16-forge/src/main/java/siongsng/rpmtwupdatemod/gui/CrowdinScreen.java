@@ -151,6 +151,7 @@ public final class CrowdinScreen extends Screen {
         int l = (this.height - this.ySize) / 2;
         blit(matrixStack, k, l, 0, 0, this.xSize, this.ySize, this.xSize, this.ySize);
         RenderSystem.disableBlend();
+
         this.renderBackground(matrixStack);
 
         int width = (this.width / 2);
