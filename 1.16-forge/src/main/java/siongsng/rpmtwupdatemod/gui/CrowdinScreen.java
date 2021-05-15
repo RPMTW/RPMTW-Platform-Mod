@@ -69,7 +69,7 @@ public final class CrowdinScreen extends Screen {
                     if (Translation.getText().equals("")) {
                         SendMsg.send("§4譯文不能是空的呦!");
                     } else {
-                        SendMsg.send("§b已成功提交翻譯，將 §e" + Text + " §b翻譯為 §e" + Translation.getText() + "§b 。");
+                        SendMsg.send("§b已成功提交翻譯，將 §e" + Text + " §b翻譯為 §e" + Translation.getText() + "§b 。(約十分鐘後將會將內容套用變更至翻譯包)");
                     }
                     CloseableHttpClient httpClient = HttpClients.createDefault();
                     StringEntity requestEntity = new StringEntity(
@@ -156,7 +156,7 @@ public final class CrowdinScreen extends Screen {
 
         int width = (this.width / 2);
         int height = (this.height / 2);
-        int TextColor = -256;
+        int TextColor = 0xFFFFFF;
 
         this.font.drawString(matrixStack, "RPMTW 物品翻譯介面", width - 50, height - 105, -65536);
         this.font.drawString(matrixStack, "原文: " + Text, width - 50, height - 80, TextColor);

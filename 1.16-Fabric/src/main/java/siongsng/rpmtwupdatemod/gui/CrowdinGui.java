@@ -67,7 +67,7 @@ public class CrowdinGui extends LightweightGuiDescription {
             if (Translations.getText().equals("")) {
                 SendMsg.send("§4譯文不能是空的呦!");
             } else {
-                SendMsg.send("§b已成功提交翻譯，將 §e" + Text + " §b翻譯為 §e" + Translations.getText() + "§b 。");
+                SendMsg.send("§b已成功提交翻譯，將 §e" + Text + " §b翻譯為 §e" + Translations.getText() + "§b 。(約十分鐘後將會將內容套用變更至翻譯包)");
             }
             CloseableHttpClient httpClient = HttpClients.createDefault();
             StringEntity requestEntity = new StringEntity(

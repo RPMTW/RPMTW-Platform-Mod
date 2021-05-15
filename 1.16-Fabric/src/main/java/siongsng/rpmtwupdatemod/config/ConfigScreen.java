@@ -10,7 +10,7 @@ public class ConfigScreen implements ConfigData {
     public static boolean DiscordPrefix = true;*/
     @Comment("是否啟用點擊指定快捷鍵(預設為V)後開啟翻譯網頁，並顯示相關資訊。")
     public boolean crowdin = true;
-    @Comment("是否啟用使用快捷鍵(預設為R)快速重新載入RPMTW繁體中文資源包。")
+    @Comment("是否啟用使用快捷鍵(預設為R)檢測RPMTW翻譯包更新。")
     public boolean reloadpack = true;
     @Comment("是否啟用使用快捷鍵(預設為U)回報翻譯錯誤。")
     public boolean report_translation = true;
@@ -20,7 +20,7 @@ public class ConfigScreen implements ConfigData {
     public boolean afk = true;
     /*    @Comment("是否啟用宇宙通訊系統。")
         public boolean discord = true;*/
-    @Comment("每次啟動遊戲時，自動RPMTW更新時所檢查的版本間隔。(此變更須重啟遊戲後生效)")
+    @Comment("每次啟動遊戲時，自動RPMTW翻譯包更新時所檢查的版本間隔。(此變更須重啟遊戲後生效)")
     public int Update_interval = 0;
     @Comment("數值以秒為單位")
     public int afkTime = 600;
