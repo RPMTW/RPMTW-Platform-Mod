@@ -23,7 +23,7 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: |
-         ${{ github.workspace }}/1.16-forge/gradlew build
+         sudo ${{ github.workspace }}/1.16-forge/gradlew build
     - name: "Upload Artifact"
       uses: actions/upload-artifact@v1
       with:
