@@ -157,12 +157,17 @@ public final class CrowdinScreen extends Screen {
         int width = (this.width / 2);
         int height = (this.height / 2);
         int TextColor = 0xFFFFFF;
+        String rpmTScreen = "物品翻譯介面";
+        String originalText = "原文: " + Text;
+        String langKey = "語系鍵: " + item_key;
+        String displayName = "顯示名稱: " + item_DisplayName;
+        String parentModID = "所屬模組 ID: " + mod_id;
 
-        this.font.drawString(matrixStack, "RPMTW 物品翻譯介面", width - 50, height - 105, -65536);
-        this.font.drawString(matrixStack, "原文: " + Text, width - 50, height - 80, TextColor);
-        this.font.drawString(matrixStack, "語系鍵: " + item_key, width - 50, height - 65, TextColor);
-        this.font.drawString(matrixStack, "顯示名稱: " + item_DisplayName, width - 50, height - 50, TextColor);
-        this.font.drawString(matrixStack, "所屬模組 ID: " + mod_id, width - 50, height - 35, TextColor);
+        this.font.drawString(matrixStack, rpmTScreen, this.font.getStringWidth(rpmTScreen), height - 105, -65536);
+        this.font.drawString(matrixStack, originalText, this.font.getStringWidth(originalText), height - 80, TextColor);
+        this.font.drawString(matrixStack, langKey, this.font.getStringWidth(langKey), height - 65, TextColor);
+        this.font.drawString(matrixStack, displayName, this.font.getStringWidth(displayName), height - 50, TextColor);
+        this.font.drawString(matrixStack, parentModID, this.font.getStringWidth(parentModID), height - 35, TextColor);
 
         Translation.render(matrixStack, mouseX, mouseY, partialTicks);//渲染文字框
 
