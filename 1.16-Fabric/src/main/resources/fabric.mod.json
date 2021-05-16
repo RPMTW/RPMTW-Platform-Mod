@@ -14,7 +14,7 @@
     "issues": "https://github.com/SiongSng/RPMTW-Update-Mod/issues"
   },
   "license": "MIT",
-  "environment": "*",
+  "environment": "client",
   "entrypoints": {
     "client": [
       "siongsng.rpmtwupdatemod.RpmtwUpdateMod"
