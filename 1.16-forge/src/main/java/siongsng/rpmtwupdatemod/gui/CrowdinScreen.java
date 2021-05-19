@@ -154,8 +154,6 @@ public final class CrowdinScreen extends Screen {
 
         this.renderBackground(matrixStack);
 
-        int width = (this.width / 2);
-        int height = (this.height / 2);
         int TextColor = 0xFFFFFF;
         String rpmTScreen = "物品翻譯介面";
         String originalText = "原文: " + Text;
