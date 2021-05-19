@@ -154,6 +154,8 @@ public final class CrowdinScreen extends Screen {
 
         this.renderBackground(matrixStack);
 
+        int width = (this.width / 2);
+        int height = (this.height / 2);
         int TextColor = 0xFFFFFF;
         String rpmTScreen = "物品翻譯介面";
         String originalText = "原文: " + Text;
@@ -161,11 +163,11 @@ public final class CrowdinScreen extends Screen {
         String displayName = "顯示名稱: " + item_DisplayName;
         String parentModID = "所屬模組 ID: " + mod_id;
 
-        this.font.drawString(matrixStack, rpmTScreen, width / (float) 2 - this.font.getStringWidth(rpmTScreen) / (float) 2, height - 105, -65536);
-        this.font.drawString(matrixStack, originalText, width / (float) 2 - this.font.getStringWidth(originalText) / (float) 2, height - 80, TextColor);
-        this.font.drawString(matrixStack, langKey, width / (float) 2 - this.font.getStringWidth(langKey) / (float) 2, height - 65, TextColor);
-        this.font.drawString(matrixStack, displayName, width / (float) 2 - this.font.getStringWidth(displayName) / (float) 2, height - 50, TextColor);
-        this.font.drawString(matrixStack, parentModID, width / (float) 2 - this.font.getStringWidth(parentModID) / (float) 2, height - 35, TextColor);
+        this.font.drawString(matrixStack, rpmTScreen, this.width / (float) 2 - this.font.getStringWidth(rpmTScreen) / (float) 2, height - 105, -65536);
+        this.font.drawString(matrixStack, originalText, this.width / (float) 2 - this.font.getStringWidth(originalText) / (float) 2, height - 80, TextColor);
+        this.font.drawString(matrixStack, langKey, this.width / (float) 2 - this.font.getStringWidth(langKey) / (float) 2, height - 65, TextColor);
+        this.font.drawString(matrixStack, displayName, this.width / (float) 2 - this.font.getStringWidth(displayName) / (float) 2, height - 50, TextColor);
+        this.font.drawString(matrixStack, parentModID, this.width / (float) 2 - this.font.getStringWidth(parentModID) / (float) 2, height - 35, TextColor);
 
         Translation.render(matrixStack, mouseX, mouseY, partialTicks);//渲染文字框
 
