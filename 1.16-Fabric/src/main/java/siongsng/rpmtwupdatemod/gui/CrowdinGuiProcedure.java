@@ -36,7 +36,6 @@ public class CrowdinGuiProcedure {
             stringID = "無法取得";
             RpmtwUpdateMod.LOGGER.error("讀取翻譯資訊時發生錯誤: " + e.getMessage());
         }
-
         return Text;
     }
 }

@@ -12,35 +12,39 @@ import siongsng.rpmtwupdatemod.function.SendMsg;
 
 import java.io.IOException;
 
-public class TokenCheck extends Thread {
+public class TokenCheck {
     public static Boolean isCheck = false;
 
-    public TokenCheck() {
-        this.setDaemon(true);
-        this.start();
-    }
-
-    public void Check(String token) throws IOException {
-        HttpClient client = HttpClients.custom().build();
-        HttpUriRequest request = RequestBuilder.get()
-                .setUri("https://api.crowdin.com/api/v2/projects/442446")
-                .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
-                .setHeader("Authorization", "Bearer " + token)
-                .build();
-        HttpResponse response = client.execute(request);
-
-        if (response.getStatusLine().getStatusCode() == 200) {
-            if (MinecraftClient.getInstance().player != null) {
-                SendMsg.send("§9[Crowdin權杖自動檢測系統]§a檢測成功，您的登入權杖是有效的。");
+    public void Check(String token) {
+        Thread thread = new Thread(() -> {
+            HttpClient client = HttpClients.custom().build();
+            HttpUriRequest request = RequestBuilder.get()
+                    .setUri("https://api.crowdin.com/api/v2/projects/442446")
+                    .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
+                    .setHeader("Authorization", "Bearer " + token)
+                    .build();
+            HttpResponse response = null;
+            try {
+                response = client.execute(request);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            RpmtwUpdateMod.LOGGER.info("[Crowdin權杖自動檢測系統]§a檢測成功，您的登入權杖是有效的。");
-            isCheck = true;
-        } else {
-            if (MinecraftClient.getInstance().player != null) {
-                SendMsg.send("§9[Crowdin權杖自動檢測系統]§c檢測失敗，登入權杖無效，請再嘗試新增或至RPMTW官方Discord群組尋求協助。\n官方Discord群組:https://discord.gg/5xApZtgV2u");
+
+            assert response != null;
+            if (response.getStatusLine().getStatusCode() == 200) {
+                if (MinecraftClient.getInstance().player != null) {
+                    SendMsg.send("§9[Crowdin權杖自動檢測系統]§a檢測成功，您的登入權杖是有效的。");
+                }
+                RpmtwUpdateMod.LOGGER.info("[Crowdin權杖自動檢測系統]§a檢測成功，您的登入權杖是有效的。");
+                isCheck = true;
+            } else {
+                if (MinecraftClient.getInstance().player != null) {
+                    SendMsg.send("§9[Crowdin權杖自動檢測系統]§c檢測失敗，登入權杖無效，請再嘗試新增或至RPMTW官方Discord群組尋求協助。\n官方Discord群組:https://discord.gg/5xApZtgV2u");
+                }
+                RpmtwUpdateMod.LOGGER.info("[Crowdin權杖自動檢測系統]§c檢測失敗，登入權杖無效，請再嘗試新增或至RPMTW官方Discord群組尋求協助。\n官方Discord群組:https://discord.gg/5xApZtgV2u");
+                isCheck = false;
             }
-            RpmtwUpdateMod.LOGGER.info("[Crowdin權杖自動檢測系統]§c檢測失敗，登入權杖無效，請再嘗試新增或至RPMTW官方Discord群組尋求協助。\n官方Discord群組:https://discord.gg/5xApZtgV2u");
-            isCheck = false;
-        }
+        });
+        thread.start();
     }
 }

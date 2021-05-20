@@ -48,12 +48,17 @@ public class key {
                     } else if (!TokenCheck.isCheck && config.Token.equals("")) {
                         SendMsg.send("§c請先新增Crowdin登入權杖(詳情請看: https://www.rpmtw.ga/Wiki/RPMTW-Update-Mod-Related#h.x230ggwx63l4)。\n§a或者到RPMTW官方Discord群組尋求協助:https://discord.gg/5xApZtgV2u");
                         return;
-                    } else if (CrowdinGuiProcedure.getText().equals("無法取得") && TokenCheck.isCheck) {
-                        SendMsg.send("§6由於你目前手持想要翻譯的物品，數據不在資料庫內\n因此無法進行翻譯，想了解更多資訊請前往RPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
-                        return;
+                    } else {
+                        SendMsg.send("請稍後，正在開啟物品翻譯界面中...");
+                        Thread thread = new Thread(() -> {
+                            if (CrowdinGuiProcedure.getText().equals("無法取得") && TokenCheck.isCheck) {
+                                SendMsg.send("§6由於你目前手持想要翻譯的物品，數據不在資料庫內\n因此無法進行翻譯，想了解更多資訊請前往RPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
+                                return;
+                            }
+                            MinecraftClient.getInstance().openScreen(new CrowdinGuiScreen(new CrowdinGui()));
+                        });
+                        thread.start();
                     }
-                    SendMsg.send("請稍後，正在開啟物品翻譯界面中...");
-                    MinecraftClient.getInstance().openScreen(new CrowdinGuiScreen(new CrowdinGui()));
                 }
             }
             if (config.reloadpack) {

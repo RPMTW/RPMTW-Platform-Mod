@@ -56,9 +56,7 @@ public class CrowdinGui extends LightweightGuiDescription {
         gui.add(Done, (int) 9.5, 9, 4, 2);
         gui.add(Crowdin, 15, 9, 4, 2);
 
-        Close.setOnClick(() -> {
-            MinecraftClient.getInstance().openScreen(null);
-        });
+        Close.setOnClick(() -> MinecraftClient.getInstance().openScreen(null));
 
         WTextField Translations = new WTextField(new LiteralText("請輸入譯文"));
         gui.add(Translations, (int) 9.5, 7, 6, 2);
@@ -66,27 +64,31 @@ public class CrowdinGui extends LightweightGuiDescription {
         Done.setOnClick(() -> {
             if (Translations.getText().equals("")) {
                 SendMsg.send("§4譯文不能是空的呦!");
+                return;
             } else {
                 SendMsg.send("§b已成功提交翻譯，將 §e" + Text + " §b翻譯為 §e" + Translations.getText() + "§b 。(約十分鐘後將會將內容套用變更至翻譯包)");
+                MinecraftClient.getInstance().openScreen(null);
             }
-            CloseableHttpClient httpClient = HttpClients.createDefault();
-            StringEntity requestEntity = new StringEntity(
-                    "{\"stringId\":\"" + stringID + "\",\"languageId\":\"zh-TW\",\"text\": \"" + Translations.getText() + "\"}",
-                    ContentType.APPLICATION_JSON);
-            HttpPost postMethod = new HttpPost("https://api.crowdin.com/api/v2/projects/442446/translations");
-            postMethod.setHeader("Authorization", "Bearer " + Configer.config.Token);
-            postMethod.setEntity(requestEntity);
-            try {
-                httpClient.execute(postMethod);
+            Thread thread = new Thread(() -> {
+                CloseableHttpClient httpClient = HttpClients.createDefault();
+                StringEntity requestEntity = new StringEntity(
+                        "{\"stringId\":\"" + stringID + "\",\"languageId\":\"zh-TW\",\"text\": \"" + Translations.getText() + "\"}",
+                        ContentType.APPLICATION_JSON);
+                HttpPost postMethod = new HttpPost("https://api.crowdin.com/api/v2/projects/442446/translations");
+                postMethod.setHeader("Authorization", "Bearer " + Configer.config.Token);
+                postMethod.setEntity(requestEntity);
+                try {
+                    httpClient.execute(postMethod);
                 /*
                 CloseableHttpResponse response = httpClient.execute(postMethod);
                 String responseBody = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
                 System.out.print(responseBody);
                 */
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-            MinecraftClient.getInstance().openScreen(null);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            });
+            thread.start();
         });
         Crowdin.setOnClick(() -> {
             String url = "https://crowdin.com/translate/resourcepack-mod-zhtw/all/en-zhtw?filter=basic&value=0#q=" + stringID;

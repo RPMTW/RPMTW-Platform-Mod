@@ -26,7 +26,6 @@ public final class CrowdinScreen extends Screen {
 
     static final int BUTTON_HEIGHT = 20;
     private static final ResourceLocation texture = new ResourceLocation("rpmtw_update_mod:textures/crowdin_gui.png");
-    private static final int TITLE_HEIGHT = 8;
     private static final int BOTTOM_BUTTON_WIDTH = 95;
     TextFieldWidget Translation;
     int xSize = 405;
@@ -68,22 +67,27 @@ public final class CrowdinScreen extends Screen {
                 button -> {
                     if (Translation.getText().equals("")) {
                         SendMsg.send("§4譯文不能是空的呦!");
+                        Minecraft.getInstance().displayGuiScreen(null);
+                        return;
                     } else {
                         SendMsg.send("§b已成功提交翻譯，將 §e" + Text + " §b翻譯為 §e" + Translation.getText() + "§b 。(約十分鐘後將會將內容套用變更至翻譯包)");
+                        Minecraft.getInstance().displayGuiScreen(null);
                     }
-                    CloseableHttpClient httpClient = HttpClients.createDefault();
-                    StringEntity requestEntity = new StringEntity(
-                            "{\"stringId\":\"" + stringID + "\",\"languageId\":\"zh-TW\",\"text\": \"" + Translation.getText() + "\"}",
-                            ContentType.APPLICATION_JSON);
-                    HttpPost postMethod = new HttpPost("https://api.crowdin.com/api/v2/projects/442446/translations");
-                    postMethod.setHeader("Authorization", "Bearer " + Configer.Token.get());
-                    postMethod.setEntity(requestEntity);
-                    try {
-                        httpClient.execute(postMethod);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                    Minecraft.getInstance().displayGuiScreen(null);
+                    Thread thread = new Thread(() -> {
+                        CloseableHttpClient httpClient = HttpClients.createDefault();
+                        StringEntity requestEntity = new StringEntity(
+                                "{\"stringId\":\"" + stringID + "\",\"languageId\":\"zh-TW\",\"text\": \"" + Translation.getText() + "\"}",
+                                ContentType.APPLICATION_JSON);
+                        HttpPost postMethod = new HttpPost("https://api.crowdin.com/api/v2/projects/442446/translations");
+                        postMethod.setHeader("Authorization", "Bearer " + Configer.Token.get());
+                        postMethod.setEntity(requestEntity);
+                        try {
+                            httpClient.execute(postMethod);
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                    });
+                    thread.start();
                 }));
         this.addButton(new Button(
                 (this.width - 100) / 2 - BOTTOM_BUTTON_WIDTH,
@@ -154,7 +158,6 @@ public final class CrowdinScreen extends Screen {
 
         this.renderBackground(matrixStack);
 
-        int width = (this.width / 2);
         int height = (this.height / 2);
         int TextColor = 0xFFFFFF;
         String rpmTScreen = "物品翻譯介面";
@@ -172,7 +175,7 @@ public final class CrowdinScreen extends Screen {
         Translation.render(matrixStack, mouseX, mouseY, partialTicks);//渲染文字框
 
         drawCenteredString(matrixStack, this.font, this.title.getString(),
-                this.width / 2, TITLE_HEIGHT, 0xFFFFFF);
+                this.width / 2, 8, 0xFFFFFF);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
     }
 

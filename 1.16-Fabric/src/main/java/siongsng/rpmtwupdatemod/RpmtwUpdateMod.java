@@ -12,8 +12,6 @@ import siongsng.rpmtwupdatemod.config.Configer;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.crowdin.key;
 
-import java.io.IOException;
-
 @Environment(EnvType.CLIENT)
 public class RpmtwUpdateMod implements ClientModInitializer {
     public static final Logger LOGGER = LogManager.getLogger("rpmtw_update_mod");
@@ -31,22 +29,14 @@ public class RpmtwUpdateMod implements ClientModInitializer {
         key.onInitializeClient(); //註冊快捷鍵
         LOGGER.info("Hello RPMTW world!");
         AutoConfig.getConfigHolder(ConfigScreen.class).registerSaveListener((var1, sava) -> { //監聽儲存Config事件
-            try {
                 if (!sava.Token.equals("")) {
                     new TokenCheck().Check(sava.Token);
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
             return null;
         });
 
         if (!Configer.config.Token.equals("")) { //如果Token不是空的
-            try {
                 new TokenCheck().Check(Configer.config.Token); //開始檢測
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
 
     }
