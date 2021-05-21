@@ -10,8 +10,8 @@
   ],
   "contact": {
     "homepage": "https://www.rpmtw.ga",
-    "sources": "https://github.com/SiongSng/RPMTW-Update-Mod",
-    "issues": "https://github.com/SiongSng/RPMTW-Update-Mod/issues"
+    "sources": "https://github.com/RPMTW/RPMTW-Update-Mod",
+    "issues": "https://github.com/RPMTW/RPMTW-Update-Mod/issues"
   },
   "license": "MIT",
   "environment": "client",

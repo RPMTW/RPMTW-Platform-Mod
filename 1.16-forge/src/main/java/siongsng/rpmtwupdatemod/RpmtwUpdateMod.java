@@ -54,7 +54,7 @@ public class RpmtwUpdateMod {
         try {
             new TokenCheck().Check(Configer.Token.get()); //開始檢測權杖
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("檢測權杖時發生未知錯誤：" + e);
         }
 
     }
