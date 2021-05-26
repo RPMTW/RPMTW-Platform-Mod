@@ -62,7 +62,7 @@ public class AFK {
                 if (info.getValue().player.getPosition().equals(info.getValue().position)) {
                     if (info.getValue().isAfk() && !info.getValue().isAfk) {
                         info.getValue().isAfk = true;
-                        SendMsg.send("§6你開始掛機了! 因此開始檢測版本並下載新翻譯。");
+                        SendMsg.send("§6偵測到你開始掛機了! 因此開始自動檢測翻譯包版本並且做更新。");
                         new ReloadPack();
                     } else {
                         info.getValue().afkTime++;

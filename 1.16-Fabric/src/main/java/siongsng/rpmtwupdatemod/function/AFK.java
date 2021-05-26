@@ -17,7 +17,7 @@ public class AFK {
             boolean afk = afkTime > config.afkTime;
 
             if (afk && !wasAfk) {
-                SendMsg.send("§6你開始掛機了! 因此開始檢測版本並下載新翻譯。");
+                SendMsg.send("§6偵測到你開始掛機了! 因此開始自動檢測翻譯包版本並且做更新。");
                 new ReloadPack();
             } else if (!afk && wasAfk) {
                 SendMsg.send("§a你不再掛機了!");

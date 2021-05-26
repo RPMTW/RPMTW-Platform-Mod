@@ -40,11 +40,11 @@ public class PackVersionCheck {
         RpmtwUpdateMod.LOGGER.info("正在準備檢測資源包版本，最新版本:" + Latest_ver);
         try {
             if (Integer.parseInt(Latest_ver_n) > Old_ver || !Files.exists(PackFile)) {
-                RpmtwUpdateMod.LOGGER.info("§6偵測到資源包版本過舊，正在進行更新並重新載入中...。目前版本為:" + Old_ver + "最新版本為:" + Latest_ver_n);
+                RpmtwUpdateMod.LOGGER.info("偵測到翻譯包版本過舊，正在進行更新並重新載入中...。目前版本為:" + Old_ver + "，最新版本為:" + Latest_ver_n);
                 FileWriter.Writer(Latest_ver_n, UpdateFile); //寫入最新版本
                 FileUtils.copyURLToFile(new URL("https://github.com/RPMTW/ResourcePack-Mod-zh_tw/releases/latest/download/RPMTW-1.16.zip"), PackFile.toFile()); //下載資源包檔案
             } else {
-                RpmtwUpdateMod.LOGGER.info("目前的RPMTW版本已經是最新的了!!");
+                RpmtwUpdateMod.LOGGER.info("目前的RPMTW翻譯包版本已經是最新的了!因此不進行更新作業。");
             }
             Class.forName("siongsng.rpmtwupdatemod.packs.LoadPack").getMethod("init", Set.class).invoke(null, providers);
         } catch (Exception e) {
