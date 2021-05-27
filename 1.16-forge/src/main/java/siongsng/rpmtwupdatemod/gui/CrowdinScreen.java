@@ -147,7 +147,6 @@ public final class CrowdinScreen extends Screen {
     @Override
     public void render(@Nonnull MatrixStack matrixStack,
                        int mouseX, int mouseY, float partialTicks) {
-        RenderSystem.color4f(1, 1, 1, 1);
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
         Minecraft.getInstance().getTextureManager().bindTexture(texture);

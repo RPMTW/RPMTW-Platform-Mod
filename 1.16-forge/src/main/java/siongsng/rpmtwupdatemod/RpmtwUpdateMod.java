@@ -13,7 +13,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import siongsng.rpmtwupdatemod.commands.AddToken;
 import siongsng.rpmtwupdatemod.commands.noticeCMD;
 import siongsng.rpmtwupdatemod.config.Config;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
@@ -63,7 +62,6 @@ public class RpmtwUpdateMod {
     public void init(final FMLClientSetupEvent e) {
         FMLJavaModLoadingContext.get().getModEventBus().register(this);
         MinecraftForge.EVENT_BUS.register(new key());  //快捷鍵註冊
-        MinecraftForge.EVENT_BUS.register(new AddToken()); //AddToken指令註冊
         MinecraftForge.EVENT_BUS.register(new noticeCMD()); //noticeCMD指令註冊
         if (Configer.notice.get()) { //判斷Config
             MinecraftForge.EVENT_BUS.register(new notice()); //玩家加入事件註冊

@@ -17,6 +17,7 @@ import siongsng.rpmtwupdatemod.config.Configer;
 import siongsng.rpmtwupdatemod.function.ReloadPack;
 import siongsng.rpmtwupdatemod.function.SendMsg;
 import siongsng.rpmtwupdatemod.gui.CorwidnProcedure;
+import siongsng.rpmtwupdatemod.gui.CrowdinLoginScreen;
 import siongsng.rpmtwupdatemod.gui.CrowdinScreen;
 
 public final class key {
@@ -55,7 +56,7 @@ public final class key {
                 SendMsg.send("§4請手持物品後再使用此功能。");
                 return;
             } else if (!Configer.isCheck.get()) {
-                SendMsg.send("§c請先新增Crowdin登入權杖(詳情請看教學: https://bit.ly/3f3Y2MO)。\n§a或者到RPMTW官方Discord群組尋求協助:https://discord.gg/5xApZtgV2u");
+                Minecraft.getInstance().displayGuiScreen(new CrowdinLoginScreen());
                 return;
             } else {
                 SendMsg.send("請稍後，正在開啟物品翻譯界面中...");
