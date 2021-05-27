@@ -29,14 +29,14 @@ public class RpmtwUpdateMod implements ClientModInitializer {
         key.onInitializeClient(); //註冊快捷鍵
         LOGGER.info("Hello RPMTW world!");
         AutoConfig.getConfigHolder(ConfigScreen.class).registerSaveListener((var1, sava) -> { //監聽儲存Config事件
-                if (!sava.Token.equals("")) {
-                    new TokenCheck().Check(sava.Token);
-                }
+            if (!sava.Token.equals("")) {
+                new TokenCheck().Check(sava.Token);
+            }
             return null;
         });
 
         if (!Configer.config.Token.equals("")) { //如果Token不是空的
-                new TokenCheck().Check(Configer.config.Token); //開始檢測
+            new TokenCheck().Check(Configer.config.Token); //開始檢測
         }
 
     }
