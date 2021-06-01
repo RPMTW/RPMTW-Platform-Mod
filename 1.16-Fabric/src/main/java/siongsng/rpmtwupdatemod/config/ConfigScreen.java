@@ -16,7 +16,7 @@ public class ConfigScreen implements ConfigData {
     @Comment("進入世界時，是否自動發送公告。(此變更須重啟遊戲後生效)")
     public boolean notice = true;
     @Comment("是否啟用掛機偵測，啟用後當掛機時會自動更新翻譯。")
-    public boolean afk = true;
+    public boolean afk = false;
     @Comment("每次啟動遊戲時，自動RPMTW翻譯包更新時所檢查的版本間隔。(此變更須重啟遊戲後生效)")
     public int UpdateInterval = 0;
     @Comment("數值以秒為單位")

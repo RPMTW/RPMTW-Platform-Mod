@@ -17,8 +17,8 @@ import siongsng.rpmtwupdatemod.function.SendMsg;
 import siongsng.rpmtwupdatemod.gui.*;
 
 public class key {
-    private static final KeyBinding crowdin = new KeyBinding("key.rpmtw_update_mod.crowdin", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_V, "key.categories.rpmtw");
-    private static final KeyBinding reloadpack = new KeyBinding("key.rpmtw_update_mod.reloadpack", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_R, "key.categories.rpmtw");
+    private static final KeyBinding crowdin = new KeyBinding("key.rpmtw_update_mod.crowdin", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "key.categories.rpmtw");
+    private static final KeyBinding reloadpack = new KeyBinding("key.rpmtw_update_mod.reloadpack", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "key.categories.rpmtw");
     private static final KeyBinding report_translation = new KeyBinding("key.rpmtw_update_mod.report_translation", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_U, "key.categories.rpmtw");
     private static final KeyBinding open_config = new KeyBinding("key.rpmtw_update_mod.open_config", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_O, "key.categories.rpmtw");
 

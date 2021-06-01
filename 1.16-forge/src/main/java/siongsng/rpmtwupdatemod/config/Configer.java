@@ -25,7 +25,7 @@ public class Configer {
                 .define("rpmtw.notice", true);
         afk = client
                 .comment("afk = 是否啟用掛機偵測，啟用後當掛機時會自動更新翻譯。")
-                .define("rpmtw.afk", true);
+                .define("rpmtw.afk", false);
         discord = client
                 .comment("discord = 是否啟用宇宙通訊系統。")
                 .define("rpmtw.discord", true);

@@ -21,10 +21,10 @@ import siongsng.rpmtwupdatemod.gui.CrowdinLoginScreen;
 import siongsng.rpmtwupdatemod.gui.CrowdinScreen;
 
 public final class key {
-    public static final KeyBinding reloadpack = new KeyBinding("key.rpmtw_update_mod.reloadpack", KeyConflictContext.UNIVERSAL, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_R, "key.categories.rpmtw");
+    public static final KeyBinding reloadpack = new KeyBinding("key.rpmtw_update_mod.reloadpack", KeyConflictContext.UNIVERSAL, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "key.categories.rpmtw");
     public static final KeyBinding report_translation = new KeyBinding("key.rpmtw_update_mod.report_translation", KeyConflictContext.UNIVERSAL, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_U, "key.categories.rpmtw");
     public static final KeyBinding open_config = new KeyBinding("key.rpmtw_update_mod.open_config", KeyConflictContext.UNIVERSAL, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_O, "key.categories.rpmtw");
-    public static final KeyBinding Crowdin = new KeyBinding("key.rpmtw_update_mod.open_crowdin", GLFW.GLFW_KEY_V, "key.categories.rpmtw");
+    public static final KeyBinding Crowdin = new KeyBinding("key.rpmtw_update_mod.open_crowdin", GLFW.GLFW_KEY_UNKNOWN, "key.categories.rpmtw");
 
     private boolean showed = false;
 
