@@ -59,12 +59,12 @@ public class key {
                     }
                 }
             }
-            if (config.reloadpack) {
+            if (config.ReloadPack) {
                 while (reloadpack.wasPressed()) {
                     new ReloadPack();
                 }
             }
-            if (config.report_translation) {
+            if (config.ReportTranslation) {
                 while (report_translation.wasPressed()) {
                     assert client.player != null;
                     Item item = client.player.getMainHandStack().getItem();

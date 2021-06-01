@@ -14,7 +14,7 @@ public class AFK {
         if (System.nanoTime() - lastUpdate > 1e+9) {
             afkTime++;
 
-            boolean afk = afkTime > config.afkTime;
+            boolean afk = afkTime > config.AfkTime;
 
             if (afk && !wasAfk) {
                 SendMsg.send("§6偵測到你開始掛機了! 因此開始自動檢測翻譯包版本並且做更新。");

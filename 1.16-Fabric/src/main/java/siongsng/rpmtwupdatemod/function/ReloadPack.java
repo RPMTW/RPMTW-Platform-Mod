@@ -32,7 +32,7 @@ public class ReloadPack {
                     Old_ver = Integer.parseInt(br.readLine());
                 }
                 fr.close();
-                if (Integer.parseInt(Latest_ver_n) > Old_ver + config.Update_interval) {
+                if (Integer.parseInt(Latest_ver_n) > Old_ver + config.UpdateInterval) {
                     SendMsg.send("§6偵測到翻譯包版本過舊，正在進行更新並重新載入中...。目前版本為:" + Old_ver + "，最新版本為:" + Latest_ver_n);
                     FileWriter.Writer(Latest_ver_n, Update_Path); //寫入最新版本
                     FileUtils.copyURLToFile(new URL("https://github.com/RPMTW/ResourcePack-Mod-zh_tw/releases/latest/download/RPMTW-1.16.zip"), PACK_NAME.toFile()); //下載資源包檔案
