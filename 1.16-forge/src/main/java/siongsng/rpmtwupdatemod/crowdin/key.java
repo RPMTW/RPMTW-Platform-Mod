@@ -49,6 +49,7 @@ public final class key {
             return;
         }
         if (Crowdin.isPressed()) {
+            assert p != null;
             Item item = p.getHeldItemMainhand().getItem(); //拿的物品
             String item_key = item.getTranslationKey(); //物品的命名空間
 

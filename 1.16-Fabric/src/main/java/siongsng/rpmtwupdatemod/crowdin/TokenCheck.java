@@ -15,7 +15,6 @@ import siongsng.rpmtwupdatemod.function.SendMsg;
 import java.io.IOException;
 
 public class TokenCheck {
-    public static Boolean isCheck = false;
     ConfigScreen config = AutoConfig.getConfigHolder(ConfigScreen.class).getConfig();
 
     public void Check(String token) {
@@ -40,13 +39,13 @@ public class TokenCheck {
                 }
                 RpmtwUpdateMod.LOGGER.info("[Crowdin權杖自動檢測系統]§a檢測成功，您的登入權杖是有效的。");
                 config.Token = token;
-                isCheck = true;
+                config.isCheck = true;
             } else {
                 if (MinecraftClient.getInstance().player != null) {
                     SendMsg.send("§9[Crowdin權杖自動檢測系統]§c檢測失敗，登入權杖無效，請再嘗試新增或至RPMTW官方Discord群組尋求協助。\n官方Discord群組:https://discord.gg/5xApZtgV2u");
                 }
                 RpmtwUpdateMod.LOGGER.info("[Crowdin權杖自動檢測系統]§c檢測失敗，登入權杖無效，請再嘗試新增或至RPMTW官方Discord群組尋求協助。\n官方Discord群組:https://discord.gg/5xApZtgV2u");
-                isCheck = false;
+                config.isCheck = false;
             }
         });
         thread.start();

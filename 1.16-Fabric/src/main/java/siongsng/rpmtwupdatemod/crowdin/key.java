@@ -43,13 +43,13 @@ public class key {
                     if (item_key.equals("block.minecraft.air")) {
                         SendMsg.send("§4請手持物品後再使用此功能。");
                         return;
-                    } else if (!TokenCheck.isCheck && config.Token.equals("")) {
+                    } else if (!config.isCheck) {
                         MinecraftClient.getInstance().openScreen(new CrowdinLoginScreen(new CrowdinLogin()));
                         return;
                     } else {
                         SendMsg.send("請稍後，正在開啟物品翻譯界面中...");
                         Thread thread = new Thread(() -> {
-                            if (CrowdinGuiProcedure.getText().equals("無法取得") && TokenCheck.isCheck) {
+                            if (CrowdinGuiProcedure.getText().equals("無法取得") && config.isCheck) {
                                 SendMsg.send("§6由於你目前手持想要翻譯的物品，數據不在資料庫內\n因此無法進行翻譯，想了解更多資訊請前往RPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
                                 return;
                             }
