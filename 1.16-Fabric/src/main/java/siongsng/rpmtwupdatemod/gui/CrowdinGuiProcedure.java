@@ -19,7 +19,7 @@ public class CrowdinGuiProcedure {
     public static String stringID = "";
 
     public static String getText() {
-        String Text = "";
+        String Text;
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
             HttpUriRequest request = RequestBuilder.get()
                     .setUri("https://api.crowdin.com/api/v2/projects/442446/strings?filter=" + MinecraftClient.getInstance().player.getMainHandStack().getItem().getTranslationKey())
