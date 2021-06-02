@@ -36,8 +36,8 @@ public class CorwidnProcedure {
             Text = JSONObject.fromObject(responseBody).getJSONArray("data").getJSONObject(0).getJSONObject("data").get("text").toString();
             stringID = JSONObject.fromObject(responseBody).getJSONArray("data").getJSONObject(0).getJSONObject("data").get("id").toString();
         } catch (Exception e) {
-            Text = "無法取得";
-            stringID = "無法取得";
+            Text = null;
+            stringID = null;
             RpmtwUpdateMod.LOGGER.error("讀取翻譯資訊時發生錯誤: " + e.getMessage());
         }
 
