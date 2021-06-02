@@ -21,6 +21,8 @@ public class ConfigScreen implements ConfigData {
     public int UpdateInterval = 0;
     @Comment("數值以秒為單位")
     public int AfkTime = 600;
+    @Comment("預設進入遊戲時，是否自動切換語言為 繁體中文。")
+    public boolean isChinese = true;
     @ConfigEntry.Gui.Excluded
     public String Token = ""; //儲存Crowdin登入權杖
     @ConfigEntry.Gui.Excluded
