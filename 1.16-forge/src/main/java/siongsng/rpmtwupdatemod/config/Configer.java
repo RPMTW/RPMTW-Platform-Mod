@@ -26,15 +26,10 @@ public class Configer {
         afk = client
                 .comment("afk = 是否啟用掛機偵測，啟用後當掛機時會自動更新翻譯。")
                 .define("rpmtw.afk", false);
-        discord = client
-                .comment("discord = 是否啟用宇宙通訊系統。")
-                .define("rpmtw.discord", true);
-        DiscordPrefix = client
-                .comment("DiscordPrefix = 是否啟用宇宙通訊系統發送訊息時需要前綴(預設為!)")
-                .define("rpmtw.DiscordPrefix", true);
         isCheck = client
                 .define("rpmtw.isCheck", false);
         isChinese = client
+                .comment("IsChinese = 預設進入遊戲時，是否自動切換語言為 繁體中文。")
                 .define("rpmtw.isChinese", true);
         Update_interval = client
                 .comment("Update_interval = 每次啟動遊戲時，自動RPMTW更新時所檢查的版本間隔。(此變更須重啟遊戲後生效)")

@@ -104,9 +104,10 @@ public final class ConfigScreen extends Screen {
                     Configer.rpmtw_reloadpack.set(true);
                     Configer.report_translation.set(true);
                     Configer.notice.set(true);
-                    Configer.afk.set(true);
+                    Configer.afk.set(false);
                     Configer.Update_interval.set(0);
                     Configer.afkTime.set(600);
+                    Configer.isChinese.set(true);
                     Minecraft.getInstance().displayGuiScreen(new ConfigScreen());
                 }));
 
