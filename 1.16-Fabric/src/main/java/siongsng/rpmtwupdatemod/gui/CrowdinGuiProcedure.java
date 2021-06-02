@@ -31,6 +31,12 @@ public class CrowdinGuiProcedure {
             }
             Text = JSONObject.fromObject(responseBody).getJSONArray("data").getJSONObject(0).getJSONObject("data").get("text").toString();
             stringID = JSONObject.fromObject(responseBody).getJSONArray("data").getJSONObject(0).getJSONObject("data").get("id").toString();
+
+            //14694在Crowdin的分支ID代表1.16版本
+            if (!JSONObject.fromObject(responseBody).getJSONArray("data").getJSONObject(0).getJSONObject("data").get("branchId").equals(14694)) {
+                Text = null;
+                stringID = null;
+            }
         } catch (Exception e) {
             Text = null;
             stringID = null;
