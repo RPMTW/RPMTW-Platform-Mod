@@ -22,6 +22,7 @@ repositories {
         name = "CottonMC"
         url = "https://server.bbkr.space/artifactory/libs-release"
     }
+    maven { url "https://maven.blamejared.com" } //Patchouli
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -40,7 +41,7 @@ dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-
+    modImplementation "vazkii.patchouli:Patchouli:1.16.4-51-FABRIC-SNAPSHOT" //Patchouli
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     shadow('net.sf.json-lib:json-lib:2.4:jdk15')
     shadow('commons-lang:commons-lang:2.6')
