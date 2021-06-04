@@ -57,7 +57,7 @@ dependencies {
     shade('commons-beanutils:commons-beanutils:1.9.4')
     shade('commons-io:commons-io:2.8.0')
     shade files('libs/commons-logging-1.2.jar')
-    minecraft 'net.minecraftforge:forge:1.16.5-36.1.24'
+    minecraft 'net.minecraftforge:forge:1.16.5-36.1.25'
 }
 jar {
     manifest {
