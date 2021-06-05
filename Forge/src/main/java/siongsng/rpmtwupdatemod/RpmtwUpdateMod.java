@@ -48,8 +48,6 @@ public class RpmtwUpdateMod {
             Minecraft.getInstance().gameSettings.language = "zh_tw"; //將語言設定為繁體中文
         }
         new PackVersionCheck(); //資源包版本檢查
-
-
         try {
             new TokenCheck().Check(Configer.Token.get()); //開始檢測權杖
         } catch (IOException e) {

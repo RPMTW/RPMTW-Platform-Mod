@@ -1,6 +1,7 @@
 package siongsng.rpmtwupdatemod;
 
-import net.sf.json.JSONObject;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,7 +10,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 public class json {
-    public static JSONObject get(String url) {
+    public static JsonObject get(String url) {
         StringBuilder json = new StringBuilder();
         try {
             URL urlObject = new URL(url);
@@ -23,14 +24,13 @@ public class json {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return JSONObject.fromObject(json.toString());
-    }
-
-    public static Object loadJson(String url) {
-        return get(url).getJSONArray("assets").getJSONObject(0).get("browser_download_url");
+        JsonParser jp = new JsonParser();
+        return (JsonObject) jp.parse(json.toString());
     }
 
     public static Object ver(String url) {
-        return get(url).get("tag_name");
+        JsonParser jp = new JsonParser();
+        JsonObject object = (JsonObject) jp.parse(get(url).toString());
+        return object.get("tag_name").getAsString();
     }
 }

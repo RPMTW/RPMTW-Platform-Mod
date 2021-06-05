@@ -6,15 +6,15 @@ public class CheckModVersion {
     public String ver = "1.1.3";
 
     public boolean get() {
-        return json.get("https://raw.githubusercontent.com/RPMTW/ResourcePack-Mod-zh_tw/main/ModUpdate.json").getJSONObject("Forge").getJSONObject("1.16").get("latest").toString().equals(ver);
+        return json.get("https://raw.githubusercontent.com/RPMTW/ResourcePack-Mod-zh_tw/main/ModUpdate.json").getAsJsonObject("Forge").getAsJsonObject("1.16").getAsJsonPrimitive("latest").getAsString().equals(ver);
     }
 
     public String NewVer() {
-        return json.get("https://raw.githubusercontent.com/RPMTW/ResourcePack-Mod-zh_tw/main/ModUpdate.json").getJSONObject("Forge").getJSONObject("1.16").get("latest").toString();
+        return json.get("https://raw.githubusercontent.com/RPMTW/ResourcePack-Mod-zh_tw/main/ModUpdate.json").getAsJsonObject("Forge").getAsJsonObject("1.16").getAsJsonPrimitive("latest").getAsString();
     }
 
     public String DownloadUrl() {
-        return json.get("https://raw.githubusercontent.com/RPMTW/ResourcePack-Mod-zh_tw/main/ModUpdate.json").getJSONObject("Forge").getJSONObject("1.16").get("DownloadUrl").toString();
+        return json.get("https://raw.githubusercontent.com/RPMTW/ResourcePack-Mod-zh_tw/main/ModUpdate.json").getAsJsonObject("Forge").getAsJsonObject("1.16").getAsJsonPrimitive("DownloadUrl").getAsString();
     }
 
 }

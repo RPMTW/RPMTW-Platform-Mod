@@ -14,7 +14,6 @@ public class notice {
         assert p != null;
         p.sendMessage(new TranslationTextComponent(
                 "gui.notice"), p.getUniqueID());
-
         if (!new CheckModVersion().get()) {
             SendMsg.send("偵測到您目前的§c §eRPMTW繁中化自動更新模組版本過舊§c\n建議您更新版本，以獲得最佳體驗。\n目前版本: " + new CheckModVersion().ver + " 最新版本: " + new CheckModVersion().NewVer() + "\n下載連結:https://bit.ly/33MpXu8");
         }
