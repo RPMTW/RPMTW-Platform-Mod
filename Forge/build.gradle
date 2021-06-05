@@ -1,0 +1,107 @@
+repositories {
+    mavenCentral()
+    jcenter()
+    maven { url 'https://m2.dv8tion.net/releases' }
+    maven { url 'https://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-releases/' }
+    maven { url 'https://maven.blamejared.com' }
+}
+buildscript {
+    repositories {
+        maven { url = 'https://files.minecraftforge.net/maven' }
+        maven {
+            name "Sponge"
+            url "https://repo.spongepowered.org/repository/maven-public/"
+            content { includeGroup "org.spongepowered" }
+        }
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:6.1.0'
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.+', changing: true
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
+    }
+}
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+configurations {
+    shade
+    compile.extendsFrom(shade)
+}
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'java'
+apply plugin: 'org.spongepowered.mixin'
+group = 'siongsng.rpmtwupdatemod'
+archivesBaseName = 'RPMTW-Update-Mod-Forge-1.16'
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+minecraft {
+    mappings channel: 'snapshot', version: '20210309-1.16.5'
+    runs {
+        client {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.console.level', 'debug'
+            arg "-mixin.config=rpmtw_update_mod.mixin.cfg.json"
+            mods {
+                rpmtwupdatemod {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+dependencies {
+    shade('net.sf.json-lib:json-lib:2.4:jdk15') //Json Library
+    shade('commons-lang:commons-lang:2.6')
+    shade('net.sf.ezmorph:ezmorph:1.0.6')
+    shade('commons-collections:commons-collections:3.2.2')
+    shade('commons-beanutils:commons-beanutils:1.9.4')
+    shade('commons-io:commons-io:2.8.0')
+    shade files('libs/commons-logging-1.2.jar')
+    implementation fg.deobf("vazkii.patchouli:Patchouli:1.16.4-51-SNAPSHOT")
+    minecraft 'net.minecraftforge:forge:1.16.5-36.1.25'
+}
+jar {
+    manifest {
+        attributes([
+                "Specification-Title"     : "rpmtwupdatemod",
+                "Specification-Vendor"    : "SiongSng",
+                "LICENSE"                 : "MIT",
+                "Specification-Version"   : "1",
+                "Implementation-Title"    : project.name,
+                "Implementation-Version"  : project.version,
+                "Implementation-Vendor"   : "SiongSng",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                "MixinConfigs": "rpmtw_update_mod.mixin.cfg.json"
+        ])
+    }
+}
+jar.finalizedBy('reobfJar')
+shadowJar {
+    configurations = [project.configurations.shade]
+    relocate('org.apache.commons', 'siongsng.rpmtwupdatemod.commons')
+    relocate('gnu', 'siongsng.rpmtwupdatemod.gnu')
+    classifier = ''
+}
+reobf {
+    shadowJar {
+        dependsOn tasks.createMcpToSrg
+        mappings = tasks.createMcpToSrg.outputs.files.singleFile
+    }
+}
+artifacts {
+    archives tasks.shadowJar
+}
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'dev'
+}
+artifacts {
+    archives deobfJar
+}

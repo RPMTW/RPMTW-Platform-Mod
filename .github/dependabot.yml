@@ -1,7 +1,7 @@
 version: 2
 updates:
 - package-ecosystem: gradle
-  directory: "/1.16-forge"
+  directory: "/Forge"
   schedule:
     interval: daily
     time: "21:00"

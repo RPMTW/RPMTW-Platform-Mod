@@ -21,13 +21,13 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: |
-         cd ${{ github.workspace }}/1.16-forge
+         cd ${{ github.workspace }}/Forge
          ./gradlew build
     - name: "Upload Artifact"
       uses: actions/upload-artifact@v1
       with:
-        name: RPMTWUpdateMod-1.16-Forge-${{ github.run_number }}
-        path: ${{ github.workspace }}/1.16-forge/build/libs
+        name: RPMTWUpdateMod-Forge-${{ github.run_number }}
+        path: ${{ github.workspace }}/Forge/build/libs
         
   Fabric-Build:
     runs-on: windows-latest
@@ -42,10 +42,10 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: |
-       cd ${{ github.workspace }}/1.16-Fabric
+       cd ${{ github.workspace }}/Fabric
        ./gradlew build
     - name: "Upload Artifact"
       uses: actions/upload-artifact@v1
       with:
-        name: RPMTWUpdateMod-1.16-fabric-${{ github.run_number }}
-        path: ${{ github.workspace }}/1.16-fabric/build/libs
+        name: RPMTWUpdateMod-Fabric-${{ github.run_number }}
+        path: ${{ github.workspace }}/Fabric/build/libs
