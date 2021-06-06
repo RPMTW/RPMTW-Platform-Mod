@@ -2,10 +2,9 @@
   "required": true,
   "minVersion": "0.8",
   "package": "siongsng.rpmtwupdatemod.mixins",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_16",
   "mixins": [
     "InputMixin",
-    "MixinBookContents",
     "PlayJoinMixin",
     "ResourcePackManagerMixin",
     "RpmtwUpdateMod_mixin",
