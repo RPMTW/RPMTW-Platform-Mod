@@ -1,7 +1,6 @@
 repositories {
     mavenCentral()
     jcenter()
-    maven { url 'https://m2.dv8tion.net/releases' }
     maven { url 'https://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-releases/' }
     maven { url 'https://maven.blamejared.com' }
 }
@@ -18,7 +17,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.github.jengelman.gradle.plugins:shadow:6.1.0'
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.+', changing: true
         classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
     }
 }
