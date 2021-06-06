@@ -3,7 +3,7 @@ package siongsng.rpmtwupdatemod.function;
 import siongsng.rpmtwupdatemod.json;
 
 public class CheckModVersion {
-    public String ver = "1.1.3";
+    public String ver = "1.1.4";
 
     public boolean get() {
         return json.get("https://raw.githubusercontent.com/RPMTW/ResourcePack-Mod-zh_tw/main/ModUpdate.json").getAsJsonObject("Forge").getAsJsonObject("1.16").getAsJsonPrimitive("latest").getAsString().equals(ver);
