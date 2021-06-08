@@ -101,6 +101,6 @@ public class CrowdinGui extends LightweightGuiDescription {
     @Environment(EnvType.CLIENT)
     @Override
     public void addPainters() {
-        getRootPanel().setBackgroundPainter(createNinePatch(new Identifier(RpmtwUpdateMod.Mod_ID, "textures/crowdin_gui.png"), 8));
+        getRootPanel().setBackgroundPainter(createNinePatch(new Identifier(RpmtwUpdateMod.Mod_ID, "textures/crowdin_gui.png")));
     }
 }

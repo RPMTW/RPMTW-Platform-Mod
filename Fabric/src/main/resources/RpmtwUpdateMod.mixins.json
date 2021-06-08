@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_16",
   "mixins": [
     "InputMixin",
+    "MixinBookContents",
     "PlayJoinMixin",
     "ResourcePackManagerMixin",
     "RpmtwUpdateMod_mixin",
