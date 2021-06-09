@@ -18,7 +18,7 @@ buildscript {
     dependencies {
         classpath 'com.github.jengelman.gradle.plugins:shadow:6.1.0'
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.+', changing: true
-        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-20210422.120709-1'
     }
 }
 tasks.withType(JavaCompile) {
@@ -33,8 +33,8 @@ apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'java'
 apply plugin: 'org.spongepowered.mixin'
 group = 'siongsng.rpmtwupdatemod'
-archivesBaseName = 'RPMTW-Update-Mod-Forge-1.16'
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
+archivesBaseName = 'RPMTW-Update-Mod-Forge-1.17'
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '16'
 task sourcesJar(type: Jar, dependsOn: classes) {
     classifier = 'sources'
     from sourceSets.main.allSource
@@ -63,7 +63,7 @@ dependencies {
     shade('commons-io:commons-io:2.9.0')
     shade files('libs/commons-logging-1.2.jar')
     implementation fg.deobf("vazkii.patchouli:Patchouli:1.16.4-52-SNAPSHOT")
-    minecraft 'net.minecraftforge:forge:1.16.5-36.1.25'
+    minecraft 'net.minecraftforge:forge:1.16.5-36.1.30'
 }
 jar {
     manifest {
