@@ -8,26 +8,26 @@ on:
     branches: [ "1.17" ]
 
 jobs:
-  Forge-Build:
-    runs-on: windows-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 8
-      uses: actions/setup-java@v1
-      with:
-        java-version: 8
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-    - name: Build with Gradle
-      run: |
-         cd ${{ github.workspace }}/Forge
-         ./gradlew build
-    - name: "Upload Artifact"
-      uses: actions/upload-artifact@v1
-      with:
-        name: RPMTWUpdateMod-Forge-${{ github.run_number }}
-        path: ${{ github.workspace }}/Forge/build/libs
+#  Forge-Build:
+#    runs-on: windows-latest
+#
+#    steps:
+#    - uses: actions/checkout@v2
+#    - name: Set up JDK 8
+#      uses: actions/setup-java@v1
+#      with:
+#        java-version: 8
+#    - name: Grant execute permission for gradlew
+#      run: chmod +x gradlew
+#    - name: Build with Gradle
+#      run: |
+#         cd ${{ github.workspace }}/Forge
+#         ./gradlew build
+#    - name: "Upload Artifact"
+#      uses: actions/upload-artifact@v1
+#      with:
+#        name: RPMTWUpdateMod-Forge-${{ github.run_number }}
+#        path: ${{ github.workspace }}/Forge/build/libs
         
   Fabric-Build:
     runs-on: windows-latest
