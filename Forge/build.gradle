@@ -63,7 +63,7 @@ dependencies {
     shade('commons-io:commons-io:2.9.0')
     shade files('libs/commons-logging-1.2.jar')
     implementation fg.deobf("vazkii.patchouli:Patchouli:1.16.4-52-SNAPSHOT")
-    minecraft 'net.minecraftforge:forge:1.16.5-36.1.30'
+    minecraft 'net.minecraftforge:forge:1.16.5-36.1.31'
 }
 jar {
     manifest {
