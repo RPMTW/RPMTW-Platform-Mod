@@ -29,7 +29,7 @@ public class PackVersionCheck {
                 FileWriter.Writer(Latest_ver_n, UpdateFile); //寫入最新版本
             }
             FileWriter.Writer(Latest_ver_n, UpdateFile); //寫入最新版本
-            FileUtils.copyURLToFile(new URL("https://github.com/RPMTW/ResourcePack-Mod-zh_tw/releases/latest/download/RPMTW-1.16.zip"), PackFile.toFile()); //下載資源包檔案
+            FileUtils.copyURLToFile(new URL(RpmtwUpdateMod.PackDownloadUrl), PackFile.toFile()); //下載資源包檔案
             Minecraft.getInstance().getResourcePackList().addPackFinder(new PackFinder()); //新增資源包至資源包列表
         } catch (Exception e) {
             RpmtwUpdateMod.LOGGER.error("發生未知錯誤: " + e); //錯誤處理

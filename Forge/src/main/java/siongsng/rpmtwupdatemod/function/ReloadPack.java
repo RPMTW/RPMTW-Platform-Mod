@@ -35,7 +35,7 @@ public class ReloadPack {
 
                 if (Integer.parseInt(Latest_ver_n) > Old_ver + Configer.Update_interval.get() || !Files.exists(PackFile)) { //判斷是否要更新(如果最新版本大於現在版本、如果不存在資源包檔案)
                     SendMsg.send("§6偵測到翻譯包版本過舊，正在進行更新並重新載入中...。目前版本為:" + Old_ver + "，最新版本為:" + Latest_ver_n);
-                    FileUtils.copyURLToFile(new URL("https://github.com/RPMTW/ResourcePack-Mod-zh_tw/releases/latest/download/RPMTW-1.16.zip"), PackFile.toFile()); //下載資源包檔案
+                    FileUtils.copyURLToFile(new URL(RpmtwUpdateMod.PackDownloadUrl), PackFile.toFile()); //下載資源包檔案
                     FileWriter.Writer(Latest_ver_n, UpdateFile); //寫入最新版本
                     Minecraft.getInstance().getResourcePackList().addPackFinder(new PackFinder()); //新增資源包至資源包列表
                     Minecraft.getInstance().reloadResources(); //重新載入資源
