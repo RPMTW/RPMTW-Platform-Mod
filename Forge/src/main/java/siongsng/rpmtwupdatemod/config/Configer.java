@@ -3,8 +3,8 @@ package siongsng.rpmtwupdatemod.config;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public class Configer {
-    public static ForgeConfigSpec.BooleanValue rpmtw_crowdin, rpmtw_reloadpack, report_translation, notice, afk, discord, DiscordPrefix, isCheck,isChinese;
-    public static ForgeConfigSpec.IntValue Update_interval, afkTime;
+    public static ForgeConfigSpec.BooleanValue rpmtw_crowdin, rpmtw_reloadpack, report_translation, notice, afk, isCheck, isChinese;
+    public static ForgeConfigSpec.IntValue afkTime;
     public static ForgeConfigSpec.ConfigValue<String> Token;
 
     public static void init(ForgeConfigSpec.Builder client) {
@@ -31,9 +31,6 @@ public class Configer {
         isChinese = client
                 .comment("IsChinese = 預設進入遊戲時，是否自動切換語言為 繁體中文。")
                 .define("rpmtw.isChinese", true);
-        Update_interval = client
-                .comment("Update_interval = 每次啟動遊戲時，自動RPMTW更新時所檢查的版本間隔。(此變更須重啟遊戲後生效)")
-                .defineInRange("rpmtw.Update_interval", 0, 0, 20);
         afkTime = client
                 .comment("afkTime = 此數值用來設定過多久沒有活動才會進入掛機模式。(以秒為單位)")
                 .defineInRange("rpmtw.afkTime", 600, 10, 3600);

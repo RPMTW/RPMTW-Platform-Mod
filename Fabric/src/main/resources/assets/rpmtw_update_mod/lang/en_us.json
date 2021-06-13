@@ -9,7 +9,6 @@
   "text.autoconfig.rpmtw_update_mod.option.ReportTranslation": "回報翻譯錯誤",
   "text.autoconfig.rpmtw_update_mod.option.notice": "進入世界時自動發送公告",
   "text.autoconfig.rpmtw_update_mod.option.afk": "啟用掛機偵測",
-  "text.autoconfig.rpmtw_update_mod.option.UpdateInterval": "自動檢查更新版本間隔",
   "text.autoconfig.rpmtw_update_mod.option.AfkTime": "開始偵測掛機模式間隔時間",
   "text.autoconfig.rpmtw_update_mod.option.ReloadPack": "重新載入翻譯包",
   "text.autoconfig.rpmtw_update_mod.option.isChinese": "自動切換預設語言",
