@@ -16,6 +16,7 @@ import siongsng.rpmtwupdatemod.crowdin.key;
 public class RpmtwUpdateMod implements ClientModInitializer {
     public static final Logger LOGGER = LogManager.getLogger("rpmtw_update_mod");
     public final static String Mod_ID = "rpmtw_update_mod";
+    public final static String PackDownloadUrl = "https://github.com/RPMTW/ResourcePack-Mod-zh_tw/raw/Translated-1.17/RPMTW-1.17.zip";
 
     public RpmtwUpdateMod() {
         if (!ping.isConnect()) {
