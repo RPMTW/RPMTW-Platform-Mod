@@ -73,24 +73,6 @@ public final class ConfigScreen extends Screen {
                 unused -> (double) Configer.afkTime.get(),
                 (unused, newValue) -> Configer.afkTime.set(newValue.intValue()),
                 (gs, option) -> new StringTextComponent("開始偵測掛機間隔時間(秒)" + ": " + (int) option.get(gs))));
-        optionsRowList.addOption(new SliderPercentageOption(
-                "自動檢查翻譯包更新版本間隔",
-                0.0F, 20, 1.0F,
-                unused -> (double) Configer.Update_interval.get(),
-                (unused, newValue) -> Configer.Update_interval.set(newValue.intValue()),
-                (gs, option) -> new StringTextComponent("自動檢查翻譯包更新版本間隔" + ": " + (int) option.get(gs))));
-/*
-        optionsRowList.addOption(new BooleanOption(
-                "啟用宇宙通訊系統",
-                unused -> Configer.discord.get(),
-                (unused, newValue) -> Configer.discord.set(newValue)
-        ));
-        optionsRowList.addOption(new BooleanOption(
-                "啟用宇宙通訊發送訊息時需要前綴(!)",
-                unused -> Configer.DiscordPrefix.get(),
-                (unused, newValue) -> Configer.DiscordPrefix.set(newValue)
-        ));
-*/
 
         this.children.add(optionsRowList);
 
@@ -105,7 +87,6 @@ public final class ConfigScreen extends Screen {
                     Configer.report_translation.set(true);
                     Configer.notice.set(true);
                     Configer.afk.set(false);
-                    Configer.Update_interval.set(0);
                     Configer.afkTime.set(600);
                     Configer.isChinese.set(true);
                     Minecraft.getInstance().displayGuiScreen(new ConfigScreen());
