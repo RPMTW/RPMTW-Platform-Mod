@@ -1,10 +1,7 @@
 package siongsng.rpmtwupdatemod.function;
 
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.SplashScreen;
-import net.minecraft.resource.ProfiledResourceReload;
 import net.minecraft.resource.ResourceManager;
-import net.minecraft.util.Util;
 import org.apache.commons.io.FileUtils;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
 
@@ -13,7 +10,6 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class ReloadPack {
