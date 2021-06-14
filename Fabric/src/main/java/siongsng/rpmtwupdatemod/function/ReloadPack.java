@@ -1,6 +1,10 @@
 package siongsng.rpmtwupdatemod.function;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.SplashScreen;
+import net.minecraft.resource.ProfiledResourceReload;
+import net.minecraft.resource.ResourceManager;
+import net.minecraft.util.Util;
 import org.apache.commons.io.FileUtils;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
 
@@ -9,6 +13,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class ReloadPack {
@@ -25,7 +30,9 @@ public class ReloadPack {
                     if (TimeUnit.MILLISECONDS.toMinutes(nowTime - fileTime) < 1) {
                         SendMsg.send("§6偵測到翻譯包版本過舊，正在進行更新並重新載入中...。");
                         FileUtils.copyURLToFile(new URL(RpmtwUpdateMod.PackDownloadUrl), PackFile.toFile()); //下載資源包檔案
-                        MinecraftClient.getInstance().reloadResources();
+                        MinecraftClient mc = MinecraftClient.getInstance();
+                        ResourceManager manager = mc.getResourceManager();
+                        mc.getLanguageManager().reload(manager);
                     } else {
                         SendMsg.send("§a目前的RPMTW翻譯包版本已經是最新的了!因此不進行更新作業。");
                     }
