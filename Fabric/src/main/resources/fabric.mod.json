@@ -26,6 +26,7 @@
   "mixins": [
     "RpmtwUpdateMod.mixins.json"
   ],
+  "accessWidener" : "RpmtwUpdateMod.accesswidener",
   "depends": {
     "fabricloader": ">=0.11.3",
     "fabric": "*",
