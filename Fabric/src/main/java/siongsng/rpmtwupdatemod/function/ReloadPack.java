@@ -1,7 +1,7 @@
 package siongsng.rpmtwupdatemod.function;
 
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.SplashScreen;
+import net.minecraft.client.gui.screen.SplashOverlay;
 import net.minecraft.client.resource.ResourceReloadLogger;
 import net.minecraft.resource.ProfiledResourceReload;
 import net.minecraft.resource.ReloadableResourceManagerImpl;
@@ -65,7 +65,7 @@ public class ReloadPack {
                     MinecraftClient.COMPLETED_UNIT_FUTURE
             );
 
-            mc.setOverlay(new SplashScreen(
+            mc.setOverlay(new SplashOverlay(
                     mc,
                     profiledResourceReload,
                     throwable -> Util.ifPresentOrElse(throwable, mc::handleResourceReloadException, () -> {
