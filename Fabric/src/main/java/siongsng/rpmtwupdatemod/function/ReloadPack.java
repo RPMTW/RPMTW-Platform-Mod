@@ -5,14 +5,12 @@ import net.minecraft.client.gui.screen.SplashScreen;
 import net.minecraft.client.resource.ResourceReloadLogger;
 import net.minecraft.resource.ProfiledResourceReload;
 import net.minecraft.resource.ReloadableResourceManagerImpl;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Util;
 import org.apache.commons.io.FileUtils;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
 
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -25,18 +23,15 @@ public class ReloadPack {
     public ReloadPack() {
         SendMsg.send("由於你按下了翻譯包更新快捷鍵，正在執行更新中，請稍後...");
         Thread thread = new Thread(() -> {
-            if (Files.exists(PackFile)) {
-                try {
-                        FileUtils.copyURLToFile(new URL(RpmtwUpdateMod.PackDownloadUrl), PackFile.toFile()); //下載資源包檔案
-                        reloadLanguage();
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-                SendMsg.send("§b處理完成。");
+            try {
+                FileUtils.copyURLToFile(new URL(RpmtwUpdateMod.PackDownloadUrl), PackFile.toFile()); //下載資源包檔案
+                reloadLanguage();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
             }
+            SendMsg.send("§b處理完成。");
         });
         thread.start();
-        assert new TranslatableText("text.autoconfig.authme.option.authButton.y").asString().equals("Y 座標");
     }
 
     private CompletableFuture<Void> reloadLanguage() {
@@ -83,7 +78,7 @@ public class ReloadPack {
 
             return completableFeature;
         } else {
-            throw new IllegalStateException("This method had been called in valid moment, please report this error to RPMTW.");
+            throw new IllegalStateException("This method had been called in valid moment, please report this error to RPMTW Update Mod (https://www.rpmtw.ga).");
         }
     }
 }
