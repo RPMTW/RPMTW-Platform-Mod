@@ -11,8 +11,6 @@ public class ConfigScreen implements ConfigData {
     public boolean crowdin = true;
     @Comment("是否啟用使用快捷鍵(預設為R)檢測RPMTW翻譯包更新。")
     public boolean ReloadPack = true;
-    @Comment("是否啟用使用快捷鍵(預設為U)回報翻譯錯誤。")
-    public boolean ReportTranslation = true;
     @Comment("進入世界時，是否自動發送公告。(此變更須重啟遊戲後生效)")
     public boolean notice = true;
     @Comment("是否啟用掛機偵測，啟用後當掛機時會自動更新翻譯。")
