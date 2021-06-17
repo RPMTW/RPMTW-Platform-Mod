@@ -79,11 +79,6 @@ public class CrowdinGui extends LightweightGuiDescription {
                 postMethod.setEntity(requestEntity);
                 try {
                     httpClient.execute(postMethod);
-                /*
-                CloseableHttpResponse response = httpClient.execute(postMethod);
-                String responseBody = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
-                System.out.print(responseBody);
-                */
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }

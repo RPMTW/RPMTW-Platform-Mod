@@ -21,7 +21,7 @@ public class ReloadPack {
     final static Path PackFile = PackDir.resolve("RPMTW-1.17.zip");
 
     public ReloadPack() {
-        SendMsg.send("由於你按下了翻譯包更新快捷鍵，正在執行更新中，請稍後...");
+        SendMsg.send("正在執行翻譯包更新中，請稍後...");
         Thread thread = new Thread(() -> {
             try {
                 FileUtils.copyURLToFile(new URL(RpmtwUpdateMod.PackDownloadUrl), PackFile.toFile()); //下載資源包檔案

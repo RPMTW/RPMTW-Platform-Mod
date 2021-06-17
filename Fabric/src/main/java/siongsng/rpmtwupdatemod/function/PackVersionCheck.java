@@ -19,7 +19,7 @@ public class PackVersionCheck {
         if (!Files.isDirectory(PackDir)) {
             Files.createDirectories(PackDir);
         }
-        RpmtwUpdateMod.LOGGER.info("正在準備檢測資源包版本。");
+        RpmtwUpdateMod.LOGGER.info("正在準被下載 RPMTW 翻譯包。");
         try {
             FileUtils.copyURLToFile(new URL(RpmtwUpdateMod.PackDownloadUrl), PackFile.toFile()); //下載資源包檔案
             Class.forName("siongsng.rpmtwupdatemod.packs.LoadPack").getMethod("init", Set.class).invoke(null, providers);
