@@ -1,22 +1,10 @@
 version: 2
 updates:
 - package-ecosystem: gradle
-  directory: "/Forge"
+  directory: "/Fabric"
   schedule:
     interval: daily
     time: "21:00"
   open-pull-requests-limit: 10
   reviewers:
   - SiongSng
-  ignore:
-  - dependency-name: net.dv8tion:JDA
-    versions:
-    - 4.2.1_259
-    - 4.2.1_260
-    - 4.2.1_261
-  - dependency-name: org.glassfish.jersey.inject:jersey-hk2
-    versions:
-    - 3.0.1
-  - dependency-name: org.glassfish.jersey.core:jersey-client
-    versions:
-    - 3.0.1
