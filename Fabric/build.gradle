@@ -4,16 +4,15 @@ plugins {
 }
 repositories {
     mavenCentral()
-    maven { url "https://maven.shedaniel.me/" }
+    maven { url "https://maven.shedaniel.me/" } //cloth-config
     maven {
-        url "https://maven.terraformersmc.com/releases/"
+        url "https://maven.terraformersmc.com/releases/" //ModMenu
         content {
             includeGroup "com.terraformersmc"
         }
     }
     maven {
-        name = "CottonMC"
-        url = "https://server.bbkr.space/artifactory/libs-release"
+        url = "https://server.bbkr.space/artifactory/libs-release" //CottonMC (LibGui)
     }
     maven { url "https://maven.blamejared.com" } //Patchouli
 }
@@ -54,7 +53,6 @@ dependencies {
 
 processResources {
     inputs.property "version", project.version
-
     filesMatching("fabric.mod.json") {
         expand "version": project.version
     }
@@ -64,19 +62,11 @@ tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
 
-task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = "sources"
-    from sourceSets.main.allSource
-}
-
 publishing {
     publications {
         mavenJava(MavenPublication) {
             artifact(remapJar) {
                 builtBy remapJar
-            }
-            artifact(sourcesJar) {
-                builtBy remapSourcesJar
             }
         }
     }
