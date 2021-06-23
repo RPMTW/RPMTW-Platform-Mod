@@ -25,7 +25,6 @@ public class key {
         KeyBindingHelper.registerKeyBinding(reloadpack);
         KeyBindingHelper.registerKeyBinding(open_config);
 
-
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (open_config.wasPressed()) {
                 MinecraftClient.getInstance().openScreen(AutoConfig.getConfigScreen(ConfigScreen.class, MinecraftClient.getInstance().currentScreen).get());
