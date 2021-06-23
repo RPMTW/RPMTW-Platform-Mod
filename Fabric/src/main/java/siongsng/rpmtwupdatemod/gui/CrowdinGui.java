@@ -38,7 +38,6 @@ public class CrowdinGui extends LightweightGuiDescription {
         WGridPanel gui = new WGridPanel();
         setRootPanel(gui);
         gui.setSize(405, 227);
-
         WLabel label = new WLabel(new LiteralText("RPMTW 物品翻譯介面"), 0xFF5555);
         gui.add(label, 9, 0, 2, 1);
 
@@ -46,7 +45,6 @@ public class CrowdinGui extends LightweightGuiDescription {
         gui.add(new WLabel(new LiteralText("語系鍵: " + item_key), 0xFFFFFF), (int) 8.5, 3, 2, 1);
         gui.add(new WLabel(new LiteralText("顯示名稱: " + item_DisplayName), 0xFFFFFF), (int) 8.5, 4, 2, 1);
         gui.add(new WLabel(new LiteralText("所屬模組 ID: " + mod_id), 0xFFFFFF), (int) 8.5, 5, 2, 1);
-
 
         WButton Close = new WButton(new LiteralText("關閉"));
         WButton Done = new WButton(new LiteralText("提交翻譯"));
