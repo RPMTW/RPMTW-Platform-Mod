@@ -25,7 +25,7 @@ import java.io.InputStream;
 public class MixinBookContents {
     @Inject(at = @At("HEAD"), method = "loadJson", cancellable = true, remap = false)
     private void loadJson(Book book, Identifier resloc, Identifier fallback, CallbackInfoReturnable<InputStream> cir) {
-        RpmtwUpdateMod.LOGGER.debug("loading json from {}.",resloc);
+        RpmtwUpdateMod.LOGGER.debug("loading json from {}.", resloc);
         try {
             cir.setReturnValue(MinecraftClient.getInstance().getResourceManager().getResource(resloc).getInputStream());
         } catch (IOException e) {
@@ -33,11 +33,12 @@ public class MixinBookContents {
         }
     }
 }
+
 @Mixin(BookContentExternalLoader.class)
 class MixinContentExternalLoader {
     @Inject(at = @At("HEAD"), method = "loadJson", cancellable = true, remap = false)
     private void loadJson(Book book, Identifier resloc, Identifier fallback, CallbackInfoReturnable<InputStream> cir) {
-        RpmtwUpdateMod.LOGGER.debug("loading json from {}.",resloc);
+        RpmtwUpdateMod.LOGGER.debug("loading json from {}.", resloc);
         try {
             cir.setReturnValue(MinecraftClient.getInstance().getResourceManager().getResource(resloc).getInputStream());
         } catch (IOException e) {
