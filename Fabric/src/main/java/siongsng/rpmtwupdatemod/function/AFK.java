@@ -1,12 +1,10 @@
 package siongsng.rpmtwupdatemod.function;
 
 
-import me.shedaniel.autoconfig.AutoConfig;
-import siongsng.rpmtwupdatemod.config.ConfigScreen;
+import siongsng.rpmtwupdatemod.config.Configer;
 
 public class AFK {
     public static long afkTime = 0;
-    static ConfigScreen config = AutoConfig.getConfigHolder(ConfigScreen.class).getConfig();
     private static boolean wasAfk = false;
     private static long lastUpdate = 0;
 
@@ -14,7 +12,7 @@ public class AFK {
         if (System.nanoTime() - lastUpdate > 1e+9) {
             afkTime++;
 
-            boolean afk = afkTime > config.AfkTime;
+            boolean afk = afkTime > Configer.config.AfkTime;
 
             if (afk && !wasAfk) {
                 SendMsg.send("§6偵測到你開始掛機了! 因此開始自動檢測翻譯包版本並且做更新。");
