@@ -1,6 +1,6 @@
-# RpmtwUpdateMod 自動繁化更新模組
+# RpmtwUpdateMod 自動中文化更新模組
 
-### 詳細功能請看: https://www.rpmtw.ga/Update-mod
+### 詳細功能請看: https://www.rpmtw.ga/RPMTWUpdateMod
 
 ## 主要功能
 
