@@ -6,7 +6,7 @@ repositories {
     mavenCentral()
     maven { url "https://maven.shedaniel.me/" } //cloth-config
     maven {
-        url "https://maven.terraformersmc.com/releases/" //ModMenu
+        url "https://bai.jfrog.io/artifactory/maven" //ModMenu
         content {
             includeGroup "com.terraformersmc"
         }
