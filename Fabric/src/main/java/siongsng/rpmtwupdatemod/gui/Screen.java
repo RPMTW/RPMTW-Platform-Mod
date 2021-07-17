@@ -1,10 +1,10 @@
-package siongsng.rpmtwupdatemod.gui.CrowdinLogin;
+package siongsng.rpmtwupdatemod.gui;
 
 import io.github.cottonmc.cotton.gui.GuiDescription;
 import io.github.cottonmc.cotton.gui.client.CottonClientScreen;
 
-public class CrowdinLoginScreen extends CottonClientScreen {
-    public CrowdinLoginScreen(GuiDescription description) {
+public class Screen extends CottonClientScreen {
+    public Screen(GuiDescription description) {
         super(description);
         description.addPainters();
     }

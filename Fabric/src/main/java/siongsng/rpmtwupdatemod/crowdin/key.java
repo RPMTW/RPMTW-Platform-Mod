@@ -13,12 +13,10 @@ import siongsng.rpmtwupdatemod.config.Configer;
 import siongsng.rpmtwupdatemod.function.ReloadPack;
 import siongsng.rpmtwupdatemod.function.SendMsg;
 import siongsng.rpmtwupdatemod.gui.CosmicChat.CosmicChatSend;
-import siongsng.rpmtwupdatemod.gui.CosmicChat.CosmicChatSendScreen;
 import siongsng.rpmtwupdatemod.gui.CrowdinGui.CrowdinGui;
 import siongsng.rpmtwupdatemod.gui.CrowdinGui.CrowdinGuiProcedure;
-import siongsng.rpmtwupdatemod.gui.CrowdinGui.CrowdinGuiScreen;
 import siongsng.rpmtwupdatemod.gui.CrowdinLogin.CrowdinLogin;
-import siongsng.rpmtwupdatemod.gui.CrowdinLogin.CrowdinLoginScreen;
+import siongsng.rpmtwupdatemod.gui.Screen;
 
 public class key {
     private static final KeyBinding crowdin = new KeyBinding("key.rpmtw_update_mod.crowdin", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "key.categories.rpmtw");
@@ -39,7 +37,7 @@ public class key {
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (cosmic_chat_send.wasPressed()) {
-                MinecraftClient.getInstance().openScreen(new CosmicChatSendScreen(new CosmicChatSend()));
+                MinecraftClient.getInstance().openScreen(new Screen(new CosmicChatSend()));
             }
             while (open_config.wasPressed()) {
                 MinecraftClient.getInstance().openScreen(AutoConfig.getConfigScreen(ConfigScreen.class, MinecraftClient.getInstance().currentScreen).get());
@@ -53,7 +51,7 @@ public class key {
                         SendMsg.send("§4請手持物品後再使用此功能。");
                         return;
                     } else if (!config.isCheck) {
-                        MinecraftClient.getInstance().openScreen(new CrowdinLoginScreen(new CrowdinLogin()));
+                        MinecraftClient.getInstance().openScreen(new Screen(new CrowdinLogin()));
                         return;
                     } else {
                         SendMsg.send("請稍後，正在開啟物品翻譯界面中...");
@@ -61,7 +59,7 @@ public class key {
                             SendMsg.send("§6由於你目前手持想要翻譯的物品，數據不在資料庫內\n因此無法進行翻譯，想了解更多資訊請前往RPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
                             return;
                         }
-                        MinecraftClient.getInstance().openScreen(new CrowdinGuiScreen(new CrowdinGui()));
+                        MinecraftClient.getInstance().openScreen(new Screen(new CrowdinGui()));
                     }
                 }
             }
