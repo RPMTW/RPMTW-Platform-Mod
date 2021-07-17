@@ -9,14 +9,22 @@ import net.minecraft.client.util.InputUtil;
 import net.minecraft.item.Item;
 import org.lwjgl.glfw.GLFW;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
+import siongsng.rpmtwupdatemod.config.Configer;
 import siongsng.rpmtwupdatemod.function.ReloadPack;
 import siongsng.rpmtwupdatemod.function.SendMsg;
-import siongsng.rpmtwupdatemod.gui.*;
+import siongsng.rpmtwupdatemod.gui.CosmicChat.CosmicChatSend;
+import siongsng.rpmtwupdatemod.gui.CosmicChat.CosmicChatSendScreen;
+import siongsng.rpmtwupdatemod.gui.CrowdinGui.CrowdinGui;
+import siongsng.rpmtwupdatemod.gui.CrowdinGui.CrowdinGuiProcedure;
+import siongsng.rpmtwupdatemod.gui.CrowdinGui.CrowdinGuiScreen;
+import siongsng.rpmtwupdatemod.gui.CrowdinLogin.CrowdinLogin;
+import siongsng.rpmtwupdatemod.gui.CrowdinLogin.CrowdinLoginScreen;
 
 public class key {
     private static final KeyBinding crowdin = new KeyBinding("key.rpmtw_update_mod.crowdin", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "key.categories.rpmtw");
     private static final KeyBinding reloadpack = new KeyBinding("key.rpmtw_update_mod.reloadpack", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "key.categories.rpmtw");
     private static final KeyBinding open_config = new KeyBinding("key.rpmtw_update_mod.open_config", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_O, "key.categories.rpmtw");
+    private static final KeyBinding cosmic_chat_send = new KeyBinding("key.rpmtw_update_mod.cosmic_chat_send", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_G, "key.categories.rpmtw");
 
     static ConfigScreen config = AutoConfig.getConfigHolder(ConfigScreen.class).getConfig();
 
@@ -24,8 +32,15 @@ public class key {
         KeyBindingHelper.registerKeyBinding(crowdin);
         KeyBindingHelper.registerKeyBinding(reloadpack);
         KeyBindingHelper.registerKeyBinding(open_config);
+        if (Configer.config.isChat){
+            KeyBindingHelper.registerKeyBinding(cosmic_chat_send);
+        }
+
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            while (cosmic_chat_send.wasPressed()) {
+                MinecraftClient.getInstance().openScreen(new CosmicChatSendScreen(new CosmicChatSend()));
+            }
             while (open_config.wasPressed()) {
                 MinecraftClient.getInstance().openScreen(AutoConfig.getConfigScreen(ConfigScreen.class, MinecraftClient.getInstance().currentScreen).get());
             }

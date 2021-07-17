@@ -19,6 +19,8 @@ public class ConfigScreen implements ConfigData {
     public int AfkTime = 600;
     @Comment("預設進入遊戲時，是否自動切換語言為 繁體中文。")
     public boolean isChinese = true;
+    @Comment("是否使用宇宙通訊系統 (重啟遊戲後生效)。")
+    public boolean isChat = true;
     @ConfigEntry.Gui.Excluded
     public String Token = ""; //儲存Crowdin登入權杖
     @ConfigEntry.Gui.Excluded

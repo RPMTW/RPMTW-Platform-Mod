@@ -1,4 +1,4 @@
-package siongsng.rpmtwupdatemod.gui;
+package siongsng.rpmtwupdatemod.gui.CrowdinGui;
 
 import com.google.gson.JsonParser;
 import net.minecraft.client.MinecraftClient;

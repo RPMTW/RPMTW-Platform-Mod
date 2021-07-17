@@ -1,4 +1,4 @@
-package siongsng.rpmtwupdatemod.gui;
+package siongsng.rpmtwupdatemod.gui.CrowdinLogin;
 
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.WButton;

@@ -7,6 +7,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import siongsng.rpmtwupdatemod.CosmicChat.GetMessage;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.config.Configer;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
@@ -32,7 +33,9 @@ public class RpmtwUpdateMod implements ClientModInitializer {
         if (!Configer.config.Token.equals("")) { //如果Token不是空的
             new TokenCheck().Check(Configer.config.Token); //開始檢測
         }
-
+        if (Configer.config.isChat) {
+            new GetMessage();
+        }
     }
 
 }

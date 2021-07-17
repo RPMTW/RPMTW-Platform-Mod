@@ -4,6 +4,7 @@
   "key.rpmtw_update_mod.reloadpack": "Reload the RPMTW Traditional Resource Pack",
   "key.rpmtw_update_mod.report_translation": "Report translation error",
   "key.rpmtw_update_mod.open_config": "開啟RPMTW設定",
+  "key.rpmtw_update_mod.cosmic_chat_send": "發送宇宙通訊訊息",
   "text.autoconfig.rpmtw_update_mod.title": "RPMTW自動繁化模組 設定選單",
   "text.autoconfig.rpmtw_update_mod.option.crowdin": "開啟對應翻譯網頁",
   "text.autoconfig.rpmtw_update_mod.option.notice": "進入世界時自動發送公告",
@@ -11,7 +12,7 @@
   "text.autoconfig.rpmtw_update_mod.option.AfkTime": "開始偵測掛機模式間隔時間",
   "text.autoconfig.rpmtw_update_mod.option.ReloadPack": "重新載入翻譯包",
   "text.autoconfig.rpmtw_update_mod.option.isChinese": "自動切換預設語言",
-  "text.autoconfig.rpmtw_update_mod.option.Token": "Crowdin 登入權杖(TOKEN)",
+  "text.autoconfig.rpmtw_update_mod.option.isChat": "是否啟用宇宙通訊系統",
   "gui.notice": "無法讀取公告。請查看 https://www.rpmtw.ga 取得幫助",
   "menu.rpmtw": "RPMTW settings"
 }
