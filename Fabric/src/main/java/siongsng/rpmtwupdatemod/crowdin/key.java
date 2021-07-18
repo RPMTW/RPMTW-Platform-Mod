@@ -32,6 +32,7 @@ public class key {
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (cosmic_chat_send.wasPressed()) {
+                if (!Configer.config.isChat) return;
                 if (Configer.config.isEULA) {
                     MinecraftClient.getInstance().openScreen(new Screen(new CosmicChat()));
                 } else {
