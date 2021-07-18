@@ -44,10 +44,10 @@ public class CosmicChatScreen extends Screen {
                 button -> {
                     if (Message.getText().equals("")) {
                         SendMsg.send("訊息不能是空的。");
-                        Minecraft.getInstance().displayGuiScreen(null);
                     } else {
                         new SendMessage().Send(Message.getText());
                     }
+                    Minecraft.getInstance().displayGuiScreen(null);
                 }));
         this.addButton(new Button(
                 (this.width - 100) / 2 - BOTTOM_BUTTON_WIDTH,
@@ -97,7 +97,6 @@ public class CosmicChatScreen extends Screen {
         this.renderBackground(matrixStack);
 
         int height = (this.height / 2);
-        int TextColor = 0xFFFFFF; //白色
         String Screen = "宇宙通訊系統-發送訊息介面";
 
         this.font.drawString(matrixStack, Screen, (this.width / (float) 2 / (float) 2) + 55, height - 65, 0xFF5555);

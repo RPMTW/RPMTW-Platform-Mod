@@ -32,8 +32,8 @@ public class Configer {
                 .comment("isChat = 是否使用宇宙通訊系統 (包含接收訊息與發送訊息)。")
                 .define("rpmtw.isChat", true);
         isEULA = client
-                .comment("isChat = 使用者是否同意宇宙通訊EULA。")
-                .define("rpmtw.isChat", false);
+                .comment("isEULA = 使用者是否同意宇宙通訊EULA。")
+                .define("rpmtw.isEULA", false);
         afkTime = client
                 .comment("afkTime = 此數值用來設定過多久沒有活動才會進入掛機模式。(以秒為單位)")
                 .defineInRange("rpmtw.afkTime", 600, 10, 3600);

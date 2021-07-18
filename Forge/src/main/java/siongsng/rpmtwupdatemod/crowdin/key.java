@@ -82,9 +82,9 @@ public final class key {
         if(cosmic_chat_send.isPressed()){
             if (!Configer.isChat.get()) return;
             if (Configer.isEULA.get()) {
-                Minecraft.getInstance().displayGuiScreen(new EULAScreen());
-            } else {
                 Minecraft.getInstance().displayGuiScreen(new CosmicChatScreen());
+            } else {
+                Minecraft.getInstance().displayGuiScreen(new EULAScreen());
             }
         }
     }

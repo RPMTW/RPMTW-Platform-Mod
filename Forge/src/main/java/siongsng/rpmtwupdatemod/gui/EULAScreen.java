@@ -17,7 +17,6 @@ public class EULAScreen extends Screen {
     static final int BUTTON_HEIGHT = 20;
     private static final ResourceLocation texture = new ResourceLocation("rpmtw_update_mod:textures/crowdin_gui.png");
     private static final int BOTTOM_BUTTON_WIDTH = 95;
-    TextFieldWidget Token;
     int xSize = 300;
     int ySize = 150;
 
@@ -80,9 +79,6 @@ public class EULAScreen extends Screen {
         this.font.drawString(matrixStack, Text3, this.width / (float) 2 - this.font.getStringWidth(Text2) / (float) 2, height - 30, TextColor);
         this.font.drawString(matrixStack, Text4, this.width / (float) 2 - this.font.getStringWidth(Text2) / (float) 2, height - 20, TextColor);
         this.font.drawString(matrixStack, Text5, this.width / (float) 2 - this.font.getStringWidth(Text2) / (float) 2, height - 10, TextColor);
-
-        Token.render(matrixStack, mouseX, mouseY, partialTicks);//渲染文字框
-
         drawCenteredString(matrixStack, this.font, this.title.getString(),
                 this.width / 2, 8, 0xFFFFFF);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
