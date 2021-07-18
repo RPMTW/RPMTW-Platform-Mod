@@ -53,11 +53,6 @@ public final class ConfigScreen extends Screen {
                 (unused, newValue) -> Configer.rpmtw_reloadpack.set(newValue)
         ));
         optionsRowList.addOption(new BooleanOption(
-                "回報翻譯錯誤",
-                unused -> Configer.report_translation.get(),
-                (unused, newValue) -> Configer.report_translation.set(newValue)
-        ));
-        optionsRowList.addOption(new BooleanOption(
                 "進入世界時自動發送公告",
                 unused -> Configer.notice.get(),
                 (unused, newValue) -> Configer.notice.set(newValue)
@@ -84,7 +79,6 @@ public final class ConfigScreen extends Screen {
                 button -> {
                     Configer.rpmtw_crowdin.set(true);
                     Configer.rpmtw_reloadpack.set(true);
-                    Configer.report_translation.set(true);
                     Configer.notice.set(true);
                     Configer.afk.set(false);
                     Configer.afkTime.set(600);

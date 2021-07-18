@@ -3,7 +3,7 @@ package siongsng.rpmtwupdatemod.config;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public class Configer {
-    public static ForgeConfigSpec.BooleanValue rpmtw_crowdin, rpmtw_reloadpack, report_translation, notice, afk, isCheck, isChinese;
+    public static ForgeConfigSpec.BooleanValue rpmtw_crowdin, rpmtw_reloadpack, notice, afk, isCheck, isChinese;
     public static ForgeConfigSpec.IntValue afkTime;
     public static ForgeConfigSpec.ConfigValue<String> Token;
 
@@ -17,9 +17,6 @@ public class Configer {
         rpmtw_reloadpack = client
                 .comment("reloadpack = 是否啟用使用快捷鍵(預設為R)快速重新載入RPMTW繁體中文資源包。")
                 .define("rpmtw.reloadpack", true);
-        report_translation = client
-                .comment("report_translation = 是否啟用使用快捷鍵(預設為U)回報翻譯錯誤。")
-                .define("rpmtw.report_translation", true);
         notice = client
                 .comment("notice = 進入世界時，是否自動發送公告。(此變更須重啟遊戲後生效)")
                 .define("rpmtw.notice", true);
