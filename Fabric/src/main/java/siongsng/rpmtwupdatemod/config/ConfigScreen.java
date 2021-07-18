@@ -25,4 +25,6 @@ public class ConfigScreen implements ConfigData {
     public String Token = ""; //儲存Crowdin登入權杖
     @ConfigEntry.Gui.Excluded
     public boolean isCheck = false; //儲存登入權杖是否有效
+    @ConfigEntry.Gui.Excluded
+    public boolean isEULA = false; //使用者是否同意宇宙通訊EULA
 }

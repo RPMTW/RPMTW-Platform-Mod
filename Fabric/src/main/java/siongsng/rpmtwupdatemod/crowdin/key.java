@@ -16,6 +16,7 @@ import siongsng.rpmtwupdatemod.gui.CosmicChat;
 import siongsng.rpmtwupdatemod.gui.CrowdinGui.CrowdinGui;
 import siongsng.rpmtwupdatemod.gui.CrowdinGui.CrowdinGuiProcedure;
 import siongsng.rpmtwupdatemod.gui.CrowdinLogin.CrowdinLogin;
+import siongsng.rpmtwupdatemod.gui.EULA;
 import siongsng.rpmtwupdatemod.gui.Screen;
 
 public class key {
@@ -30,14 +31,18 @@ public class key {
         KeyBindingHelper.registerKeyBinding(crowdin);
         KeyBindingHelper.registerKeyBinding(reloadpack);
         KeyBindingHelper.registerKeyBinding(open_config);
-        if (Configer.config.isChat){
+        if (Configer.config.isChat) {
             KeyBindingHelper.registerKeyBinding(cosmic_chat_send);
         }
 
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (cosmic_chat_send.wasPressed()) {
-                MinecraftClient.getInstance().openScreen(new Screen(new CosmicChat()));
+                if (Configer.config.isEULA) {
+                    MinecraftClient.getInstance().openScreen(new Screen(new CosmicChat()));
+                } else {
+                    MinecraftClient.getInstance().openScreen(new Screen(new EULA()));
+                }
             }
             while (open_config.wasPressed()) {
                 MinecraftClient.getInstance().openScreen(AutoConfig.getConfigScreen(ConfigScreen.class, MinecraftClient.getInstance().currentScreen).get());
