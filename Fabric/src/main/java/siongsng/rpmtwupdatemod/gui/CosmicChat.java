@@ -1,4 +1,4 @@
-package siongsng.rpmtwupdatemod.gui.CosmicChat;
+package siongsng.rpmtwupdatemod.gui;
 
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.WButton;
@@ -17,8 +17,8 @@ import siongsng.rpmtwupdatemod.function.SendMsg;
 
 import static io.github.cottonmc.cotton.gui.client.BackgroundPainter.createNinePatch;
 
-public class CosmicChatSend extends LightweightGuiDescription {
-    public CosmicChatSend() {
+public class CosmicChat extends LightweightGuiDescription {
+    public CosmicChat() {
         WGridPanel gui = new WGridPanel();
         setRootPanel(gui);
         gui.setSize(300, 215);
@@ -32,7 +32,7 @@ public class CosmicChatSend extends LightweightGuiDescription {
 
         WButton Cancel = new WButton(new LiteralText("取消"));
         WButton Send = new WButton(new LiteralText("傳送"));
-        WButton Info = new WButton(new LiteralText("這是什麼？"));
+        WButton Info = new WButton(new LiteralText("這是什麼?"));
         gui.add(Cancel, 1, 10, 4, 2);
         gui.add(Send, 6, 10, 4, 2);
         gui.add(Info, 11, 10, 5, 2);

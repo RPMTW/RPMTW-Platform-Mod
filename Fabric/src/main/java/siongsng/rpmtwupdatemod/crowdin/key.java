@@ -12,7 +12,7 @@ import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.config.Configer;
 import siongsng.rpmtwupdatemod.function.ReloadPack;
 import siongsng.rpmtwupdatemod.function.SendMsg;
-import siongsng.rpmtwupdatemod.gui.CosmicChat.CosmicChatSend;
+import siongsng.rpmtwupdatemod.gui.CosmicChat;
 import siongsng.rpmtwupdatemod.gui.CrowdinGui.CrowdinGui;
 import siongsng.rpmtwupdatemod.gui.CrowdinGui.CrowdinGuiProcedure;
 import siongsng.rpmtwupdatemod.gui.CrowdinLogin.CrowdinLogin;
@@ -37,7 +37,7 @@ public class key {
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (cosmic_chat_send.wasPressed()) {
-                MinecraftClient.getInstance().openScreen(new Screen(new CosmicChatSend()));
+                MinecraftClient.getInstance().openScreen(new Screen(new CosmicChat()));
             }
             while (open_config.wasPressed()) {
                 MinecraftClient.getInstance().openScreen(AutoConfig.getConfigScreen(ConfigScreen.class, MinecraftClient.getInstance().currentScreen).get());
