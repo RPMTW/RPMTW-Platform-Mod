@@ -63,8 +63,13 @@ dependencies {
     shade('commons-beanutils:commons-beanutils:1.9.4')
     shade('commons-io:commons-io:2.9.0')
     shade files('libs/commons-logging-1.2.jar')
+    shade('io.socket:socket.io-client:2.0.1')
+    shade('io.socket:engine.io-client:2.0.0')
+    shade('org.json:json:20090211')
+    shade('com.squareup.okhttp3:okhttp:3.12.12')
+    shade('com.squareup.okio:okio:1.15.0')
     implementation fg.deobf("vazkii.patchouli:Patchouli:1.16.4-52-SNAPSHOT")
-    minecraft 'net.minecraftforge:forge:1.16.5-36.1.25'
+    minecraft 'net.minecraftforge:forge:1.16.5-36.1.62'
 }
 jar {
     manifest {
