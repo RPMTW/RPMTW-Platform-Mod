@@ -11,7 +11,7 @@ public class GetMessage {
     public GetMessage() {
         new SocketClient().getSocket().connect().on(("broadcast"), (data) -> {
             if (Minecraft.getInstance().player == null) return;
-//            if (!Configer.config.isChat) return;
+            if (!Configer.isChat.get()) return;
             JsonParser jp = new JsonParser();
             JsonObject JsonData = (JsonObject) jp.parse(data[0].toString());
             String Type = JsonData.getAsJsonPrimitive("Type").getAsString();

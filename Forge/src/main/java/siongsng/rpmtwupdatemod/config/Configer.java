@@ -3,7 +3,7 @@ package siongsng.rpmtwupdatemod.config;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public class Configer {
-    public static ForgeConfigSpec.BooleanValue rpmtw_crowdin, rpmtw_reloadpack, notice, afk, isCheck, isChinese;
+    public static ForgeConfigSpec.BooleanValue rpmtw_crowdin, rpmtw_reloadpack, notice, afk, isCheck, isChinese, isChat, isEULA;
     public static ForgeConfigSpec.IntValue afkTime;
     public static ForgeConfigSpec.ConfigValue<String> Token;
 
@@ -28,6 +28,12 @@ public class Configer {
         isChinese = client
                 .comment("IsChinese = 預設進入遊戲時，是否自動切換語言為 繁體中文。")
                 .define("rpmtw.isChinese", true);
+        isChat = client
+                .comment("isChat = 是否使用宇宙通訊系統 (包含接收訊息與發送訊息)。")
+                .define("rpmtw.isChat", true);
+        isEULA = client
+                .comment("isChat = 使用者是否同意宇宙通訊EULA。")
+                .define("rpmtw.isChat", false);
         afkTime = client
                 .comment("afkTime = 此數值用來設定過多久沒有活動才會進入掛機模式。(以秒為單位)")
                 .defineInRange("rpmtw.afkTime", 600, 10, 3600);

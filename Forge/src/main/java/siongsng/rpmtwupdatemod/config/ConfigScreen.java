@@ -53,6 +53,11 @@ public final class ConfigScreen extends Screen {
                 (unused, newValue) -> Configer.rpmtw_reloadpack.set(newValue)
         ));
         optionsRowList.addOption(new BooleanOption(
+                "是否啟用宇宙通訊系統",
+                unused -> Configer.isChat.get(),
+                (unused, newValue) -> Configer.isChat.set(newValue)
+        ));
+        optionsRowList.addOption(new BooleanOption(
                 "進入世界時自動發送公告",
                 unused -> Configer.notice.get(),
                 (unused, newValue) -> Configer.notice.set(newValue)
@@ -80,6 +85,7 @@ public final class ConfigScreen extends Screen {
                     Configer.rpmtw_crowdin.set(true);
                     Configer.rpmtw_reloadpack.set(true);
                     Configer.notice.set(true);
+                    Configer.isChat.set(true);
                     Configer.afk.set(false);
                     Configer.afkTime.set(600);
                     Configer.isChinese.set(true);

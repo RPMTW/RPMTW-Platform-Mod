@@ -13,6 +13,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import siongsng.rpmtwupdatemod.CosmicChat.GetMessage;
 import siongsng.rpmtwupdatemod.commands.noticeCMD;
 import siongsng.rpmtwupdatemod.config.Config;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
@@ -71,6 +72,9 @@ public class RpmtwUpdateMod {
                 ExtensionPoint.CONFIGGUIFACTORY,
                 () -> (mc, screen) -> new ConfigScreen()
         );
+        if (Configer.isChat.get()) {
+            new GetMessage();
+        }
     }
 
 }

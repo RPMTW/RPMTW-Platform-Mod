@@ -68,7 +68,7 @@ dependencies {
     shade('org.json:json:20090211')
     shade('com.squareup.okhttp3:okhttp:3.12.12')
     shade('com.squareup.okio:okio:1.15.0')
-    implementation fg.deobf("vazkii.patchouli:Patchouli:1.16.4-52-SNAPSHOT")
+    implementation fg.deobf("vazkii.patchouli:Patchouli:1.16.4-53.1")
     minecraft 'net.minecraftforge:forge:1.16.5-36.1.62'
 }
 jar {
