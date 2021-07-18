@@ -58,8 +58,4 @@ public class CrowdinLogin extends LightweightGuiDescription {
     public void addPainters() {
         getRootPanel().setBackgroundPainter(createNinePatch(new Identifier(RpmtwUpdateMod.Mod_ID, "textures/crowdin_gui.png"), 8));
     }
-
-    private Boolean Login() {
-        return true;
-    }
 }
