@@ -6,7 +6,7 @@ repositories {
     mavenCentral()
     maven { url "https://maven.shedaniel.me/" }
     maven {
-        url "https://maven.terraformersmc.com/releases/"
+        url "https://bai.jfrog.io/artifactory/maven" //ModMenu
         content {
             includeGroup "com.terraformersmc"
         }
@@ -23,6 +23,7 @@ repositories {
         url = "https://server.bbkr.space/artifactory/libs-release"
     }
     maven { url "https://maven.blamejared.com" } //Patchouli
+    maven { url "https://repo1.maven.org/maven2/"}
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -48,6 +49,11 @@ dependencies {
     shadow('commons-collections:commons-collections:3.2.2')
     shadow('commons-beanutils:commons-beanutils:1.9.4')
     shadow('org.apache.httpcomponents:httpclient:4.5.13')
+    include(modApi('io.socket:socket.io-client:2.0.1'))
+    include('io.socket:engine.io-client:2.0.0')
+    include('org.json:json:20090211')
+    include('com.squareup.okhttp3:okhttp:3.12.12')
+    include('com.squareup.okio:okio:1.15.0')
     modImplementation include("me.shedaniel.cloth:cloth-config-fabric:4.11.19") {
         exclude(group: "net.fabricmc.fabric-api")
     }
