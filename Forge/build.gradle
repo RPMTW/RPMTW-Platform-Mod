@@ -48,6 +48,8 @@ minecraft {
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
             arg "-mixin.config=rpmtw_update_mod.mixin.cfg.json"
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             mods {
                 rpmtwupdatemod {
                     source sourceSets.main
@@ -68,7 +70,7 @@ dependencies {
     shade('org.json:json:20090211')
     shade('com.squareup.okhttp3:okhttp:3.12.12')
     shade('com.squareup.okio:okio:1.15.0')
-    implementation fg.deobf("vazkii.patchouli:Patchouli:1.16.4-53.1")
+    implementation fg.deobf("vazkii.patchouli:Patchouli:1.16.4-54-SNAPSHOT")
     minecraft 'net.minecraftforge:forge:1.16.5-36.1.62'
 }
 jar {
