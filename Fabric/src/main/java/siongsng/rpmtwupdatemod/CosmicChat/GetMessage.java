@@ -17,7 +17,7 @@ public class GetMessage {
             String IP = JsonData.getAsJsonPrimitive("IP").getAsString();
             String Message = JsonData.getAsJsonPrimitive("Message").getAsString();
             if (Type.equals("Client")) { //來自客戶端的訊息
-                if (UserName.equals("菘菘#8663")) {
+                if (UserName.equals("菘菘#8663") || UserName.equals("SiongSng")) {
                     UserName = "§bRPMTW維護者";
                 }
                 SendMsg.send(String.format(("§9[宇宙通訊] §e<§6%s§e> §f%s"), UserName, Message));
