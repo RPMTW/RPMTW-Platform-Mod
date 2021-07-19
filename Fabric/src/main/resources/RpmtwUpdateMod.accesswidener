@@ -1,9 +1,0 @@
-accessWidener	v1	named
-
-accessible    field    net/minecraft/client/MinecraftClient    resourceReloadLogger    Lnet/minecraft/client/resource/ResourceReloadLogger;
-
-accessible    field    net/minecraft/client/MinecraftClient    COMPLETED_UNIT_FUTURE    Ljava/util/concurrent/CompletableFuture;
-
-accessible    method    net/minecraft/client/MinecraftClient    handleResourceReloadException    (Ljava/lang/Throwable;)V
-
-accessible    method    net/minecraft/resource/ReloadableResourceManagerImpl    clear    ()V
