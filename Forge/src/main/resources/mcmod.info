@@ -1,0 +1,18 @@
+[
+  {
+    "modid": "RPMTW-Update-Mod",
+    "name": "RPMTW Update Mod",
+    "description": "這個模組開啟遊戲後將會自動更新與下載翻譯包，並且新增許多對於譯者、使用者方便的功能。官方網站: https://www.rpmtw.ga",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "https://www.rpmtw.ga",
+    "updateUrl": "",
+    "authorList": [
+      "SiongSng"
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
