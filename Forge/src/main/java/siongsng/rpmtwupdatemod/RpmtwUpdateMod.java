@@ -1,10 +1,19 @@
 package siongsng.rpmtwupdatemod;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.Language;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import siongsng.rpmtwupdatemod.config.Configer;
+import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
+import siongsng.rpmtwupdatemod.function.AddPack;
+import siongsng.rpmtwupdatemod.function.ping;
+
+import java.io.IOException;
 
 @Mod(
         modid = RpmtwUpdateMod.MOD_ID,
@@ -23,38 +32,31 @@ public class RpmtwUpdateMod {
     @Mod.Instance(MOD_ID)
     public static RpmtwUpdateMod INSTANCE;
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
-
     public RpmtwUpdateMod() {
-//        MinecraftForge.EVENT_BUS.register(this);
-//        LOGGER.info("Hello RPMTW world!");
-//        if (!ping.isConnect()) { //判斷是否有網路
-//            LOGGER.error("你目前處於無網路狀態，因此無法使用 RPMTW 翻譯自動更新模組，請連結網路後重新啟動此模組。");
-//        }
-//        new PackVersionCheck(); //資源包版本檢查
-//        Minecraft.getMinecraft().gameSettings.language = "zh_tw"; //將語言設定為繁體中文
-//        try {
-//            new TokenCheck().Check(Configer.Token); //開始檢測權杖
-//        } catch (IOException e) {
-//            LOGGER.error("檢測權杖時發生未知錯誤：" + e);
-//        }
+        MinecraftForge.EVENT_BUS.register(this);
     }
 
-//    public static void insertForcedPack(List resourcePackList) {
-//
-//    }
-
-    /**
-     * This is the first initialization event. Register tile entities here.
-     * The registry events below will have fired prior to entry to this method.
-     */
     @Mod.EventHandler
-    public void preinit(FMLPreInitializationEvent event) {
-    }
+    public void construct(FMLConstructionEvent event) {
+        LOGGER.info("Hello RPMTW world!");
+        if (!ping.isConnect()) { //判斷是否有網路
+            LOGGER.error("你目前處於無網路狀態，因此無法使用 RPMTW 翻譯自動更新模組，請連結網路後重新啟動此模組。");
+        }
+//        new PackVersionCheck(); //資源包版本檢查
 
-    /**
-     * This is the second initialization event. Register custom recipes
-     */
+
+        new AddPack();
+
+        Minecraft.getMinecraft().getLanguageManager().setCurrentLanguage(new Language("zh_tw", "TW", "繁體中文", false));
+        Minecraft.getMinecraft().gameSettings.language = "zh_tw"; //將語言設定為繁體中文
+        try {
+            new TokenCheck().Check(Configer.Token); //開始檢測權杖
+        } catch (IOException e) {
+            LOGGER.error("檢測權杖時發生未知錯誤：" + e);
+        }
+    }
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
+
     }
 }

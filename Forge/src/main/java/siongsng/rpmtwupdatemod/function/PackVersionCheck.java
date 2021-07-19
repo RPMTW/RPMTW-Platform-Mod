@@ -1,10 +1,9 @@
 package siongsng.rpmtwupdatemod.function;
 
-import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.ResourcePackRepository;
 import org.apache.commons.io.FileUtils;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
 
-import java.io.FileWriter;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,6 +19,7 @@ public class PackVersionCheck {
                 Files.createDirectories(PackDir);
             }
             FileUtils.copyURLToFile(new URL(RpmtwUpdateMod.PackDownloadUrl), PackFile.toFile()); //下載資源包檔案
+            new AddPack();
         } catch (Exception e) {
             RpmtwUpdateMod.LOGGER.error("發生未知錯誤: " + e); //錯誤處理
         }
