@@ -32,9 +32,6 @@ public class RpmtwUpdateMod {
     @Mod.Instance(MOD_ID)
     public static RpmtwUpdateMod INSTANCE;
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
-    public RpmtwUpdateMod() {
-        MinecraftForge.EVENT_BUS.register(this);
-    }
 
     @Mod.EventHandler
     public void construct(FMLConstructionEvent event) {
@@ -45,14 +42,23 @@ public class RpmtwUpdateMod {
 
         new AddPack(); //新增翻譯資源包
 
-        Minecraft.getMinecraft().getLanguageManager().setCurrentLanguage(new Language("zh_tw", "TW", "繁體中文", false));
-        Minecraft.getMinecraft().gameSettings.language = "zh_tw"; //將語言設定為繁體中文
+        /*
+        將語言設定為繁體中文
+         */
+        if (RPMTWConfig.isChinese) {
+            Minecraft.getMinecraft().getLanguageManager().setCurrentLanguage(new Language("zh_tw", "TW", "繁體中文", false));
+            Minecraft.getMinecraft().gameSettings.language = "zh_tw";
+            Minecraft.getMinecraft().gameSettings.saveOptions();
+        }
         try {
-            new TokenCheck().Check(RPMTWConfig.Token); //開始檢測權杖
+            if (!RPMTWConfig.Token.equals("")) {
+                new TokenCheck().Check(RPMTWConfig.Token); //開始檢測登入權杖
+            }
         } catch (IOException e) {
             LOGGER.error("檢測權杖時發生未知錯誤：" + e);
         }
     }
+
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
 
