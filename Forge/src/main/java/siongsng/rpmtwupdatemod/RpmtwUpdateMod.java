@@ -69,7 +69,7 @@ public class RpmtwUpdateMod {
             LOGGER.error("檢測權杖時發生未知錯誤：" + e);
         }
     }
-    
+
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(new key());

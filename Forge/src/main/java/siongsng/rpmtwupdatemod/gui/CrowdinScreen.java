@@ -102,7 +102,10 @@ public class CrowdinScreen extends GuiScreen {
 
         if (button == Info) {
             try {
-                Desktop.getDesktop().browse(new URI("https://www.rpmtw.ga/Wiki/RPMTW-Update-Mod-Related#h.x230ggwx63l4"));
+                String url = "https://crowdin.com/translate/resourcepack-mod-zhtw/all/en-zhtw?filter=basic&value=0#q=" + stringID;
+
+                SendMsg.send("§6開啟翻譯平台網頁中...");
+                Desktop.getDesktop().browse(new URI(url));
             } catch (Exception e) {
                 e.printStackTrace();
             }
