@@ -12,6 +12,8 @@ import org.lwjgl.input.Keyboard;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.function.ReloadPack;
 import siongsng.rpmtwupdatemod.function.SendMsg;
+import siongsng.rpmtwupdatemod.gui.CrowdinLoginScreen;
+import siongsng.rpmtwupdatemod.gui.CrowdinProcedure;
 
 public final class key {
     public static final KeyBinding reloadpack = new KeyBinding("key.rpmtw_update_mod.reloadpack", KeyConflictContext.UNIVERSAL, Keyboard.KEY_UNLABELED, "key.categories.rpmtw");
@@ -55,7 +57,7 @@ public final class key {
             } else {
                 SendMsg.send("請稍後，正在開啟物品翻譯界面中...");
                 Thread thread = new Thread(() -> {
-                    if (CorwidnProcedure.getText() == null && RPMTWConfig.isCheck) {
+                    if (CrowdinProcedure.getText() == null && RPMTWConfig.isCheck) {
                         SendMsg.send("§6由於你目前手持想要翻譯的物品，數據不在資料庫內\n因此無法進行翻譯，想了解更多資訊請前往RPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
                         return;
                     }
