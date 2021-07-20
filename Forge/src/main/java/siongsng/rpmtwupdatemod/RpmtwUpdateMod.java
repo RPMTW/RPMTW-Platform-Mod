@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import siongsng.rpmtwupdatemod.config.Configer;
+import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.function.AddPack;
 import siongsng.rpmtwupdatemod.function.ping;
@@ -42,15 +42,13 @@ public class RpmtwUpdateMod {
         if (!ping.isConnect()) { //判斷是否有網路
             LOGGER.error("你目前處於無網路狀態，因此無法使用 RPMTW 翻譯自動更新模組，請連結網路後重新啟動此模組。");
         }
-//        new PackVersionCheck(); //資源包版本檢查
 
-
-        new AddPack();
+        new AddPack(); //新增翻譯資源包
 
         Minecraft.getMinecraft().getLanguageManager().setCurrentLanguage(new Language("zh_tw", "TW", "繁體中文", false));
         Minecraft.getMinecraft().gameSettings.language = "zh_tw"; //將語言設定為繁體中文
         try {
-            new TokenCheck().Check(Configer.Token); //開始檢測權杖
+            new TokenCheck().Check(RPMTWConfig.Token); //開始檢測權杖
         } catch (IOException e) {
             LOGGER.error("檢測權杖時發生未知錯誤：" + e);
         }
