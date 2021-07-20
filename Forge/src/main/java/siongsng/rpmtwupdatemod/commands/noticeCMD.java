@@ -22,7 +22,7 @@ public class noticeCMD extends CommandBase {
 
     @Override
     public void execute(MinecraftServer server, ICommandSender sender, String[] args) {
-        SendMsg.send(new TextComponentTranslation("gui.notice").toString());
+        SendMsg.send(new TextComponentTranslation("gui.notice").getFormattedText());
     }
 
     @Override

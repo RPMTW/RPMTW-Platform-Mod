@@ -2,14 +2,17 @@ package siongsng.rpmtwupdatemod;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.Language;
+import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import siongsng.rpmtwupdatemod.commands.noticeCMD;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
+import siongsng.rpmtwupdatemod.crowdin.key;
 import siongsng.rpmtwupdatemod.function.AddPack;
 import siongsng.rpmtwupdatemod.function.ping;
 
@@ -61,6 +64,7 @@ public class RpmtwUpdateMod {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-
+        MinecraftForge.EVENT_BUS.register(new key());
+        ClientCommandHandler.instance.registerCommand(new noticeCMD());
     }
 }
