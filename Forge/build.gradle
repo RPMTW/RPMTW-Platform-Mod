@@ -41,6 +41,7 @@ minecraft {
     }
 }
 sourceSets.main.resources { srcDir 'src/generated/resources' }
+
 configurations {
     shade
     compile.extendsFrom(shade)
