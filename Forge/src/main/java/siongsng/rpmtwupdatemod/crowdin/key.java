@@ -17,9 +17,7 @@ import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.function.ReloadPack;
 import siongsng.rpmtwupdatemod.function.SendMsg;
-import siongsng.rpmtwupdatemod.gui.CrowdinLoginScreen;
-import siongsng.rpmtwupdatemod.gui.CrowdinProcedure;
-import siongsng.rpmtwupdatemod.gui.CrowdinScreen;
+import siongsng.rpmtwupdatemod.gui.*;
 
 public final class key {
     public static final KeyBinding reloadpack = new KeyBinding("key.rpmtw_update_mod.reloadpack", KeyConflictContext.UNIVERSAL, Keyboard.KEY_NONE, "key.categories.rpmtw");
@@ -83,9 +81,9 @@ public final class key {
         if (cosmic_chat_send.isPressed()) {
             if (!RPMTWConfig.isChat) return;
             if (RPMTWConfig.isEULA) {
-//                Minecraft.getMinecraft().displayGuiScreen(new CosmicChatScreen());
+                Minecraft.getMinecraft().displayGuiScreen(new CosmicChatScreen());
             } else {
-//                Minecraft.getMinecraft().displayGuiScreen(new EULAScreen());
+                Minecraft.getMinecraft().displayGuiScreen(new EULAScreen());
             }
         }
     }

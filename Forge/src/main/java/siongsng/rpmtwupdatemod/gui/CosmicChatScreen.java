@@ -7,40 +7,40 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
-import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
+import siongsng.rpmtwupdatemod.CosmicChat.SendMessage;
 import siongsng.rpmtwupdatemod.function.SendMsg;
 
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
 
-public class CrowdinLoginScreen extends GuiScreen {
+public class CosmicChatScreen extends GuiScreen {
     static final int BUTTON_HEIGHT = 20;
     private static final int BOTTOM_BUTTON_WIDTH = 95;
-    GuiTextField Token;
+    GuiTextField Message;
     GuiButton Info;
-    GuiButton OK;
+    GuiButton Send;
     GuiButton Close;
 
     @Override
     public void initGui() {
         super.initGui();
-        Token = new GuiTextField(1, fontRenderer, (this.width / 2) - 95, (this.height / 2) - 10, 200, 20);
+        Message = new GuiTextField(1, fontRenderer, (this.width / 2) - 95, (this.height / 2) - 10, 200, 20);
         Info = new GuiButton(
                 1,
                 (this.width / 2 + 50),
                 (this.height / 2) + 30,
                 BOTTOM_BUTTON_WIDTH,
                 BUTTON_HEIGHT,
-                "查看帳號登入教學");
+                "這是什麼?");
 
-        OK = new GuiButton(
+        Send = new GuiButton(
                 2,
                 (this.width - 4) / 2 - BOTTOM_BUTTON_WIDTH + 50,
                 (this.height / 2) + 30,
                 BOTTOM_BUTTON_WIDTH,
                 BUTTON_HEIGHT,
-                "登入");
+                "傳送");
 
         Close = new GuiButton(
                 3,
@@ -48,10 +48,10 @@ public class CrowdinLoginScreen extends GuiScreen {
                 (this.height / 2) + 30,
                 BOTTOM_BUTTON_WIDTH,
                 BUTTON_HEIGHT,
-                "關閉");
+                "取消");
 
         this.buttonList.add(Info);
-        this.buttonList.add(OK);
+        this.buttonList.add(Send);
         this.buttonList.add(Close);
     }
 
@@ -62,16 +62,14 @@ public class CrowdinLoginScreen extends GuiScreen {
 
         int height = (this.height / 2);
         int TextColor = 0xFFFFFF; //白色
-        String Screen = "RPMTW X Crowdin 翻譯帳號登入系統";
-        String Text1 = "由於你目前尚未登入Crowdin帳號因此無法使用 協助翻譯 功能。";
-        String Text2 = "如需使用此功能，請先登入Crowdin帳號，登入教學點擊下方按鈕即可。";
+        String Screen = "宇宙通訊系統-發送訊息介面";
+        String Text1 = "請在下方框格內輸入要向宇宙發送的訊息。";
 
-        this.drawString(fontRenderer, Screen, (this.width / 2 - fontRenderer.getStringWidth(Text1) / 2) + 55, height - 65, 0xFF5555);
+        this.drawString(fontRenderer, Screen, (this.width / 2 - fontRenderer.getStringWidth(Screen) / 2), height - 65, 0xFF5555);
         this.drawString(fontRenderer, Text1, this.width / 2 - fontRenderer.getStringWidth(Text1) / 2, height - 50, TextColor);
-        this.drawString(fontRenderer, Text2, this.width / 2 - fontRenderer.getStringWidth(Text2) / 2, height - 40, TextColor);
 
-        Token.setMaxStringLength(500);
-        Token.drawTextBox();
+        Message.setMaxStringLength(200);
+        Message.drawTextBox();
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
@@ -82,25 +80,19 @@ public class CrowdinLoginScreen extends GuiScreen {
 
         if (button == Info) {
             try {
-                Desktop.getDesktop().browse(new URI("https://www.rpmtw.ga/Wiki/RPMTW-Update-Mod-Related#h.x230ggwx63l4"));
+                Desktop.getDesktop().browse(new URI("https://www.rpmtw.ga/Wiki/RPMTW-Update-Mod-Related#h.krxvof43ocod"));
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-        if (button == OK) {
-            if (Token.getText().equals("")) {
-                SendMsg.send("Crowdin登入權杖不能是空的");
-                Minecraft.getMinecraft().displayGuiScreen(null);
+        if (button == Send) {
+            if (Message.getText().equals("")) {
+                SendMsg.send("訊息不能是空的。");
             } else {
-                SendMsg.send("正在嘗試登入中...");
-                Minecraft.getMinecraft().displayGuiScreen(null);
-                try {
-                    new TokenCheck().Check(Token.getText());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                new SendMessage().Send(Message.getText());
             }
+            Minecraft.getMinecraft().displayGuiScreen(null);
         }
 
         if (button == Close) {
@@ -111,18 +103,18 @@ public class CrowdinLoginScreen extends GuiScreen {
     @Override
     public void keyTyped(char c, int i) throws IOException {
         super.keyTyped(c, i);
-        Token.textboxKeyTyped(c, i);
+        Message.textboxKeyTyped(c, i);
     }
 
     @Override
     public void mouseClicked(int i, int j, int k) throws IOException {
-        Token.mouseClicked(i, j, k);
+        Message.mouseClicked(i, j, k);
         super.mouseClicked(i, j, k);
     }
 
     @Override
     public void updateScreen() {
-        Token.updateCursorCounter();
+        Message.updateCursorCounter();
         super.updateScreen();
     }
 }

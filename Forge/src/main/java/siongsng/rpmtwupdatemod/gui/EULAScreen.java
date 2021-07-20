@@ -6,18 +6,18 @@ package siongsng.rpmtwupdatemod.gui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.GuiTextField;
-import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
-import siongsng.rpmtwupdatemod.function.SendMsg;
+import net.minecraftforge.common.config.Config;
+import net.minecraftforge.common.config.ConfigManager;
+import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
+import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
 
-public class CrowdinLoginScreen extends GuiScreen {
+public class EULAScreen extends GuiScreen {
     static final int BUTTON_HEIGHT = 20;
     private static final int BOTTOM_BUTTON_WIDTH = 95;
-    GuiTextField Token;
     GuiButton Info;
     GuiButton OK;
     GuiButton Close;
@@ -25,14 +25,13 @@ public class CrowdinLoginScreen extends GuiScreen {
     @Override
     public void initGui() {
         super.initGui();
-        Token = new GuiTextField(1, fontRenderer, (this.width / 2) - 95, (this.height / 2) - 10, 200, 20);
         Info = new GuiButton(
                 1,
                 (this.width / 2 + 50),
                 (this.height / 2) + 30,
                 BOTTOM_BUTTON_WIDTH,
                 BUTTON_HEIGHT,
-                "查看帳號登入教學");
+                "這是什麼?");
 
         OK = new GuiButton(
                 2,
@@ -40,7 +39,7 @@ public class CrowdinLoginScreen extends GuiScreen {
                 (this.height / 2) + 30,
                 BOTTOM_BUTTON_WIDTH,
                 BUTTON_HEIGHT,
-                "登入");
+                "我同意");
 
         Close = new GuiButton(
                 3,
@@ -48,7 +47,7 @@ public class CrowdinLoginScreen extends GuiScreen {
                 (this.height / 2) + 30,
                 BOTTOM_BUTTON_WIDTH,
                 BUTTON_HEIGHT,
-                "關閉");
+                "我不同意");
 
         this.buttonList.add(Info);
         this.buttonList.add(OK);
@@ -62,16 +61,19 @@ public class CrowdinLoginScreen extends GuiScreen {
 
         int height = (this.height / 2);
         int TextColor = 0xFFFFFF; //白色
-        String Screen = "RPMTW X Crowdin 翻譯帳號登入系統";
-        String Text1 = "由於你目前尚未登入Crowdin帳號因此無法使用 協助翻譯 功能。";
-        String Text2 = "如需使用此功能，請先登入Crowdin帳號，登入教學點擊下方按鈕即可。";
+        String Screen = "宇宙通訊系統-EULA";
+        String Text1 = "使用宇宙通訊系統須遵守《RPMTW 宇宙通訊系統終端使用者授權合約》";
+        String Text2 = "- 由於此功能與Discord串聯，請遵守《Discord使用者服務條款》";
+        String Text3 = "- 訊息內容請不得以任何形式騷擾別人，否則我們有權封禁該帳號";
+        String Text4 = "- 我們將會蒐集您的IP、Minecraft UUID/ID，IP僅用於封禁帳號";
+        String Text5 = "- 我們將有權隨時更改本條款";
 
-        this.drawString(fontRenderer, Screen, (this.width / 2 - fontRenderer.getStringWidth(Text1) / 2) + 55, height - 65, 0xFF5555);
+        this.drawString(fontRenderer, Screen, (this.width / 2 - fontRenderer.getStringWidth(Screen) / 2), height - 65, 0xFF5555);
         this.drawString(fontRenderer, Text1, this.width / 2 - fontRenderer.getStringWidth(Text1) / 2, height - 50, TextColor);
         this.drawString(fontRenderer, Text2, this.width / 2 - fontRenderer.getStringWidth(Text2) / 2, height - 40, TextColor);
-
-        Token.setMaxStringLength(500);
-        Token.drawTextBox();
+        this.drawString(fontRenderer, Text3, this.width / 2 - fontRenderer.getStringWidth(Text3) / 2, height - 30, TextColor);
+        this.drawString(fontRenderer, Text4, this.width / 2 - fontRenderer.getStringWidth(Text4) / 2, height - 20, TextColor);
+        this.drawString(fontRenderer, Text5, this.width / 2 - fontRenderer.getStringWidth(Text5) / 2, height - 10, TextColor);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
@@ -82,47 +84,20 @@ public class CrowdinLoginScreen extends GuiScreen {
 
         if (button == Info) {
             try {
-                Desktop.getDesktop().browse(new URI("https://www.rpmtw.ga/Wiki/RPMTW-Update-Mod-Related#h.x230ggwx63l4"));
+                Desktop.getDesktop().browse(new URI("https://www.rpmtw.ga/Wiki/RPMTW-Update-Mod-Related#h.krxvof43ocod"));
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
         if (button == OK) {
-            if (Token.getText().equals("")) {
-                SendMsg.send("Crowdin登入權杖不能是空的");
-                Minecraft.getMinecraft().displayGuiScreen(null);
-            } else {
-                SendMsg.send("正在嘗試登入中...");
-                Minecraft.getMinecraft().displayGuiScreen(null);
-                try {
-                    new TokenCheck().Check(Token.getText());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            RPMTWConfig.isEULA = true;
+            ConfigManager.sync(RpmtwUpdateMod.MOD_ID, Config.Type.INSTANCE);
+            Minecraft.getMinecraft().displayGuiScreen(new CosmicChatScreen());
         }
 
         if (button == Close) {
             Minecraft.getMinecraft().displayGuiScreen(null);
         }
-    }
-
-    @Override
-    public void keyTyped(char c, int i) throws IOException {
-        super.keyTyped(c, i);
-        Token.textboxKeyTyped(c, i);
-    }
-
-    @Override
-    public void mouseClicked(int i, int j, int k) throws IOException {
-        Token.mouseClicked(i, j, k);
-        super.mouseClicked(i, j, k);
-    }
-
-    @Override
-    public void updateScreen() {
-        Token.updateCursorCounter();
-        super.updateScreen();
     }
 }

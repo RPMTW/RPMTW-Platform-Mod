@@ -3,20 +3,14 @@ package siongsng.rpmtwupdatemod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.Language;
 import net.minecraftforge.client.ClientCommandHandler;
-import net.minecraftforge.client.event.GuiOpenEvent;
-import net.minecraftforge.client.gui.ForgeGuiFactory;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.client.GuiModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import siongsng.rpmtwupdatemod.CosmicChat.GetMessage;
 import siongsng.rpmtwupdatemod.commands.noticeCMD;
-import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.crowdin.key;
@@ -68,6 +62,8 @@ public class RpmtwUpdateMod {
         } catch (IOException e) {
             LOGGER.error("檢測權杖時發生未知錯誤：" + e);
         }
+
+        new GetMessage();
     }
 
     @Mod.EventHandler
