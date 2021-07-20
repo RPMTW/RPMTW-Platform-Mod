@@ -1,5 +1,5 @@
 /*
-特別感謝 3X0DUS - ChAoS#6969 解答關於此類別的一些問題。
+特別感謝 3X0DUS - ChAoS#6969 解惑關於此類別的一些問題。
  */
 package siongsng.rpmtwupdatemod.gui;
 
@@ -71,7 +71,6 @@ public class CrowdinLoginScreen extends GuiScreen {
         this.drawString(fontRenderer, Text2, this.width / 2 - fontRenderer.getStringWidth(Text2) / 2, height - 40, TextColor);
 
         Token.setMaxStringLength(500);
-        Token.setText("請輸入Crowdin登入權杖");
         Token.drawTextBox();
 
         super.drawScreen(mouseX, mouseY, partialTicks);
@@ -90,7 +89,7 @@ public class CrowdinLoginScreen extends GuiScreen {
         }
 
         if (button == Login) {
-            if (Token.getText().equals("") || Token.getText().equals("請輸入Crowdin登入權杖")) {
+            if (Token.getText().equals("")) {
                 SendMsg.send("Crowdin登入權杖不能是空的");
                 Minecraft.getMinecraft().displayGuiScreen(null);
             } else {
