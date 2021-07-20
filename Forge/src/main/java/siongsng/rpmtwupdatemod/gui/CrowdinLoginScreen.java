@@ -1,3 +1,6 @@
+/*
+特別感謝 3X0DUS - ChAoS#6969 解答關於此類別的一些問題。
+ */
 package siongsng.rpmtwupdatemod.gui;
 
 import net.minecraft.client.Minecraft;
@@ -21,6 +24,8 @@ public class CrowdinLoginScreen extends GuiScreen {
 
     @Override
     public void initGui() {
+        super.initGui();
+        Token = new GuiTextField(1, fontRenderer, (this.width / 2) - 95, (this.height / 2) - 10, 200, 20);
         Info = new GuiButton(
                 1,
                 (this.width / 2 + 50),
@@ -52,7 +57,6 @@ public class CrowdinLoginScreen extends GuiScreen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        Token = new GuiTextField(1, fontRenderer, (this.width / 2) - 95, (this.height / 2) - 10, 200, 20);
 
         drawDefaultBackground();
 
@@ -66,7 +70,8 @@ public class CrowdinLoginScreen extends GuiScreen {
         this.drawString(fontRenderer, Text1, this.width / 2 - fontRenderer.getStringWidth(Text1) / 2, height - 50, TextColor);
         this.drawString(fontRenderer, Text2, this.width / 2 - fontRenderer.getStringWidth(Text2) / 2, height - 40, TextColor);
 
-        Token.setMaxStringLength(1000);
+        Token.setMaxStringLength(500);
+        Token.setText("請輸入Crowdin登入權杖");
         Token.drawTextBox();
 
         super.drawScreen(mouseX, mouseY, partialTicks);
@@ -106,8 +111,8 @@ public class CrowdinLoginScreen extends GuiScreen {
 
     @Override
     public void keyTyped(char c, int i) throws IOException {
-        Token.textboxKeyTyped(c, i);
         super.keyTyped(c, i);
+        Token.textboxKeyTyped(c, i);
     }
 
     @Override
@@ -119,29 +124,6 @@ public class CrowdinLoginScreen extends GuiScreen {
     @Override
     public void updateScreen() {
         Token.updateCursorCounter();
+        super.updateScreen();
     }
-
-//           {
-//                setSuggestion("請輸入Crowdin登入權杖");
-//            }
-//
-//            @Override
-//            public void writeText(String text) {
-//                super.writeText(text);
-//                if (getText().isEmpty())
-//                    setSuggestion("請輸入Crowdin登入權杖");
-//                else
-//                    setSuggestion(null);
-//            }
-//
-//            @Override
-//            public void setCursorPosition(int pos) {
-//                super.setCursorPosition(pos);
-//                if (getText().isEmpty())
-//                    setSuggestion("請輸入Crowdin登入權杖");
-//                else
-//                    setSuggestion(null);
-//            }
-//        };
-//    }
 }
