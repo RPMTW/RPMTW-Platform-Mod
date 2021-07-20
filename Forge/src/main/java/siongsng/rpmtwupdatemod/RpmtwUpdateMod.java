@@ -16,6 +16,7 @@ import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.crowdin.key;
 import siongsng.rpmtwupdatemod.function.AddPack;
 import siongsng.rpmtwupdatemod.function.ping;
+import siongsng.rpmtwupdatemod.notice.notice;
 
 import java.io.IOException;
 
@@ -70,5 +71,6 @@ public class RpmtwUpdateMod {
     public void init(FMLInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(new key());
         ClientCommandHandler.instance.registerCommand(new noticeCMD());
+        MinecraftForge.EVENT_BUS.register(new notice());
     }
 }
