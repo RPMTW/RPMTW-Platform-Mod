@@ -22,7 +22,7 @@ public class GetMessage {
                 if (UserName.equals("菘菘#8663") || UserName.equals("SiongSng")) {
                     UserName = "§bRPMTW維護者";
                 }
-                SendMsg.send(String.format(("§9[宇宙通訊] §e<§6%s§e> §f%s"), UserName, Message));
+                SendMsg.send(String.format(("§9[宇宙通訊] §e<§6%s§e> §f%s"), UserName, new FormattingCodeConverter().FormattingCodeToMD(Message)));
             } else if (Type.equals("Server")) { //來自伺服器端的訊息
                 MinecraftClient mc = MinecraftClient.getInstance();
                 PlayerEntity player = mc.player;
