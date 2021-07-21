@@ -5,8 +5,6 @@ package siongsng.rpmtwupdatemod.CosmicChat;
 
 public class FormattingCodeConverter {
     public String FormattingCodeToMD(String source) throws IndexOutOfBoundsException {
-//        Pattern regex = Pattern.compile("/(\\*[^\\*]+\\*|\\*{2}[^\\*{2}]+\\*{2}|\\*{3}[^\\*{3}]+\\*{3}|~{2}[^~{2}]+~{2}|_{2}[^_{2}]+_{2})/g");
-//        String Msg = "";
         StringBuilder result = new StringBuilder();
         boolean bold = false;
         boolean italic = false;
