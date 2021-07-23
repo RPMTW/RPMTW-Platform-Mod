@@ -35,10 +35,10 @@ public final class CrowdinScreen extends Screen {
 
 
     PlayerEntity p = Minecraft.getInstance().player;
-    Item item = p.getHeldItemMainhand().getItem(); //拿的物品
-    String mod_id = item.getCreatorModId(p.getHeldItemMainhand().getStack()); //物品所屬的模組ID
-    String item_key = item.getTranslationKey(); //物品的命名空間
-    String item_DisplayName = item.getName().getString(); //物品的顯示名稱
+    Item item = p.getMainHandItem().getItem(); //拿的物品
+    String mod_id = item.getCreatorModId(p.getMainHandItem().getStack()); //物品所屬的模組ID
+    String item_key = item.getDescriptionId(); //物品的命名空間
+    String item_DisplayName = item.getDescription().getString(); //物品的顯示名稱
 
     public CrowdinScreen() {
         super(new StringTextComponent(""));
@@ -55,8 +55,8 @@ public final class CrowdinScreen extends Screen {
                 button -> {
                     String url = "https://crowdin.com/translate/resourcepack-mod-zhtw/all/en-zhtw?filter=basic&value=0#q=" + stringID;
 
-                    p.sendMessage(new StringTextComponent("§6開啟翻譯平台網頁中..."), p.getUniqueID()); //發送訊息
-                    Util.getOSType().openURI(url); //使用預設瀏覽器開啟網頁
+                    p.sendMessage(new StringTextComponent("§6開啟翻譯平台網頁中..."), p.getUUID()); //發送訊息
+                    Util.getPlatform().openUri(url); //使用預設瀏覽器開啟網頁
                 }));
 
         this.addButton(new Button(
@@ -65,18 +65,18 @@ public final class CrowdinScreen extends Screen {
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
                 new StringTextComponent("提交翻譯"),
                 button -> {
-                    if (Translation.getText().equals("")) {
+                    if (Translation.getValue().equals("")) {
                         SendMsg.send("§4譯文不能是空的呦!");
-                        Minecraft.getInstance().displayGuiScreen(null);
+                        Minecraft.getInstance().setScreen(null);
                         return;
                     } else {
-                        SendMsg.send("§b已成功提交翻譯，將 §e" + Text + " §b翻譯為 §e" + Translation.getText() + "§b 。(約十分鐘後將會將內容套用變更至翻譯包)");
-                        Minecraft.getInstance().displayGuiScreen(null);
+                        SendMsg.send("§b已成功提交翻譯，將 §e" + Text + " §b翻譯為 §e" + Translation.getValue() + "§b 。(約十分鐘後將會將內容套用變更至翻譯包)");
+                        Minecraft.getInstance().setScreen(null);
                     }
                     Thread thread = new Thread(() -> {
                         CloseableHttpClient httpClient = HttpClients.createDefault();
                         StringEntity requestEntity = new StringEntity(
-                                "{\"stringId\":\"" + stringID + "\",\"languageId\":\"zh-TW\",\"text\": \"" + Translation.getText() + "\"}",
+                                "{\"stringId\":\"" + stringID + "\",\"languageId\":\"zh-TW\",\"text\": \"" + Translation.getValue() + "\"}",
                                 ContentType.APPLICATION_JSON);
                         HttpPost postMethod = new HttpPost("https://api.crowdin.com/api/v2/projects/442446/translations");
                         postMethod.setHeader("Authorization", "Bearer " + Configer.Token.get());
@@ -95,7 +95,7 @@ public final class CrowdinScreen extends Screen {
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
                 new StringTextComponent("取消"),
                 button -> {
-                    Minecraft.getInstance().displayGuiScreen(null);
+                    Minecraft.getInstance().setScreen(null);
                 }));
 
         Translation = new TextFieldWidget(this.font, (this.width / 2) - 50, (this.height / 2) + 10, 120, 20, new StringTextComponent("請輸入譯文")) {
@@ -104,25 +104,25 @@ public final class CrowdinScreen extends Screen {
             }
 
             @Override
-            public void writeText(String text) {
-                super.writeText(text);
-                if (getText().isEmpty())
+            public void insertText(String text) {
+                super.insertText(text);
+                if (getValue().isEmpty())
                     setSuggestion("請輸入譯文");
                 else
                     setSuggestion(null);
             }
 
             @Override
-            public void setCursorPosition(int pos) {
-                super.setCursorPosition(pos);
-                if (getText().isEmpty())
+            public void moveCursorTo(int pos) {
+                super.moveCursorTo(pos);
+                if (getValue().isEmpty())
                     setSuggestion("請輸入譯文");
                 else
                     setSuggestion(null);
             }
         };
         this.children.add(Translation);
-        Translation.setMaxStringLength(32767);
+        Translation.setMaxLength(32767);
     }
 
     @Override
@@ -136,7 +136,7 @@ public final class CrowdinScreen extends Screen {
         if (key == 256) {
             assert this.minecraft != null;
             assert this.minecraft.player != null;
-            this.minecraft.player.closeScreen();
+            this.minecraft.player.closeContainer();
             return true;
         }
         if (Translation.isFocused())
@@ -149,7 +149,7 @@ public final class CrowdinScreen extends Screen {
                        int mouseX, int mouseY, float partialTicks) {
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
-        Minecraft.getInstance().getTextureManager().bindTexture(texture);
+        Minecraft.getInstance().getTextureManager().bind(texture);
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
         blit(matrixStack, k, l, 0, 0, this.xSize, this.ySize, this.xSize, this.ySize);
@@ -165,11 +165,11 @@ public final class CrowdinScreen extends Screen {
         String displayName = "顯示名稱: " + item_DisplayName;
         String parentModID = "所屬模組 ID: " + mod_id;
 
-        this.font.drawString(matrixStack, rpmTScreen, this.width / (float) 2 - this.font.getStringWidth(rpmTScreen) / (float) 2, height - 105, -65536);
-        this.font.drawString(matrixStack, originalText, this.width / (float) 2 - this.font.getStringWidth(originalText) / (float) 2, height - 80, TextColor);
-        this.font.drawString(matrixStack, langKey, this.width / (float) 2 - this.font.getStringWidth(langKey) / (float) 2, height - 65, TextColor);
-        this.font.drawString(matrixStack, displayName, this.width / (float) 2 - this.font.getStringWidth(displayName) / (float) 2, height - 50, TextColor);
-        this.font.drawString(matrixStack, parentModID, this.width / (float) 2 - this.font.getStringWidth(parentModID) / (float) 2, height - 35, TextColor);
+        this.font.draw(matrixStack, rpmTScreen, this.width / (float) 2 - this.font.width(rpmTScreen) / (float) 2, height - 105, -65536);
+        this.font.draw(matrixStack, originalText, this.width / (float) 2 - this.font.width(originalText) / (float) 2, height - 80, TextColor);
+        this.font.draw(matrixStack, langKey, this.width / (float) 2 - this.font.width(langKey) / (float) 2, height - 65, TextColor);
+        this.font.draw(matrixStack, displayName, this.width / (float) 2 - this.font.width(displayName) / (float) 2, height - 50, TextColor);
+        this.font.draw(matrixStack, parentModID, this.width / (float) 2 - this.font.width(parentModID) / (float) 2, height - 35, TextColor);
 
         Translation.render(matrixStack, mouseX, mouseY, partialTicks);//渲染文字框
 
@@ -179,7 +179,7 @@ public final class CrowdinScreen extends Screen {
     }
 
     @Override
-    public void onClose() {
-        super.onClose(); //關閉此Gui
+    public void removed() {
+        super.removed(); //關閉此Gui
     }
 }

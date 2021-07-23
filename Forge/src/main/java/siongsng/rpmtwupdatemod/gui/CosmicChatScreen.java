@@ -34,7 +34,7 @@ public class CosmicChatScreen extends Screen {
                 (this.height / 2) + 30,
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
                 new StringTextComponent("這是什麼?"),
-                button -> Util.getOSType().openURI("https://www.rpmtw.ga/Wiki/RPMTW-Update-Mod-Related#h.krxvof43ocod")));
+                button -> Util.getPlatform().openUri("https://www.rpmtw.ga/Wiki/RPMTW-Update-Mod-Related#h.krxvof43ocod")));
 
         this.addButton(new Button(
                 (this.width - 4) / 2 - BOTTOM_BUTTON_WIDTH + 50,
@@ -42,19 +42,19 @@ public class CosmicChatScreen extends Screen {
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
                 new StringTextComponent("傳送"),
                 button -> {
-                    if (Message.getText().equals("")) {
+                    if (Message.getValue().equals("")) {
                         SendMsg.send("訊息不能是空的。");
                     } else {
-                        new SendMessage().Send(Message.getText());
+                        new SendMessage().Send(Message.getValue());
                     }
-                    Minecraft.getInstance().displayGuiScreen(null);
+                    Minecraft.getInstance().setScreen(null);
                 }));
         this.addButton(new Button(
                 (this.width - 100) / 2 - BOTTOM_BUTTON_WIDTH,
                 (this.height / 2) + 30,
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
                 new StringTextComponent("取消"),
-                button -> Minecraft.getInstance().displayGuiScreen(null)));
+                button -> Minecraft.getInstance().setScreen(null)));
 
         Message = new TextFieldWidget(this.font, (this.width / 2) - 95, (this.height / 2) - 10, 200, 20, new StringTextComponent("請輸入譯文")) {
             {
@@ -62,24 +62,24 @@ public class CosmicChatScreen extends Screen {
             }
 
             @Override
-            public void writeText(String text) {
-                super.writeText(text);
-                if (getText().isEmpty())
+            public void insertText(String text) {
+                super.insertText(text);
+                if (getValue().isEmpty())
                     setSuggestion("請輸入要發送的訊息");
                 else
                     setSuggestion(null);
             }
 
             @Override
-            public void setCursorPosition(int pos) {
-                super.setCursorPosition(pos);
-                if (getText().isEmpty())
+            public void moveCursorTo(int pos) {
+                super.moveCursorTo(pos);
+                if (getValue().isEmpty())
                     setSuggestion("請輸入要發送的訊息");
                 else
                     setSuggestion(null);
             }
         };
-        Message.setMaxStringLength(150);
+        Message.setMaxLength(150);
         this.children.add(Message);
     }
 
@@ -88,7 +88,7 @@ public class CosmicChatScreen extends Screen {
                        int mouseX, int mouseY, float partialTicks) {
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
-        Minecraft.getInstance().getTextureManager().bindTexture(texture);
+        Minecraft.getInstance().getTextureManager().bind(texture);
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
         blit(matrixStack, k, l, 0, 0, this.xSize, this.ySize, this.xSize, this.ySize);
@@ -99,7 +99,7 @@ public class CosmicChatScreen extends Screen {
         int height = (this.height / 2);
         String Screen = "宇宙通訊系統-發送訊息介面";
 
-        this.font.drawString(matrixStack, Screen, (this.width / (float) 2 / (float) 2) + 55, height - 65, 0xFF5555);
+        this.font.draw(matrixStack, Screen, (this.width / (float) 2 / (float) 2) + 55, height - 65, 0xFF5555);
 
         Message.render(matrixStack, mouseX, mouseY, partialTicks);//渲染文字框
 
@@ -109,7 +109,7 @@ public class CosmicChatScreen extends Screen {
     }
 
     @Override
-    public void onClose() {
-        super.onClose(); //關閉此Gui
+    public void removed() {
+        super.removed(); //關閉此Gui
     }
 }

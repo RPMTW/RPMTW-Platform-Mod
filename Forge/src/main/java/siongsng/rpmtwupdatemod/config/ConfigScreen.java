@@ -42,32 +42,32 @@ public final class ConfigScreen extends Screen {
                 this.height - OPTIONS_LIST_BOTTOM_OFFSET,
                 OPTIONS_LIST_ITEM_HEIGHT);
 
-        optionsRowList.addOption(new BooleanOption(
+        optionsRowList.addBig(new BooleanOption(
                 "開啟對應翻譯網頁",
                 unused -> Configer.rpmtw_crowdin.get(),
                 (unused, newValue) -> Configer.rpmtw_crowdin.set(newValue)
         ));
-        optionsRowList.addOption(new BooleanOption(
+        optionsRowList.addBig(new BooleanOption(
                 "使用快捷鍵檢測翻譯包更新",
                 unused -> Configer.rpmtw_reloadpack.get(),
                 (unused, newValue) -> Configer.rpmtw_reloadpack.set(newValue)
         ));
-        optionsRowList.addOption(new BooleanOption(
+        optionsRowList.addBig(new BooleanOption(
                 "是否啟用宇宙通訊系統",
                 unused -> Configer.isChat.get(),
                 (unused, newValue) -> Configer.isChat.set(newValue)
         ));
-        optionsRowList.addOption(new BooleanOption(
+        optionsRowList.addBig(new BooleanOption(
                 "進入世界時自動發送公告",
                 unused -> Configer.notice.get(),
                 (unused, newValue) -> Configer.notice.set(newValue)
         ));
-        optionsRowList.addOption(new BooleanOption(
+        optionsRowList.addBig(new BooleanOption(
                 "啟用掛機偵測",
                 unused -> Configer.afk.get(),
                 (unused, newValue) -> Configer.afk.set(newValue)
         ));
-        optionsRowList.addOption(new SliderPercentageOption(
+        optionsRowList.addBig(new SliderPercentageOption(
                 "開始偵測掛機間隔時間(秒)",
                 10.0F, 3600, 1.0F,
                 unused -> (double) Configer.afkTime.get(),
@@ -89,7 +89,7 @@ public final class ConfigScreen extends Screen {
                     Configer.afk.set(false);
                     Configer.afkTime.set(600);
                     Configer.isChinese.set(true);
-                    Minecraft.getInstance().displayGuiScreen(new ConfigScreen());
+                    Minecraft.getInstance().setScreen(new ConfigScreen());
                 }));
 
         this.addButton(new Button(
@@ -99,7 +99,7 @@ public final class ConfigScreen extends Screen {
                 new StringTextComponent("儲存設定"),
                 button -> {
                     Config.save(); // 儲存模組設定
-                    Minecraft.getInstance().displayGuiScreen(null);
+                    Minecraft.getInstance().setScreen(null);
                 })
         );
     }
@@ -115,8 +115,8 @@ public final class ConfigScreen extends Screen {
     }
 
     @Override
-    public void onClose() {
+    public void removed() {
         Config.save(); // 儲存模組設定
-        super.onClose(); //關閉此Gui
+        super.removed(); //關閉此Gui
     }
 }

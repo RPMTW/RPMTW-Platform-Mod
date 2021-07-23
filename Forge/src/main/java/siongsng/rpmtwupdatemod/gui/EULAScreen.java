@@ -32,14 +32,14 @@ public class EULAScreen extends Screen {
                 (this.height / 2) + 30,
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
                 new StringTextComponent("我不同意"),
-                button -> Minecraft.getInstance().displayGuiScreen(null)));
+                button -> Minecraft.getInstance().setScreen(null)));
 
         this.addButton(new Button(
                 (this.width - 4) / 2 - BOTTOM_BUTTON_WIDTH + 50,
                 (this.height / 2) + 30,
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
                 new StringTextComponent("這是什麼?"),
-                button -> Util.getOSType().openURI("https://www.rpmtw.ga/Wiki/RPMTW-Update-Mod-Related#h.krxvof43ocod")));
+                button -> Util.getPlatform().openUri("https://www.rpmtw.ga/Wiki/RPMTW-Update-Mod-Related#h.krxvof43ocod")));
         this.addButton(new Button(
                 (this.width - 100) / 2 - BOTTOM_BUTTON_WIDTH,
                 (this.height / 2) + 30,
@@ -47,7 +47,7 @@ public class EULAScreen extends Screen {
                 new StringTextComponent("我同意"),
                 button -> {
                     Configer.isEULA.set(true);
-                    Minecraft.getInstance().displayGuiScreen(new CosmicChatScreen());
+                    Minecraft.getInstance().setScreen(new CosmicChatScreen());
                 }));
     }
 
@@ -56,7 +56,7 @@ public class EULAScreen extends Screen {
                        int mouseX, int mouseY, float partialTicks) {
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
-        Minecraft.getInstance().getTextureManager().bindTexture(texture);
+        Minecraft.getInstance().getTextureManager().bind(texture);
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
         blit(matrixStack, k, l, 0, 0, this.xSize, this.ySize, this.xSize, this.ySize);
@@ -73,19 +73,19 @@ public class EULAScreen extends Screen {
         String Text4 = "- 我們將會蒐集您的IP、Minecraft UUID/ID，IP僅用於封禁帳號";
         String Text5 = "- 我們將有權隨時更改本條款";
 
-        this.font.drawString(matrixStack, Screen, (this.width / (float) 2 - this.font.getStringWidth(Text1) / (float) 2) + 55, height - 65, 0xFF5555);
-        this.font.drawString(matrixStack, Text1, this.width / (float) 2 - this.font.getStringWidth(Text1) / (float) 2, height - 50, TextColor);
-        this.font.drawString(matrixStack, Text2, this.width / (float) 2 - this.font.getStringWidth(Text2) / (float) 2, height - 40, TextColor);
-        this.font.drawString(matrixStack, Text3, this.width / (float) 2 - this.font.getStringWidth(Text2) / (float) 2, height - 30, TextColor);
-        this.font.drawString(matrixStack, Text4, this.width / (float) 2 - this.font.getStringWidth(Text2) / (float) 2, height - 20, TextColor);
-        this.font.drawString(matrixStack, Text5, this.width / (float) 2 - this.font.getStringWidth(Text2) / (float) 2, height - 10, TextColor);
+        this.font.draw(matrixStack, Screen, (this.width / (float) 2 - this.font.width(Text1) / (float) 2) + 55, height - 65, 0xFF5555);
+        this.font.draw(matrixStack, Text1, this.width / (float) 2 - this.font.width(Text1) / (float) 2, height - 50, TextColor);
+        this.font.draw(matrixStack, Text2, this.width / (float) 2 - this.font.width(Text2) / (float) 2, height - 40, TextColor);
+        this.font.draw(matrixStack, Text3, this.width / (float) 2 - this.font.width(Text2) / (float) 2, height - 30, TextColor);
+        this.font.draw(matrixStack, Text4, this.width / (float) 2 - this.font.width(Text2) / (float) 2, height - 20, TextColor);
+        this.font.draw(matrixStack, Text5, this.width / (float) 2 - this.font.width(Text2) / (float) 2, height - 10, TextColor);
         drawCenteredString(matrixStack, this.font, this.title.getString(),
                 this.width / 2, 8, 0xFFFFFF);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
     }
 
     @Override
-    public void onClose() {
-        super.onClose(); //關閉此Gui
+    public void removed() {
+        super.removed(); //關閉此Gui
     }
 }

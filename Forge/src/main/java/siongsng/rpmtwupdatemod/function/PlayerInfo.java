@@ -12,7 +12,7 @@ public class PlayerInfo {
 
     public PlayerInfo(PlayerEntity player) {
         this.player = player;
-        this.position = player.getPosition();
+        this.position = player.blockPosition();
         this.isAfk = false;
     }
 

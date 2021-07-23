@@ -59,7 +59,7 @@ public class AFK {
             Iterator<Entry<UUID, PlayerInfo>> it = PLAYER_INFOS.entrySet().iterator();
             while (it.hasNext()) {
                 Entry<UUID, PlayerInfo> info = it.next();
-                if (info.getValue().player.getPosition().equals(info.getValue().position)) {
+                if (info.getValue().player.blockPosition().equals(info.getValue().position)) {
                     if (info.getValue().isAfk() && !info.getValue().isAfk) {
                         info.getValue().isAfk = true;
                         SendMsg.send("§6偵測到你開始掛機了! 因此開始自動檢測翻譯包版本並且做更新。");
@@ -68,7 +68,7 @@ public class AFK {
                         info.getValue().afkTime++;
                     }
                 } else {
-                    info.getValue().position = info.getValue().player.getPosition();
+                    info.getValue().position = info.getValue().player.blockPosition();
                     info.getValue().afkTime = 0;
                     if (info.getValue().isAfk) {
                         SendMsg.send("§a你不再掛機了!");

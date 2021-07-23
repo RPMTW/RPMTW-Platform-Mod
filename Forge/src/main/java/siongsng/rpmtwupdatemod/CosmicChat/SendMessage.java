@@ -12,8 +12,8 @@ public class SendMessage {
         String IP = new GetIP().Get();
         assert player != null;
         JsonParser jp = new JsonParser();
-        String Data = String.format("{\"Type\":\"Client\",\"Message\":\"%s\",\"UserName\":\"%s\",\"UUID\":\"%s\",\"IP\":\"%s\"}", Message, player.getName().getString(), player.getUniqueID(), IP);
-        player.sendStatusMessage(new StringTextComponent("訊息發送中..."), true);
+        String Data = String.format("{\"Type\":\"Client\",\"Message\":\"%s\",\"UserName\":\"%s\",\"UUID\":\"%s\",\"IP\":\"%s\"}", Message, player.getName().getString(), player.getUUID(), IP);
+        player.displayClientMessage(new StringTextComponent("訊息發送中..."), true);
         new SocketClient().getSocket().connect().emit("message", jp.parse(Data));
     }
 }

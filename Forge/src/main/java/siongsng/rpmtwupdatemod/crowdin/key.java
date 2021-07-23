@@ -38,7 +38,7 @@ public final class key {
         PlayerEntity p = Minecraft.getInstance().player;
         if (showed) { //防止重複開啟
             try {
-                if (!reloadpack.isKeyDown() && !open_config.isKeyDown() && !Crowdin.isKeyDown() && !cosmic_chat_send.isKeyDown()) {
+                if (!reloadpack.isDown() && !open_config.isDown() && !Crowdin.isDown() && !cosmic_chat_send.isDown()) {
                     showed = false;
                 }
             } catch (IndexOutOfBoundsException ex) {
@@ -46,16 +46,16 @@ public final class key {
             }
             return;
         }
-        if (Crowdin.isPressed()) {
+        if (Crowdin.consumeClick()) {
             assert p != null;
-            Item item = p.getHeldItemMainhand().getItem(); //拿的物品
-            String item_key = item.getTranslationKey(); //物品的命名空間
+            Item item = p.getMainHandItem().getItem(); //拿的物品
+            String item_key = item.getDescriptionId(); //物品的命名空間
 
             if (item_key.equals("block.minecraft.air")) {
                 SendMsg.send("§4請手持物品後再使用此功能。");
                 return;
             } else if (!Configer.isCheck.get()) {
-                Minecraft.getInstance().displayGuiScreen(new CrowdinLoginScreen());
+                Minecraft.getInstance().setScreen(new CrowdinLoginScreen());
                 return;
             } else {
                 SendMsg.send("請稍後，正在開啟物品翻譯界面中...");
@@ -64,27 +64,27 @@ public final class key {
                         SendMsg.send("§6由於你目前手持想要翻譯的物品，數據不在資料庫內\n因此無法進行翻譯，想了解更多資訊請前往RPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
                         return;
                     }
-                    Minecraft.getInstance().displayGuiScreen(new CrowdinScreen());
+                    Minecraft.getInstance().setScreen(new CrowdinScreen());
                 });
                 thread.start();
             }
 
         }
 
-        if (open_config.isPressed()) {
-            Minecraft.getInstance().displayGuiScreen(new ConfigScreen());
+        if (open_config.consumeClick()) {
+            Minecraft.getInstance().setScreen(new ConfigScreen());
         }
         if (Configer.rpmtw_reloadpack.get()) {
-            if (reloadpack.isPressed()) {
+            if (reloadpack.consumeClick()) {
                 new ReloadPack();
             }
         }
-        if(cosmic_chat_send.isPressed()){
+        if(cosmic_chat_send.consumeClick()){
             if (!Configer.isChat.get()) return;
             if (Configer.isEULA.get()) {
-                Minecraft.getInstance().displayGuiScreen(new CosmicChatScreen());
+                Minecraft.getInstance().setScreen(new CosmicChatScreen());
             } else {
-                Minecraft.getInstance().displayGuiScreen(new EULAScreen());
+                Minecraft.getInstance().setScreen(new EULAScreen());
             }
         }
     }

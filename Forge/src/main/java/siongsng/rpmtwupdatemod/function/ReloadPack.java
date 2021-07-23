@@ -24,8 +24,8 @@ public class ReloadPack {
                         SendMsg.send("§6偵測到翻譯包版本過舊，正在進行更新並重新載入中...。");
                     }
                     FileUtils.copyURLToFile(new URL(RpmtwUpdateMod.PackDownloadUrl), PackFile.toFile()); //下載資源包檔案
-                    Minecraft.getInstance().getResourcePackList().addPackFinder(new PackFinder()); //新增資源包至資源包列表
-                    Minecraft.getInstance().reloadResources(); //重新載入資源
+                    Minecraft.getInstance().getResourcePackRepository().addPackFinder(new PackFinder()); //新增資源包至資源包列表
+                    Minecraft.getInstance().reloadResourcePacks(); //重新載入資源
                 } else {
                     SendMsg.send("§a目前的RPMTW翻譯包版本已經是最新的了!因此不進行更新作業。");
                 }
