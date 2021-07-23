@@ -1,7 +1,6 @@
 repositories {
     mavenCentral()
     jcenter()
-    maven { url 'https://m2.dv8tion.net/releases' }
     maven { url 'https://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-releases/' }
     maven { url 'https://maven.blamejared.com' }
 }
@@ -18,7 +17,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.github.jengelman.gradle.plugins:shadow:6.1.0'
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.+', changing: true
         classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
     }
 }
@@ -65,7 +64,7 @@ dependencies {
     shade('commons-beanutils:commons-beanutils:1.9.4')
     shade('commons-io:commons-io:2.9.0')
     shade files('libs/commons-logging-1.2.jar')
-    shade('io.socket:socket.io-client:2.0.1')
+    implementation('io.socket:socket.io-client:2.0.1')
     shade('io.socket:engine.io-client:2.0.0')
     shade('org.json:json:20090211')
     shade('com.squareup.okhttp3:okhttp:3.12.12')
