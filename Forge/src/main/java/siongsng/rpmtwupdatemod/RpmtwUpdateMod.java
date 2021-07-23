@@ -31,7 +31,7 @@ public class RpmtwUpdateMod {
 
     public static final Logger LOGGER = LogManager.getLogger(); //註冊紀錄器
     public final static String Mod_ID = "rpmtw_update_mod"; //模組ID
-    public final static String PackDownloadUrl = "https://github.com/RPMTW/ResourcePack-Mod-zh_tw/raw/Translated/RPMTW-1.16.zip";
+    public final static String PackDownloadUrl = "https://github.com/RPMTW/ResourcePack-Mod-zh_tw/raw/Translated-1.17/RPMTW-1.17.zip";
 
     public RpmtwUpdateMod() {
 

@@ -32,11 +32,6 @@ public class CorwidnProcedure {
             JsonParser jp = new JsonParser();
             Text = jp.parse(responseBody).getAsJsonObject().getAsJsonArray("data").get(0).getAsJsonObject().get("data").getAsJsonObject().getAsJsonPrimitive("text").getAsString();
             stringID = jp.parse(responseBody).getAsJsonObject().getAsJsonArray("data").get(0).getAsJsonObject().get("data").getAsJsonObject().getAsJsonPrimitive("id").getAsString();
-            //14694在Crowdin的分支ID代表1.16版本
-            if (jp.parse(responseBody).getAsJsonObject().getAsJsonArray("data").get(0).getAsJsonObject().get("data").getAsJsonObject().getAsJsonPrimitive("branchId").getAsInt() != (14694)) {
-                Text = null;
-                stringID = null;
-            }
         } catch (Exception e) {
             Text = null;
             stringID = null;
