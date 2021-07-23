@@ -15,7 +15,7 @@ import org.apache.logging.log4j.Logger;
 import siongsng.rpmtwupdatemod.CosmicChat.GetMessage;
 import siongsng.rpmtwupdatemod.commands.noticeCMD;
 import siongsng.rpmtwupdatemod.config.Config;
-import siongsng.rpmtwupdatemod.config.Configer;
+import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.crowdin.key;
 import siongsng.rpmtwupdatemod.function.AFK;
@@ -44,12 +44,12 @@ public class RpmtwUpdateMod {
         if (!ping.isConnect()) { //判斷是否有網路
             LOGGER.error("你目前處於無網路狀態，因此無法使用 RPMTW 翻譯自動更新模組，請連結網路後重新啟動此模組。");
         }
-        if (FMLEnvironment.dist == Dist.CLIENT && Configer.isChinese.get()) {
+        if (FMLEnvironment.dist == Dist.CLIENT && RPMTWConfig.isChinese.get()) {
             Minecraft.getInstance().options.languageCode = "zh_tw"; //將語言設定為繁體中文
         }
         new PackVersionCheck(); //資源包版本檢查
         try {
-            new TokenCheck().Check(Configer.Token.get()); //開始檢測權杖
+            new TokenCheck().Check(RPMTWConfig.Token.get()); //開始檢測權杖
         } catch (IOException e) {
             LOGGER.error("檢測權杖時發生未知錯誤：" + e);
         }
@@ -61,11 +61,11 @@ public class RpmtwUpdateMod {
         FMLJavaModLoadingContext.get().getModEventBus().register(this);
         MinecraftForge.EVENT_BUS.register(new key());  //快捷鍵註冊
         MinecraftForge.EVENT_BUS.register(new noticeCMD()); //noticeCMD指令註冊
-        if (Configer.notice.get()) { //判斷Config
+        if (RPMTWConfig.notice.get()) { //判斷Config
             MinecraftForge.EVENT_BUS.register(new notice()); //玩家加入事件註冊
         }
         MinecraftForge.EVENT_BUS.register(new AFK()); //掛機事件註冊
-        if (Configer.isChat.get()) {
+        if (RPMTWConfig.isChat.get()) {
             new GetMessage();
         }
     }

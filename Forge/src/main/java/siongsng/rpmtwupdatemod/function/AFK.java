@@ -4,7 +4,7 @@ import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import siongsng.rpmtwupdatemod.config.Configer;
+import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -23,13 +23,13 @@ public class AFK {
 
     @SubscribeEvent
     public void onPlayerConnect(PlayerEvent.PlayerLoggedInEvent connected) { //玩家連線
-        if (!Configer.afk.get()) return;
+        if (!RPMTWConfig.afk.get()) return;
         PLAYER_INFOS.put(connected.getPlayer().getGameProfile().getId(), new PlayerInfo(connected.getPlayer()));
     }
 
     @SubscribeEvent
     public void onPlayerDisconect(PlayerEvent.PlayerLoggedOutEvent disconnected) { //玩家斷開連線
-        if (!Configer.afk.get()) return;
+        if (!RPMTWConfig.afk.get()) return;
         for (Entry<UUID, PlayerInfo> info : PLAYER_INFOS.entrySet()) {
             if (info.getKey() == disconnected.getPlayer().getGameProfile().getId()) {
                 PLAYER_INFOS.remove(info.getKey());
@@ -40,7 +40,7 @@ public class AFK {
 
     @SubscribeEvent
     public void chatty(ServerChatEvent chat) { //伺服器聊天事件
-        if (!Configer.afk.get()) return;
+        if (!RPMTWConfig.afk.get()) return;
         PlayerInfo info = PLAYER_INFOS.get(chat.getPlayer().getGameProfile().getId());
         if (info == null) {
             return;
@@ -54,7 +54,7 @@ public class AFK {
 
     @SubscribeEvent
     public void onServerTick(TickEvent.ServerTickEvent event) { //伺服器Tick事件
-        if (!Configer.afk.get()) return;
+        if (!RPMTWConfig.afk.get()) return;
         if (event.phase == TickEvent.Phase.START) {
             Iterator<Entry<UUID, PlayerInfo>> it = PLAYER_INFOS.entrySet().iterator();
             while (it.hasNext()) {

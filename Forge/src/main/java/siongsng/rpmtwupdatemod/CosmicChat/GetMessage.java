@@ -4,14 +4,14 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
-import siongsng.rpmtwupdatemod.config.Configer;
+import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.function.SendMsg;
 
 public class GetMessage {
     public GetMessage() {
         new SocketClient().getSocket().connect().on(("broadcast"), (data) -> {
             if (Minecraft.getInstance().player == null) return;
-            if (!Configer.isChat.get()) return;
+            if (!RPMTWConfig.isChat.get()) return;
             JsonParser jp = new JsonParser();
             JsonObject JsonData = (JsonObject) jp.parse(data[0].toString());
             String Type = JsonData.getAsJsonPrimitive("Type").getAsString();

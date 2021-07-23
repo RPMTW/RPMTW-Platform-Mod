@@ -18,7 +18,7 @@ public class Config {
     private static final Path CONFIG_PATH = Paths.get(FMLPaths.CONFIGDIR.get().resolve("rpmtw_update_mod-client.toml").toString());
 
     static {
-        Configer.init(CLIENT_BUILDER);
+        RPMTWConfig.init(CLIENT_BUILDER);
         CLIENT = CLIENT_BUILDER.build();
     }
 

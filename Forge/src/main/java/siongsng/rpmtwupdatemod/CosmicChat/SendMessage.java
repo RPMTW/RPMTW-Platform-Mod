@@ -12,6 +12,7 @@ public class SendMessage {
         String IP = new GetIP().Get();
         assert player != null;
         JsonParser jp = new JsonParser();
+        Message.replaceAll("\"","\\\"").replaceAll("\\",""); //跳脫字元處理
         String Data = String.format("{\"Type\":\"Client\",\"Message\":\"%s\",\"UserName\":\"%s\",\"UUID\":\"%s\",\"IP\":\"%s\"}", Message, player.getName().getString(), player.getUUID(), IP);
         player.displayClientMessage(new TextComponent("訊息發送中..."), true);
         new SocketClient().getSocket().connect().emit("message", jp.parse(Data));

@@ -2,7 +2,7 @@ package siongsng.rpmtwupdatemod.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 
-public class Configer {
+public class RPMTWConfig {
     public static ForgeConfigSpec.BooleanValue rpmtw_crowdin, rpmtw_reloadpack, notice, afk, isCheck, isChinese, isChat, isEULA;
     public static ForgeConfigSpec.IntValue afkTime;
     public static ForgeConfigSpec.ConfigValue<String> Token;

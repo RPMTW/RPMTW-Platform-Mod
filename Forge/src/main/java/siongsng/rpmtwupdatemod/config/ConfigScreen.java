@@ -42,30 +42,30 @@ public final class ConfigScreen extends Screen {
                 this.height - OPTIONS_LIST_BOTTOM_OFFSET,
                 OPTIONS_LIST_ITEM_HEIGHT);
         optionsRowList.addBig(CycleOption.createOnOff("是否啟用開啟物品翻譯界面",
-                (values) -> Configer.rpmtw_crowdin.get(),
-                (p_168189_, p_168190_, newValue) -> Configer.rpmtw_crowdin.set(newValue)
+                (values) -> RPMTWConfig.rpmtw_crowdin.get(),
+                (p_168189_, p_168190_, newValue) -> RPMTWConfig.rpmtw_crowdin.set(newValue)
         ));
         optionsRowList.addBig(CycleOption.createOnOff("是否啟用使用快捷鍵更新翻譯包",
-                (values) -> Configer.rpmtw_reloadpack.get(),
-                (p_168189_, p_168190_, newValue) -> Configer.rpmtw_reloadpack.set(newValue)
+                (values) -> RPMTWConfig.rpmtw_reloadpack.get(),
+                (p_168189_, p_168190_, newValue) -> RPMTWConfig.rpmtw_reloadpack.set(newValue)
         ));
         optionsRowList.addBig(CycleOption.createOnOff("是否啟用宇宙通訊系統",
-                (values) -> Configer.isChat.get(),
-                (p_168189_, p_168190_, newValue) -> Configer.isChat.set(newValue)
+                (values) -> RPMTWConfig.isChat.get(),
+                (p_168189_, p_168190_, newValue) -> RPMTWConfig.isChat.set(newValue)
         ));
         optionsRowList.addBig(CycleOption.createOnOff("是否啟用進入世界時發送公告",
-                (values) -> Configer.notice.get(),
-                (p_168189_, p_168190_, newValue) -> Configer.notice.set(newValue)
+                (values) -> RPMTWConfig.notice.get(),
+                (p_168189_, p_168190_, newValue) -> RPMTWConfig.notice.set(newValue)
         ));
         optionsRowList.addBig(CycleOption.createOnOff("是否啟用啟用掛機偵測來更新翻譯包",
-                (values) -> Configer.afk.get(),
-                (p_168189_, p_168190_, newValue) -> Configer.afk.set(newValue)
+                (values) -> RPMTWConfig.afk.get(),
+                (p_168189_, p_168190_, newValue) -> RPMTWConfig.afk.set(newValue)
         ));
         optionsRowList.addBig(new ProgressOption(
                 "開始偵測掛機間隔時間(秒)",
                 10.0F, 3600, 1.0F,
-                unused -> (double) Configer.afkTime.get(),
-                (unused, newValue) -> Configer.afkTime.set(newValue.intValue()),
+                unused -> (double) RPMTWConfig.afkTime.get(),
+                (unused, newValue) -> RPMTWConfig.afkTime.set(newValue.intValue()),
                 (gs, option) -> new TextComponent("開始偵測掛機間隔時間(秒)" + ": " + (int) option.get(gs))));
 
         this.addWidget(optionsRowList);
@@ -76,13 +76,13 @@ public final class ConfigScreen extends Screen {
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
                 new TextComponent("重置設定"),
                 button -> {
-                    Configer.rpmtw_crowdin.set(true);
-                    Configer.rpmtw_reloadpack.set(true);
-                    Configer.notice.set(true);
-                    Configer.isChat.set(true);
-                    Configer.afk.set(false);
-                    Configer.afkTime.set(600);
-                    Configer.isChinese.set(true);
+                    RPMTWConfig.rpmtw_crowdin.set(true);
+                    RPMTWConfig.rpmtw_reloadpack.set(true);
+                    RPMTWConfig.notice.set(true);
+                    RPMTWConfig.isChat.set(true);
+                    RPMTWConfig.afk.set(false);
+                    RPMTWConfig.afkTime.set(600);
+                    RPMTWConfig.isChinese.set(true);
                     Minecraft.getInstance().setScreen(new ConfigScreen());
                 }));
 

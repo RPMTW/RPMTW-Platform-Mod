@@ -2,7 +2,7 @@ package siongsng.rpmtwupdatemod.function;
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.core.BlockPos;
-import siongsng.rpmtwupdatemod.config.Configer;
+import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 
 public class PlayerInfo {
     public Player player; //玩家實體
@@ -17,7 +17,7 @@ public class PlayerInfo {
     }
 
     public boolean isAfk() {
-        return afkTime >= Configer.afkTime.get() * 20; //20個Tick等於一秒
+        return afkTime >= RPMTWConfig.afkTime.get() * 20; //20個Tick等於一秒
     }
 
 }
