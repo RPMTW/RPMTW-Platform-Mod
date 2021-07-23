@@ -86,7 +86,7 @@ public class CosmicChatScreen extends Screen {
         int height = (this.height / 2);
         String Screen = "宇宙通訊系統-發送訊息介面";
 
-        this.font.draw(matrixStack, Screen, this.width / (float) 2 / (float) 2 - 55, height - 65, 0xFF5555);
+        this.font.draw(matrixStack, Screen, this.width / (float) 2 - this.font.width(Screen) / (float) 2, height - 65, 0xFF5555);
 
         Message.render(matrixStack, mouseX, mouseY, partialTicks);//渲染文字框
 
