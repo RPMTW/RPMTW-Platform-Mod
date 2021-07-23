@@ -32,6 +32,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'java'
 apply plugin: 'org.spongepowered.mixin'
+apply from: 'https://raw.githubusercontent.com/SizableShrimp/Forge-Class-Remapper/main/classremapper.gradle'
 group = 'siongsng.rpmtwupdatemod'
 archivesBaseName = 'RPMTW-Update-Mod-Forge-1.16'
 java.toolchain.languageVersion = JavaLanguageVersion.of(16) //1.17 Use Java 16
@@ -40,7 +41,7 @@ task sourcesJar(type: Jar, dependsOn: classes) {
     from sourceSets.main.allSource
 }
 minecraft {
-    mappings channel: 'official', version: '1.16.5'
+    mappings channel: 'official', version: '1.17.1'
     runs {
         client {
             workingDirectory project.file('run')
@@ -70,7 +71,7 @@ dependencies {
     shade('com.squareup.okhttp3:okhttp:3.12.12')
     shade('com.squareup.okio:okio:1.15.0')
     implementation fg.deobf("vazkii.patchouli:Patchouli:1.16.4-54-SNAPSHOT")
-    minecraft 'net.minecraftforge:forge:1.16.5-36.2.0'
+    minecraft 'net.minecraftforge:forge:1.17.1-37.0.1'
 }
 jar {
     manifest {
