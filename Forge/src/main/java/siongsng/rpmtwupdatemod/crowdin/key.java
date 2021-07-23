@@ -45,6 +45,7 @@ public final class key {
             return;
         }
         if (Crowdin.consumeClick()) {
+            if (!Configer.rpmtw_crowdin.get()) return;
             assert p != null;
             Item item = p.getMainHandItem().getItem(); //拿的物品
             String item_key = item.getDescriptionId(); //物品的命名空間

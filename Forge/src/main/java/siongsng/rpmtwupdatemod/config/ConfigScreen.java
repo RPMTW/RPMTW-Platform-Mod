@@ -1,11 +1,12 @@
 package siongsng.rpmtwupdatemod.config;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.CycleOption;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.ProgressOption;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.OptionsList;
-import net.minecraft.client.ProgressOption;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.TextComponent;
 
 import javax.annotation.Nonnull;
@@ -40,32 +41,26 @@ public final class ConfigScreen extends Screen {
                 OPTIONS_LIST_TOP_HEIGHT,
                 this.height - OPTIONS_LIST_BOTTOM_OFFSET,
                 OPTIONS_LIST_ITEM_HEIGHT);
-
-//        optionsRowList.addBig(new Booleanoption(
-//                "開啟對應翻譯網頁",
-//                unused -> Configer.rpmtw_crowdin.get(),
-//                (unused, newValue) -> Configer.rpmtw_crowdin.set(newValue)
-//        ));
-//        optionsRowList.addBig(new BooleanOption(
-//                "使用快捷鍵檢測翻譯包更新",
-//                unused -> Configer.rpmtw_reloadpack.get(),
-//                (unused, newValue) -> Configer.rpmtw_reloadpack.set(newValue)
-//        ));
-//        optionsRowList.addBig(new BooleanOption(
-//                "是否啟用宇宙通訊系統",
-//                unused -> Configer.isChat.get(),
-//                (unused, newValue) -> Configer.isChat.set(newValue)
-//        ));
-//        optionsRowList.addBig(new BooleanOption(
-//                "進入世界時自動發送公告",
-//                unused -> Configer.notice.get(),
-//                (unused, newValue) -> Configer.notice.set(newValue)
-//        ));
-//        optionsRowList.addBig(new BooleanOption(
-//                "啟用掛機偵測",
-//                unused -> Configer.afk.get(),
-//                (unused, newValue) -> Configer.afk.set(newValue)
-//        ));
+        optionsRowList.addBig(CycleOption.createOnOff("是否啟用開啟物品翻譯界面",
+                (values) -> Configer.rpmtw_crowdin.get(),
+                (p_168189_, p_168190_, newValue) -> Configer.rpmtw_crowdin.set(newValue)
+        ));
+        optionsRowList.addBig(CycleOption.createOnOff("是否啟用使用快捷鍵更新翻譯包",
+                (values) -> Configer.rpmtw_reloadpack.get(),
+                (p_168189_, p_168190_, newValue) -> Configer.rpmtw_reloadpack.set(newValue)
+        ));
+        optionsRowList.addBig(CycleOption.createOnOff("是否啟用宇宙通訊系統",
+                (values) -> Configer.isChat.get(),
+                (p_168189_, p_168190_, newValue) -> Configer.isChat.set(newValue)
+        ));
+        optionsRowList.addBig(CycleOption.createOnOff("是否啟用進入世界時發送公告",
+                (values) -> Configer.notice.get(),
+                (p_168189_, p_168190_, newValue) -> Configer.notice.set(newValue)
+        ));
+        optionsRowList.addBig(CycleOption.createOnOff("是否啟用啟用掛機偵測來更新翻譯包",
+                (values) -> Configer.afk.get(),
+                (p_168189_, p_168190_, newValue) -> Configer.afk.set(newValue)
+        ));
         optionsRowList.addBig(new ProgressOption(
                 "開始偵測掛機間隔時間(秒)",
                 10.0F, 3600, 1.0F,
