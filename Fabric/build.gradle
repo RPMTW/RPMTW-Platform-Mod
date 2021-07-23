@@ -39,7 +39,7 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    modImplementation "vazkii.patchouli:Patchouli:1.17-55-FABRIC-SNAPSHOT" //Patchouli
+    modImplementation "vazkii.patchouli:Patchouli:1.17.1-55-FABRIC-SNAPSHOT" //Patchouli
     shadow('commons-lang:commons-lang:2.6')
     shadow('net.sf.ezmorph:ezmorph:1.0.6')
     shadow('commons-collections:commons-collections:3.2.2')
