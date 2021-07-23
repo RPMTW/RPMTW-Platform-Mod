@@ -65,11 +65,6 @@ public class RpmtwUpdateMod {
             MinecraftForge.EVENT_BUS.register(new notice()); //玩家加入事件註冊
         }
         MinecraftForge.EVENT_BUS.register(new AFK()); //掛機事件註冊
-
-//        ModLoadingContext.get().registerExtensionPoint( //註冊組態螢幕至Forge模組設定
-//                ExtensionPoint.CONFIGGUIFACTORY,
-//                () -> (mc, screen) -> new ConfigScreen()
-//        );
         if (Configer.isChat.get()) {
             new GetMessage();
         }
