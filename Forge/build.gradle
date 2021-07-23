@@ -70,7 +70,7 @@ dependencies {
     shade('com.squareup.okhttp3:okhttp:3.12.12')
     shade('com.squareup.okio:okio:1.15.0')
     implementation fg.deobf("vazkii.patchouli:Patchouli:1.16.4-54-SNAPSHOT")
-    minecraft 'net.minecraftforge:forge:1.16.5-36.1.62'
+    minecraft 'net.minecraftforge:forge:1.16.5-36.2.0'
 }
 jar {
     manifest {
