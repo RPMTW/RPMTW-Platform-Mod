@@ -1,6 +1,5 @@
 package siongsng.rpmtwupdatemod.gui;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
@@ -28,8 +27,6 @@ public final class CrowdinScreen extends Screen {
     private static final ResourceLocation texture = new ResourceLocation("rpmtw_update_mod:textures/crowdin_gui.png");
     private static final int BOTTOM_BUTTON_WIDTH = 95;
     EditBox Translation;
-    int xSize = 405;
-    int ySize = 227;
     String Text = CorwidnProcedure.getText();
     String stringID = CorwidnProcedure.stringID;
 
@@ -47,7 +44,7 @@ public final class CrowdinScreen extends Screen {
     @Override
     protected void init() {
 
-        this.addWidget(new Button(
+        this.addRenderableWidget(new Button(
                 (this.width / 2 + 50),
                 (this.height / 2) + 80,
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
@@ -59,7 +56,7 @@ public final class CrowdinScreen extends Screen {
                     Util.getPlatform().openUri(url); //使用預設瀏覽器開啟網頁
                 }));
 
-        this.addWidget(new Button(
+        this.addRenderableWidget(new Button(
                 (this.width - 4) / 2 - BOTTOM_BUTTON_WIDTH + 50,
                 (this.height / 2) + 80,
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
@@ -89,7 +86,7 @@ public final class CrowdinScreen extends Screen {
                     });
                     thread.start();
                 }));
-        this.addWidget(new Button(
+        this.addRenderableWidget(new Button(
                 (this.width - 100) / 2 - BOTTOM_BUTTON_WIDTH,
                 (this.height / 2) + 80,
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
@@ -147,14 +144,6 @@ public final class CrowdinScreen extends Screen {
     @Override
     public void render(@Nonnull PoseStack matrixStack,
                        int mouseX, int mouseY, float partialTicks) {
-        RenderSystem.enableBlend();
-        RenderSystem.defaultBlendFunc();
-        Minecraft.getInstance().getTextureManager().bindForSetup(texture);
-        int k = (this.width - this.xSize) / 2;
-        int l = (this.height - this.ySize) / 2;
-        blit(matrixStack, k, l, 0, 0, this.xSize, this.ySize, this.xSize, this.ySize);
-        RenderSystem.disableBlend();
-
         this.renderBackground(matrixStack);
 
         int height = (this.height / 2);

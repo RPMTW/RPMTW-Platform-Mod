@@ -1,13 +1,11 @@
 package siongsng.rpmtwupdatemod.gui;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.gui.components.EditBox;
-import net.minecraft.client.gui.components.Button;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.Util;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.TextComponent;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.function.SendMsg;
@@ -17,11 +15,8 @@ import java.io.IOException;
 
 public class CrowdinLoginScreen extends Screen {
     static final int BUTTON_HEIGHT = 20;
-    private static final ResourceLocation texture = new ResourceLocation("rpmtw_update_mod:textures/crowdin_gui.png");
     private static final int BOTTOM_BUTTON_WIDTH = 95;
     EditBox Token;
-    int xSize = 300;
-    int ySize = 150;
 
     public CrowdinLoginScreen() {
         super(new TextComponent(""));
@@ -30,7 +25,7 @@ public class CrowdinLoginScreen extends Screen {
     @Override
     protected void init() {
 
-        this.addWidget(new Button(
+        this.addRenderableWidget(new Button(
                 (this.width / 2 + 50),
                 (this.height / 2) + 30,
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
@@ -39,7 +34,7 @@ public class CrowdinLoginScreen extends Screen {
                     Util.getPlatform().openUri("https://www.rpmtw.ga/Wiki/RPMTW-Update-Mod-Related#h.x230ggwx63l4"); //使用預設瀏覽器開啟網頁
                 }));
 
-        this.addWidget(new Button(
+        this.addRenderableWidget(new Button(
                 (this.width - 4) / 2 - BOTTOM_BUTTON_WIDTH + 50,
                 (this.height / 2) + 30,
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
@@ -58,7 +53,7 @@ public class CrowdinLoginScreen extends Screen {
                         }
                     }
                 }));
-        this.addWidget(new Button(
+        this.addRenderableWidget(new Button(
                 (this.width - 100) / 2 - BOTTOM_BUTTON_WIDTH,
                 (this.height / 2) + 30,
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
@@ -96,14 +91,6 @@ public class CrowdinLoginScreen extends Screen {
     @Override
     public void render(@Nonnull PoseStack matrixStack,
                        int mouseX, int mouseY, float partialTicks) {
-        RenderSystem.enableBlend();
-        RenderSystem.defaultBlendFunc();
-        Minecraft.getInstance().getTextureManager().bindForSetup(texture);
-        int k = (this.width - this.xSize) / 2;
-        int l = (this.height - this.ySize) / 2;
-        blit(matrixStack, k, l, 0, 0, this.xSize, this.ySize, this.xSize, this.ySize);
-        RenderSystem.disableBlend();
-
         this.renderBackground(matrixStack);
 
         int height = (this.height / 2);
@@ -112,7 +99,7 @@ public class CrowdinLoginScreen extends Screen {
         String Text1 = "由於你目前尚未登入Crowdin帳號因此無法使用 協助翻譯 功能。";
         String Text2 = "如需使用此功能，請先登入Crowdin帳號，登入教學點擊下方按鈕即可。";
 
-        this.font.draw(matrixStack, Screen, (this.width / (float) 2 - this.font.width(Text1) / (float) 2) + 55, height - 65, 0xFF5555);
+        this.font.draw(matrixStack, Screen, this.width / (float) 2 - this.font.width(Screen) / (float) 2, height - 65, 0xFF5555);
         this.font.draw(matrixStack, Text1, this.width / (float) 2 - this.font.width(Text1) / (float) 2, height - 50, TextColor);
         this.font.draw(matrixStack, Text2, this.width / (float) 2 - this.font.width(Text2) / (float) 2, height - 40, TextColor);
 

@@ -70,7 +70,7 @@ public final class ConfigScreen extends Screen {
 
         this.addWidget(optionsRowList);
 
-        this.addWidget(new Button(
+        this.addRenderableWidget(new Button(
                 (this.width / 2),
                 this.height - BOTTOM_BUTTON_HEIGHT_OFFSET,
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
@@ -86,7 +86,7 @@ public final class ConfigScreen extends Screen {
                     Minecraft.getInstance().setScreen(new ConfigScreen());
                 }));
 
-        this.addWidget(new Button(
+        this.addRenderableWidget(new Button(
                 (this.width - 4) / 2 - BOTTOM_BUTTON_WIDTH,
                 this.height - BOTTOM_BUTTON_HEIGHT_OFFSET,
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
