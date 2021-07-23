@@ -3,7 +3,6 @@
   "package": "siongsng.rpmtwupdatemod.mixin",
   "compatibilityLevel": "JAVA_8",
   "client": [
-    "MixinBookContents"
   ],
   "target": "@env(DEFAULT)",
   "setSourceFile": true,
