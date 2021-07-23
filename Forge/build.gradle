@@ -18,7 +18,7 @@ buildscript {
     dependencies {
         classpath 'com.github.jengelman.gradle.plugins:shadow:6.1.0'
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
+//        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
     }
 }
 tasks.withType(JavaCompile) {
@@ -31,10 +31,9 @@ configurations {
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'java'
-apply plugin: 'org.spongepowered.mixin'
-apply from: 'https://raw.githubusercontent.com/SizableShrimp/Forge-Class-Remapper/main/classremapper.gradle'
+//apply plugin: 'org.spongepowered.mixin'
 group = 'siongsng.rpmtwupdatemod'
-archivesBaseName = 'RPMTW-Update-Mod-Forge-1.16'
+archivesBaseName = 'RPMTW-Update-Mod-Forge-1.17'
 java.toolchain.languageVersion = JavaLanguageVersion.of(16) //1.17 Use Java 16
 task sourcesJar(type: Jar, dependsOn: classes) {
     classifier = 'sources'
@@ -47,9 +46,9 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
-            arg "-mixin.config=rpmtw_update_mod.mixin.cfg.json"
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+//            arg "-mixin.config=rpmtw_update_mod.mixin.cfg.json"
+//            property 'mixin.env.remapRefMap', 'true'
+//            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             mods {
                 rpmtwupdatemod {
                     source sourceSets.main
@@ -84,15 +83,13 @@ jar {
                 "Implementation-Version"  : project.version,
                 "Implementation-Vendor"   : "SiongSng",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "MixinConfigs": "rpmtw_update_mod.mixin.cfg.json"
+//                "MixinConfigs": "rpmtw_update_mod.mixin.cfg.json"
         ])
     }
 }
 jar.finalizedBy('reobfJar')
 shadowJar {
     configurations = [project.configurations.shade]
-    relocate('org.apache.commons', 'siongsng.rpmtwupdatemod.commons')
-    relocate('gnu', 'siongsng.rpmtwupdatemod.gnu')
     classifier = ''
 }
 reobf {
@@ -108,9 +105,9 @@ task deobfJar(type: Jar) {
     from sourceSets.main.output
     classifier = 'dev'
 }
-mixin {
-    disableAnnotationProcessorCheck = true
-}
+//mixin {
+//    disableAnnotationProcessorCheck = true
+//}
 artifacts {
     archives deobfJar
 }
