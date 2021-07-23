@@ -3,7 +3,7 @@ package siongsng.rpmtwupdatemod.CosmicChat;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.entity.player.Player;
 import siongsng.rpmtwupdatemod.config.Configer;
 import siongsng.rpmtwupdatemod.function.SendMsg;
 
@@ -25,7 +25,7 @@ public class GetMessage {
                 SendMsg.send(String.format(("§9[宇宙通訊] §e<§6%s§e> §f%s"), UserName, Message));
             } else if (Type.equals("Server")) { //來自伺服器端的訊息
                 Minecraft mc = Minecraft.getInstance();
-                PlayerEntity player = mc.player;
+                Player player = mc.player;
                 assert player != null;
                 if (new GetIP().Get().equals(IP) && Message.equals("Ban")) {
                     SendMsg.send("由於您違反了 《RPMTW 宇宙通訊系統終端使用者授權合約》，因此無法發送訊息至宇宙通訊，如認為有誤判請至我們的Discord群組。");

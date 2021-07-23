@@ -2,8 +2,8 @@ package siongsng.rpmtwupdatemod.commands;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
-import net.minecraft.command.CommandSource;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import siongsng.rpmtwupdatemod.function.SendMsg;
@@ -14,13 +14,13 @@ public class noticeCMD {
         event.getDispatcher().register(customCommand()); //註冊指令
     }
 
-    private LiteralArgumentBuilder<CommandSource> customCommand() {
-        return LiteralArgumentBuilder.<CommandSource>literal("Get-notice").executes(this::exe);
+    private LiteralArgumentBuilder<CommandSourceStack> customCommand() {
+        return LiteralArgumentBuilder.<CommandSourceStack>literal("Get-notice").executes(this::exe);
     }
 
-    private int exe(CommandContext<CommandSource> ctx) {
+    private int exe(CommandContext<CommandSourceStack> ctx) {
         try {
-            SendMsg.send(new TranslationTextComponent("gui.notice").toString());
+            SendMsg.send(new TranslatableComponent("gui.notice").toString());
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,14 +1,14 @@
 package siongsng.rpmtwupdatemod.gui;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Util;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.Util;
+import net.minecraft.network.chat.TextComponent;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.function.SendMsg;
 
@@ -19,31 +19,31 @@ public class CrowdinLoginScreen extends Screen {
     static final int BUTTON_HEIGHT = 20;
     private static final ResourceLocation texture = new ResourceLocation("rpmtw_update_mod:textures/crowdin_gui.png");
     private static final int BOTTOM_BUTTON_WIDTH = 95;
-    TextFieldWidget Token;
+    EditBox Token;
     int xSize = 300;
     int ySize = 150;
 
     public CrowdinLoginScreen() {
-        super(new StringTextComponent(""));
+        super(new TextComponent(""));
     }
 
     @Override
     protected void init() {
 
-        this.addButton(new Button(
+        this.addWidget(new Button(
                 (this.width / 2 + 50),
                 (this.height / 2) + 30,
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
-                new StringTextComponent("查看帳號登入教學"),
+                new TextComponent("查看帳號登入教學"),
                 button -> {
                     Util.getPlatform().openUri("https://www.rpmtw.ga/Wiki/RPMTW-Update-Mod-Related#h.x230ggwx63l4"); //使用預設瀏覽器開啟網頁
                 }));
 
-        this.addButton(new Button(
+        this.addWidget(new Button(
                 (this.width - 4) / 2 - BOTTOM_BUTTON_WIDTH + 50,
                 (this.height / 2) + 30,
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
-                new StringTextComponent("登入"),
+                new TextComponent("登入"),
                 button -> {
                     if (Token.getValue().equals("")) {
                         SendMsg.send("Crowdin登入權杖不能是空的");
@@ -58,14 +58,14 @@ public class CrowdinLoginScreen extends Screen {
                         }
                     }
                 }));
-        this.addButton(new Button(
+        this.addWidget(new Button(
                 (this.width - 100) / 2 - BOTTOM_BUTTON_WIDTH,
                 (this.height / 2) + 30,
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
-                new StringTextComponent("關閉"),
+                new TextComponent("關閉"),
                 button -> Minecraft.getInstance().setScreen(null)));
 
-        Token = new TextFieldWidget(this.font, (this.width / 2) - 95, (this.height / 2) - 10, 200, 20, new StringTextComponent("請輸入譯文")) {
+        Token = new EditBox(this.font, (this.width / 2) - 95, (this.height / 2) - 10, 200, 20, new TextComponent("請輸入譯文")) {
             {
                 setSuggestion("請輸入Crowdin登入權杖");
             }
@@ -89,16 +89,16 @@ public class CrowdinLoginScreen extends Screen {
             }
         };
         Token.setMaxLength(200);
-        this.children.add(Token);
+        this.addWidget(Token);
         Token.setMaxLength(32767);
     }
 
     @Override
-    public void render(@Nonnull MatrixStack matrixStack,
+    public void render(@Nonnull PoseStack matrixStack,
                        int mouseX, int mouseY, float partialTicks) {
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
-        Minecraft.getInstance().getTextureManager().bind(texture);
+        Minecraft.getInstance().getTextureManager().bindForSetup(texture);
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
         blit(matrixStack, k, l, 0, 0, this.xSize, this.ySize, this.xSize, this.ySize);

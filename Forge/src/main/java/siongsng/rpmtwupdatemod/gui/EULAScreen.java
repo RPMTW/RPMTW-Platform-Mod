@@ -1,14 +1,13 @@
 package siongsng.rpmtwupdatemod.gui;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Util;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.Util;
+import net.minecraft.network.chat.TextComponent;
 import siongsng.rpmtwupdatemod.config.Configer;
 
 import javax.annotation.Nonnull;
@@ -21,30 +20,30 @@ public class EULAScreen extends Screen {
     int ySize = 150;
 
     public EULAScreen() {
-        super(new StringTextComponent(""));
+        super(new TextComponent(""));
     }
 
     @Override
     protected void init() {
 
-        this.addButton(new Button(
+        this.addWidget(new Button(
                 (this.width / 2 + 50),
                 (this.height / 2) + 30,
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
-                new StringTextComponent("我不同意"),
+                new TextComponent("我不同意"),
                 button -> Minecraft.getInstance().setScreen(null)));
 
-        this.addButton(new Button(
+        this.addWidget(new Button(
                 (this.width - 4) / 2 - BOTTOM_BUTTON_WIDTH + 50,
                 (this.height / 2) + 30,
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
-                new StringTextComponent("這是什麼?"),
+                new TextComponent("這是什麼?"),
                 button -> Util.getPlatform().openUri("https://www.rpmtw.ga/Wiki/RPMTW-Update-Mod-Related#h.krxvof43ocod")));
-        this.addButton(new Button(
+        this.addWidget(new Button(
                 (this.width - 100) / 2 - BOTTOM_BUTTON_WIDTH,
                 (this.height / 2) + 30,
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
-                new StringTextComponent("我同意"),
+                new TextComponent("我同意"),
                 button -> {
                     Configer.isEULA.set(true);
                     Minecraft.getInstance().setScreen(new CosmicChatScreen());
@@ -52,11 +51,11 @@ public class EULAScreen extends Screen {
     }
 
     @Override
-    public void render(@Nonnull MatrixStack matrixStack,
+    public void render(@Nonnull PoseStack matrixStack,
                        int mouseX, int mouseY, float partialTicks) {
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
-        Minecraft.getInstance().getTextureManager().bind(texture);
+        Minecraft.getInstance().getTextureManager().bindForSetup(texture);
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
         blit(matrixStack, k, l, 0, 0, this.xSize, this.ySize, this.xSize, this.ySize);

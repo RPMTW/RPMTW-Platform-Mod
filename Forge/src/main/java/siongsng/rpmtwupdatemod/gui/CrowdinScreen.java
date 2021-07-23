@@ -1,16 +1,16 @@
 package siongsng.rpmtwupdatemod.gui;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Util;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
@@ -27,43 +27,43 @@ public final class CrowdinScreen extends Screen {
     static final int BUTTON_HEIGHT = 20;
     private static final ResourceLocation texture = new ResourceLocation("rpmtw_update_mod:textures/crowdin_gui.png");
     private static final int BOTTOM_BUTTON_WIDTH = 95;
-    TextFieldWidget Translation;
+    EditBox Translation;
     int xSize = 405;
     int ySize = 227;
     String Text = CorwidnProcedure.getText();
     String stringID = CorwidnProcedure.stringID;
 
 
-    PlayerEntity p = Minecraft.getInstance().player;
+    Player p = Minecraft.getInstance().player;
     Item item = p.getMainHandItem().getItem(); //拿的物品
-    String mod_id = item.getCreatorModId(p.getMainHandItem().getStack()); //物品所屬的模組ID
+    String mod_id = item.getCreatorModId(p.getMainHandItem()); //物品所屬的模組ID
     String item_key = item.getDescriptionId(); //物品的命名空間
     String item_DisplayName = item.getDescription().getString(); //物品的顯示名稱
 
     public CrowdinScreen() {
-        super(new StringTextComponent(""));
+        super(new TextComponent(""));
     }
 
     @Override
     protected void init() {
 
-        this.addButton(new Button(
+        this.addWidget(new Button(
                 (this.width / 2 + 50),
                 (this.height / 2) + 80,
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
-                new StringTextComponent("Crowdin"),
+                new TextComponent("Crowdin"),
                 button -> {
                     String url = "https://crowdin.com/translate/resourcepack-mod-zhtw/all/en-zhtw?filter=basic&value=0#q=" + stringID;
 
-                    p.sendMessage(new StringTextComponent("§6開啟翻譯平台網頁中..."), p.getUUID()); //發送訊息
+                    p.sendMessage(new TextComponent("§6開啟翻譯平台網頁中..."), p.getUUID()); //發送訊息
                     Util.getPlatform().openUri(url); //使用預設瀏覽器開啟網頁
                 }));
 
-        this.addButton(new Button(
+        this.addWidget(new Button(
                 (this.width - 4) / 2 - BOTTOM_BUTTON_WIDTH + 50,
                 (this.height / 2) + 80,
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
-                new StringTextComponent("提交翻譯"),
+                new TextComponent("提交翻譯"),
                 button -> {
                     if (Translation.getValue().equals("")) {
                         SendMsg.send("§4譯文不能是空的呦!");
@@ -89,16 +89,16 @@ public final class CrowdinScreen extends Screen {
                     });
                     thread.start();
                 }));
-        this.addButton(new Button(
+        this.addWidget(new Button(
                 (this.width - 100) / 2 - BOTTOM_BUTTON_WIDTH,
                 (this.height / 2) + 80,
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
-                new StringTextComponent("取消"),
+                new TextComponent("取消"),
                 button -> {
                     Minecraft.getInstance().setScreen(null);
                 }));
 
-        Translation = new TextFieldWidget(this.font, (this.width / 2) - 50, (this.height / 2) + 10, 120, 20, new StringTextComponent("請輸入譯文")) {
+        Translation = new EditBox(this.font, (this.width / 2) - 50, (this.height / 2) + 10, 120, 20, new TextComponent("請輸入譯文")) {
             {
                 setSuggestion("請輸入譯文");
             }
@@ -121,7 +121,7 @@ public final class CrowdinScreen extends Screen {
                     setSuggestion(null);
             }
         };
-        this.children.add(Translation);
+        this.addWidget(Translation);
         Translation.setMaxLength(32767);
     }
 
@@ -145,11 +145,11 @@ public final class CrowdinScreen extends Screen {
     }
 
     @Override
-    public void render(@Nonnull MatrixStack matrixStack,
+    public void render(@Nonnull PoseStack matrixStack,
                        int mouseX, int mouseY, float partialTicks) {
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
-        Minecraft.getInstance().getTextureManager().bind(texture);
+        Minecraft.getInstance().getTextureManager().bindForSetup(texture);
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
         blit(matrixStack, k, l, 0, 0, this.xSize, this.ySize, this.xSize, this.ySize);

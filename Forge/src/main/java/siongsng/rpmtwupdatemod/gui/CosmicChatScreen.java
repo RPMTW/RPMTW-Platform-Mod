@@ -1,14 +1,14 @@
 package siongsng.rpmtwupdatemod.gui;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Util;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.resources.ResourceLocation;
 import siongsng.rpmtwupdatemod.CosmicChat.SendMessage;
 import siongsng.rpmtwupdatemod.function.SendMsg;
 
@@ -18,29 +18,29 @@ public class CosmicChatScreen extends Screen {
     static final int BUTTON_HEIGHT = 20;
     private static final ResourceLocation texture = new ResourceLocation("rpmtw_update_mod:textures/crowdin_gui.png");
     private static final int BOTTOM_BUTTON_WIDTH = 95;
-    TextFieldWidget Message;
+    EditBox Message;
     int xSize = 300;
     int ySize = 150;
 
     public CosmicChatScreen() {
-        super(new StringTextComponent(""));
+        super(new TextComponent(""));
     }
 
     @Override
     protected void init() {
 
-        this.addButton(new Button(
+        this.addWidget(new Button(
                 (this.width / 2 + 50),
                 (this.height / 2) + 30,
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
-                new StringTextComponent("這是什麼?"),
+                new TextComponent("這是什麼?"),
                 button -> Util.getPlatform().openUri("https://www.rpmtw.ga/Wiki/RPMTW-Update-Mod-Related#h.krxvof43ocod")));
 
-        this.addButton(new Button(
+        this.addWidget(new Button(
                 (this.width - 4) / 2 - BOTTOM_BUTTON_WIDTH + 50,
                 (this.height / 2) + 30,
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
-                new StringTextComponent("傳送"),
+                new TextComponent("傳送"),
                 button -> {
                     if (Message.getValue().equals("")) {
                         SendMsg.send("訊息不能是空的。");
@@ -49,14 +49,14 @@ public class CosmicChatScreen extends Screen {
                     }
                     Minecraft.getInstance().setScreen(null);
                 }));
-        this.addButton(new Button(
+        this.addWidget(new Button(
                 (this.width - 100) / 2 - BOTTOM_BUTTON_WIDTH,
                 (this.height / 2) + 30,
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
-                new StringTextComponent("取消"),
+                new TextComponent("取消"),
                 button -> Minecraft.getInstance().setScreen(null)));
 
-        Message = new TextFieldWidget(this.font, (this.width / 2) - 95, (this.height / 2) - 10, 200, 20, new StringTextComponent("請輸入譯文")) {
+        Message = new EditBox(this.font, (this.width / 2) - 95, (this.height / 2) - 10, 200, 20, new TextComponent("請輸入譯文")) {
             {
                 setSuggestion("請輸入要發送的訊息");
             }
@@ -80,15 +80,15 @@ public class CosmicChatScreen extends Screen {
             }
         };
         Message.setMaxLength(150);
-        this.children.add(Message);
+        this.addWidget(Message);
     }
 
     @Override
-    public void render(@Nonnull MatrixStack matrixStack,
+    public void render(@Nonnull PoseStack matrixStack,
                        int mouseX, int mouseY, float partialTicks) {
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
-        Minecraft.getInstance().getTextureManager().bind(texture);
+        Minecraft.getInstance().getTextureManager().bindForSetup(texture);
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
         blit(matrixStack, k, l, 0, 0, this.xSize, this.ySize, this.xSize, this.ySize);

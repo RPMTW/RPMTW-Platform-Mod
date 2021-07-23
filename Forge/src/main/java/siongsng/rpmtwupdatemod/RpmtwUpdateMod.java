@@ -4,7 +4,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ExtensionPoint;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -16,7 +15,6 @@ import org.apache.logging.log4j.Logger;
 import siongsng.rpmtwupdatemod.CosmicChat.GetMessage;
 import siongsng.rpmtwupdatemod.commands.noticeCMD;
 import siongsng.rpmtwupdatemod.config.Config;
-import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.config.Configer;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.crowdin.key;
@@ -68,10 +66,10 @@ public class RpmtwUpdateMod {
         }
         MinecraftForge.EVENT_BUS.register(new AFK()); //掛機事件註冊
 
-        ModLoadingContext.get().registerExtensionPoint( //註冊組態螢幕至Forge模組設定
-                ExtensionPoint.CONFIGGUIFACTORY,
-                () -> (mc, screen) -> new ConfigScreen()
-        );
+//        ModLoadingContext.get().registerExtensionPoint( //註冊組態螢幕至Forge模組設定
+//                ExtensionPoint.CONFIGGUIFACTORY,
+//                () -> (mc, screen) -> new ConfigScreen()
+//        );
         if (Configer.isChat.get()) {
             new GetMessage();
         }
