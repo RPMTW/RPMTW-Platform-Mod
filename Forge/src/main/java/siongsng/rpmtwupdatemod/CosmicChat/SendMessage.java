@@ -1,6 +1,6 @@
 package siongsng.rpmtwupdatemod.CosmicChat;
 
-import com.google.gson.JsonParser;
+import com.google.gson.JsonObject;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.entity.player.Player;
@@ -13,9 +13,16 @@ public class SendMessage {
             Player player = mc.player;
             String IP = new GetIP().Get();
             assert player != null;
-            String Data = String.format("{\"Type\":\"Client\",\"Message\":\"%s\",\"UserName\":\"%s\",\"UUID\":\"%s\",\"IP\":\"%s\"}", Message, player.getName().getString(), player.getUUID(), IP);
+
+            JsonObject Data = new JsonObject();
+            Data.addProperty("Type", "Client");
+            Data.addProperty("Message", Message);
+            Data.addProperty("UserName", player.getName().getString());
+            Data.addProperty("UUID", player.getUUID().toString());
+            Data.addProperty("IP", IP);
+
             player.displayClientMessage(new TextComponent("訊息發送中..."), true);
-            new SocketClient().getSocket().connect().emit("message", new JsonParser().parse(Data));
+            new SocketClient().getSocket().connect().emit("message", Data);
         } catch (Exception err) {
             RpmtwUpdateMod.LOGGER.warn("發送宇宙通訊訊息時發生未知錯誤，原因: " + err);
         }
