@@ -31,7 +31,7 @@ jobs:
        name: RPMTWUpdateMod-Forge-${{ github.run_number }}
        path: ${{ github.workspace }}/Forge/build/libs
         
-  Fabric-Build:
+ Fabric-Build:
     runs-on: windows-latest
 
     steps:
