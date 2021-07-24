@@ -13,7 +13,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
-import siongsng.rpmtwupdatemod.config.Configer;
+import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 
 import static io.github.cottonmc.cotton.gui.client.BackgroundPainter.createNinePatch;
 
@@ -40,7 +40,7 @@ public class EULA extends LightweightGuiDescription {
         Cancel.setOnClick(() -> MinecraftClient.getInstance().openScreen(null));
         Info.setOnClick(() -> Util.getOperatingSystem().open("https://www.rpmtw.ga/Wiki/RPMTW-Update-Mod-Related#h.krxvof43ocod"));
         OK.setOnClick(() -> {
-            Configer.config.isEULA = true;
+            RPMTWConfig.config.isEULA = true;
             AutoConfig.getConfigHolder(ConfigScreen.class).save(); //儲存Config
             MinecraftClient.getInstance().openScreen(new Screen(new CosmicChat()));
         });

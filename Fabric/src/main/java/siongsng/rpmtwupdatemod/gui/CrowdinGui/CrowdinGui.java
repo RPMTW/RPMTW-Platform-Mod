@@ -19,7 +19,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
-import siongsng.rpmtwupdatemod.config.Configer;
+import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.function.SendMsg;
 
 import java.io.IOException;
@@ -73,7 +73,7 @@ public class CrowdinGui extends LightweightGuiDescription {
                         "{\"stringId\":\"" + stringID + "\",\"languageId\":\"zh-TW\",\"text\": \"" + Translations.getText() + "\"}",
                         ContentType.APPLICATION_JSON);
                 HttpPost postMethod = new HttpPost("https://api.crowdin.com/api/v2/projects/442446/translations");
-                postMethod.setHeader("Authorization", "Bearer " + Configer.config.Token);
+                postMethod.setHeader("Authorization", "Bearer " + RPMTWConfig.config.Token);
                 postMethod.setEntity(requestEntity);
                 try {
                     httpClient.execute(postMethod);

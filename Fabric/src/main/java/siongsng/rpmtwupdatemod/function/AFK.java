@@ -1,7 +1,7 @@
 package siongsng.rpmtwupdatemod.function;
 
 
-import siongsng.rpmtwupdatemod.config.Configer;
+import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 
 public class AFK {
     public static long afkTime = 0;
@@ -12,7 +12,7 @@ public class AFK {
         if (System.nanoTime() - lastUpdate > 1e+9) {
             afkTime++;
 
-            boolean afk = afkTime > Configer.config.AfkTime;
+            boolean afk = afkTime > RPMTWConfig.config.AfkTime;
 
             if (afk && !wasAfk) {
                 SendMsg.send("§6偵測到你開始掛機了! 因此開始自動檢測翻譯包版本並且做更新。");

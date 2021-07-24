@@ -8,10 +8,10 @@ import net.fabricmc.api.Environment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import siongsng.rpmtwupdatemod.CosmicChat.GetMessage;
+import siongsng.rpmtwupdatemod.Register.KeyBinding;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
-import siongsng.rpmtwupdatemod.config.Configer;
+import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
-import siongsng.rpmtwupdatemod.crowdin.key;
 
 @Environment(EnvType.CLIENT)
 public class RpmtwUpdateMod implements ClientModInitializer {
@@ -28,12 +28,12 @@ public class RpmtwUpdateMod implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        key.onInitializeClient(); //註冊快捷鍵
+        new KeyBinding().Register(); //註冊快捷鍵
         LOGGER.info("Hello RPMTW world!");
-        if (!Configer.config.Token.equals("")) { //如果Token不是空的
-            new TokenCheck().Check(Configer.config.Token); //開始檢測
+        if (!RPMTWConfig.config.Token.equals("")) { //如果Token不是空的
+            new TokenCheck().Check(RPMTWConfig.config.Token); //開始檢測
         }
-        if (Configer.config.isChat) {
+        if (RPMTWConfig.config.isChat) {
             new GetMessage();
         }
     }
