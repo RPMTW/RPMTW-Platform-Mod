@@ -13,10 +13,6 @@ public class ConfigScreen implements ConfigData {
     public boolean ReloadPack = true;
     @Comment("進入世界時，是否自動發送公告。(此變更須重啟遊戲後生效)")
     public boolean notice = true;
-    @Comment("是否啟用掛機偵測，啟用後當掛機時會自動更新翻譯。")
-    public boolean afk = false;
-    @Comment("數值以秒為單位")
-    public int AfkTime = 600;
     @Comment("預設進入遊戲時，是否自動切換語言為 繁體中文。")
     public boolean isChinese = true;
     @Comment("是否使用宇宙通訊系統。")

@@ -3,8 +3,7 @@ package siongsng.rpmtwupdatemod.config;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public class RPMTWConfig {
-    public static ForgeConfigSpec.BooleanValue rpmtw_crowdin, rpmtw_reloadpack, notice, afk, isCheck, isChinese, isChat, isEULA;
-    public static ForgeConfigSpec.IntValue afkTime;
+    public static ForgeConfigSpec.BooleanValue rpmtw_crowdin, rpmtw_reloadpack, notice, isCheck, isChinese, isChat, isEULA;
     public static ForgeConfigSpec.ConfigValue<String> Token;
 
     public static void init(ForgeConfigSpec.Builder client) {
@@ -20,9 +19,6 @@ public class RPMTWConfig {
         notice = client
                 .comment("notice = 進入世界時，是否自動發送公告。(此變更須重啟遊戲後生效)")
                 .define("rpmtw.notice", true);
-        afk = client
-                .comment("afk = 是否啟用掛機偵測，啟用後當掛機時會自動更新翻譯。")
-                .define("rpmtw.afk", false);
         isCheck = client
                 .define("rpmtw.isCheck", false);
         isChinese = client
@@ -34,9 +30,6 @@ public class RPMTWConfig {
         isEULA = client
                 .comment("isEULA = 使用者是否同意宇宙通訊EULA。")
                 .define("rpmtw.isEULA", false);
-        afkTime = client
-                .comment("afkTime = 此數值用來設定過多久沒有活動才會進入掛機模式。(以秒為單位)")
-                .defineInRange("rpmtw.afkTime", 600, 10, 3600);
         Token = client
                 .comment("Crowdin Token (翻譯平台登入權杖)")
                 .define("rpmtw.token", "");

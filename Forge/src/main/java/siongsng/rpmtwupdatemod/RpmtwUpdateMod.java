@@ -18,7 +18,6 @@ import siongsng.rpmtwupdatemod.config.Config;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.crowdin.key;
-import siongsng.rpmtwupdatemod.function.AFK;
 import siongsng.rpmtwupdatemod.function.PackVersionCheck;
 import siongsng.rpmtwupdatemod.notice.notice;
 

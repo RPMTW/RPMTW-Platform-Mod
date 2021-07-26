@@ -57,17 +57,6 @@ public final class ConfigScreen extends Screen {
                 (values) -> RPMTWConfig.notice.get(),
                 (p_168189_, p_168190_, newValue) -> RPMTWConfig.notice.set(newValue)
         ));
-        optionsRowList.addBig(CycleOption.createOnOff("是否啟用啟用掛機偵測來更新翻譯包",
-                (values) -> RPMTWConfig.afk.get(),
-                (p_168189_, p_168190_, newValue) -> RPMTWConfig.afk.set(newValue)
-        ));
-        optionsRowList.addBig(new ProgressOption(
-                "開始偵測掛機間隔時間(秒)",
-                10.0F, 3600, 1.0F,
-                unused -> (double) RPMTWConfig.afkTime.get(),
-                (unused, newValue) -> RPMTWConfig.afkTime.set(newValue.intValue()),
-                (gs, option) -> new TextComponent("開始偵測掛機間隔時間(秒)" + ": " + (int) option.get(gs))));
-
         this.addWidget(optionsRowList);
 
         this.addRenderableWidget(new Button(
@@ -80,8 +69,6 @@ public final class ConfigScreen extends Screen {
                     RPMTWConfig.rpmtw_reloadpack.set(true);
                     RPMTWConfig.notice.set(true);
                     RPMTWConfig.isChat.set(true);
-                    RPMTWConfig.afk.set(false);
-                    RPMTWConfig.afkTime.set(600);
                     RPMTWConfig.isChinese.set(true);
                     Minecraft.getInstance().setScreen(new ConfigScreen());
                 }));
