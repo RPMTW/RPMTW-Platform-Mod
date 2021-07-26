@@ -63,7 +63,6 @@ public class RpmtwUpdateMod {
         if (RPMTWConfig.notice.get()) { //判斷Config
             MinecraftForge.EVENT_BUS.register(new notice()); //玩家加入事件註冊
         }
-        MinecraftForge.EVENT_BUS.register(new AFK()); //掛機事件註冊
         if (RPMTWConfig.isChat.get()) {
             new GetMessage();
         }
