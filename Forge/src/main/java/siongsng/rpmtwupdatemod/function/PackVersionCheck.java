@@ -2,7 +2,6 @@ package siongsng.rpmtwupdatemod.function;
 
 import net.minecraft.client.Minecraft;
 import org.apache.commons.io.FileUtils;
-import siongsng.rpmtwupdatemod.PackFinder;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
 
 import java.net.URL;

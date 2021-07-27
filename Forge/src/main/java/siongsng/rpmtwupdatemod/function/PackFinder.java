@@ -1,10 +1,9 @@
-package siongsng.rpmtwupdatemod;
+package siongsng.rpmtwupdatemod.function;
 
 import net.minecraft.server.packs.FilePackResources;
-import net.minecraft.server.packs.repository.RepositorySource;
-import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.server.packs.repository.Pack;
-import siongsng.rpmtwupdatemod.function.PackVersionCheck;
+import net.minecraft.server.packs.repository.PackSource;
+import net.minecraft.server.packs.repository.RepositorySource;
 
 import java.util.function.Consumer;
 
