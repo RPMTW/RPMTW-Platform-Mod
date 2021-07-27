@@ -34,6 +34,7 @@ public class MixinBookContents {
     }
 }
 
+
 @Mixin(BookContentExternalLoader.class)
 class MixinContentExternalLoader {
     @Inject(at = @At("HEAD"), method = "loadJson", cancellable = true, remap = false)

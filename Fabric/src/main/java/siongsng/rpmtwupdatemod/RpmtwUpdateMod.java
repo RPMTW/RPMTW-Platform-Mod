@@ -23,7 +23,7 @@ public class RpmtwUpdateMod implements ClientModInitializer {
         if (!ping.isConnect()) {
             LOGGER.error("你目前處於無網路狀態，因此無法使用 RPMTW 翻譯自動更新模組，請連結網路後重新啟動此模組。");
         }
-        AutoConfig.register(ConfigScreen.class, Toml4jConfigSerializer::new);
+        AutoConfig.register(ConfigScreen.class, Toml4jConfigSerializer::new); //註冊Config
     }
 
     @Override
