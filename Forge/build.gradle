@@ -61,13 +61,7 @@ dependencies {
     shade('commons-lang:commons-lang:2.6')
     shade('net.sf.ezmorph:ezmorph:1.0.6')
     shade('commons-collections:commons-collections:3.2.2')
-    shade('commons-beanutils:commons-beanutils:1.9.4')
-    shade('commons-io:commons-io:2.9.0')
     shade implementation('io.socket:socket.io-client:2.0.1')
-    shade('io.socket:engine.io-client:2.0.0')
-    shade('org.json:json:20090211')
-    shade('com.squareup.okhttp3:okhttp:3.12.12')
-    shade('com.squareup.okio:okio:1.15.0')
 //    implementation fg.deobf("vazkii.patchouli:Patchouli:1.16.4-54-SNAPSHOT")
     minecraft 'net.minecraftforge:forge:1.17.1-37.0.12'
 }
@@ -87,6 +81,7 @@ jar {
 jar.finalizedBy('reobfJar')
 shadowJar {
     configurations = [project.configurations.shade]
+    relocate 'org.apache.commons.lang.enum', 'org.apache.commons.lang.enumm'
     classifier = ''
 }
 reobf {
