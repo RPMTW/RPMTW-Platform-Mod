@@ -70,17 +70,21 @@ public final class key {
                         BlockPos blockPos = ((BlockHitResult) client.hitResult).getBlockPos();
                         assert client.level != null;
                         item = client.level.getBlockState(blockPos).getBlock().asItem();
+                        SendMsg.send("請稍後，正在開啟物品翻譯界面中...");
                         CrowdinProcedure.OpenTransactionGUI(item.getDefaultInstance());
                     }
                     case ENTITY -> { //指向實體
-                        item = SpawnEggItem.byId((((EntityHitResult) client.hitResult)).getEntity().getId()); //指向實體的生怪蛋
+                        item = SpawnEggItem.byId((((EntityHitResult) client.hitResult)).getEntity().getType()); //指向實體的生怪蛋
+                        assert item != null;
                         if (item.getDefaultInstance().isEmpty()) return;
+                        SendMsg.send("請稍後，正在開啟物品翻譯界面中...");
                         CrowdinProcedure.OpenTransactionGUI(item.getDefaultInstance());
                     }
                     default -> SendMsg.send("§4請手持物品或十字準星對象方塊或實體後再使用此功能。");
                 }
                 return;
             } else if (!item_key.isEmpty()) {
+                SendMsg.send("請稍後，正在開啟物品翻譯界面中...");
                 CrowdinProcedure.OpenTransactionGUI(item.getDefaultInstance());
             }
 

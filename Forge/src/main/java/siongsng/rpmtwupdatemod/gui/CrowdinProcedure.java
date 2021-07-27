@@ -46,14 +46,10 @@ public class CrowdinProcedure {
 
     public static void OpenTransactionGUI(ItemStack itemStack) {
         item = itemStack;
-        SendMsg.send("請稍後，正在開啟物品翻譯界面中...");
-        Thread thread = new Thread(() -> {
             if (CrowdinProcedure.getText(item.getDescriptionId()) == null && RPMTWConfig.isCheck.get()) {
                 SendMsg.send("§6由於你目前手持想要翻譯的物品，數據不在資料庫內\n因此無法進行翻譯，想了解更多資訊請前往RPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
                 return;
             }
             Minecraft.getInstance().setScreen(new CrowdinScreen());
-        });
-        thread.start();
     }
 }
