@@ -7,9 +7,7 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.TextComponent;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
@@ -24,18 +22,16 @@ import java.io.IOException;
 public final class CrowdinScreen extends Screen {
 
     static final int BUTTON_HEIGHT = 20;
-    private static final ResourceLocation texture = new ResourceLocation("rpmtw_update_mod:textures/crowdin_gui.png");
     private static final int BOTTOM_BUTTON_WIDTH = 95;
     EditBox Translation;
-    String Text = CorwidnProcedure.getText();
-    String stringID = CorwidnProcedure.stringID;
 
-
-    Player p = Minecraft.getInstance().player;
-    Item item = p.getMainHandItem().getItem(); //拿的物品
-    String mod_id = item.getCreatorModId(p.getMainHandItem()); //物品所屬的模組ID
+    ItemStack item = CrowdinProcedure.item; //拿的物品
+    String mod_id = item.getItem().getCreatorModId(item); //物品所屬的模組ID
     String item_key = item.getDescriptionId(); //物品的命名空間
-    String item_DisplayName = item.getDescription().getString(); //物品的顯示名稱
+    String item_DisplayName = item.getItem().getDescription().getString(); //物品的顯示名稱
+
+    String Text = CrowdinProcedure.getText(item_key);
+    String stringID = CrowdinProcedure.stringID;
 
     public CrowdinScreen() {
         super(new TextComponent(""));
@@ -52,7 +48,7 @@ public final class CrowdinScreen extends Screen {
                 button -> {
                     String url = "https://crowdin.com/translate/resourcepack-mod-zhtw/all/en-zhtw?filter=basic&value=0#q=" + stringID;
 
-                    p.sendMessage(new TextComponent("§6開啟翻譯平台網頁中..."), p.getUUID()); //發送訊息
+                    SendMsg.send("§6開啟翻譯平台網頁中...");
                     Util.getPlatform().openUri(url); //使用預設瀏覽器開啟網頁
                 }));
 
