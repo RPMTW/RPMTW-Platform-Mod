@@ -6,13 +6,17 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.item.Item;
+import net.minecraft.item.SpawnEggItem;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.hit.HitResult;
+import net.minecraft.util.math.BlockPos;
 import org.lwjgl.glfw.GLFW;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.function.ReloadPack;
 import siongsng.rpmtwupdatemod.function.SendMsg;
 import siongsng.rpmtwupdatemod.gui.CosmicChat;
-import siongsng.rpmtwupdatemod.gui.CrowdinGui.CrowdinGui;
 import siongsng.rpmtwupdatemod.gui.CrowdinGui.CrowdinGuiProcedure;
 import siongsng.rpmtwupdatemod.gui.CrowdinLogin.CrowdinLogin;
 import siongsng.rpmtwupdatemod.gui.EULA;
@@ -45,26 +49,36 @@ public class KeyBinding {
             while (open_config.wasPressed()) {
                 MinecraftClient.getInstance().openScreen(AutoConfig.getConfigScreen(ConfigScreen.class, MinecraftClient.getInstance().currentScreen).get());
             }
-            while (crowdin.wasPressed()) { //物品翻譯界面
+            while (crowdin.wasPressed()) { //開啟物品翻譯界面
                 if (!RPMTWConfig.config.crowdin) return;
                 assert client.player != null;
-                Item item = client.player.getMainHandStack().getItem();
+                Item item = client.player.getMainHandStack().getItem(); //取得手上拿的物品
                 String item_key = item.getTranslationKey(); //物品的命名空間
 
-                if (item_key.equals("block.minecraft.air")) {
-                    SendMsg.send("§4請手持物品後再使用此功能。");
-                    return;
-                } else if (!RPMTWConfig.config.isCheck) {
+                if (!RPMTWConfig.config.isCheck) {
                     MinecraftClient.getInstance().openScreen(new Screen(new CrowdinLogin()));
                     return;
-                } else {
-                    SendMsg.send("請稍後，正在開啟物品翻譯界面中...");
-                    if (CrowdinGuiProcedure.getText(item.getTranslationKey()) == null && RPMTWConfig.config.isCheck) {
-                        SendMsg.send("§6由於你目前手持想要翻譯的物品，數據不在資料庫內\n因此無法進行翻譯，想了解更多資訊請前往RPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
-                        return;
+                } else if (item_key.equals("block.minecraft.air")) {
+                    assert client.crosshairTarget != null;
+                    HitResult.Type type = client.crosshairTarget.getType();
+                    switch (type) {
+                        case BLOCK -> { //指向方塊
+                            BlockPos blockPos = ((BlockHitResult) client.crosshairTarget).getBlockPos();
+                            assert client.world != null;
+                            item = client.world.getBlockState(blockPos).getBlock().asItem();
+                            CrowdinGuiProcedure.OpenTransactionGUI(item.getDefaultStack());
+                        }
+                        case ENTITY -> { //指向實體
+                            item = SpawnEggItem.forEntity(((EntityHitResult) client.crosshairTarget).getEntity().getType()); //指向實體的生怪蛋
+                            assert item != null;
+                            if (item.getDefaultStack().isEmpty()) return;
+                            CrowdinGuiProcedure.OpenTransactionGUI(item.getDefaultStack());
+                        }
+                        default -> SendMsg.send("§4請手持物品或十字準星對象方塊或實體後再使用此功能。");
                     }
-                    CrowdinGuiProcedure.SetItemStack(item.getDefaultStack());
-                    MinecraftClient.getInstance().openScreen(new Screen(new CrowdinGui()));
+                    return;
+                } else if (!item_key.isEmpty()) {
+                    CrowdinGuiProcedure.OpenTransactionGUI(item.getDefaultStack());
                 }
             }
             while (reloadpack.wasPressed()) { //更新翻譯包
