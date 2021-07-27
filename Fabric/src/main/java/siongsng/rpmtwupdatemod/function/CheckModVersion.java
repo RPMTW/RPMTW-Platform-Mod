@@ -1,7 +1,7 @@
 package siongsng.rpmtwupdatemod.function;
 
 public class CheckModVersion {
-    public String ver = "1.2.1";
+    public String ver = "1.2.2";
 
     public boolean get() {
         return json.get("https://raw.githubusercontent.com/RPMTW/ResourcePack-Mod-zh_tw/main/ModUpdate.json").getAsJsonObject("Fabric").getAsJsonObject("1.17").getAsJsonPrimitive("latest").getAsString().equals(ver);

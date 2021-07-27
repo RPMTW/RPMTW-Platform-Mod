@@ -8,7 +8,7 @@ license = "MIT"
 # The modid of the mod
 modId = "rpmtw_update_mod"
 
-version = "1.2.1"
+version = "1.2.2"
 # A display name for the mod
 displayName = "RpmtwUpdateMod"
 
@@ -34,6 +34,6 @@ side = "CLIENT"
 modId = "minecraft"
 mandatory = true
 # This version range declares a minimum of the current minecraft version up to but not including the next major version
-versionRange = "[1.17.1,)"
+versionRange = "[1.17.1,1.18)"
 ordering = "NONE"
 side = "BOTH"
