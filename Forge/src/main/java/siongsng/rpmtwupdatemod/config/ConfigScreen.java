@@ -3,7 +3,6 @@ package siongsng.rpmtwupdatemod.config;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.CycleOption;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.ProgressOption;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.OptionsList;
 import net.minecraft.client.gui.screens.Screen;
@@ -29,7 +28,7 @@ public final class ConfigScreen extends Screen {
     private OptionsList optionsRowList;
 
     public ConfigScreen() {
-        super(new TextComponent("RPMTW自動繁化模組 設定選單"));
+        super(new TextComponent("RPMTW 設定選單"));
     }
 
     @Override
