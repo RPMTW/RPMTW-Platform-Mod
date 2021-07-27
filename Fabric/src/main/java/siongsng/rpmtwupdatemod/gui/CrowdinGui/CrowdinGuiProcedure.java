@@ -1,7 +1,7 @@
 package siongsng.rpmtwupdatemod.gui.CrowdinGui;
 
 import com.google.gson.JsonParser;
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.item.ItemStack;
 import org.apache.http.HttpHeaders;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
@@ -17,12 +17,13 @@ import java.nio.charset.StandardCharsets;
 public class CrowdinGuiProcedure {
     public static String responseBody;
     public static String stringID = "";
+    public static ItemStack itemStack;
 
-    public static String getText() {
+    public static String getText(String key) {
         String Text;
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
             HttpUriRequest request = RequestBuilder.get()
-                    .setUri("https://api.crowdin.com/api/v2/projects/442446/strings?filter=" + MinecraftClient.getInstance().player.getMainHandStack().getItem().getTranslationKey())
+                    .setUri("https://api.crowdin.com/api/v2/projects/442446/strings?filter=" + key)
                     .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
                     .setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + RPMTWConfig.config.Token)
                     .build();
@@ -38,5 +39,9 @@ public class CrowdinGuiProcedure {
             RpmtwUpdateMod.LOGGER.error("讀取翻譯資訊時發生錯誤: " + e.getMessage());
         }
         return Text;
+    }
+
+    public static void SetItemStack(ItemStack item) {
+        itemStack = item;
     }
 }

@@ -50,6 +50,7 @@ public class KeyBinding {
                 assert client.player != null;
                 Item item = client.player.getMainHandStack().getItem();
                 String item_key = item.getTranslationKey(); //物品的命名空間
+
                 if (item_key.equals("block.minecraft.air")) {
                     SendMsg.send("§4請手持物品後再使用此功能。");
                     return;
@@ -58,10 +59,11 @@ public class KeyBinding {
                     return;
                 } else {
                     SendMsg.send("請稍後，正在開啟物品翻譯界面中...");
-                    if (CrowdinGuiProcedure.getText() == null && RPMTWConfig.config.isCheck) {
+                    if (CrowdinGuiProcedure.getText(item.getTranslationKey()) == null && RPMTWConfig.config.isCheck) {
                         SendMsg.send("§6由於你目前手持想要翻譯的物品，數據不在資料庫內\n因此無法進行翻譯，想了解更多資訊請前往RPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
                         return;
                     }
+                    CrowdinGuiProcedure.SetItemStack(item.getDefaultStack());
                     MinecraftClient.getInstance().openScreen(new Screen(new CrowdinGui()));
                 }
             }

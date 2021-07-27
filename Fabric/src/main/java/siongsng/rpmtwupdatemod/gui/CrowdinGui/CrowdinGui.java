@@ -27,11 +27,11 @@ import java.io.IOException;
 import static io.github.cottonmc.cotton.gui.client.BackgroundPainter.createNinePatch;
 
 public class CrowdinGui extends LightweightGuiDescription {
-    Item item = MinecraftClient.getInstance().player.getMainHandStack().getItem();
+    Item item = CrowdinGuiProcedure.itemStack.getItem();
     String mod_id = Registry.ITEM.getId(item).getNamespace();//物品所屬的模組ID
     String item_key = item.getTranslationKey(); //物品的命名空間
     String item_DisplayName = item.getName().getString(); //物品的顯示名稱
-    String Text = CrowdinGuiProcedure.getText();
+    String Text = CrowdinGuiProcedure.getText(item_key);
     String stringID = CrowdinGuiProcedure.stringID;
 
     public CrowdinGui() {
