@@ -63,8 +63,7 @@ dependencies {
     shade('commons-collections:commons-collections:3.2.2')
     shade('commons-beanutils:commons-beanutils:1.9.4')
     shade('commons-io:commons-io:2.9.0')
-    shade files('libs/commons-logging-1.2.jar')
-    implementation('io.socket:socket.io-client:2.0.1')
+    shade implementation('io.socket:socket.io-client:2.0.1')
     shade('io.socket:engine.io-client:2.0.0')
     shade('org.json:json:20090211')
     shade('com.squareup.okhttp3:okhttp:3.12.12')
@@ -73,19 +72,17 @@ dependencies {
     minecraft 'net.minecraftforge:forge:1.17.1-37.0.12'
 }
 jar {
-    manifest {
-        attributes([
-                "Specification-Title"     : "rpmtwupdatemod",
-                "Specification-Vendor"    : "SiongSng",
-                "LICENSE"                 : "MIT",
-                "Specification-Version"   : "1",
-                "Implementation-Title"    : project.name,
-                "Implementation-Version"  : project.version,
-                "Implementation-Vendor"   : "SiongSng",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-//                "MixinConfigs": "rpmtw_update_mod.mixin.cfg.json"
-        ])
-    }
+    manifest.attributes([
+            "Specification-Title"     : "rpmtwupdatemod",
+            "Specification-Vendor"    : "SiongSng",
+            "LICENSE"                 : "MIT",
+            "Specification-Version"   : "1",
+            "Implementation-Title"    : project.name,
+            "Implementation-Version"  : project.version,
+            "Implementation-Vendor"   : "SiongSng",
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+//          "MixinConfigs": "rpmtw_update_mod.mixin.cfg.json"
+    ])
 }
 jar.finalizedBy('reobfJar')
 shadowJar {
