@@ -1,7 +1,5 @@
 package siongsng.rpmtwupdatemod.function;
 
-import siongsng.rpmtwupdatemod.json;
-
 public class CheckModVersion {
     public String ver = "1.2.1";
 

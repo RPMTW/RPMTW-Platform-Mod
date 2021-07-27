@@ -12,6 +12,7 @@ import siongsng.rpmtwupdatemod.Register.KeyBinding;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
+import siongsng.rpmtwupdatemod.gui.ping;
 
 @Environment(EnvType.CLIENT)
 public class RpmtwUpdateMod implements ClientModInitializer {

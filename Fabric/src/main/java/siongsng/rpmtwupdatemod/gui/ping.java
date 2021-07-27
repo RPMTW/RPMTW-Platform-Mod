@@ -1,4 +1,4 @@
-package siongsng.rpmtwupdatemod;
+package siongsng.rpmtwupdatemod.gui;
 
 import java.io.IOException;
 import java.net.URL;

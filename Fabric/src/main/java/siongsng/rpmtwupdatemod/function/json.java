@@ -1,4 +1,4 @@
-package siongsng.rpmtwupdatemod;
+package siongsng.rpmtwupdatemod.function;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
