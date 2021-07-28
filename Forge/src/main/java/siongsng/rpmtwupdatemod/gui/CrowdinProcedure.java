@@ -47,7 +47,7 @@ public class CrowdinProcedure {
     public static void OpenTransactionGUI(ItemStack itemStack) {
         item = itemStack;
             if (CrowdinProcedure.getText(item.getDescriptionId()) == null && RPMTWConfig.isCheck.get()) {
-                SendMsg.send("§6由於你目前手持想要翻譯的物品，數據不在資料庫內\n因此無法進行翻譯，想了解更多資訊請前往RPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
+                SendMsg.send("§6由於你指定想要翻譯的物品或實體生怪蛋，不在資料庫內\n因此無法進行翻譯，想了解更多資訊請前往RPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
                 return;
             }
             Minecraft.getInstance().setScreen(new CrowdinScreen());

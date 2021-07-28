@@ -41,6 +41,7 @@ public class CrowdinGuiProcedure {
             stringID = null;
             RpmtwUpdateMod.LOGGER.error("讀取翻譯資訊時發生錯誤: " + e.getMessage());
         }
+
         return Text;
     }
 
@@ -49,7 +50,7 @@ public class CrowdinGuiProcedure {
         item = itemStack;
         SendMsg.send("請稍後，正在開啟物品翻譯界面中...");
         if (CrowdinGuiProcedure.getText(item.getTranslationKey()) == null && RPMTWConfig.config.isCheck) {
-            SendMsg.send("§6由於你目前手持想要翻譯的物品，數據不在資料庫內\n因此無法進行翻譯，想了解更多資訊請前往RPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
+            SendMsg.send("§6由於你指定想要翻譯的物品或實體生怪蛋，不在資料庫內\n因此無法進行翻譯，想了解更多資訊請前往RPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
             return;
         }
         MinecraftClient.getInstance().openScreen(new Screen(new CrowdinGui()));
