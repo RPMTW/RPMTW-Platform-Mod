@@ -1,4 +1,4 @@
-package siongsng.rpmtwupdatemod.function;
+package siongsng.rpmtwupdatemod.Packs;
 
 import net.minecraft.client.Minecraft;
 import org.apache.commons.io.FileUtils;

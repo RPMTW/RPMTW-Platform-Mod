@@ -20,9 +20,9 @@ import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.crowdin.key;
-import siongsng.rpmtwupdatemod.function.PackVersionCheck;
+import siongsng.rpmtwupdatemod.Packs.PackVersionCheck;
 import siongsng.rpmtwupdatemod.function.ping;
-import siongsng.rpmtwupdatemod.notice.notice;
+import siongsng.rpmtwupdatemod.function.OnPlayerJoin;
 
 import java.io.IOException;
 
@@ -65,7 +65,7 @@ public class RpmtwUpdateMod {
         MinecraftForge.EVENT_BUS.register(new key());  //快捷鍵註冊
         MinecraftForge.EVENT_BUS.register(new noticeCMD()); //noticeCMD指令註冊
         if (RPMTWConfig.notice.get()) { //判斷Config
-            MinecraftForge.EVENT_BUS.register(new notice()); //玩家加入事件註冊
+            MinecraftForge.EVENT_BUS.register(new OnPlayerJoin()); //玩家加入事件註冊
         }
         if (RPMTWConfig.isChat.get()) {
             new GetMessage();

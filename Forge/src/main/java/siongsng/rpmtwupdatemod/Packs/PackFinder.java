@@ -1,4 +1,4 @@
-package siongsng.rpmtwupdatemod.function;
+package siongsng.rpmtwupdatemod.Packs;
 
 import net.minecraft.server.packs.FilePackResources;
 import net.minecraft.server.packs.repository.Pack;

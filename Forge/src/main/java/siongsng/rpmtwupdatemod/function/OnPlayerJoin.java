@@ -1,13 +1,12 @@
-package siongsng.rpmtwupdatemod.notice;
+package siongsng.rpmtwupdatemod.function;
 
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.Entity;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import siongsng.rpmtwupdatemod.function.CheckModVersion;
 
-public class notice {
+public class OnPlayerJoin {
     @SubscribeEvent
     public void send(PlayerEvent.PlayerLoggedInEvent e) {
         Entity p = e.getPlayer();

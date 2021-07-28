@@ -4,7 +4,6 @@ import net.minecraft.resource.ResourcePackProfile;
 import net.minecraft.resource.ResourcePackProvider;
 import net.minecraft.resource.ResourcePackSource;
 import net.minecraft.resource.ZipResourcePack;
-import siongsng.rpmtwupdatemod.function.PackVersionCheck;
 
 import java.io.File;
 import java.util.Set;

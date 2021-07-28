@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import siongsng.rpmtwupdatemod.function.PackVersionCheck;
+import siongsng.rpmtwupdatemod.packs.PackVersionCheck;
 
 import java.io.IOException;
 import java.util.HashSet;

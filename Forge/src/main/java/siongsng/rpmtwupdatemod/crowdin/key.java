@@ -17,7 +17,7 @@ import net.minecraftforge.fmlclient.registry.ClientRegistry;
 import org.lwjgl.glfw.GLFW;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
-import siongsng.rpmtwupdatemod.function.ReloadPack;
+import siongsng.rpmtwupdatemod.Packs.ReloadPack;
 import siongsng.rpmtwupdatemod.function.SendMsg;
 import siongsng.rpmtwupdatemod.gui.CosmicChatScreen;
 import siongsng.rpmtwupdatemod.gui.CrowdinLoginScreen;

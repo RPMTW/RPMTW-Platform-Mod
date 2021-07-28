@@ -1,4 +1,4 @@
-package siongsng.rpmtwupdatemod.function;
+package siongsng.rpmtwupdatemod.packs;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.SplashOverlay;
@@ -8,6 +8,7 @@ import net.minecraft.resource.ReloadableResourceManagerImpl;
 import net.minecraft.util.Util;
 import org.apache.commons.io.FileUtils;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
+import siongsng.rpmtwupdatemod.function.SendMsg;
 
 import java.io.IOException;
 import java.net.URL;
