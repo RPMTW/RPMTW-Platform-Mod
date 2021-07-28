@@ -7,7 +7,7 @@
     "MixinBookContents",
     "MixinContentExternalLoader",
     "PlayJoinMixin",
-    "ResourcePackManagerMixin",
+    "ResourcePackManagerMixin"
   ],
   "client": [
     "RpmtwUpdateModClient"

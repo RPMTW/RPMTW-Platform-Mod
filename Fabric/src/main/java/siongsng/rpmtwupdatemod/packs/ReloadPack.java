@@ -27,6 +27,7 @@ public class ReloadPack {
             try {
                 FileUtils.copyURLToFile(new URL(RpmtwUpdateMod.PackDownloadUrl), PackFile.toFile()); //下載資源包檔案
                 reloadLanguage();
+                MinecraftClient.getInstance().reloadResources();
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
@@ -42,7 +43,6 @@ public class ReloadPack {
         var resourcePackManager = mc.getResourcePackManager();
         var langManager = mc.getLanguageManager();
         var list = resourcePackManager.createResourcePacks();
-
         if (resourceManager instanceof ReloadableResourceManagerImpl rm) {
             mc.resourceReloadLogger.reload(ResourceReloadLogger.ReloadReason.MANUAL, list);
 
