@@ -4,18 +4,18 @@ import net.minecraft.resource.ResourcePackProfile;
 import net.minecraft.resource.ResourcePackProvider;
 import net.minecraft.resource.ResourcePackSource;
 import net.minecraft.resource.ZipResourcePack;
+import siongsng.rpmtwupdatemod.function.PackVersionCheck;
 
 import java.io.File;
 import java.util.Set;
 import java.util.function.Consumer;
 
 public class LoadPack implements ResourcePackProvider {
-    public static final LoadPack RESOUCE = new LoadPack("Resource Pack", new File(System.getProperty("user.home") + "/.rpmtw/1.17/RPMTW-1.17.zip"));
+    public static final LoadPack RESOUCE = new LoadPack("Resource Pack", PackVersionCheck.PackFile.toFile());
 
     private final File loaderDirectory;
 
     public LoadPack(String type, File loaderDirectory) {
-
         this.loaderDirectory = loaderDirectory;
     }
 
