@@ -9,6 +9,7 @@ import net.minecraft.network.chat.TextComponent;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 
 import javax.annotation.Nonnull;
+import java.util.Locale;
 
 public class EULAScreen extends Screen {
     static final int BUTTON_HEIGHT = 20;
