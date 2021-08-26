@@ -74,12 +74,6 @@ task sourcesJar(type: Jar, dependsOn: classes) {
     from sourceSets.main.allSource
 }
 
-jar {
-    from "LICENSE"
-    from {
-        configurations.shadow.collect { it.toString().contains("guava") ? null : it.isDirectory() ? it : zipTree(it) }
-    }
-}
 
 publishing {
     publications {
