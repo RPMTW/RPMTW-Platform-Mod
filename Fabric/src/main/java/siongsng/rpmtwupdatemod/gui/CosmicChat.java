@@ -45,7 +45,7 @@ public class CosmicChat extends LightweightGuiDescription {
             }
             MinecraftClient.getInstance().openScreen(null);
         });
-        Info.setOnClick(() -> Util.getOperatingSystem().open("https://www.rpmtw.ga/Wiki/RPMTW-Update-Mod-Related#h.krxvof43ocod"));
+        Info.setOnClick(() -> Util.getOperatingSystem().open("https://www.rpmtw.ga/Wiki/ModInfo#what-is-cosmic-system"));
         gui.validate(this);
     }
 

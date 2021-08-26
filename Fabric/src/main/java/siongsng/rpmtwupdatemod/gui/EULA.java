@@ -26,8 +26,8 @@ public class EULA extends LightweightGuiDescription {
         gui.add(label, (int) 6.8, 1, 2, 1);
         gui.add(new WLabel(new LiteralText("使用宇宙通訊系統須遵守《RPMTW 宇宙通訊系統終端使用者授權合約》"), 0xFFFFFF), 1, 3, 2, 1);
         gui.add(new WLabel(new LiteralText("- 由於此功能與Discord串聯，請遵守《Discord使用者服務條款》"), 0xFFFFFF), 1, 4, 2, 1);
-        gui.add(new WLabel(new LiteralText("- 訊息內容請不得以任何形式騷擾別人，否則我們有權封禁該帳號"), 0xFFFFFF), 1, 5, 2, 1);
-        gui.add(new WLabel(new LiteralText("- 我們將會蒐集您的IP、Minecraft UUID/ID，IP僅用於封禁帳號"), 0xFFFFFF), 1, 6, 2, 1);
+        gui.add(new WLabel(new LiteralText("- 訊息內容請不得以任何形式騷擾別人，也禁止使用任何攻擊手段攻擊宇宙通訊伺服器，否則我們有權封禁該帳號"), 0xFFFFFF), 1, 5, 2, 1);
+        gui.add(new WLabel(new LiteralText("- 我們將會蒐集您的 Minecraft UUID/ID 與 登入憑證，憑證與UUID僅用於驗證與封禁帳號"), 0xFFFFFF), 1, 6, 2, 1);
         gui.add(new WLabel(new LiteralText("- 我們將有權隨時更改本條款"), 0xFFFFFF), 1, 7, 2, 1);
 
         WButton Cancel = new WButton(new LiteralText("我不同意"));
@@ -38,7 +38,7 @@ public class EULA extends LightweightGuiDescription {
         gui.add(OK, 11, 9, 5, 2);
 
         Cancel.setOnClick(() -> MinecraftClient.getInstance().openScreen(null));
-        Info.setOnClick(() -> Util.getOperatingSystem().open("https://www.rpmtw.ga/Wiki/RPMTW-Update-Mod-Related#h.krxvof43ocod"));
+        Info.setOnClick(() -> Util.getOperatingSystem().open("https://www.rpmtw.ga/Wiki/ModInfo#what-is-cosmic-system"));
         OK.setOnClick(() -> {
             Configer.config.isEULA = true;
             AutoConfig.getConfigHolder(ConfigScreen.class).save(); //儲存Config
