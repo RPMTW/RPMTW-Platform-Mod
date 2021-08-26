@@ -80,7 +80,7 @@ public class CosmicChatScreen extends GuiScreen {
 
         if (button == Info) {
             try {
-                Desktop.getDesktop().browse(new URI("https://www.rpmtw.ga/Wiki/RPMTW-Update-Mod-Related#h.krxvof43ocod"));
+                Desktop.getDesktop().browse(new URI("https://www.rpmtw.ga/Wiki/ModInfo#what-is-cosmic-system"));
             } catch (Exception e) {
                 e.printStackTrace();
             }

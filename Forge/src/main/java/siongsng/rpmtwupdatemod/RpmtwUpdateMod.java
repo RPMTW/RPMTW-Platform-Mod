@@ -19,6 +19,8 @@ import siongsng.rpmtwupdatemod.function.ping;
 import siongsng.rpmtwupdatemod.notice.notice;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.Objects;
 
 @Mod(
         modid = RpmtwUpdateMod.MOD_ID,
@@ -32,8 +34,10 @@ public class RpmtwUpdateMod {
 
     public static final String MOD_ID = "rpmtw_update_mod";
     public static final String MOD_NAME = "RPMTW Update Mod";
-    public static final String VERSION = "1.2.1";
-    public final static String PackDownloadUrl = "https://github.com/RPMTW/ResourcePack-Mod-zh_tw/raw/Translated-1.12/RPMTW-1.12.zip";
+    public static final String VERSION = "1.2.3";
+    public final static String PackDownloadUrl =
+            Objects.equals(Locale.getDefault().getISO3Country(), "CHN") ? "https://github.com.cnpmjs.org/RPMTW/ResourcePack-Mod-zh_tw/raw/Translated-1.12/RPMTW-1.12.zip" :
+                    "https://github.com/RPMTW/ResourcePack-Mod-zh_tw/raw/Translated-1.12/RPMTW-1.12.zip";
 
     @Mod.Instance(MOD_ID)
     public static RpmtwUpdateMod INSTANCE;
