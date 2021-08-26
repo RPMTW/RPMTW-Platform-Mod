@@ -38,7 +38,7 @@ public class EULA extends LightweightGuiDescription {
         gui.add(OK, 11, 9, 5, 2);
 
         Cancel.setOnClick(() -> MinecraftClient.getInstance().openScreen(null));
-        Info.setOnClick(() -> Util.getOperatingSystem().open("https://www.rpmtw.ga/Wiki/RPMTW-Update-Mod-Related#h.krxvof43ocod"));
+        Info.setOnClick(() -> Util.getOperatingSystem().open("https://www.rpmtw.ga/Wiki/ModInfo#what-is-cosmic-system"));
         OK.setOnClick(() -> {
             RPMTWConfig.config.isEULA = true;
             AutoConfig.getConfigHolder(ConfigScreen.class).save(); //儲存Config

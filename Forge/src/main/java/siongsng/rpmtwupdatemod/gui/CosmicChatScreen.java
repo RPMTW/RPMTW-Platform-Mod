@@ -29,7 +29,7 @@ public class CosmicChatScreen extends Screen {
                 (this.height / 2) + 30,
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
                 new TextComponent("這是什麼?"),
-                button -> Util.getPlatform().openUri("https://www.rpmtw.ga/Wiki/RPMTW-Update-Mod-Related#h.krxvof43ocod")));
+                button -> Util.getPlatform().openUri("https://www.rpmtw.ga/Wiki/ModInfo#what-is-cosmic-system")));
 
         this.addRenderableWidget(new Button(
                 (this.width - 4) / 2 - BOTTOM_BUTTON_WIDTH + 50,
