@@ -1,6 +1,5 @@
 repositories {
     mavenCentral()
-    jcenter()
     maven { url 'https://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-releases/' }
     maven { url 'https://maven.blamejared.com' }
 }
@@ -12,8 +11,8 @@ buildscript {
             url "https://repo.spongepowered.org/repository/maven-public/"
             content { includeGroup "org.spongepowered" }
         }
+        gradlePluginPortal()
         mavenCentral()
-        jcenter()
     }
     dependencies {
         classpath 'com.github.jengelman.gradle.plugins:shadow:6.1.0'
