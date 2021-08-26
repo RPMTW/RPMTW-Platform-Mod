@@ -13,11 +13,16 @@ import siongsng.rpmtwupdatemod.config.Configer;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.crowdin.key;
 
+import java.util.Locale;
+import java.util.Objects;
+
 @Environment(EnvType.CLIENT)
 public class RpmtwUpdateMod implements ClientModInitializer {
     public static final Logger LOGGER = LogManager.getLogger("rpmtw_update_mod");
     public final static String Mod_ID = "rpmtw_update_mod";
-    public final static String PackDownloadUrl = "https://github.com/RPMTW/ResourcePack-Mod-zh_tw/raw/Translated/RPMTW-1.16.zip";
+    public final static String PackDownloadUrl =
+            Objects.equals(Locale.getDefault().getISO3Country(), "CHN") ? "https://github.com.cnpmjs.org/RPMTW/ResourcePack-Mod-zh_tw/raw/Translated/RPMTW-1.16.zip" :
+                    "https://github.com/RPMTW/ResourcePack-Mod-zh_tw/raw/Translated/RPMTW-1.16.zip";
 
     public RpmtwUpdateMod() {
         if (!ping.isConnect()) {
