@@ -55,8 +55,8 @@ public class EULAScreen extends Screen {
         String Screen = "宇宙通訊系統-EULA";
         String Text1 = "使用宇宙通訊系統須遵守《RPMTW 宇宙通訊系統終端使用者授權合約》";
         String Text2 = "- 由於此功能與Discord串聯，請遵守《Discord使用者服務條款》";
-        String Text3 = "- 訊息內容請不得以任何形式騷擾別人，否則我們有權封禁該帳號";
-        String Text4 = "- 我們將會蒐集您的IP、Minecraft UUID/ID，IP僅用於封禁帳號";
+        String Text3 = "- 訊息內容請不得以任何形式騷擾別人，也禁止使用任何攻擊手段攻擊宇宙通訊伺服器，否則我們有權封禁該帳號";
+        String Text4 = "- 我們將會蒐集您的 Minecraft UUID/ID 與 登入憑證，憑證與UUID僅用於驗證與封禁帳號";
         String Text5 = "- 我們將有權隨時更改本條款";
 
         this.font.draw(matrixStack, Screen, this.width / (float) 2 - this.font.width(Screen) / (float) 2, height - 65, 0xFF5555);

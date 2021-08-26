@@ -13,7 +13,7 @@ public class GetMessage {
     public GetMessage() {
         new SocketClient().getSocket().on(("broadcast"), (data) -> {
             try {
-                if (Minecraft.getInstance() == null) return;
+                if (Minecraft.getInstance().player == null) return;
                 if (!RPMTWConfig.isChat.get()) return;
 
                 Minecraft mc = Minecraft.getInstance();
