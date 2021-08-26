@@ -19,7 +19,6 @@ public class SocketClient {
             User user = mc.getUser();
             Map<String, String> AuthMap = new HashMap<>();
             AuthMap.put("Token", user.getAccessToken());
-            AuthMap.put("AccountType", user.getType().name());
             AuthMap.put("UUID", user.getUuid());
 
             IO.Options options = IO.Options.builder().setAuth(AuthMap).build();
