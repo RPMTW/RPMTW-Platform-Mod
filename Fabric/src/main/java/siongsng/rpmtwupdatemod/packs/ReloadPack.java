@@ -8,9 +8,13 @@ import net.minecraft.resource.ReloadableResourceManagerImpl;
 import net.minecraft.util.Util;
 import org.apache.commons.io.FileUtils;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
+import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.function.SendMsg;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -25,9 +29,10 @@ public class ReloadPack {
         SendMsg.send("正在執行翻譯包更新中，請稍後...");
         Thread thread = new Thread(() -> {
             try {
-                FileUtils.copyURLToFile(new URL(RpmtwUpdateMod.PackDownloadUrl), PackFile.toFile()); //下載資源包檔案
+            	File fi = PackFile.toFile();
+                FileUtils.copyURLToFile(new URL(RpmtwUpdateMod.PackDownloadUrl), fi); //下載資源包檔案
                 reloadLanguage();
-            } catch (IOException ioException) {
+            } catch (Exception ioException) {
                 ioException.printStackTrace();
             }
             SendMsg.send("§b處理完成。");
@@ -46,7 +51,11 @@ public class ReloadPack {
             mc.resourceReloadLogger.reload(ResourceReloadLogger.ReloadReason.MANUAL, list);
 
             rm.clear();
-
+            try {
+            	ZipUtils.removeDirFromZip(PackFile.toFile(),RPMTWConfig.config.modBlackList);
+            } catch (Exception ioException) {
+               
+            }
             for (var pack : list) {
                 try {
                     rm.addPack(pack);

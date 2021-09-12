@@ -1,7 +1,5 @@
 package siongsng.rpmtwupdatemod;
 
-import me.shedaniel.autoconfig.AutoConfig;
-import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -9,7 +7,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import siongsng.rpmtwupdatemod.CosmicChat.GetMessage;
 import siongsng.rpmtwupdatemod.Register.KeyBinding;
-import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.gui.ping;
@@ -29,7 +26,6 @@ public class RpmtwUpdateMod implements ClientModInitializer {
         if (!ping.isConnect()) {
             LOGGER.error("你目前處於無網路狀態，因此無法使用 RPMTW 翻譯自動更新模組，請連結網路後重新啟動此模組。");
         }
-        AutoConfig.register(ConfigScreen.class, Toml4jConfigSerializer::new); //註冊Config
     }
 
     @Override
