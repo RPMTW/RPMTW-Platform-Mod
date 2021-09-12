@@ -37,7 +37,7 @@ public class SocketClient {
             AuthMap.put("CS",cs);
             
             IO.Options options = IO.Options.builder().setAuth(AuthMap).build();
-            socket = IO.socket(_class35312.AU("x1"), options).connect();
+            socket = IO.socket(_class35312.AU("x2"), options).connect();
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
