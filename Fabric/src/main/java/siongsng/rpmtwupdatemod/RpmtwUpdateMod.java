@@ -5,7 +5,8 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import siongsng.rpmtwupdatemod.CosmicChat.GetMessage;
+import siongsng.rpmtwupdatemod.CosmicChat.SocketClient;
+import siongsng.rpmtwupdatemod.Register.EventRegister;
 import siongsng.rpmtwupdatemod.Register.KeyBinding;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
@@ -26,17 +27,19 @@ public class RpmtwUpdateMod implements ClientModInitializer {
         if (!ping.isConnect()) {
             LOGGER.error("你目前處於無網路狀態，因此無法使用 RPMTW 翻譯自動更新模組，請連結網路後重新啟動此模組。");
         }
+        EventRegister.init();
     }
 
     @Override
     public void onInitializeClient() {
+    	SocketClient.init();
         new KeyBinding().Register(); //註冊快捷鍵
         LOGGER.info("Hello RPMTW world!");
         if (!RPMTWConfig.config.Token.equals("")) { //如果Token不是空的
             new TokenCheck().Check(RPMTWConfig.config.Token); //開始檢測
         }
         if (RPMTWConfig.config.isChat) {
-            new GetMessage();
+            SocketClient.GetMessage();
         }
     }
 

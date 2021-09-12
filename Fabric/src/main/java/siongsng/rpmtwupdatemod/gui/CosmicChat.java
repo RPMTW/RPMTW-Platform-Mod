@@ -11,7 +11,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
-import siongsng.rpmtwupdatemod.CosmicChat.SendMessage;
+import siongsng.rpmtwupdatemod.CosmicChat.SocketClient;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
 import siongsng.rpmtwupdatemod.function.SendMsg;
 
@@ -41,7 +41,7 @@ public class CosmicChat extends LightweightGuiDescription {
             if (Message.getText().equals("")) {
                 SendMsg.send("訊息不能是空的。");
             } else {
-                new SendMessage().Send(Message.getText());
+                SocketClient.Send(Message.getText());
             }
             MinecraftClient.getInstance().openScreen(null);
         });
