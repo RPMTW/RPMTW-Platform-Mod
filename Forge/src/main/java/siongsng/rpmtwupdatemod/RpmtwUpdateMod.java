@@ -3,12 +3,14 @@ package siongsng.rpmtwupdatemod;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.IExtensionPoint;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.minecraftforge.fmllegacy.network.FMLNetworkConstants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import siongsng.rpmtwupdatemod.CosmicChat.GetMessage;
@@ -58,6 +60,9 @@ public class RpmtwUpdateMod {
                 LOGGER.error("檢測權杖時發生未知錯誤：" + e);
             }
         }
+        ModLoadingContext.get().registerExtensionPoint(IExtensionPoint.DisplayTest.class, () ->
+                new IExtensionPoint.DisplayTest(() -> FMLNetworkConstants.IGNORESERVERONLY, (remote, isServer) -> true));
+
     }
 
     public void init(final FMLClientSetupEvent e) {
