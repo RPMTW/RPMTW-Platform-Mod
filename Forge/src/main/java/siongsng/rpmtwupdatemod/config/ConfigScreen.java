@@ -8,6 +8,8 @@ import net.minecraft.client.gui.widget.list.OptionsRowList;
 import net.minecraft.client.settings.BooleanOption;
 import net.minecraft.client.settings.SliderPercentageOption;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraftforge.fml.ExtensionPoint;
+import net.minecraftforge.fml.ModLoadingContext;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
@@ -118,5 +120,12 @@ public final class ConfigScreen extends Screen {
     public void onClose() {
         Config.save(); // 儲存模組設定
         super.onClose(); //關閉此Gui
+    }
+
+    public static void registerConfigScreen() {
+        ModLoadingContext.get().registerExtensionPoint( //註冊組態螢幕至Forge模組設定
+                ExtensionPoint.CONFIGGUIFACTORY,
+                () -> (mc, screen) -> new ConfigScreen()
+        );
     }
 }
