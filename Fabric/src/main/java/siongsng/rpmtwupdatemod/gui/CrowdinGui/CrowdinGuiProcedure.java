@@ -28,7 +28,7 @@ public class CrowdinGuiProcedure {
             HttpUriRequest request = RequestBuilder.get()
                     .setUri("https://api.crowdin.com/api/v2/projects/442446/strings?filter=" + key)
                     .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
-                    .setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + RPMTWConfig.config.Token)
+                    .setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + RPMTWConfig.getConfig().Token)
                     .build();
             try (CloseableHttpResponse response = httpClient.execute(request)) {
                 responseBody = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
@@ -49,7 +49,7 @@ public class CrowdinGuiProcedure {
     public static void OpenTransactionGUI(ItemStack itemStack) {
         item = itemStack;
         SendMsg.send("請稍後，正在開啟物品翻譯界面中...");
-        if (CrowdinGuiProcedure.getText(item.getTranslationKey()) == null && RPMTWConfig.config.isCheck) {
+        if (CrowdinGuiProcedure.getText(item.getTranslationKey()) == null && RPMTWConfig.getConfig().isCheck) {
             SendMsg.send("§6由於你指定想要翻譯的物品或實體生怪蛋，不在資料庫內\n因此無法進行翻譯，想了解更多資訊請前往RPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
             return;
         }

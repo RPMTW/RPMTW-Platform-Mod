@@ -15,7 +15,7 @@ import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 public class RpmtwUpdateModClient {
     @Inject(method = "<init>", at = @At("RETURN"))
     public void init(RunArgs args, CallbackInfo ci) {
-        if (RPMTWConfig.config.isChinese) {
+        if (RPMTWConfig.getConfig().isChinese) {
             MinecraftClient.getInstance().getLanguageManager().setLanguage(new LanguageDefinition("zh_tw", "TW", "繁體中文", false));
         }
 

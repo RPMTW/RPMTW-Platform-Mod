@@ -50,7 +50,7 @@ public class SocketClient {
     	socket.on(("broadcast"), (data) -> {
            try {
                if (MinecraftClient.getInstance() == null) return;
-               if (!RPMTWConfig.config.isChat) return;
+               if (!RPMTWConfig.getConfig().isChat) return;
 
                MinecraftClient mc = MinecraftClient.getInstance();
                PlayerEntity player = mc.player;

@@ -52,7 +52,7 @@ public class ReloadPack {
 
             rm.clear();
             try {
-            	ZipUtils.removeDirFromZip(PackFile.toFile(),RPMTWConfig.config.modBlackList);
+            	ZipUtils.removeDirFromZip(PackFile.toFile(),RPMTWConfig.getConfig().modBlackList);
             } catch (Exception ioException) {
                
             }

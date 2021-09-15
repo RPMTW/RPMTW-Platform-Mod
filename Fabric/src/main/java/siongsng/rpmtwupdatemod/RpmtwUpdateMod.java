@@ -35,10 +35,10 @@ public class RpmtwUpdateMod implements ClientModInitializer {
     	SocketClient.init();
         new KeyBinding().Register(); //註冊快捷鍵
         LOGGER.info("Hello RPMTW world!");
-        if (!RPMTWConfig.config.Token.equals("")) { //如果Token不是空的
-            new TokenCheck().Check(RPMTWConfig.config.Token); //開始檢測
+        if (!RPMTWConfig.getConfig().Token.equals("")) { //如果Token不是空的
+            new TokenCheck().Check(RPMTWConfig.getConfig().Token); //開始檢測
         }
-        if (RPMTWConfig.config.isChat) {
+        if (RPMTWConfig.getConfig().isChat) {
             SocketClient.GetMessage();
         }
     }

@@ -39,8 +39,8 @@ public class KeyBinding {
     public void Events() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (cosmic_chat_send.wasPressed()) { //開啟宇宙通訊介面
-                if (!RPMTWConfig.config.isChat) return;
-                if (RPMTWConfig.config.isEULA) {
+                if (!RPMTWConfig.getConfig().isChat) return;
+                if (RPMTWConfig.getConfig().isEULA) {
                     MinecraftClient.getInstance().openScreen(new Screen(new CosmicChat()));
                 } else {
                     MinecraftClient.getInstance().openScreen(new Screen(new EULA()));
@@ -50,12 +50,12 @@ public class KeyBinding {
                 MinecraftClient.getInstance().openScreen(AutoConfig.getConfigScreen(ConfigScreen.class, MinecraftClient.getInstance().currentScreen).get());
             }
             while (crowdin.wasPressed()) { //開啟物品翻譯界面
-                if (!RPMTWConfig.config.crowdin) return;
+                if (!RPMTWConfig.getConfig().crowdin) return;
                 assert client.player != null;
                 Item item = client.player.getMainHandStack().getItem(); //取得手上拿的物品
                 String item_key = item.getTranslationKey(); //物品的命名空間
 
-                if (!RPMTWConfig.config.isCheck) {
+                if (!RPMTWConfig.getConfig().isCheck) {
                     MinecraftClient.getInstance().openScreen(new Screen(new CrowdinLogin()));
                     return;
                 } else if (item_key.equals("block.minecraft.air")) {
@@ -82,7 +82,7 @@ public class KeyBinding {
                 }
             }
             while (reloadpack.wasPressed()) { //更新翻譯包
-                if (!RPMTWConfig.config.ReloadPack) return;
+                if (!RPMTWConfig.getConfig().ReloadPack) return;
                 new ReloadPack();
             }
 

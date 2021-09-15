@@ -73,7 +73,7 @@ public class CrowdinGui extends LightweightGuiDescription {
                         "{\"stringId\":\"" + stringID + "\",\"languageId\":\"zh-TW\",\"text\": \"" + Translations.getText() + "\"}",
                         ContentType.APPLICATION_JSON);
                 HttpPost postMethod = new HttpPost("https://api.crowdin.com/api/v2/projects/442446/translations");
-                postMethod.setHeader("Authorization", "Bearer " + RPMTWConfig.config.Token);
+                postMethod.setHeader("Authorization", "Bearer " + RPMTWConfig.getConfig().Token);
                 postMethod.setEntity(requestEntity);
                 try {
                     httpClient.execute(postMethod);

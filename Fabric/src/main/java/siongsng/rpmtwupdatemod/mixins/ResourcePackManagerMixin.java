@@ -27,7 +27,7 @@ public abstract class ResourcePackManagerMixin {
 
     @Inject(method = "<init>", at = @At("TAIL"))
     private void registerLoader(CallbackInfo info) throws IOException {
-        AutoConfig.register(ConfigScreen.class, Toml4jConfigSerializer::new); //註冊Config
+       
         this.providers = new HashSet<ResourcePackProvider>(this.providers);
         new PackVersionCheck(this.providers);
     }

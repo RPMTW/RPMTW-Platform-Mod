@@ -25,7 +25,7 @@ public class PackVersionCheck {
         try {
         	File fi = PackFile.toFile();
             FileUtils.copyURLToFile(new URL(RpmtwUpdateMod.PackDownloadUrl), fi); //下載資源包檔案
-            ZipUtils.removeDirFromZip(fi,RPMTWConfig.config.modBlackList);
+            ZipUtils.removeDirFromZip(fi,RPMTWConfig.getConfig().modBlackList);
             Class.forName("siongsng.rpmtwupdatemod.packs.LoadPack").getMethod("init", Set.class).invoke(null, providers);
         } catch (Exception e) {
             RpmtwUpdateMod.LOGGER.error("發生未知錯誤: " , e);
