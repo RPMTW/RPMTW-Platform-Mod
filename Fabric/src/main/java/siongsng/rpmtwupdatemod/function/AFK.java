@@ -3,6 +3,7 @@ package siongsng.rpmtwupdatemod.function;
 
 import me.shedaniel.autoconfig.AutoConfig;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
+import siongsng.rpmtwupdatemod.packs.PackManeger;
 
 public class AFK {
     public static long afkTime = 0;
@@ -18,7 +19,7 @@ public class AFK {
 
             if (afk && !wasAfk) {
                 SendMsg.send("§6偵測到你開始掛機了! 因此開始自動檢測翻譯包版本並且做更新。");
-                new ReloadPack();
+                 PackManeger.ReloadPack();
             } else if (!afk && wasAfk) {
                 SendMsg.send("§a你不再掛機了!");
             }

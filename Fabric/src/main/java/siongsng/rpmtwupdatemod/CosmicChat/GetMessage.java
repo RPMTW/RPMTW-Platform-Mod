@@ -14,7 +14,7 @@ public class GetMessage {
         new SocketClient().getSocket().on(("broadcast"), (data) -> {
             try {
                 if (MinecraftClient.getInstance() == null) return;
-                if (!Configer.config.isChat) return;
+                if (!Configer.getConfig().isChat) return;
 
                 MinecraftClient mc = MinecraftClient.getInstance();
                 PlayerEntity player = mc.player;
