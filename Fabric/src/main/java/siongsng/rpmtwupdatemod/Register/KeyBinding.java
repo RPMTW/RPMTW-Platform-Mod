@@ -14,11 +14,11 @@ import net.minecraft.util.math.BlockPos;
 import org.lwjgl.glfw.GLFW;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
-import siongsng.rpmtwupdatemod.packs.ReloadPack;
 import siongsng.rpmtwupdatemod.function.SendMsg;
 import siongsng.rpmtwupdatemod.gui.CosmicChat;
 import siongsng.rpmtwupdatemod.gui.CrowdinGui.CrowdinGuiProcedure;
 import siongsng.rpmtwupdatemod.gui.CrowdinLogin.CrowdinLogin;
+import siongsng.rpmtwupdatemod.packs.PackManeger;
 import siongsng.rpmtwupdatemod.gui.EULA;
 import siongsng.rpmtwupdatemod.gui.Screen;
 
@@ -27,7 +27,8 @@ public class KeyBinding {
     public static final net.minecraft.client.option.KeyBinding reloadpack = new net.minecraft.client.option.KeyBinding("key.rpmtw_update_mod.reloadpack", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "key.categories.rpmtw");
     public static final net.minecraft.client.option.KeyBinding open_config = new net.minecraft.client.option.KeyBinding("key.rpmtw_update_mod.open_config", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_O, "key.categories.rpmtw");
     public static final net.minecraft.client.option.KeyBinding cosmic_chat_send = new net.minecraft.client.option.KeyBinding("key.rpmtw_update_mod.cosmic_chat_send", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_G, "key.categories.rpmtw");
-
+    public static boolean updateLock = false;
+    
     public void Register() {
         KeyBindingHelper.registerKeyBinding(crowdin);
         KeyBindingHelper.registerKeyBinding(reloadpack);
@@ -81,9 +82,12 @@ public class KeyBinding {
                     CrowdinGuiProcedure.OpenTransactionGUI(item.getDefaultStack());
                 }
             }
-            while (reloadpack.wasPressed()) { //更新翻譯包
-                if (!RPMTWConfig.getConfig().ReloadPack) return;
-                new ReloadPack();
+            while (reloadpack.wasPressed() && !updateLock) { //更新翻譯包
+                if (!RPMTWConfig.getConfig().ReloadPack) 
+                	return;
+                
+                updateLock = true;
+            	PackManeger.ReloadPack();
             }
 
         });

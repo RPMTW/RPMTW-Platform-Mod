@@ -10,10 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import me.shedaniel.autoconfig.AutoConfig;
-import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
-import siongsng.rpmtwupdatemod.config.ConfigScreen;
-import siongsng.rpmtwupdatemod.packs.PackVersionCheck;
+import siongsng.rpmtwupdatemod.packs.PackManeger;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -29,6 +26,6 @@ public abstract class ResourcePackManagerMixin {
     private void registerLoader(CallbackInfo info) throws IOException {
        
         this.providers = new HashSet<ResourcePackProvider>(this.providers);
-        new PackVersionCheck(this.providers);
+        PackManeger.PackVersionCheck(this.providers);
     }
 }
