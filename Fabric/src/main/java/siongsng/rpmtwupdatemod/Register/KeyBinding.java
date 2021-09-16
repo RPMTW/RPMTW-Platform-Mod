@@ -48,9 +48,7 @@ public class KeyBinding {
                 }
             }
             while (open_config.wasPressed()) {
-            	try(MinecraftClient mc = MinecraftClient.getInstance()){
-            		 MinecraftClient.getInstance().openScreen(AutoConfig.getConfigScreen(ConfigScreen.class, mc.currentScreen).get());
-            	}
+                MinecraftClient.getInstance().openScreen(AutoConfig.getConfigScreen(ConfigScreen.class, MinecraftClient.getInstance().currentScreen).get());
             }
             while (crowdin.wasPressed()) { //開啟物品翻譯界面
                 if (!RPMTWConfig.getConfig().crowdin) return;

@@ -6,11 +6,8 @@ import net.minecraft.text.Text;
 
 public class SendMsg {
     public static void send(String msg) {
-    	try(MinecraftClient mc = MinecraftClient.getInstance()){
-    		PlayerEntity p = mc.player;
-    		assert p != null;
-    	    p.sendMessage(Text.of(msg), false);
-    	}
-
+        PlayerEntity p = MinecraftClient.getInstance().player;
+        assert p != null;
+        p.sendMessage(Text.of(msg), false);
     }
 }
