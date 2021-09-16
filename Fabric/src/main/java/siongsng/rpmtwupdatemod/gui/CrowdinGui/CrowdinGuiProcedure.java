@@ -48,14 +48,11 @@ public class CrowdinGuiProcedure {
 
     public static void OpenTransactionGUI(ItemStack itemStack) {
         item = itemStack;
-        Thread thread = new Thread(() -> {
-        	SendMsg.send("請稍後，正在開啟物品翻譯界面中...");
-            if (CrowdinGuiProcedure.getText(item.getTranslationKey()) == null && RPMTWConfig.getConfig().isCheck) {
-                SendMsg.send("§6由於你指定想要翻譯的物品或實體生怪蛋，不在資料庫內\n因此無法進行翻譯，想了解更多資訊請前往RPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
-                return;
-            }
-            MinecraftClient.getInstance().openScreen(new Screen(new CrowdinGui()));
-        });
-        thread.start();
+        SendMsg.send("請稍後，正在開啟物品翻譯界面中...");
+        if (CrowdinGuiProcedure.getText(item.getTranslationKey()) == null && RPMTWConfig.getConfig().isCheck) {
+            SendMsg.send("§6由於你指定想要翻譯的物品或實體生怪蛋，不在資料庫內\n因此無法進行翻譯，想了解更多資訊請前往RPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
+            return;
+        }
+        MinecraftClient.getInstance().openScreen(new Screen(new CrowdinGui()));
     }
 }
