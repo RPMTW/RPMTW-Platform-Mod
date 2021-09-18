@@ -3,7 +3,6 @@ package siongsng.rpmtwupdatemod.CosmicChat;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Session;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
 import siongsng.rpmtwupdatemod.config.Configer;
@@ -13,10 +12,10 @@ public class GetMessage {
     public GetMessage() {
         new SocketClient().getSocket().on(("broadcast"), (data) -> {
             try {
-                if (Minecraft.getInstance().player == null) return;
+            	Minecraft mc = Minecraft.getInstance();
+                if (mc.player == null) return;
                 if (!Configer.isChat.get()) return;
 
-                Minecraft mc = Minecraft.getInstance();
                 Session session = mc.getSession();
 
                 JsonParser jp = new JsonParser();

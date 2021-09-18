@@ -21,8 +21,8 @@ import siongsng.rpmtwupdatemod.config.Configer;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.crowdin.key;
 import siongsng.rpmtwupdatemod.function.AFK;
-import siongsng.rpmtwupdatemod.function.PackVersionCheck;
 import siongsng.rpmtwupdatemod.notice.notice;
+import siongsng.rpmtwupdatemod.packs.PacksManerger;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -51,9 +51,10 @@ public class RpmtwUpdateMod {
             LOGGER.error("你目前處於無網路狀態，因此無法使用 RPMTW 翻譯自動更新模組，請連結網路後重新啟動此模組。");
         }
         if (FMLEnvironment.dist == Dist.CLIENT && Configer.isChinese.get()) {
-            Minecraft.getInstance().gameSettings.language = "zh_tw"; //將語言設定為繁體中文
+        	Minecraft mc =  Minecraft.getInstance();
+        	mc.gameSettings.language = "zh_tw"; //將語言設定為繁體中文
         }
-        new PackVersionCheck(); //資源包版本檢查
+        PacksManerger.PackVersionCheck(); //資源包版本檢查
         try {
             new TokenCheck().Check(Configer.Token.get()); //開始檢測權杖
         } catch (IOException e) {
