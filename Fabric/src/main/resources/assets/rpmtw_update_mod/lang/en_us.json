@@ -5,6 +5,7 @@
   "key.rpmtw_update_mod.report_translation": "Report translation error",
   "key.rpmtw_update_mod.open_config": "開啟RPMTW設定",
   "key.rpmtw_update_mod.cosmic_chat_send": "發送宇宙通訊訊息",
+  "key.rpmtw_update_mod.translate": "使用機器翻譯",
   "text.autoconfig.rpmtw_update_mod.title": "RPMTW自動繁化模組 設定選單",
   "text.autoconfig.rpmtw_update_mod.option.crowdin": "開啟物品翻譯界面",
   "text.autoconfig.rpmtw_update_mod.option.notice": "進入世界時自動發送公告",

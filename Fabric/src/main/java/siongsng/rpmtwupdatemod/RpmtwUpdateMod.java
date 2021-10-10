@@ -16,6 +16,8 @@ import siongsng.rpmtwupdatemod.config.Configer;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.crowdin.key;
 import siongsng.rpmtwupdatemod.function.SendMsg;
+import siongsng.rpmtwupdatemod.translation.Handler;
+import siongsng.rpmtwupdatemod.translation.TranslationManager;
 
 import java.util.Locale;
 import java.util.Objects;
@@ -62,6 +64,8 @@ public class RpmtwUpdateMod implements ClientModInitializer {
         if (Configer.getConfig().isChat) {
             new GetMessage();
         }
+        Handler.init();
+        TranslationManager.getInstance().init();
     }
 
 }

@@ -19,6 +19,7 @@ public class key {
     private static final KeyBinding reloadpack = new KeyBinding("key.rpmtw_update_mod.reloadpack", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "key.categories.rpmtw");
     private static final KeyBinding open_config = new KeyBinding("key.rpmtw_update_mod.open_config", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_O, "key.categories.rpmtw");
     private static final KeyBinding cosmic_chat_send = new KeyBinding("key.rpmtw_update_mod.cosmic_chat_send", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_G, "key.categories.rpmtw");
+    public static final KeyBinding translate = new KeyBinding("key.rpmtw_update_mod.translate", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_N, "key.categories.rpmtw");
     public static boolean updateLock = false;
     static ConfigScreen config = AutoConfig.getConfigHolder(ConfigScreen.class).getConfig();
 

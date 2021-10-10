@@ -4,7 +4,9 @@
   "package": "siongsng.rpmtwupdatemod.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "ClientLanguageMixin",
     "InputMixin",
+    "LanguageMixin",
     "MixinBookContents",
     "PlayJoinMixin",
     "ResourcePackManagerMixin",
