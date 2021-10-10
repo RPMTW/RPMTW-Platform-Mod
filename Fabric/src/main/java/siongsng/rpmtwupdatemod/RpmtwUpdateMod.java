@@ -1,17 +1,21 @@
 package siongsng.rpmtwupdatemod;
 
-import me.shedaniel.autoconfig.AutoConfig;
-import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
+import net.minecraft.resource.ResourceManager;
+import net.minecraft.resource.ResourceType;
+import net.minecraft.util.Identifier;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import siongsng.rpmtwupdatemod.CosmicChat.GetMessage;
-import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.config.Configer;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.crowdin.key;
+import siongsng.rpmtwupdatemod.function.SendMsg;
 
 import java.util.Locale;
 import java.util.Objects;
@@ -28,17 +32,34 @@ public class RpmtwUpdateMod implements ClientModInitializer {
         if (!ping.isConnect()) {
             LOGGER.error("你目前處於無網路狀態，因此無法使用 RPMTW 翻譯自動更新模組，請連結網路後重新啟動此模組。");
         }
-        AutoConfig.register(ConfigScreen.class, Toml4jConfigSerializer::new);
+
     }
 
     @Override
     public void onInitializeClient() {
         key.onInitializeClient(); //註冊快捷鍵
+        
+        ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
+            @Override
+            public Identifier getFabricId() {
+                return new Identifier(Mod_ID, "rpmtw1.16");
+            }
+
+			@Override
+			public void reload(ResourceManager manager) {
+				if(key.updateLock) {
+					key.updateLock = false;
+					SendMsg.send("§b處理完成。");	
+				}	
+			}
+        });
+        
         LOGGER.info("Hello RPMTW world!");
-        if (!Configer.config.Token.equals("")) { //如果Token不是空的
-            new TokenCheck().Check(Configer.config.Token); //開始檢測
+
+        if (!Configer.getConfig().Token.equals("")) { //如果Token不是空的
+            new TokenCheck().Check(Configer.getConfig().Token); //開始檢測
         }
-        if (Configer.config.isChat) {
+        if (Configer.getConfig().isChat) {
             new GetMessage();
         }
     }

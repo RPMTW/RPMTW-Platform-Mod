@@ -5,6 +5,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import siongsng.rpmtwupdatemod.config.Configer;
+import siongsng.rpmtwupdatemod.packs.PacksManerger;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -63,7 +64,7 @@ public class AFK {
                     if (info.getValue().isAfk() && !info.getValue().isAfk) {
                         info.getValue().isAfk = true;
                         SendMsg.send("§6偵測到你開始掛機了! 因此開始自動檢測翻譯包版本並且做更新。");
-                        new ReloadPack();
+                        PacksManerger.ReloadPack();
                     } else {
                         info.getValue().afkTime++;
                     }

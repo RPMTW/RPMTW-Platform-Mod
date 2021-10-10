@@ -1,10 +1,14 @@
 package siongsng.rpmtwupdatemod.config;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public class Configer {
     public static ForgeConfigSpec.BooleanValue rpmtw_crowdin, rpmtw_reloadpack, notice, afk, isCheck, isChinese, isChat, isEULA;
     public static ForgeConfigSpec.IntValue afkTime;
+    public static ForgeConfigSpec.ConfigValue<List<String>> modBlackList;
     public static ForgeConfigSpec.ConfigValue<String> Token;
 
     public static void init(ForgeConfigSpec.Builder client) {
@@ -40,5 +44,8 @@ public class Configer {
         Token = client
                 .comment("Crowdin Token (翻譯平台登入權杖)")
                 .define("rpmtw.token", "");
+        modBlackList = client
+                .comment("模組翻譯黑名單，可輸入資料夾 或 檔案名稱(若檔名未指定資料夾，將會排除所有同名檔案)。")
+                .define("rpmtw.modBlackList", new ArrayList<String>());
     }
 }

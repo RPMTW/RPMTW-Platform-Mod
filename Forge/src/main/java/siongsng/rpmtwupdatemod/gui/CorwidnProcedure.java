@@ -21,8 +21,9 @@ public class CorwidnProcedure {
     public static String getText() {
         String Text;
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
+        	Minecraft mc = Minecraft.getInstance();
             HttpUriRequest request = RequestBuilder.get()
-                    .setUri("https://api.crowdin.com/api/v2/projects/442446/strings?filter=" + Minecraft.getInstance().player.getHeldItemMainhand().getItem().getTranslationKey())
+                    .setUri("https://api.crowdin.com/api/v2/projects/442446/strings?filter=" + mc.player.getHeldItemMainhand().getItem().getTranslationKey())
                     .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
                     .setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + Configer.Token.get())
                     .build();

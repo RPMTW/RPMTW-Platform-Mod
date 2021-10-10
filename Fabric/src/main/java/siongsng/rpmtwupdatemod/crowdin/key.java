@@ -10,30 +10,30 @@ import net.minecraft.item.Item;
 import org.lwjgl.glfw.GLFW;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.config.Configer;
-import siongsng.rpmtwupdatemod.function.ReloadPack;
 import siongsng.rpmtwupdatemod.function.SendMsg;
 import siongsng.rpmtwupdatemod.gui.*;
+import siongsng.rpmtwupdatemod.packs.PackManeger;
 
 public class key {
     private static final KeyBinding crowdin = new KeyBinding("key.rpmtw_update_mod.crowdin", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "key.categories.rpmtw");
     private static final KeyBinding reloadpack = new KeyBinding("key.rpmtw_update_mod.reloadpack", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "key.categories.rpmtw");
     private static final KeyBinding open_config = new KeyBinding("key.rpmtw_update_mod.open_config", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_O, "key.categories.rpmtw");
     private static final KeyBinding cosmic_chat_send = new KeyBinding("key.rpmtw_update_mod.cosmic_chat_send", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_G, "key.categories.rpmtw");
-
+    public static boolean updateLock = false;
     static ConfigScreen config = AutoConfig.getConfigHolder(ConfigScreen.class).getConfig();
 
     public static void onInitializeClient() {
         KeyBindingHelper.registerKeyBinding(crowdin);
         KeyBindingHelper.registerKeyBinding(reloadpack);
         KeyBindingHelper.registerKeyBinding(open_config);
-        if (Configer.config.isChat) {
+        if (Configer.getConfig().isChat) {
             KeyBindingHelper.registerKeyBinding(cosmic_chat_send);
         }
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (cosmic_chat_send.wasPressed()) {
-                if (!Configer.config.isChat) return;
-                if (Configer.config.isEULA) {
+                if (!Configer.getConfig().isChat) return;
+                if (Configer.getConfig().isEULA) {
                     MinecraftClient.getInstance().openScreen(new Screen(new CosmicChat()));
                 } else {
                     MinecraftClient.getInstance().openScreen(new Screen(new EULA()));
@@ -67,8 +67,9 @@ public class key {
                 }
             }
             if (config.ReloadPack) {
-                while (reloadpack.wasPressed()) {
-                    new ReloadPack();
+                while (reloadpack.wasPressed()&& !updateLock) {
+                	updateLock = true;
+                    PackManeger.ReloadPack();
                 }
             }
         });

@@ -69,6 +69,7 @@ dependencies {
     shade('commons-beanutils:commons-beanutils:1.9.4')
     shade('commons-io:commons-io:2.9.0')
     shade implementation('io.socket:socket.io-client:2.0.1')
+    shade implementation('net.lingala.zip4j:zip4j:2.9.0')
     shade('io.socket:engine.io-client:2.0.0')
     shade('org.json:json:20090211')
     shade('com.squareup.okhttp3:okhttp:3.12.12')

@@ -24,7 +24,7 @@ public class CrowdinGuiProcedure {
             HttpUriRequest request = RequestBuilder.get()
                     .setUri("https://api.crowdin.com/api/v2/projects/442446/strings?filter=" + MinecraftClient.getInstance().player.getMainHandStack().getItem().getTranslationKey())
                     .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
-                    .setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + Configer.config.Token)
+                    .setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + Configer.getConfig().Token)
                     .build();
             try (CloseableHttpResponse response = httpClient.execute(request)) {
                 responseBody = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);

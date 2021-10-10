@@ -119,3 +119,15 @@ fabric.properties
 Forge建置完成檔案
 
 Fabric建置完成檔案
+Forge/.classpath
+Forge/.project
+Forge/.settings/
+Fabric/bin/
+Forge/bin/
+Fabric/.settings/
+Fabric/.vscode/
+*.classpath
+*.project
+Forge/gradle/.settings/
+Fabric/Fabric_client.launch
+Fabric/Fabric_server.launch
