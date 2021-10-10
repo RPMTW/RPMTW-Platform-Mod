@@ -14,11 +14,11 @@ import net.minecraft.util.math.BlockPos;
 import org.lwjgl.glfw.GLFW;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
-import siongsng.rpmtwupdatemod.packs.ReloadPack;
 import siongsng.rpmtwupdatemod.function.SendMsg;
 import siongsng.rpmtwupdatemod.gui.CosmicChat;
 import siongsng.rpmtwupdatemod.gui.CrowdinGui.CrowdinGuiProcedure;
 import siongsng.rpmtwupdatemod.gui.CrowdinLogin.CrowdinLogin;
+import siongsng.rpmtwupdatemod.packs.PackManeger;
 import siongsng.rpmtwupdatemod.gui.EULA;
 import siongsng.rpmtwupdatemod.gui.Screen;
 
@@ -27,7 +27,8 @@ public class KeyBinding {
     public static final net.minecraft.client.option.KeyBinding reloadpack = new net.minecraft.client.option.KeyBinding("key.rpmtw_update_mod.reloadpack", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "key.categories.rpmtw");
     public static final net.minecraft.client.option.KeyBinding open_config = new net.minecraft.client.option.KeyBinding("key.rpmtw_update_mod.open_config", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_O, "key.categories.rpmtw");
     public static final net.minecraft.client.option.KeyBinding cosmic_chat_send = new net.minecraft.client.option.KeyBinding("key.rpmtw_update_mod.cosmic_chat_send", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_G, "key.categories.rpmtw");
-
+    public static boolean updateLock = false;
+    
     public void Register() {
         KeyBindingHelper.registerKeyBinding(crowdin);
         KeyBindingHelper.registerKeyBinding(reloadpack);
@@ -39,23 +40,24 @@ public class KeyBinding {
     public void Events() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (cosmic_chat_send.wasPressed()) { //開啟宇宙通訊介面
-                if (!RPMTWConfig.config.isChat) return;
-                if (RPMTWConfig.config.isEULA) {
+                if (!RPMTWConfig.getConfig().isChat) return;
+                if (RPMTWConfig.getConfig().isEULA) {
                     MinecraftClient.getInstance().openScreen(new Screen(new CosmicChat()));
                 } else {
                     MinecraftClient.getInstance().openScreen(new Screen(new EULA()));
                 }
             }
             while (open_config.wasPressed()) {
-                MinecraftClient.getInstance().openScreen(AutoConfig.getConfigScreen(ConfigScreen.class, MinecraftClient.getInstance().currentScreen).get());
+            	MinecraftClient mc = MinecraftClient.getInstance();
+            	mc.openScreen(AutoConfig.getConfigScreen(ConfigScreen.class, mc.currentScreen).get());
             }
             while (crowdin.wasPressed()) { //開啟物品翻譯界面
-                if (!RPMTWConfig.config.crowdin) return;
+                if (!RPMTWConfig.getConfig().crowdin) return;
                 assert client.player != null;
                 Item item = client.player.getMainHandStack().getItem(); //取得手上拿的物品
                 String item_key = item.getTranslationKey(); //物品的命名空間
 
-                if (!RPMTWConfig.config.isCheck) {
+                if (!RPMTWConfig.getConfig().isCheck) {
                     MinecraftClient.getInstance().openScreen(new Screen(new CrowdinLogin()));
                     return;
                 } else if (item_key.equals("block.minecraft.air")) {
@@ -81,9 +83,12 @@ public class KeyBinding {
                     CrowdinGuiProcedure.OpenTransactionGUI(item.getDefaultStack());
                 }
             }
-            while (reloadpack.wasPressed()) { //更新翻譯包
-                if (!RPMTWConfig.config.ReloadPack) return;
-                new ReloadPack();
+            while (reloadpack.wasPressed() && !updateLock) { //更新翻譯包
+                if (!RPMTWConfig.getConfig().ReloadPack) 
+                	return;
+                
+                updateLock = true;
+            	PackManeger.ReloadPack();
             }
 
         });

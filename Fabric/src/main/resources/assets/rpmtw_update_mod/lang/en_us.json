@@ -11,6 +11,7 @@
   "text.autoconfig.rpmtw_update_mod.option.ReloadPack": "重新載入翻譯包",
   "text.autoconfig.rpmtw_update_mod.option.isChinese": "自動切換預設語言",
   "text.autoconfig.rpmtw_update_mod.option.isChat": "是否啟用宇宙通訊系統",
+  "text.autoconfig.rpmtw_update_mod.option.modBlackList": "模組翻譯黑名單",
   "gui.notice": "無法讀取公告。請查看 https://www.rpmtw.ga 取得幫助",
   "menu.rpmtw": "RPMTW settings"
 }

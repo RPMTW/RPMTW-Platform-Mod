@@ -16,7 +16,7 @@ import siongsng.rpmtwupdatemod.function.CheckModVersion;
 public class PlayJoinMixin {
     @Inject(method = "onPlayerConnect", at = @At("TAIL"), cancellable = false)
     private void playerJoin(ClientConnection connection, ServerPlayerEntity player, CallbackInfo ci) {
-        if (RPMTWConfig.config.notice) { //判斷Config
+        if (RPMTWConfig.getConfig().notice) { //判斷Config
             player.sendMessage(new TranslatableText(
                     "gui.notice"), false);
 
