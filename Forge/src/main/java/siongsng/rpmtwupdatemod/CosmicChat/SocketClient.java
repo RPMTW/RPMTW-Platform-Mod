@@ -1,6 +1,5 @@
 package siongsng.rpmtwupdatemod.CosmicChat;
 
-
 import io.socket.client.IO;
 import io.socket.client.Socket;
 import net.minecraft.client.Minecraft;
@@ -22,7 +21,7 @@ public class SocketClient {
             AuthMap.put("UUID", user.getUuid());
 
             IO.Options options = IO.Options.builder().setAuth(AuthMap).build();
-            socket = IO.socket("https://api.rpmtwchat.ga", options).connect();
+            socket = IO.socket("https://api.rpmtwchat.ga",options).connect();
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }

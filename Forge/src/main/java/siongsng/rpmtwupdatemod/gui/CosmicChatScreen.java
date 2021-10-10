@@ -24,19 +24,12 @@ public class CosmicChatScreen extends Screen {
     @Override
     protected void init() {
 
-        this.addRenderableWidget(new Button(
-                (this.width / 2 + 50),
-                (this.height / 2) + 30,
-                BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
-                new TextComponent("這是什麼?"),
+        this.addRenderableWidget(new Button((this.width / 2 + 50), (this.height / 2) + 30, BOTTOM_BUTTON_WIDTH,
+                BUTTON_HEIGHT, new TextComponent("這是什麼?"),
                 button -> Util.getPlatform().openUri("https://www.rpmtw.ga/Wiki/ModInfo#what-is-cosmic-system")));
 
-        this.addRenderableWidget(new Button(
-                (this.width - 4) / 2 - BOTTOM_BUTTON_WIDTH + 50,
-                (this.height / 2) + 30,
-                BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
-                new TextComponent("傳送"),
-                button -> {
+        this.addRenderableWidget(new Button((this.width - 4) / 2 - BOTTOM_BUTTON_WIDTH + 50, (this.height / 2) + 30,
+                BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT, new TextComponent("傳送"), button -> {
                     if (Message.getValue().equals("")) {
                         SendMsg.send("訊息不能是空的。");
                     } else {
@@ -44,14 +37,12 @@ public class CosmicChatScreen extends Screen {
                     }
                     Minecraft.getInstance().setScreen(null);
                 }));
-        this.addRenderableWidget(new Button(
-                (this.width - 100) / 2 - BOTTOM_BUTTON_WIDTH,
-                (this.height / 2) + 30,
-                BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
-                new TextComponent("取消"),
-                button -> Minecraft.getInstance().setScreen(null)));
+        this.addRenderableWidget(
+                new Button((this.width - 100) / 2 - BOTTOM_BUTTON_WIDTH, (this.height / 2) + 30, BOTTOM_BUTTON_WIDTH,
+                        BUTTON_HEIGHT, new TextComponent("取消"), button -> Minecraft.getInstance().setScreen(null)));
 
-        Message = new EditBox(this.font, (this.width / 2) - 95, (this.height / 2) - 10, 200, 20, new TextComponent("請輸入譯文")) {
+        Message = new EditBox(this.font, (this.width / 2) - 95, (this.height / 2) - 10, 200, 20,
+                new TextComponent("請輸入譯文")) {
             {
                 setSuggestion("請輸入要發送的訊息");
             }
@@ -79,24 +70,23 @@ public class CosmicChatScreen extends Screen {
     }
 
     @Override
-    public void render(@Nonnull PoseStack matrixStack,
-                       int mouseX, int mouseY, float partialTicks) {
+    public void render(@Nonnull PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(matrixStack);
 
         int height = (this.height / 2);
         String Screen = "宇宙通訊系統-發送訊息介面";
 
-        this.font.draw(matrixStack, Screen, this.width / (float) 2 - this.font.width(Screen) / (float) 2, height - 65, 0xFF5555);
+        this.font.draw(matrixStack, Screen, this.width / (float) 2 - this.font.width(Screen) / (float) 2, height - 65,
+                0xFF5555);
 
-        Message.render(matrixStack, mouseX, mouseY, partialTicks);//渲染文字框
+        Message.render(matrixStack, mouseX, mouseY, partialTicks);// 渲染文字框
 
-        drawCenteredString(matrixStack, this.font, this.title.getString(),
-                this.width / 2, 8, 0xFFFFFF);
+        drawCenteredString(matrixStack, this.font, this.title.getString(), this.width / 2, 8, 0xFFFFFF);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
     }
 
     @Override
     public void removed() {
-        super.removed(); //關閉此Gui
+        super.removed(); // 關閉此Gui
     }
 }

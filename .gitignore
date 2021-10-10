@@ -119,3 +119,12 @@ fabric.properties
 Forge建置完成檔案
 
 Fabric建置完成檔案
+Forge/bin/
+Fabric/bin
+Fabric/.classpath
+.gitignore
+Fabric/.project
+Fabric/.settings/org.eclipse.buildship.core.prefs
+Forge/.project
+Forge/.classpath
+Forge/.settings/org.eclipse.buildship.core.prefs
