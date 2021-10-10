@@ -53,6 +53,7 @@ dependencies {
     include('org.json:json:20210307')
     include('com.squareup.okhttp3:okhttp:4.9.2')
     include('com.squareup.okio:okio:2.10.0')
+    modImplementation include("net.fabricmc:fabric-language-kotlin:1.6.5+kotlin.1.5.31")
 
     modImplementation include("me.shedaniel.cloth:cloth-config-fabric:6.0.39") {
         exclude(group: "net.fabricmc.fabric-api")
