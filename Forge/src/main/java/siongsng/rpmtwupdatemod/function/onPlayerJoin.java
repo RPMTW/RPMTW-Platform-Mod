@@ -6,7 +6,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-public class OnPlayerJoin {
+public class onPlayerJoin {
     @SubscribeEvent
     public void send(PlayerEvent.PlayerLoggedInEvent e) {
         Entity p = e.getPlayer();

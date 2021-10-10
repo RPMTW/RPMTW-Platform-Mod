@@ -27,10 +27,4 @@ public class json {
         JsonParser jp = new JsonParser();
         return (JsonObject) jp.parse(json.toString());
     }
-
-    public static Object ver(String url) {
-        JsonParser jp = new JsonParser();
-        JsonObject object = (JsonObject) jp.parse(get(url).toString());
-        return object.get("tag_name").getAsString();
-    }
 }

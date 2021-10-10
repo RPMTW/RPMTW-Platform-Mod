@@ -13,7 +13,7 @@ import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.fmllegacy.network.FMLNetworkConstants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import siongsng.rpmtwupdatemod.CosmicChat.GetMessage;
+import siongsng.rpmtwupdatemod.CosmicChat.SocketClient;
 import siongsng.rpmtwupdatemod.Packs.PackVersionCheck;
 import siongsng.rpmtwupdatemod.commands.noticeCMD;
 import siongsng.rpmtwupdatemod.config.Config;
@@ -21,7 +21,7 @@ import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.crowdin.key;
-import siongsng.rpmtwupdatemod.function.OnPlayerJoin;
+import siongsng.rpmtwupdatemod.function.onPlayerJoin;
 import siongsng.rpmtwupdatemod.function.ping;
 
 import java.io.IOException;
@@ -39,7 +39,8 @@ public class RpmtwUpdateMod {
 
     public RpmtwUpdateMod() {
 
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::init); // 註冊監聽事件
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::init); // 註冊初始化事件
+
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT, "rpmtw_update_mod-client.toml"); // 註冊組態
 
         if (FMLEnvironment.dist == Dist.CLIENT) {
@@ -49,7 +50,7 @@ public class RpmtwUpdateMod {
             if (!ping.isConnect()) { // 判斷是否有網路
                 LOGGER.error("你目前處於無網路狀態，因此無法使用 RPMTW 翻譯自動更新模組，請連結網路後重新啟動此模組。");
             }
-            if (FMLEnvironment.dist == Dist.CLIENT && RPMTWConfig.isChinese.get()) {
+            if (RPMTWConfig.isChinese.get()) {
                 Minecraft.getInstance().options.languageCode = "zh_tw"; // 將語言設定為繁體中文
             }
             new PackVersionCheck(); // 資源包版本檢查
@@ -69,12 +70,11 @@ public class RpmtwUpdateMod {
         MinecraftForge.EVENT_BUS.register(new key()); // 快捷鍵註冊
         MinecraftForge.EVENT_BUS.register(new noticeCMD()); // noticeCMD指令註冊
         if (RPMTWConfig.notice.get()) { // 判斷Config
-            MinecraftForge.EVENT_BUS.register(new OnPlayerJoin()); // 玩家加入事件註冊
+            MinecraftForge.EVENT_BUS.register(new onPlayerJoin()); // 玩家加入事件註冊
         }
         ConfigScreen.registerConfigScreen();
         if (RPMTWConfig.isChat.get()) {
-            new GetMessage();
+            SocketClient.GetMessage();
         }
     }
-
 }
