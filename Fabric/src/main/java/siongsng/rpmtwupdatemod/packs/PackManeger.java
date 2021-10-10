@@ -20,7 +20,7 @@ import net.minecraft.resource.ReloadableResourceManagerImpl;
 import net.minecraft.resource.ResourcePackProvider;
 import net.minecraft.util.Util;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
-import siongsng.rpmtwupdatemod.Register.KeyBinding;
+import siongsng.rpmtwupdatemod.Register.RPMKeyBinding;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.function.SendMsg;
 
@@ -57,8 +57,8 @@ public class PackManeger  {
                 ZipUtils.removeDirFromZip(packFile, RPMTWConfig.getConfig().modBlackList);
                 reload();
                 reloadLanguage().whenComplete((v,t)->{
-                	if(KeyBinding.updateLock) {
-    					KeyBinding.updateLock = false;
+                	if(RPMKeyBinding.updateLock) {
+    					RPMKeyBinding.updateLock = false;
     					SendMsg.send("§b處理完成。");	
     				}	
                 });

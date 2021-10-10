@@ -7,10 +7,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import siongsng.rpmtwupdatemod.CosmicChat.SocketClient;
 import siongsng.rpmtwupdatemod.Register.EventRegister;
-import siongsng.rpmtwupdatemod.Register.KeyBinding;
+import siongsng.rpmtwupdatemod.Register.RPMKeyBinding;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.gui.ping;
+import siongsng.rpmtwupdatemod.translation.Handler;
+import siongsng.rpmtwupdatemod.translation.TranslationManager;
 
 import java.util.Locale;
 import java.util.Objects;
@@ -33,7 +35,7 @@ public class RpmtwUpdateMod implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
     	SocketClient.init();
-        new KeyBinding().Register(); //註冊快捷鍵
+        new RPMKeyBinding().Register(); //註冊快捷鍵
         LOGGER.info("Hello RPMTW world!");
         if (!RPMTWConfig.getConfig().Token.equals("")) { //如果Token不是空的
             new TokenCheck().Check(RPMTWConfig.getConfig().Token); //開始檢測
@@ -41,6 +43,8 @@ public class RpmtwUpdateMod implements ClientModInitializer {
         if (RPMTWConfig.getConfig().isChat) {
             SocketClient.GetMessage();
         }
+        TranslationManager.getInstance().init();
+        Handler.init();
     }
 
 }

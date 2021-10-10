@@ -115,14 +115,17 @@ public class SocketClient {
 
             player.sendMessage(new LiteralText("訊息發送中..."), true);
             socket.emit("message", Data.toString());
+
         } catch (Exception err) {
             RpmtwUpdateMod.LOGGER.warn("發送宇宙通訊訊息時發生未知錯誤，原因: " + err);
         }
     }
 
     public Socket getSocket() {
-        if (socket == null)
+        if (socket == null) {
             init();
+        }
+
 
         return socket;
     }
