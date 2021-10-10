@@ -54,7 +54,7 @@ public class CrowdinGui extends LightweightGuiDescription {
         gui.add(Done, (int) 9.5, 9, 4, 2);
         gui.add(Crowdin, 15, 9, 4, 2);
 
-        Close.setOnClick(() -> MinecraftClient.getInstance().openScreen(null));
+        Close.setOnClick(() -> MinecraftClient.getInstance().setScreen(null));
 
         WTextField Translations = new WTextField(new LiteralText("請輸入譯文"));
         gui.add(Translations, (int) 9.5, 7, 6, 2);
@@ -65,7 +65,7 @@ public class CrowdinGui extends LightweightGuiDescription {
                 return;
             } else {
                 SendMsg.send("§b已成功提交翻譯，將 §e" + Text + " §b翻譯為 §e" + Translations.getText() + "§b 。(約十分鐘後將會將內容套用變更至翻譯包)");
-                MinecraftClient.getInstance().openScreen(null);
+                MinecraftClient.getInstance().setScreen(null);
             }
             Thread thread = new Thread(() -> {
                 CloseableHttpClient httpClient = HttpClients.createDefault();

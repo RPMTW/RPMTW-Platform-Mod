@@ -38,12 +38,12 @@ public class EULA extends LightweightGuiDescription {
         gui.add(Info, 6, 9, 4, 2);
         gui.add(OK, 11, 9, 5, 2);
 
-        Cancel.setOnClick(() -> MinecraftClient.getInstance().openScreen(null));
+        Cancel.setOnClick(() -> MinecraftClient.getInstance().setScreen(null));
         Info.setOnClick(() -> Util.getOperatingSystem().open("https://www.rpmtw.ga/Wiki/ModInfo#what-is-cosmic-system"));
         OK.setOnClick(() -> {
             RPMTWConfig.getConfig().isEULA = true;
             AutoConfig.getConfigHolder(ConfigScreen.class).save(); //儲存Config
-            MinecraftClient.getInstance().openScreen(new Screen(new CosmicChat()));
+            MinecraftClient.getInstance().setScreen(new Screen(new CosmicChat()));
         });
         gui.validate(this);
     }

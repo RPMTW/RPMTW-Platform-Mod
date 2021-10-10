@@ -38,15 +38,15 @@ public class CrowdinLogin extends LightweightGuiDescription {
         Token.setMaxLength(200);
         gui.add(Token, 3, (int) 4.5, 10, 2);
 
-        Close.setOnClick(() -> MinecraftClient.getInstance().openScreen(null));
+        Close.setOnClick(() -> MinecraftClient.getInstance().setScreen(null));
         Info.setOnClick(() -> Util.getOperatingSystem().open("https://www.rpmtw.ga/Wiki/RPMTW-Update-Mod-Related#h.x230ggwx63l4"));
         Done.setOnClick(() -> {
             if (Token.getText().equals("")) {
                 SendMsg.send("Crowdin登入權杖不能是空的");
-                MinecraftClient.getInstance().openScreen(null);
+                MinecraftClient.getInstance().setScreen(null);
             } else {
                 SendMsg.send("正在嘗試登入中...");
-                MinecraftClient.getInstance().openScreen(null);
+                MinecraftClient.getInstance().setScreen(null);
                 new TokenCheck().Check(Token.getText());
             }
         });

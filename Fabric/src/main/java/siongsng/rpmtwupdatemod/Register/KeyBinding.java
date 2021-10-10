@@ -42,14 +42,14 @@ public class KeyBinding {
             while (cosmic_chat_send.wasPressed()) { //開啟宇宙通訊介面
                 if (!RPMTWConfig.getConfig().isChat) return;
                 if (RPMTWConfig.getConfig().isEULA) {
-                    MinecraftClient.getInstance().openScreen(new Screen(new CosmicChat()));
+                    MinecraftClient.getInstance().setScreen(new Screen(new CosmicChat()));
                 } else {
-                    MinecraftClient.getInstance().openScreen(new Screen(new EULA()));
+                    MinecraftClient.getInstance().setScreen(new Screen(new EULA()));
                 }
             }
             while (open_config.wasPressed()) {
             	MinecraftClient mc = MinecraftClient.getInstance();
-            	mc.openScreen(AutoConfig.getConfigScreen(ConfigScreen.class, mc.currentScreen).get());
+            	mc.setScreen(AutoConfig.getConfigScreen(ConfigScreen.class, mc.currentScreen).get());
             }
             while (crowdin.wasPressed()) { //開啟物品翻譯界面
                 if (!RPMTWConfig.getConfig().crowdin) return;
@@ -58,7 +58,7 @@ public class KeyBinding {
                 String item_key = item.getTranslationKey(); //物品的命名空間
 
                 if (!RPMTWConfig.getConfig().isCheck) {
-                    MinecraftClient.getInstance().openScreen(new Screen(new CrowdinLogin()));
+                    MinecraftClient.getInstance().setScreen(new Screen(new CrowdinLogin()));
                     return;
                 } else if (item_key.equals("block.minecraft.air")) {
                     assert client.crosshairTarget != null;

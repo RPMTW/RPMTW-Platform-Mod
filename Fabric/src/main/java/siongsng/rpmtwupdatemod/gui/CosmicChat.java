@@ -36,14 +36,14 @@ public class CosmicChat extends LightweightGuiDescription {
         Message.setMaxLength(150);
         gui.add(Message, (int) 3.5,  3, 10, 2);
 
-        Cancel.setOnClick(() -> MinecraftClient.getInstance().openScreen(null));
+        Cancel.setOnClick(() -> MinecraftClient.getInstance().setScreen(null));
         Send.setOnClick(() -> {
             if (Message.getText().equals("")) {
                 SendMsg.send("訊息不能是空的。");
             } else {
                 SocketClient.Send(Message.getText());
             }
-            MinecraftClient.getInstance().openScreen(null);
+            MinecraftClient.getInstance().setScreen(null);
         });
         Info.setOnClick(() -> Util.getOperatingSystem().open("https://www.rpmtw.ga/Wiki/ModInfo#what-is-cosmic-system"));
         gui.validate(this);

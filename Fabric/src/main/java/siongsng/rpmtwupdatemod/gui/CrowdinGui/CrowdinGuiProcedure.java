@@ -53,6 +53,6 @@ public class CrowdinGuiProcedure {
             SendMsg.send("§6由於你指定想要翻譯的物品或實體生怪蛋，不在資料庫內\n因此無法進行翻譯，想了解更多資訊請前往RPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
             return;
         }
-        MinecraftClient.getInstance().openScreen(new Screen(new CrowdinGui()));
+        MinecraftClient.getInstance().setScreen(new Screen(new CrowdinGui()));
     }
 }
