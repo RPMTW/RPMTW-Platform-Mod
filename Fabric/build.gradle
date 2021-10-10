@@ -52,7 +52,7 @@ dependencies {
     include(modApi('net.lingala.zip4j:zip4j:2.9.0'))
     include('io.socket:engine.io-client:2.0.0')
     include('org.json:json:20090211')
-    include('com.squareup.okhttp3:okhttp:3.12.12')
+    include('com.squareup.okhttp3:okhttp:4.9.2')
     include('com.squareup.okio:okio:1.15.0')
     modImplementation include('customUtils:Utils:1.0.0')
  
