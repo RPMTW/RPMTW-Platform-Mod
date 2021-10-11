@@ -19,11 +19,12 @@ import siongsng.rpmtwupdatemod.commands.noticeCMD;
 import siongsng.rpmtwupdatemod.config.Config;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.config.Configer;
+import siongsng.rpmtwupdatemod.crowdin.RPMKeyBinding;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
-import siongsng.rpmtwupdatemod.crowdin.key;
-import siongsng.rpmtwupdatemod.function.AFK;
 import siongsng.rpmtwupdatemod.notice.notice;
 import siongsng.rpmtwupdatemod.packs.PacksManerger;
+import siongsng.rpmtwupdatemod.translation.Handler;
+import siongsng.rpmtwupdatemod.translation.TranslationManager;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -47,8 +48,8 @@ public class RpmtwUpdateMod {
             LOGGER.error("你目前處於無網路狀態，因此無法使用 RPMTW 翻譯自動更新模組，請連結網路後重新啟動此模組。");
         }
         if (FMLEnvironment.dist == Dist.CLIENT && Configer.isChinese.get()) {
-        	Minecraft mc =  Minecraft.getInstance();
-        	mc.gameSettings.language = "zh_tw"; //將語言設定為繁體中文
+            Minecraft mc = Minecraft.getInstance();
+            mc.gameSettings.language = "zh_tw"; //將語言設定為繁體中文
         }
         PacksManerger.PackVersionCheck(); //資源包版本檢查
         try {
@@ -61,17 +62,18 @@ public class RpmtwUpdateMod {
     }
 
     public void init(final FMLClientSetupEvent e) {
-        MinecraftForge.EVENT_BUS.register(new key());  //快捷鍵註冊
+        MinecraftForge.EVENT_BUS.register(new RPMKeyBinding());  //快捷鍵註冊
         MinecraftForge.EVENT_BUS.register(new noticeCMD()); //noticeCMD指令註冊
         if (Configer.notice.get()) { //判斷Config
             MinecraftForge.EVENT_BUS.register(new notice()); //玩家加入事件註冊
         }
-        MinecraftForge.EVENT_BUS.register(new AFK()); //掛機事件註冊
         ConfigScreen.registerConfigScreen();
 
         if (Configer.isChat.get()) {
             new GetMessage();
         }
+        MinecraftForge.EVENT_BUS.register(new Handler());
+        TranslationManager.getInstance().init();
     }
 
 }

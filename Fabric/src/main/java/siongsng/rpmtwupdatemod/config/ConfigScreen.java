@@ -32,4 +32,6 @@ public class ConfigScreen implements ConfigData {
     public boolean isEULA = false; //使用者是否同意宇宙通訊EULA
     @Comment("模組翻譯黑名單，可輸入資料夾 或 檔案名稱(若檔名未指定資料夾，將會排除所有同名檔案)。")
     public List<String> modBlackList = new ArrayList<String>(); //模組翻譯黑名單，可輸入資料夾名稱，或是檔案名稱
+    @Comment("啟用機器翻譯")
+    public boolean isTranslate = true;
 }

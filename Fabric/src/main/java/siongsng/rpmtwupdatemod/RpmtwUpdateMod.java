@@ -3,6 +3,7 @@ package siongsng.rpmtwupdatemod;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.resource.ResourceManager;
@@ -66,6 +67,9 @@ public class RpmtwUpdateMod implements ClientModInitializer {
         }
         Handler.init();
         TranslationManager.getInstance().init();
+        ClientLifecycleEvents.CLIENT_STOPPING.register(client ->{
+            TranslationManager.getInstance().writeCash(); //寫入翻譯快取
+        });
     }
 
 }

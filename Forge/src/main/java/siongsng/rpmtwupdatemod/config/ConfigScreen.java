@@ -65,9 +65,9 @@ public final class ConfigScreen extends Screen {
                 (unused, newValue) -> Configer.notice.set(newValue)
         ));
         optionsRowList.addOption(new BooleanOption(
-                "啟用掛機偵測",
-                unused -> Configer.afk.get(),
-                (unused, newValue) -> Configer.afk.set(newValue)
+                "啟用機器翻譯",
+                unused -> Configer.isTranslate.get(),
+                (unused, newValue) -> Configer.isTranslate.set(newValue)
         ));
         optionsRowList.addOption(new SliderPercentageOption(
                 "開始偵測掛機間隔時間(秒)",
@@ -88,7 +88,7 @@ public final class ConfigScreen extends Screen {
                     Configer.rpmtw_reloadpack.set(true);
                     Configer.notice.set(true);
                     Configer.isChat.set(true);
-                    Configer.afk.set(false);
+                    Configer.isTranslate.set(false);
                     Configer.afkTime.set(600);
                     Configer.isChinese.set(true);
                     Minecraft.getInstance().displayGuiScreen(new ConfigScreen());

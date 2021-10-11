@@ -1,12 +1,12 @@
 package siongsng.rpmtwupdatemod.config;
 
+import net.minecraftforge.common.ForgeConfigSpec;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraftforge.common.ForgeConfigSpec;
-
 public class Configer {
-    public static ForgeConfigSpec.BooleanValue rpmtw_crowdin, rpmtw_reloadpack, notice, afk, isCheck, isChinese, isChat, isEULA;
+    public static ForgeConfigSpec.BooleanValue rpmtw_crowdin, rpmtw_reloadpack, notice, isCheck, isChinese, isChat, isEULA, isTranslate;
     public static ForgeConfigSpec.IntValue afkTime;
     public static ForgeConfigSpec.ConfigValue<List<String>> modBlackList;
     public static ForgeConfigSpec.ConfigValue<String> Token;
@@ -24,9 +24,6 @@ public class Configer {
         notice = client
                 .comment("notice = 進入世界時，是否自動發送公告。(此變更須重啟遊戲後生效)")
                 .define("rpmtw.notice", true);
-        afk = client
-                .comment("afk = 是否啟用掛機偵測，啟用後當掛機時會自動更新翻譯。")
-                .define("rpmtw.afk", false);
         isCheck = client
                 .define("rpmtw.isCheck", false);
         isChinese = client
@@ -46,6 +43,10 @@ public class Configer {
                 .define("rpmtw.token", "");
         modBlackList = client
                 .comment("模組翻譯黑名單，可輸入資料夾 或 檔案名稱(若檔名未指定資料夾，將會排除所有同名檔案)。")
-                .define("rpmtw.modBlackList", new ArrayList<String>());
+                .define("rpmtw.modBlackList", new ArrayList<>());
+
+        isTranslate = client
+                .comment("isTranslate = 是否開啟機器翻譯功能。")
+                .define("rpmtw.isTranslate", true);
     }
 }

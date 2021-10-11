@@ -16,24 +16,27 @@ import siongsng.rpmtwupdatemod.function.SendMsg;
 import siongsng.rpmtwupdatemod.gui.*;
 import siongsng.rpmtwupdatemod.packs.PacksManerger;
 
-public final class key {
+public final class RPMKeyBinding {
     public static final KeyBinding reloadpack = new KeyBinding("key.rpmtw_update_mod.reloadpack", KeyConflictContext.UNIVERSAL, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "key.categories.rpmtw");
     public static final KeyBinding open_config = new KeyBinding("key.rpmtw_update_mod.open_config", KeyConflictContext.UNIVERSAL, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_O, "key.categories.rpmtw");
     public static final KeyBinding Crowdin = new KeyBinding("key.rpmtw_update_mod.open_crowdin", GLFW.GLFW_KEY_UNKNOWN, "key.categories.rpmtw");
     public static final KeyBinding cosmic_chat_send = new KeyBinding("key.rpmtw_update_mod.cosmic_chat_send", GLFW.GLFW_KEY_G, "key.categories.rpmtw");
+    public static final KeyBinding translate = new KeyBinding("key.rpmtw_update_mod.translate", GLFW.GLFW_KEY_N, "key.categories.rpmtw");
+
     public static boolean updateLock = false;
     private boolean showed = false;
 
-    public key() {
+    public RPMKeyBinding() {
         ClientRegistry.registerKeyBinding(reloadpack);
         ClientRegistry.registerKeyBinding(open_config);
         ClientRegistry.registerKeyBinding(Crowdin);
         ClientRegistry.registerKeyBinding(cosmic_chat_send);
+        ClientRegistry.registerKeyBinding(translate);
     }
 
     @SubscribeEvent
     public void onKeyPress(InputEvent.KeyInputEvent e) {
-    	Minecraft mc = Minecraft.getInstance();
+        Minecraft mc = Minecraft.getInstance();
         PlayerEntity p = mc.player;
         if (showed) { //防止重複開啟
             try {
@@ -75,11 +78,11 @@ public final class key {
         }
         if (Configer.rpmtw_reloadpack.get()) {
             if (reloadpack.isPressed() && !updateLock) {
-            	updateLock = true;
+                updateLock = true;
                 PacksManerger.ReloadPack();
             }
         }
-        if(cosmic_chat_send.isPressed()){
+        if (cosmic_chat_send.isPressed()) {
             if (!Configer.isChat.get()) return;
             if (Configer.isEULA.get()) {
                 Minecraft.getInstance().displayGuiScreen(new CosmicChatScreen());

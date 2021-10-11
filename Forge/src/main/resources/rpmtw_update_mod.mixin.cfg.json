@@ -3,6 +3,8 @@
   "package": "siongsng.rpmtwupdatemod.mixin",
   "compatibilityLevel": "JAVA_8",
   "client": [
+    "ClientLanguageMixin",
+    "LanguageMixin",
     "MixinBookContents"
   ],
   "target": "@env(DEFAULT)",

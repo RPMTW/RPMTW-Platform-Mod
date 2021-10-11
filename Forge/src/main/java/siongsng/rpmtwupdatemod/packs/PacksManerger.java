@@ -10,15 +10,10 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FileUtils;
 
 import net.minecraft.client.Minecraft;
-import net.minecraftforge.client.ForgeHooksClient;
-import net.minecraftforge.fml.client.ClientModLoader;
-import net.minecraftforge.resource.ReloadRequirements;
-import net.minecraftforge.resource.SelectiveReloadStateHandler;
-import net.minecraftforge.resource.VanillaResourceType;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
 import siongsng.rpmtwupdatemod.json;
 import siongsng.rpmtwupdatemod.config.Configer;
-import siongsng.rpmtwupdatemod.crowdin.key;
+import siongsng.rpmtwupdatemod.crowdin.RPMKeyBinding;
 import siongsng.rpmtwupdatemod.function.FileWriter;
 import siongsng.rpmtwupdatemod.function.SendMsg;
 
@@ -52,7 +47,7 @@ public  class PacksManerger {
 	                    ZipUtils.removeDirFromZip(file, Configer.modBlackList.get());
 	                    Minecraft.getInstance().getResourcePackList().addPackFinder(RESOUCE); //新增資源包至資源包列表
 	                    Minecraft.getInstance().reloadResources().whenCompleteAsync((c,t)->{//重新載入資源
-	                    	 key.updateLock = false;
+	                    	 RPMKeyBinding.updateLock = false;
 	                    	 SendMsg.send("§b處理完成。");
 	                    });
 
