@@ -25,7 +25,6 @@ public class Translator {
 
         result = filter[0];
 
-
         client.dispatcher().cancelAll();
         return result;
     }
