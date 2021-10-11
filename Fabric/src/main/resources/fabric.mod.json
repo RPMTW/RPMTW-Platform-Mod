@@ -26,13 +26,14 @@
   "mixins": [
     "RpmtwUpdateMod.mixins.json"
   ],
-  "accessWidener" : "RpmtwUpdateMod.accesswidener",
+  "accessWidener": "RpmtwUpdateMod.accesswidener",
   "depends": {
     "fabricloader": ">=0.11.3",
     "fabric": "*",
     "minecraft": "1.17.x",
     "java": ">=16",
-    "cloth-config2": ">=5.0.34"
+    "cloth-config2": ">=5.0.34",
+    "fabric-language-kotlin": ">=1.6.5+kotlin.1.5.31"
   },
   "suggests": {
     "modmenu": ">=2.0.0"
