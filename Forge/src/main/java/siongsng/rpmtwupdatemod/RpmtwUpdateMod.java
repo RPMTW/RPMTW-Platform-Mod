@@ -13,10 +13,12 @@ import siongsng.rpmtwupdatemod.CosmicChat.GetMessage;
 import siongsng.rpmtwupdatemod.commands.noticeCMD;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
-import siongsng.rpmtwupdatemod.crowdin.key;
+import siongsng.rpmtwupdatemod.crowdin.RPMKeyBinding;
 import siongsng.rpmtwupdatemod.function.AddPack;
 import siongsng.rpmtwupdatemod.function.ping;
 import siongsng.rpmtwupdatemod.notice.notice;
+import siongsng.rpmtwupdatemod.translation.Handler;
+import siongsng.rpmtwupdatemod.translation.TranslationManager;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -73,8 +75,10 @@ public class RpmtwUpdateMod {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register(new key());
+        MinecraftForge.EVENT_BUS.register(new RPMKeyBinding());
         ClientCommandHandler.instance.registerCommand(new noticeCMD());
         MinecraftForge.EVENT_BUS.register(new notice());
+        MinecraftForge.EVENT_BUS.register(new Handler());
+        TranslationManager.getInstance().init();
     }
 }

@@ -18,12 +18,6 @@ public class RPMTWConfig {
     @Config.Name("是否啟用公告系統")
     @Config.Comment("進入世界時，是否自動發送公告。(此變更須重啟遊戲後生效)")
     public static boolean notice = true;
-    @Config.Name("是否啟用掛機偵測")
-    @Config.Comment("是否啟用掛機偵測，啟用後當掛機時會自動更新翻譯。")
-    public static boolean afk = false;
-    @Config.Name("掛機偵測間隔時間")
-    @Config.Comment("數值以秒為單位")
-    public static int AfkTime = 600;
     @Config.Name("是否自動切換語言")
     @Config.Comment("預設進入遊戲時，是否自動切換語言為 繁體中文。")
     public static boolean isChinese = true;
@@ -33,6 +27,8 @@ public class RPMTWConfig {
     public static String Token = ""; //儲存Crowdin登入權杖
     public static boolean isCheck = false; //儲存登入權杖是否有效
     public static boolean isEULA = false; //使用者是否同意宇宙通訊EULA
+    @Config.Name("是否使用機器翻譯")
+    public static boolean isTranslate = true;
 
     // 儲存設定檔案
     @Mod.EventBusSubscriber(modid = RpmtwUpdateMod.MOD_ID)
