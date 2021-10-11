@@ -38,6 +38,7 @@ public final class RPMKeyBinding {
         ClientRegistry.registerKeyBinding(open_config);
         ClientRegistry.registerKeyBinding(Crowdin);
         ClientRegistry.registerKeyBinding(cosmic_chat_send);
+        ClientRegistry.registerKeyBinding(translate);
     }
 
     @SubscribeEvent
