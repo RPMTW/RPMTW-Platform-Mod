@@ -1,8 +1,10 @@
 {
   "required": false,
   "package": "siongsng.rpmtwupdatemod.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_16",
   "client": [
+    "ClientLanguageMixin",
+    "LanguageMixin"
   ],
   "target": "@env(DEFAULT)",
   "setSourceFile": true,

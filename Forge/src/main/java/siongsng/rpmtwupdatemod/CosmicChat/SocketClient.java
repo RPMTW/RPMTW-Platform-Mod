@@ -33,7 +33,7 @@ public class SocketClient {
             IO.Options options = IO.Options.builder().setAuth(AuthMap).build();
             socket = IO.socket("https://api.rpmtwchat.ga", options).connect();
         } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
+            RpmtwUpdateMod.LOGGER.error(e);
         }
     }
 

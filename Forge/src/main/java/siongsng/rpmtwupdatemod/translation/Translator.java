@@ -14,8 +14,6 @@ public class Translator {
                 .build();
         Response response = client.newCall(request).execute();
 
-        if (response.code() == 429) return "錯誤：連線Google伺服器流量異常";
-
         String result = response.body().string();
         System.out.println(result);
 

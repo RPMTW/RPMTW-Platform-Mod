@@ -24,15 +24,16 @@ import siongsng.rpmtwupdatemod.gui.CrowdinLoginScreen;
 import siongsng.rpmtwupdatemod.gui.CrowdinProcedure;
 import siongsng.rpmtwupdatemod.gui.EULAScreen;
 
-public final class key {
+public final class RPMKeyBinding {
     public static final KeyMapping reloadpack = new KeyMapping("key.rpmtw_update_mod.reloadpack", KeyConflictContext.UNIVERSAL, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "key.categories.rpmtw");
     public static final KeyMapping open_config = new KeyMapping("key.rpmtw_update_mod.open_config", KeyConflictContext.UNIVERSAL, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_O, "key.categories.rpmtw");
     public static final KeyMapping Crowdin = new KeyMapping("key.rpmtw_update_mod.open_crowdin", GLFW.GLFW_KEY_UNKNOWN, "key.categories.rpmtw");
     public static final KeyMapping cosmic_chat_send = new KeyMapping("key.rpmtw_update_mod.cosmic_chat_send", GLFW.GLFW_KEY_G, "key.categories.rpmtw");
+    public static final KeyMapping translate = new KeyMapping("key.rpmtw_update_mod.translate", GLFW.GLFW_KEY_N, "key.categories.rpmtw");
 
     private boolean showed = false;
 
-    public key() {
+    public RPMKeyBinding() {
         ClientRegistry.registerKeyBinding(reloadpack);
         ClientRegistry.registerKeyBinding(open_config);
         ClientRegistry.registerKeyBinding(Crowdin);

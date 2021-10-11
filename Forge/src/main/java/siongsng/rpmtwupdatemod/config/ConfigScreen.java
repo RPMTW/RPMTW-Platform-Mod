@@ -58,6 +58,10 @@ public final class ConfigScreen extends Screen {
                 (values) -> RPMTWConfig.notice.get(),
                 (p_168189_, p_168190_, newValue) -> RPMTWConfig.notice.set(newValue)
         ));
+        optionsRowList.addBig(CycleOption.createOnOff("是否開啟機器翻譯",
+                (values) -> RPMTWConfig.isTranslate.get(),
+                (p_168189_, p_168190_, newValue) -> RPMTWConfig.isTranslate.set(newValue)
+        ));
         this.addWidget(optionsRowList);
 
         this.addRenderableWidget(new Button(
@@ -71,6 +75,7 @@ public final class ConfigScreen extends Screen {
                     RPMTWConfig.notice.set(true);
                     RPMTWConfig.isChat.set(true);
                     RPMTWConfig.isChinese.set(true);
+                    RPMTWConfig.isTranslate.set(true);
                     Minecraft.getInstance().setScreen(new ConfigScreen());
                 }));
 

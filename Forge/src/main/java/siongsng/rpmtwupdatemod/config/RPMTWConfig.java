@@ -3,7 +3,7 @@ package siongsng.rpmtwupdatemod.config;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public class RPMTWConfig {
-    public static ForgeConfigSpec.BooleanValue rpmtw_crowdin, rpmtw_reloadpack, notice, isCheck, isChinese, isChat, isEULA;
+    public static ForgeConfigSpec.BooleanValue rpmtw_crowdin, rpmtw_reloadpack, notice, isCheck, isChinese, isChat, isEULA, isTranslate;
     public static ForgeConfigSpec.ConfigValue<String> Token;
 
     public static void init(ForgeConfigSpec.Builder client) {
@@ -33,5 +33,8 @@ public class RPMTWConfig {
         Token = client
                 .comment("Crowdin Token (翻譯平台登入權杖)")
                 .define("rpmtw.token", "");
+        isTranslate = client
+                .comment("isTranslate = 是否開啟機器翻譯功能。")
+                .define("rpmtw.isTranslate", true);
     }
 }
