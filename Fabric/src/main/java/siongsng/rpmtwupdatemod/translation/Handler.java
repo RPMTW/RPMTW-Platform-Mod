@@ -10,6 +10,7 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import siongsng.rpmtwupdatemod.Register.RPMKeyBinding;
+import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 
 import java.util.HashMap;
 import java.util.List;
@@ -38,15 +39,21 @@ public class Handler {
     public static void onTooltip(ItemStack itemStack, TooltipContext tooltipFlag, List<Text> list) {
         list.add(1, new LiteralText("原文: " + Handler.getNoLocalizedMap().getOrDefault(itemStack.getTranslationKey(), "無")).formatted(Formatting.GRAY));
         boolean press = isKeyPress(RPMKeyBinding.translate);
-        if (press) {
-            for (Text text : TranslationManager.getInstance().createToolTip(itemStack)) {
-                list.add(2, text);
-            }
-        } else {
-            boolean isNoLocalized = getNoLocalizedMap().containsKey(itemStack.getTranslationKey());
-            if (isNoLocalized) {
-                list.add(2, new LiteralText("按下 " + RPMKeyBinding.translate.getDefaultKey().getLocalizedText().asString() + " 後將物品機器翻譯為中文"));
+        boolean playing = MinecraftClient.getInstance().player != null;
+
+        if (playing && RPMTWConfig.getConfig().isTranslate) {
+            if (press) {
+                for (Text text : TranslationManager.getInstance().createToolTip(itemStack)) {
+                    list.add(2, text);
+                }
+            } else {
+                boolean isNoLocalized = getNoLocalizedMap().containsKey(itemStack.getTranslationKey());
+                if (isNoLocalized) {
+                    list.add(2, new LiteralText("按下 " + RPMKeyBinding.translate.getDefaultKey().getLocalizedText().asString() + " 後將物品機器翻譯為中文"));
+                }
             }
         }
+
+
     }
 }

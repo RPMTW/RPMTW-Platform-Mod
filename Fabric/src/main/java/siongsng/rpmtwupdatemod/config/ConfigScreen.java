@@ -20,6 +20,7 @@ public class ConfigScreen implements ConfigData {
     public boolean isChinese = true;
     @Comment("是否使用宇宙通訊系統。")
     public boolean isChat = true;
+    public boolean isTranslate = true;
     @ConfigEntry.Gui.Excluded
     public String Token = ""; //儲存Crowdin登入權杖
     @ConfigEntry.Gui.Excluded
