@@ -33,7 +33,7 @@
     "minecraft": "1.17.x",
     "java": ">=16",
     "cloth-config2": ">=5.0.34",
-    "fabric-language-kotlin": ">=1.6.5+kotlin.1.5.30"
+    "fabric-language-kotlin": ">=1.6.4+kotlin.1.5.30"
   },
   "suggests": {
     "modmenu": ">=2.0.0"
