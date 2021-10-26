@@ -174,14 +174,7 @@ public class TranslationManager {
         }
     }
 
-    public static class SourceLangText {
-        private final String langCode;
-        private final String text;
-
-        public SourceLangText(String langCode, String text) {
-            this.langCode = langCode;
-            this.text = text;
-        }
+    public record SourceLangText(String langCode, String text) {
 
         @Override
         public boolean equals(Object o) {

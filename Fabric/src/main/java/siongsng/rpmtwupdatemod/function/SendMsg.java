@@ -6,9 +6,13 @@ import net.minecraft.text.Text;
 
 public class SendMsg {
     public static void send(String msg) {
-    	MinecraftClient mc = MinecraftClient.getInstance();
-        PlayerEntity p = mc.player;
-        assert p != null;
-        p.sendMessage(Text.of(msg), false);
+        try {
+            MinecraftClient mc = MinecraftClient.getInstance();
+            PlayerEntity p = mc.player;
+            assert p != null;
+            p.sendMessage(Text.of(msg), false);
+        } catch (Throwable ignored) {
+
+        }
     }
 }

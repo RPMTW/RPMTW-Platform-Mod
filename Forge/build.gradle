@@ -70,7 +70,7 @@ dependencies {
     shade implementation('io.socket:socket.io-client:2.0.1')
 
 //    implementation fg.deobf("vazkii.patchouli:Patchouli:1.17.1-56-SNAPSHOT")
-    minecraft 'net.minecraftforge:forge:1.17.1-37.0.84'
+    minecraft 'net.minecraftforge:forge:1.17.1-37.0.103'
 
     annotationProcessor 'org.spongepowered:mixin:0.8.4:processor'
 }
