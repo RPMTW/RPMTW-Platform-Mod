@@ -8,10 +8,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.crowdin.RPMKeyBinding;
 
@@ -54,10 +52,5 @@ public class Handler {
             }
         }
 
-    }
-
-    @SubscribeEvent
-    public void quit(final ClientPlayerNetworkEvent.LoggedOutEvent event) {
-        TranslationManager.getInstance().writeCash();
     }
 }

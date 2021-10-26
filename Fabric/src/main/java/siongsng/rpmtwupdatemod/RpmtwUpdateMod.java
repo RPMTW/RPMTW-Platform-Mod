@@ -12,7 +12,6 @@ import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.gui.ping;
 import siongsng.rpmtwupdatemod.translation.Handler;
-import siongsng.rpmtwupdatemod.translation.TranslationManager;
 
 import java.util.Locale;
 import java.util.Objects;
@@ -43,7 +42,6 @@ public class RpmtwUpdateMod implements ClientModInitializer {
         if (RPMTWConfig.getConfig().isChat) {
             SocketClient.GetMessage();
         }
-        TranslationManager.getInstance().init();
         Handler.init();
     }
 

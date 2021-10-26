@@ -23,7 +23,6 @@ import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.function.onPlayerJoin;
 import siongsng.rpmtwupdatemod.function.ping;
 import siongsng.rpmtwupdatemod.translation.Handler;
-import siongsng.rpmtwupdatemod.translation.TranslationManager;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -79,6 +78,5 @@ public class RpmtwUpdateMod {
             SocketClient.GetMessage();
         }
         MinecraftForge.EVENT_BUS.register(new Handler());
-        TranslationManager.getInstance().init();
     }
 }
