@@ -8,3 +8,11 @@ updates:
   open-pull-requests-limit: 10
   reviewers:
   - SiongSng
+- package-ecosystem: gradle
+  directory: "/Forge"
+  schedule:
+    interval: daily
+    time: "21:00"
+  open-pull-requests-limit: 10
+  reviewers:
+  - SiongSng
