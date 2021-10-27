@@ -8,5 +8,9 @@
   ],
   "target": "@env(DEFAULT)",
   "setSourceFile": true,
-  "minVersion": "0.8"
+  "minVersion": "0.8",
+  "mixins": [
+    "MixinBookContents",
+    "MixinContentExternalLoader"
+  ]
 }
