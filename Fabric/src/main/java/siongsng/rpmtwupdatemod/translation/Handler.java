@@ -49,7 +49,7 @@ public class Handler {
             } else {
                 boolean isNoLocalized = getNoLocalizedMap().containsKey(itemStack.getTranslationKey());
                 if (isNoLocalized) {
-                    list.add(2, new LiteralText("按下 " + RPMKeyBinding.translate.getDefaultKey().getLocalizedText().asString() + " 後將物品機器翻譯為中文"));
+                    list.add(2, new LiteralText("按下 " + RPMKeyBinding.translate.getBoundKeyLocalizedText().asString() + " 後將物品機器翻譯為中文"));
                 }
             }
         }
