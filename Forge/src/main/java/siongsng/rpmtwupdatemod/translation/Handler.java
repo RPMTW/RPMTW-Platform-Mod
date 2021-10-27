@@ -1,9 +1,7 @@
 package siongsng.rpmtwupdatemod.translation;
 
 
-import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
@@ -27,17 +25,11 @@ public class Handler {
         noLocalizedMap.put(key, value);
     }
 
-
-    public boolean isKeyPress(KeyMapping key) {
-        return InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), key.getKey().getValue());
-    }
-
-
     @SubscribeEvent
     public void onTooltip(ItemTooltipEvent event) {
         ItemStack stack = event.getItemStack();
         event.getToolTip().add(1, new TextComponent("原文: " + Handler.getNoLocalizedMap().getOrDefault(stack.getDescriptionId(), "無")).withStyle(ChatFormatting.GRAY));
-        boolean press = isKeyPress(RPMKeyBinding.translate);
+        boolean press = RPMKeyBinding.translate.isDown();
         boolean playing = Minecraft.getInstance().player != null;
         if (RPMTWConfig.isTranslate.get() && playing) {
             if (press) {
