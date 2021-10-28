@@ -21,7 +21,7 @@ import siongsng.rpmtwupdatemod.config.Configer;
 import siongsng.rpmtwupdatemod.crowdin.RPMKeyBinding;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.notice.notice;
-import siongsng.rpmtwupdatemod.packs.PacksManerger;
+import siongsng.rpmtwupdatemod.packs.PacksManager;
 import siongsng.rpmtwupdatemod.translation.Handler;
 
 import java.io.IOException;
@@ -49,7 +49,7 @@ public class RpmtwUpdateMod {
             Minecraft mc = Minecraft.getInstance();
             mc.gameSettings.language = "zh_tw"; //將語言設定為繁體中文
         }
-        PacksManerger.PackVersionCheck(); //資源包版本檢查
+        PacksManager.PackVersionCheck(); //資源包版本檢查
         try {
             new TokenCheck().Check(Configer.Token.get()); //開始檢測權杖
         } catch (IOException e) {

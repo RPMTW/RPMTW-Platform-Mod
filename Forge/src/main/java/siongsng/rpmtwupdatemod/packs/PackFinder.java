@@ -14,7 +14,7 @@ public class PackFinder implements IPackFinder {
     private static FilePack pack;
 
     public PackFinder() {
-        this.loaderDirectory = PacksManerger.PackFile.toFile();
+        this.loaderDirectory = PacksManager.PackFile.toFile();
     }
 
     public void close() {

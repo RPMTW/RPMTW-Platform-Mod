@@ -14,7 +14,7 @@ import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.config.Configer;
 import siongsng.rpmtwupdatemod.function.SendMsg;
 import siongsng.rpmtwupdatemod.gui.*;
-import siongsng.rpmtwupdatemod.packs.PacksManerger;
+import siongsng.rpmtwupdatemod.packs.PacksManager;
 
 public final class RPMKeyBinding {
     public static final KeyBinding reloadpack = new KeyBinding("key.rpmtw_update_mod.reloadpack", KeyConflictContext.UNIVERSAL, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "key.categories.rpmtw");
@@ -79,7 +79,7 @@ public final class RPMKeyBinding {
         if (Configer.rpmtw_reloadpack.get()) {
             if (reloadpack.isPressed() && !updateLock) {
                 updateLock = true;
-                PacksManerger.ReloadPack();
+                PacksManager.ReloadPack();
             }
         }
         if (cosmic_chat_send.isPressed()) {

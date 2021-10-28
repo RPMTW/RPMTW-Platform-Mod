@@ -17,7 +17,7 @@ public class ZipUtils {
     final static Path PackFile = PackDir.resolve("RPMTW-1.16.zip");
 	private static int retryCount = 0;
 	public static void removeDirFromZip(File file,List<String> removeDirs) throws ZipException{
-		PacksManerger.close();
+		PacksManager.close();
 		List<String> removeList = new ArrayList<String>();
 		ZipFile zipFile = null;
 		try {
@@ -43,7 +43,7 @@ public class ZipUtils {
         			}	
         		}
 			}
-    		PacksManerger.close();
+    		PacksManager.close();
     		zipFile.removeFiles(removeList);
 
     		RpmtwUpdateMod.LOGGER.info("篩選耗時："+ (System.currentTimeMillis()-start)/1000.0+" 秒。");
