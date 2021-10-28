@@ -1,12 +1,12 @@
 package siongsng.rpmtwupdatemod.config;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Config(name = "rpmtw_update_mod")
 public class ConfigScreen implements ConfigData {
@@ -16,10 +16,6 @@ public class ConfigScreen implements ConfigData {
     public boolean ReloadPack = true;
     @Comment("進入世界時，是否自動發送公告。(此變更須重啟遊戲後生效)")
     public boolean notice = true;
-    @Comment("是否啟用掛機偵測，啟用後當掛機時會自動更新翻譯。")
-    public boolean afk = false;
-    @Comment("每次啟動遊戲時，自動RPMTW翻譯包更新時所檢查的版本間隔。(此變更須重啟遊戲後生效)")
-    public int AfkTime = 600;
     @Comment("預設進入遊戲時，是否自動切換語言為 繁體中文。")
     public boolean isChinese = true;
     @Comment("是否使用宇宙通訊系統 (包含接收訊息與發送訊息)。")

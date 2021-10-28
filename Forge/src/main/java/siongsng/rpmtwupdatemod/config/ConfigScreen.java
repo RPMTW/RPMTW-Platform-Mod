@@ -6,7 +6,6 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.gui.widget.list.OptionsRowList;
 import net.minecraft.client.settings.BooleanOption;
-import net.minecraft.client.settings.SliderPercentageOption;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.fml.ExtensionPoint;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -69,12 +68,6 @@ public final class ConfigScreen extends Screen {
                 unused -> Configer.isTranslate.get(),
                 (unused, newValue) -> Configer.isTranslate.set(newValue)
         ));
-        optionsRowList.addOption(new SliderPercentageOption(
-                "開始偵測掛機間隔時間(秒)",
-                10.0F, 3600, 1.0F,
-                unused -> (double) Configer.afkTime.get(),
-                (unused, newValue) -> Configer.afkTime.set(newValue.intValue()),
-                (gs, option) -> new StringTextComponent("開始偵測掛機間隔時間(秒)" + ": " + (int) option.get(gs))));
 
         this.children.add(optionsRowList);
 
@@ -88,8 +81,7 @@ public final class ConfigScreen extends Screen {
                     Configer.rpmtw_reloadpack.set(true);
                     Configer.notice.set(true);
                     Configer.isChat.set(true);
-                    Configer.isTranslate.set(false);
-                    Configer.afkTime.set(600);
+                    Configer.isTranslate.set(true);
                     Configer.isChinese.set(true);
                     Minecraft.getInstance().displayGuiScreen(new ConfigScreen());
                 }));

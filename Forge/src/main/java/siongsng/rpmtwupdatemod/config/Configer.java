@@ -7,7 +7,6 @@ import java.util.List;
 
 public class Configer {
     public static ForgeConfigSpec.BooleanValue rpmtw_crowdin, rpmtw_reloadpack, notice, isCheck, isChinese, isChat, isEULA, isTranslate;
-    public static ForgeConfigSpec.IntValue afkTime;
     public static ForgeConfigSpec.ConfigValue<List<String>> modBlackList;
     public static ForgeConfigSpec.ConfigValue<String> Token;
 
@@ -35,9 +34,6 @@ public class Configer {
         isEULA = client
                 .comment("isEULA = 使用者是否同意宇宙通訊EULA。")
                 .define("rpmtw.isEULA", false);
-        afkTime = client
-                .comment("afkTime = 此數值用來設定過多久沒有活動才會進入掛機模式。(以秒為單位)")
-                .defineInRange("rpmtw.afkTime", 600, 10, 3600);
         Token = client
                 .comment("Crowdin Token (翻譯平台登入權杖)")
                 .define("rpmtw.token", "");
