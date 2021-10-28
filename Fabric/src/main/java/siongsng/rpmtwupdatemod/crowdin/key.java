@@ -27,6 +27,7 @@ public class key {
         KeyBindingHelper.registerKeyBinding(crowdin);
         KeyBindingHelper.registerKeyBinding(reloadpack);
         KeyBindingHelper.registerKeyBinding(open_config);
+        KeyBindingHelper.registerKeyBinding(translate);
         if (Configer.getConfig().isChat) {
             KeyBindingHelper.registerKeyBinding(cosmic_chat_send);
         }

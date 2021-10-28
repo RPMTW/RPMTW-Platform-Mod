@@ -35,28 +35,27 @@ public class RpmtwUpdateMod implements ClientModInitializer {
         if (!ping.isConnect()) {
             LOGGER.error("你目前處於無網路狀態，因此無法使用 RPMTW 翻譯自動更新模組，請連結網路後重新啟動此模組。");
         }
-
     }
 
     @Override
     public void onInitializeClient() {
         key.onInitializeClient(); //註冊快捷鍵
-        
+
         ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
             @Override
             public Identifier getFabricId() {
                 return new Identifier(Mod_ID, "rpmtw1.16");
             }
 
-			@Override
-			public void reload(ResourceManager manager) {
-				if(key.updateLock) {
-					key.updateLock = false;
-					SendMsg.send("§b處理完成。");	
-				}	
-			}
+            @Override
+            public void reload(ResourceManager manager) {
+                if (key.updateLock) {
+                    key.updateLock = false;
+                    SendMsg.send("§b處理完成。");
+                }
+            }
         });
-        
+
         LOGGER.info("Hello RPMTW world!");
 
         if (!Configer.getConfig().Token.equals("")) { //如果Token不是空的
@@ -67,7 +66,7 @@ public class RpmtwUpdateMod implements ClientModInitializer {
         }
         Handler.init();
         TranslationManager.getInstance().init();
-        ClientLifecycleEvents.CLIENT_STOPPING.register(client ->{
+        ClientLifecycleEvents.CLIENT_STOPPING.register(client -> {
             TranslationManager.getInstance().writeCash(); //寫入翻譯快取
         });
     }

@@ -8,7 +8,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import siongsng.rpmtwupdatemod.config.Configer;
@@ -53,10 +52,5 @@ public class Handler {
             }
         }
 
-    }
-
-    @SubscribeEvent
-    public void quit(final ClientPlayerNetworkEvent.LoggedOutEvent event) {
-        TranslationManager.getInstance().writeCash();
     }
 }

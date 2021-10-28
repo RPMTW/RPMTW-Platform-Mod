@@ -30,8 +30,8 @@ public final class CrowdinScreen extends Screen {
     TextFieldWidget Translation;
     int xSize = 405;
     int ySize = 227;
-    String Text = CorwidnProcedure.getText();
-    String stringID = CorwidnProcedure.stringID;
+    String Text = CorowdinProcedure.getText();
+    String stringID = CorowdinProcedure.stringID;
 
 
     PlayerEntity p = Minecraft.getInstance().player;

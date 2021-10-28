@@ -23,7 +23,6 @@ public class Config {
     }
 
     public static void loadConfig(ForgeConfigSpec config) {
-
         RpmtwUpdateMod.LOGGER.info("載入config中... " + CONFIG_PATH);
         final CommentedFileConfig file = CommentedFileConfig.builder(new File(String.valueOf(CONFIG_PATH))).sync().autosave().writingMode(WritingMode.REPLACE).build();
         RpmtwUpdateMod.LOGGER.info("建立config中... " + CONFIG_PATH);

@@ -14,7 +14,7 @@ import siongsng.rpmtwupdatemod.config.Configer;
 
 import java.nio.charset.StandardCharsets;
 
-public class CorwidnProcedure {
+public class CorowdinProcedure {
     public static String responseBody = "";
     public static String stringID;
 

@@ -15,7 +15,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import siongsng.rpmtwupdatemod.CosmicChat.GetMessage;
-import siongsng.rpmtwupdatemod.commands.noticeCMD;
 import siongsng.rpmtwupdatemod.config.Config;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.config.Configer;
@@ -24,7 +23,6 @@ import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.notice.notice;
 import siongsng.rpmtwupdatemod.packs.PacksManerger;
 import siongsng.rpmtwupdatemod.translation.Handler;
-import siongsng.rpmtwupdatemod.translation.TranslationManager;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -63,7 +61,6 @@ public class RpmtwUpdateMod {
 
     public void init(final FMLClientSetupEvent e) {
         MinecraftForge.EVENT_BUS.register(new RPMKeyBinding());  //快捷鍵註冊
-        MinecraftForge.EVENT_BUS.register(new noticeCMD()); //noticeCMD指令註冊
         if (Configer.notice.get()) { //判斷Config
             MinecraftForge.EVENT_BUS.register(new notice()); //玩家加入事件註冊
         }
@@ -73,7 +70,6 @@ public class RpmtwUpdateMod {
             new GetMessage();
         }
         MinecraftForge.EVENT_BUS.register(new Handler());
-        TranslationManager.getInstance().init();
     }
 
 }
