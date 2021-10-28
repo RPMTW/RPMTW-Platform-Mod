@@ -1,8 +1,11 @@
 package siongsng.rpmtwupdatemod.translation;
 
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
+import net.fabricmc.fabric.mixin.client.keybinding.KeyCodeAccessor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.util.InputUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
@@ -26,13 +29,17 @@ public class Handler {
     }
 
 
+    public static boolean isKeyPress(KeyBinding key) {
+        return InputUtil.isKeyPressed(MinecraftClient.getInstance().getWindow().getHandle(), ((KeyCodeAccessor) key).fabric_getBoundKey().getCode());
+    }
+
     public static void init() {
         ItemTooltipCallback.EVENT.register(Handler::onTooltip);
     }
 
     public static void onTooltip(ItemStack itemStack, TooltipContext tooltipFlag, List<Text> list) {
         list.add(1, new LiteralText("原文: " + Handler.getNoLocalizedMap().getOrDefault(itemStack.getTranslationKey(), "無")).formatted(Formatting.GRAY));
-        boolean press = RPMKeyBinding.translate.isPressed();
+        boolean press = isKeyPress(RPMKeyBinding.translate);
         boolean playing = MinecraftClient.getInstance().player != null;
 
         if (playing && RPMTWConfig.getConfig().isTranslate) {
