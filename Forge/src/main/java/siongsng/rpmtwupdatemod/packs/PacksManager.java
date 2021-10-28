@@ -17,7 +17,6 @@ import java.util.concurrent.TimeUnit;
 public class PacksManager {
     public static Path PackDir = Paths.get(System.getProperty("user.home") + "/.rpmtw/1.16"); //資源包的放置根目錄
     public static Path PackFile = PackDir.resolve("RPMTW-1.16.zip"); //資源包檔案位置
-    public static String UpdateFile = PackDir + "/Update.txt"; //更新暫存檔案放置位置
     private static PackFinder RESOURCES;
 
     public static void close() {

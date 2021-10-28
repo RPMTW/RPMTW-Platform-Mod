@@ -5,13 +5,11 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "ClientLanguageMixin",
-    "TranslatableTextMixin",
     "LanguageMixin",
     "MixinBookContents",
     "PlayJoinMixin",
     "ResourcePackManagerMixin",
-    "RpmtwUpdateMod_mixin",
-    "RpmtwUpdateModServer"
+    "RpmtwUpdateMod_mixin"
   ],
   "client": [
     "RpmtwUpdateModClient"
