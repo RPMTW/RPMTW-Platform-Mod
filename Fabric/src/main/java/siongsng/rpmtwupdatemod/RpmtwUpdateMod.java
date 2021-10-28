@@ -3,13 +3,11 @@ package siongsng.rpmtwupdatemod;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import siongsng.rpmtwupdatemod.CosmicChat.GetMessage;
@@ -18,7 +16,6 @@ import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.crowdin.key;
 import siongsng.rpmtwupdatemod.function.SendMsg;
 import siongsng.rpmtwupdatemod.translation.Handler;
-import siongsng.rpmtwupdatemod.translation.TranslationManager;
 
 import java.util.Locale;
 import java.util.Objects;
@@ -65,10 +62,6 @@ public class RpmtwUpdateMod implements ClientModInitializer {
             new GetMessage();
         }
         Handler.init();
-        TranslationManager.getInstance().init();
-        ClientLifecycleEvents.CLIENT_STOPPING.register(client -> {
-            TranslationManager.getInstance().writeCash(); //寫入翻譯快取
-        });
     }
 
 }
