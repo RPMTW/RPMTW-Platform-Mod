@@ -16,8 +16,7 @@ public class PlayJoinMixin {
     private void playerJoin(ClientConnection connection, ServerPlayerEntity player, CallbackInfo ci) {
         if (RPMTWConfig.getConfig().notice) { //判斷Config
             player.sendMessage(new LiteralText(
-                    "§e歡迎使用 RPMTW Update Mod 萬用中文化模組\n§a如有問題可以到我們的Discord群組詢問\n§eDiscord: https://discord.gg/5xApZtgV2u\n§如果有些功能不需要也可以打開選單關閉(預設快捷鍵為)"), false);
-
+                    "§a歡迎使用 RPMTW Update Mod 萬用中文化模組\\n§f如有問題可以到我們的Discord群組詢問\\n§fDiscord: https://discord.gg/5xApZtgV2u\\n§f如果有些功能不需要也可以打開選單關閉(快捷鍵 O)"), false);
         }
     }
 }
