@@ -47,7 +47,7 @@ public class Handler {
             } else {
                 boolean isNoLocalized = getNoLocalizedMap().containsKey(stack.getTranslationKey());
                 if (isNoLocalized) {
-                    event.getToolTip().add(2, new StringTextComponent("按下 " + RPMKeyBinding.translate.getDefault().func_237520_d_().getString() + " 後將物品機器翻譯為中文"));
+                    event.getToolTip().add(2, new StringTextComponent("按下 " + RPMKeyBinding.translate.getKey().func_237520_d_().getString() + " 後將物品機器翻譯為中文"));
                 }
             }
         }

@@ -1,6 +1,7 @@
 package siongsng.rpmtwupdatemod.translation;
 
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
+import net.fabricmc.fabric.mixin.client.keybinding.KeyCodeAccessor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.option.KeyBinding;
@@ -29,7 +30,7 @@ public class Handler {
 
 
     public static boolean isKeyPress(KeyBinding key) {
-        return InputUtil.isKeyPressed(MinecraftClient.getInstance().getWindow().getHandle(), key.getDefaultKey().getCode());
+        return InputUtil.isKeyPressed(MinecraftClient.getInstance().getWindow().getHandle(), ((KeyCodeAccessor) key).fabric_getBoundKey().getCode());
     }
 
     public static void init() {
@@ -48,7 +49,7 @@ public class Handler {
             } else {
                 boolean isNoLocalized = getNoLocalizedMap().containsKey(itemStack.getTranslationKey());
                 if (isNoLocalized) {
-                    list.add(2, new LiteralText("按下 " + key.translate.getDefaultKey().getLocalizedText().asString() + " 後將物品機器翻譯為中文"));
+                    list.add(2, new LiteralText("按下 " + key.translate.getBoundKeyLocalizedText().asString() + " 後將物品機器翻譯為中文"));
                 }
             }
         }
