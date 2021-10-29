@@ -67,9 +67,7 @@ public class RpmtwUpdateMod {
 
     public void init(final FMLClientSetupEvent e) {
         MinecraftForge.EVENT_BUS.register(new RPMKeyBinding()); // 快捷鍵註冊
-        if (RPMTWConfig.notice.get()) { // 判斷Config
-            MinecraftForge.EVENT_BUS.register(new onPlayerJoin()); // 玩家加入事件註冊
-        }
+        MinecraftForge.EVENT_BUS.register(new onPlayerJoin()); // 玩家加入事件註冊
         ConfigScreen.registerConfigScreen();
 
         boolean isDebug = Boolean.parseBoolean(System.getProperty("siongsng.rpmtwupdatemod.RpmtwUpdateMod.isDebug"));
