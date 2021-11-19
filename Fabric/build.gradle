@@ -58,7 +58,7 @@ dependencies {
     modImplementation include("me.shedaniel.cloth:cloth-config-fabric:6.0.42") {
         exclude(group: "net.fabricmc.fabric-api")
     }
-    modImplementation include("io.github.cottonmc:LibGui:4.2.1+")
+    modImplementation include("io.github.cottonmc:LibGui:4.2.2+")
     modImplementation("com.terraformersmc:modmenu:2.0.2")
 }
 
