@@ -48,7 +48,7 @@ dependencies {
     shadow('commons-beanutils:commons-beanutils:20030211.134440')
     shadow('org.apache.httpcomponents:httpclient:4.5.13')
     include(modApi('io.socket:socket.io-client:2.0.1'))
-    include(modApi('net.lingala.zip4j:zip4j:2.9.0'))
+    include(modApi('net.lingala.zip4j:zip4j:2.9.1'))
     include('io.socket:engine.io-client:2.0.0')
     include('org.json:json:20210307')
     include('com.squareup.okhttp3:okhttp:4.9.2')
