@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '0.9-SNAPSHOT'
+    id 'fabric-loom' version '0.10-SNAPSHOT'
     id 'maven-publish'
 }
 repositories {
@@ -40,7 +40,7 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    modImplementation("vazkii.patchouli:Patchouli:1.17.1-57-FABRIC") //Patchouli
+//    modImplementation("vazkii.patchouli:Patchouli:1.17.1-57-FABRIC") //Patchouli
 
     shadow('commons-lang:commons-lang:20030203.000129')
     shadow('net.sf.ezmorph:ezmorph:1.0.6')
@@ -58,8 +58,9 @@ dependencies {
     modImplementation include("me.shedaniel.cloth:cloth-config-fabric:6.0.42") {
         exclude(group: "net.fabricmc.fabric-api")
     }
-    modImplementation include("io.github.cottonmc:LibGui:4.2.2+")
-    modImplementation("com.terraformersmc:modmenu:2.0.2")
+    modImplementation include("io.github.cottonmc:LibGui:5.0.0-beta.1+1.18-pre2")
+    include(modApi('io.github.juuxel:libninepatch:1.1.0'))
+    modImplementation("com.terraformersmc:modmenu:3.0.0")
 }
 
 processResources {

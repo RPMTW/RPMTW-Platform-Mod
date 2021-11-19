@@ -32,7 +32,7 @@ public class TokenCheck {
                 e.printStackTrace();
             }
             assert response != null;
-        	MinecraftClient mc = MinecraftClient.getInstance();
+            MinecraftClient mc = MinecraftClient.getInstance();
             if (response.getStatusLine().getStatusCode() == 200) {
                 if (mc.player != null) {
                     SendMsg.send("§9[Crowdin權杖自動檢測系統]§a檢測成功，您的登入權杖是有效的。");

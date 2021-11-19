@@ -1,12 +1,12 @@
 package siongsng.rpmtwupdatemod.config;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Config(name = "rpmtw_update_mod")
 public class ConfigScreen implements ConfigData {

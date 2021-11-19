@@ -11,9 +11,10 @@ import java.util.function.Consumer;
 
 public class LoadPack implements ResourcePackProvider {
 
-    private File loaderDirectory;
     private static ResourcePackProfile profile;
     private static ZipResourcePack pack;
+    private File loaderDirectory;
+
     public LoadPack() {
 
         this.loaderDirectory = new File(System.getProperty("user.home") + "/.rpmtw/1.17/RPMTW-1.17.zip");
@@ -22,18 +23,18 @@ public class LoadPack implements ResourcePackProvider {
     public void init(Set<ResourcePackProvider> set) {
         set.add(this);
     }
-    
+
     public void close() {
-     	pack.close();
-    	profile.close();
+        pack.close();
+        profile.close();
     }
 
     public void register(Consumer<ResourcePackProfile> consumer, ResourcePackProfile.Factory factory) {
         final String packName = "RPMTW 1.17 翻譯包";
         pack = new ZipResourcePack(loaderDirectory);
-        final ResourcePackProfile packInfo = ResourcePackProfile.of(packName, true, () -> pack , factory, ResourcePackProfile.InsertionPosition.TOP, ResourcePackSource.PACK_SOURCE_NONE);
+        final ResourcePackProfile packInfo = ResourcePackProfile.of(packName, true, () -> pack, factory, ResourcePackProfile.InsertionPosition.TOP, ResourcePackSource.PACK_SOURCE_NONE);
         if (packInfo != null) {
-        	profile = packInfo;
+            profile = packInfo;
             consumer.accept(packInfo);
         }
     }

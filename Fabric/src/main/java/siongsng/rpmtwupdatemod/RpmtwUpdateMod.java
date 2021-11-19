@@ -33,7 +33,7 @@ public class RpmtwUpdateMod implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-    	SocketClient.init();
+        SocketClient.init();
         new RPMKeyBinding().Register(); //註冊快捷鍵
         LOGGER.info("Hello RPMTW world!");
         if (!RPMTWConfig.getConfig().Token.equals("")) { //如果Token不是空的

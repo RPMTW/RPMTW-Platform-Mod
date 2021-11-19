@@ -34,7 +34,7 @@ public class CosmicChat extends LightweightGuiDescription {
 
         WTextField Message = new WTextField(new LiteralText("請輸入要發送的訊息"));
         Message.setMaxLength(150);
-        gui.add(Message, (int) 3.5,  3, 10, 2);
+        gui.add(Message, (int) 3.5, 3, 10, 2);
 
         Cancel.setOnClick(() -> MinecraftClient.getInstance().setScreen(null));
         Send.setOnClick(() -> {

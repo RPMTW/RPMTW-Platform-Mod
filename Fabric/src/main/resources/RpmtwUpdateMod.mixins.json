@@ -6,8 +6,6 @@
   "mixins": [
     "ClientLanguageMixin",
     "LanguageMixin",
-    "MixinBookContents",
-    "MixinContentExternalLoader",
     "PlayJoinMixin",
     "ResourcePackManagerMixin"
   ],

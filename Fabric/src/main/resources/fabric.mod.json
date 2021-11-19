@@ -28,12 +28,12 @@
   ],
   "accessWidener": "RpmtwUpdateMod.accesswidener",
   "depends": {
-    "fabricloader": ">=0.11.3",
+    "fabricloader": ">=0.12.5",
     "fabric": "*",
-    "minecraft": "1.17.1",
-    "java": ">=16",
+    "minecraft": "1.18-beta.4",
+    "java": ">=17",
     "fabric-language-kotlin": ">=1.6.4+kotlin.1.5.30",
-    "cloth-config2": ">=5.0.0"
+    "cloth-config2": ">=6.0.0"
   },
   "suggests": {
     "modmenu": ">=2.0.0"

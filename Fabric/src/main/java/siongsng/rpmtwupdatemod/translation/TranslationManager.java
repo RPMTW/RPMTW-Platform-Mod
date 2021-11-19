@@ -74,6 +74,21 @@ public class TranslationManager {
         return "zh-TW";
     }
 
+    public record SourceLangText(String langCode, String text) {
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            SourceLangText that = (SourceLangText) o;
+            return Objects.equals(langCode, that.langCode) && Objects.equals(text, that.text);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(langCode, text);
+        }
+    }
 
     private class TranslateThread extends Thread {
         private final String text;
@@ -114,22 +129,6 @@ public class TranslationManager {
             }
 
             PROGRESS.remove(text);
-        }
-    }
-
-    public record SourceLangText(String langCode, String text) {
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            SourceLangText that = (SourceLangText) o;
-            return Objects.equals(langCode, that.langCode) && Objects.equals(text, that.text);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(langCode, text);
         }
     }
 }
