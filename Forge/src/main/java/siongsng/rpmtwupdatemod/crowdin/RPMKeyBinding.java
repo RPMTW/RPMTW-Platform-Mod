@@ -11,7 +11,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import org.lwjgl.glfw.GLFW;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
-import siongsng.rpmtwupdatemod.config.Configer;
+import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.function.SendMsg;
 import siongsng.rpmtwupdatemod.gui.*;
 import siongsng.rpmtwupdatemod.packs.PacksManager;
@@ -56,13 +56,13 @@ public final class RPMKeyBinding {
             if (item_key.equals("block.minecraft.air")) {
                 SendMsg.send("§4請手持物品後再使用此功能。");
                 return;
-            } else if (!Configer.isCheck.get()) {
+            } else if (!RPMTWConfig.isCheck.get()) {
                 Minecraft.getInstance().displayGuiScreen(new CrowdinLoginScreen());
                 return;
             } else {
                 SendMsg.send("請稍後，正在開啟物品翻譯界面中...");
                 Thread thread = new Thread(() -> {
-                    if (CorowdinProcedure.getText() == null && Configer.isCheck.get()) {
+                    if (CorowdinProcedure.getText() == null && RPMTWConfig.isCheck.get()) {
                         SendMsg.send("§6由於你目前手持想要翻譯的物品，數據不在資料庫內\n因此無法進行翻譯，想了解更多資訊請前往RPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
                         return;
                     }
@@ -76,15 +76,15 @@ public final class RPMKeyBinding {
         if (open_config.isPressed()) {
             Minecraft.getInstance().displayGuiScreen(new ConfigScreen());
         }
-        if (Configer.rpmtw_reloadpack.get()) {
+        if (RPMTWConfig.rpmtw_reloadpack.get()) {
             if (reloadpack.isPressed() && !updateLock) {
                 updateLock = true;
                 PacksManager.ReloadPack();
             }
         }
         if (cosmic_chat_send.isPressed()) {
-            if (!Configer.isChat.get()) return;
-            if (Configer.isEULA.get()) {
+            if (!RPMTWConfig.isChat.get()) return;
+            if (RPMTWConfig.isEULA.get()) {
                 Minecraft.getInstance().displayGuiScreen(new CosmicChatScreen());
             } else {
                 Minecraft.getInstance().displayGuiScreen(new EULAScreen());

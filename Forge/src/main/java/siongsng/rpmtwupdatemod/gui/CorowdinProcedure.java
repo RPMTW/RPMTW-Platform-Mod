@@ -10,7 +10,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
-import siongsng.rpmtwupdatemod.config.Configer;
+import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 
 import java.nio.charset.StandardCharsets;
 
@@ -25,7 +25,7 @@ public class CorowdinProcedure {
             HttpUriRequest request = RequestBuilder.get()
                     .setUri("https://api.crowdin.com/api/v2/projects/442446/strings?filter=" + mc.player.getHeldItemMainhand().getItem().getTranslationKey())
                     .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
-                    .setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + Configer.Token.get())
+                    .setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + RPMTWConfig.Token.get())
                     .build();
             try (CloseableHttpResponse response = httpClient.execute(request)) {
                 responseBody = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);

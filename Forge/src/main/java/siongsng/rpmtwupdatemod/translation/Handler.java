@@ -10,7 +10,7 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import siongsng.rpmtwupdatemod.config.Configer;
+import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.crowdin.RPMKeyBinding;
 
 import java.util.HashMap;
@@ -39,7 +39,7 @@ public class Handler {
         event.getToolTip().add(1, new StringTextComponent("原文: " + Handler.getNoLocalizedMap().getOrDefault(stack.getTranslationKey(), "無")).mergeStyle(TextFormatting.GRAY));
         boolean press = isKeyPress(RPMKeyBinding.translate);
         boolean playing = Minecraft.getInstance().player != null;
-        if (Configer.isTranslate.get() && playing) {
+        if (RPMTWConfig.isTranslate.get() && playing) {
             if (press) {
                 for (ITextComponent text : TranslationManager.getInstance().createToolTip(stack)) {
                     event.getToolTip().add(2, text);

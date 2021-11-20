@@ -5,7 +5,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Configer {
+public class RPMTWConfig {
     public static ForgeConfigSpec.BooleanValue rpmtw_crowdin, rpmtw_reloadpack, notice, isCheck, isChinese, isChat, isEULA, isTranslate;
     public static ForgeConfigSpec.ConfigValue<List<String>> modBlackList;
     public static ForgeConfigSpec.ConfigValue<String> Token;

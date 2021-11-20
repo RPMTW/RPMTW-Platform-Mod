@@ -45,28 +45,28 @@ public final class ConfigScreen extends Screen {
 
         optionsRowList.addOption(new BooleanOption(
                 "開啟對應翻譯網頁",
-                unused -> Configer.rpmtw_crowdin.get(),
-                (unused, newValue) -> Configer.rpmtw_crowdin.set(newValue)
+                unused -> RPMTWConfig.rpmtw_crowdin.get(),
+                (unused, newValue) -> RPMTWConfig.rpmtw_crowdin.set(newValue)
         ));
         optionsRowList.addOption(new BooleanOption(
                 "使用快捷鍵檢測翻譯包更新",
-                unused -> Configer.rpmtw_reloadpack.get(),
-                (unused, newValue) -> Configer.rpmtw_reloadpack.set(newValue)
+                unused -> RPMTWConfig.rpmtw_reloadpack.get(),
+                (unused, newValue) -> RPMTWConfig.rpmtw_reloadpack.set(newValue)
         ));
         optionsRowList.addOption(new BooleanOption(
                 "是否啟用宇宙通訊系統",
-                unused -> Configer.isChat.get(),
-                (unused, newValue) -> Configer.isChat.set(newValue)
+                unused -> RPMTWConfig.isChat.get(),
+                (unused, newValue) -> RPMTWConfig.isChat.set(newValue)
         ));
         optionsRowList.addOption(new BooleanOption(
                 "進入世界時自動發送公告",
-                unused -> Configer.notice.get(),
-                (unused, newValue) -> Configer.notice.set(newValue)
+                unused -> RPMTWConfig.notice.get(),
+                (unused, newValue) -> RPMTWConfig.notice.set(newValue)
         ));
         optionsRowList.addOption(new BooleanOption(
                 "啟用機器翻譯",
-                unused -> Configer.isTranslate.get(),
-                (unused, newValue) -> Configer.isTranslate.set(newValue)
+                unused -> RPMTWConfig.isTranslate.get(),
+                (unused, newValue) -> RPMTWConfig.isTranslate.set(newValue)
         ));
 
         this.children.add(optionsRowList);
@@ -77,12 +77,12 @@ public final class ConfigScreen extends Screen {
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
                 new StringTextComponent("重置設定"),
                 button -> {
-                    Configer.rpmtw_crowdin.set(true);
-                    Configer.rpmtw_reloadpack.set(true);
-                    Configer.notice.set(true);
-                    Configer.isChat.set(true);
-                    Configer.isTranslate.set(true);
-                    Configer.isChinese.set(true);
+                    RPMTWConfig.rpmtw_crowdin.set(true);
+                    RPMTWConfig.rpmtw_reloadpack.set(true);
+                    RPMTWConfig.notice.set(true);
+                    RPMTWConfig.isChat.set(true);
+                    RPMTWConfig.isTranslate.set(true);
+                    RPMTWConfig.isChinese.set(true);
                     Minecraft.getInstance().displayGuiScreen(new ConfigScreen());
                 }));
 

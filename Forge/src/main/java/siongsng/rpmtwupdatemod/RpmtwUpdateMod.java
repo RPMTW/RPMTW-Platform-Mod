@@ -17,7 +17,7 @@ import org.apache.logging.log4j.Logger;
 import siongsng.rpmtwupdatemod.CosmicChat.GetMessage;
 import siongsng.rpmtwupdatemod.config.Config;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
-import siongsng.rpmtwupdatemod.config.Configer;
+import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.crowdin.RPMKeyBinding;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.notice.notice;
@@ -45,13 +45,19 @@ public class RpmtwUpdateMod {
         if (!ping.isConnect()) { //判斷是否有網路
             LOGGER.error("你目前處於無網路狀態，因此無法使用 RPMTW 翻譯自動更新模組，請連結網路後重新啟動此模組。");
         }
-        if (FMLEnvironment.dist == Dist.CLIENT && Configer.isChinese.get()) {
-            Minecraft mc = Minecraft.getInstance();
-            mc.gameSettings.language = "zh_tw"; //將語言設定為繁體中文
+        Minecraft mc = Minecraft.getInstance();
+        if (FMLEnvironment.dist == Dist.CLIENT) {
+            Config.loadConfig(Config.CLIENT);
+            System.out.print("test: " + RPMTWConfig.isChinese.get());
+            if (RPMTWConfig.isChinese.get()) {
+                mc.gameSettings.language = "zh_tw"; //將語言設定為繁體中文
+            }
         }
+
+
         PacksManager.PackVersionCheck(); //資源包版本檢查
         try {
-            new TokenCheck().Check(Configer.Token.get()); //開始檢測權杖
+            new TokenCheck().Check(RPMTWConfig.Token.get()); //開始檢測權杖
         } catch (IOException e) {
             LOGGER.error("檢測權杖時發生未知錯誤：" + e);
         }
@@ -61,12 +67,12 @@ public class RpmtwUpdateMod {
 
     public void init(final FMLClientSetupEvent e) {
         MinecraftForge.EVENT_BUS.register(new RPMKeyBinding());  //快捷鍵註冊
-        if (Configer.notice.get()) { //判斷Config
+        if (RPMTWConfig.notice.get()) { //判斷Config
             MinecraftForge.EVENT_BUS.register(new notice()); //玩家加入事件註冊
         }
         ConfigScreen.registerConfigScreen();
 
-        if (Configer.isChat.get()) {
+        if (RPMTWConfig.isChat.get()) {
             new GetMessage();
         }
         MinecraftForge.EVENT_BUS.register(new Handler());

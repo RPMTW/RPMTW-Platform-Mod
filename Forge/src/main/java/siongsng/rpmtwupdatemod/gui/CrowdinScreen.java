@@ -16,7 +16,7 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import siongsng.rpmtwupdatemod.config.Configer;
+import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.function.SendMsg;
 
 import javax.annotation.Nonnull;
@@ -79,7 +79,7 @@ public final class CrowdinScreen extends Screen {
                                 "{\"stringId\":\"" + stringID + "\",\"languageId\":\"zh-TW\",\"text\": \"" + Translation.getText() + "\"}",
                                 ContentType.APPLICATION_JSON);
                         HttpPost postMethod = new HttpPost("https://api.crowdin.com/api/v2/projects/442446/translations");
-                        postMethod.setHeader("Authorization", "Bearer " + Configer.Token.get());
+                        postMethod.setHeader("Authorization", "Bearer " + RPMTWConfig.Token.get());
                         postMethod.setEntity(requestEntity);
                         try {
                             httpClient.execute(postMethod);

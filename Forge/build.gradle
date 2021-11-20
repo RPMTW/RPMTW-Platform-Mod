@@ -63,19 +63,19 @@ configurations {
 }
 
 dependencies {
-    shade('commons-lang:commons-lang:2.6')
-    shade('net.sf.ezmorph:ezmorph:1.0.6')
-    shade('commons-collections:commons-collections:3.2.2')
-    shade('commons-beanutils:commons-beanutils:1.9.4')
-    shade('commons-io:commons-io:2.9.0')
+    shade implementation('commons-lang:commons-lang:2.6')
+    shade implementation('net.sf.ezmorph:ezmorph:1.0.6')
+    shade implementation('commons-collections:commons-collections:3.2.2')
+    shade implementation('commons-beanutils:commons-beanutils:1.9.4')
+    shade implementation('commons-io:commons-io:2.9.0')
     shade implementation('io.socket:socket.io-client:2.0.1')
     shade implementation('net.lingala.zip4j:zip4j:2.9.0')
     shade('io.socket:engine.io-client:2.0.0')
-    shade('org.json:json:20090211')
-    shade('com.squareup.okhttp3:okhttp:3.12.12')
-    shade('com.squareup.okio:okio:1.15.0')
+    shade implementation('org.json:json:20090211')
+    shade implementation('com.squareup.okhttp3:okhttp:3.12.12')
+    shade implementation('com.squareup.okio:okio:1.15.0')
     implementation fg.deobf("vazkii.patchouli:Patchouli:1.16.4-54-SNAPSHOT")
-    minecraft 'net.minecraftforge:forge:1.16.5-36.2.8'
+    minecraft 'net.minecraftforge:forge:1.16.5-36.2.9'
     annotationProcessor 'org.spongepowered:mixin:0.8:processor'
 }
 

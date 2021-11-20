@@ -8,7 +8,7 @@ import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.StringTextComponent;
-import siongsng.rpmtwupdatemod.config.Configer;
+import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 
 import javax.annotation.Nonnull;
 
@@ -45,7 +45,7 @@ public class EULAScreen extends Screen {
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
                 new StringTextComponent("我同意"),
                 button -> {
-                    Configer.isEULA.set(true);
+                    RPMTWConfig.isEULA.set(true);
                     Minecraft.getInstance().displayGuiScreen(new CosmicChatScreen());
                 }));
     }

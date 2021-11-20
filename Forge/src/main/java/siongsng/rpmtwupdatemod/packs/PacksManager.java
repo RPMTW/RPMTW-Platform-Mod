@@ -3,7 +3,7 @@ package siongsng.rpmtwupdatemod.packs;
 import net.minecraft.client.Minecraft;
 import org.apache.commons.io.FileUtils;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
-import siongsng.rpmtwupdatemod.config.Configer;
+import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.crowdin.RPMKeyBinding;
 import siongsng.rpmtwupdatemod.function.SendMsg;
 
@@ -38,7 +38,7 @@ public class PacksManager {
                         SendMsg.send("§6偵測到翻譯包版本過舊，正在進行更新並重新載入中...。");
                     }
                     FileUtils.copyURLToFile(new URL(RpmtwUpdateMod.PackDownloadUrl), file); //下載資源包檔案
-                    ZipUtils.removeDirFromZip(file, Configer.modBlackList.get());
+                    ZipUtils.removeDirFromZip(file, RPMTWConfig.modBlackList.get());
                     Minecraft.getInstance().getResourcePackList().addPackFinder(RESOURCES); //新增資源包至資源包列表
                     Minecraft.getInstance().reloadResources().whenCompleteAsync((c, t) -> {//重新載入資源
                         RPMKeyBinding.updateLock = false;
@@ -65,7 +65,7 @@ public class PacksManager {
                     Files.createDirectories(PackDir);
                 }
                 FileUtils.copyURLToFile(new URL(RpmtwUpdateMod.PackDownloadUrl), file); //下載資源包檔案
-                ZipUtils.removeDirFromZip(file, Configer.modBlackList.get());
+                ZipUtils.removeDirFromZip(file, RPMTWConfig.modBlackList.get());
                 Minecraft.getInstance().getResourcePackList().addPackFinder(RESOURCES); //新增資源包至資源包列表
             }
         } catch (Exception e) {

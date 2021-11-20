@@ -5,7 +5,7 @@ import com.google.gson.JsonParser;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.Session;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
-import siongsng.rpmtwupdatemod.config.Configer;
+import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.function.SendMsg;
 
 public class GetMessage {
@@ -14,7 +14,7 @@ public class GetMessage {
             try {
             	Minecraft mc = Minecraft.getInstance();
                 if (mc.player == null) return;
-                if (!Configer.isChat.get()) return;
+                if (!RPMTWConfig.isChat.get()) return;
 
                 Session session = mc.getSession();
 
