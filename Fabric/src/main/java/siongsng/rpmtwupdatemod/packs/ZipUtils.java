@@ -13,8 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ZipUtils {
-    final static Path PackDir = Paths.get(System.getProperty("user.home") + "/.rpmtw/1.17");
-    final static Path PackFile = PackDir.resolve("RPMTW-1.17.zip");
+    final static Path PackDir = Paths.get(System.getProperty("user.home") + "/.rpmtw/1.18");
     private static int retryCount = 0;
 
     public static void removeDirFromZip(File file, List<String> removeDirs) throws ZipException {
@@ -50,7 +49,7 @@ public class ZipUtils {
             RpmtwUpdateMod.LOGGER.info("篩選耗時：" + (System.currentTimeMillis() - start) / 1000.0 + " 秒。");
             if (retryCount > 0) {
                 RpmtwUpdateMod.LOGGER.info("重新嘗試成功,已刪除暫存檔案");
-                File[] files = Paths.get(System.getProperty("user.home") + "/.rpmtw/1.17").toFile().listFiles((d, s) -> {
+                File[] files = Paths.get(System.getProperty("user.home") + "/.rpmtw/1.18").toFile().listFiles((d, s) -> {
                     return s.toLowerCase().contains(".zip") && !s.toLowerCase().endsWith(".zip");
                 });
                 for (File f : files) {

@@ -17,7 +17,7 @@ public class LoadPack implements ResourcePackProvider {
 
     public LoadPack() {
 
-        this.loaderDirectory = new File(System.getProperty("user.home") + "/.rpmtw/1.17/RPMTW-1.17.zip");
+        this.loaderDirectory = new File(System.getProperty("user.home") + "/.rpmtw/1.18/RPMTW-1.18.zip");
     }
 
     public void init(Set<ResourcePackProvider> set) {
@@ -30,7 +30,7 @@ public class LoadPack implements ResourcePackProvider {
     }
 
     public void register(Consumer<ResourcePackProfile> consumer, ResourcePackProfile.Factory factory) {
-        final String packName = "RPMTW 1.17 翻譯包";
+        final String packName = "RPMTW 1.18 翻譯包";
         pack = new ZipResourcePack(loaderDirectory);
         final ResourcePackProfile packInfo = ResourcePackProfile.of(packName, true, () -> pack, factory, ResourcePackProfile.InsertionPosition.TOP, ResourcePackSource.PACK_SOURCE_NONE);
         if (packInfo != null) {
