@@ -51,7 +51,7 @@ dependencies {
     include(modApi('net.lingala.zip4j:zip4j:2.9.1'))
     include('io.socket:engine.io-client:2.0.0')
     include('org.json:json:20210307')
-    include('com.squareup.okhttp3:okhttp:4.9.2')
+    include('com.squareup.okhttp3:okhttp:4.9.3')
     include('com.squareup.okio:okio:2.10.0')
     modImplementation "net.fabricmc:fabric-language-kotlin:1.6.5+kotlin.1.5.31"
 
