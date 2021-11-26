@@ -5,6 +5,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
@@ -17,6 +18,7 @@ import siongsng.rpmtwupdatemod.crowdin.key;
 import siongsng.rpmtwupdatemod.function.SendMsg;
 import siongsng.rpmtwupdatemod.translation.Handler;
 
+import java.io.File;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -36,6 +38,19 @@ public class RpmtwUpdateMod implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        File CrowdinTranslationsDirectory = new File(MinecraftClient.getInstance().runDirectory.getAbsolutePath(), "ModTranslations");
+
+        if (CrowdinTranslationsDirectory.exists() && CrowdinTranslationsDirectory.isDirectory()) {
+            try {
+                boolean deleteSuccessful = CrowdinTranslationsDirectory.delete();
+                if (deleteSuccessful) {
+                    LOGGER.info("刪除 ModTranslations 翻譯資料夾成功。");
+                }
+            } catch (Exception ignored) {
+
+            }
+        }
+
         key.onInitializeClient(); //註冊快捷鍵
 
         ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(new SimpleSynchronousResourceReloadListener() {

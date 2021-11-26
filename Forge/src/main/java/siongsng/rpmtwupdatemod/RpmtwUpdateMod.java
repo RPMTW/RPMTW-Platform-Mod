@@ -39,21 +39,21 @@ public class RpmtwUpdateMod {
 
     public RpmtwUpdateMod() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::init); //註冊監聽事件
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT, "rpmtw_update_mod-client.toml"); //註冊組態
 
         LOGGER.info("Hello RPMTW world!");
+
         if (!ping.isConnect()) { //判斷是否有網路
             LOGGER.error("你目前處於無網路狀態，因此無法使用 RPMTW 翻譯自動更新模組，請連結網路後重新啟動此模組。");
         }
+
         Minecraft mc = Minecraft.getInstance();
         if (FMLEnvironment.dist == Dist.CLIENT) {
+            ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT, "rpmtw_update_mod-client.toml"); //註冊組態
             Config.loadConfig(Config.CLIENT);
-            System.out.print("test: " + RPMTWConfig.isChinese.get());
             if (RPMTWConfig.isChinese.get()) {
                 mc.gameSettings.language = "zh_tw"; //將語言設定為繁體中文
             }
         }
-
 
         PacksManager.PackVersionCheck(); //資源包版本檢查
         try {
