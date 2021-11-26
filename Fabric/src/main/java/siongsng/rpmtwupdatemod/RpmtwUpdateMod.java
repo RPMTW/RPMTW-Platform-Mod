@@ -3,6 +3,7 @@ package siongsng.rpmtwupdatemod;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.MinecraftClient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import siongsng.rpmtwupdatemod.CosmicChat.SocketClient;
@@ -13,6 +14,7 @@ import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.gui.ping;
 import siongsng.rpmtwupdatemod.translation.Handler;
 
+import java.io.File;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -33,7 +35,19 @@ public class RpmtwUpdateMod implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-    	SocketClient.init();
+        File CrowdinTranslationsDirectory = new File(MinecraftClient.getInstance().runDirectory.getAbsolutePath(), "ModTranslations");
+
+        if (CrowdinTranslationsDirectory.exists() && CrowdinTranslationsDirectory.isDirectory()) {
+            try {
+                boolean deleteSuccessful = CrowdinTranslationsDirectory.delete();
+                if (deleteSuccessful) {
+                    LOGGER.info("刪除 ModTranslations 翻譯資料夾成功。");
+                }
+            } catch (Exception ignored) {
+            }
+        }
+
+        SocketClient.init();
         new RPMKeyBinding().Register(); //註冊快捷鍵
         LOGGER.info("Hello RPMTW world!");
         if (!RPMTWConfig.getConfig().Token.equals("")) { //如果Token不是空的
