@@ -69,7 +69,7 @@ dependencies {
     shade('commons-collections:commons-collections:20040616')
     shade implementation('io.socket:socket.io-client:2.0.1')
 
-    implementation fg.deobf("vazkii.patchouli:Patchouli:1.17.1-57-SNAPSHOT")
+    implementation fg.deobf("vazkii.patchouli:Patchouli:1.18-60-FABRIC-SNAPSHOT")
     minecraft 'net.minecraftforge:forge:1.17.1-37.0.109'
 
     annotationProcessor 'org.spongepowered:mixin:0.8.4:processor'
