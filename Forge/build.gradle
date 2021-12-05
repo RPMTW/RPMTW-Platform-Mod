@@ -1,5 +1,6 @@
 repositories {
     mavenCentral()
+    gradlePluginPortal()
     maven { url 'https://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-releases/' }
     maven { url 'https://maven.blamejared.com' }
 }
@@ -11,11 +12,15 @@ buildscript {
             url "https://repo.spongepowered.org/repository/maven-public/"
             content { includeGroup "org.spongepowered" }
         }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
         gradlePluginPortal()
         mavenCentral()
     }
+
     dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:6.1.0'
+        classpath "gradle.plugin.com.github.johnrengelman:shadow:7.1.0"
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.+', changing: true
         classpath 'org.spongepowered:mixingradle:0.7.+'
         classpath('io.socket:socket.io-client:2.0.1')
@@ -28,8 +33,9 @@ configurations {
     shade
     compile.extendsFrom(shade)
 }
+
+apply plugin: "com.github.johnrengelman.shadow"
 apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
