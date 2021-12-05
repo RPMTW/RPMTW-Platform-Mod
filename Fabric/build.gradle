@@ -40,7 +40,7 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-//    modImplementation("vazkii.patchouli:Patchouli:1.17.1-57-FABRIC") //Patchouli
+    modImplementation("vazkii.patchouli:Patchouli:1.18-61-FABRIC-SNAPSHOT") //Patchouli
 
     shadow('commons-lang:commons-lang:20030203.000129')
     shadow('net.sf.ezmorph:ezmorph:1.0.6')
@@ -55,10 +55,11 @@ dependencies {
     include('com.squareup.okio:okio:2.10.0')
     modImplementation "net.fabricmc:fabric-language-kotlin:1.6.5+kotlin.1.5.31"
 
-    modImplementation include("me.shedaniel.cloth:cloth-config-fabric:6.0.42") {
+    modImplementation include("me.shedaniel.cloth:cloth-config-fabric:6.0.45") {
         exclude(group: "net.fabricmc.fabric-api")
     }
     modImplementation include("io.github.cottonmc:LibGui:5.0.0-beta.1+1.18-pre2")
+    modImplementation include("net.fabricmc:fabric-language-kotlin:1.7.0+kotlin.1.6.0")
     include(modApi('io.github.juuxel:libninepatch:1.1.0'))
     modImplementation("com.terraformersmc:modmenu:3.0.0")
 }

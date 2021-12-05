@@ -7,8 +7,8 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.OptionsList;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraftforge.client.ConfigGuiHandler;
 import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fmlclient.ConfigGuiHandler;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;

@@ -10,8 +10,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class PackVersionCheck {
-    public static Path PackDir = Paths.get(System.getProperty("user.home") + "/.rpmtw/1.17"); //資源包的放置根目錄
-    public static Path PackFile = PackDir.resolve("RPMTW-1.17.zip"); //資源包檔案位置
+    public static Path PackDir = Paths.get(System.getProperty("user.home") + "/.rpmtw/1.18"); //資源包的放置根目錄
+    public static Path PackFile = PackDir.resolve("RPMTW-1.18.zip"); //資源包檔案位置
 
     public PackVersionCheck() {
         try {

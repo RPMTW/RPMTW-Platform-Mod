@@ -35,8 +35,8 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 group = 'siongsng.rpmtwupdatemod'
-archivesBaseName = 'RPMTW-Update-Mod-Forge-1.17'
-java.toolchain.languageVersion = JavaLanguageVersion.of(16) //1.17 Use Java 16
+archivesBaseName = 'RPMTW-Update-Mod-Forge-1.18'
+//java.toolchain.languageVersion = JavaLanguageVersion.of(17) //1.18 Use Java 17
 compileJava.options.encoding = 'UTF-8'
 compileTestJava.options.encoding = 'UTF-8'
 task sourcesJar(type: Jar, dependsOn: classes) {
@@ -44,7 +44,7 @@ task sourcesJar(type: Jar, dependsOn: classes) {
     from sourceSets.main.allSource
 }
 minecraft {
-    mappings channel: 'official', version: '1.17.1'
+    mappings channel: 'official', version: '1.18'
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
     runs {
         client {
@@ -69,8 +69,8 @@ dependencies {
     shade('commons-collections:commons-collections:20040616')
     shade implementation('io.socket:socket.io-client:2.0.1')
 
-    implementation fg.deobf("vazkii.patchouli:Patchouli:1.17.1-57-SNAPSHOT")
-    minecraft 'net.minecraftforge:forge:1.17.1-37.0.109'
+//    implementation fg.deobf("vazkii.patchouli:Patchouli:1.17.1-57-SNAPSHOT")
+    minecraft 'net.minecraftforge:forge:1.18-38.0.14'
 
     annotationProcessor 'org.spongepowered:mixin:0.8.4:processor'
 }
@@ -112,3 +112,5 @@ task deobfJar(type: Jar) {
 artifacts {
     archives deobfJar
 }
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17

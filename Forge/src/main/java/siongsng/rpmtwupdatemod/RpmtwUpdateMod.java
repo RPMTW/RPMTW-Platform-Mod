@@ -10,7 +10,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
-import net.minecraftforge.fmllegacy.network.FMLNetworkConstants;
+import net.minecraftforge.network.NetworkConstants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import siongsng.rpmtwupdatemod.CosmicChat.SocketClient;
@@ -33,8 +33,8 @@ public class RpmtwUpdateMod {
     public final static String Mod_ID = "rpmtw_update_mod"; // 模組ID
     public static final Logger LOGGER = LogManager.getLogger(); // 註冊紀錄器
     public final static String PackDownloadUrl = Objects.equals(Locale.getDefault().getISO3Country(), "CHN")
-            ? "https://github.com.cnpmjs.org/RPMTW/ResourcePack-Mod-zh_tw/raw/Translated-1.17/RPMTW-1.17.zip"
-            : "https://github.com/RPMTW/ResourcePack-Mod-zh_tw/raw/Translated-1.17/RPMTW-1.17.zip";
+            ? "https://github.com.cnpmjs.org/RPMTW/ResourcePack-Mod-zh_tw/raw/Translated-1.18/RPMTW-1.18.zip"
+            : "https://github.com/RPMTW/ResourcePack-Mod-zh_tw/raw/Translated-1.18/RPMTW-1.18.zip";
 
     public RpmtwUpdateMod() {
 
@@ -60,7 +60,7 @@ public class RpmtwUpdateMod {
             }
         }
         ModLoadingContext.get().registerExtensionPoint(IExtensionPoint.DisplayTest.class,
-                () -> new IExtensionPoint.DisplayTest(() -> FMLNetworkConstants.IGNORESERVERONLY,
+                () -> new IExtensionPoint.DisplayTest(() -> NetworkConstants.IGNORESERVERONLY,
                         (remote, isServer) -> true));
 
     }
