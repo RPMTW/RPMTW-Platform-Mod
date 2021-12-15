@@ -41,7 +41,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 group = 'siongsng.rpmtwupdatemod'
-archivesBaseName = 'RPMTW-Update-Mod-Forge-1.18'
+archivesBaseName = 'RPMTW-Update-Mod-Forge-1.18.1'
 //java.toolchain.languageVersion = JavaLanguageVersion.of(17) //1.18 Use Java 17
 compileJava.options.encoding = 'UTF-8'
 compileTestJava.options.encoding = 'UTF-8'
@@ -50,7 +50,7 @@ task sourcesJar(type: Jar, dependsOn: classes) {
     from sourceSets.main.allSource
 }
 minecraft {
-    mappings channel: 'official', version: '1.18'
+    mappings channel: 'official', version: '1.18.1'
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
     runs {
         client {
@@ -75,8 +75,8 @@ dependencies {
     shade('commons-collections:commons-collections:20040616')
     shade implementation('io.socket:socket.io-client:2.0.1')
 
-//    implementation fg.deobf("vazkii.patchouli:Patchouli:1.17.1-57-SNAPSHOT")
-    minecraft 'net.minecraftforge:forge:1.18-38.0.14'
+    implementation fg.deobf("vazkii.patchouli:Patchouli:1.18.1-62-SNAPSHOT")
+    minecraft 'net.minecraftforge:forge:1.18.1-39.0.5'
 
     annotationProcessor 'org.spongepowered:mixin:0.8.4:processor'
 }
@@ -87,7 +87,7 @@ jar {
             "LICENSE"                 : "MIT",
             "Specification-Version"   : "1",
             "Implementation-Title"    : project.name,
-            "Implementation-Version"  : project.version,
+            "Implementation-Version"  : "${project.version}${getVersionMetadata()}",
             "Implementation-Vendor"   : "SiongSng",
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
             "MixinConfigs"            : "rpmtw_update_mod.mixin.cfg.json"
@@ -120,3 +120,14 @@ artifacts {
 }
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
+
+
+static String getVersionMetadata() {
+    def build_id = System.getenv("GITHUB_RUN_NUMBER")
+
+    if (build_id != null) {
+        return "+build.${build_id}"
+    } else {
+        return "";
+    }
+}
