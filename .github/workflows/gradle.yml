@@ -26,7 +26,7 @@ jobs:
         with:
           curseforge-id: 461500
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-          files-primary: ${{ github.workspace }}/Forge/build/libs/!(*-@(dev|sources)).jar
+          files-primary: ${{ github.workspace }}/Forge/build/libs/RPMTW-Update-Mod-Forge-1.18.1-1.2.7.jar
           version-type: beta
           loaders: forge
           version-resolver: latest
@@ -57,7 +57,7 @@ jobs:
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
           curseforge-id: 461500
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-          files-primary: ${{ github.workspace }}/Fabric/build/libs/!(*-@(dev|sources)).jar
+          files-primary: ${{ github.workspace }}/Fabric/build/libs/RPMTW-Update-Mod-Fabric-1.18.1-1.2.7.jar
           version-type: release
           loaders: fabric
           version-resolver: latest
