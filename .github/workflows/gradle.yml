@@ -23,7 +23,8 @@ jobs:
         with:
           curseforge-id: 461500
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-          files-primary: build/libs/!(*-@(dev|sources)).jar
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          files-primary: ${{ github.workspace }}/Forge/build/libs/!(*-@(dev|sources)).jar
           version-type: beta
           loaders: forge
           version-resolver: latest
@@ -44,6 +45,9 @@ jobs:
           cd ${{ github.workspace }}/Fabric
           chmod +x gradlew
           sh ./gradlew build
+          cd build
+          cd libs
+          ls
       - name: Upload artifacts to Modrinth, Curseforge and GitHub
         uses: Kir-Antipov/mc-publish@v2.0
         with:
@@ -51,7 +55,8 @@ jobs:
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
           curseforge-id: 461500
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-          files-primary: build/libs/!(*-@(dev|sources)).jar
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          files-primary: ${{ github.workspace }}/Fabric/build/libs/!(*-@(dev|sources)).jar
           version-type: release
           loaders: fabric
           version-resolver: latest
