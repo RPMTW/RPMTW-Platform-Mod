@@ -93,10 +93,10 @@ remapJar.doLast {
 
 static String getVersionMetadata() {
     def build_id = System.getenv("GITHUB_RUN_NUMBER")
-
-    if (build_id != null) {
-        return "+build.${build_id}"
-    } else {
-        return "";
-    }
+return  "";
+//    if (build_id != null) {
+//        return "+build.${build_id}"
+//    } else {
+//        return "";
+//    }
 }
