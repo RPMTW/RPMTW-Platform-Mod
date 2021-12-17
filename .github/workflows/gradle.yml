@@ -31,5 +31,8 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           files-primary: ${{ github.workspace }}/Forge/build/libs/!(*-@(dev|sources)).jar
           version-type: beta
+          name: ${{ github.event_name }} (Forge)
           loaders: forge
           version-resolver: latest
+          java: |
+            8

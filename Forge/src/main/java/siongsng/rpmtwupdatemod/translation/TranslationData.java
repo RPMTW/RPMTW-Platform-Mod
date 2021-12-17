@@ -14,10 +14,6 @@ public class TranslationData {
         TRANS_DATA.put(langCode, text);
     }
 
-    public Map<String, TranslationInfo> getAllTranslateText() {
-        return TRANS_DATA;
-    }
-
     public boolean isTranslated(String langCode) {
 
         return TRANS_DATA.containsKey(langCode);

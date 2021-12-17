@@ -26,7 +26,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
 group = 'siongsng.rpmtwupdatemod'
-version = '1.2.3'
+version = '1.2.8'
 archivesBaseName = 'RPMTW-Update-Mod-1.12'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(8)
@@ -72,9 +72,6 @@ dependencies {
         exclude module: 'commons-io'
         exclude module: 'gson'
     }
-
-//    shade('org.spongepowered:mixin:0.8.4:processor')
-//    shade('com.google.code.gson:gson:2.8.8')
 }
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
