@@ -26,12 +26,13 @@ jobs:
         with:
           curseforge-id: 461500
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           files-primary: ${{ github.workspace }}/Forge/build/libs/!(*-@(dev|sources)).jar
           version-type: beta
           loaders: forge
           version-resolver: latest
-          name: ${{ github.event.name }} (Forge)
+          name: ${{ github.event.release.name }} (Forge)
           java: |
             17
 
@@ -63,7 +64,7 @@ jobs:
           version-type: release
           loaders: fabric
           version-resolver: latest
-          name: ${{ github.event.name }} (Fabric)
+          name: ${{ github.event.release.name }} (Fabric)
           java: |
             17
             18
