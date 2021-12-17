@@ -8,7 +8,6 @@ on:
 jobs:
   Forge-Build:
     runs-on: ubuntu-latest
-    if: ${{ (github.ref =='refs/heads/1.18') }}
 
     steps:
       - uses: actions/checkout@v2
@@ -39,7 +38,6 @@ jobs:
 
   Fabric-Build:
     runs-on: ubuntu-latest
-    if: ${{ (github.ref =='refs/heads/1.18') }}
 
     steps:
       - uses: actions/checkout@v2
