@@ -5,7 +5,6 @@ on:
     types:
       - published
 
-
 jobs:
   Forge-Build:
     runs-on: ubuntu-latest
@@ -27,10 +26,11 @@ jobs:
         with:
           curseforge-id: 461500
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           files-primary: ${{ github.workspace }}/Forge/build/libs/!(*-@(dev|sources)).jar
           version-type: beta
-          name: ${{ github.event.name }} (Forge)
+          name: ${{ github.event.release.name }} (Forge)
           loaders: forge
           version-resolver: latest
           java: |
