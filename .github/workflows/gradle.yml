@@ -31,7 +31,7 @@ jobs:
           version-type: beta
           loaders: forge
           version-resolver: latest
-          name: ${{ github.event_name }} (Forge)
+          name: ${{ github.event.name }} (Forge)
           java: |
             17
 
@@ -63,7 +63,7 @@ jobs:
           version-type: release
           loaders: fabric
           version-resolver: latest
-          name: ${{ github.event_name }} (Fabric)
+          name: ${{ github.event.name }} (Fabric)
           java: |
             17
             18

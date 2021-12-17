@@ -27,23 +27,20 @@ public class TranslationManager {
         return INSTANCE;
     }
 
-    public List<Component> createToolTip(ItemStack item) {
-        Component text = item.getDisplayName();
-        String key = item.getDescriptionId();
-        String str = Handler.getNoLocalizedMap().containsKey(key) ? Handler.getNoLocalizedMap().get(key) : text.getString();
+    public List<Component> createToolTip(String source) {
         String lang = "en";
 
         if (currentLang().equals(lang))
             return Collections.singletonList(NO_REQUIRED_TEXT);
 
-        SourceLangText langText = new SourceLangText(lang, str);
+        SourceLangText langText = new SourceLangText(lang, source);
 
         if (Cash.containsKey(langText) && Cash.get(langText).isTranslated(currentLang())) {
             TranslationData.TranslationInfo info = Cash.get(langText).getTranslateInfo(currentLang());
             if (info.getError() != null)
                 return Collections.singletonList(ERROR_TEXT);
 
-            if (str.equals(info.getText()))
+            if (source.equals(info.getText()))
                 return Collections.singletonList(NO_REQUIRED_TEXT);
 
             if (info.getText() != null) {
@@ -55,15 +52,15 @@ public class TranslationManager {
             return Collections.singletonList(ERROR_TEXT);
         }
 
-        if (PROGRESS.contains(str)) {
+        if (PROGRESS.contains(source)) {
             MutableComponent c = PROGRESS_TEXT.copy();
             for (int i = 0; i < (System.currentTimeMillis() % 400) / 100; i++) {
                 c.append(".");
             }
             return Collections.singletonList(c);
         }
-        PROGRESS.add(str);
-        TranslateThread tt = new TranslateThread(str, lang, currentLang());
+        PROGRESS.add(source);
+        TranslateThread tt = new TranslateThread(source, lang, currentLang());
         tt.start();
 
         return Collections.singletonList(ERROR_TEXT);

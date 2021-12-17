@@ -18,19 +18,18 @@ import java.util.List;
 import java.util.Map;
 
 public class Handler {
-    private static Map<String, String> noLocalizedMap = new HashMap<>();
-
-    public static Map<String, String> getNoLocalizedMap() {
-        return noLocalizedMap;
-    }
+    private static final Map<String, String> noLocalizedMap = new HashMap<>();
 
     public static void addNoLocalizedMap(String key, String value) {
         noLocalizedMap.put(key, value);
     }
 
-
     public static boolean isKeyPress(KeyBinding key) {
-        return InputUtil.isKeyPressed(MinecraftClient.getInstance().getWindow().getHandle(), ((KeyCodeAccessor) key).fabric_getBoundKey().getCode());
+        try {
+            return InputUtil.isKeyPressed(MinecraftClient.getInstance().getWindow().getHandle(), ((KeyCodeAccessor) key).fabric_getBoundKey().getCode());
+        } catch (Exception exception) {
+            return false;
+        }
     }
 
     public static void init() {
@@ -38,20 +37,18 @@ public class Handler {
     }
 
     public static void onTooltip(ItemStack itemStack, TooltipContext tooltipFlag, List<Text> list) {
-        list.add(1, new LiteralText("原文: " + Handler.getNoLocalizedMap().getOrDefault(itemStack.getTranslationKey(), "無")).formatted(Formatting.GRAY));
         boolean press = isKeyPress(RPMKeyBinding.translate);
         boolean playing = MinecraftClient.getInstance().player != null;
 
         if (playing && RPMTWConfig.getConfig().isTranslate) {
+            String source = noLocalizedMap.getOrDefault(itemStack.getTranslationKey(), "無");
+            list.add(1, new LiteralText("原文: " + source).formatted(Formatting.GRAY));
             if (press) {
-                for (Text text : TranslationManager.getInstance().createToolTip(itemStack)) {
+                for (Text text : TranslationManager.getInstance().createToolTip(source)) {
                     list.add(2, text);
                 }
             } else {
-                boolean isNoLocalized = getNoLocalizedMap().containsKey(itemStack.getTranslationKey());
-                if (isNoLocalized) {
-                    list.add(2, new LiteralText("按下 " + RPMKeyBinding.translate.getBoundKeyLocalizedText().asString() + " 後將物品機器翻譯為中文"));
-                }
+                list.add(2, new LiteralText("按下 " + RPMKeyBinding.translate.getBoundKeyLocalizedText().asString() + " 後將物品機器翻譯為中文"));
             }
         }
 

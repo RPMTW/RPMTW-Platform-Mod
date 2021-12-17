@@ -17,36 +17,35 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Handler {
-    private static Map<String, String> noLocalizedMap = new HashMap<>();
+    private static final Map<String, String> noLocalizedMap = new HashMap<>();
 
-    public static Map<String, String> getNoLocalizedMap() {
-        return noLocalizedMap;
-    }
 
     public static void addNoLocalizedMap(String key, String value) {
         noLocalizedMap.put(key, value);
     }
 
     public boolean isKeyPress(KeyMapping key) {
-        return InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), key.getKey().getValue());
+        try {
+            return InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), key.getKey().getValue());
+        } catch (Exception exception) {
+            return false;
+        }
     }
 
     @SubscribeEvent
     public void onTooltip(ItemTooltipEvent event) {
-        ItemStack stack = event.getItemStack();
-        event.getToolTip().add(1, new TextComponent("原文: " + Handler.getNoLocalizedMap().getOrDefault(stack.getDescriptionId(), "無")).withStyle(ChatFormatting.GRAY));
-        boolean press = RPMKeyBinding.translate.consumeClick();
+        boolean press = isKeyPress(RPMKeyBinding.translate);
         boolean playing = Minecraft.getInstance().player != null;
         if (RPMTWConfig.isTranslate.get() && playing) {
+            ItemStack stack = event.getItemStack();
+            String source = noLocalizedMap.getOrDefault(stack.getDescriptionId(), "無");
+            event.getToolTip().add(1, new TextComponent("原文: " + source).withStyle(ChatFormatting.GRAY));
             if (press) {
-                for (Component text : TranslationManager.getInstance().createToolTip(stack)) {
+                for (Component text : TranslationManager.getInstance().createToolTip(source)) {
                     event.getToolTip().add(2, text);
                 }
             } else {
-                boolean isNoLocalized = getNoLocalizedMap().containsKey(stack.getDescriptionId());
-                if (isNoLocalized) {
-                    event.getToolTip().add(2, new TextComponent("按下 " + RPMKeyBinding.translate.getTranslatedKeyMessage().getString() + " 後將物品機器翻譯為中文"));
-                }
+                event.getToolTip().add(2, new TextComponent("按下 " + RPMKeyBinding.translate.getTranslatedKeyMessage().getString() + " 後將物品機器翻譯為中文"));
             }
         }
 
