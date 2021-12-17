@@ -4,7 +4,7 @@
     <facet type="minecraft" name="Minecraft">
       <configuration>
         <autoDetectTypes>
-          <platformType>FORGE</platformType>
+          <platformType>FABRIC</platformType>
           <platformType>MIXIN</platformType>
           <platformType>MCP</platformType>
         </autoDetectTypes>
@@ -12,9 +12,6 @@
     </facet>
   </component>
   <component name="McpModuleSettings">
-    <option name="mappingFile" value="$MODULE_DIR$/../../Forge/build/createMcpToSrg/output.tsrg" />
-    <option name="mcpVersion" value="stable_39-1.12" />
-    <option name="minecraftVersion" value="1.12.2" />
-    <option name="srgType" value="TSRG" />
+    <option name="srgType" value="SRG" />
   </component>
 </module>

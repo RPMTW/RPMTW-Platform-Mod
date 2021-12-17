@@ -3,16 +3,21 @@ package siongsng.rpmtwupdatemod.translation;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
+
+import java.util.Random;
 
 public class Translator {
+    private String randomIP() {
+        Random r = new Random();
+        return r.nextInt(256) + "." + r.nextInt(256) + "." + r.nextInt(256) + "." + r.nextInt(256);
+    }
+
     public String translate(String text) throws Exception {
-        RpmtwUpdateMod.LOGGER.info("翻譯");
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         Request request = new Request.Builder()
                 .url("https://translate.googleapis.com/translate_a/single?client=gtx&sl=" + "en_us" + "&tl=" + "zh_Hant" + "&dt=t&q=" + text)
-                .method("GET", null)
+                .addHeader("x-forwarded-for", randomIP()).method("GET", null)
                 .build();
         Response response = client.newCall(request).execute();
 

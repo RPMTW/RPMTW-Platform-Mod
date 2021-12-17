@@ -1,30 +1,23 @@
 package siongsng.rpmtwupdatemod.translation;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.*;
-import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 
-import java.io.FileReader;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
-import java.util.stream.Collectors;
 
 public class TranslationManager {
 
     private static final Minecraft mc = Minecraft.getMinecraft();
-    private static final Gson GSON = new Gson();
     private static final ITextComponent PROGRESS_TEXT = new TextComponentString("翻譯中...").setStyle(new Style().setColor(TextFormatting.GRAY));
     private static final ITextComponent ERROR_TEXT = new TextComponentString("翻譯失敗").setStyle(new Style().setColor(TextFormatting.GRAY));
     private static final ITextComponent NO_REQUIRED_TEXT = new TextComponentString("不需翻譯").setStyle(new Style().setColor(TextFormatting.GRAY));
     private static final TranslationManager INSTANCE = new TranslationManager();
-    private static final String CashFilePath = System.getProperty("user.home") + "/.rpmtw/translation.json";
 
     private final Map<SourceLangText, TranslationData> Cash = new HashMap<>();
     private final List<String> PROGRESS = new ArrayList<>();
@@ -35,71 +28,21 @@ public class TranslationManager {
         return INSTANCE;
     }
 
-    public void init() {
-        readCash();
-    }
 
-    public void readCash() {
-        try {
-            if (Paths.get(CashFilePath).toFile().exists()) {
-                JsonObject jo = GSON.fromJson(new FileReader(CashFilePath), JsonObject.class);
-                for (Map.Entry<String, JsonElement> lang : jo.entrySet()) {
-                    JsonObject je = lang.getValue().getAsJsonObject();
-                    for (Map.Entry<String, JsonElement> entry : je.entrySet()) {
-                        JsonObject jk = entry.getValue().getAsJsonObject();
-                        TranslationData data = new TranslationData();
-                        for (Map.Entry<String, JsonElement> langs : jk.entrySet()) {
-                            data.addTranslateInfo(langs.getKey(), new TranslationData.TranslationInfo(langs.getValue().getAsString(), null, System.currentTimeMillis()));
-                        }
-                        Cash.put(new SourceLangText(lang.getKey(), entry.getKey()), data);
-                    }
-                }
-            }
-        } catch (Exception e) {
-            RpmtwUpdateMod.LOGGER.error(e);
-        }
-    }
-
-    public void writeCash() {
-        try {
-            JsonObject jo = new JsonObject();
-            mc.addScheduledTask(() -> {
-                for (String lang : Cash.keySet().stream().map(n -> n.langCode).collect(Collectors.toSet())) {
-                    jo.add(lang, new JsonObject());
-                }
-                Cash.forEach((n, m) -> {
-                    JsonObject ja = jo.get(n.langCode).getAsJsonObject();
-                    JsonObject jk = new JsonObject();
-                    m.getAllTranslateText().forEach((l, k) -> {
-                        if (k.getError() == null && k.getText() != null)
-                            jk.addProperty(l, k.getText());
-                    });
-                    ja.add(n.text, jk);
-                });
-            }).get();
-            Files.write(Paths.get(CashFilePath), jo.toString().getBytes(StandardCharsets.UTF_8));
-        } catch (Exception e) {
-            RpmtwUpdateMod.LOGGER.error(e);
-        }
-    }
-
-    public List<ITextComponent> createToolTip(ItemStack item) {
-        String text = item.getDisplayName();
-        String key = item.getTranslationKey();
-        String str = Handler.getNoLocalizedMap().getOrDefault(key, text);
+    public List<ITextComponent> createToolTip(String source) {
         String lang = "en";
 
         if (currentLang().equals(lang))
             return Collections.singletonList(NO_REQUIRED_TEXT);
 
-        SourceLangText langText = new SourceLangText(lang, str);
+        SourceLangText langText = new SourceLangText(lang, source);
 
         if (Cash.containsKey(langText) && Cash.get(langText).isTranslated(currentLang())) {
             TranslationData.TranslationInfo info = Cash.get(langText).getTranslateInfo(currentLang());
             if (info.getError() != null)
                 return Collections.singletonList(ERROR_TEXT);
 
-            if (str.equals(info.getText()))
+            if (source.equals(info.getText()))
                 return Collections.singletonList(NO_REQUIRED_TEXT);
 
             if (info.getText() != null) {
@@ -111,15 +54,15 @@ public class TranslationManager {
             return Collections.singletonList(ERROR_TEXT);
         }
 
-        if (PROGRESS.contains(str)) {
+        if (PROGRESS.contains(source)) {
             ITextComponent c = PROGRESS_TEXT.createCopy();
             for (int i = 0; i < (System.currentTimeMillis() % 400) / 100; i++) {
                 c.appendText(".");
             }
             return Collections.singletonList(c);
         }
-        PROGRESS.add(str);
-        TranslateThread tt = new TranslateThread(str, lang, currentLang());
+        PROGRESS.add(source);
+        TranslateThread tt = new TranslateThread(source, lang, currentLang());
         tt.start();
 
         return Collections.singletonList(ERROR_TEXT);

@@ -2,7 +2,6 @@ package siongsng.rpmtwupdatemod;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.Language;
-import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;
@@ -10,15 +9,13 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import siongsng.rpmtwupdatemod.CosmicChat.GetMessage;
-import siongsng.rpmtwupdatemod.commands.noticeCMD;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
-import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.crowdin.RPMKeyBinding;
+import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.function.AddPack;
 import siongsng.rpmtwupdatemod.function.ping;
 import siongsng.rpmtwupdatemod.notice.notice;
 import siongsng.rpmtwupdatemod.translation.Handler;
-import siongsng.rpmtwupdatemod.translation.TranslationManager;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -29,7 +26,7 @@ import java.util.Objects;
         name = RpmtwUpdateMod.MOD_NAME,
         version = RpmtwUpdateMod.VERSION,
         clientSideOnly = true,
-        guiFactory = "siongsng.rpmtwupdatemod.config.ConfigScreen"
+        guiFactory = "siongsng.rpmtwupdatemod.config.ConfigGuiFactory"
 )
 
 public class RpmtwUpdateMod {
@@ -41,8 +38,7 @@ public class RpmtwUpdateMod {
             Objects.equals(Locale.getDefault().getISO3Country(), "CHN") ? "https://github.com.cnpmjs.org/RPMTW/ResourcePack-Mod-zh_tw/raw/Translated-1.12/RPMTW-1.12.zip" :
                     "https://github.com/RPMTW/ResourcePack-Mod-zh_tw/raw/Translated-1.12/RPMTW-1.12.zip";
 
-    @Mod.Instance(MOD_ID)
-    public static RpmtwUpdateMod INSTANCE;
+//    @Mod.Instance(MOD_ID)
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
     @Mod.EventHandler
@@ -76,9 +72,7 @@ public class RpmtwUpdateMod {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(new RPMKeyBinding());
-        ClientCommandHandler.instance.registerCommand(new noticeCMD());
-        MinecraftForge.EVENT_BUS.register(new notice());
         MinecraftForge.EVENT_BUS.register(new Handler());
-        TranslationManager.getInstance().init();
+        MinecraftForge.EVENT_BUS.register(new notice());
     }
 }

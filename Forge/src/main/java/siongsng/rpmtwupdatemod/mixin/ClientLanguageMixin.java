@@ -1,60 +1,51 @@
 package siongsng.rpmtwupdatemod.mixin;
 
+import com.google.common.base.Splitter;
 import net.minecraft.client.resources.IResource;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.client.resources.Locale;
+import net.minecraft.util.ResourceLocation;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
 import siongsng.rpmtwupdatemod.translation.Handler;
-import siongsng.rpmtwupdatemod.translation.UntranslatedLangChecker;
 
-import java.util.HashMap;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 @Mixin(Locale.class)
 public class ClientLanguageMixin {
-
-    @Inject(method = "loadLocaleDataFiles", at = @At("HEAD"), remap = false)
-    private static void loadFrom(IResourceManager s1, List<String> s, CallbackInfo ci) {
-        RpmtwUpdateMod.LOGGER.info("test");
-        UntranslatedLangChecker.loadLang = true;
-    }
-
     @Inject(method = "loadLocaleDataFiles", at = @At("RETURN"), remap = false)
-    private static void loadFrom2(IResourceManager s1, List<String> s, CallbackInfo ci) {
-        RpmtwUpdateMod.LOGGER.info("test");
+    private void loadFrom2(IResourceManager resourceManager, List<String> languageList, CallbackInfo ci) {
+        ArrayList<String> langList = new ArrayList<>();
+        langList.add("en_us");
+        langList.add("en_US");
 
-        Map<String, String> en_us = UntranslatedLangChecker.loadLangList.get("lang/en_us.json");
+        for (String lang : langList) {
+            String s1 = String.format("lang/%s.lang", lang);
 
-        if (en_us != null) {
-            for (Map.Entry<String, Map<String, String>> entry : UntranslatedLangChecker.loadLangList.entrySet()) {
-                if (entry.getKey().equals("lang/en_us.json"))
-                    continue;
-                for (Map.Entry<String, String> _entry : en_us.entrySet()) {
-                    Handler.addNoLocalizedMap(_entry.getKey(), _entry.getValue());
+            for (String modID : resourceManager.getResourceDomains()) {
+                try {
+                    List<IResource> resources = resourceManager.getAllResources(new ResourceLocation(modID, s1));
+                    for (IResource resource : resources) {
+                        Properties props = new Properties();
+                        props.load(new InputStreamReader(resource.getInputStream(), StandardCharsets.UTF_8));
+                        for (Map.Entry<Object, Object> e : props.entrySet()) {
+                            Handler.addNoLocalizedMap((String) e.getKey(), (String) e.getValue());
+                        }
+                        props.clear();
+                    }
+                } catch (IOException ignored) {
                 }
             }
         }
-
-
-        UntranslatedLangChecker.loadList.clear();
-        UntranslatedLangChecker.loadList = null;
-        UntranslatedLangChecker.loadLangList.clear();
-        UntranslatedLangChecker.loadLangList = null;
-
-
-        UntranslatedLangChecker.loadLang = false;
     }
 
-    @Inject(method = "loadLocaleData(Ljava/util/List;)V", at = @At("HEAD"), remap = false)
-    private static void appendFrom(List<IResource> list, CallbackInfo ci) {
-        UntranslatedLangChecker.loadList = list;
-        UntranslatedLangChecker.loadCont = 0;
-        if (UntranslatedLangChecker.loadLangList == null)
-            UntranslatedLangChecker.loadLangList = new HashMap<>();
-    }
+
 }
