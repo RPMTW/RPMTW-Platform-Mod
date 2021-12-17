@@ -1,21 +1,32 @@
 repositories {
     mavenCentral()
-    jcenter()
+    gradlePluginPortal()
     maven { url 'https://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-releases/' }
-    maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
     maven { url 'https://maven.blamejared.com' }
+    maven {
+        name "Sponge"
+        url "https://repo.spongepowered.org/repository/maven-public/"
+        content { includeGroup "org.spongepowered" }
+    }
 }
 buildscript {
     repositories {
-        maven { url = 'https://maven.minecraftforge.net' }
-        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
-        mavenCentral()
+        maven { url = 'https://files.minecraftforge.net/maven' }
+        maven {
+            name "Sponge"
+            url "https://repo.spongepowered.org/repository/maven-public/"
+            content { includeGroup "org.spongepowered" }
+        }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
         gradlePluginPortal()
+        mavenCentral()
     }
     dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:6.1.0'
+        classpath "gradle.plugin.com.github.johnrengelman:shadow:7.1.0"
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.+', changing: true
-        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+        classpath 'org.spongepowered:mixingradle:0.7.+'
     }
 }
 
@@ -24,6 +35,7 @@ apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
+apply plugin: 'java'
 
 group = 'siongsng.rpmtwupdatemod'
 version = '1.2.8'
@@ -53,21 +65,22 @@ configurations {
     shade
     compile.extendsFrom(shade)
 }
+
 dependencies {
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
-    shade('commons-lang:commons-lang:2.6')
-    shade('net.sf.ezmorph:ezmorph:1.0.6')
-    shade('commons-collections:commons-collections:3.2.2')
-    shade('commons-beanutils:commons-beanutils:1.9.4')
-    shade('commons-io:commons-io:2.9.0')
-    shade('commons-logging:commons-logging:1.2')
-    shade('io.socket:socket.io-client:2.0.1')
-    shade('io.socket:engine.io-client:2.0.0')
-    shade('org.json:json:20090211')
-    shade('com.squareup.okhttp3:okhttp:3.12.12')
-    shade('com.squareup.okio:okio:1.15.0')
+    implementation shade('commons-lang:commons-lang:2.6')
+    implementation shade('net.sf.ezmorph:ezmorph:1.0.6')
+    implementation shade('commons-collections:commons-collections:3.2.2')
+    implementation shade('commons-beanutils:commons-beanutils:1.9.4')
+    implementation shade('commons-io:commons-io:2.9.0')
+    implementation shade('commons-logging:commons-logging:1.2')
+    implementation shade('io.socket:socket.io-client:2.0.1')
+    implementation shade('io.socket:engine.io-client:2.0.0')
+    implementation shade('org.json:json:20090211')
+    implementation shade('com.squareup.okhttp3:okhttp:3.12.12')
+    implementation shade('com.squareup.okio:okio:1.15.0')
 
-    shade('org.spongepowered:mixin:0.8.3-SNAPSHOT') {
+    implementation shade('org.spongepowered:mixin:0.8.3-SNAPSHOT') {
         exclude module: 'guava'
         exclude module: 'commons-io'
         exclude module: 'gson'
@@ -79,6 +92,7 @@ tasks.withType(JavaCompile) {
 mixin {
     add sourceSets.main, 'mrpmtw_update_mod.mixin.refmap.json'
     config 'rpmtw_update_mod.mixin.cfg.json'
+    disableAnnotationProcessorCheck(true)
 }
 jar {
     manifest {

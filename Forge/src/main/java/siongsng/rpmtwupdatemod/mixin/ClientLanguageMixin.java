@@ -1,6 +1,5 @@
 package siongsng.rpmtwupdatemod.mixin;
 
-import com.google.common.base.Splitter;
 import net.minecraft.client.resources.IResource;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.client.resources.Locale;
