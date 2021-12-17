@@ -8,7 +8,6 @@ on:
 
 jobs:
   Forge-Build:
-    if: ${{ (github.ref =='refs/heads/1.12') }}
     runs-on: ubuntu-latest
 
     steps:
