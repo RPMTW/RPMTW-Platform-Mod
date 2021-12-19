@@ -26,6 +26,7 @@ jobs:
         with:
           curseforge-id: 461500
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          modrinth-id: ZukQzaRP
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           files-primary: ${{ github.workspace }}/Forge/build/libs/!(*-@(dev|sources)).jar
