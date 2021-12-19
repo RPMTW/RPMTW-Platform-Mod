@@ -3,20 +3,10 @@ repositories {
     gradlePluginPortal()
     maven { url 'https://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-releases/' }
     maven { url 'https://maven.blamejared.com' }
-    maven {
-        name "Sponge"
-        url "https://repo.spongepowered.org/repository/maven-public/"
-        content { includeGroup "org.spongepowered" }
-    }
 }
 buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
-        maven {
-            name "Sponge"
-            url "https://repo.spongepowered.org/repository/maven-public/"
-            content { includeGroup "org.spongepowered" }
-        }
         maven {
             url "https://plugins.gradle.org/m2/"
         }
@@ -26,19 +16,15 @@ buildscript {
     dependencies {
         classpath "gradle.plugin.com.github.johnrengelman:shadow:7.1.0"
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.+', changing: true
-        classpath 'org.spongepowered:mixingradle:0.7.+'
     }
 }
 
 apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
-apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'java'
 
 group = 'siongsng.rpmtwupdatemod'
-version = '1.2.8'
+version = '1.2.9'
 archivesBaseName = 'RPMTW-Update-Mod-1.12'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(8)
@@ -49,8 +35,6 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            property 'fml.coreMods.load', "siongsng.rpmtwupdatemod.core.CoreMod"
-            arg "-mixin.config=rpmtw_update_mod.mixin.cfg.json"
             mods {
                 rpmtwupdatemod {
                     source sourceSets.main
@@ -62,79 +46,46 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 configurations {
-    shade
-    compile.extendsFrom(shade)
+    embed
+    implementation.extendsFrom(embed)
 }
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
-    implementation shade('commons-lang:commons-lang:2.6')
-    implementation shade('net.sf.ezmorph:ezmorph:1.0.6')
-    implementation shade('commons-collections:commons-collections:3.2.2')
-    implementation shade('commons-beanutils:commons-beanutils:1.9.4')
-    implementation shade('commons-io:commons-io:2.9.0')
-    implementation shade('commons-logging:commons-logging:1.2')
-    implementation shade('io.socket:socket.io-client:2.0.1')
-    implementation shade('io.socket:engine.io-client:2.0.0')
-    implementation shade('org.json:json:20090211')
-    implementation shade('com.squareup.okhttp3:okhttp:3.12.12')
-    implementation shade('com.squareup.okio:okio:1.15.0')
-
-    implementation shade('org.spongepowered:mixin:0.8.3-SNAPSHOT') {
-        exclude module: 'guava'
-        exclude module: 'commons-io'
-        exclude module: 'gson'
-    }
+    embed('commons-lang:commons-lang:2.6')
+    embed('net.sf.ezmorph:ezmorph:1.0.6')
+    embed('commons-collections:commons-collections:3.2.2')
+    embed('commons-beanutils:commons-beanutils:1.9.4')
+    embed('commons-io:commons-io:2.9.0')
+    embed('commons-logging:commons-logging:1.2')
+    embed('io.socket:socket.io-client:2.0.1')
+    embed('io.socket:engine.io-client:2.0.0')
+    embed('org.json:json:20090211')
+    embed('com.squareup.okhttp3:okhttp:3.12.12')
+    embed('com.squareup.okio:okio:1.15.0')
 }
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
-mixin {
-    add sourceSets.main, 'mrpmtw_update_mod.mixin.refmap.json'
-    config 'rpmtw_update_mod.mixin.cfg.json'
-    disableAnnotationProcessorCheck(true)
-}
+
 jar {
+    from {
+        configurations.embed.collect { it.isDirectory() ? it : zipTree(it) }
+    } {
+        exclude "LICENSE.txt", "META-INF/MANIFSET.MF", "META-INF/maven/**", "META-INF/*.RSA", "META-INF/*.SF", "META-INF/*.txt"
+    }
+
     manifest {
         attributes([
                 "Specification-Title"        : "rpmtw_update_mod",
                 "Specification-Vendor"       : "SiongSng",
-                "Specification-Version"      : "1", // We are version 1 of ourselves
+                "Specification-Version"      : "1",
                 "Implementation-Title"       : project.name,
                 "Implementation-Version"     : project.version,
                 "Implementation-Vendor"      : "SiongSng",
-                "Implementation-Timestamp"   : new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "MixinConfigs"               : "rpmtw_update_mod.mixin.cfg.json",
-                "FMLCorePlugin"              : "siongsng.rpmtwupdatemod.core.CoreMod",
-                "FMLCorePluginContainsFMLMod": "false",
-                "ForceLoadAsMod"             : "true",
-                "TweakClass"                 : "org.spongepowered.asm.launch.MixinTweaker",
-                "TweakOrder"                 : "0",
+                "Implementation-Timestamp"   : new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
 }
+
 jar.finalizedBy('reobfJar')
-shadowJar {
-    configurations = [project.configurations.shade]
-    classifier = ''
-}
-reobf {
-    shadowJar {
-        dependsOn tasks.createMcpToSrg
-        mappings = tasks.createMcpToSrg.outputs.files.singleFile
-    }
-}
-artifacts {
-    archives tasks.shadowJar
-}
-task deobfJar(type: Jar) {
-    from sourceSets.main.output
-    classifier = 'dev'
-}
-task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
-artifacts {
-    archives deobfJar
-}
