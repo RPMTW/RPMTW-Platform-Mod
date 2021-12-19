@@ -33,6 +33,8 @@ jobs:
           version-type: beta
           name: ${{ github.event.release.name }} (Forge)
           loaders: forge
+          game-versions: |
+            1.12.2
           version-resolver: latest
           java: |
             8
