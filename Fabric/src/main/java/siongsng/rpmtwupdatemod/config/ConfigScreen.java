@@ -21,6 +21,8 @@ public class ConfigScreen implements ConfigData {
     @Comment("是否使用宇宙通訊系統。")
     public boolean isChat = true;
     public boolean isTranslate = true;
+    @Comment("是否在遊戲暫停視窗中顯示翻譯貢獻者按鈕。")
+    public boolean contributorButton = true;
     @ConfigEntry.Gui.Excluded
     public String Token = ""; //儲存Crowdin登入權杖
     @ConfigEntry.Gui.Excluded
