@@ -31,14 +31,14 @@ import java.util.Objects;
 @Mod("rpmtw_update_mod")
 public class RpmtwUpdateMod {
     public final static String Mod_ID = "rpmtw_update_mod"; // 模組ID
-    public static final Logger LOGGER = LogManager.getLogger(); // 註冊紀錄器
+    public static final Logger LOGGER = LogManager.getLogger(Mod_ID); // 註冊紀錄器
     public final static String PackDownloadUrl = Objects.equals(Locale.getDefault().getISO3Country(), "CHN")
             ? "https://github.com.cnpmjs.org/RPMTW/ResourcePack-Mod-zh_tw/raw/Translated-1.18/RPMTW-1.18.zip"
             : "https://github.com/RPMTW/ResourcePack-Mod-zh_tw/raw/Translated-1.18/RPMTW-1.18.zip";
 
     public RpmtwUpdateMod() {
-
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::init); // 註冊初始化事件
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(new Handler()::registerReload); // 註冊資源重新載入事件
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT, "rpmtw_update_mod-client.toml"); // 註冊組態
 
@@ -52,7 +52,7 @@ public class RpmtwUpdateMod {
             if (RPMTWConfig.isChinese.get()) {
                 Minecraft.getInstance().options.languageCode = "zh_tw"; // 將語言設定為繁體中文
             }
-            new PackVersionCheck(); // 資源包版本檢查
+            PackVersionCheck.check(); // 資源包版本檢查
             try {
                 new TokenCheck().Check(RPMTWConfig.Token.get()); // 開始檢測權杖
             } catch (IOException e) {

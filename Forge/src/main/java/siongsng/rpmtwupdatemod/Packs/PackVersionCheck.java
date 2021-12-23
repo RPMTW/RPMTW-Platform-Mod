@@ -13,7 +13,7 @@ public class PackVersionCheck {
     public static Path PackDir = Paths.get(System.getProperty("user.home") + "/.rpmtw/1.18"); //資源包的放置根目錄
     public static Path PackFile = PackDir.resolve("RPMTW-1.18.zip"); //資源包檔案位置
 
-    public PackVersionCheck() {
+    public static void check() {
         try {
             RpmtwUpdateMod.LOGGER.info("正在下載 RPMTW 翻譯包");
             if (!Files.isDirectory(PackDir)) { //如果沒有資源包路徑

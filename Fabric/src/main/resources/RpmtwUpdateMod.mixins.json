@@ -4,8 +4,6 @@
   "package": "siongsng.rpmtwupdatemod.mixins",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "ClientLanguageMixin",
-    "LanguageMixin",
     "MixinBookContents",
     "MixinContentExternalLoader",
     "PlayJoinMixin",

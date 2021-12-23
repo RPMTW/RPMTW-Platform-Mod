@@ -1,28 +1,41 @@
 package siongsng.rpmtwupdatemod.translation;
 
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.Resource;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.crowdin.RPMKeyBinding;
 
+import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.regex.Pattern;
 
-public class Handler {
+public class Handler extends SimplePreparableReloadListener<CompletableFuture<Void>> {
     private static final Map<String, String> noLocalizedMap = new HashMap<>();
-
-
-    public static void addNoLocalizedMap(String key, String value) {
-        noLocalizedMap.put(key, value);
-    }
+    private static final Pattern UNSUPPORTED_FORMAT_PATTERN = Pattern.compile("%(\\d+\\$)?[\\d.]*[df]");
 
     public boolean isKeyPress(KeyMapping key) {
         try {
@@ -31,6 +44,11 @@ public class Handler {
             return false;
         }
     }
+
+    public void registerReload(RegisterClientReloadListenersEvent event) {
+        event.registerReloadListener(this);
+    }
+
 
     @SubscribeEvent
     public void onTooltip(ItemTooltipEvent event) {
@@ -44,10 +62,42 @@ public class Handler {
                 for (Component text : TranslationManager.getInstance().createToolTip(source)) {
                     event.getToolTip().add(2, text);
                 }
-            } else {
-                event.getToolTip().add(2, new TextComponent("按下 " + RPMKeyBinding.translate.getTranslatedKeyMessage().getString() + " 後將物品機器翻譯為中文"));
             }
         }
+    }
 
+
+    @Override
+    protected CompletableFuture<Void> prepare(ResourceManager manager, ProfilerFiller p_10797_) {
+        return CompletableFuture.runAsync(() -> {
+            RpmtwUpdateMod.LOGGER.info("rpmtw test");
+            for (String namespace : manager.getNamespaces()) {
+                String path = "lang/en_us.json";
+                try {
+                    ResourceLocation identifier = new ResourceLocation(namespace, path);
+
+                    List<Resource> resourceList = manager.getResources(identifier);
+
+                    for (Resource resource : resourceList) {
+                        final Gson GSON = new Gson();
+
+                        JsonObject jsonObject = GSON.fromJson(new InputStreamReader(resource.getInputStream(), StandardCharsets.UTF_8), JsonObject.class);
+
+                        for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
+                            String value = UNSUPPORTED_FORMAT_PATTERN.matcher(GsonHelper.convertToString(entry.getValue(), entry.getKey())).replaceAll("%$1s");
+                            noLocalizedMap.put(entry.getKey(), value);
+                        }
+                    }
+                } catch (FileNotFoundException ignored) {
+                } catch (Exception e) {
+                    RpmtwUpdateMod.LOGGER.warn("Skipped language file: {}:{} ({})", namespace, path, e.toString());
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void apply(CompletableFuture<Void> p_10793_, ResourceManager p_10794_, ProfilerFiller p_10795_) {
+        RpmtwUpdateMod.LOGGER.info("rpmtw test");
     }
 }

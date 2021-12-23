@@ -42,7 +42,7 @@ public class RpmtwUpdateMod implements ClientModInitializer {
         if (RPMTWConfig.getConfig().isChat) {
             SocketClient.GetMessage();
         }
-        Handler.init();
+        new Handler();
     }
 
 }
