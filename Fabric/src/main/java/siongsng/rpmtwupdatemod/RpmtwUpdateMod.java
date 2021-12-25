@@ -115,7 +115,7 @@ public class RpmtwUpdateMod implements ClientModInitializer {
             buttons.add(rpmtwLogo);
         } else if (screen instanceof ChatScreen && RPMTWConfig.getConfig().cosmicChatButton) {
 
-            TextFieldWidget textField = ((ChatScreenAccessor.chatFieldAccessor) (ChatScreen) screen).getChatField();
+            TextFieldWidget textField = ((ChatScreenAccessor.chatFieldAccessor) screen).getChatField();
 
             TranslucentButton translucentButton = new TranslucentButton(scaledWidth - 185, scaledHeight - 40, 90, 20, new LiteralText("發送訊息至宇宙通訊"), (button) -> Utility.openCosmicChatScreen(textField.getText()), (buttonWidget1, matrixStack, i, j) -> screen.renderTooltip(matrixStack, new LiteralText("發送訊息至浩瀚的宇宙中，與其他星球的生物交流")
                     , i, j));
