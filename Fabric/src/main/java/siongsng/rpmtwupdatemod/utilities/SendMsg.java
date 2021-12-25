@@ -9,8 +9,9 @@ public class SendMsg {
         try {
             MinecraftClient mc = MinecraftClient.getInstance();
             PlayerEntity p = mc.player;
-            assert p != null;
-            p.sendMessage(Text.of(msg), false);
+            if (p != null) {
+                p.sendMessage(Text.of(msg), false);
+            }
         } catch (Throwable ignored) {
 
         }

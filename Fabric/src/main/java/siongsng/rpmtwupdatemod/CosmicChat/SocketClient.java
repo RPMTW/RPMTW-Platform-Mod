@@ -7,7 +7,7 @@ import io.socket.client.Socket;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.Session;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.*;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.utilities.SendMsg;
@@ -55,8 +55,7 @@ public class SocketClient {
                 if (player != null) {
                     Session session = mc.getSession();
 
-                    JsonParser jp = new JsonParser();
-                    JsonObject JsonData = (JsonObject) jp.parse(data[0].toString());
+                    JsonObject JsonData = (JsonObject) JsonParser.parseString(data[0].toString());
                     String Type = JsonData.getAsJsonPrimitive("Type").getAsString();
                     String MessageType = JsonData.getAsJsonPrimitive("MessageType").getAsString();
 
@@ -68,7 +67,11 @@ public class SocketClient {
                                 if (UserName.equals("菘菘#8663") || UserName.equals("SiongSng")) {
                                     UserName = "§bRPMTW維護者";
                                 }
-                                SendMsg.send(String.format(("§9[宇宙通訊] §e<§6%s§e> §f%s"), UserName, Message));
+
+                                MutableText text = LiteralText.EMPTY.copy();
+                                text.append(new LiteralText("§9[宇宙通訊] ").setStyle(Style.EMPTY.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,new LiteralText("宇宙通訊系統是一個可在遊戲內外聊天的系統，由 RPMTW 萬用中文化模組提供此功能，可在聊天視窗中使用本系統。")))));
+                                text.append(new LiteralText(String.format(("§e<§6%s§e> §f%s"), UserName, Message)));
+                                player.sendMessage(text, false);
                             }
                         case "Server":
                             switch (MessageType) {
@@ -123,7 +126,7 @@ public class SocketClient {
         }
     }
 
-    public static void Disconnect() {
+    public static void disconnect() {
         if (socket != null)
             socket.disconnect();
 
