@@ -19,7 +19,7 @@ public class ConfigScreen implements ConfigData {
     @Comment("預設進入遊戲時，是否自動切換語言為 繁體中文。")
     public boolean isChinese = true;
     @Comment("是否使用宇宙通訊系統 (包含接收訊息與發送訊息)。")
-    public boolean isChat = true;
+    public boolean cosmicChat = true;
     @ConfigEntry.Gui.Excluded
     public String Token = ""; //儲存Crowdin登入權杖
     @ConfigEntry.Gui.Excluded
@@ -28,6 +28,9 @@ public class ConfigScreen implements ConfigData {
     public boolean isEULA = false; //使用者是否同意宇宙通訊EULA
     @Comment("模組翻譯黑名單，可輸入資料夾 或 檔案名稱(若檔名未指定資料夾，將會排除所有同名檔案)。")
     public List<String> modBlackList = new ArrayList<String>(); //模組翻譯黑名單，可輸入資料夾名稱，或是檔案名稱
-    @Comment("啟用機器翻譯")
+    @Comment("是否在原版聊天視窗中新增宇宙通訊發送按鈕。")
+    public boolean cosmicChatButton = true;
     public boolean isTranslate = true;
+    @Comment("是否在遊戲暫停視窗中顯示翻譯貢獻者按鈕。")
+    public boolean contributorButton = true;
 }

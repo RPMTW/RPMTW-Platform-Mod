@@ -11,13 +11,22 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
-import siongsng.rpmtwupdatemod.CosmicChat.SendMessage;
+import siongsng.rpmtwupdatemod.CosmicChat.SocketClient;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
-import siongsng.rpmtwupdatemod.function.SendMsg;
+import siongsng.rpmtwupdatemod.utilities.SendMsg;
 
 import static io.github.cottonmc.cotton.gui.client.BackgroundPainter.createNinePatch;
 
 public class CosmicChat extends LightweightGuiDescription {
+    public static void open(String initMessage) {
+        if (!initMessage.isEmpty()) {
+            SocketClient.sendMessage(initMessage);
+            MinecraftClient.getInstance().openScreen(null);
+        } else {
+            MinecraftClient.getInstance().openScreen(new Screen(new CosmicChat()));
+        }
+    }
+
     public CosmicChat() {
         WGridPanel gui = new WGridPanel();
         setRootPanel(gui);
@@ -34,14 +43,14 @@ public class CosmicChat extends LightweightGuiDescription {
 
         WTextField Message = new WTextField(new LiteralText("請輸入要發送的訊息"));
         Message.setMaxLength(150);
-        gui.add(Message, (int) 3.5,  3, 10, 2);
+        gui.add(Message, (int) 3.5, 3, 10, 2);
 
         Cancel.setOnClick(() -> MinecraftClient.getInstance().openScreen(null));
         Send.setOnClick(() -> {
             if (Message.getText().equals("")) {
                 SendMsg.send("訊息不能是空的。");
             } else {
-                new SendMessage().Send(Message.getText());
+                SocketClient.sendMessage(Message.getText());
             }
             MinecraftClient.getInstance().openScreen(null);
         });

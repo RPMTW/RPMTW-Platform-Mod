@@ -9,10 +9,14 @@ import net.minecraft.client.util.InputUtil;
 import net.minecraft.item.Item;
 import org.lwjgl.glfw.GLFW;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
-import siongsng.rpmtwupdatemod.config.Configer;
-import siongsng.rpmtwupdatemod.function.SendMsg;
-import siongsng.rpmtwupdatemod.gui.*;
+import siongsng.rpmtwupdatemod.config.RPMTWConfig;
+import siongsng.rpmtwupdatemod.gui.CrowdinGui;
+import siongsng.rpmtwupdatemod.gui.CrowdinGuiProcedure;
+import siongsng.rpmtwupdatemod.gui.CrowdinLogin;
+import siongsng.rpmtwupdatemod.gui.Screen;
 import siongsng.rpmtwupdatemod.packs.PackManeger;
+import siongsng.rpmtwupdatemod.utilities.SendMsg;
+import siongsng.rpmtwupdatemod.utilities.Utility;
 
 public class key {
     private static final KeyBinding crowdin = new KeyBinding("key.rpmtw_update_mod.crowdin", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "key.categories.rpmtw");
@@ -28,18 +32,14 @@ public class key {
         KeyBindingHelper.registerKeyBinding(reloadpack);
         KeyBindingHelper.registerKeyBinding(open_config);
         KeyBindingHelper.registerKeyBinding(translate);
-        if (Configer.getConfig().isChat) {
+        if (RPMTWConfig.getConfig().cosmicChat) {
             KeyBindingHelper.registerKeyBinding(cosmic_chat_send);
         }
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (cosmic_chat_send.wasPressed()) {
-                if (!Configer.getConfig().isChat) return;
-                if (Configer.getConfig().isEULA) {
-                    MinecraftClient.getInstance().openScreen(new Screen(new CosmicChat()));
-                } else {
-                    MinecraftClient.getInstance().openScreen(new Screen(new EULA()));
-                }
+                if (!RPMTWConfig.getConfig().cosmicChat) return;
+                Utility.openCosmicChatScreen("");
             }
             while (open_config.wasPressed()) {
                 MinecraftClient.getInstance().openScreen(AutoConfig.getConfigScreen(ConfigScreen.class, MinecraftClient.getInstance().currentScreen).get());
@@ -69,8 +69,8 @@ public class key {
                 }
             }
             if (config.ReloadPack) {
-                while (reloadpack.wasPressed()&& !updateLock) {
-                	updateLock = true;
+                while (reloadpack.wasPressed() && !updateLock) {
+                    updateLock = true;
                     PackManeger.ReloadPack();
                 }
             }

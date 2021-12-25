@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import siongsng.rpmtwupdatemod.config.Configer;
+import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.crowdin.key;
 
 import java.util.HashMap;
@@ -41,7 +41,7 @@ public class Handler {
         list.add(1, new LiteralText("原文: " + Handler.getNoLocalizedMap().getOrDefault(itemStack.getTranslationKey(), "無")).formatted(Formatting.GRAY));
         boolean press = isKeyPress(key.translate);
         boolean playing = MinecraftClient.getInstance().player != null;
-        if (playing && Configer.getConfig().isTranslate) {
+        if (playing && RPMTWConfig.getConfig().isTranslate) {
             if (press) {
                 for (Text text : TranslationManager.getInstance().createToolTip(itemStack)) {
                     list.add(2, text);

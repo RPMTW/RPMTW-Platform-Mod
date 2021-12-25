@@ -4,8 +4,8 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.resource.ResourcePackProvider;
 import org.apache.commons.io.FileUtils;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
-import siongsng.rpmtwupdatemod.config.Configer;
-import siongsng.rpmtwupdatemod.function.SendMsg;
+import siongsng.rpmtwupdatemod.config.RPMTWConfig;
+import siongsng.rpmtwupdatemod.utilities.SendMsg;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,7 +46,7 @@ public class PackManeger {
             try {
                 close();
                 FileUtils.copyURLToFile(new URL(RpmtwUpdateMod.PackDownloadUrl), packFile); //下載資源包檔案
-                ZipUtils.removeDirFromZip(packFile, Configer.getConfig().modBlackList);
+                ZipUtils.removeDirFromZip(packFile, RPMTWConfig.getConfig().modBlackList);
                 reload();
                 MinecraftClient.getInstance().reloadResources();
             } catch (IOException ioException) {
@@ -66,7 +66,7 @@ public class PackManeger {
             if (RESOUCE == null) {
                 RpmtwUpdateMod.LOGGER.info("正在準備檢測資源包版本。");
                 FileUtils.copyURLToFile(new URL(RpmtwUpdateMod.PackDownloadUrl), packFile); //下載資源包檔案
-                ZipUtils.removeDirFromZip(packFile, Configer.getConfig().modBlackList);
+                ZipUtils.removeDirFromZip(packFile, RPMTWConfig.getConfig().modBlackList);
                 create(providers);
             }
         } catch (Exception e) {
