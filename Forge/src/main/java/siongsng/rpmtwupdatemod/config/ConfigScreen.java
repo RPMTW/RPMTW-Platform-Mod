@@ -55,8 +55,8 @@ public final class ConfigScreen extends Screen {
         ));
         optionsRowList.addOption(new BooleanOption(
                 "是否啟用宇宙通訊系統",
-                unused -> RPMTWConfig.isChat.get(),
-                (unused, newValue) -> RPMTWConfig.isChat.set(newValue)
+                unused -> RPMTWConfig.cosmicChat.get(),
+                (unused, newValue) -> RPMTWConfig.cosmicChat.set(newValue)
         ));
         optionsRowList.addOption(new BooleanOption(
                 "進入世界時自動發送公告",
@@ -68,6 +68,17 @@ public final class ConfigScreen extends Screen {
                 unused -> RPMTWConfig.isTranslate.get(),
                 (unused, newValue) -> RPMTWConfig.isTranslate.set(newValue)
         ));
+        optionsRowList.addOption(new BooleanOption(
+                "宇宙通訊發送按鈕",
+                unused -> RPMTWConfig.cosmicChatButton.get(),
+                (unused, newValue) -> RPMTWConfig.cosmicChatButton.set(newValue)
+        ));
+        optionsRowList.addOption(new BooleanOption(
+                "顯示翻譯貢獻者按鈕",
+                unused -> RPMTWConfig.contributorButton.get(),
+                (unused, newValue) -> RPMTWConfig.contributorButton.set(newValue)
+        ));
+
 
         this.children.add(optionsRowList);
 
@@ -80,9 +91,11 @@ public final class ConfigScreen extends Screen {
                     RPMTWConfig.rpmtw_crowdin.set(true);
                     RPMTWConfig.rpmtw_reloadpack.set(true);
                     RPMTWConfig.notice.set(true);
-                    RPMTWConfig.isChat.set(true);
+                    RPMTWConfig.cosmicChat.set(true);
                     RPMTWConfig.isTranslate.set(true);
                     RPMTWConfig.isChinese.set(true);
+                    RPMTWConfig.cosmicChatButton.set(true);
+                    RPMTWConfig.contributorButton.set(true);
                     Minecraft.getInstance().displayGuiScreen(new ConfigScreen());
                 }));
 

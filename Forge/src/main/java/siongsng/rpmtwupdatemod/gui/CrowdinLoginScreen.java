@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.StringTextComponent;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
-import siongsng.rpmtwupdatemod.function.SendMsg;
+import siongsng.rpmtwupdatemod.utilities.SendMsg;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;

@@ -8,6 +8,7 @@ import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.StringTextComponent;
+import siongsng.rpmtwupdatemod.CosmicChat.SocketClient;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 
 import javax.annotation.Nonnull;
@@ -16,11 +17,13 @@ public class EULAScreen extends Screen {
     static final int BUTTON_HEIGHT = 20;
     private static final ResourceLocation texture = new ResourceLocation("rpmtw_update_mod:textures/crowdin_gui.png");
     private static final int BOTTOM_BUTTON_WIDTH = 95;
+    protected final String initMessage;
     int xSize = 300;
     int ySize = 150;
 
-    public EULAScreen() {
+    public EULAScreen(String initMessage) {
         super(new StringTextComponent(""));
+        this.initMessage = initMessage;
     }
 
     @Override
@@ -46,6 +49,11 @@ public class EULAScreen extends Screen {
                 new StringTextComponent("我同意"),
                 button -> {
                     RPMTWConfig.isEULA.set(true);
+                    if (!initMessage.isEmpty()) {
+                        SocketClient.sendMessage(initMessage);
+                        Minecraft.getInstance().displayGuiScreen(null);
+                        return;
+                    }
                     Minecraft.getInstance().displayGuiScreen(new CosmicChatScreen());
                 }));
     }

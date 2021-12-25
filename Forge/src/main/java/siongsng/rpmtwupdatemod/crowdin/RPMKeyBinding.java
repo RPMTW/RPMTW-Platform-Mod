@@ -12,9 +12,10 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 import org.lwjgl.glfw.GLFW;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
-import siongsng.rpmtwupdatemod.function.SendMsg;
+import siongsng.rpmtwupdatemod.utilities.SendMsg;
 import siongsng.rpmtwupdatemod.gui.*;
 import siongsng.rpmtwupdatemod.packs.PacksManager;
+import siongsng.rpmtwupdatemod.utilities.Utility;
 
 public final class RPMKeyBinding {
     public static final KeyBinding reloadpack = new KeyBinding("key.rpmtw_update_mod.reloadpack", KeyConflictContext.UNIVERSAL, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "key.categories.rpmtw");
@@ -83,12 +84,8 @@ public final class RPMKeyBinding {
             }
         }
         if (cosmic_chat_send.isPressed()) {
-            if (!RPMTWConfig.isChat.get()) return;
-            if (RPMTWConfig.isEULA.get()) {
-                Minecraft.getInstance().displayGuiScreen(new CosmicChatScreen());
-            } else {
-                Minecraft.getInstance().displayGuiScreen(new EULAScreen());
-            }
+            if (!RPMTWConfig.cosmicChat.get()) return;
+            Utility.openCosmicChatScreen("");
         }
     }
 }

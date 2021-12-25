@@ -3,6 +3,7 @@
   "package": "siongsng.rpmtwupdatemod.mixin",
   "compatibilityLevel": "JAVA_8",
   "client": [
+    "ChatScreenAccessor$chatFieldAccessor",
     "ClientLanguageMixin",
     "LanguageMixin",
     "MixinBookContents"
