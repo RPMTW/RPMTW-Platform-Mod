@@ -3,13 +3,13 @@
   "id": "rpmtw_update_mod",
   "version": "1.2.8",
   "name": "RpmtwUpdateMod",
-  "description": "這個模組可以在進入世界的時候自動下載翻譯資源包，並且還內建了許多實用功能。官方網站: https://www.rpmtw.ga",
+  "description": "這個模組可以在進入世界的時候自動下載翻譯資源包，並且還內建了許多實用功能。官方網站: https://www.rpmtw.com",
   "icon": "assets/rpmtw_update_mod/icon.png",
   "authors": [
     "SiongSng"
   ],
   "contact": {
-    "homepage": "https://www.rpmtw.ga",
+    "homepage": "https://www.rpmtw.com",
     "sources": "https://github.com/RPMTW/RPMTW-Update-Mod",
     "issues": "https://github.com/RPMTW/RPMTW-Update-Mod/issues"
   },

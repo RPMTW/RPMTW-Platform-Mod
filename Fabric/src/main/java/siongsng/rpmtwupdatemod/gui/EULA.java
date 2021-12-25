@@ -18,7 +18,7 @@ import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import static io.github.cottonmc.cotton.gui.client.BackgroundPainter.createNinePatch;
 
 public class EULA extends LightweightGuiDescription {
-    public EULA() {
+    public EULA(String initMessage) {
         WGridPanel gui = new WGridPanel();
         setRootPanel(gui);
         gui.setSize(300, 200);
@@ -39,11 +39,11 @@ public class EULA extends LightweightGuiDescription {
         gui.add(OK, 11, 9, 5, 2);
 
         Cancel.setOnClick(() -> MinecraftClient.getInstance().setScreen(null));
-        Info.setOnClick(() -> Util.getOperatingSystem().open("https://www.rpmtw.ga/Wiki/ModInfo#what-is-cosmic-system"));
+        Info.setOnClick(() -> Util.getOperatingSystem().open("https://www.rpmtw.com/Wiki/ModInfo#what-is-cosmic-system"));
         OK.setOnClick(() -> {
             RPMTWConfig.getConfig().isEULA = true;
             AutoConfig.getConfigHolder(ConfigScreen.class).save(); //儲存Config
-            MinecraftClient.getInstance().setScreen(new Screen(new CosmicChat()));
+            CosmicChat.open(initMessage);
         });
         gui.validate(this);
     }

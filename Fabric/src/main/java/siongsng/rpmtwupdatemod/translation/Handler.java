@@ -36,17 +36,17 @@ public class Handler implements SimpleSynchronousResourceReloadListener {
     private static final Map<String, String> noLocalizedMap = new HashMap<>();
     private static final Pattern TOKEN_PATTERN = Pattern.compile("%(\\d+\\$)?[\\d.]*[df]");
 
+    public Handler() {
+        ItemTooltipCallback.EVENT.register(Handler::onTooltip);
+        ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(this);
+    }
+
     public static boolean isKeyPress(KeyBinding key) {
         try {
             return InputUtil.isKeyPressed(MinecraftClient.getInstance().getWindow().getHandle(), ((KeyCodeAccessor) key).fabric_getBoundKey().getCode());
         } catch (Exception exception) {
             return false;
         }
-    }
-
-    public Handler() {
-        ItemTooltipCallback.EVENT.register(Handler::onTooltip);
-        ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(this);
     }
 
     public static void onTooltip(ItemStack itemStack, TooltipContext tooltipFlag, List<Text> list) {

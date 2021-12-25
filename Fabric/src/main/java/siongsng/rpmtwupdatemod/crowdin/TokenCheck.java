@@ -1,6 +1,5 @@
 package siongsng.rpmtwupdatemod.crowdin;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.client.MinecraftClient;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
@@ -10,12 +9,13 @@ import org.apache.http.client.methods.RequestBuilder;
 import org.apache.http.impl.client.HttpClients;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
-import siongsng.rpmtwupdatemod.function.SendMsg;
+import siongsng.rpmtwupdatemod.config.RPMTWConfig;
+import siongsng.rpmtwupdatemod.utilities.SendMsg;
 
 import java.io.IOException;
 
 public class TokenCheck {
-    ConfigScreen config = AutoConfig.getConfigHolder(ConfigScreen.class).getConfig();
+    ConfigScreen config = RPMTWConfig.getConfig();
 
     public void Check(String token) {
         Thread thread = new Thread(() -> {
@@ -40,7 +40,7 @@ public class TokenCheck {
                 RpmtwUpdateMod.LOGGER.info("[Crowdin權杖自動檢測系統]§a檢測成功，您的登入權杖是有效的。");
                 config.Token = token;
                 config.isCheck = true;
-                AutoConfig.getConfigHolder(ConfigScreen.class).save();
+                RPMTWConfig.saveConfig();
             } else {
                 if (mc.player != null) {
                     SendMsg.send("§9[Crowdin權杖自動檢測系統]§c檢測失敗，登入權杖無效，請再嘗試新增或至RPMTW官方Discord群組尋求協助。\n官方Discord群組:https://discord.gg/5xApZtgV2u");

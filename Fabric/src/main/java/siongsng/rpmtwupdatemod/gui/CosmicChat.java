@@ -13,11 +13,20 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import siongsng.rpmtwupdatemod.CosmicChat.SocketClient;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
-import siongsng.rpmtwupdatemod.function.SendMsg;
+import siongsng.rpmtwupdatemod.utilities.SendMsg;
 
 import static io.github.cottonmc.cotton.gui.client.BackgroundPainter.createNinePatch;
 
 public class CosmicChat extends LightweightGuiDescription {
+    public static void open(String initMessage) {
+        if (!initMessage.isEmpty()) {
+            SocketClient.sendMessage(initMessage);
+            MinecraftClient.getInstance().setScreen(null);
+        } else {
+            MinecraftClient.getInstance().setScreen(new Screen(new CosmicChat()));
+        }
+    }
+
     public CosmicChat() {
         WGridPanel gui = new WGridPanel();
         setRootPanel(gui);
@@ -38,14 +47,14 @@ public class CosmicChat extends LightweightGuiDescription {
 
         Cancel.setOnClick(() -> MinecraftClient.getInstance().setScreen(null));
         Send.setOnClick(() -> {
-            if (Message.getText().equals("")) {
+            if (Message.getText().isEmpty()) {
                 SendMsg.send("訊息不能是空的。");
             } else {
-                SocketClient.Send(Message.getText());
+                SocketClient.sendMessage(Message.getText());
             }
             MinecraftClient.getInstance().setScreen(null);
         });
-        Info.setOnClick(() -> Util.getOperatingSystem().open("https://www.rpmtw.ga/Wiki/ModInfo#what-is-cosmic-system"));
+        Info.setOnClick(() -> Util.getOperatingSystem().open("https://www.rpmtw.com/Wiki/ModInfo#what-is-cosmic-system"));
         gui.validate(this);
     }
 

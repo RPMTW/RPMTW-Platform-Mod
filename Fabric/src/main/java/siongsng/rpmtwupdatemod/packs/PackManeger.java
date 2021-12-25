@@ -11,7 +11,7 @@ import org.apache.commons.io.FileUtils;
 import siongsng.rpmtwupdatemod.Register.RPMKeyBinding;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
-import siongsng.rpmtwupdatemod.function.SendMsg;
+import siongsng.rpmtwupdatemod.utilities.SendMsg;
 
 import java.io.File;
 import java.io.IOException;

@@ -10,7 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.LiteralText;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
-import siongsng.rpmtwupdatemod.function.SendMsg;
+import siongsng.rpmtwupdatemod.utilities.SendMsg;
 
 import java.net.URISyntaxException;
 import java.util.HashMap;
@@ -46,7 +46,7 @@ public class SocketClient {
             try {
                 if (MinecraftClient.getInstance() == null)
                     return;
-                if (!RPMTWConfig.getConfig().isChat)
+                if (!RPMTWConfig.getConfig().cosmicChat)
                     return;
 
                 MinecraftClient mc = MinecraftClient.getInstance();
@@ -99,7 +99,7 @@ public class SocketClient {
 
     }
 
-    public static void Send(String Message) {
+    public static void sendMessage(String Message) {
         if (socket == null) {
             init();
         }

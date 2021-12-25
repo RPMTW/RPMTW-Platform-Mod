@@ -19,7 +19,9 @@ public class ConfigScreen implements ConfigData {
     @Comment("預設進入遊戲時，是否自動切換語言為 繁體中文。")
     public boolean isChinese = true;
     @Comment("是否使用宇宙通訊系統。")
-    public boolean isChat = true;
+    public boolean cosmicChat = true;
+    @Comment("是否在原版聊天視窗中新增宇宙通訊發送按鈕。")
+    public boolean cosmicChatButton = true;
     public boolean isTranslate = true;
     @Comment("是否在遊戲暫停視窗中顯示翻譯貢獻者按鈕。")
     public boolean contributorButton = true;

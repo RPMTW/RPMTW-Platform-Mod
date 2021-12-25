@@ -6,18 +6,14 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.fabricmc.fabric.api.client.screen.v1.Screens;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.ChatScreen;
 import net.minecraft.client.gui.screen.GameMenuScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.gui.screen.option.OptionsScreen;
-import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.gui.widget.ClickableWidget;
-import net.minecraft.client.gui.widget.TexturedButtonWidget;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.gui.widget.*;
 import net.minecraft.text.LiteralText;
-import net.minecraft.text.OrderedText;
-import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import org.apache.logging.log4j.LogManager;
@@ -28,13 +24,15 @@ import siongsng.rpmtwupdatemod.Register.RPMKeyBinding;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.gui.ping;
+import siongsng.rpmtwupdatemod.gui.widget.RPMCheckbox;
+import siongsng.rpmtwupdatemod.gui.widget.TranslucentButton;
+import siongsng.rpmtwupdatemod.mixins.ChatScreenAccessor;
 import siongsng.rpmtwupdatemod.translation.Handler;
+import siongsng.rpmtwupdatemod.utilities.Utility;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
-import java.util.function.Consumer;
 
 @Environment(EnvType.CLIENT)
 public class RpmtwUpdateMod implements ClientModInitializer {
@@ -59,7 +57,7 @@ public class RpmtwUpdateMod implements ClientModInitializer {
         if (!RPMTWConfig.getConfig().Token.equals("")) { //如果Token不是空的
             new TokenCheck().Check(RPMTWConfig.getConfig().Token); //開始檢測 Crowdin token
         }
-        if (RPMTWConfig.getConfig().isChat) {
+        if (RPMTWConfig.getConfig().cosmicChat) {
             SocketClient.GetMessage();
         }
         new Handler();
@@ -67,31 +65,37 @@ public class RpmtwUpdateMod implements ClientModInitializer {
     }
 
     public void screenEvent(MinecraftClient client, Screen screen, int scaledWidth, int scaledHeight) {
-        boolean show = screen instanceof GameMenuScreen || screen instanceof CreativeInventoryScreen || screen instanceof InventoryScreen || screen instanceof OptionsScreen;
+        boolean showContributor = screen instanceof GameMenuScreen || screen instanceof CreativeInventoryScreen || screen instanceof InventoryScreen || screen instanceof OptionsScreen;
+        List<ClickableWidget> buttons = Screens.getButtons(screen);
 
-        if (show && RPMTWConfig.getConfig().contributorButton && RPMTWConfig.getConfig().isChinese) {
+        // 翻譯貢獻者按鈕
+        if (showContributor && RPMTWConfig.getConfig().contributorButton && RPMTWConfig.getConfig().isChinese) {
+            int y = (int) (scaledHeight / 1.11);
 
+            if (!(screen instanceof GameMenuScreen)) {
+                y += 12;
+            }
 
-            TexturedButtonWidget rpmtwLogo = new TexturedButtonWidget(scaledWidth / 80, scaledHeight - 22, 15, 15, 0, 0, 0, new Identifier(RpmtwUpdateMod.Mod_ID, "textures/rpmtw_logo.png"), 15, 15, (buttonWidget) -> {
-            }, new LiteralText(""));
-            ButtonWidget buttonWidget = new ButtonWidget(scaledWidth / 80 - 2, scaledHeight - 25, 20, 20, LiteralText.EMPTY, (button) -> Util.getOperatingSystem().open("https://www.rpmtw.com/Contributor"), new ButtonWidget.TooltipSupplier() {
-                public void onTooltip(ButtonWidget buttonWidget, MatrixStack matrixStack, int i, int j) {
-                    this.supply(consumer -> {
-                        List<OrderedText> lines = new ArrayList<>();
-                        lines.add(consumer.asOrderedText());
-                        screen.renderOrderedTooltip(matrixStack, lines
-                                , i, j);
-                    });
-                }
-
-                public void supply(Consumer<Text> consumer) {
-                    consumer.accept(new LiteralText("查看 RPMTW 翻譯貢獻者"));
-                }
+            TexturedButtonWidget rpmtwLogo = new TexturedButtonWidget(scaledWidth / 80, y + 2, 15, 15, 0, 0, 0, new Identifier(RpmtwUpdateMod.Mod_ID, "textures/rpmtw_logo.png"), 15, 15, (buttonWidget) -> {
             });
+            ButtonWidget buttonWidget = new ButtonWidget(scaledWidth / 80 - 2, y, 20, 20, LiteralText.EMPTY, (button) -> Util.getOperatingSystem().open("https://www.rpmtw.com/Contributor"), (buttonWidget1, matrixStack, i, j) -> screen.renderTooltip(matrixStack, new LiteralText("查看 RPMTW 翻譯貢獻者")
+                    , i, j));
 
-            List<ClickableWidget> buttons = Screens.getButtons(screen);
             buttons.add(buttonWidget);
             buttons.add(rpmtwLogo);
+        } else if (screen instanceof ChatScreen chatScreen && RPMTWConfig.getConfig().cosmicChatButton) {
+            TextFieldWidget textField = ((ChatScreenAccessor.chatFieldAccessor) chatScreen).getChatField();
+
+            TranslucentButton translucentButton = new TranslucentButton(scaledWidth - 170, scaledHeight - 40, 75, 20, new LiteralText("發送宇宙通訊"), (button) -> Utility.openCosmicChatScreen(textField.getText()), (buttonWidget1, matrixStack, i, j) -> screen.renderTooltip(matrixStack, new LiteralText("發送訊息至浩瀚的宇宙中，與其他星球的生物交流")
+                    , i, j));
+
+            CheckboxWidget checkbox = new RPMCheckbox(scaledWidth - 90, scaledHeight - 40, 20, 20, new LiteralText("接收宇宙通訊"), RPMTWConfig.getConfig().cosmicChat, (checked -> {
+                RPMTWConfig.getConfig().cosmicChat = checked;
+                RPMTWConfig.saveConfig();
+            }), "接收來自其他星球的訊息");
+
+            buttons.add(translucentButton);
+            buttons.add(checkbox);
         }
     }
 

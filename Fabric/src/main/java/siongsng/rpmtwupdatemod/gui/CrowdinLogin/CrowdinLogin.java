@@ -13,7 +13,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
-import siongsng.rpmtwupdatemod.function.SendMsg;
+import siongsng.rpmtwupdatemod.utilities.SendMsg;
 
 import static io.github.cottonmc.cotton.gui.client.BackgroundPainter.createNinePatch;
 
@@ -39,7 +39,7 @@ public class CrowdinLogin extends LightweightGuiDescription {
         gui.add(Token, 3, (int) 4.5, 10, 2);
 
         Close.setOnClick(() -> MinecraftClient.getInstance().setScreen(null));
-        Info.setOnClick(() -> Util.getOperatingSystem().open("https://www.rpmtw.ga/Wiki/RPMTW-Update-Mod-Related#h.x230ggwx63l4"));
+        Info.setOnClick(() -> Util.getOperatingSystem().open("https://www.rpmtw.com/Wiki/RPMTW-Update-Mod-Related#h.x230ggwx63l4"));
         Done.setOnClick(() -> {
             if (Token.getText().equals("")) {
                 SendMsg.send("Crowdin登入權杖不能是空的");
