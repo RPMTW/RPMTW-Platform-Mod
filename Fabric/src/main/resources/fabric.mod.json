@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "rpmtw_update_mod",
-  "version": "1.2.9",
+  "version": "1.3.0",
   "name": "RpmtwUpdateMod",
   "description": "這個模組可以在進入世界的時候自動下載翻譯資源包，並且還內建了許多實用功能。官方網站: https://www.rpmtw.com",
   "icon": "assets/rpmtw_update_mod/icon.png",
