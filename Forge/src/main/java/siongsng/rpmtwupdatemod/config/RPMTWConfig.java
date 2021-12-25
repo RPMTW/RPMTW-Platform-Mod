@@ -25,7 +25,7 @@ public class RPMTWConfig {
                 .comment("IsChinese = 預設進入遊戲時，是否自動切換語言為 繁體中文。")
                 .define("rpmtw.isChinese", true);
         cosmicChat = client
-                .comment("isChat = 是否使用宇宙通訊系統 (包含接收訊息與發送訊息)。")
+                .comment("cosmicChat = 是否使用宇宙通訊系統 (包含接收訊息與發送訊息)。")
                 .define("rpmtw.cosmicChat", true);
         isEULA = client
                 .comment("isEULA = 使用者是否同意宇宙通訊EULA。")
