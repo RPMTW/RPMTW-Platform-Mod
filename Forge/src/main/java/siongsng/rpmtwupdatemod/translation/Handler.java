@@ -29,7 +29,11 @@ public class Handler {
 
 
     public boolean isKeyPress(KeyBinding key) {
-        return InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(), key.getKey().getKeyCode());
+        try {
+            return InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(), key.getKey().getKeyCode());
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 

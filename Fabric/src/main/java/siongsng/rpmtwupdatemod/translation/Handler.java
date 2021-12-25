@@ -30,7 +30,11 @@ public class Handler {
 
 
     public static boolean isKeyPress(KeyBinding key) {
-        return InputUtil.isKeyPressed(MinecraftClient.getInstance().getWindow().getHandle(), ((KeyCodeAccessor) key).fabric_getBoundKey().getCode());
+        try {
+            return InputUtil.isKeyPressed(MinecraftClient.getInstance().getWindow().getHandle(), ((KeyCodeAccessor) key).fabric_getBoundKey().getCode());
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public static void init() {
