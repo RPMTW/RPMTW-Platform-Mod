@@ -11,7 +11,7 @@ import org.apache.http.client.methods.RequestBuilder;
 import org.apache.http.impl.client.HttpClients;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
-import siongsng.rpmtwupdatemod.function.SendMsg;
+import siongsng.rpmtwupdatemod.utilities.SendMsg;
 
 import java.io.IOException;
 

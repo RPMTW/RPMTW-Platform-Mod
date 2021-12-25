@@ -8,7 +8,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
-import siongsng.rpmtwupdatemod.function.SendMsg;
+import siongsng.rpmtwupdatemod.utilities.SendMsg;
 
 import java.awt.*;
 import java.io.IOException;

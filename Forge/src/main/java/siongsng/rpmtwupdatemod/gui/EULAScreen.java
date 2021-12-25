@@ -8,6 +8,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
+import siongsng.rpmtwupdatemod.CosmicChat.SocketClient;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 
@@ -21,6 +22,11 @@ public class EULAScreen extends GuiScreen {
     GuiButton Info;
     GuiButton OK;
     GuiButton Close;
+    protected String initMessage;
+
+    public EULAScreen(String initMessage) {
+        this.initMessage = initMessage;
+    }
 
     @Override
     public void initGui() {
@@ -93,6 +99,13 @@ public class EULAScreen extends GuiScreen {
         if (button == OK) {
             RPMTWConfig.isEULA = true;
             ConfigManager.sync(RpmtwUpdateMod.MOD_ID, Config.Type.INSTANCE);
+
+            if (!initMessage.isEmpty()){
+                SocketClient.sendMessage(initMessage);
+                Minecraft.getMinecraft().displayGuiScreen(null);
+                return;
+            }
+
             Minecraft.getMinecraft().displayGuiScreen(new CosmicChatScreen());
         }
 

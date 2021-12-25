@@ -23,9 +23,18 @@ public class RPMTWConfig {
     public static boolean isChinese = true;
     @Config.Name("是否使用宇宙通訊系統")
     @Config.Comment("宇宙通訊系統是本模組提供的一個文字聊天系統，將會與RPMTW官方Discord群組進行串連，可以使用本系統在遊戲內外進行交流。")
-    public static boolean isChat = true;
+    public static boolean cosmicChat = true;
+    @Config.Name("宇宙通訊發送按鈕")
+    @Config.Comment("是否在原版聊天視窗中新增宇宙通訊發送按鈕")
+    public static boolean cosmicChatButton = true;
+    @Config.Name("顯示翻譯貢獻者按鈕")
+    @Config.Comment("是否在遊戲暫停視窗中顯示翻譯貢獻者按鈕")
+    public static boolean contributorButton = true;
+
     public static String Token = ""; //儲存Crowdin登入權杖
+    @Config.Ignore()
     public static boolean isCheck = false; //儲存登入權杖是否有效
+    @Config.Ignore()
     public static boolean isEULA = false; //使用者是否同意宇宙通訊EULA
     @Config.Name("是否使用機器翻譯")
     public static boolean isTranslate = true;

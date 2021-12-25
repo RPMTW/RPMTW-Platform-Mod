@@ -15,7 +15,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
-import siongsng.rpmtwupdatemod.function.SendMsg;
+import siongsng.rpmtwupdatemod.utilities.SendMsg;
 
 import java.awt.*;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package siongsng.rpmtwupdatemod.function;
+package siongsng.rpmtwupdatemod.utilities;
 
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;

@@ -13,9 +13,10 @@ import net.minecraftforge.fml.common.gameevent.InputEvent;
 import org.lwjgl.input.Keyboard;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
-import siongsng.rpmtwupdatemod.function.ReloadPack;
-import siongsng.rpmtwupdatemod.function.SendMsg;
+import siongsng.rpmtwupdatemod.utilities.ReloadPack;
+import siongsng.rpmtwupdatemod.utilities.SendMsg;
 import siongsng.rpmtwupdatemod.gui.*;
+import siongsng.rpmtwupdatemod.utilities.Utility;
 
 public final class RPMKeyBinding {
     public static final KeyBinding reloadpack = new KeyBinding("重新載入翻譯包", KeyConflictContext.UNIVERSAL, Keyboard.KEY_NONE, "RPMTW 快捷鍵");
@@ -79,12 +80,8 @@ public final class RPMKeyBinding {
             }
         }
         if (cosmic_chat_send.isPressed()) {
-            if (!RPMTWConfig.isChat) return;
-            if (RPMTWConfig.isEULA) {
-                Minecraft.getMinecraft().displayGuiScreen(new CosmicChatScreen());
-            } else {
-                Minecraft.getMinecraft().displayGuiScreen(new EULAScreen());
-            }
+            if (!RPMTWConfig.cosmicChat) return;
+            Utility.openCosmicChatScreen("");
         }
     }
 }

@@ -1,24 +1,40 @@
 package siongsng.rpmtwupdatemod;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.IReloadableResourceManager;
+import net.minecraft.client.gui.*;
+import net.minecraft.client.gui.inventory.GuiContainerCreative;
+import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.resources.Language;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Config;
+import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import siongsng.rpmtwupdatemod.CosmicChat.GetMessage;
+import siongsng.rpmtwupdatemod.CosmicChat.SocketClient;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.crowdin.RPMKeyBinding;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
-import siongsng.rpmtwupdatemod.function.AddPack;
-import siongsng.rpmtwupdatemod.function.ping;
+import siongsng.rpmtwupdatemod.gui.widget.RPMButton;
+import siongsng.rpmtwupdatemod.gui.widget.RPMCheckbox;
+import siongsng.rpmtwupdatemod.gui.widget.TranslucentButton;
 import siongsng.rpmtwupdatemod.notice.notice;
 import siongsng.rpmtwupdatemod.translation.Handler;
+import siongsng.rpmtwupdatemod.utilities.AddPack;
+import siongsng.rpmtwupdatemod.utilities.Utility;
+import siongsng.rpmtwupdatemod.utilities.ping;
 
+import java.awt.*;
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -70,7 +86,7 @@ public class RpmtwUpdateMod {
         }
 
 
-        new GetMessage();
+        SocketClient.GetMessage();
     }
 
     @Mod.EventHandler
@@ -78,6 +94,66 @@ public class RpmtwUpdateMod {
         MinecraftForge.EVENT_BUS.register(new RPMKeyBinding());
         MinecraftForge.EVENT_BUS.register(new Handler());
         MinecraftForge.EVENT_BUS.register(new notice());
+        MinecraftForge.EVENT_BUS.register(this);
+    }
+
+    @SubscribeEvent
+    public void screenEvent(GuiScreenEvent.InitGuiEvent event) {
+        GuiScreen screen = event.getGui();
+        List<GuiButton> buttons = event.getButtonList();
+        int scaledWidth = screen.width;
+        int scaledHeight = screen.height;
+
+        boolean showContributor = screen instanceof GuiIngameMenu || screen instanceof GuiInventory || screen instanceof GuiContainerCreative || screen instanceof GuiOptions;
+        // 翻譯貢獻者按鈕
+        if (showContributor && RPMTWConfig.contributorButton && RPMTWConfig.isChinese) {
+            int y = (int) (scaledHeight / 1.155);
+
+            if (!(screen instanceof GuiIngameMenu)) {
+                y += 10;
+            }
+
+            GuiButtonImage rpmtwLogo = new GuiButtonImage(0, scaledWidth / 80, y + 2, 15, 15, 15, 15, 0, new ResourceLocation(RpmtwUpdateMod.MOD_ID, "textures/rpmtw_logo.png"));
+
+            GuiButton buttonWidget = new RPMButton(scaledWidth / 80 - 2, y, 20, 20, "", () -> {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://www.rpmtw.com/Contributor"));
+                } catch (IOException | URISyntaxException e) {
+                    e.printStackTrace();
+                }
+            }, "查看 RPMTW 翻譯貢獻者");
+
+            buttons.add(buttonWidget);
+            buttons.add(rpmtwLogo);
+        } else if (screen instanceof GuiChat && RPMTWConfig.cosmicChatButton) {
+            try {
+                GuiChat screenChat = (GuiChat) screen;
+                Field f;
+                try {
+                    f = screenChat.getClass().getDeclaredField("field_146415_a");
+                } catch (Exception e) {
+                    f = screenChat.getClass().getDeclaredField("inputField");
+                }
+                f.setAccessible(true);
+
+                GuiTextField textField = (GuiTextField) f.get(screenChat);
+                if (textField != null) {
+                    TranslucentButton translucentButton = new TranslucentButton(scaledWidth - 185, scaledHeight - 40, 90, 20, "發送訊息至宇宙通訊", () -> Utility.openCosmicChatScreen(textField.getText()), "發送訊息至浩瀚的宇宙中，與其他星球的生物交流"
+                    );
+
+                    RPMCheckbox checkbox = new RPMCheckbox(scaledWidth - 90, scaledHeight - 35, "接收宇宙通訊", RPMTWConfig.cosmicChat, (checked -> {
+                        RPMTWConfig.cosmicChat = checked;
+                        ConfigManager.sync(RpmtwUpdateMod.MOD_ID, Config.Type.INSTANCE);
+                    }), "接收來自其他星球的訊息");
+
+                    buttons.add(translucentButton);
+                    buttons.add(checkbox);
+                }
+            } catch (Exception e) {
+                RpmtwUpdateMod.LOGGER.error("新增宇宙通訊發送按鈕時發生未知錯誤" + e);
+            }
+        }
+        event.setButtonList(buttons);
     }
 
 }

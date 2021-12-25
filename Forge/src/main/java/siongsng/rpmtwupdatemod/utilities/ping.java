@@ -1,4 +1,4 @@
-package siongsng.rpmtwupdatemod.function;
+package siongsng.rpmtwupdatemod.utilities;
 
 import java.io.IOException;
 import java.net.MalformedURLException;

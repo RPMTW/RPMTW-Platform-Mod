@@ -36,15 +36,13 @@ minecraft {
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
             mods {
-                rpmtwupdatemod {
+                rpmtw_update_mod {
                     source sourceSets.main
                 }
             }
         }
     }
 }
-sourceSets.main.resources { srcDir 'src/generated/resources' }
-
 configurations {
     embed
     implementation.extendsFrom(embed)
@@ -83,7 +81,7 @@ jar {
                 "Implementation-Title"       : project.name,
                 "Implementation-Version"     : project.version,
                 "Implementation-Vendor"      : "SiongSng",
-                "Implementation-Timestamp"   : new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+                "Implementation-Timestamp"   : new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
         ])
     }
 }
