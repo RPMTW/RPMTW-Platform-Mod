@@ -47,9 +47,6 @@ public class SocketClient {
 
         socket.on(("broadcast"), (data) -> {
             try {
-                if (!RPMTWConfig.getConfig().cosmicChat)
-                    return;
-
                 MinecraftClient mc = MinecraftClient.getInstance();
                 PlayerEntity player = mc.player;
 
@@ -62,6 +59,9 @@ public class SocketClient {
 
                     switch (Type) {
                         case "Client":
+                            if (!RPMTWConfig.getConfig().cosmicChat)
+                                return;
+
                             if (MessageType.equals("General")) { // 一般類型的訊息
                                 String UserName = JsonData.getAsJsonPrimitive("UserName").getAsString();
                                 String Message = JsonData.getAsJsonPrimitive("Message").getAsString();
@@ -77,12 +77,18 @@ public class SocketClient {
                         case "Server":
                             switch (MessageType) {
                                 case "Ban" -> {
+                                    if (!RPMTWConfig.getConfig().cosmicChat)
+                                        return;
+
                                     String UUID = JsonData.getAsJsonPrimitive("UUID").getAsString();
                                     if (session.getUuid().equals(UUID)) {
                                         SendMsg.send("由於您違反了 《RPMTW 宇宙通訊系統終端使用者授權合約》，因此無法發送訊息至宇宙通訊，如認為有誤判請至我們的Discord群組。");
                                     }
                                 }
                                 case "Auth" -> {
+                                    if (!RPMTWConfig.getConfig().cosmicChat)
+                                        return;
+
                                     String UUID = JsonData.getAsJsonPrimitive("UUID").getAsString();
                                     if (session.getUuid().equals(UUID)) {
                                         SendMsg.send("由於您的 Minecraft 帳號不是正版，因此無法發送訊息至宇宙通訊，如認為有誤判請至我們的Discord群組。");
@@ -90,7 +96,7 @@ public class SocketClient {
                                 }
                                 case "Notice" -> {
                                     String Message = JsonData.getAsJsonPrimitive("Message").getAsString();
-                                    SendMsg.send(String.format(("§c[官方公告] §f%s"), Message));
+                                    SendMsg.send(String.format(("§c[RPMTW 官方公告] §f%s"), Message));
                                 }
                             }
                     }
