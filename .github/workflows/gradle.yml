@@ -68,7 +68,7 @@ jobs:
           version-type: release
           loaders: fabric
           version-resolver: latest
-          version: ${{ github.event.release.tag_name }}-forge
+          version: ${{ github.event.release.tag_name }}-fabric
           name: ${{ github.event.release.name }} (Fabric)
           java: |
             8
