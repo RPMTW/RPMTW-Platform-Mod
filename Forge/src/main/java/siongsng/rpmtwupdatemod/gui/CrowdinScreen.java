@@ -28,9 +28,8 @@ public final class CrowdinScreen extends Screen {
     ItemStack item = CrowdinProcedure.item; //拿的物品
     String mod_id = item.getItem().getCreatorModId(item); //物品所屬的模組ID
     String item_key = item.getDescriptionId(); //物品的命名空間
-    String item_DisplayName = item.getItem().getDescription().getString(); //物品的顯示名稱
-
     String Text = CrowdinProcedure.getText(item_key);
+    String item_DisplayName = item.getItem().getDescription().getString(); //物品的顯示名稱
     String stringID = CrowdinProcedure.stringID;
 
     public CrowdinScreen() {

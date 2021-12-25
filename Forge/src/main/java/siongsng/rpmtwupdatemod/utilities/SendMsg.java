@@ -1,8 +1,8 @@
 package siongsng.rpmtwupdatemod.utilities;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.entity.player.Player;
 
 public class SendMsg {
     public static void send(String msg) {

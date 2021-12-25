@@ -18,15 +18,6 @@ import siongsng.rpmtwupdatemod.utilities.SendMsg;
 import static io.github.cottonmc.cotton.gui.client.BackgroundPainter.createNinePatch;
 
 public class CosmicChat extends LightweightGuiDescription {
-    public static void open(String initMessage) {
-        if (!initMessage.isEmpty()) {
-            SocketClient.sendMessage(initMessage);
-            MinecraftClient.getInstance().setScreen(null);
-        } else {
-            MinecraftClient.getInstance().setScreen(new Screen(new CosmicChat()));
-        }
-    }
-
     public CosmicChat() {
         WGridPanel gui = new WGridPanel();
         setRootPanel(gui);
@@ -56,6 +47,15 @@ public class CosmicChat extends LightweightGuiDescription {
         });
         Info.setOnClick(() -> Util.getOperatingSystem().open("https://www.rpmtw.com/Wiki/ModInfo#what-is-cosmic-system"));
         gui.validate(this);
+    }
+
+    public static void open(String initMessage) {
+        if (!initMessage.isEmpty()) {
+            SocketClient.sendMessage(initMessage);
+            MinecraftClient.getInstance().setScreen(null);
+        } else {
+            MinecraftClient.getInstance().setScreen(new Screen(new CosmicChat()));
+        }
     }
 
     @Environment(EnvType.CLIENT)

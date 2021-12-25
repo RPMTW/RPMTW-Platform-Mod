@@ -33,6 +33,11 @@ public final class ConfigScreen extends Screen {
         super(new TextComponent("RPMTW 設定選單"));
     }
 
+    public static void registerConfigScreen() {
+        ModLoadingContext.get().registerExtensionPoint(ConfigGuiHandler.ConfigGuiFactory.class,
+                () -> new ConfigGuiHandler.ConfigGuiFactory((minecraft, screen) -> new ConfigScreen()));
+    }
+
     @Override
     protected void init() {
         assert this.minecraft != null;
@@ -65,7 +70,8 @@ public final class ConfigScreen extends Screen {
         optionsRowList.addBig(CycleOption.createOnOff("宇宙通訊發送按鈕",
                 (values) -> RPMTWConfig.cosmicChatButton.get(),
                 (p_168189_, p_168190_, newValue) -> RPMTWConfig.cosmicChatButton.set(newValue)
-        ));    optionsRowList.addBig(CycleOption.createOnOff("顯示翻譯貢獻者按鈕",
+        ));
+        optionsRowList.addBig(CycleOption.createOnOff("顯示翻譯貢獻者按鈕",
                 (values) -> RPMTWConfig.contributorButton.get(),
                 (p_168189_, p_168190_, newValue) -> RPMTWConfig.contributorButton.set(newValue)
         ));
@@ -115,10 +121,5 @@ public final class ConfigScreen extends Screen {
     public void removed() {
         Config.save(); // 儲存模組設定
         super.removed(); //關閉此Gui
-    }
-
-    public static void registerConfigScreen() {
-        ModLoadingContext.get().registerExtensionPoint(ConfigGuiHandler.ConfigGuiFactory.class,
-                () -> new ConfigGuiHandler.ConfigGuiFactory((minecraft, screen) -> new ConfigScreen()));
     }
 }

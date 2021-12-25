@@ -5,7 +5,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.ImageButton;
-import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.ChatScreen;
 import net.minecraft.client.gui.screens.OptionsScreen;
 import net.minecraft.client.gui.screens.PauseScreen;
@@ -43,7 +42,6 @@ import siongsng.rpmtwupdatemod.translation.Handler;
 import siongsng.rpmtwupdatemod.utilities.Utility;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 

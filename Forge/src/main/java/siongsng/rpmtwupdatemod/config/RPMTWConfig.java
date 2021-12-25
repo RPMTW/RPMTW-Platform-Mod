@@ -3,7 +3,7 @@ package siongsng.rpmtwupdatemod.config;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public class RPMTWConfig {
-    public static ForgeConfigSpec.BooleanValue rpmtw_crowdin, rpmtw_reloadpack, notice, isCheck, isChinese, cosmicChat, isEULA, isTranslate,cosmicChatButton,contributorButton;
+    public static ForgeConfigSpec.BooleanValue rpmtw_crowdin, rpmtw_reloadpack, notice, isCheck, isChinese, cosmicChat, isEULA, isTranslate, cosmicChatButton, contributorButton;
     public static ForgeConfigSpec.ConfigValue<String> Token;
 
     public static void init(ForgeConfigSpec.Builder client) {

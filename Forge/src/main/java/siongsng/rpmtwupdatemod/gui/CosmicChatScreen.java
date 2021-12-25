@@ -30,13 +30,13 @@ public class CosmicChatScreen extends Screen {
 
         this.addRenderableWidget(new Button((this.width - 4) / 2 - BOTTOM_BUTTON_WIDTH + 50, (this.height / 2) + 30,
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT, new TextComponent("傳送"), button -> {
-                    if (Message.getValue().equals("")) {
-                        SendMsg.send("訊息不能是空的。");
-                    } else {
-                        SocketClient.sendMessage(Message.getValue());
-                    }
-                    Minecraft.getInstance().setScreen(null);
-                }));
+            if (Message.getValue().equals("")) {
+                SendMsg.send("訊息不能是空的。");
+            } else {
+                SocketClient.sendMessage(Message.getValue());
+            }
+            Minecraft.getInstance().setScreen(null);
+        }));
         this.addRenderableWidget(
                 new Button((this.width - 100) / 2 - BOTTOM_BUTTON_WIDTH, (this.height / 2) + 30, BOTTOM_BUTTON_WIDTH,
                         BUTTON_HEIGHT, new TextComponent("取消"), button -> Minecraft.getInstance().setScreen(null)));

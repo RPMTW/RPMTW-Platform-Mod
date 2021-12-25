@@ -131,19 +131,19 @@ public class SocketClient {
         }
     }
 
-    public Socket getSocket() {
-        if (socket == null)
-            init();
-
-        return socket;
-    }
-
     public static void disconnect() {
         if (socket != null)
             socket.disconnect();
 
         socket = null;
         RpmtwUpdateMod.LOGGER.info("已中斷宇宙通訊的連線");
+    }
+
+    public Socket getSocket() {
+        if (socket == null)
+            init();
+
+        return socket;
     }
 
 }
