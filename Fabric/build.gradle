@@ -25,8 +25,15 @@ archivesBaseName = "RPMTW-Update-Mod-Fabric-1.18.1"
 version = "${project.mod_version}${getVersionMetadata()}" as Object
 group = project.maven_group as Object
 
-minecraft {
+loom {
     accessWidenerPath = file("src/main/resources/RpmtwUpdateMod.accesswidener")
+
+    runConfigs {
+        client {
+            client()
+            vmArg(project.cleint_vm_args)
+        }
+    }
 }
 
 configurations {
@@ -93,7 +100,7 @@ remapJar.doLast {
 
 static String getVersionMetadata() {
     def build_id = System.getenv("GITHUB_RUN_NUMBER")
-return  "";
+    return "";
 //    if (build_id != null) {
 //        return "+build.${build_id}"
 //    } else {
