@@ -3,7 +3,7 @@ package siongsng.rpmtwupdatemod.Packs;
 import net.minecraft.client.Minecraft;
 import org.apache.commons.io.FileUtils;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
-import siongsng.rpmtwupdatemod.function.SendMsg;
+import siongsng.rpmtwupdatemod.utilities.SendMsg;
 
 import java.net.URL;
 import java.nio.file.Path;

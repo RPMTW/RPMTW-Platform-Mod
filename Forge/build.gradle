@@ -62,8 +62,9 @@ minecraft {
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             mods {
-                rpmtwupdatemod {
+                rpmtw_update_mod {
                     source sourceSets.main
+                    resource sourceSets.main.resources
                 }
             }
         }

@@ -15,14 +15,13 @@ import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.lwjgl.glfw.GLFW;
+import siongsng.rpmtwupdatemod.Packs.ReloadPack;
 import siongsng.rpmtwupdatemod.config.ConfigScreen;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
-import siongsng.rpmtwupdatemod.Packs.ReloadPack;
-import siongsng.rpmtwupdatemod.function.SendMsg;
-import siongsng.rpmtwupdatemod.gui.CosmicChatScreen;
 import siongsng.rpmtwupdatemod.gui.CrowdinLoginScreen;
 import siongsng.rpmtwupdatemod.gui.CrowdinProcedure;
-import siongsng.rpmtwupdatemod.gui.EULAScreen;
+import siongsng.rpmtwupdatemod.utilities.SendMsg;
+import siongsng.rpmtwupdatemod.utilities.Utility;
 
 public final class RPMKeyBinding {
     public static final KeyMapping reloadpack = new KeyMapping("key.rpmtw_update_mod.reloadpack", KeyConflictContext.UNIVERSAL, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "key.categories.rpmtw");
@@ -100,12 +99,8 @@ public final class RPMKeyBinding {
             new ReloadPack();
         }
         if (cosmic_chat_send.consumeClick()) {
-            if (!RPMTWConfig.isChat.get()) return;
-            if (RPMTWConfig.isEULA.get()) {
-                Minecraft.getInstance().setScreen(new CosmicChatScreen());
-            } else {
-                Minecraft.getInstance().setScreen(new EULAScreen());
-            }
+            if (!RPMTWConfig.cosmicChat.get()) return;
+            Utility.openCosmicChatScreen("");
         }
     }
 }

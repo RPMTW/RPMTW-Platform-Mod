@@ -11,9 +11,10 @@
   "text.autoconfig.rpmtw_update_mod.option.notice": "進入世界時自動發送公告",
   "text.autoconfig.rpmtw_update_mod.option.ReloadPack": "重新載入翻譯包",
   "text.autoconfig.rpmtw_update_mod.option.isChinese": "自動切換預設語言",
-  "text.autoconfig.rpmtw_update_mod.option.isChat": "是否啟用宇宙通訊系統",
+  "text.autoconfig.rpmtw_update_mod.option.cosmicChat": "是否啟用宇宙通訊系統",
   "text.autoconfig.rpmtw_update_mod.option.modBlackList": "模組翻譯黑名單",
   "text.autoconfig.rpmtw_update_mod.option.isTranslate": "是否使用機器翻譯",
   "text.autoconfig.rpmtw_update_mod.option.contributorButton": "顯示翻譯貢獻者按鈕",
+  "text.autoconfig.rpmtw_update_mod.option.cosmicChatButton": "宇宙通訊發送按鈕",
   "menu.rpmtw": "RPMTW settings"
 }

@@ -57,9 +57,8 @@ public class RpmtwUpdateMod implements ClientModInitializer {
         if (!RPMTWConfig.getConfig().Token.equals("")) { //如果Token不是空的
             new TokenCheck().Check(RPMTWConfig.getConfig().Token); //開始檢測 Crowdin token
         }
-        if (RPMTWConfig.getConfig().cosmicChat) {
-            SocketClient.GetMessage();
-        }
+        SocketClient.GetMessage();
+
         new Handler();
         ScreenEvents.AFTER_INIT.register(this::screenEvent);
     }
@@ -70,7 +69,7 @@ public class RpmtwUpdateMod implements ClientModInitializer {
 
         // 翻譯貢獻者按鈕
         if (showContributor && RPMTWConfig.getConfig().contributorButton && RPMTWConfig.getConfig().isChinese) {
-            int y = (int) (scaledHeight / 1.11);
+            int y = (int) (scaledHeight / 1.155);
 
             if (!(screen instanceof GameMenuScreen)) {
                 y += 12;

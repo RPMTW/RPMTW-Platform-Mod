@@ -70,7 +70,6 @@ public class Handler extends SimplePreparableReloadListener<CompletableFuture<Vo
     @Override
     protected CompletableFuture<Void> prepare(ResourceManager manager, ProfilerFiller p_10797_) {
         return CompletableFuture.runAsync(() -> {
-            RpmtwUpdateMod.LOGGER.info("rpmtw test");
             for (String namespace : manager.getNamespaces()) {
                 String path = "lang/en_us.json";
                 try {
@@ -98,6 +97,5 @@ public class Handler extends SimplePreparableReloadListener<CompletableFuture<Vo
 
     @Override
     protected void apply(CompletableFuture<Void> p_10793_, ResourceManager p_10794_, ProfilerFiller p_10795_) {
-        RpmtwUpdateMod.LOGGER.info("rpmtw test");
     }
 }

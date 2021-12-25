@@ -1,4 +1,4 @@
-package siongsng.rpmtwupdatemod.function;
+package siongsng.rpmtwupdatemod.utilities;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;

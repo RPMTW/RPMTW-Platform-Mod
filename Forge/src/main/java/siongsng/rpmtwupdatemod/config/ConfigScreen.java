@@ -51,8 +51,8 @@ public final class ConfigScreen extends Screen {
                 (p_168189_, p_168190_, newValue) -> RPMTWConfig.rpmtw_reloadpack.set(newValue)
         ));
         optionsRowList.addBig(CycleOption.createOnOff("是否啟用宇宙通訊系統",
-                (values) -> RPMTWConfig.isChat.get(),
-                (p_168189_, p_168190_, newValue) -> RPMTWConfig.isChat.set(newValue)
+                (values) -> RPMTWConfig.cosmicChat.get(),
+                (p_168189_, p_168190_, newValue) -> RPMTWConfig.cosmicChat.set(newValue)
         ));
         optionsRowList.addBig(CycleOption.createOnOff("是否啟用進入世界時發送公告",
                 (values) -> RPMTWConfig.notice.get(),
@@ -62,6 +62,14 @@ public final class ConfigScreen extends Screen {
                 (values) -> RPMTWConfig.isTranslate.get(),
                 (p_168189_, p_168190_, newValue) -> RPMTWConfig.isTranslate.set(newValue)
         ));
+        optionsRowList.addBig(CycleOption.createOnOff("宇宙通訊發送按鈕",
+                (values) -> RPMTWConfig.cosmicChatButton.get(),
+                (p_168189_, p_168190_, newValue) -> RPMTWConfig.cosmicChatButton.set(newValue)
+        ));    optionsRowList.addBig(CycleOption.createOnOff("顯示翻譯貢獻者按鈕",
+                (values) -> RPMTWConfig.contributorButton.get(),
+                (p_168189_, p_168190_, newValue) -> RPMTWConfig.contributorButton.set(newValue)
+        ));
+
         this.addWidget(optionsRowList);
 
         this.addRenderableWidget(new Button(
@@ -73,9 +81,11 @@ public final class ConfigScreen extends Screen {
                     RPMTWConfig.rpmtw_crowdin.set(true);
                     RPMTWConfig.rpmtw_reloadpack.set(true);
                     RPMTWConfig.notice.set(true);
-                    RPMTWConfig.isChat.set(true);
+                    RPMTWConfig.cosmicChat.set(true);
                     RPMTWConfig.isChinese.set(true);
                     RPMTWConfig.isTranslate.set(true);
+                    RPMTWConfig.cosmicChatButton.set(true);
+                    RPMTWConfig.contributorButton.set(true);
                     Minecraft.getInstance().setScreen(new ConfigScreen());
                 }));
 

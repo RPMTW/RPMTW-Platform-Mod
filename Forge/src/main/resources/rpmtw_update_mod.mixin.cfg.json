@@ -8,5 +8,8 @@
   "mixins": [
     "MixinBookContents",
     "MixinContentExternalLoader"
+  ],
+  "client": [
+    "ChatScreenAccessor$chatFieldAccessor"
   ]
 }

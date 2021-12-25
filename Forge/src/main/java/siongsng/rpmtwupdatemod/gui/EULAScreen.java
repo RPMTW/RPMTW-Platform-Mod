@@ -6,17 +6,20 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.TextComponent;
+import siongsng.rpmtwupdatemod.CosmicChat.SocketClient;
+import siongsng.rpmtwupdatemod.config.Config;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 
 import javax.annotation.Nonnull;
-import java.util.Locale;
 
 public class EULAScreen extends Screen {
     static final int BUTTON_HEIGHT = 20;
     private static final int BOTTOM_BUTTON_WIDTH = 95;
+    protected final String initMessage;
 
-    public EULAScreen() {
+    public EULAScreen(String initMessage) {
         super(new TextComponent(""));
+        this.initMessage = initMessage;
     }
 
     @Override
@@ -42,6 +45,12 @@ public class EULAScreen extends Screen {
                 new TextComponent("我同意"),
                 button -> {
                     RPMTWConfig.isEULA.set(true);
+                    Config.save();
+                    if (!initMessage.isEmpty()) {
+                        SocketClient.sendMessage(initMessage);
+                        Minecraft.getInstance().setScreen(null);
+                        return;
+                    }
                     Minecraft.getInstance().setScreen(new CosmicChatScreen());
                 }));
     }
