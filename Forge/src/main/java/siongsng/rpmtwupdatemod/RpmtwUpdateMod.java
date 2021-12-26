@@ -35,13 +35,13 @@ import siongsng.rpmtwupdatemod.crowdin.RPMKeyBinding;
 import siongsng.rpmtwupdatemod.crowdin.TokenCheck;
 import siongsng.rpmtwupdatemod.gui.widget.RPMCheckbox;
 import siongsng.rpmtwupdatemod.gui.widget.TranslucentButton;
-import siongsng.rpmtwupdatemod.mixin.ChatScreenAccessor;
 import siongsng.rpmtwupdatemod.notice.notice;
 import siongsng.rpmtwupdatemod.packs.PacksManager;
 import siongsng.rpmtwupdatemod.translation.Handler;
 import siongsng.rpmtwupdatemod.utilities.Utility;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -115,16 +115,28 @@ public class RpmtwUpdateMod {
 
             event.addWidget(buttonWidget);
             event.addWidget(rpmtwLogo);
-        } else if (screen instanceof ChatScreen  && RPMTWConfig.cosmicChatButton.get()) {
-            TextFieldWidget textField = ((ChatScreenAccessor.chatFieldAccessor) screen).getChatField();
+        } else if (screen instanceof ChatScreen && RPMTWConfig.cosmicChatButton.get()) {
 
-            TranslucentButton translucentButton = new TranslucentButton(scaledWidth - 185, scaledHeight - 40, 90, 20, new StringTextComponent("發送訊息至宇宙通訊"), (button) -> Utility.openCosmicChatScreen(textField.getText()), (buttonWidget1, matrixStack, i, j) -> screen.renderTooltip(matrixStack, new StringTextComponent("發送訊息至浩瀚的宇宙中，與其他星球的生物交流")
-                    , i, j));
+            try {
+                ChatScreen chatScreen = (ChatScreen) screen;
+                Field f;
+                try {
+                    f = chatScreen.getClass().getDeclaredField("field_146415_a");
+                } catch (Exception e) {
+                    f = chatScreen.getClass().getDeclaredField("inputField");
+                }
+                f.setAccessible(true);
 
-            RPMCheckbox checkbox = new RPMCheckbox(scaledWidth - 90, scaledHeight - 40, 20, 20, new StringTextComponent("接收宇宙通訊"), RPMTWConfig.cosmicChat.get(), (checked -> RPMTWConfig.cosmicChat.set(checked)), "接收來自其他星球的訊息");
+                TextFieldWidget textField = (TextFieldWidget) f.get(chatScreen);
+                TranslucentButton translucentButton = new TranslucentButton(scaledWidth - 185, scaledHeight - 40, 90, 20, new StringTextComponent("發送訊息至宇宙通訊"), (button) -> Utility.openCosmicChatScreen(textField.getText()), (buttonWidget1, matrixStack, i, j) -> screen.renderTooltip(matrixStack, new StringTextComponent("發送訊息至浩瀚的宇宙中，與其他星球的生物交流")
+                        , i, j));
+                RPMCheckbox checkbox = new RPMCheckbox(scaledWidth - 90, scaledHeight - 40, 20, 20, new StringTextComponent("接收宇宙通訊"), RPMTWConfig.cosmicChat.get(), (checked -> RPMTWConfig.cosmicChat.set(checked)), "接收來自其他星球的訊息");
 
-            event.addWidget(translucentButton);
-            event.addWidget(checkbox);
+                event.addWidget(translucentButton);
+                event.addWidget(checkbox);
+            } catch (Exception e) {
+                RpmtwUpdateMod.LOGGER.error("新增宇宙通訊發送按鈕時發生未知錯誤" + e);
+            }
         }
     }
 
