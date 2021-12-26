@@ -107,8 +107,10 @@ public class RpmtwUpdateMod {
         if (showContributor && RPMTWConfig.contributorButton.get() && RPMTWConfig.isChinese.get()) {
             int y = (int) (scaledHeight / 1.155);
 
-            if (!(screen instanceof PauseScreen)) {
-                y += 10;
+            if (screen instanceof OptionsScreen) {
+                y += 12;
+            } else if (screen instanceof CreativeModeInventoryScreen || screen instanceof InventoryScreen) {
+                y -= 20;
             }
 
             ImageButton rpmtwLogo = new ImageButton(scaledWidth / 80, y + 2, 15, 15, 0, 0, 0, new ResourceLocation(RpmtwUpdateMod.Mod_ID, "textures/rpmtw_logo.png"), 15, 15, (buttonWidget) -> {

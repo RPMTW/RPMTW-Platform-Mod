@@ -13,6 +13,7 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.jetbrains.annotations.NotNull;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
 import siongsng.rpmtwupdatemod.utilities.SendMsg;
 
@@ -24,21 +25,29 @@ public final class CrowdinScreen extends Screen {
     static final int BUTTON_HEIGHT = 20;
     private static final int BOTTOM_BUTTON_WIDTH = 95;
     EditBox Translation;
+    @NotNull CrowdinInfo info;
 
-    ItemStack item = CrowdinProcedure.item; //拿的物品
-    String mod_id = item.getItem().getCreatorModId(item); //物品所屬的模組ID
-    String item_key = item.getDescriptionId(); //物品的命名空間
-    String Text = CrowdinProcedure.getText(item_key);
-    String item_DisplayName = item.getItem().getDescription().getString(); //物品的顯示名稱
-    String stringID = CrowdinProcedure.stringID;
+    ItemStack item;
+    String modId;
+    String itemKey;
+    String sourceText;
+    String itemDisplayName;
+    String stringID;
 
-    public CrowdinScreen() {
+    public CrowdinScreen(@NotNull CrowdinInfo info) {
         super(new TextComponent(""));
+        this.info = info;
+
+        this.item = info.getItemStack(); //拿的物品
+        this.modId = item.getItem().getCreatorModId(item); //物品所屬的模組ID
+        this.itemKey = item.getDescriptionId(); //物品的命名空間
+        this.sourceText = info.getSourceText();
+        this.itemDisplayName = item.getItem().getDescription().getString(); //物品的顯示名稱
+        this.stringID = info.getStringID();
     }
 
     @Override
     protected void init() {
-
         this.addRenderableWidget(new Button(
                 (this.width / 2 + 50),
                 (this.height / 2) + 80,
@@ -62,7 +71,7 @@ public final class CrowdinScreen extends Screen {
                         Minecraft.getInstance().setScreen(null);
                         return;
                     } else {
-                        SendMsg.send("§b已成功提交翻譯，將 §e" + Text + " §b翻譯為 §e" + Translation.getValue() + "§b 。(約十分鐘後將會將內容套用變更至翻譯包)");
+                        SendMsg.send("§b已成功提交翻譯，將 §e" + sourceText + " §b翻譯為 §e" + Translation.getValue() + "§b 。(約十分鐘後將會將內容套用變更至翻譯包)");
                         Minecraft.getInstance().setScreen(null);
                     }
                     Thread thread = new Thread(() -> {
@@ -96,7 +105,7 @@ public final class CrowdinScreen extends Screen {
             }
 
             @Override
-            public void insertText(String text) {
+            public void insertText(@NotNull String text) {
                 super.insertText(text);
                 if (getValue().isEmpty())
                     setSuggestion("請輸入譯文");
@@ -144,10 +153,10 @@ public final class CrowdinScreen extends Screen {
         int height = (this.height / 2);
         int TextColor = 0xFFFFFF;
         String rpmTScreen = "物品翻譯介面";
-        String originalText = "原文: " + Text;
-        String langKey = "語系鍵: " + item_key;
-        String displayName = "顯示名稱: " + item_DisplayName;
-        String parentModID = "所屬模組 ID: " + mod_id;
+        String originalText = "原文: " + sourceText;
+        String langKey = "語系鍵: " + itemKey;
+        String displayName = "顯示名稱: " + itemDisplayName;
+        String parentModID = "所屬模組 ID: " + modId;
 
         this.font.draw(matrixStack, rpmTScreen, this.width / (float) 2 - this.font.width(rpmTScreen) / (float) 2, height - 105, -65536);
         this.font.draw(matrixStack, originalText, this.width / (float) 2 - this.font.width(originalText) / (float) 2, height - 80, TextColor);

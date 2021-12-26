@@ -8,7 +8,7 @@ import io.github.cottonmc.cotton.gui.widget.WTextField;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
@@ -27,24 +27,28 @@ import java.io.IOException;
 import static io.github.cottonmc.cotton.gui.client.BackgroundPainter.createNinePatch;
 
 public class CrowdinGui extends LightweightGuiDescription {
-    Item item = CrowdinGuiProcedure.item.getItem();
-    String mod_id = Registry.ITEM.getId(item).getNamespace();//物品所屬的模組ID
-    String item_key = item.getTranslationKey(); //物品的命名空間
-    String Text = CrowdinGuiProcedure.getText(item_key);
-    String item_DisplayName = item.getName().getString(); //物品的顯示名稱
-    String stringID = CrowdinGuiProcedure.stringID;
+    CrowdinInfo info; //Crowdin 字串 ID
 
-    public CrowdinGui() {
+    public CrowdinGui(CrowdinInfo info) {
+        this.info = info;
+
+        ItemStack item = info.getItemStack();
+        String modID = Registry.ITEM.getId(item.getItem()).getNamespace();//物品所屬的模組ID
+        String itemKey = item.getTranslationKey(); //物品的命名空間
+        String itemDisplayName = item.getName().getString(); //物品的顯示名稱
+        String stringID = info.getStringID(); //Crowdin 字串 ID
+        String sourceText = info.getSourceText(); //Crowdin 原文
+
         WGridPanel gui = new WGridPanel();
         setRootPanel(gui);
         gui.setSize(405, 227);
         WLabel label = new WLabel(new LiteralText("RPMTW 物品翻譯介面"), 0xFF5555);
         gui.add(label, 9, 0, 2, 1);
 
-        gui.add(new WLabel(new LiteralText("原文: " + Text), 0xFFFFFF), (int) 8.5, 2, 2, 1);
-        gui.add(new WLabel(new LiteralText("語系鍵: " + item_key), 0xFFFFFF), (int) 8.5, 3, 2, 1);
-        gui.add(new WLabel(new LiteralText("顯示名稱: " + item_DisplayName), 0xFFFFFF), (int) 8.5, 4, 2, 1);
-        gui.add(new WLabel(new LiteralText("所屬模組 ID: " + mod_id), 0xFFFFFF), (int) 8.5, 5, 2, 1);
+        gui.add(new WLabel(new LiteralText("原文: " + sourceText), 0xFFFFFF), (int) 8.5, 2, 2, 1);
+        gui.add(new WLabel(new LiteralText("語系鍵: " + itemKey), 0xFFFFFF), (int) 8.5, 3, 2, 1);
+        gui.add(new WLabel(new LiteralText("顯示名稱: " + itemDisplayName), 0xFFFFFF), (int) 8.5, 4, 2, 1);
+        gui.add(new WLabel(new LiteralText("所屬模組 ID: " + modID), 0xFFFFFF), (int) 8.5, 5, 2, 1);
 
         WButton Close = new WButton(new LiteralText("關閉"));
         WButton Done = new WButton(new LiteralText("提交翻譯"));
@@ -64,14 +68,12 @@ public class CrowdinGui extends LightweightGuiDescription {
                 SendMsg.send("§4譯文不能是空的呦!");
                 return;
             } else {
-                SendMsg.send("§b已成功提交翻譯，將 §e" + Text + " §b翻譯為 §e" + Translations.getText() + "§b 。(約十分鐘後將會將內容套用變更至翻譯包)");
+                SendMsg.send("§b已成功提交翻譯，將 §e" + sourceText + " §b翻譯為 §e" + Translations.getText() + "§b 。(約十分鐘後將會將內容套用變更至翻譯包)");
                 MinecraftClient.getInstance().setScreen(null);
             }
             Thread thread = new Thread(() -> {
                 CloseableHttpClient httpClient = HttpClients.createDefault();
-                StringEntity requestEntity = new StringEntity(
-                        "{\"stringId\":\"" + stringID + "\",\"languageId\":\"zh-TW\",\"text\": \"" + Translations.getText() + "\"}",
-                        ContentType.APPLICATION_JSON);
+                StringEntity requestEntity = new StringEntity("{\"stringId\":\"" + stringID + "\",\"languageId\":\"zh-TW\",\"text\": \"" + Translations.getText() + "\"}", ContentType.APPLICATION_JSON);
                 HttpPost postMethod = new HttpPost("https://api.crowdin.com/api/v2/projects/442446/translations");
                 postMethod.setHeader("Authorization", "Bearer " + RPMTWConfig.getConfig().Token);
                 postMethod.setEntity(requestEntity);

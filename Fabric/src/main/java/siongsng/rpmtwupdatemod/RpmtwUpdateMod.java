@@ -71,8 +71,10 @@ public class RpmtwUpdateMod implements ClientModInitializer {
         if (showContributor && RPMTWConfig.getConfig().contributorButton && RPMTWConfig.getConfig().isChinese) {
             int y = (int) (scaledHeight / 1.155);
 
-            if (!(screen instanceof GameMenuScreen)) {
+            if (screen instanceof OptionsScreen) {
                 y += 12;
+            } else if (screen instanceof CreativeInventoryScreen || screen instanceof InventoryScreen) {
+                y -= 20;
             }
 
             TexturedButtonWidget rpmtwLogo = new TexturedButtonWidget(scaledWidth / 80, y + 2, 15, 15, 0, 0, 0, new Identifier(RpmtwUpdateMod.Mod_ID, "textures/rpmtw_logo.png"), 15, 15, (buttonWidget) -> {
