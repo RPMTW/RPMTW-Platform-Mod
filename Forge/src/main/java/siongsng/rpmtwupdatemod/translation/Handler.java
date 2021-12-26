@@ -52,17 +52,21 @@ public class Handler extends SimplePreparableReloadListener<CompletableFuture<Vo
 
     @SubscribeEvent
     public void onTooltip(ItemTooltipEvent event) {
-        boolean press = isKeyPress(RPMKeyBinding.translate);
-        boolean playing = Minecraft.getInstance().player != null;
-        if (RPMTWConfig.isTranslate.get() && playing) {
-            ItemStack stack = event.getItemStack();
-            String source = noLocalizedMap.getOrDefault(stack.getDescriptionId(), "無");
-            event.getToolTip().add(1, new TextComponent("原文: " + source).withStyle(ChatFormatting.GRAY));
-            if (press) {
-                for (Component text : TranslationManager.getInstance().createToolTip(source)) {
-                    event.getToolTip().add(2, text);
+        try {
+            boolean press = isKeyPress(RPMKeyBinding.translate);
+            boolean playing = Minecraft.getInstance().player != null;
+            if (RPMTWConfig.isTranslate.get() && playing) {
+                ItemStack stack = event.getItemStack();
+                String source = noLocalizedMap.getOrDefault(stack.getDescriptionId(), "無");
+                event.getToolTip().add(1, new TextComponent("原文: " + source).withStyle(ChatFormatting.GRAY));
+                event.getToolTip().add(2, new TextComponent("按下 " + RPMKeyBinding.translate.getTranslatedKeyMessage().getString() + " 後將物品機器翻譯為中文"));
+                if (press) {
+                    for (Component text : TranslationManager.getInstance().createToolTip(source)) {
+                        event.getToolTip().add(2, text);
+                    }
                 }
             }
+        } catch (Exception ignored) {
         }
     }
 

@@ -57,17 +57,17 @@ public record CrowdinInfo(String sourceText, String stringID, ItemStack itemStac
 
     public static void openTransactionGUI(ItemStack itemStack) {
         SendMsg.send("請稍後，正在讀取物品翻譯資訊中...");
-        Thread crowdinAPIThread = new Thread(() -> {
-            AtomicReference<CrowdinInfo> info = new AtomicReference<>();
-            info.set(getByItem(itemStack));
+        AtomicReference<CrowdinInfo> info = new AtomicReference<>();
+
+        try {
+            Minecraft.getInstance().submit(() -> info.set(getByItem(itemStack))).get();
             if (info.get() == null && RPMTWConfig.isCheck.get()) {
                 SendMsg.send("§6由於你指定想要翻譯的物品或實體生怪蛋，不在資料庫內\n因此無法進行翻譯，想了解更多資訊請前往RPMTW官方Discord群組:https://discord.gg/5xApZtgV2u");
             } else if (info.get() != null) {
                 RpmtwUpdateMod.LOGGER.info("test");
                 Minecraft.getInstance().setScreen(new CrowdinScreen(info.get()));
             }
-        });
-        crowdinAPIThread.start();
-
+        } catch (Exception ignored) {
+        }
     }
 }
