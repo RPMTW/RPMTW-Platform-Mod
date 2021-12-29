@@ -20,7 +20,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "gradle.plugin.com.github.johnrengelman:shadow:7.1.1"
+        classpath "gradle.plugin.com.github.johnrengelman:shadow:7.1.2"
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.+', changing: true
         classpath 'org.spongepowered:mixingradle:0.7.+'
         classpath('io.socket:socket.io-client:2.0.1')
