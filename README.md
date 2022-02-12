@@ -1,4 +1,5 @@
-# RpmtwUpdateMod 自動中文化更新模組
+# RPMTW Platform Mod
+# RPMTW 平台
 
 ### 詳細功能請看: https://www.rpmtw.ga/RPMTWUpdateMod
 
