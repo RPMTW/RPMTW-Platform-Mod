@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "rpmtw_platform_mod",
+  "version": "${version}",
+  "name": "RPMTW Platform Mod",
+  "description": "整合了 RPMTW 各項服務的模組，涵蓋了翻譯、百科、宇宙通訊、中文輸入優化等功能，期望能讓 Minecraft 中文玩家獲得更好的體驗。\nThe mod that integrates various services of RPMTW covers translation, wiki, cosmic chat, Chinese input optimization, and other functions, hoping to make Minecraft Chinese players get a better experience.",
+  "authors": [
+    "SiongSng"
+  ],
+  "contact": {
+    "homepage": "https://rpmtw.com/",
+    "sources": "https://github.com/RPMTW/RPMTW-Platform-Mod"
+  },
+  "license": "GPL 3",
+  "icon": "rpmtw-platform-logo.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.rpmtw.rpmtw_platform_mod.fabric.RPMTWPlatformModFabric"
+    ]
+  },
+  "depends": {
+    "fabric": "*",
+    "minecraft": ">=1.18",
+    "architectury": ">=3.6.15"
+  },
+  "suggests": {
+    "modmenu": ">=2.0.0"
+  }
+}

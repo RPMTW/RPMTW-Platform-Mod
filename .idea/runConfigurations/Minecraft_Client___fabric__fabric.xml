@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Minecraft Client (:fabric)" type="Application" factoryName="Application">
+    
+    <option name="MAIN_CLASS_NAME" value="dev.architectury.transformer.TransformerRuntime" />
+    <module name="architectury-example-mod.fabric.main" />
+    <option name="PROGRAM_PARAMETERS" value="" />
+    <option name="VM_PARAMETERS" value="&quot;-Dfabric.dli.config=/media/siongsng/Data/coding/Java/RPMTW-Update-Mod/fabric/.gradle/loom-cache/launch.cfg&quot; &quot;-Dfabric.dli.env=client&quot; &quot;-Dfabric.dli.main=net.fabricmc.loader.impl.launch.knot.KnotClient&quot; &quot;-Darchitectury.main.class=/media/siongsng/Data/coding/Java/RPMTW-Update-Mod/fabric/.gradle/architectury/.main_class&quot; &quot;-Darchitectury.runtime.transformer=/media/siongsng/Data/coding/Java/RPMTW-Update-Mod/fabric/.gradle/architectury/.transforms&quot; &quot;-Darchitectury.properties=/media/siongsng/Data/coding/Java/RPMTW-Update-Mod/fabric/.gradle/architectury/.properties&quot; &quot;-Djdk.attach.allowAttachSelf=true&quot; &quot;-javaagent:/media/siongsng/Data/coding/Java/RPMTW-Update-Mod/.gradle/architectury/architectury-transformer-agent.jar&quot;" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/fabric/run/" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
