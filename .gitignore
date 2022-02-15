@@ -5,3 +5,5 @@ common/build
 /fabric/build/
 /forge/run/
 /forge/build/
+build/
+.architectury-transformer/

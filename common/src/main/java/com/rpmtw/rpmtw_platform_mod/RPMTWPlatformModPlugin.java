@@ -13,9 +13,9 @@ public class RPMTWPlatformModPlugin {
      * platform sub-package, with its class suffixed with {@code Impl}.
      * <p>
      * Example:
-     * Expect: net.examplemod.ExampleExpectPlatform#getConfigDirectory()
-     * Actual Fabric: net.examplemod.fabric.ExampleExpectPlatformImpl#getConfigDirectory()
-     * Actual Forge: net.examplemod.forge.ExampleExpectPlatformImpl#getConfigDirectory()
+     * Expect: com.rpmtw.rpmtw_platform_mod.RPMTWPlatformModPlugin#getConfigDirectory()
+     * Actual Fabric: com.rpmtw.rpmtw_platform_mod.fabric.RPMTWPlatformModPluginImpl#getConfigDirectory()
+     * Actual Forge: com.rpmtw.rpmtw_platform_mod.forge.RPMTWPlatformModPluginImpl#getConfigDirectory()
      * <p>
      * <a href="https://plugins.jetbrains.com/plugin/16210-architectury">You should also get the IntelliJ plugin to help with @ExpectPlatform.</a>
      */

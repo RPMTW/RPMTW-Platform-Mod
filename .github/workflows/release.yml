@@ -1,0 +1,56 @@
+name: Build Release
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  Build-Release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: 17
+      - name: Build with Gradle
+        run: |
+          cd ${{ github.workspace }}
+          chmod +x gradlew
+          sh ./gradlew build
+      - name: Upload artifacts (fabric)
+        uses: Kir-Antipov/mc-publish@v2.0
+        with:
+          modrinth-id: ZukQzaRP
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          curseforge-id: 461500
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          files-primary: ${{ github.workspace }}/fabric/build/libs/!(*-@(dev|sources)).jar
+          version-type: release
+          loaders: fabric
+          version-resolver: latest
+          version: ${{ github.event.release.tag_name }}-fabric
+          name: ${{ github.event.release.name }} (Fabric)
+          java: |
+            17
+            18
+      - name: Upload artifacts (forge)
+        uses: Kir-Antipov/mc-publish@v2.0
+        with:
+          curseforge-id: 461500
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          modrinth-id: ZukQzaRP
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          files-primary: ${{ github.workspace }}/forge/build/libs/!(*-@(dev|sources)).jar
+          version-type: beta
+          loaders: forge
+          version-resolver: latest
+          version: ${{ github.event.release.tag_name }}-forge
+          name: ${{ github.event.release.name }} (Forge)
+          java: |
+            17

@@ -1,0 +1,31 @@
+name: Build Release
+
+on:
+  push:
+    branches:
+      - 1.18.1
+  pull_request:
+
+jobs:
+  Build-Release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: 17
+      - name: Build with Gradle
+        run: |
+          cd ${{ github.workspace }}
+          chmod +x gradlew
+          sh ./gradlew build
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: Build Artifact (Fabric/Forge).zip
+          path: |
+            ${{ github.workspace }}/fabric/build/libs/!(*-@(dev|sources)).jar
+            ${{ github.workspace }}/forge/build/libs/!(*-@(dev|sources)).jar
