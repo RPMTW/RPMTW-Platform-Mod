@@ -22,10 +22,13 @@ jobs:
           cd ${{ github.workspace }}
           chmod +x gradlew
           sh ./gradlew build
-      - name: Upload artifacts
+      - name: Upload artifacts (fabric)
         uses: actions/upload-artifact@v2
         with:
-          name: Build Artifact (Fabric/Forge).zip
-          path: |
-            ${{ github.workspace }}/fabric/build/libs/
-            ${{ github.workspace }}/forge/build/libs/
+          name: Build Artifact (Fabric).zip
+          path: ${{ github.workspace }}/fabric/build/libs/
+      - name: Upload artifacts (forge)
+        uses: actions/upload-artifact@v2
+        with:
+          name: Build Artifact (Forge).zip
+          path: ${{ github.workspace }}/forge/build/libs/
