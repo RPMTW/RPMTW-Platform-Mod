@@ -1,4 +1,4 @@
-name: Build Release
+name: Build
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
   pull_request:
 
 jobs:
-  Build-Release:
+  Build:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,5 +27,5 @@ jobs:
         with:
           name: Build Artifact (Fabric/Forge).zip
           path: |
-            ${{ github.workspace }}/fabric/build/libs/!(*-@(dev|sources)).jar
-            ${{ github.workspace }}/forge/build/libs/!(*-@(dev|sources)).jar
+            ${{ github.workspace }}/fabric/build/libs/
+            ${{ github.workspace }}/forge/build/libs/
