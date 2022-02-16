@@ -34,3 +34,10 @@ mandatory = true
 versionRange = "[3.6.15,)"
 ordering = "AFTER"
 side = "BOTH"
+
+[[dependencies.rpmtw_platform_mod]]
+modId = "cloth_config"
+mandatory = true
+versionRange = "[6.0,)"
+ordering = "NONE"
+side = "BOTH"
