@@ -1,0 +1,5 @@
+{
+  "config.rpmtw_platform_mod.title": "RPMTW 平台設定",
+  "config.rpmtw_platform_mod.category.translate": "RPMTW 翻譯平台",
+  "config.rpmtw_platform_mod.option.translate.autoToggleLanguage": "自動切換語言"
+}

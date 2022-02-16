@@ -7,6 +7,16 @@ architectury {
     fabric()
 }
 
+repositories {
+    mavenCentral()
+    maven {
+        url "https://bai.jfrog.io/artifactory/maven" //ModMenu
+        content {
+            includeGroup "com.terraformersmc"
+        }
+    }
+}
+
 configurations {
     common
     shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
@@ -20,9 +30,14 @@ dependencies {
     modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
     // Remove the next line if you don't want to depend on the API
     modApi "dev.architectury:architectury-fabric:${rootProject.architectury_version}"
+    modApi("me.shedaniel.cloth:cloth-config-fabric:${rootProject.cloth_config_version}") {
+        exclude(module: "fabric-api")
+    }
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
+
+    modImplementation("com.terraformersmc:modmenu:3.0.0")
 }
 
 processResources {

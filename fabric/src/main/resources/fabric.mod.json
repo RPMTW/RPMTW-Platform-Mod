@@ -3,20 +3,24 @@
   "id": "rpmtw_platform_mod",
   "version": "${version}",
   "name": "RPMTW Platform Mod",
-  "description": "整合了 RPMTW 各項服務的模組，涵蓋了翻譯、百科、宇宙通訊、中文輸入優化等功能，期望能讓 Minecraft 中文玩家獲得更好的體驗。\nThe mod that integrates various services of RPMTW covers translation, wiki, cosmic chat, Chinese input optimization, and other functions, hoping to make Minecraft Chinese players get a better experience.",
+  "description": "整合了RPMTW各項服務的模組，涵蓋翻譯、百科、宇宙通訊、中文輸入優化等功能，讓 Minecraft 中文玩家獲得更好的遊戲體驗。\nThe mod integrated with RPMTW services covers translation, wiki, cosmic chat, Chinese input optimization, and other features for Minecraft players to get a better gaming experience.",
   "authors": [
     "SiongSng"
   ],
   "contact": {
     "homepage": "https://rpmtw.com/",
-    "sources": "https://github.com/RPMTW/RPMTW-Platform-Mod"
+    "sources": "https://github.com/RPMTW/RPMTW-Platform-Mod",
+    "issues": "https://github.com/RPMTW/RPMTW-Platform-Mod/issues"
   },
   "license": "GPL 3",
   "icon": "rpmtw-platform-logo.png",
-  "environment": "*",
+  "environment": "client",
   "entrypoints": {
     "main": [
       "com.rpmtw.rpmtw_platform_mod.fabric.RPMTWPlatformModFabric"
+    ],
+    "modmenu": [
+      "com.rpmtw.rpmtw_platform_mod.fabric.gui.ModMenuIntegration"
     ]
   },
   "depends": {
@@ -25,6 +29,16 @@
     "architectury": ">=3.6.15"
   },
   "suggests": {
-    "modmenu": ">=2.0.0"
-  }
+    "modmenu": ">=3.0.0"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.com/invite/5xApZtgV2u"
+      }
+    }
+  },
+  "mixins": [
+    "rpmtw_platform_mod.mixins.json"
+  ]
 }

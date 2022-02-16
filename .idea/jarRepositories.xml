@@ -41,5 +41,10 @@
       <option name="name" value="UserLocalRemappedMods" />
       <option name="url" value="file:$PROJECT_DIR$/.gradle/loom-cache/remapped_mods/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven2" />
+      <option name="name" value="maven2" />
+      <option name="url" value="https://bai.jfrog.io/artifactory/maven" />
+    </remote-repository>
   </component>
 </project>

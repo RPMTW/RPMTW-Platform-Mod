@@ -1,15 +1,13 @@
 package com.rpmtw.rpmtw_platform_mod.forge;
 
-import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformModPlugin;
-import net.minecraftforge.fml.loading.FMLPaths;
 
-import java.nio.file.Path;
+import com.rpmtw.rpmtw_platform_mod.utilities.RPMTWConfig;
+import net.minecraftforge.client.ConfigGuiHandler;
+import net.minecraftforge.fml.ModLoadingContext;
 
 public class RPMTWPlatformModPluginImpl {
-    /**
-     * This is our actual method to {@link RPMTWPlatformModPlugin#getConfigDirectory()}.
-     */
-    public static Path getConfigDirectory() {
-        return FMLPaths.CONFIGDIR.get();
+    public static void registerConfig() {
+        ModLoadingContext.get().registerExtensionPoint(ConfigGuiHandler.ConfigGuiFactory.class,
+                () -> new ConfigGuiHandler.ConfigGuiFactory((minecraft, screen) -> RPMTWConfig.getScreen(screen)));
     }
 }

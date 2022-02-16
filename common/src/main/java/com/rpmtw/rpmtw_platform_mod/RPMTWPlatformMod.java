@@ -1,15 +1,15 @@
 package com.rpmtw.rpmtw_platform_mod;
 
-import com.google.common.base.Suppliers;
-import dev.architectury.registry.registries.Registries;
+import com.rpmtw.rpmtw_platform_mod.utilities.RPMTWConfig;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.util.function.Supplier;
 
 public class RPMTWPlatformMod {
     public static final String MOD_ID = "rpmtw_platform_mod";
-    public static final Supplier<Registries> REGISTRIES = Suppliers.memoize(() -> Registries.get(MOD_ID));
-    public static void init() {
+    public static final Logger LOGGER = LogManager.getLogger(MOD_ID); // register logger
 
-        System.out.println(RPMTWPlatformModPlugin.getConfigDirectory().toAbsolutePath().normalize().toString());
+    public static void init() {
+        RPMTWConfig.register();
     }
 }

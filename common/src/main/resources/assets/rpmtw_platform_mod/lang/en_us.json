@@ -1,2 +1,5 @@
 {
+  "config.rpmtw_platform_mod.title": "RPMTW Platform Config",
+  "config.rpmtw_platform_mod.category.translate": "RPMTranslator",
+  "config.rpmtw_platform_mod.option.translate.autoToggleLanguage": "Auto-Toggle Language"
 }
