@@ -16,7 +16,7 @@ object RPMTWConfig {
             JanksonConfigSerializer(definition, configClass)
         } // register config
         config = AutoConfig.getConfigHolder(ConfigScreen::class.java).config
-//        registerConfig()
+       registerConfig()
     }
 
     @JvmStatic
