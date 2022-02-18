@@ -40,7 +40,6 @@ dependencies {
         exclude(module = "fabric-api")
     }
     modApi("net.fabricmc:fabric-language-kotlin:${project.property("fabric-kotlin_version").toString()}")
-
     "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
     "shadowCommon"(project(path = ":common", configuration = "transformProductionFabric")) { isTransitive = false }
 
@@ -59,8 +58,6 @@ tasks {
 
 
     shadowJar {
-        exclude("fabric.mod.json")
-
         configurations = listOf(shadowCommon.get())
         archiveClassifier.set("dev-shadow")
     }

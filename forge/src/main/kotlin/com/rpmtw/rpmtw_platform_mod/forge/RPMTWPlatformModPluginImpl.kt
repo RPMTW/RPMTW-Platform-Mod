@@ -4,13 +4,13 @@ import com.rpmtw.rpmtw_platform_mod.utilities.RPMTWConfig.getScreen
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.screens.Screen
 import net.minecraftforge.client.ConfigGuiHandler.ConfigGuiFactory
-import net.minecraftforge.fml.ModLoadingContext
+import thedarkcolour.kotlinforforge.forge.LOADING_CONTEXT
 
 @Suppress("unused")
 object RPMTWPlatformModPluginImpl {
     @JvmStatic
-    fun registerConfig() {
-        ModLoadingContext.get().registerExtensionPoint(ConfigGuiFactory::class.java) {
+    fun registerConfigScreen() {
+        LOADING_CONTEXT.registerExtensionPoint(ConfigGuiFactory::class.java) {
             ConfigGuiFactory { _: Minecraft?, screen: Screen? -> getScreen(screen) }
         }
     }
