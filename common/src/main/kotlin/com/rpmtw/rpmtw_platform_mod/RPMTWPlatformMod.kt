@@ -12,6 +12,7 @@ object RPMTWPlatformMod {
 
     @JvmStatic
     fun init() {
+        LOGGER.info("Initializing RPMTW Platform Mod")
         RPMTWConfig.register()
     }
 }

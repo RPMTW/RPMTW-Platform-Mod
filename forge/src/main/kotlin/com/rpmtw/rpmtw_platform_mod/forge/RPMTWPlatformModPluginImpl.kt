@@ -9,7 +9,7 @@ import thedarkcolour.kotlinforforge.forge.LOADING_CONTEXT
 @Suppress("unused")
 object RPMTWPlatformModPluginImpl {
     @JvmStatic
-    fun registerConfig() {
+    fun registerConfigScreen() {
         LOADING_CONTEXT.registerExtensionPoint(ConfigGuiFactory::class.java) {
             ConfigGuiFactory { _: Minecraft?, screen: Screen? -> getScreen(screen) }
         }

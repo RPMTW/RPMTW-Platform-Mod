@@ -1,7 +1,8 @@
 package com.rpmtw.rpmtw_platform_mod.utilities
 
+import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.gui.ConfigScreen
-import com.rpmtw.rpmtw_platform_mod.registerConfig
+import com.rpmtw.rpmtw_platform_mod.registerConfigScreen
 import me.shedaniel.autoconfig.AutoConfig
 import me.shedaniel.autoconfig.annotation.Config
 import me.shedaniel.autoconfig.gui.ConfigScreenProvider
@@ -12,11 +13,13 @@ import net.minecraft.client.gui.screens.Screen
 object RPMTWConfig {
     private var config: ConfigScreen? = null
     fun register() {
+        RPMTWPlatformMod.LOGGER.info("Registering config")
         AutoConfig.register(ConfigScreen::class.java) { definition: Config?, configClass: Class<ConfigScreen?>? ->
             JanksonConfigSerializer(definition, configClass)
         } // register config
         config = AutoConfig.getConfigHolder(ConfigScreen::class.java).config
-       registerConfig()
+        registerConfigScreen()
+        RPMTWPlatformMod.LOGGER.info("Registered config")
     }
 
     @JvmStatic
@@ -28,7 +31,11 @@ object RPMTWConfig {
     }
 
     @JvmStatic
-    fun getScreen(parent: Screen?): Screen {
+    fun getScreen(parent: Screen?): Screen? {
+        if (parent == null) {
+            return null
+        }
+
         val provider = AutoConfig.getConfigScreen(ConfigScreen::class.java, parent) as ConfigScreenProvider<*>
         provider.setI13nFunction { "config.rpmtw_platform_mod" }
         provider.setBuildFunction { builder: ConfigBuilder ->
