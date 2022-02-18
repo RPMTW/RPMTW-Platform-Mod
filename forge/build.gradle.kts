@@ -26,6 +26,9 @@ dependencies {
     // Remove the next line if you don't want to depend on the API
     modApi("dev.architectury:architectury-forge:${project.property("architectury_version").toString()}")
     modApi("me.shedaniel.cloth:cloth-config-forge:${project.property("cloth_config_version").toString()}")
+    implementation("thedarkcolour:kotlinforforge:${rootProject.property("kotlin_forge_version").toString()}")
+    forgeRuntimeLibrary(kotlin("stdlib-jdk8"))
+    forgeRuntimeLibrary(kotlin("reflect"))
 
     "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
     "shadowCommon"(project(path = ":common", configuration = "transformProductionForge")) { isTransitive = false }
@@ -73,6 +76,13 @@ components.getByName<AdhocComponentWithVariants>("java") {
 loom {
     forge {
         mixinConfig("rpmtw_platform_mod.mixins.json")
+    }
+}
+
+repositories {
+    maven {
+        // Kotlin For Forge
+        url = uri("https://thedarkcolour.github.io/KotlinForForge/")
     }
 }
 

@@ -17,7 +17,10 @@
   "environment": "client",
   "entrypoints": {
     "main": [
-      "com.rpmtw.rpmtw_platform_mod.fabric.RPMTWPlatformModFabric"
+      {
+        "adapter": "kotlin",
+        "value": "com.rpmtw.rpmtw_platform_mod.fabric.RPMTWPlatformModFabric"
+      }
     ],
     "modmenu": [
       "com.rpmtw.rpmtw_platform_mod.fabric.gui.ModMenuIntegration"
@@ -25,9 +28,10 @@
   },
   "depends": {
     "fabric": "*",
-    "minecraft": ">=1.18",
+    "minecraft": ">=1.18.1",
     "architectury": ">=3.6.15",
-    "cloth-config2": ">=6.0.0"
+    "cloth-config2": ">=6.0.0",
+    "fabric-language-kotlin": "^1.7.0"
   },
   "suggests": {
     "modmenu": ">=3.0.0"

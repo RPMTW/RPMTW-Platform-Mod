@@ -5,7 +5,10 @@ import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 
 object RPMTWPlatformMod {
+
     const val MOD_ID = "rpmtw_platform_mod"
+
+    @JvmField
     val LOGGER: Logger = LogManager.getLogger(MOD_ID) // register logger
 
     fun init() {
