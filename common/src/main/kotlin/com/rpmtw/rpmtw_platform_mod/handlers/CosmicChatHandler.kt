@@ -3,6 +3,7 @@ package com.rpmtw.rpmtw_platform_mod.handlers
 import com.rpmtw.rpmtw_api_client.RPMTWApiClient
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.utilities.RPMTWConfig
+import com.rpmtw.rpmtw_platform_mod.utilities.Utilities
 import kotlinx.coroutines.*
 import net.minecraft.ChatFormatting
 import net.minecraft.client.Minecraft
@@ -21,6 +22,14 @@ object CosmicChatHandler {
         override val coroutineContext: CoroutineContext
             get() = Job()
     }
+    private val nickname: String?
+        get() {
+            return if (RPMTWConfig.get().cosmicChat.nickname != null && RPMTWConfig.get().cosmicChat.nickname!!.isNotEmpty()) {
+                RPMTWConfig.get().cosmicChat.nickname!!
+            } else {
+                null
+            }
+        }
 
     private suspend fun init() {
         val minecraft: Minecraft = Minecraft.getInstance()
@@ -81,13 +90,34 @@ object CosmicChatHandler {
     }
 
     private suspend fun sendMessage(message: String) {
-        // TODO: Support nickname
-        val status: String = client.cosmicChatResource.sendMessage(message)
+        val status: String = client.cosmicChatResource.sendMessage(message, nickname = nickname)
+        val prefix = "[${I18n.get("cosmicChat.rpmtw_platform_mod.title")}]"
 
-        if (status == "success") {
-
-        } else if (status == "phishing") {
-        } else if (status == "banned") {
+        when (status) {
+            "success" -> {
+                Utilities.sendMessage(
+                    "$prefix ${I18n.get("cosmicChat.rpmtw_platform_mod.status.success")}！",
+                    overlay = true
+                )
+            }
+            "phishing" -> {
+                Utilities.sendMessage(
+                    "$prefix ${I18n.get("cosmicChat.rpmtw_platform_mod.status.phishing")}",
+                    overlay = true
+                )
+            }
+            "banned" -> {
+                Utilities.sendMessage(
+                    "$prefix ${I18n.get("cosmicChat.rpmtw_platform_mod.status.banned")}",
+                    overlay = true
+                )
+            }
+            "unauthorized" -> {
+                Utilities.sendMessage(
+                    "$prefix ${I18n.get("cosmicChat.rpmtw_platform_mod.status.unauthorized")}",
+                    overlay = true
+                )
+            }
         }
     }
 

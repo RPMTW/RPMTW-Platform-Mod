@@ -31,9 +31,9 @@ class CosmicChatEULAScreen(private val initMessage: String?) : Screen(TextCompon
                     if (initMessage != null && initMessage.isNotEmpty()) {
                         CosmicChatHandler.send(initMessage)
                         Minecraft.getInstance().setScreen(null)
-                        return@OnPress
+                    } else {
+                        Minecraft.getInstance().setScreen(CosmicChatScreen())
                     }
-                    Minecraft.getInstance().setScreen(CosmicChatScreen())
                 })
         )
 

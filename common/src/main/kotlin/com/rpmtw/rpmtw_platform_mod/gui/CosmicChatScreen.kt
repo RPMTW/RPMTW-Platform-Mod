@@ -29,8 +29,12 @@ class CosmicChatScreen : Screen(TextComponent("")) {
         ) {
             if (messageEditBox == null) return@Button
             if (messageEditBox!!.value.isEmpty()) {
-                Utilities.sendMessage(I18n.get("cosmicChat.rpmtw_platform_mod.gui.input.null"))
+                Utilities.sendMessage(I18n.get("cosmicChat.rpmtw_platform_mod.gui.input.null"), overlay = true)
             } else {
+                Utilities.sendMessage(
+                    "[${I18n.get("cosmicChat.rpmtw_platform_mod.title")}] ${I18n.get("cosmicChat.rpmtw_platform_mod.status.sending")}",
+                    overlay = true
+                )
                 CosmicChatHandler.send(messageEditBox!!.value)
             }
             Minecraft.getInstance().setScreen(null)

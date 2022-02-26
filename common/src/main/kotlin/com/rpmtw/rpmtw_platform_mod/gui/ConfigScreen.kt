@@ -42,5 +42,9 @@ class ConfigScreen : ConfigData {
         @JvmField
         @ConfigEntry.Gui.Excluded
         var eula = false
+
+        @JvmField
+        @ConfigEntry.Gui.Tooltip(count = 1)
+        var nickname: String? = null
     }
 }
