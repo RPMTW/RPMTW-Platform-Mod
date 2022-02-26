@@ -8,5 +8,10 @@
   "config.rpmtw_platform_mod.option.cosmicChat.enableButton": "快捷按鈕",
   "config.rpmtw_platform_mod.option.cosmicChat.enable": "啟用宇宙通訊",
   "config.rpmtw_platform_mod.option.cosmicChat.enable.@Tooltip": "若將此選項調整為停用，會覆蓋其他設定，將所有跟宇宙通訊相關的功能停用。",
-  "config.rpmtw_platform_mod.option.cosmicChat.enableButton.@Tooltip": "是否顯示在聊天視窗內的宇宙通訊快捷按鈕。"
+  "config.rpmtw_platform_mod.option.cosmicChat.enableButton.@Tooltip": "是否顯示在聊天視窗內的宇宙通訊快捷按鈕。",
+  "cosmicChat.rpmtw_platform_mod.title": "宇宙通訊",
+  "cosmicChat.rpmtw_platform_mod.button.send": "發送訊息至宇宙通訊",
+  "cosmicChat.rpmtw_platform_mod.button.send.tooltip": "發送訊息至浩瀚的宇宙中，與其他星球的生物交流。",
+  "cosmicChat.rpmtw_platform_mod.button.receive": "接收宇宙通訊",
+  "cosmicChat.rpmtw_platform_mod.button.receive.tooltip": "接收來自其他星球的訊息。"
 }

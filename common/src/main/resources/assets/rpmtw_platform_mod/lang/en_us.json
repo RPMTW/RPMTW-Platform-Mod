@@ -8,5 +8,10 @@
   "config.rpmtw_platform_mod.option.cosmicChat.enable.@Tooltip": "If disabled, it will override and disable other cosmic chat options.",
   "config.rpmtw_platform_mod.option.cosmicChat.enableReceiveMessage": "Receive messages",
   "config.rpmtw_platform_mod.option.cosmicChat.enableButton": "Shortcut button",
-  "config.rpmtw_platform_mod.option.cosmicChat.enableButton.@Tooltip": "Whether to show shortcut button of cosmic chat in the chat screen."
+  "config.rpmtw_platform_mod.option.cosmicChat.enableButton.@Tooltip": "Whether to show shortcut button of cosmic chat in the chat screen.",
+  "cosmicChat.rpmtw_platform_mod.title": "Cosmic Chat",
+  "cosmicChat.rpmtw_platform_mod.button.send": "Send message",
+  "cosmicChat.rpmtw_platform_mod.button.send.tooltip": "Sending messages to the vastness of the cosmos to communicate with creatures from other planets.",
+  "cosmicChat.rpmtw_platform_mod.button.receive": "Receive Messages",
+  "cosmicChat.rpmtw_platform_mod.button.receive.tooltip": "Receive messages from other planets."
 }

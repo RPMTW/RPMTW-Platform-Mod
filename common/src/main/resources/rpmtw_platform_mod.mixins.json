@@ -8,5 +8,8 @@
   },
   "mixins": [
     "ClientInit"
+  ],
+  "client": [
+    "ChatScreenAccessor$chatFieldAccessor"
   ]
 }
