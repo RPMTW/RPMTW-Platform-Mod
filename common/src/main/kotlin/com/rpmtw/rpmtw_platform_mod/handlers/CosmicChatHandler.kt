@@ -38,7 +38,7 @@ object CosmicChatHandler {
                     RPMTWPlatformMod.LOGGER.error("player is null")
                     return@onMessageSent
                 }
-                if (!RPMTWConfig.get().cosmicChat.enableReceiveMessage) return@onMessageSent
+                if (!RPMTWConfig.get().cosmicChat.enable || !RPMTWConfig.get().cosmicChat.enableReceiveMessage) return@onMessageSent
                 val component: MutableComponent = TextComponent.EMPTY.copy()
                 val title = TextComponent("[${I18n.get("cosmicChat.rpmtw_platform_mod.title")}] ").setStyle(
                     Style.EMPTY.withColor(ChatFormatting.BLUE)
@@ -80,6 +80,17 @@ object CosmicChatHandler {
         }
     }
 
+    private suspend fun sendMessage(message: String) {
+        // TODO: Support nickname
+        val status: String = client.cosmicChatResource.sendMessage(message)
+
+        if (status == "success") {
+
+        } else if (status == "phishing") {
+        } else if (status == "banned") {
+        }
+    }
+
     fun handle() {
         if (RPMTWConfig.get().cosmicChat.enable) {
             RPMTWPlatformMod.LOGGER.info("Initializing cosmic chat server...")
@@ -100,6 +111,19 @@ object CosmicChatHandler {
         }
         coroutineScope.launch {
             result.await()
+        }
+    }
+
+    fun send(message: String) {
+        if (client.cosmicChatResource.isConnected) {
+            val result: Deferred<Unit> = coroutineScope.async {
+                sendMessage(message)
+            }
+            coroutineScope.launch {
+                result.await()
+            }
+        } else {
+            RPMTWPlatformMod.LOGGER.error("Connecting to cosmic chat server failed")
         }
     }
 

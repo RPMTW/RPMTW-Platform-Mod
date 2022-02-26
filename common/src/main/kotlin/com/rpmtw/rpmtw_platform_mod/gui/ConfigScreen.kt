@@ -38,5 +38,9 @@ class ConfigScreen : ConfigData {
         @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
         var enableButton = true
+
+        @JvmField
+        @ConfigEntry.Gui.Excluded
+        var eula = false
     }
 }

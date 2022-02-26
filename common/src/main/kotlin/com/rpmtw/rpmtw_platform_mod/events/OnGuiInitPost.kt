@@ -4,6 +4,7 @@ import com.rpmtw.rpmtw_platform_mod.gui.widgets.RPMTWCheckbox
 import com.rpmtw.rpmtw_platform_mod.gui.widgets.TranslucentButton
 import com.rpmtw.rpmtw_platform_mod.mixins.ChatScreenAccessor
 import com.rpmtw.rpmtw_platform_mod.utilities.RPMTWConfig
+import com.rpmtw.rpmtw_platform_mod.utilities.Utilities
 import dev.architectury.hooks.client.screen.ScreenAccess
 import net.minecraft.client.gui.components.EditBox
 import net.minecraft.client.gui.screens.ChatScreen
@@ -16,8 +17,8 @@ object OnGuiInitPost {
         val scaledWidth = screen.width
         val scaledHeight = screen.height
 
-        if (screen is ChatScreen && RPMTWConfig.get().cosmicChat.enableButton) {
-              val textField: EditBox? = (screen as ChatScreenAccessor.chatFieldAccessor).chatField
+        if (screen is ChatScreen && (RPMTWConfig.get().cosmicChat.enable && RPMTWConfig.get().cosmicChat.enableButton)) {
+            val textField: EditBox? = (screen as ChatScreenAccessor.chatFieldAccessor).chatField
 
             val sendButton = TranslucentButton(
                 scaledWidth - 185,
@@ -26,7 +27,7 @@ object OnGuiInitPost {
                 20,
                 TranslatableComponent("cosmicChat.rpmtw_platform_mod.button.send"),
                 {
-                    TODO("Open cosmic chat screen")
+                    Utilities.openCosmicChatScreen(textField?.value)
                 },
                 { _, matrixStack, i, j ->
                     screen.renderTooltip(
