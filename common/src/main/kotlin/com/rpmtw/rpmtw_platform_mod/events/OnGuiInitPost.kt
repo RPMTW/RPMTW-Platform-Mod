@@ -51,7 +51,10 @@ object OnGuiInitPost {
                 20,
                 TranslatableComponent("cosmicChat.rpmtw_platform_mod.button.receive"),
                 RPMTWConfig.get().cosmicChat.enableReceiveMessage,
-                { checked -> RPMTWConfig.get().cosmicChat.enableReceiveMessage = checked },
+                { checked ->
+                    RPMTWConfig.get().cosmicChat.enableReceiveMessage = checked
+                    RPMTWConfig.save()
+                },
                 I18n.get("cosmicChat.rpmtw_platform_mod.button.receive.tooltip")
             )
 

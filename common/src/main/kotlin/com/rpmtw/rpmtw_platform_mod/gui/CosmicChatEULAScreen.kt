@@ -28,6 +28,7 @@ class CosmicChatEULAScreen(private val initMessage: String?) : Screen(TextCompon
                 BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
                 TranslatableComponent("cosmicChat.rpmtw_platform_mod.gui.eula.agree"), Button.OnPress {
                     RPMTWConfig.get().cosmicChat.eula = true
+                    RPMTWConfig.save()
                     if (initMessage != null && initMessage.isNotEmpty()) {
                         CosmicChatHandler.send(initMessage)
                         Minecraft.getInstance().setScreen(null)

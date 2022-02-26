@@ -91,7 +91,7 @@ object CosmicChatHandler {
 
     private suspend fun sendMessage(message: String) {
         val status: String = client.cosmicChatResource.sendMessage(message, nickname = nickname)
-        val prefix = "[${I18n.get("cosmicChat.rpmtw_platform_mod.title")}]"
+        val prefix = "§9[${I18n.get("cosmicChat.rpmtw_platform_mod.title")}]§r"
 
         when (status) {
             "success" -> {
