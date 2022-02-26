@@ -20,7 +20,7 @@
   "cosmicChat.rpmtw_platform_mod.gui.eula.subtitle": "使用宇宙通讯系统即代表您同意以下条款：",
   "cosmicChat.rpmtw_platform_mod.gui.eula.text.1": "- 此功能与 Discord 连动，因此请遵守《Discord 用户服务条款》。",
   "cosmicChat.rpmtw_platform_mod.gui.eula.text.2": "- 信息内容不得以任何形式骚扰别人、禁止使用任何手段攻击宇宙通讯服务器。",
-  "cosmicChat.rpmtw_platform_mod.gui.eula.text.3": "- 我们将会搜集您的 UUID/IP，仅用于验证与停权账户。",
+  "cosmicChat.rpmtw_platform_mod.gui.eula.text.3": "- 我们将会搜集您的 UUID/IP，仅用于验证与封锁账户。",
   "cosmicChat.rpmtw_platform_mod.gui.eula.text.4": "- 我们将有权随时更改本条款 (若要查看最新版本，请至 RPMTW 官网)。",
   "cosmicChat.rpmtw_platform_mod.gui.eula.title": "《RPMTW 宇宙通讯系统最终用户许可协议》",
   "cosmicChat.rpmtw_platform_mod.gui.input.null": "信息不得为空。",
