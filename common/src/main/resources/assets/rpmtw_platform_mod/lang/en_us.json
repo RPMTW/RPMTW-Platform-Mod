@@ -1,5 +1,12 @@
 {
   "config.rpmtw_platform_mod.title": "RPMTW Platform Config",
   "config.rpmtw_platform_mod.category.translate": "RPMTranslator",
-  "config.rpmtw_platform_mod.option.translate.autoToggleLanguage": "Auto-Toggle Language"
+  "config.rpmtw_platform_mod.category.cosmicChat": "Cosmic Chat",
+  "config.rpmtw_platform_mod.option.translate.autoToggleLanguage": "Auto-Toggle Language",
+  "config.rpmtw_platform_mod.option.translate.autoToggleLanguage.@Tooltip": "Automatically switch the game language to a language supported by RPMTranslator when starting the game.",
+  "config.rpmtw_platform_mod.option.cosmicChat.enable": "Enable cosmic chat",
+  "config.rpmtw_platform_mod.option.cosmicChat.enable.@Tooltip": "If disabled, it will override and disable other cosmic chat options.",
+  "config.rpmtw_platform_mod.option.cosmicChat.enableReceiveMessage": "Receive messages",
+  "config.rpmtw_platform_mod.option.cosmicChat.enableButton": "Shortcut button",
+  "config.rpmtw_platform_mod.option.cosmicChat.enableButton.@Tooltip": "Whether to show shortcut button of cosmic chat in the chat screen."
 }

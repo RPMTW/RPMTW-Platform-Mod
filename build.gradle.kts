@@ -27,7 +27,8 @@ subprojects {
         // The following line declares the yarn mappings you may select this one as well.
         // mappings ("net.fabricmc:yarn:${rootProject.yarn_version}")
         // 使用 yarn 會導致無法編譯 forge 版本，因此暫時先用 mojang 官方映射
-        "implementation"(group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version = "1.6.20-M1")
+        implementation(group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version = "1.6.20-M1")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
     }
 }
 
@@ -46,6 +47,9 @@ allprojects {
         // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
         // See https://docs.gradle.org/current/userguide/declaring_repositories.html
         // for more information about repositories.
+        maven {
+            url = uri("https://jitpack.io")
+        }
     }
 
     tasks {

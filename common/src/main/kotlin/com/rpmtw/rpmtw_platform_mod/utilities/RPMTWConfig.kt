@@ -23,11 +23,11 @@ object RPMTWConfig {
     }
 
     @JvmStatic
-    fun get(): ConfigScreen? {
+    fun get(): ConfigScreen {
         if (config == null) {
             register()
         }
-        return config
+        return config!!
     }
 
     @JvmStatic
@@ -47,6 +47,6 @@ object RPMTWConfig {
     }
 
     fun save() {
-        AutoConfig.getConfigHolder(get()!!.javaClass).save()
+        AutoConfig.getConfigHolder(get().javaClass).save()
     }
 }

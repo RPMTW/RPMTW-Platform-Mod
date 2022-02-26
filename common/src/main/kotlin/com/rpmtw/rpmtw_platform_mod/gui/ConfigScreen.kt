@@ -3,7 +3,6 @@ package com.rpmtw.rpmtw_platform_mod.gui
 import me.shedaniel.autoconfig.ConfigData
 import me.shedaniel.autoconfig.annotation.Config
 import me.shedaniel.autoconfig.annotation.ConfigEntry
-import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 
@@ -15,9 +14,29 @@ class ConfigScreen : ConfigData {
     @ConfigEntry.Gui.TransitiveObject
     var translate = Translate()
 
+    @JvmField
+    @ConfigEntry.Category("cosmicChat")
+    @ConfigEntry.Gui.TransitiveObject
+    var cosmicChat = CosmicChat()
+
     class Translate {
         @JvmField
-        @Comment("啟動遊戲時自動切換遊戲語言至 RPMTranslator 支援的語言")
+        @ConfigEntry.Gui.Tooltip(count = 1)
+        @ConfigEntry.Gui.RequiresRestart
         var autoToggleLanguage = true
+    }
+
+    class CosmicChat {
+        @JvmField
+        @ConfigEntry.Gui.Tooltip(count = 1)
+        @ConfigEntry.Gui.RequiresRestart
+        var enable = true
+
+        @JvmField
+        var enableReceiveMessage = true
+
+        @JvmField
+        @ConfigEntry.Gui.Tooltip(count = 1)
+        var enableButton = true
     }
 }

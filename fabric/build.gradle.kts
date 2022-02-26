@@ -44,6 +44,7 @@ dependencies {
     "shadowCommon"(project(path = ":common", configuration = "transformProductionFabric")) { isTransitive = false }
 
     modImplementation("com.terraformersmc:modmenu:3.0.0")
+    modApi("com.github.RPMTW:RPMTW-API-Client-Kotlin:${project.property("rpmtw_api_client_version").toString()}")
 }
 
 tasks {

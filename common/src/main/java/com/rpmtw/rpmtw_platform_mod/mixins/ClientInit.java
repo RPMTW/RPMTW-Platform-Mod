@@ -12,7 +12,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Locale;
-import java.util.Objects;
 
 @Mixin(Minecraft.class)
 public class ClientInit {
@@ -21,7 +20,7 @@ public class ClientInit {
         Minecraft minecraft = Minecraft.getInstance();
         String langCode = Locale.getDefault().getLanguage();
         // if auto-toggle language is enabled and the user language is Chinese, set the language
-        if (Objects.requireNonNull(RPMTWConfig.get()).translate.autoToggleLanguage && (langCode.contains("zh") || langCode.contains("chi"))) {
+        if (RPMTWConfig.get().translate.autoToggleLanguage && (langCode.contains("zh") || langCode.contains("chi"))) {
             String countryCode = Locale.getDefault().getCountry();
             LanguageManager manager = minecraft.getLanguageManager();
             if (countryCode.contains("TW") || countryCode.contains("HK")) {

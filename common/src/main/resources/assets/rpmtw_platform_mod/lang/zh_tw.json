@@ -1,5 +1,12 @@
 {
   "config.rpmtw_platform_mod.title": "RPMTW 平台設定",
   "config.rpmtw_platform_mod.category.translate": "RPMTW 翻譯平台",
-  "config.rpmtw_platform_mod.option.translate.autoToggleLanguage": "自動切換語言"
+  "config.rpmtw_platform_mod.option.translate.autoToggleLanguage": "自動切換語言",
+  "config.rpmtw_platform_mod.option.translate.autoToggleLanguage.@Tooltip": "啟動遊戲時自動切換遊戲語言至 RPMTranslator 支援的語言。",
+  "config.rpmtw_platform_mod.category.cosmicChat": "宇宙通訊",
+  "config.rpmtw_platform_mod.option.cosmicChat.enableReceiveMessage": "接收訊息",
+  "config.rpmtw_platform_mod.option.cosmicChat.enableButton": "快捷按鈕",
+  "config.rpmtw_platform_mod.option.cosmicChat.enable": "啟用宇宙通訊",
+  "config.rpmtw_platform_mod.option.cosmicChat.enable.@Tooltip": "若將此選項調整為停用，會覆蓋其他設定，將所有跟宇宙通訊相關的功能停用。",
+  "config.rpmtw_platform_mod.option.cosmicChat.enableButton.@Tooltip": "是否顯示在聊天視窗內的宇宙通訊快捷按鈕。"
 }
