@@ -1,4 +1,4 @@
- name: Comment PR artifacts links
+name: Comment PR artifacts links
 on:
   workflow_run:
     workflows: ['Build']
