@@ -9,7 +9,6 @@ on:
 
 jobs:
   Build:
-    if: ${{ github.event_name == 'push' || !github.event.pull_request.draft }}
     runs-on: ubuntu-latest
 
     steps:
