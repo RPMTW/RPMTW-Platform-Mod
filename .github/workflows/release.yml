@@ -6,8 +6,8 @@ on:
       - published
 
 jobs:
-  if: github.event.release.target_commitish == "1.18.1"
   Build-Release:
+    if: github.event.release.target_commitish == "1.18.1"
     runs-on: ubuntu-latest
 
     steps:
