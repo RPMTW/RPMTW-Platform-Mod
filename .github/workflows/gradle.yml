@@ -4,6 +4,8 @@ on:
   release:
     types:
       - published
+    target_commitish:
+      - 1.18-deprecated
 
 jobs:
   Forge-Build:
