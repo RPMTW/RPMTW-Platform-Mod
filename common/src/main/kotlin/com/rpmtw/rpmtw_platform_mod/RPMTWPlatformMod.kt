@@ -1,6 +1,7 @@
 package com.rpmtw.rpmtw_platform_mod
 
 import com.rpmtw.rpmtw_api_client.RPMTWApiClient
+import com.rpmtw.rpmtw_platform_mod.command.RPMTWCommand
 import com.rpmtw.rpmtw_platform_mod.handlers.CosmicChatHandler
 import com.rpmtw.rpmtw_platform_mod.handlers.EventHandler
 import com.rpmtw.rpmtw_platform_mod.utilities.RPMTWConfig
@@ -19,6 +20,7 @@ object RPMTWPlatformMod {
         RPMTWApiClient.init()
         RPMTWConfig.register()
         CosmicChatHandler.handle()
+        RPMTWCommand.handle()
         EventHandler.handle()
     }
 }

@@ -1,4 +1,5 @@
 {
+  "command.rpmtw_platform_mod.replyCosmicMessage.getMessage.failed": "Failed to got the cosmic chat message.",
   "config.rpmtw_platform_mod.category.cosmicChat": "Cosmic Chat",
   "config.rpmtw_platform_mod.category.translate": "RPMTranslator",
   "config.rpmtw_platform_mod.option.cosmicChat.enable": "Enable cosmic chat",
@@ -25,8 +26,10 @@
   "cosmicChat.rpmtw_platform_mod.gui.eula.title": "《RPMTW Cosmic chat system end-user license agreement》",
   "cosmicChat.rpmtw_platform_mod.gui.input.null": "Message cannot be empty.",
   "cosmicChat.rpmtw_platform_mod.gui.input.tooltip": "Please enter the message you want to send.",
+  "cosmicChat.rpmtw_platform_mod.gui.reply": "Reply message to %s",
   "cosmicChat.rpmtw_platform_mod.gui.send": "Send message to cosmic chat system",
   "cosmicChat.rpmtw_platform_mod.gui.what": "What is this?",
+  "cosmicChat.rpmtw_platform_mod.open_avatar_url": "Open avatar URL",
   "cosmicChat.rpmtw_platform_mod.status.banned": "No message can be sent because your IP has been banned.",
   "cosmicChat.rpmtw_platform_mod.status.phishing": "The message cannot be sent because the system detects that the message contains a suspicious link.",
   "cosmicChat.rpmtw_platform_mod.status.sending": "Sending message...",
@@ -34,5 +37,7 @@
   "cosmicChat.rpmtw_platform_mod.status.unauthorized": "The message cannot be sent, probably because it is a pirated account or the certificate data is processed incorrectly, please try again.",
   "cosmicChat.rpmtw_platform_mod.title": "Cosmic Chat",
   "gui.rpmtw_platform_mod.cancel": "Cancel",
-  "gui.rpmtw_platform_mod.send": "Send"
+  "gui.rpmtw_platform_mod.reply": "Reply",
+  "gui.rpmtw_platform_mod.send": "Send",
+  "gui.rpmtw_platform_mod.self": "Self"
 }

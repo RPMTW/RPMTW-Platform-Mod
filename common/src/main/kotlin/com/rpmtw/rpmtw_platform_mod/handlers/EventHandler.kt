@@ -12,7 +12,7 @@ object EventHandler {
         ClientLifecycleEvent.CLIENT_STOPPING.register(::OnClientStopping)
         ClientLifecycleEvent.CLIENT_STARTED.register(::OnClientStarted)
         try {
-            ClientGuiEvent.INIT_POST.register(OnGuiInitPost::handle)
+            ClientGuiEvent.INIT_POST.register(::OnGuiInitPost)
         } catch (e: Exception) {
             RPMTWPlatformMod.LOGGER.error("Adding button to the chat screen failed", e)
         }

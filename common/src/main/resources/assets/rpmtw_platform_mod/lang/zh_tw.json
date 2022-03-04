@@ -1,4 +1,5 @@
 {
+  "command.rpmtw_platform_mod.replyCosmicMessage.getMessage.failed": "取得宇宙通訊的訊息失敗。",
   "config.rpmtw_platform_mod.category.cosmicChat": "宇宙通訊",
   "config.rpmtw_platform_mod.category.translate": "RPMTW 翻譯平台",
   "config.rpmtw_platform_mod.option.cosmicChat.enable": "啟用宇宙通訊",
@@ -25,8 +26,10 @@
   "cosmicChat.rpmtw_platform_mod.gui.eula.title": "《RPMTW 宇宙通訊系統終端使用者授權合約》",
   "cosmicChat.rpmtw_platform_mod.gui.input.null": "訊息不得為空。",
   "cosmicChat.rpmtw_platform_mod.gui.input.tooltip": "請輸入您要發送的訊息...",
+  "cosmicChat.rpmtw_platform_mod.gui.reply": "回覆訊息給 %s",
   "cosmicChat.rpmtw_platform_mod.gui.send": "發送訊息至宇宙通訊系統",
   "cosmicChat.rpmtw_platform_mod.gui.what": "這是什麼？",
+  "cosmicChat.rpmtw_platform_mod.open_avatar_url": "Open avatar URL",
   "cosmicChat.rpmtw_platform_mod.status.banned": "無法發送訊息，因為您的 IP 已經被停權，如有誤判請至 RPMTW Discord 伺服器詢問。",
   "cosmicChat.rpmtw_platform_mod.status.phishing": "無法發送訊息，因為系統偵測到訊息內容包含可疑連結，如有誤判請至 RPMTW Discord 伺服器詢問。",
   "cosmicChat.rpmtw_platform_mod.status.sending": "發送訊息中...",
@@ -34,5 +37,7 @@
   "cosmicChat.rpmtw_platform_mod.status.unauthorized": "無法發送訊息，可能因為是盜版帳號或憑證資料處理錯誤，請再試一次。",
   "cosmicChat.rpmtw_platform_mod.title": "宇宙通訊",
   "gui.rpmtw_platform_mod.cancel": "取消",
+  "gui.rpmtw_platform_mod.reply": "回覆",
+  "gui.rpmtw_platform_mod.self": "自己",
   "gui.rpmtw_platform_mod.send": "發送"
 }

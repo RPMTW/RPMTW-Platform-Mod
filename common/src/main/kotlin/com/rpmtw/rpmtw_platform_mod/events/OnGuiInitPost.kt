@@ -13,8 +13,8 @@ import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.resources.language.I18n
 import net.minecraft.network.chat.TranslatableComponent
 
-object OnGuiInitPost {
-    fun handle(screen: Screen, screenAccess: ScreenAccess) {
+class OnGuiInitPost(screen: Screen, screenAccess: ScreenAccess) {
+    init {
         val scaledWidth = screen.width
         val scaledHeight = screen.height
 
