@@ -4,11 +4,10 @@ on:
   release:
     types:
       - published
-    target_commitish:
-      - 1.18-deprecated
 
 jobs:
   Forge-Build:
+    if: github.event.release.target_commitish == "1.18-deprecated"
     runs-on: ubuntu-latest
 
     steps:
@@ -42,6 +41,7 @@ jobs:
 
 
   Fabric-Build:
+    if: github.event.release.target_commitish == "1.18-deprecated"
     runs-on: ubuntu-latest
 
     steps:
