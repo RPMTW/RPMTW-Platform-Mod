@@ -3,6 +3,7 @@ package siongsng.rpmtwupdatemod.packs;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.SplashOverlay;
 import net.minecraft.client.resource.ResourceReloadLogger;
+import net.minecraft.resource.NamespaceResourceManager;
 import net.minecraft.resource.ProfiledResourceReload;
 import net.minecraft.resource.ReloadableResourceManagerImpl;
 import net.minecraft.resource.ResourcePackProvider;
@@ -11,6 +12,7 @@ import org.apache.commons.io.FileUtils;
 import siongsng.rpmtwupdatemod.Register.RPMKeyBinding;
 import siongsng.rpmtwupdatemod.RpmtwUpdateMod;
 import siongsng.rpmtwupdatemod.config.RPMTWConfig;
+import siongsng.rpmtwupdatemod.mixins.NamespaceResourceManagerAccessor;
 import siongsng.rpmtwupdatemod.utilities.SendMsg;
 
 import java.io.File;
@@ -75,10 +77,10 @@ public class PackManeger {
         var resourcePackManager = mc.getResourcePackManager();
         var langManager = mc.getLanguageManager();
         var list = resourcePackManager.createResourcePacks();
-        if (resourceManager instanceof ReloadableResourceManagerImpl rm) {
+        if (resourceManager instanceof NamespaceResourceManager rm) {
             mc.resourceReloadLogger.reload(ResourceReloadLogger.ReloadReason.MANUAL, list);
 
-            rm.clear();
+            ((NamespaceResourceManagerAccessor) rm).getPackList().clear();
 
             for (var pack : list) {
                 try {
