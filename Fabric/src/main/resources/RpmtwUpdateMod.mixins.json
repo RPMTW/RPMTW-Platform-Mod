@@ -17,5 +17,5 @@
   "injectors": {
     "defaultRequire": 1
   },
-  "refmap": "RPMTW-Update-Mod-Fabric-1.18.1-refmap.json"
+  "refmap": "RPMTW-Update-Mod-Fabric-1.18.2-refmap.json"
 }
