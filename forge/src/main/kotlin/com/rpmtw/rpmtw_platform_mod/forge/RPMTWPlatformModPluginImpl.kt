@@ -3,6 +3,7 @@ package com.rpmtw.rpmtw_platform_mod.forge
 import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.arguments.ArgumentType
 import com.mojang.brigadier.context.CommandContext
+import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.utilities.RPMTWConfig.getScreen
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.screens.Screen
@@ -24,8 +25,13 @@ object RPMTWPlatformModPluginImpl {
 
     @JvmStatic
     fun registerClientCommand(command: String, executes: () -> Int) {
-        val dispatcher: CommandDispatcher<CommandSourceStack> = ClientCommandHandler.getDispatcher()
-        dispatcher.register(literal(command).executes {
+        val dispatcher: CommandDispatcher<CommandSourceStack>? = ClientCommandHandler.getDispatcher()
+
+        if (dispatcher == null) {
+            RPMTWPlatformMod.LOGGER.error("Failed to register client command, because dispatcher is null")
+        }
+
+        dispatcher?.register(literal(command).executes {
             return@executes executes()
         })
     }
@@ -38,9 +44,13 @@ object RPMTWPlatformModPluginImpl {
         argumentType: ArgumentType<*>,
         executes: (CommandContext<*>) -> Int
     ) {
-        val dispatcher: CommandDispatcher<CommandSourceStack> = ClientCommandHandler.getDispatcher()
+        val dispatcher: CommandDispatcher<CommandSourceStack>? = ClientCommandHandler.getDispatcher()
 
-        dispatcher.register(
+        if (dispatcher == null) {
+            RPMTWPlatformMod.LOGGER.error("Failed to register client command, because dispatcher is null")
+        }
+
+        dispatcher?.register(
             literal(command).then(literal(subCommand).then(argument(argumentName, argumentType).executes {
                 return@executes executes(it)
             }))
