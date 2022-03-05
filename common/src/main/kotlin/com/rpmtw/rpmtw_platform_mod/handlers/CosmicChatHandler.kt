@@ -2,6 +2,7 @@ package com.rpmtw.rpmtw_platform_mod.handlers
 
 import com.rpmtw.rpmtw_api_client.RPMTWApiClient
 import com.rpmtw.rpmtw_api_client.models.cosmic_chat.CosmicChatMessage
+import com.rpmtw.rpmtw_api_client.resources.CosmicChatMessageFormat
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.gui.widgets.CosmicChatComponent
 import com.rpmtw.rpmtw_platform_mod.utilities.RPMTWConfig
@@ -98,7 +99,7 @@ object CosmicChatHandler {
 
     private fun listenMessages() {
         if (client.cosmicChatResource.isConnected) {
-            client.cosmicChatResource.onMessageSent { msg ->
+            client.cosmicChatResource.onMessageSent({ msg ->
                 if (RPMTWConfig.get().cosmicChat.enable && RPMTWConfig.get().cosmicChat.enableReceiveMessage) {
                     coroutineScope.launch {
                         val isReply: Boolean = msg.replyMessageUUID != null
@@ -171,7 +172,7 @@ object CosmicChatHandler {
                         Minecraft.getInstance().player?.displayClientMessage(component, false)
                     }
                 }
-            }
+            }, format = CosmicChatMessageFormat.MinecraftFormatting)
         } else {
             RPMTWPlatformMod.LOGGER.error("Connecting to cosmic chat server failed")
         }
