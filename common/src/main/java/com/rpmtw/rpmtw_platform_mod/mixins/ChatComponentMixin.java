@@ -7,6 +7,9 @@ import com.rpmtw.rpmtw_api_client.models.cosmic_chat.CosmicChatMessage;
 import com.rpmtw.rpmtw_platform_mod.CosmicChatData;
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod;
 import com.rpmtw.rpmtw_platform_mod.gui.widgets.CosmicChatComponent;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.GuiMessage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.components.ChatComponent;
@@ -25,21 +28,29 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
 
-// TODO: cosmic chat user avatar image
-
 @Mixin(ChatComponent.class)
+@Environment(EnvType.CLIENT)
 public class ChatComponentMixin {
     @Shadow
     @Final
     private Minecraft minecraft;
-    private NativeImage image;
-    private ResourceLocation imageLocation;
+
+    @Shadow
+    @Final
+    private List<GuiMessage<FormattedCharSequence>> trimmedMessages;
+    @Shadow
+    @Final
+    private List<GuiMessage<Component>> allMessages;
 
     @Inject(method = "addMessage(Lnet/minecraft/network/chat/Component;IIZ)V", at = @At("HEAD"))
     public void addMessage(Component component, int i, int j, boolean bl, CallbackInfo ci) {
@@ -49,18 +60,13 @@ public class ChatComponentMixin {
         if (chatComponent != null) {
             CosmicChatMessage message = chatComponent.getCosmicChatMessage();
             String avatarUrl = message.getAvatarUrl();
-            Map<String, ResourceLocation> avatarMap = CosmicChatData.cosmicChatUserAvatar;
-            if (avatarMap.containsKey(avatarUrl)) {
-                imageLocation = avatarMap.get(avatarUrl);
-                return;
+            Map<String, ResourceLocation> avatarMap = CosmicChatData.avatarCache;
+            if (!avatarMap.containsKey(avatarUrl)) {
+                loadImage(avatarUrl);
             }
-            ResourceLocation location = loadImage(avatarUrl);
-            if (location == null) return;
-            avatarMap.put(avatarUrl, location);
-            CosmicChatData.cosmicChatUserAvatar = avatarMap;
-            imageLocation = location;
         }
     }
+
 
     @ModifyArg(
             at = @At(
@@ -74,7 +80,22 @@ public class ChatComponentMixin {
     public float moveTheText(PoseStack poseStack, FormattedCharSequence formattedCharSequence, float f, float y, int color) {
         CosmicChatData.lastY = (int) y;
         CosmicChatData.lastOpacity = (((color >> 24) + 256) % 256) / 255f; // haha yes
-        return CosmicChatData.Offset;
+        return CosmicChatData.offset;
+    }
+
+
+    @ModifyArg(
+            at = @At(
+                    value = "INVOKE",
+                    target = "Ljava/util/List;get(I)Ljava/lang/Object;",
+                    ordinal = 0
+            ),
+            method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;I)V",
+            index = 0
+    )
+    public int getLastMessage(int index) {
+        CosmicChatData.lastMessageIndex = index;
+        return index;
     }
 
 
@@ -87,15 +108,32 @@ public class ChatComponentMixin {
             method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;I)V"
     )
     public void render(PoseStack matrixStack, int i, CallbackInfo ci) {
-        if (imageLocation == null) return;
-        RenderSystem.setShaderColor(1, 1, 1, CosmicChatData.lastOpacity);
-        minecraft.getTextureManager().bindForSetup(imageLocation);
+        try {
+            GuiMessage<FormattedCharSequence> guiMessage = trimmedMessages.get(CosmicChatData.lastMessageIndex);
+            GuiMessage<Component> component = allMessages.stream().filter(msg -> msg.getId() == guiMessage.getId()).findFirst().orElse(null);
+            if (component == null) return;
 
-        // draw base layer
-        GuiComponent.blit(matrixStack, 0, CosmicChatData.lastY, 8, 8, 8.0F, 8, 8, 8, 64, 64);
-        // draw hat
-        // GuiComponent.blit(matrixStack, 0, CosmicChatData.lastY, 8, 8, 40.0F, 8, 8, 8, 64, 64);
-        RenderSystem.setShaderColor(1, 1, 1, 1);
+            List<Component> siblings = component.getMessage().getSiblings();
+            CosmicChatComponent chatComponent = (CosmicChatComponent) siblings.stream().filter(sibling -> sibling instanceof CosmicChatComponent).findFirst().orElse(null);
+            if (chatComponent == null) return;
+
+            CosmicChatMessage message = chatComponent.getCosmicChatMessage();
+            ResourceLocation location = CosmicChatData.avatarCache.getOrDefault(message.getAvatarUrl(), null);
+
+            if (location == null) return;
+            RenderSystem.setShaderTexture(0, location);
+            RenderSystem.setShaderColor(1, 1, 1, CosmicChatData.lastOpacity);
+            RenderSystem.setShaderTexture(0, location);
+            RenderSystem.enableBlend();
+            // Draw base layer
+            GuiComponent.blit(matrixStack, 0, CosmicChatData.lastY, 8, 8, 8.0F, 8, 8, 8, 8, 8);
+            // Draw hat
+            GuiComponent.blit(matrixStack, 0, CosmicChatData.lastY, 8, 8, 40.0F, 8, 8, 8, 8, 8);
+            RenderSystem.setShaderColor(1, 1, 1, 1);
+            RenderSystem.disableBlend();
+        } catch (Exception e) {
+            RPMTWPlatformMod.LOGGER.info("Rending chat component failed\n" + e);
+        }
     }
 
     @ModifyArg(
@@ -107,7 +145,7 @@ public class ChatComponentMixin {
             index = 1
     )
     public int correctClickPosition(int x) {
-        return x - CosmicChatData.Offset;
+        return x - CosmicChatData.offset;
     }
 
     @Redirect(
@@ -118,58 +156,47 @@ public class ChatComponentMixin {
             method = "addMessage(Lnet/minecraft/network/chat/Component;IIZ)V"
     )
     public int fixTextOverflow(ChatComponent chatHud) {
-        return ChatComponent.getWidth(minecraft.options.chatWidth) - CosmicChatData.Offset;
+        return ChatComponent.getWidth(minecraft.options.chatWidth) - CosmicChatData.offset;
     }
 
-    @Nullable
-    private ResourceLocation loadImage(String url) {
-        try {
-            HttpURLConnection connection = openConnection(url);
-            if (connection == null) return null;
-            image = NativeImage.read(connection.getInputStream());
-        } catch (IOException e) {
-            RPMTWPlatformMod.LOGGER.error("Exception reading image", e);
-        }
+    private void loadImage(String url) {
+        ResourceLocation location = new ResourceLocation("rpmtw_platform_mod", "cosmic_chat_user_avatar/" + url.replace("https://", ""));
+        Thread thread = new Thread(null, () -> {
+            @Nullable
+            NativeImage nativeImage = null;
 
-        if (image == null) return null;
+            try {
+                URL uri = new URL(url);
+                File file = new File(System.getProperty("user.home") + "/.rpmtw/cosmic_chat_user_avatar/" + url.replace("https://", "") + ".png");
+                BufferedImage image = convertToBufferedImage(ImageIO.read(uri.openConnection().getInputStream()).getScaledInstance(8, 8, Image.SCALE_SMOOTH));
+                ImageIO.write(image, "png", file);
+                file.deleteOnExit();
 
-        image = scaleImage(image, 64, 64);
-        TextureManager manager = Minecraft.getInstance().getTextureManager();
-        return manager.register("cosmic_chat_user_avatar", new DynamicTexture(image));
+                RPMTWPlatformMod.LOGGER.info("Loading image from " + file.getAbsolutePath());
+
+                nativeImage = NativeImage.read(Files.newInputStream(file.toPath()));
+            } catch (IOException e) {
+                RPMTWPlatformMod.LOGGER.error("Exception reading image", e);
+            }
+
+            if (nativeImage != null) {
+                TextureManager manager = Minecraft.getInstance().getTextureManager();
+                manager.register(location, new DynamicTexture(nativeImage));
+
+                CosmicChatData.avatarCache.put(url, location);
+                RPMTWPlatformMod.LOGGER.info("Loaded image for " + url);
+            }
+        }, "CosmicChatAvatarLoader");
+        thread.start();
     }
 
-
-    private NativeImage scaleImage(NativeImage image, int maxWidth, int maxHeight) {
-        int width = image.getWidth();
-        int height = image.getHeight();
-
-        if (width > maxWidth) {
-            width = maxWidth;
-            height = (int) (((float) image.getHeight() / (float) image.getWidth()) * (float) width);
-        }
-
-        if (height > maxHeight) {
-            height = maxHeight;
-            width = (int) (((float) image.getWidth() / (float) image.getHeight()) * (float) height);
-        }
-
-        NativeImage scaledImage = new NativeImage(width, height, false);
-        image.resizeSubRectTo(0, 0, image.getWidth(), image.getHeight(), scaledImage);
-        return scaledImage;
-    }
-
-    @Nullable
-    private HttpURLConnection openConnection(String url) {
-        try {
-            final String USER_AGENT = "Mozilla/4.0";
-            URL uri = new URL(url);
-            HttpURLConnection connection = (HttpURLConnection) uri.openConnection();
-            connection.addRequestProperty("User-Agent", USER_AGENT);
-            return connection;
-        } catch (IOException e) {
-            RPMTWPlatformMod.LOGGER.error("Failed to open connection", e);
-            return null;
-        }
+    private static BufferedImage convertToBufferedImage(Image image) {
+        BufferedImage newImage = new BufferedImage(image.getWidth(null), image.getHeight(null),
+                BufferedImage.TYPE_4BYTE_ABGR);
+        Graphics2D g = newImage.createGraphics();
+        g.drawImage(image, 0, 0, null);
+        g.dispose();
+        return newImage;
     }
 }
 

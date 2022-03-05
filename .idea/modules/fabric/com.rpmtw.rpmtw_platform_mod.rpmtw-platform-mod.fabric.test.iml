@@ -11,11 +11,4 @@
       </configuration>
     </facet>
   </component>
-  <component name="McpModuleSettings">
-    <option name="srgType" value="SRG" />
-  </component>
-  <component name="NewModuleRootManager" inherit-compiler-output="true">
-    <exclude-output />
-    <orderEntry type="sourceFolder" forTests="false" />
-  </component>
 </module>

@@ -29,7 +29,7 @@
   "cosmicChat.rpmtw_platform_mod.gui.reply": "回覆訊息給 %s",
   "cosmicChat.rpmtw_platform_mod.gui.send": "發送訊息至宇宙通訊系統",
   "cosmicChat.rpmtw_platform_mod.gui.what": "這是什麼？",
-  "cosmicChat.rpmtw_platform_mod.open_avatar_url": "Open avatar URL",
+  "cosmicChat.rpmtw_platform_mod.open_avatar_url": "開啟使用者頭像網址",
   "cosmicChat.rpmtw_platform_mod.status.banned": "無法發送訊息，因為您的 IP 已經被停權，如有誤判請至 RPMTW Discord 伺服器詢問。",
   "cosmicChat.rpmtw_platform_mod.status.phishing": "無法發送訊息，因為系統偵測到訊息內容包含可疑連結，如有誤判請至 RPMTW Discord 伺服器詢問。",
   "cosmicChat.rpmtw_platform_mod.status.sending": "發送訊息中...",

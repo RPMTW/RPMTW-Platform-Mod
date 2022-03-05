@@ -13,24 +13,26 @@ import net.minecraft.network.chat.TranslatableComponent
 
 class CosmicChatEULAScreen(private val initMessage: String?) : Screen(TextComponent("")) {
     override fun init() {
+
+        val agreeButton = Button(
+            (width - 100) / 2 - BOTTOM_BUTTON_WIDTH,
+            height / 2 + 30,
+            BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
+            TranslatableComponent("cosmicChat.rpmtw_platform_mod.gui.eula.agree")
+        ) {
+            RPMTWConfig.get().cosmicChat.eula = true
+            RPMTWConfig.save()
+            Utilities.openCosmicChatScreen(initMessage)
+        }
+
         val disagreeButton = Button(
-            width / 2 + 50,
+            (width - 4) / 2 - BOTTOM_BUTTON_WIDTH + 50,
             height / 2 + 30,
             BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
             TranslatableComponent("cosmicChat.rpmtw_platform_mod.gui.eula.disagree")
         ) {
             Minecraft.getInstance().setScreen(null)
         }
-
-        val agreeButton = Button(
-            (width - 100) / 2 - BOTTOM_BUTTON_WIDTH,
-            height / 2 + 30,
-            BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
-            TranslatableComponent("cosmicChat.rpmtw_platform_mod.gui.eula.agree"), Button.OnPress {
-                RPMTWConfig.get().cosmicChat.eula = true
-                RPMTWConfig.save()
-                Utilities.openCosmicChatScreen(initMessage)
-            })
 
         val whatButton = CosmicChatWhatButton(width, height)
 
@@ -58,7 +60,7 @@ class CosmicChatEULAScreen(private val initMessage: String?) : Screen(TextCompon
         font.draw(matrixStack, title, width / 2f - font.width(title) / 2f, (height - 65).toFloat(), 0xFF5555)
         font.draw(matrixStack, text1, width / 2f - font.width(text1) / 2f, (height - 50).toFloat(), textColor)
 
-        val fontWidth: Int = font.width(text2);
+        val fontWidth: Int = font.width(text2)
 
         font.draw(matrixStack, text2, width / 2f - fontWidth / 2f, (height - 40).toFloat(), textColor)
         font.draw(matrixStack, text3, width / 2f - fontWidth / 2f, (height - 30).toFloat(), textColor)
