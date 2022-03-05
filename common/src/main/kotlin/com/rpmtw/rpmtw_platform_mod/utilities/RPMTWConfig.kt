@@ -1,8 +1,8 @@
 package com.rpmtw.rpmtw_platform_mod.utilities
 
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
+import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformModPlugin
 import com.rpmtw.rpmtw_platform_mod.gui.ConfigScreen
-import com.rpmtw.rpmtw_platform_mod.registerConfigScreen
 import me.shedaniel.autoconfig.AutoConfig
 import me.shedaniel.autoconfig.annotation.Config
 import me.shedaniel.autoconfig.gui.ConfigScreenProvider
@@ -18,7 +18,7 @@ object RPMTWConfig {
             JanksonConfigSerializer(definition, configClass)
         } // register config
         config = AutoConfig.getConfigHolder(ConfigScreen::class.java).config
-        registerConfigScreen()
+        RPMTWPlatformModPlugin.registerConfigScreen()
         RPMTWPlatformMod.LOGGER.info("Registered config")
     }
 

@@ -4,10 +4,10 @@ import com.mojang.brigadier.Command
 import com.mojang.brigadier.arguments.StringArgumentType
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType
 import com.rpmtw.rpmtw_api_client.models.cosmic_chat.CosmicChatMessage
+import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformModPlugin
 import com.rpmtw.rpmtw_platform_mod.gui.CosmicChatScreen
 import com.rpmtw.rpmtw_platform_mod.gui.CosmicChatScreenType
 import com.rpmtw.rpmtw_platform_mod.handlers.CosmicChatHandler
-import com.rpmtw.rpmtw_platform_mod.registerClientCommand
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -23,7 +23,7 @@ object RPMTWCommand {
 
     private fun replyCosmicMessage() {
         val argumentName = "message_uuid"
-        registerClientCommand("cosmicChat", "reply", argumentName, StringArgumentType.string()) {
+        RPMTWPlatformModPlugin.registerClientCommand("cosmicChat", "reply", argumentName, StringArgumentType.string()) {
             val uuid: String = StringArgumentType.getString(it, argumentName)
             val coroutineScope = object : CoroutineScope {
                 override val coroutineContext: CoroutineContext
