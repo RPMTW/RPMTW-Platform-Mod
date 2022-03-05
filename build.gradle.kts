@@ -4,9 +4,9 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     base
     java
-    id("org.jetbrains.kotlin.jvm") version "1.6.20-M1"
+    id("org.jetbrains.kotlin.jvm") version "1.6.10"
     id("architectury-plugin") version "3.4-SNAPSHOT"
-    id("dev.architectury.loom") version "0.10.0-SNAPSHOT" apply false
+    id("dev.architectury.loom") version "0.11.0-SNAPSHOT" apply false
 }
 
 architectury {
@@ -27,7 +27,7 @@ subprojects {
         // The following line declares the yarn mappings you may select this one as well.
         // mappings ("net.fabricmc:yarn:${rootProject.yarn_version}")
         // 使用 yarn 會導致無法編譯 forge 版本，因此暫時先用 mojang 官方映射
-        implementation(group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version = "1.6.20-M1")
+        implementation(group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version = "1.6.10")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
     }
 }

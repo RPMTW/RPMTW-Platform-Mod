@@ -40,8 +40,8 @@ dependencies {
         forgeRuntimeLibrary(it)
     }
 
-    forgeRuntimeLibrary(kotlin("stdlib-jdk8"))
-    forgeRuntimeLibrary(kotlin("reflect"))
+    forgeRuntimeLibrary("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0")
+    forgeRuntimeLibrary("org.jetbrains.kotlin:kotlin-reflect:1.6.0")
 
     "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
     "shadowCommon"(project(path = ":common", configuration = "transformProductionForge")) { isTransitive = false }
