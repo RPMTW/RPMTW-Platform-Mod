@@ -1,7 +1,6 @@
 package com.rpmtw.rpmtw_platform_mod.handlers
 
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformModPlugin
-import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.events.OnClientStarted
 import com.rpmtw.rpmtw_platform_mod.events.OnClientStopping
 import com.rpmtw.rpmtw_platform_mod.events.OnGuiInitPost
@@ -17,8 +16,6 @@ object EventHandler {
         ClientLifecycleEvent.CLIENT_STARTED.register(::OnClientStarted)
         ClientGuiEvent.INIT_POST.register(::OnGuiInitPost)
         ClientTooltipEvent.ITEM.register(::OnItemTooltip)
-        if (RPMTWConfig.get().translate.unlocalized || RPMTWConfig.get().translate.machineTranslation) {
-            RPMTWPlatformModPlugin.registerReloadEvent(MachineTranslationStorage())
-        }
+        RPMTWPlatformModPlugin.registerReloadEvent(MachineTranslationStorage())
     }
 }

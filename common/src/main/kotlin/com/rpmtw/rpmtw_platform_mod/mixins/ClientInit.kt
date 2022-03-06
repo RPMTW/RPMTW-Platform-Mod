@@ -2,7 +2,7 @@
 package com.rpmtw.rpmtw_platform_mod.mixins
 
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
-import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig.get
+import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import net.minecraft.client.Minecraft
 import net.minecraft.client.main.GameConfig
 import net.minecraft.client.resources.language.LanguageInfo
@@ -17,10 +17,11 @@ import java.util.*
 class ClientInit {
     @Inject(method = ["<init>"], at = [At("RETURN")])
     fun init(gameConfig: GameConfig?, ci: CallbackInfo?) {
+        //  RPMTWConfig.register()
         val minecraft = Minecraft.getInstance()
         val langCode = Locale.getDefault().language
         // if auto-toggle language is enabled and the user language is Chinese, set the language
-        if (get().translate.autoToggleLanguage && (langCode.contains("zh") || langCode.contains("chi"))) {
+        if (RPMTWConfig.get().translate.autoToggleLanguage && (langCode.contains("zh") || langCode.contains("chi"))) {
             val countryCode = Locale.getDefault().country
             val manager = minecraft.languageManager
             if (countryCode.contains("TW") || countryCode.contains("HK")) {

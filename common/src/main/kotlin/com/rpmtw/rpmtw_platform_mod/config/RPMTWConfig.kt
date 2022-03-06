@@ -29,10 +29,9 @@ import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.world.InteractionResult
 import java.util.*
 
-
 object RPMTWConfig {
     private var config: ConfigObject? = null
-    fun register() {
+    private fun register() {
         RPMTWPlatformMod.LOGGER.info("Registering config")
         // register config
         AutoConfig.register(ConfigObject::class.java) { definition: Config?, configClass: Class<ConfigObject?>? ->

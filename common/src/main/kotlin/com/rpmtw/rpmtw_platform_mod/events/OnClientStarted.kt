@@ -5,6 +5,6 @@ import net.minecraft.client.Minecraft
 
 class OnClientStarted(val client: Minecraft) {
     init {
-        CosmicChatHandler.listen()
+        CosmicChatHandler.handle()
     }
 }

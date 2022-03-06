@@ -53,7 +53,7 @@ class ConfigObject : ConfigData {
         @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
         @ConfigEntry.Gui.RequiresRestart
-        var unlocalized = Minecraft.getInstance().options.languageCode != "en_us"
+        var unlocalized = Minecraft.getInstance().languageManager.selected.code == "en_us"
     }
 
     class CosmicChat {
