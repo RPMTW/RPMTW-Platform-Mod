@@ -121,7 +121,6 @@ public class ChatComponentMixin {
             ResourceLocation location = CosmicChatData.avatarCache.getOrDefault(message.getAvatarUrl(), null);
 
             if (location == null) return;
-            RenderSystem.setShaderTexture(0, location);
             RenderSystem.setShaderColor(1, 1, 1, CosmicChatData.lastOpacity);
             RenderSystem.setShaderTexture(0, location);
             RenderSystem.enableBlend();
