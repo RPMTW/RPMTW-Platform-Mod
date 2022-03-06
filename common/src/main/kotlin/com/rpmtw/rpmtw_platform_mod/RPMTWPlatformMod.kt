@@ -17,7 +17,7 @@ object RPMTWPlatformMod {
     @JvmStatic
     fun init() {
         LOGGER.info("Initializing RPMTW Platform Mod")
-        RPMTWApiClient.init(development = true)
+        RPMTWApiClient.init()
         RPMTWConfig.register()
         CosmicChatHandler.handle()
         RPMTWCommand.handle()
