@@ -32,6 +32,7 @@ import java.net.URL
 import java.nio.file.Files
 import javax.imageio.ImageIO
 
+@Suppress("UNUSED_PARAMETER")
 @Mixin(ChatComponent::class)
 @Environment(EnvType.CLIENT)
 class ChatComponentMixin {

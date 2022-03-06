@@ -3,7 +3,7 @@ name: Build
 on:
   push:
     branches:
-      - 1.18.1
+      - 1.18.2
   pull_request:
 
 
@@ -39,10 +39,10 @@ jobs:
       - name: Upload artifacts (fabric)
         uses: actions/upload-artifact@v2
         with:
-          name: 1.18.1-${{ steps.github_short_hash.outputs.result }}-fabric.zip
+          name: 1.18.2-${{ steps.github_short_hash.outputs.result }}-fabric.zip
           path: ${{ github.workspace }}/fabric/build/libs/
       - name: Upload artifacts (forge)
         uses: actions/upload-artifact@v2
         with:
-          name: 1.18.1-${{ steps.github_short_hash.outputs.result }}-forge.zip
+          name: 1.18.2-${{ steps.github_short_hash.outputs.result }}-forge.zip
           path: ${{ github.workspace }}/forge/build/libs/

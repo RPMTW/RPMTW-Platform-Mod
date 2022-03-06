@@ -56,7 +56,7 @@ dependencies {
     }
 
 
-    modImplementation("com.terraformersmc:modmenu:3.0.0")
+    modImplementation("com.terraformersmc:modmenu:3.1.0")
 }
 
 tasks {

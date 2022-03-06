@@ -6,6 +6,7 @@ import com.mojang.brigadier.arguments.ArgumentType
 import com.mojang.brigadier.context.CommandContext
 import dev.architectury.injectables.annotations.ExpectPlatform
 
+@Suppress("UNUSED_PARAMETER")
 object RPMTWPlatformModPlugin {
     @ExpectPlatform
     @JvmStatic

@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo
 import java.util.*
 
+@Suppress("UNUSED_PARAMETER")
 @Mixin(Minecraft::class)
 class ClientInit {
     @Inject(method = ["<init>"], at = [At("RETURN")])
