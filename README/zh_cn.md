@@ -13,7 +13,7 @@
 
 - [English](https://github.com/RPMTW/RPMTW-Platform-Mod/blob/1.18.2/README.md)
 - [繁體中文](https://github.com/RPMTW/RPMTW-Platform-Mod/blob/1.18.2/README/zh_tw.md)
-- 简体中文 (目前语言)
+- 简体中文 (当前语言)
 
 ## 📚 介绍
 
