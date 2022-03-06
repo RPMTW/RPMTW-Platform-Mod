@@ -7,6 +7,10 @@
     "defaultRequire": 1
   },
   "mixins": [
+    "ChatComponentMixin",
     "ClientInit"
+  ],
+  "client": [
+    "ChatScreenAccessor$chatFieldAccessor"
   ]
 }

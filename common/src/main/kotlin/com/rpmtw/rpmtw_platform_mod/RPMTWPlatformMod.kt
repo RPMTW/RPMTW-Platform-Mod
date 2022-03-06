@@ -1,5 +1,9 @@
 package com.rpmtw.rpmtw_platform_mod
 
+import com.rpmtw.rpmtw_api_client.RPMTWApiClient
+import com.rpmtw.rpmtw_platform_mod.command.RPMTWCommand
+import com.rpmtw.rpmtw_platform_mod.handlers.CosmicChatHandler
+import com.rpmtw.rpmtw_platform_mod.handlers.EventHandler
 import com.rpmtw.rpmtw_platform_mod.utilities.RPMTWConfig
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
@@ -13,6 +17,10 @@ object RPMTWPlatformMod {
     @JvmStatic
     fun init() {
         LOGGER.info("Initializing RPMTW Platform Mod")
+        RPMTWApiClient.init()
         RPMTWConfig.register()
+        CosmicChatHandler.handle()
+        RPMTWCommand.handle()
+        EventHandler.handle()
     }
 }

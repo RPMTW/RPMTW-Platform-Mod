@@ -40,8 +40,21 @@ dependencies {
         exclude(module = "fabric-api")
     }
     modApi("net.fabricmc:fabric-language-kotlin:${project.property("fabric-kotlin_version").toString()}")
+
     "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
     "shadowCommon"(project(path = ":common", configuration = "transformProductionFabric")) { isTransitive = false }
+    "shadowCommon"(
+        "com.github.RPMTW:RPMTW-API-Client-Kotlin:${
+            project.property("rpmtw_api_client_version").toString()
+        }"
+    ) {
+        exclude("com.google.code.gson")
+        exclude("org.jetbrains.kotlinx")
+        exclude("org.jetbrains.kotlin")
+    }.let {
+        implementation(it)
+    }
+
 
     modImplementation("com.terraformersmc:modmenu:3.0.0")
 }

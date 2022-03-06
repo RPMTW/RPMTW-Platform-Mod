@@ -26,9 +26,23 @@ dependencies {
     // Remove the next line if you don't want to depend on the API
     modApi("dev.architectury:architectury-forge:${project.property("architectury_version").toString()}")
     modApi("me.shedaniel.cloth:cloth-config-forge:${project.property("cloth_config_version").toString()}")
-    implementation("thedarkcolour:kotlinforforge:${rootProject.property("kotlin_forge_version").toString()}")
-    forgeRuntimeLibrary(kotlin("stdlib-jdk8"))
-    forgeRuntimeLibrary(kotlin("reflect"))
+    implementation("thedarkcolour:kotlinforforge:${project.property("kotlin_forge_version").toString()}")
+
+    "shadowCommon"(
+        "com.github.RPMTW:RPMTW-API-Client-Kotlin:${
+            project.property("rpmtw_api_client_version").toString()
+        }"
+    ) {
+        exclude("com.google.code.gson")
+        exclude("org.jetbrains.kotlinx")
+        exclude("org.jetbrains.kotlin")
+    }.let {
+        forgeRuntimeLibrary(it)
+    }
+
+    forgeRuntimeLibrary("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.10")
+    forgeRuntimeLibrary("org.jetbrains.kotlin:kotlin-reflect:1.6.10")
+    forgeRuntimeLibrary("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
 
     "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
     "shadowCommon"(project(path = ":common", configuration = "transformProductionForge")) { isTransitive = false }
@@ -95,6 +109,5 @@ publishing {
     }
 
     // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-    repositories {
-    }
+    repositories {}
 }
