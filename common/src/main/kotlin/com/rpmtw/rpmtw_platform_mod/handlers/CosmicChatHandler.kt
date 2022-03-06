@@ -4,9 +4,9 @@ import com.rpmtw.rpmtw_api_client.RPMTWApiClient
 import com.rpmtw.rpmtw_api_client.models.cosmic_chat.CosmicChatMessage
 import com.rpmtw.rpmtw_api_client.resources.CosmicChatMessageFormat
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
-import com.rpmtw.rpmtw_platform_mod.gui.CosmicChatAccountType
+import com.rpmtw.rpmtw_platform_mod.config.CosmicChatAccountType
 import com.rpmtw.rpmtw_platform_mod.gui.widgets.CosmicChatComponent
-import com.rpmtw.rpmtw_platform_mod.utilities.RPMTWConfig
+import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.utilities.Utilities
 import kotlinx.coroutines.Deferred
 import net.minecraft.ChatFormatting
@@ -29,7 +29,7 @@ object CosmicChatHandler {
     private suspend fun init() {
         val minecraft: Minecraft = Minecraft.getInstance()
         val user: User = minecraft.user
-        if (RPMTWConfig.get().base.rpmtwAuthToken != null && RPMTWConfig.get().cosmicChat.accountType == CosmicChatAccountType.RPMTW) {
+        if (RPMTWConfig.get().base.isLogin() && RPMTWConfig.get().cosmicChat.accountType == CosmicChatAccountType.RPMTW) {
             client.cosmicChatResource.connect(token = RPMTWConfig.get().base.rpmtwAuthToken!!)
         } else {
             client.cosmicChatResource.connect(minecraftUUID = user.uuid)
@@ -279,5 +279,12 @@ object CosmicChatHandler {
 
     fun close() {
         client.cosmicChatResource.disconnect()
+    }
+
+    fun reset() {
+        RPMTWPlatformMod.LOGGER.info("Resetting cosmic chat...")
+        close()
+        handle()
+        RPMTWPlatformMod.LOGGER.info("Cosmic chat reset!")
     }
 }

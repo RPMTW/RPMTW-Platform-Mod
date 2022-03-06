@@ -1,5 +1,6 @@
 package com.rpmtw.rpmtw_platform_mod.utilities
 
+import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.gui.CosmicChatEULAScreen
 import com.rpmtw.rpmtw_platform_mod.gui.CosmicChatScreen
 import com.rpmtw.rpmtw_platform_mod.gui.CosmicChatScreenType

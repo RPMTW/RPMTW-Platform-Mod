@@ -1,4 +1,4 @@
-package com.rpmtw.rpmtw_platform_mod.gui
+package com.rpmtw.rpmtw_platform_mod.config
 
 import me.shedaniel.autoconfig.ConfigData
 import me.shedaniel.autoconfig.annotation.Config
@@ -8,7 +8,7 @@ import net.fabricmc.api.Environment
 
 @Config(name = "rpmtw_platform_mod")
 @Environment(EnvType.CLIENT)
-class ConfigScreen : ConfigData {
+class ConfigObject : ConfigData {
     @JvmField
     @ConfigEntry.Category("base")
     @ConfigEntry.Gui.TransitiveObject
@@ -29,6 +29,10 @@ class ConfigScreen : ConfigData {
         @JvmField
         @ConfigEntry.Gui.Excluded
         var rpmtwAuthToken: String? = null
+
+        fun isLogin(): Boolean {
+            return rpmtwAuthToken != null && rpmtwAuthToken!!.isNotEmpty()
+        }
     }
 
     class Translate {
@@ -61,7 +65,6 @@ class ConfigScreen : ConfigData {
 
         @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
-        @ConfigEntry.Gui.RequiresRestart
         @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
         var accountType: CosmicChatAccountType = CosmicChatAccountType.RPMTW
     }
@@ -69,5 +72,11 @@ class ConfigScreen : ConfigData {
 
 enum class CosmicChatAccountType {
     MINECRAFT,
-    RPMTW
+    RPMTW;
+
+    val isMinecraft: Boolean
+        get() = this == MINECRAFT
+
+    val isRPMTW: Boolean
+        get() = this == RPMTW
 }

@@ -4,10 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/rpmtw-platform-mod.common.main.iml" filepath="$PROJECT_DIR$/.idea/modules/common/rpmtw-platform-mod.common.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/rpmtw-platform-mod.common.test.iml" filepath="$PROJECT_DIR$/.idea/modules/common/rpmtw-platform-mod.common.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/fabric/rpmtw-platform-mod.fabric.main.iml" filepath="$PROJECT_DIR$/.idea/modules/fabric/rpmtw-platform-mod.fabric.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/fabric/rpmtw-platform-mod.fabric.test.iml" filepath="$PROJECT_DIR$/.idea/modules/fabric/rpmtw-platform-mod.fabric.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/forge/rpmtw-platform-mod.forge.main.iml" filepath="$PROJECT_DIR$/.idea/modules/forge/rpmtw-platform-mod.forge.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/forge/rpmtw-platform-mod.forge.test.iml" filepath="$PROJECT_DIR$/.idea/modules/forge/rpmtw-platform-mod.forge.test.iml" />
     </modules>
   </component>
 </project>

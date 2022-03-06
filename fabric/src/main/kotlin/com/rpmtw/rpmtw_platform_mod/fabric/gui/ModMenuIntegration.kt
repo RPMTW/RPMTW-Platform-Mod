@@ -1,6 +1,6 @@
 package com.rpmtw.rpmtw_platform_mod.fabric.gui
 
-import com.rpmtw.rpmtw_platform_mod.utilities.RPMTWConfig
+import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.terraformersmc.modmenu.api.ConfigScreenFactory
 import com.terraformersmc.modmenu.api.ModMenuApi
 import net.fabricmc.api.EnvType

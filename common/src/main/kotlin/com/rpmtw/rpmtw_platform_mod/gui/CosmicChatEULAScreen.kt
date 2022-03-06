@@ -2,7 +2,7 @@ package com.rpmtw.rpmtw_platform_mod.gui
 
 import com.mojang.blaze3d.vertex.PoseStack
 import com.rpmtw.rpmtw_platform_mod.gui.widgets.CosmicChatWhatButton
-import com.rpmtw.rpmtw_platform_mod.utilities.RPMTWConfig
+import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.utilities.Utilities
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.components.Button

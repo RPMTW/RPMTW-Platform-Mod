@@ -4,7 +4,7 @@ import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.arguments.ArgumentType
 import com.mojang.brigadier.context.CommandContext
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
-import com.rpmtw.rpmtw_platform_mod.utilities.RPMTWConfig.getScreen
+import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig.getScreen
 import dev.architectury.platform.Platform
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.screens.Screen

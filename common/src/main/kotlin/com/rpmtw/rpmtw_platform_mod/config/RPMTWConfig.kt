@@ -1,11 +1,12 @@
-package com.rpmtw.rpmtw_platform_mod.utilities
+package com.rpmtw.rpmtw_platform_mod.config
 
 import com.mojang.blaze3d.vertex.PoseStack
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformModPlugin
-import com.rpmtw.rpmtw_platform_mod.gui.ConfigScreen
+import com.rpmtw.rpmtw_platform_mod.handlers.CosmicChatHandler
 import com.rpmtw.rpmtw_platform_mod.handlers.RPMTWAuthHandler
 import me.shedaniel.autoconfig.AutoConfig
+import me.shedaniel.autoconfig.ConfigHolder
 import me.shedaniel.autoconfig.annotation.Config
 import me.shedaniel.autoconfig.gui.ConfigScreenProvider
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer
@@ -22,24 +23,49 @@ import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.resources.language.I18n
 import net.minecraft.network.chat.TextComponent
 import net.minecraft.network.chat.TranslatableComponent
+import net.minecraft.world.InteractionResult
 import java.util.*
 
 
 object RPMTWConfig {
-    private var config: ConfigScreen? = null
+    private var config: ConfigObject? = null
     fun register() {
         RPMTWPlatformMod.LOGGER.info("Registering config")
         // register config
-        AutoConfig.register(ConfigScreen::class.java) { definition: Config?, configClass: Class<ConfigScreen?>? ->
+        AutoConfig.register(ConfigObject::class.java) { definition: Config?, configClass: Class<ConfigObject?>? ->
             JanksonConfigSerializer(definition, configClass)
         }
-        config = AutoConfig.getConfigHolder(ConfigScreen::class.java).config
+        val holder: ConfigHolder<ConfigObject> = AutoConfig.getConfigHolder(ConfigObject::class.java)
+        config = holder.config
+        listenOnSave(holder, holder.config)
+
         RPMTWPlatformModPlugin.registerConfigScreen()
         RPMTWPlatformMod.LOGGER.info("Registered config")
     }
 
+    private fun listenOnSave(holder: ConfigHolder<ConfigObject>, beforeConfig: ConfigObject) {
+        var beforeAccountType = beforeConfig.cosmicChat.accountType
+
+        holder.registerSaveListener { _, edited ->
+            var reset = false
+            if (edited.cosmicChat.accountType != beforeAccountType) {
+                // If change the account type to RPMTW and are not logged RPMTW account, it will not restart the cosmic chat client.
+                if (!(!edited.base.isLogin() && edited.cosmicChat.accountType.isRPMTW)) {
+                    reset = true
+                }
+            }
+
+            if (reset) {
+                CosmicChatHandler.reset()
+            }
+            beforeAccountType = edited.cosmicChat.accountType
+
+            return@registerSaveListener InteractionResult.SUCCESS
+        }
+    }
+
     @JvmStatic
-    fun get(): ConfigScreen {
+    fun get(): ConfigObject {
         if (config == null) {
             register()
         }
@@ -53,7 +79,7 @@ object RPMTWConfig {
             return null
         }
 
-        val provider = AutoConfig.getConfigScreen(ConfigScreen::class.java, parent) as ConfigScreenProvider<*>
+        val provider = AutoConfig.getConfigScreen(ConfigObject::class.java, parent) as ConfigScreenProvider<*>
         provider.setI13nFunction { "config.rpmtw_platform_mod" }
         provider.setBuildFunction { builder: ConfigBuilder ->
             builder.setGlobalized(true)
@@ -120,7 +146,7 @@ internal class LoginButtonEntry : AbstractConfigListEntry<Any?>(TextComponent(UU
         logoutButton.render(matrices, mouseX, mouseY, delta)
 
         val text =
-            I18n.get(if (RPMTWConfig.get().base.rpmtwAuthToken != null) "auth.rpmtw_platform_mod.status.logged_in" else "auth.rpmtw_platform_mod.status.not_logged_in")
+            I18n.get(if (RPMTWConfig.get().base.isLogin()) "auth.rpmtw_platform_mod.status.logged_in" else "auth.rpmtw_platform_mod.status.not_logged_in")
 
         Minecraft.getInstance().font.drawShadow(
             matrices,

@@ -11,6 +11,6 @@
     "ClientInit"
   ],
   "client": [
-    "ChatScreenAccessor$chatFieldAccessor"
+    "ChatScreenAccessor$ChatFieldAccessor"
   ]
 }

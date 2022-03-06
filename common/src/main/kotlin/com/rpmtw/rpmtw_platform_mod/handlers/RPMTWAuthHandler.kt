@@ -1,7 +1,7 @@
 package com.rpmtw.rpmtw_platform_mod.handlers
 
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
-import com.rpmtw.rpmtw_platform_mod.utilities.RPMTWConfig
+import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.utilities.Utilities
 import com.sun.net.httpserver.HttpServer
 import kotlinx.coroutines.Dispatchers
@@ -47,6 +47,7 @@ object RPMTWAuthHandler {
                     if (token != null) {
                         RPMTWConfig.get().base.rpmtwAuthToken = token
                         RPMTWConfig.save()
+                        CosmicChatHandler.reset()
 
                         val message = I18n.get("auth.rpmtw_platform_mod.status.success")
                         handler.sendResponseHeaders(200, message.toByteArray(Charsets.UTF_8).size.toLong())
@@ -89,7 +90,9 @@ object RPMTWAuthHandler {
     }
 
     fun logout() {
+        if (!RPMTWConfig.get().base.isLogin()) return
         RPMTWConfig.get().base.rpmtwAuthToken = null
         RPMTWConfig.save()
+        CosmicChatHandler.reset()
     }
 }
