@@ -26,8 +26,8 @@ object RPMTWPlatformModPlugin {
     fun registerClientCommand(
         command: String,
         subCommand: String,
-        argumentName: String,
-        argumentType: ArgumentType<*>,
+        argumentName: String? = null,
+        argumentType: ArgumentType<*>? = null,
         executes: (CommandContext<*>) -> Int
     ) {
         // Just throw an error, the content should get replaced at runtime.

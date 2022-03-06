@@ -4,10 +4,18 @@ import com.rpmtw.rpmtw_platform_mod.gui.CosmicChatEULAScreen
 import com.rpmtw.rpmtw_platform_mod.gui.CosmicChatScreen
 import com.rpmtw.rpmtw_platform_mod.gui.CosmicChatScreenType
 import com.rpmtw.rpmtw_platform_mod.handlers.CosmicChatHandler
+import kotlinx.coroutines.*
 import net.minecraft.client.Minecraft
 import net.minecraft.network.chat.TextComponent
+import kotlin.coroutines.CoroutineContext
+
 
 object Utilities {
+    private val coroutineScope = object : CoroutineScope {
+        override val coroutineContext: CoroutineContext
+            get() = Job()
+    }
+
     fun sendMessage(message: String, overlay: Boolean = false) {
         Minecraft.getInstance().player?.displayClientMessage(TextComponent(message), overlay)
     }
@@ -22,6 +30,18 @@ object Utilities {
             }
         } else {
             Minecraft.getInstance().setScreen(CosmicChatEULAScreen(initMessage))
+        }
+    }
+
+    fun coroutineLaunch(block: suspend CoroutineScope.() -> Unit) {
+        coroutineScope.launch {
+            block()
+        }
+    }
+
+    fun <T> coroutineAsync(block: suspend CoroutineScope.() -> T): Deferred<T> {
+        return coroutineScope.async {
+            block()
         }
     }
 }

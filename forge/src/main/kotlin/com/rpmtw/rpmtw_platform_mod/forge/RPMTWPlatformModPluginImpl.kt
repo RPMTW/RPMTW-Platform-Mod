@@ -5,6 +5,7 @@ import com.mojang.brigadier.arguments.ArgumentType
 import com.mojang.brigadier.context.CommandContext
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.utilities.RPMTWConfig.getScreen
+import dev.architectury.platform.Platform
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.commands.CommandSourceStack
@@ -27,7 +28,7 @@ object RPMTWPlatformModPluginImpl {
     fun registerClientCommand(command: String, executes: () -> Int) {
         val dispatcher: CommandDispatcher<CommandSourceStack>? = ClientCommandHandler.getDispatcher()
 
-        if (dispatcher == null) {
+        if (dispatcher == null && !Platform.isDevelopmentEnvironment()) {
             RPMTWPlatformMod.LOGGER.error("Failed to register client command, because dispatcher is null")
         }
 
@@ -40,20 +41,26 @@ object RPMTWPlatformModPluginImpl {
     fun registerClientCommand(
         command: String,
         subCommand: String,
-        argumentName: String,
-        argumentType: ArgumentType<*>,
+        argumentName: String? = null,
+        argumentType: ArgumentType<*>? = null,
         executes: (CommandContext<*>) -> Int
     ) {
         val dispatcher: CommandDispatcher<CommandSourceStack>? = ClientCommandHandler.getDispatcher()
 
-        if (dispatcher == null) {
+        if (dispatcher == null && !Platform.isDevelopmentEnvironment()) {
             RPMTWPlatformMod.LOGGER.error("Failed to register client command, because dispatcher is null")
         }
 
-        dispatcher?.register(
-            literal(command).then(literal(subCommand).then(argument(argumentName, argumentType).executes {
-                return@executes executes(it)
-            }))
-        )
+        if (argumentName != null && argumentType != null) {
+            dispatcher?.register(
+                literal(command).then(
+                    literal(subCommand).then(argument(argumentName, argumentType).executes { executes(it) })
+                )
+            )
+        } else {
+            dispatcher?.register(
+                literal(command).then(literal(subCommand).executes { executes(it) })
+            )
+        }
     }
 }

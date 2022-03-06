@@ -1,7 +1,17 @@
 {
+  "auth.rpmtw_platform_mod.button.login": "Login",
+  "auth.rpmtw_platform_mod.button.login.tooltip": "Login with RPMTW account.",
+  "auth.rpmtw_platform_mod.button.logout": "Logout",
+  "auth.rpmtw_platform_mod.status.failed": "Login failed, please try again!\nIf it still fails, please go to RPMTW Discord and ask\nhttps://discord.gg/5xApZtgV2u",
+  "auth.rpmtw_platform_mod.status.logged_in": "You are already logged in.",
+  "auth.rpmtw_platform_mod.status.not_logged_in": "You are not logged in.",
+  "auth.rpmtw_platform_mod.status.success": "Login successfully, you can now close this screen, go back to the game and enjoy the game!",
   "command.rpmtw_platform_mod.replyCosmicMessage.getMessage.failed": "Failed to got the cosmic chat message.",
+  "config.rpmtw_platform_mod.category.base": "Base Config",
   "config.rpmtw_platform_mod.category.cosmicChat": "Cosmic Chat",
   "config.rpmtw_platform_mod.category.translate": "RPMTranslator",
+  "config.rpmtw_platform_mod.option.cosmicChat.accountType": "Account type",
+  "config.rpmtw_platform_mod.option.cosmicChat.accountType.@Tooltip": "Minecraft account is used by default if you are not logged in to your RPMTW account",
   "config.rpmtw_platform_mod.option.cosmicChat.enable": "Enable cosmic chat",
   "config.rpmtw_platform_mod.option.cosmicChat.enable.@Tooltip": "If disabled, it will override and disable other cosmic chat options.",
   "config.rpmtw_platform_mod.option.cosmicChat.enableButton": "Shortcut button",
@@ -38,6 +48,6 @@
   "cosmicChat.rpmtw_platform_mod.title": "Cosmic Chat",
   "gui.rpmtw_platform_mod.cancel": "Cancel",
   "gui.rpmtw_platform_mod.reply": "Reply",
-  "gui.rpmtw_platform_mod.send": "Send",
-  "gui.rpmtw_platform_mod.self": "Self"
+  "gui.rpmtw_platform_mod.self": "Self",
+  "gui.rpmtw_platform_mod.send": "Send"
 }

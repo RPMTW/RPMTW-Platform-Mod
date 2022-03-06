@@ -10,6 +10,11 @@ import net.fabricmc.api.Environment
 @Environment(EnvType.CLIENT)
 class ConfigScreen : ConfigData {
     @JvmField
+    @ConfigEntry.Category("base")
+    @ConfigEntry.Gui.TransitiveObject
+    var base = Base()
+
+    @JvmField
     @ConfigEntry.Category("translate")
     @ConfigEntry.Gui.TransitiveObject
     var translate = Translate()
@@ -18,6 +23,13 @@ class ConfigScreen : ConfigData {
     @ConfigEntry.Category("cosmicChat")
     @ConfigEntry.Gui.TransitiveObject
     var cosmicChat = CosmicChat()
+
+
+    class Base {
+        @JvmField
+        @ConfigEntry.Gui.Excluded
+        var rpmtwAuthToken: String? = null
+    }
 
     class Translate {
         @JvmField
@@ -46,5 +58,16 @@ class ConfigScreen : ConfigData {
         @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
         var nickname: String? = null
+
+        @JvmField
+        @ConfigEntry.Gui.Tooltip(count = 1)
+        @ConfigEntry.Gui.RequiresRestart
+        @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
+        var accountType: CosmicChatAccountType = CosmicChatAccountType.RPMTW
     }
+}
+
+enum class CosmicChatAccountType {
+    MINECRAFT,
+    RPMTW
 }

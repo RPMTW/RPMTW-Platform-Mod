@@ -4,23 +4,19 @@ import com.rpmtw.rpmtw_api_client.RPMTWApiClient
 import com.rpmtw.rpmtw_api_client.models.cosmic_chat.CosmicChatMessage
 import com.rpmtw.rpmtw_api_client.resources.CosmicChatMessageFormat
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
+import com.rpmtw.rpmtw_platform_mod.gui.CosmicChatAccountType
 import com.rpmtw.rpmtw_platform_mod.gui.widgets.CosmicChatComponent
 import com.rpmtw.rpmtw_platform_mod.utilities.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.utilities.Utilities
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Deferred
 import net.minecraft.ChatFormatting
 import net.minecraft.client.Minecraft
 import net.minecraft.client.User
 import net.minecraft.client.resources.language.I18n
 import net.minecraft.network.chat.*
-import kotlin.coroutines.CoroutineContext
 
 object CosmicChatHandler {
     private val client: RPMTWApiClient = RPMTWApiClient.instance
-    private val coroutineScope = object : CoroutineScope {
-        override val coroutineContext: CoroutineContext
-            get() = Job()
-    }
     private val nickname: String?
         get() {
             return if (RPMTWConfig.get().cosmicChat.nickname != null && RPMTWConfig.get().cosmicChat.nickname!!.isNotEmpty()) {
@@ -33,7 +29,11 @@ object CosmicChatHandler {
     private suspend fun init() {
         val minecraft: Minecraft = Minecraft.getInstance()
         val user: User = minecraft.user
-        client.cosmicChatResource.connect(minecraftUUID = user.uuid)
+        if (RPMTWConfig.get().base.rpmtwAuthToken != null && RPMTWConfig.get().cosmicChat.accountType == CosmicChatAccountType.RPMTW) {
+            client.cosmicChatResource.connect(token = RPMTWConfig.get().base.rpmtwAuthToken!!)
+        } else {
+            client.cosmicChatResource.connect(minecraftUUID = user.uuid)
+        }
     }
 
     private fun formatUrl(message: String): MutableComponent {
@@ -101,7 +101,7 @@ object CosmicChatHandler {
         if (client.cosmicChatResource.isConnected) {
             client.cosmicChatResource.onMessageSent({ msg ->
                 if (RPMTWConfig.get().cosmicChat.enable && RPMTWConfig.get().cosmicChat.enableReceiveMessage) {
-                    coroutineScope.launch {
+                    Utilities.coroutineLaunch {
                         val isReply: Boolean = msg.replyMessageUUID != null
 
                         val component: MutableComponent = TextComponent.EMPTY.copy()
@@ -222,7 +222,7 @@ object CosmicChatHandler {
     fun handle() {
         if (RPMTWConfig.get().cosmicChat.enable) {
             RPMTWPlatformMod.LOGGER.info("Initializing cosmic chat server...")
-            coroutineScope.launch {
+            Utilities.coroutineLaunch {
                 init()
             }
 
@@ -231,17 +231,17 @@ object CosmicChatHandler {
     }
 
     fun listen() {
-        val result: Deferred<Unit> = coroutineScope.async {
+        val result: Deferred<Unit> = Utilities.coroutineAsync {
             listenMessages()
         }
-        coroutineScope.launch {
+        Utilities.coroutineLaunch {
             result.await()
         }
     }
 
     fun send(message: String) {
         if (client.cosmicChatResource.isConnected) {
-            coroutineScope.launch {
+            Utilities.coroutineLaunch {
                 sendMessage(message)
             }
         } else {
@@ -251,7 +251,7 @@ object CosmicChatHandler {
 
     fun reply(message: String, uuid: String) {
         if (client.cosmicChatResource.isConnected) {
-            coroutineScope.launch {
+            Utilities.coroutineLaunch {
                 replyMessage(message, uuid)
             }
         } else {
@@ -261,12 +261,12 @@ object CosmicChatHandler {
 
     suspend fun getMessageAsync(uuid: String): CosmicChatMessage? {
         if (client.cosmicChatResource.isConnected) {
-            val result: Deferred<CosmicChatMessage?> = coroutineScope.async {
+            val result: Deferred<CosmicChatMessage?> = Utilities.coroutineAsync {
                 try {
-                    return@async client.cosmicChatResource.getMessage(uuid)
+                    return@coroutineAsync client.cosmicChatResource.getMessage(uuid)
                 } catch (e: Exception) {
                     RPMTWPlatformMod.LOGGER.error("Failed to get message", e)
-                    return@async null
+                    return@coroutineAsync null
                 }
             }
 
