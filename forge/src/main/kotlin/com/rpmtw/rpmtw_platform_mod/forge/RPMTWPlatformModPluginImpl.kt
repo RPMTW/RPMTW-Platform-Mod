@@ -25,19 +25,6 @@ object RPMTWPlatformModPluginImpl {
     }
 
     @JvmStatic
-    fun registerClientCommand(command: String, executes: () -> Int) {
-        val dispatcher: CommandDispatcher<CommandSourceStack>? = ClientCommandHandler.getDispatcher()
-
-        if (dispatcher == null && !Platform.isDevelopmentEnvironment()) {
-            RPMTWPlatformMod.LOGGER.error("Failed to register client command, because dispatcher is null")
-        }
-
-        dispatcher?.register(literal(command).executes {
-            return@executes executes()
-        })
-    }
-
-    @JvmStatic
     fun registerClientCommand(
         command: String,
         subCommand: String,

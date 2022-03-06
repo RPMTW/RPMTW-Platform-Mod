@@ -16,13 +16,6 @@ object RPMTWPlatformModPluginImpl {
     }
 
     @JvmStatic
-    fun registerClientCommand(command: String, executes: () -> Int) {
-        ClientCommandManager.DISPATCHER.register(literal(command).executes {
-            return@executes executes()
-        })
-    }
-
-    @JvmStatic
     fun registerClientCommand(
         command: String,
         subCommand: String,

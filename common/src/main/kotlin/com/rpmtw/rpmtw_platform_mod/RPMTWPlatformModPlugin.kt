@@ -16,13 +16,6 @@ object RPMTWPlatformModPlugin {
 
     @JvmStatic
     @ExpectPlatform
-    fun registerClientCommand(command: String, executes: () -> Int) {
-        // Just throw an error, the content should get replaced at runtime.
-        throw AssertionError()
-    }
-
-    @JvmStatic
-    @ExpectPlatform
     fun registerClientCommand(
         command: String,
         subCommand: String,
