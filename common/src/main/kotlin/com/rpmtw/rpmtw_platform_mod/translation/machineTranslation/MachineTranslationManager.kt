@@ -16,16 +16,22 @@ import java.util.concurrent.ExecutionException
 
 
 object MachineTranslationManager {
-    private val cache: MutableMap<String, MachineTranslationData?> =
-        HashMap<String, MachineTranslationData?>()
-    private val progress: MutableList<String> = ArrayList()
     private val mc = Minecraft.getInstance()
+    private val cache: MutableMap<SourceText, MachineTranslationData?> = HashMap()
+    private val progress: MutableList<String> = ArrayList()
     private val PROGRESS_TEXT: Component = TextComponent("翻譯中...").withStyle(ChatFormatting.GRAY)
     private val ERROR_TEXT: Component = TextComponent("翻譯失敗").withStyle(ChatFormatting.GRAY)
     private val NO_REQUIRED_TEXT: Component = TextComponent("不需翻譯").withStyle(ChatFormatting.GRAY)
+    private val translatedLanguage: String
+        get() = when (mc.languageManager.selected.code) {
+            "zh_tw" -> "zh_Hant"
+            "zh_hk" -> "zh_Hant"
+            "zh_cn" -> "zh_Hans"
+            else -> "zh_Hant"
+        }
 
     fun createToolTip(source: String): Component {
-        val info: MachineTranslationData? = cache[source]
+        val info: MachineTranslationData? = cache[SourceText(source, translatedLanguage)]
 
         if (info != null) {
             if (info.error != null) return ERROR_TEXT
@@ -54,7 +60,7 @@ object MachineTranslationManager {
             try {
                 withContext(Dispatchers.IO) {
                     mc.submit {
-                        cache[source] = data
+                        cache[SourceText(source, translatedLanguage)] = data
                     }.get()
                 }
             } catch (e: InterruptedException) {
@@ -73,27 +79,27 @@ object MachineTranslationManager {
         return "${r.nextInt(256)}.${r.nextInt(256)}.${r.nextInt(256)}.${r.nextInt(256)}"
     }
 
+    @Suppress("SpellCheckingInspection")
     private suspend fun translate(text: String): String {
-        val client = OkHttpClient().newBuilder()
-            .build()
+        val client = OkHttpClient().newBuilder().build()
 
-        val url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=en_us&tl=zh_Hant&dt=t&q=$text"
-        return url.httpGet().header("x-forwarded-for", randomIP()).awaitStringResult().fold(
-            { response ->
-                var result: String = response.split("\n".toRegex()).toTypedArray()[0]
-                result = result.replace("\"", "").replace("[", "").replace("]", "")
-                val filter = result.split(",".toRegex()).toTypedArray()
-                result = filter[0]
-                client.dispatcher().cancelAll()
-                return result
-            },
-            {
-                if (it.response.statusCode == 429) {
-                    "錯誤：連線 Google 翻譯伺服器流量異常"
-                } else {
-                    "錯誤：取得翻譯失敗"
-                }
+        val url =
+            "https://translate.googleapis.com/translate_a/single?client=gtx&sl=en_us&tl=${translatedLanguage}&dt=t&q=$text"
+        return url.httpGet().header("x-forwarded-for", randomIP()).awaitStringResult().fold({ response ->
+            var result: String = response.split("\n".toRegex()).toTypedArray()[0]
+            result = result.replace("\"", "").replace("[", "").replace("]", "")
+            val filter = result.split(",".toRegex()).toTypedArray()
+            result = filter[0]
+            client.dispatcher().cancelAll()
+            return result
+        }, {
+            if (it.response.statusCode == 429) {
+                "錯誤：連線 Google 翻譯伺服器流量異常"
+            } else {
+                "錯誤：取得翻譯失敗"
             }
-        )
+        })
     }
 }
+
+data class SourceText(val source: String, val language: String)
