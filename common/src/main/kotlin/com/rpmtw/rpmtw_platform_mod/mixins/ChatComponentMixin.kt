@@ -5,6 +5,7 @@ import com.mojang.blaze3d.platform.NativeImage
 import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.PoseStack
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
+import com.rpmtw.rpmtw_platform_mod.data.ChatComponentData
 import com.rpmtw.rpmtw_platform_mod.gui.widgets.CosmicChatComponent
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -57,7 +58,7 @@ class ChatComponentMixin {
 
         if (chatComponent != null) {
             val (_, _, _, _, avatarUrl) = chatComponent.cosmicChatMessage
-            val avatarMap: Map<String, ResourceLocation?> = CosmicChatData.avatarCache
+            val avatarMap: Map<String, ResourceLocation?> = ChatComponentData.cosmicChatAvatarCache
             if (!avatarMap.containsKey(avatarUrl)) {
                 loadImage(avatarUrl)
             }
@@ -78,9 +79,9 @@ class ChatComponentMixin {
         y: Float,
         color: Int
     ): Float {
-        CosmicChatData.lastY = y.toInt()
-        CosmicChatData.lastOpacity = ((color shr 24) + 256) % 256 / 255f // haha yes
-        return CosmicChatData.offset.toFloat()
+        ChatComponentData.lastY = y.toInt()
+        ChatComponentData.lastOpacity = ((color shr 24) + 256) % 256 / 255f // haha yes
+        return ChatComponentData.offset.toFloat()
     }
 
     @ModifyArg(
@@ -89,7 +90,7 @@ class ChatComponentMixin {
         index = 0
     )
     fun getLastMessage(index: Int): Int {
-        CosmicChatData.lastMessageIndex = index
+        ChatComponentData.lastMessageIndex = index
         return index
     }
 
@@ -102,8 +103,10 @@ class ChatComponentMixin {
     )
     fun render(matrixStack: PoseStack, i: Int, ci: CallbackInfo?) {
         try {
-            val guiMessage = trimmedMessages!![CosmicChatData.lastMessageIndex]
-            val component = allMessages!!.stream().filter { msg: GuiMessage<Component>? -> msg!!.id == guiMessage.id }
+            val guiMessage: GuiMessage<FormattedCharSequence> =
+                trimmedMessages!!.getOrNull(ChatComponentData.lastMessageIndex) ?: return
+
+            val component = allMessages!!.stream().filter { msg: GuiMessage<Component>? -> msg!!.id == guiMessage?.id }
                 .findFirst().orElse(null)
                 ?: return
             val siblings = component.message.siblings
@@ -112,14 +115,14 @@ class ChatComponentMixin {
                     .findFirst().orElse(null) as CosmicChatComponent? ?: return
 
             val (_, _, _, _, avatarUrl) = chatComponent.cosmicChatMessage
-            val location = CosmicChatData.avatarCache.getOrDefault(avatarUrl, null) ?: return
-            RenderSystem.setShaderColor(1f, 1f, 1f, CosmicChatData.lastOpacity)
+            val location = ChatComponentData.cosmicChatAvatarCache.getOrDefault(avatarUrl, null) ?: return
+            RenderSystem.setShaderColor(1f, 1f, 1f, ChatComponentData.lastOpacity)
             RenderSystem.setShaderTexture(0, location)
             RenderSystem.enableBlend()
             // Draw base layer
-            GuiComponent.blit(matrixStack, 0, CosmicChatData.lastY, 8, 8, 8.0f, 8f, 8, 8, 8, 8)
+            GuiComponent.blit(matrixStack, 0, ChatComponentData.lastY, 8, 8, 8.0f, 8f, 8, 8, 8, 8)
             // Draw hat
-            GuiComponent.blit(matrixStack, 0, CosmicChatData.lastY, 8, 8, 40.0f, 8f, 8, 8, 8, 8)
+            GuiComponent.blit(matrixStack, 0, ChatComponentData.lastY, 8, 8, 40.0f, 8f, 8, 8, 8, 8)
             RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
             RenderSystem.disableBlend()
         } catch (e: Exception) {
@@ -134,7 +137,7 @@ class ChatComponentMixin {
         ), method = ["getClickedComponentStyleAt(DD)Lnet/minecraft/network/chat/Style;"], index = 1
     )
     fun correctClickPosition(x: Int): Int {
-        return x - CosmicChatData.offset
+        return x - ChatComponentData.offset
     }
 
     @Redirect(
@@ -142,7 +145,7 @@ class ChatComponentMixin {
         method = ["addMessage(Lnet/minecraft/network/chat/Component;IIZ)V"]
     )
     fun fixTextOverflow(chatHud: ChatComponent?): Int {
-        return ChatComponent.getWidth(minecraft!!.options.chatWidth) - CosmicChatData.offset
+        return ChatComponent.getWidth(minecraft!!.options.chatWidth) - ChatComponentData.offset
     }
 }
 
@@ -172,7 +175,7 @@ private fun loadImage(url: String) {
         if (nativeImage != null) {
             val manager = Minecraft.getInstance().textureManager
             manager.register(location, DynamicTexture(nativeImage))
-            CosmicChatData.avatarCache[url] = location
+            ChatComponentData.cosmicChatAvatarCache[url] = location
             RPMTWPlatformMod.LOGGER.info("Loaded image for $url")
         }
     }, "CosmicChatAvatarLoader")
@@ -188,12 +191,4 @@ private fun convertToBufferedImage(image: Image): BufferedImage {
     g.drawImage(image, 0, 0, null)
     g.dispose()
     return newImage
-}
-
-private object CosmicChatData {
-    const val offset = 10
-    var lastY = 0
-    var lastMessageIndex = 0
-    var lastOpacity = 0f
-    var avatarCache: MutableMap<String, ResourceLocation?> = HashMap()
 }
