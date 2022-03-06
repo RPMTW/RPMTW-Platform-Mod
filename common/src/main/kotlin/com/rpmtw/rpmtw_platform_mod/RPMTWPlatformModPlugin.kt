@@ -5,6 +5,7 @@ package com.rpmtw.rpmtw_platform_mod
 import com.mojang.brigadier.arguments.ArgumentType
 import com.mojang.brigadier.context.CommandContext
 import dev.architectury.injectables.annotations.ExpectPlatform
+import net.minecraft.server.packs.resources.SimplePreparableReloadListener
 
 @Suppress("UNUSED_PARAMETER")
 object RPMTWPlatformModPlugin {
@@ -24,6 +25,13 @@ object RPMTWPlatformModPlugin {
         argumentType: ArgumentType<*>? = null,
         executes: (CommandContext<*>) -> Int
     ) {
+        // Just throw an error, the content should get replaced at runtime.
+        throw AssertionError()
+    }
+
+    @ExpectPlatform
+    @JvmStatic
+    fun <T> registerReloadEvent(reloadListener: SimplePreparableReloadListener<T>) {
         // Just throw an error, the content should get replaced at runtime.
         throw AssertionError()
     }

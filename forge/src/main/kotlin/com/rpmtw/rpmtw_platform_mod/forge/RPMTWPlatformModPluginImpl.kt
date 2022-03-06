@@ -11,8 +11,10 @@ import net.minecraft.client.gui.screens.Screen
 import net.minecraft.commands.CommandSourceStack
 import net.minecraft.commands.Commands.argument
 import net.minecraft.commands.Commands.literal
+import net.minecraft.server.packs.resources.SimplePreparableReloadListener
 import net.minecraftforge.client.ClientCommandHandler
 import net.minecraftforge.client.ConfigGuiHandler.ConfigGuiFactory
+import thedarkcolour.kotlinforforge.forge.FORGE_BUS
 import thedarkcolour.kotlinforforge.forge.LOADING_CONTEXT
 
 @Suppress("unused")
@@ -49,5 +51,11 @@ object RPMTWPlatformModPluginImpl {
                 literal(command).then(literal(subCommand).executes { executes(it) })
             )
         }
+    }
+
+
+    @JvmStatic
+    fun <T> registerReloadEvent(reloadListener: SimplePreparableReloadListener<T>) {
+        FORGE_BUS.register(reloadListener)
     }
 }

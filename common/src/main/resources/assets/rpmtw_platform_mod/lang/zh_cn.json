@@ -1,6 +1,6 @@
 {
-  "config.rpmtw_platform_mod.category.cosmicChat": "宇宙通讯",
-  "config.rpmtw_platform_mod.category.translate": "RPMTW 翻译平台",
+  "config.rpmtw_platform_mod.option.cosmicChat": "宇宙通讯",
+  "config.rpmtw_platform_mod.option.translate": "RPMTW 翻译平台",
   "config.rpmtw_platform_mod.option.cosmicChat.enable": "启用宇宙通讯",
   "config.rpmtw_platform_mod.option.cosmicChat.enable.@Tooltip": "若将此选项调整为禁用，会覆盖其他设置，将所有跟宇宙通讯相关的功能禁用。",
   "config.rpmtw_platform_mod.option.cosmicChat.enableButton": "快捷按钮",
