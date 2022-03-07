@@ -11,7 +11,9 @@ import kotlinx.coroutines.withContext
 import net.minecraft.ChatFormatting
 import net.minecraft.client.Minecraft
 import net.minecraft.client.resources.language.I18n
-import net.minecraft.network.chat.*
+import net.minecraft.network.chat.MutableComponent
+import net.minecraft.network.chat.TextComponent
+import net.minecraft.network.chat.TranslatableComponent
 import org.apache.http.client.utils.URIBuilder
 import java.io.File
 import java.sql.Timestamp
@@ -23,12 +25,9 @@ object MTManager {
     private val cacheFile: File = Utilities.getFileLocation("machine_translation_cache.json")
     private val queue: MutableList<SourceText> = ArrayList()
     private var handleQueueing: Boolean = false
-    private val translateStyle: Style = Style.EMPTY.withHoverEvent(
-        HoverEvent(
-            HoverEvent.Action.SHOW_TEXT,
-            TranslatableComponent("machineTranslation.rpmtw_platform_mod.tooltip").withStyle(ChatFormatting.GOLD)
-        )
-    )
+    private val tooltip: MutableComponent =
+        TranslatableComponent("machineTranslation.rpmtw_platform_mod.tooltip").withStyle(ChatFormatting.GOLD).append("\n")
+
 
     @Suppress("SpellCheckingInspection")
     private val translatedLanguage: String
@@ -43,7 +42,9 @@ object MTManager {
         val info: MTInfo? = cache[SourceText(source, translatedLanguage)]
 
         return if (info?.text != null && info.status == MTDataStatus.SUCCESS) {
-            TextComponent(info.text).setStyle(translateStyle.withColor(ChatFormatting.GREEN))
+            TextComponent(info.text).withStyle {
+                it.withColor(ChatFormatting.GREEN)
+            }.append(tooltip)
         } else if (info?.status == MTDataStatus.FAILED && info.error != null) {
             TextComponent(I18n.get("machineTranslation.rpmtw_platform_mod.status.failed", info.error)).withStyle(
                 ChatFormatting.RED
@@ -70,7 +71,7 @@ object MTManager {
         val info: MTInfo? = cache[SourceText(source, translatedLanguage)]
 
         if (info?.text == null) return null
-        return TextComponent(info.text).setStyle(translateStyle)
+        return TextComponent(info.text).append(tooltip)
     }
 
     fun saveCache() {
@@ -83,9 +84,14 @@ object MTManager {
     }
 
     fun readCache() {
-        if (cacheFile.exists()) {
-            val json = cacheFile.reader().readText()
-            cache.putAll(Gson().fromJson(json, HashMap<SourceText, MTInfo>().javaClass))
+        try {
+            if (cacheFile.exists()) {
+                val json = cacheFile.reader().readText()
+                cache.putAll(Gson().fromJson(json, HashMap<SourceText, MTInfo>().javaClass))
+            }
+        } catch (e: Exception) {
+            RPMTWPlatformMod.LOGGER.error("Failed to read machine translation cache file", e)
+            cacheFile.delete()
         }
     }
 

@@ -8,7 +8,6 @@ import com.rpmtw.rpmtw_platform_mod.translation.machineTranslation.MTStorage
 import me.shedaniel.clothconfig2.api.ModifierKeyCode
 import net.minecraft.ChatFormatting
 import net.minecraft.client.Minecraft
-import net.minecraft.locale.Language
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.TextComponent
 import net.minecraft.world.item.ItemStack
@@ -35,15 +34,17 @@ class OnItemTooltip(private val itemStack: ItemStack, private val lines: List<Co
                 if (RPMTWConfig.get().translate.machineTranslation) {
 
                     // Check if it has been human translated
-                    if (MTManager.getFromCache(unlocalizedName) != null && !Language.getInstance().has(itemKey)) {
-                        lines.removeAt(0)
-                        lines.add(0, MTManager.getFromCache(unlocalizedName)!!)
-                    } else {
-                        if (press) {
+                    if (!MTStorage.isTranslate(itemKey)) {
+                        if (MTManager.getFromCache(unlocalizedName) != null) {
                             lines.removeAt(0)
-                            lines.add(0, MachineTranslationText(unlocalizedName))
+                            lines.add(0, MTManager.getFromCache(unlocalizedName)!!)
                         } else {
-                            MTManager.addToQueue(unlocalizedName)
+                            if (press) {
+                                lines.removeAt(0)
+                                lines.add(0, MachineTranslationText(unlocalizedName))
+                            } else {
+                                MTManager.addToQueue(unlocalizedName)
+                            }
                         }
                     }
                 }
