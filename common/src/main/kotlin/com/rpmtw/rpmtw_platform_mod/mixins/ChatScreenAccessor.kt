@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.gen.Accessor
 class ChatScreenAccessor {
     @Mixin(ChatScreen::class)
     interface ChatFieldAccessor {
-        @get:Accessor("input", remap = true)
+        @get:Accessor("input", remap = false)
         val chatField: EditBox?
     }
 }

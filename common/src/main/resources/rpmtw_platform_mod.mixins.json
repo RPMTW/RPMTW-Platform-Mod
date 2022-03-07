@@ -11,6 +11,5 @@
   ],
   "client": [
     "ChatScreenAccessor$ChatFieldAccessor"
-  ],
-  "refmap": "rpmtw_platform_mod.mixins-refmap.json"
+  ]
 }
