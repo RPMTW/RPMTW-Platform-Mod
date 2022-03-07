@@ -91,6 +91,7 @@ loom {
     forge {
         mixinConfig("rpmtw_platform_mod.mixins.json")
     }
+    accessWidenerPath.set(project(":common").file("src/main/resources/rpmtw_platform_mod.accesswidener"))
 }
 
 repositories {

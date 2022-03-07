@@ -110,3 +110,9 @@ publishing {
     repositories {
     }
 }
+
+val accessWidenerFile = project(":common").file("src/main/resources/rpmtw_platform_mod.accesswidener")
+
+loom {
+    accessWidenerPath.set(accessWidenerFile)
+}

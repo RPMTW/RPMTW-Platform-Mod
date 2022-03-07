@@ -8,8 +8,5 @@
   },
   "mixins": [
     "ChatComponentMixin"
-  ],
-  "client": [
-    "ChatScreenAccessor$ChatFieldAccessor"
   ]
 }

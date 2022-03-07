@@ -12,6 +12,10 @@ architectury {
     common()
 }
 
+loom {
+    accessWidenerPath.set(file("src/main/resources/rpmtw_platform_mod.accesswidener"))
+}
+
 publishing {
     publications {
         create<MavenPublication>("mavenCommon") {

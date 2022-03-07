@@ -1,10 +1,9 @@
 package com.rpmtw.rpmtw_platform_mod.events
 
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
+import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.gui.widgets.RPMTWCheckbox
 import com.rpmtw.rpmtw_platform_mod.gui.widgets.TranslucentButton
-import com.rpmtw.rpmtw_platform_mod.mixins.ChatScreenAccessor
-import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.utilities.Utilities
 import dev.architectury.hooks.client.screen.ScreenAccess
 import dev.architectury.platform.Platform
@@ -21,7 +20,7 @@ class OnGuiInitPost(screen: Screen, screenAccess: ScreenAccess) {
             val scaledHeight = screen.height
 
             if (screen is ChatScreen && (RPMTWConfig.get().cosmicChat.enable && RPMTWConfig.get().cosmicChat.enableButton)) {
-                val textField: EditBox? = (screen as ChatScreenAccessor.ChatFieldAccessor).chatField
+                val textField: EditBox? = screen.input
                 val offsetX: Int
                 val hasQuarkMod = Platform.isModLoaded("quark")
                 offsetX = if (hasQuarkMod) {
