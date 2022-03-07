@@ -8,6 +8,7 @@ import com.rpmtw.rpmtw_platform_mod.translation.machineTranslation.MTStorage
 import me.shedaniel.clothconfig2.api.ModifierKeyCode
 import net.minecraft.ChatFormatting
 import net.minecraft.client.Minecraft
+import net.minecraft.locale.Language
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.TextComponent
 import net.minecraft.world.item.ItemStack
@@ -20,16 +21,21 @@ class OnItemTooltip(private val itemStack: ItemStack, private val lines: List<Co
             val key: ModifierKeyCode = RPMTWConfig.get().keyBindings.machineTranslation
             val press: Boolean = key.matchesCurrentKey()
             val playing = Minecraft.getInstance().player != null
-            val unlocalizedName: String = MTStorage.getUnlocalizedTranslate(itemStack.descriptionId) ?: return
 
-            // Check if the feature for unlocalized names is enabled and differs from translation
-            if (playing && lines is ArrayList && unlocalizedName != itemStack.displayName.string) {
+            if (playing && lines is ArrayList) {
+                val itemKey: String = itemStack.descriptionId
+                val unlocalizedName: String = MTStorage.getUnlocalizedTranslate(itemKey) ?: return
+                val itemName: String = itemStack.displayName.string
 
-                if (RPMTWConfig.get().translate.unlocalized) {
+                // Check if the feature for unlocalized names is enabled and differs from translation
+                if (RPMTWConfig.get().translate.unlocalized && unlocalizedName != itemName) {
                     lines.add(1, TextComponent(unlocalizedName).withStyle(ChatFormatting.GRAY))
                 }
+
                 if (RPMTWConfig.get().translate.machineTranslation) {
-                    if (MTManager.getFromCache(unlocalizedName) != null) {
+
+                    // Check if it has been human translated
+                    if (MTManager.getFromCache(unlocalizedName) != null && !Language.getInstance().has(itemKey)) {
                         lines.removeAt(0)
                         lines.add(0, MTManager.getFromCache(unlocalizedName)!!)
                     } else {

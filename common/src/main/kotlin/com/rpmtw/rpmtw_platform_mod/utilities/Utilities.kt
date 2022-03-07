@@ -8,6 +8,7 @@ import com.rpmtw.rpmtw_platform_mod.handlers.CosmicChatHandler
 import kotlinx.coroutines.*
 import net.minecraft.client.Minecraft
 import net.minecraft.network.chat.TextComponent
+import java.io.File
 import kotlin.coroutines.CoroutineContext
 
 
@@ -44,5 +45,13 @@ object Utilities {
         return coroutineScope.async {
             block()
         }
+    }
+
+    fun getBaseDirectory(): File {
+        return File(System.getProperty("user.home")).resolve(".rpmtw")
+    }
+
+    fun getFileLocation(fileName: String): File {
+        return getBaseDirectory().resolve(fileName)
     }
 }

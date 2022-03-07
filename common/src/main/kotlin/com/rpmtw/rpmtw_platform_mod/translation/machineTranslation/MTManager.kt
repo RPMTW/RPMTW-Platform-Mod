@@ -2,6 +2,7 @@ package com.rpmtw.rpmtw_platform_mod.translation.machineTranslation
 
 import com.github.kittinunf.fuel.coroutines.awaitStringResult
 import com.github.kittinunf.fuel.httpGet
+import com.google.gson.Gson
 import com.google.gson.JsonParser
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.utilities.Utilities
@@ -12,12 +13,14 @@ import net.minecraft.client.Minecraft
 import net.minecraft.client.resources.language.I18n
 import net.minecraft.network.chat.*
 import org.apache.http.client.utils.URIBuilder
+import java.io.File
 import java.sql.Timestamp
 import java.util.concurrent.TimeUnit
 
 object MTManager {
     private val mc = Minecraft.getInstance()
     private val cache: MutableMap<SourceText, MTInfo?> = HashMap()
+    private val cacheFile: File = Utilities.getFileLocation("machine_translation_cache.json")
     private val queue: MutableList<SourceText> = ArrayList()
     private var handleQueueing: Boolean = false
     private val translateStyle: Style = Style.EMPTY.withHoverEvent(
@@ -70,6 +73,22 @@ object MTManager {
         return TextComponent(info.text).setStyle(translateStyle)
     }
 
+    fun saveCache() {
+        if (!cacheFile.exists()) {
+            cacheFile.createNewFile()
+        }
+        Gson().toJson(cache, HashMap<SourceText, MTInfo>().javaClass).let {
+            cacheFile.writeText(it)
+        }
+    }
+
+    fun readCache() {
+        if (cacheFile.exists()) {
+            val json = cacheFile.reader().readText()
+            cache.putAll(Gson().fromJson(json, HashMap<SourceText, MTInfo>().javaClass))
+        }
+    }
+
     private fun handleQueue() {
         handleQueueing = true
         Utilities.coroutineLaunch {
@@ -78,7 +97,7 @@ object MTManager {
                 translateAndCache(sourceText.text)
                 withContext(Dispatchers.IO) {
                     // Sleep for a second to prevent spamming the Google Translate API
-                    Thread.sleep(TimeUnit.SECONDS.toMillis(10))
+                    Thread.sleep(TimeUnit.SECONDS.toMillis(3))
                 }
             }
             handleQueueing = false

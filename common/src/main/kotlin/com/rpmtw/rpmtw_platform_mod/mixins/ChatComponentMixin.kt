@@ -6,6 +6,7 @@ import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.PoseStack
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.gui.widgets.CosmicChatComponent
+import com.rpmtw.rpmtw_platform_mod.utilities.Utilities
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.GuiMessage
@@ -26,7 +27,6 @@ import org.spongepowered.asm.mixin.injection.Redirect
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo
 import java.awt.Image
 import java.awt.image.BufferedImage
-import java.io.File
 import java.io.IOException
 import java.net.URL
 import java.nio.file.Files
@@ -153,12 +153,9 @@ private fun loadImage(url: String) {
         var nativeImage: NativeImage? = null
         try {
             val uri = URL(url)
-            val file = File(
-                System.getProperty("user.home") + "/.rpmtw/cosmic_chat_user_avatar/" + url.replace(
-                    "https://",
-                    ""
-                ) + ".png"
-            )
+            val file =
+                Utilities.getFileLocation("/.rpmtw/cosmic_chat_user_avatar/" + url.replace("https://", "") + ".png")
+
             val image = convertToBufferedImage(
                 ImageIO.read(uri.openConnection().getInputStream()).getScaledInstance(8, 8, Image.SCALE_SMOOTH)
             )
