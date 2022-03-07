@@ -56,5 +56,10 @@
   "gui.rpmtw_platform_mod.cancel": "取消",
   "gui.rpmtw_platform_mod.reply": "回覆",
   "gui.rpmtw_platform_mod.self": "自己",
-  "gui.rpmtw_platform_mod.send": "發送"
+  "gui.rpmtw_platform_mod.send": "發送",
+  "machineTranslation.rpmtw_platform_mod.status.exception": "發生未知錯誤，狀態碼： %d，請稍後再試.",
+  "machineTranslation.rpmtw_platform_mod.status.failed": "翻譯失敗： %s",
+  "machineTranslation.rpmtw_platform_mod.status.rate_limit": "連線 Google 翻譯伺服器超出速率限制 (429)，請稍後再試。",
+  "machineTranslation.rpmtw_platform_mod.status.translating": "翻譯中...",
+  "machineTranslation.rpmtw_platform_mod.tooltip": "此翻譯由 Google 翻譯提供。"
 }

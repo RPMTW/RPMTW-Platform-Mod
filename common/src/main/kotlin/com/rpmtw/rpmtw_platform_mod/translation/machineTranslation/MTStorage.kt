@@ -15,7 +15,7 @@ import java.io.InputStreamReader
 import java.nio.charset.StandardCharsets
 import java.util.concurrent.CompletableFuture
 
-class MachineTranslationStorage : SimplePreparableReloadListener<CompletableFuture<Void>>() {
+class MTStorage : SimplePreparableReloadListener<CompletableFuture<Void>>() {
     private val unsupportedFormatRegx: Regex = Regex("%(\\d+\\$)?[\\d.]*[df]")
 
     companion object {
