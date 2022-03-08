@@ -57,7 +57,6 @@
   "machineTranslation.rpmtw_platform_mod.status.rate_limit": "The connection to Google Translate Server has exceeded the rate limit (429), please try again later.",
   "machineTranslation.rpmtw_platform_mod.status.exception": "Exception error occurred, status code: %d, please try again later.",
   "machineTranslation.rpmtw_platform_mod.status.failed": "Translation failed: %s",
-  "machineTranslation.rpmtw_platform_mod.tooltip": "This translation was provided by Google Translate.",
   "gui.rpmtw_platform_mod.cancel": "Cancel",
   "gui.rpmtw_platform_mod.reply": "Reply",
   "gui.rpmtw_platform_mod.self": "Self",

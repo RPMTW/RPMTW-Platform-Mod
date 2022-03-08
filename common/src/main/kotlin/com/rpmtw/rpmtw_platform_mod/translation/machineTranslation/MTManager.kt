@@ -12,6 +12,7 @@ import net.minecraft.ChatFormatting
 import net.minecraft.client.Minecraft
 import net.minecraft.client.resources.language.I18n
 import net.minecraft.network.chat.MutableComponent
+import net.minecraft.network.chat.TextColor
 import net.minecraft.network.chat.TextComponent
 import net.minecraft.network.chat.TranslatableComponent
 import org.apache.http.client.utils.URIBuilder
@@ -25,9 +26,6 @@ object MTManager {
     private val cacheFile: File = Utilities.getFileLocation("machine_translation_cache.json")
     private val queue: MutableList<SourceText> = ArrayList()
     private var handleQueueing: Boolean = false
-    private val tooltip: MutableComponent =
-        TranslatableComponent("machineTranslation.rpmtw_platform_mod.tooltip").withStyle(ChatFormatting.GOLD).append("\n")
-
 
     @Suppress("SpellCheckingInspection")
     private val translatedLanguage: String
@@ -44,7 +42,7 @@ object MTManager {
         return if (info?.text != null && info.status == MTDataStatus.SUCCESS) {
             TextComponent(info.text).withStyle {
                 it.withColor(ChatFormatting.GREEN)
-            }.append(tooltip)
+            }
         } else if (info?.status == MTDataStatus.FAILED && info.error != null) {
             TextComponent(I18n.get("machineTranslation.rpmtw_platform_mod.status.failed", info.error)).withStyle(
                 ChatFormatting.RED
@@ -71,7 +69,10 @@ object MTManager {
         val info: MTInfo? = cache[SourceText(source, translatedLanguage)]
 
         if (info?.text == null) return null
-        return TextComponent(info.text).append(tooltip)
+        return TextComponent(info.text).withStyle {
+            // light blue
+            it.withColor(TextColor.parseColor("#2f8eed"))
+        }
     }
 
     fun saveCache() {
