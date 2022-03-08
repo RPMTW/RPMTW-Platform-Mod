@@ -9,10 +9,9 @@ import net.minecraft.client.Minecraft
 
 @Suppress("UNUSED_PARAMETER")
 @Environment(EnvType.CLIENT)
-object OnClientStopping {
-    fun init(minecraft: Minecraft) {
+class OnClientStopping(minecraft: Minecraft) {
+    init {
         MTManager.saveCache()
-        RPMTWPlatformMod.LOGGER.info("Machine translation cache saved.")
         // Close the cosmic chat socket to save resources.
         CosmicChatHandler.close()
         RPMTWPlatformMod.LOGGER.info("Cosmic chat socket closed.")

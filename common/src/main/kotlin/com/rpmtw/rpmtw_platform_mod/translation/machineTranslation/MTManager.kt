@@ -11,14 +11,12 @@ import kotlinx.coroutines.withContext
 import net.minecraft.ChatFormatting
 import net.minecraft.client.Minecraft
 import net.minecraft.client.resources.language.I18n
-import net.minecraft.network.chat.MutableComponent
-import net.minecraft.network.chat.TextColor
-import net.minecraft.network.chat.TextComponent
-import net.minecraft.network.chat.TranslatableComponent
+import net.minecraft.network.chat.*
 import org.apache.http.client.utils.URIBuilder
 import java.io.File
 import java.sql.Timestamp
 import java.util.concurrent.TimeUnit
+import java.util.regex.Pattern
 
 object MTManager {
     private val mc = Minecraft.getInstance()
@@ -27,6 +25,7 @@ object MTManager {
     private val queue: MutableList<SourceText> = ArrayList()
     private var handleQueueing: Boolean = false
     private var translatingCount: Int = 0
+    private val formatPattern = Pattern.compile("%(?:(\\d+)\\$)?([A-Za-z%]|$)")
 
     @Suppress("SpellCheckingInspection")
     private val translatedLanguage: String
@@ -37,11 +36,11 @@ object MTManager {
             else -> "zh_Hant"
         }
 
-    fun create(source: String, vararg i18nArgs: Any? = arrayOf(null)): MutableComponent {
+    fun create(source: String, vararg i18nArgs: Any? = arrayOf()): MutableComponent {
         val info: MTInfo? = cache[SourceText(source, translatedLanguage)]
 
         return if (info?.text != null && info.status == MTDataStatus.SUCCESS) {
-            TextComponent(String.format(info.text, *i18nArgs)).withStyle {
+            handleI18nComponent(info.text, *i18nArgs).withStyle {
                 it.withColor(ChatFormatting.GREEN)
             }
         } else if (info?.status == MTDataStatus.FAILED && info.error != null) {
@@ -69,11 +68,11 @@ object MTManager {
         }
     }
 
-    fun getFromCache(source: String, vararg i18nArgs: Any? = arrayOf(null)): MutableComponent? {
+    fun getFromCache(source: String, vararg i18nArgs: Any? = arrayOf()): MutableComponent? {
         val info: MTInfo? = cache[SourceText(source, translatedLanguage)]
 
         if (info?.text == null) return null
-        return TextComponent(String.format(info.text, i18nArgs)).withStyle {
+        return handleI18nComponent(info.text, i18nArgs).withStyle {
             // light blue
             it.withColor(TextColor.parseColor("#2f8eed"))
         }
@@ -86,6 +85,7 @@ object MTManager {
         Gson().toJson(cache, HashMap<SourceText, MTInfo>().javaClass).let {
             cacheFile.writeText(it)
         }
+        RPMTWPlatformMod.LOGGER.info("Machine translation cache saved.")
     }
 
     fun readCache() {
@@ -98,6 +98,61 @@ object MTManager {
             RPMTWPlatformMod.LOGGER.error("Failed to read machine translation cache file", e)
             cacheFile.delete()
         }
+    }
+
+
+    private fun handleI18nComponent(text: String, vararg args: Any? = arrayOf()): MutableComponent {
+        fun getArgument(i: Int): MutableComponent {
+            val obj: Any? = args.getOrNull(i)
+            return if (obj is Component) {
+                obj.copy()
+            } else {
+                if (obj == null) TextComponent.EMPTY.copy() else TextComponent(obj.toString())
+            }
+        }
+
+        val component: MutableComponent = TextComponent.EMPTY.copy()
+
+        val matcher = formatPattern.matcher(text)
+        try {
+            var i = 0
+            var j: Int
+            var l: Int
+            j = 0
+            while (matcher.find(j)) {
+                val k = matcher.start()
+                l = matcher.end()
+                var string2: String
+                if (k > j) {
+                    string2 = text.substring(j, k)
+                    require(string2.indexOf(37.toChar()) == -1)
+                    component.append(string2)
+                }
+                string2 = matcher.group(2)
+                val string3 = text.substring(k, l)
+                if ("%" == string2 && "%%" == string3) {
+                    component.append("%")
+                } else {
+                    if ("s" == string2) {
+                        val string4 = matcher.group(1)
+                        val m = if (string4 != null) string4.toInt() - 1 else i++
+                        if (m < args.size) {
+                            val argument = getArgument(m)
+                            component.append(argument)
+                        }
+                    }
+                }
+                j = l
+            }
+            if (j < text.length) {
+                val string5 = text.substring(j)
+                require(string5.indexOf(37.toChar()) == -1)
+                component.append(string5)
+            }
+        } catch (_: IllegalArgumentException) {
+        }
+
+        return component
     }
 
     private fun handleQueue() {

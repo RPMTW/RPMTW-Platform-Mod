@@ -8,6 +8,8 @@ import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.Minecraft
 import net.minecraft.client.resources.language.LanguageInfo
+import java.util.concurrent.TimeUnit
+import kotlin.concurrent.timer
 
 @Environment(EnvType.CLIENT)
 class OnClientStarted(val client: Minecraft) {
@@ -16,6 +18,12 @@ class OnClientStarted(val client: Minecraft) {
         toggleLanguage()
         CosmicChatHandler.handle()
         MTManager.readCache()
+        timer(initialDelay = TimeUnit.SECONDS.toMillis(5), period = TimeUnit.MINUTES.toMillis(5)) {
+            Utilities.coroutineLaunch {
+                // Auto save cache in every 5 minutes
+                MTManager.saveCache()
+            }
+        }
     }
 
     private fun toggleLanguage() {

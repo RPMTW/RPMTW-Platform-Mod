@@ -19,11 +19,11 @@ import net.minecraft.world.item.TooltipFlag
 @Environment(EnvType.CLIENT)
 class OnItemTooltip(private val itemStack: ItemStack, private val lines: List<Component>, flag: TooltipFlag) {
 
-    private fun onTooltip() {
+    private fun machineTranslation() {
         try {
             val playing = Minecraft.getInstance().player != null
             if (playing && lines is ArrayList) {
-                fun load(index: Int, i18nKey: String, vararg i18nArgs: Any? = arrayOf(null)) {
+                fun load(index: Int, i18nKey: String, vararg i18nArgs: Any? = arrayOf()) {
                     val key: ModifierKeyCode = RPMTWConfig.get().keyBindings.machineTranslation
                     val press: Boolean = key.matchesCurrentKey()
 
@@ -74,6 +74,6 @@ class OnItemTooltip(private val itemStack: ItemStack, private val lines: List<Co
     }
 
     init {
-        onTooltip()
+        machineTranslation()
     }
 }
