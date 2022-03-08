@@ -26,6 +26,7 @@ object MTManager {
     private val cacheFile: File = Utilities.getFileLocation("machine_translation_cache.json")
     private val queue: MutableList<SourceText> = ArrayList()
     private var handleQueueing: Boolean = false
+    private var translatingCount: Int = 0
 
     @Suppress("SpellCheckingInspection")
     private val translatedLanguage: String
@@ -47,6 +48,9 @@ object MTManager {
             TextComponent(I18n.get("machineTranslation.rpmtw_platform_mod.status.failed", info.error)).withStyle(
                 ChatFormatting.RED
             )
+        } else if (translatingCount > 3) {
+            // If there are too many things to translate at the same time, the translation will be skipped to avoid sending too many requests to the server
+            generateProgressText()
         } else if (info?.status == MTDataStatus.Translating) {
             generateProgressText()
         } else {
@@ -99,7 +103,7 @@ object MTManager {
     private fun handleQueue() {
         handleQueueing = true
         Utilities.coroutineLaunch {
-            while (queue.isNotEmpty()) {
+            while (queue.isNotEmpty() && translatingCount < 3) {
                 val sourceText = queue.removeAt(0)
                 translateAndCache(sourceText.text)
                 withContext(Dispatchers.IO) {
@@ -121,6 +125,7 @@ object MTManager {
     }
 
     private suspend fun translateAndCache(source: String) {
+        translatingCount++
         val sourceText = SourceText(source, translatedLanguage)
         try {
             val translatingData = MTInfo(
@@ -140,6 +145,8 @@ object MTManager {
                 timestamp = Timestamp(System.currentTimeMillis()), error = e, status = MTDataStatus.FAILED
             )
             cache[sourceText] = data
+        } finally {
+            translatingCount--
         }
     }
 
