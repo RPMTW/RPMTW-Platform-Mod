@@ -6,11 +6,11 @@ import net.minecraft.network.chat.MutableComponent
 import net.minecraft.network.chat.Style
 import net.minecraft.util.FormattedCharSequence
 
-class MachineTranslationText(source: String) : Component {
+class MachineTranslationText(source: String, vararg i18nArgs: Any? = arrayOf(null)) : Component {
     private val text: MutableComponent
 
     init {
-        text = MTManager.create(source)
+        text = MTManager.create(source, *i18nArgs)
     }
 
     override fun getStyle(): Style {

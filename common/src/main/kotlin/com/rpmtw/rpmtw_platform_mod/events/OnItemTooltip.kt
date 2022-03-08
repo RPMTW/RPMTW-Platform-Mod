@@ -20,7 +20,7 @@ class OnItemTooltip(private val itemStack: ItemStack, private val lines: List<Co
         try {
             val playing = Minecraft.getInstance().player != null
             if (playing && lines is ArrayList) {
-                fun load(index: Int, i18nKey: String) {
+                fun load(index: Int, i18nKey: String, vararg i18nArgs: Any? = arrayOf(null)) {
                     val key: ModifierKeyCode = RPMTWConfig.get().keyBindings.machineTranslation
                     val press: Boolean = key.matchesCurrentKey()
 
@@ -30,11 +30,11 @@ class OnItemTooltip(private val itemStack: ItemStack, private val lines: List<Co
 
                         if (MTManager.getFromCache(unlocalizedName) != null) {
                             lines.removeAt(index)
-                            lines.add(index, MTManager.getFromCache(unlocalizedName)!!)
+                            lines.add(index, MTManager.getFromCache(unlocalizedName, *i18nArgs)!!)
                         } else {
                             if (press) {
                                 lines.removeAt(index)
-                                lines.add(index, MachineTranslationText(unlocalizedName))
+                                lines.add(index, MachineTranslationText(unlocalizedName, *i18nArgs))
                             } else {
                                 MTManager.addToQueue(unlocalizedName)
                             }
@@ -52,7 +52,7 @@ class OnItemTooltip(private val itemStack: ItemStack, private val lines: List<Co
                     for (i in 1 until lines.size) {
                         val line: Component = lines.getOrNull(i) ?: continue
                         if (line is TranslatableComponent) {
-                            load(i, line.key)
+                            load(i, line.key, line.args)
                         }
                     }
                 }

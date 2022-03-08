@@ -37,11 +37,11 @@ object MTManager {
             else -> "zh_Hant"
         }
 
-    fun create(source: String): MutableComponent {
+    fun create(source: String, vararg i18nArgs: Any? = arrayOf(null)): MutableComponent {
         val info: MTInfo? = cache[SourceText(source, translatedLanguage)]
 
         return if (info?.text != null && info.status == MTDataStatus.SUCCESS) {
-            TextComponent(info.text).withStyle {
+            TextComponent(String.format(info.text, *i18nArgs)).withStyle {
                 it.withColor(ChatFormatting.GREEN)
             }
         } else if (info?.status == MTDataStatus.FAILED && info.error != null) {
@@ -69,11 +69,11 @@ object MTManager {
         }
     }
 
-    fun getFromCache(source: String): MutableComponent? {
+    fun getFromCache(source: String, vararg i18nArgs: Any? = arrayOf(null)): MutableComponent? {
         val info: MTInfo? = cache[SourceText(source, translatedLanguage)]
 
         if (info?.text == null) return null
-        return TextComponent(info.text).withStyle {
+        return TextComponent(String.format(info.text, i18nArgs)).withStyle {
             // light blue
             it.withColor(TextColor.parseColor("#2f8eed"))
         }
