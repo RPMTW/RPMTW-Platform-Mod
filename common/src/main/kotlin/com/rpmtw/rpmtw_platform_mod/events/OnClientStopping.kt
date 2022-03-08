@@ -11,10 +11,10 @@ import net.minecraft.client.Minecraft
 @Environment(EnvType.CLIENT)
 class OnClientStopping(minecraft: Minecraft) {
     init {
+        MTManager.saveCache()
+        RPMTWPlatformMod.LOGGER.info("Machine translation cache saved.")
         // Close the cosmic chat socket to save resources.
         CosmicChatHandler.close()
         RPMTWPlatformMod.LOGGER.info("Cosmic chat socket closed.")
-        MTManager.saveCache()
-        RPMTWPlatformMod.LOGGER.info("Machine translation cache saved.")
     }
 }
