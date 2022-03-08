@@ -6,7 +6,7 @@ import net.minecraft.network.chat.MutableComponent
 import net.minecraft.network.chat.Style
 import net.minecraft.util.FormattedCharSequence
 
-class MachineTranslationText(source: String, vararg i18nArgs: Any? = arrayOf()) : Component {
+class MachineTranslationText(source: String, vararg i18nArgs: Any? = arrayOf(null)) : Component {
     private val text: MutableComponent
 
     init {

@@ -2,8 +2,7 @@ package com.rpmtw.rpmtw_platform_mod.translation.machineTranslation
 
 import com.github.kittinunf.fuel.coroutines.awaitStringResult
 import com.github.kittinunf.fuel.httpGet
-import com.google.gson.Gson
-import com.google.gson.JsonParser
+import com.google.gson.*
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.utilities.Utilities
 import kotlinx.coroutines.Dispatchers
@@ -14,6 +13,7 @@ import net.minecraft.client.resources.language.I18n
 import net.minecraft.network.chat.*
 import org.apache.http.client.utils.URIBuilder
 import java.io.File
+import java.lang.reflect.Type
 import java.sql.Timestamp
 import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
@@ -82,7 +82,11 @@ object MTManager {
         if (!cacheFile.exists()) {
             cacheFile.createNewFile()
         }
-        Gson().toJson(cache, HashMap<SourceText, MTInfo>().javaClass).let {
+        val gsonBuilder = GsonBuilder()
+        gsonBuilder.registerTypeAdapter(Exception::class.java, ExceptionSerializer())
+        val gson = gsonBuilder.create()
+
+        gson.toJson(cache, HashMap<SourceText, MTInfo>().javaClass).let {
             cacheFile.writeText(it)
         }
         RPMTWPlatformMod.LOGGER.info("Machine translation cache saved.")
@@ -102,12 +106,15 @@ object MTManager {
 
 
     private fun handleI18nComponent(text: String, vararg args: Any? = arrayOf()): MutableComponent {
-        fun getArgument(i: Int): MutableComponent {
+        fun getArgument(i: Int): Component {
             val obj: Any? = args.getOrNull(i)
             return if (obj is Component) {
-                obj.copy()
+                obj
             } else {
-                if (obj == null) TextComponent.EMPTY.copy() else TextComponent(obj.toString())
+                if (obj == null) TextComponent.EMPTY.copy() else {
+                    RPMTWPlatformMod.LOGGER.info(obj.javaClass.name)
+                    TextComponent(obj.toString())
+                }
             }
         }
 
@@ -233,3 +240,12 @@ object MTManager {
 }
 
 data class SourceText(val text: String, val language: String)
+
+class ExceptionSerializer : JsonSerializer<Exception?> {
+    override fun serialize(src: Exception?, typeOfSrc: Type?, context: JsonSerializationContext?): JsonElement {
+        val jsonObject = JsonObject()
+        jsonObject.add("cause", JsonPrimitive(src?.cause?.toString()))
+        jsonObject.add("message", JsonPrimitive(src?.message))
+        return jsonObject
+    }
+}
