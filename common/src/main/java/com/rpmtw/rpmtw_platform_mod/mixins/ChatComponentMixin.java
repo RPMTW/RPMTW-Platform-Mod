@@ -62,7 +62,7 @@ public class ChatComponentMixin {
         if (chatComponent != null) {
             CosmicChatMessage message = chatComponent.getCosmicChatMessage();
             String avatarUrl = message.getAvatarUrl();
-            Map<String, ResourceLocation> avatarMap = CosmicChatData.avatarCache;
+            Map<String, ResourceLocation> avatarMap = ChatComponentData.cosmicChatAvatarCache;
             if (!avatarMap.containsKey(avatarUrl)) {
                 loadImage(avatarUrl);
             }
@@ -72,15 +72,15 @@ public class ChatComponentMixin {
 
     @ModifyArg(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Font;drawShadow(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/util/FormattedCharSequence;FFI)I", ordinal = 0), method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;I)V", index = 2)
     public float moveTheText(PoseStack poseStack, FormattedCharSequence formattedCharSequence, float f, float y, int color) {
-        CosmicChatData.lastY = (int) y;
-        CosmicChatData.lastOpacity = (((color >> 24) + 256) % 256) / 255f; // haha yes
-        return CosmicChatData.offset;
+        ChatComponentData.lastY = (int) y;
+        ChatComponentData.lastOpacity = (((color >> 24) + 256) % 256) / 255f; // haha yes
+        return ChatComponentData.offset;
     }
 
 
     @ModifyArg(at = @At(value = "INVOKE", target = "Ljava/util/List;get(I)Ljava/lang/Object;", ordinal = 0), method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;I)V", index = 0)
     public int getLastMessage(int index) {
-        CosmicChatData.lastMessageIndex = index;
+        ChatComponentData.lastMessageIndex = index;
         return index;
     }
 
@@ -88,7 +88,7 @@ public class ChatComponentMixin {
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Font;drawShadow(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/util/FormattedCharSequence;FFI)I", ordinal = 0), method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;I)V")
     public void render(PoseStack matrixStack, int i, CallbackInfo ci) {
         try {
-            GuiMessage<FormattedCharSequence> guiMessage = trimmedMessages.get(CosmicChatData.lastMessageIndex);
+            GuiMessage<FormattedCharSequence> guiMessage = trimmedMessages.get(ChatComponentData.lastMessageIndex);
             GuiMessage<Component> component = allMessages.stream().filter(msg -> msg.getId() == guiMessage.getId()).findFirst().orElse(null);
             if (component == null) return;
 
@@ -97,16 +97,16 @@ public class ChatComponentMixin {
             if (chatComponent == null) return;
 
             CosmicChatMessage message = chatComponent.getCosmicChatMessage();
-            ResourceLocation location = CosmicChatData.avatarCache.getOrDefault(message.getAvatarUrl(), null);
+            ResourceLocation location = ChatComponentData.cosmicChatAvatarCache.getOrDefault(message.getAvatarUrl(), null);
 
             if (location == null) return;
-            RenderSystem.setShaderColor(1, 1, 1, CosmicChatData.lastOpacity);
+            RenderSystem.setShaderColor(1, 1, 1, ChatComponentData.lastOpacity);
             RenderSystem.setShaderTexture(0, location);
             RenderSystem.enableBlend();
             // Draw base layer
-            GuiComponent.blit(matrixStack, 0, CosmicChatData.lastY, 8, 8, 8.0F, 8, 8, 8, 8, 8);
+            GuiComponent.blit(matrixStack, 0, ChatComponentData.lastY, 8, 8, 8.0F, 8, 8, 8, 8, 8);
             // Draw hat
-            GuiComponent.blit(matrixStack, 0, CosmicChatData.lastY, 8, 8, 40.0F, 8, 8, 8, 8, 8);
+            GuiComponent.blit(matrixStack, 0, ChatComponentData.lastY, 8, 8, 40.0F, 8, 8, 8, 8, 8);
             RenderSystem.setShaderColor(1, 1, 1, 1);
             RenderSystem.disableBlend();
         } catch (Exception e) {
@@ -116,12 +116,12 @@ public class ChatComponentMixin {
 
     @ModifyArg(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/StringSplitter;componentStyleAtWidth(Lnet/minecraft/util/FormattedCharSequence;I)Lnet/minecraft/network/chat/Style;"), method = "getClickedComponentStyleAt(DD)Lnet/minecraft/network/chat/Style;", index = 1)
     public int correctClickPosition(int x) {
-        return x - CosmicChatData.offset;
+        return x - ChatComponentData.offset;
     }
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/ChatComponent;getWidth()I"), method = "addMessage(Lnet/minecraft/network/chat/Component;IIZ)V")
     public int fixTextOverflow(ChatComponent chatHud) {
-        return ChatComponent.getWidth(minecraft.options.chatWidth) - CosmicChatData.offset;
+        return ChatComponent.getWidth(minecraft.options.chatWidth) - ChatComponentData.offset;
     }
 
     private void loadImage(String url) {
@@ -148,7 +148,7 @@ public class ChatComponentMixin {
                 TextureManager manager = Minecraft.getInstance().getTextureManager();
                 manager.register(location, new DynamicTexture(nativeImage));
 
-                CosmicChatData.avatarCache.put(url, location);
+                ChatComponentData.cosmicChatAvatarCache.put(url, location);
                 RPMTWPlatformMod.LOGGER.info("Loaded image for " + url);
             }
         }, "CosmicChatAvatarLoader");
@@ -164,10 +164,10 @@ public class ChatComponentMixin {
     }
 }
 
-class CosmicChatData {
+class ChatComponentData {
     static int offset = 10;
     static int lastY = 0;
     static int lastMessageIndex = 0;
     static float lastOpacity = 0f;
-    static Map<String, ResourceLocation> avatarCache = new HashMap<>();
+    static Map<String, ResourceLocation> cosmicChatAvatarCache = new HashMap<>();
 }
