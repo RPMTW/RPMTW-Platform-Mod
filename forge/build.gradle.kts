@@ -88,10 +88,13 @@ components.getByName<AdhocComponentWithVariants>("java") {
 }
 
 loom {
+    accessWidenerPath.set(project(":common").file("src/main/resources/rpmtw_platform_mod.accesswidener"))
+
     forge {
+        convertAccessWideners.set(true)
+        extraAccessWideners.add("rpmtw_platform_mod.accesswidener")
         mixinConfig("rpmtw_platform_mod.mixins.json")
     }
-    accessWidenerPath.set(project(":common").file("src/main/resources/rpmtw_platform_mod.accesswidener"))
 }
 
 repositories {
