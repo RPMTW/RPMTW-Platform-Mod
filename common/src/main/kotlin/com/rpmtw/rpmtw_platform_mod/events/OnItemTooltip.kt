@@ -17,57 +17,54 @@ import net.minecraft.world.item.TooltipFlag
 class OnItemTooltip(private val itemStack: ItemStack, private val lines: List<Component>, flag: TooltipFlag) {
 
     private fun onTooltip() {
-        if (lines is ArrayList) {
-            fun load(index: Int, i18nKey: String) {
-                val key: ModifierKeyCode = RPMTWConfig.get().keyBindings.machineTranslation
-                val press: Boolean = key.matchesCurrentKey()
+        try {
+            val playing = Minecraft.getInstance().player != null
+            if (playing && lines is ArrayList) {
+                fun load(index: Int, i18nKey: String) {
+                    val key: ModifierKeyCode = RPMTWConfig.get().keyBindings.machineTranslation
+                    val press: Boolean = key.matchesCurrentKey()
 
-                // Check if it has been human translated
-                if (!MTStorage.isTranslate(i18nKey)) {
-                    val unlocalizedName: String = MTStorage.getUnlocalizedTranslate(i18nKey) ?: return
+                    // Check if it has been human translated
+                    if (!MTStorage.isTranslate(i18nKey)) {
+                        val unlocalizedName: String = MTStorage.getUnlocalizedTranslate(i18nKey) ?: return
 
-                    if (MTManager.getFromCache(unlocalizedName) != null) {
-                        lines.removeAt(index)
-                        lines.add(index, MTManager.getFromCache(unlocalizedName)!!)
-                    } else {
-                        if (press) {
+                        if (MTManager.getFromCache(unlocalizedName) != null) {
                             lines.removeAt(index)
-                            lines.add(index, MachineTranslationText(unlocalizedName))
+                            lines.add(index, MTManager.getFromCache(unlocalizedName)!!)
                         } else {
-                            MTManager.addToQueue(unlocalizedName)
+                            if (press) {
+                                lines.removeAt(index)
+                                lines.add(index, MachineTranslationText(unlocalizedName))
+                            } else {
+                                MTManager.addToQueue(unlocalizedName)
+                            }
                         }
                     }
                 }
-            }
 
-            try {
-                val playing = Minecraft.getInstance().player != null
+                val itemKey: String = itemStack.descriptionId
+                val unlocalizedName: String = MTStorage.getUnlocalizedTranslate(itemKey) ?: return
 
-                if (playing) {
-                    val itemKey: String = itemStack.descriptionId
-                    val unlocalizedName: String = MTStorage.getUnlocalizedTranslate(itemKey) ?: return
+                if (RPMTWConfig.get().translate.machineTranslation) {
+                    // Item name
+                    load(0, itemKey)
 
-                    if (RPMTWConfig.get().translate.machineTranslation) {
-                        // Item name
-                        load(0, itemKey)
-
-                        val description: Component? = lines.getOrNull(1)
-                        if (description is TranslatableComponent) {
-                            // Item description
-                            load(1, description.key)
-                        }
-                    }
-
-                    val itemName: String = itemStack.displayName.string
-                    // Check if the feature for unlocalized names is enabled and differs from translation
-                    if (RPMTWConfig.get().translate.unlocalized && unlocalizedName != itemName) {
-                        lines.add(TextComponent(unlocalizedName).withStyle(ChatFormatting.GRAY))
+                    val description: Component? = lines.getOrNull(1)
+                    if (description is TranslatableComponent) {
+                        // Item description
+                        load(1, description.key)
                     }
                 }
 
-            } catch (e: Exception) {
-                RPMTWPlatformMod.LOGGER.error("Error in item tooltip event", e)
+                val itemName: String = itemStack.displayName.string
+                // Check if the feature for unlocalized names is enabled and differs from translation
+                if (RPMTWConfig.get().translate.unlocalized && unlocalizedName != itemName) {
+                    lines.add(TextComponent(unlocalizedName).withStyle(ChatFormatting.GRAY))
+                }
             }
+
+        } catch (e: Exception) {
+            RPMTWPlatformMod.LOGGER.error("Error in item tooltip event", e)
         }
     }
 
