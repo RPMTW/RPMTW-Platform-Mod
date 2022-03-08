@@ -102,8 +102,8 @@ object MTManager {
                 val sourceText = queue.removeAt(0)
                 translateAndCache(sourceText.text)
                 withContext(Dispatchers.IO) {
-                    // Sleep for a second to prevent spamming the Google Translate API
-                    Thread.sleep(TimeUnit.SECONDS.toMillis(3))
+                    // Sleep for 2.5 second to prevent spamming the Google Translate API
+                    Thread.sleep(TimeUnit.SECONDS.toMillis(2.5))
                 }
             }
             handleQueueing = false

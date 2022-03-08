@@ -51,7 +51,7 @@ class OnItemTooltip(private val itemStack: ItemStack, private val lines: List<Co
                         // Item name
                         load(0, itemKey)
 
-                        val description: Component = lines[1]
+                        val description: Component? = lines.getOrNull(1)
                         if (description is TranslatableComponent) {
                             // Item description
                             load(1, description.key)
