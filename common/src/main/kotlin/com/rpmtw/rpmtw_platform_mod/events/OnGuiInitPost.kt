@@ -7,12 +7,15 @@ import com.rpmtw.rpmtw_platform_mod.gui.widgets.TranslucentButton
 import com.rpmtw.rpmtw_platform_mod.utilities.Utilities
 import dev.architectury.hooks.client.screen.ScreenAccess
 import dev.architectury.platform.Platform
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.gui.components.EditBox
 import net.minecraft.client.gui.screens.ChatScreen
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.resources.language.I18n
 import net.minecraft.network.chat.TranslatableComponent
 
+@Environment(EnvType.CLIENT)
 class OnGuiInitPost(screen: Screen, screenAccess: ScreenAccess) {
     init {
         try {

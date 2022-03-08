@@ -4,9 +4,12 @@ import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.handlers.CosmicChatHandler
 import com.rpmtw.rpmtw_platform_mod.translation.machineTranslation.MTManager
 import com.rpmtw.rpmtw_platform_mod.utilities.Utilities
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.Minecraft
 import net.minecraft.client.resources.language.LanguageInfo
 
+@Environment(EnvType.CLIENT)
 class OnClientStarted(val client: Minecraft) {
     init {
         // RPMTWConfig.register()
