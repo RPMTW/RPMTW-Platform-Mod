@@ -3,6 +3,8 @@ package com.rpmtw.rpmtw_platform_mod.translation.machineTranslation
 import com.github.kittinunf.fuel.coroutines.awaitStringResult
 import com.github.kittinunf.fuel.httpGet
 import com.google.gson.*
+import com.google.gson.stream.JsonReader
+import com.google.gson.stream.JsonWriter
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.utilities.Utilities
 import kotlinx.coroutines.Dispatchers
@@ -13,6 +15,7 @@ import net.minecraft.client.resources.language.I18n
 import net.minecraft.network.chat.*
 import org.apache.http.client.utils.URIBuilder
 import java.io.File
+import java.io.IOException
 import java.lang.reflect.Type
 import java.sql.Timestamp
 import java.util.concurrent.TimeUnit
@@ -25,6 +28,7 @@ object MTManager {
     private val queue: MutableList<SourceText> = ArrayList()
     private var handleQueueing: Boolean = false
     private var translatingCount: Int = 0
+    private const val maxTranslatingCount: Int = 3
     private val formatPattern = Pattern.compile("%(?:(\\d+)\\$)?([A-Za-z%]|$)")
 
     @Suppress("SpellCheckingInspection")
@@ -47,7 +51,7 @@ object MTManager {
             TextComponent(I18n.get("machineTranslation.rpmtw_platform_mod.status.failed", info.error)).withStyle(
                 ChatFormatting.RED
             )
-        } else if (translatingCount > 3) {
+        } else if (translatingCount >= maxTranslatingCount) {
             // If there are too many things to translate at the same time, the translation will be skipped to avoid sending too many requests to the server
             generateProgressText()
         } else if (info?.status == MTDataStatus.Translating) {
@@ -62,8 +66,12 @@ object MTManager {
     }
 
     fun addToQueue(source: String) {
-        queue.add(SourceText(source, translatedLanguage))
-        if (!handleQueueing) {
+        val sourceText = SourceText(source, translatedLanguage)
+        if (!queue.contains(sourceText)) {
+            queue.add(sourceText)
+        }
+
+        if (!handleQueueing && queue.isNotEmpty() && translatingCount < maxTranslatingCount) {
             handleQueue()
         }
     }
@@ -82,9 +90,8 @@ object MTManager {
         if (!cacheFile.exists()) {
             cacheFile.createNewFile()
         }
-        val gsonBuilder = GsonBuilder()
-        gsonBuilder.registerTypeAdapter(Exception::class.java, ExceptionSerializer())
-        val gson = gsonBuilder.create()
+        val gson = GsonBuilder().registerTypeAdapter(Exception::class.java, ExceptionSerializer())
+            .registerTypeAdapter(Timestamp::class.java, TimestampAdapter()).create()
 
         gson.toJson(cache, HashMap<SourceText, MTInfo>().javaClass).let {
             cacheFile.writeText(it)
@@ -107,7 +114,7 @@ object MTManager {
 
     private fun handleI18nComponent(text: String, vararg args: Any? = arrayOf()): MutableComponent {
         fun getArgument(i: Int): Component {
-            val obj: Any? = args.getOrNull(i)
+            val obj = args.getOrNull(i)
             return if (obj is Component) {
                 obj
             } else {
@@ -165,7 +172,7 @@ object MTManager {
     private fun handleQueue() {
         handleQueueing = true
         Utilities.coroutineLaunch {
-            while (queue.isNotEmpty() && translatingCount < 3) {
+            while (queue.isNotEmpty() && translatingCount < maxTranslatingCount) {
                 val sourceText = queue.removeAt(0)
                 translateAndCache(sourceText.text)
                 withContext(Dispatchers.IO) {
@@ -247,5 +254,17 @@ class ExceptionSerializer : JsonSerializer<Exception?> {
         jsonObject.add("cause", JsonPrimitive(src?.cause?.toString()))
         jsonObject.add("message", JsonPrimitive(src?.message))
         return jsonObject
+    }
+}
+
+class TimestampAdapter : TypeAdapter<Timestamp>() {
+    @Throws(IOException::class)
+    override fun read(`in`: JsonReader): Timestamp {
+        return Timestamp(`in`.nextLong())
+    }
+
+    @Throws(IOException::class)
+    override fun write(out: JsonWriter, timestamp: Timestamp) {
+        out.value(timestamp.time)
     }
 }
