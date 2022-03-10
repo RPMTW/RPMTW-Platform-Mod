@@ -94,7 +94,7 @@ object MTManager {
         val gson = GsonBuilder().registerTypeAdapter(Exception::class.java, ExceptionSerializer())
             .registerTypeAdapter(Timestamp::class.java, TimestampAdapter()).create()
 
-        gson.toJson(cache, HashMap<SourceText, MTInfo>().javaClass).let {
+        gson.toJson(cache, LinkedHashMap<SourceText, MTInfo>().javaClass).let {
             cacheFile.writeText(it)
         }
         RPMTWPlatformMod.LOGGER.info("Machine translation cache saved.")
@@ -104,7 +104,7 @@ object MTManager {
         try {
             if (cacheFile.exists()) {
                 val json = cacheFile.reader().readText()
-                cache.putAll(Gson().fromJson(json, HashMap<SourceText, MTInfo>().javaClass))
+                cache.putAll(Gson().fromJson(json, LinkedHashMap<SourceText, MTInfo>().javaClass))
             }
         } catch (e: Exception) {
             RPMTWPlatformMod.LOGGER.error("Failed to read machine translation cache file", e)
