@@ -1,6 +1,7 @@
 package com.rpmtw.rpmtw_platform_mod.events
 
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
+import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.handlers.CosmicChatHandler
 import com.rpmtw.rpmtw_platform_mod.translation.machineTranslation.MTManager
 import com.rpmtw.rpmtw_platform_mod.utilities.Utilities
@@ -8,22 +9,14 @@ import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.Minecraft
 import net.minecraft.client.resources.language.LanguageInfo
-import java.util.concurrent.TimeUnit
-import kotlin.concurrent.timer
 
 @Environment(EnvType.CLIENT)
 class OnClientStarted(val client: Minecraft) {
     init {
-        // RPMTWConfig.register()
+        RPMTWConfig.register()
         toggleLanguage()
         CosmicChatHandler.handle()
         MTManager.readCache()
-        timer(initialDelay = TimeUnit.SECONDS.toMillis(5), period = TimeUnit.MINUTES.toMillis(5)) {
-            Utilities.coroutineLaunch {
-                // Auto save cache in every 5 minutes
-                MTManager.saveCache()
-            }
-        }
     }
 
     private fun toggleLanguage() {

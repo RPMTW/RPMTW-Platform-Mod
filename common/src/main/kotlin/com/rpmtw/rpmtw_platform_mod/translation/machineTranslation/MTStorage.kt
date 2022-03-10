@@ -14,9 +14,8 @@ import net.minecraft.util.profiling.ProfilerFiller
 import java.io.FileNotFoundException
 import java.io.InputStreamReader
 import java.nio.charset.StandardCharsets
-import java.util.concurrent.CompletableFuture
 
-class MTStorage : SimplePreparableReloadListener<CompletableFuture<Void>>() {
+class MTStorage : SimplePreparableReloadListener<Unit>() {
     private val unsupportedFormatRegx: Regex = Regex("%(\\d+\\$)?[\\d.]*[df]")
 
     companion object {
@@ -32,27 +31,7 @@ class MTStorage : SimplePreparableReloadListener<CompletableFuture<Void>>() {
         }
     }
 
-    override fun prepare(manager: ResourceManager, profilerFiller: ProfilerFiller): CompletableFuture<Void> {
-        RPMTWPlatformMod.LOGGER.info("Preparing MTStorage...")
-        val currentLangCode: String = Utilities.languageCode
-        unlocalizedMap.clear()
-        currentLangMap.clear()
-
-        return CompletableFuture.runAsync {
-            if (RPMTWConfig.get().translate.unlocalized || RPMTWConfig.get().translate.machineTranslation) {
-
-                for (namespace in manager.namespaces) {
-                    load("en_us", { key, value ->
-                        unlocalizedMap[key] = value
-                    }, namespace, manager)
-
-                    // Only load current language
-                    load(currentLangCode, { key, value ->
-                        currentLangMap[key] = value
-                    }, namespace, manager)
-                }
-            }
-        }
+    override fun prepare(manager: ResourceManager, profilerFiller: ProfilerFiller) {
     }
 
     private fun load(
@@ -89,10 +68,30 @@ class MTStorage : SimplePreparableReloadListener<CompletableFuture<Void>>() {
     }
 
     override fun apply(
-        `object`: CompletableFuture<Void>,
-        resourceManager: ResourceManager,
+        unit: Unit,
+        manager: ResourceManager,
         profilerFiller: ProfilerFiller
     ) {
         // no-op
+        Utilities.coroutineLaunch {
+            RPMTWPlatformMod.LOGGER.info("Load resources for machine translation...")
+            val currentLangCode: String = Utilities.languageCode
+            unlocalizedMap.clear()
+            currentLangMap.clear()
+
+            if (RPMTWConfig.get().translate.unlocalized || RPMTWConfig.get().translate.machineTranslation) {
+
+                for (namespace in manager.namespaces) {
+                    load("en_us", { key, value ->
+                        unlocalizedMap[key] = value
+                    }, namespace, manager)
+
+                    // Only load current language
+                    load(currentLangCode, { key, value ->
+                        currentLangMap[key] = value
+                    }, namespace, manager)
+                }
+            }
+        }
     }
 }

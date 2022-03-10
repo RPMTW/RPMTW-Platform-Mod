@@ -23,7 +23,7 @@ import java.util.regex.Pattern
 
 object MTManager {
     private val mc = Minecraft.getInstance()
-    private val cache: MutableMap<SourceText, MTInfo?> = HashMap()
+    private val cache: MutableMap<SourceText, MTInfo?> = LinkedHashMap()
     private val cacheFile: File = Utilities.getFileLocation("machine_translation_cache.json")
     private val queue: MutableList<SourceText> = ArrayList()
     private var handleQueueing: Boolean = false
@@ -90,6 +90,7 @@ object MTManager {
         if (!cacheFile.exists()) {
             cacheFile.createNewFile()
         }
+
         val gson = GsonBuilder().registerTypeAdapter(Exception::class.java, ExceptionSerializer())
             .registerTypeAdapter(Timestamp::class.java, TimestampAdapter()).create()
 
@@ -119,7 +120,6 @@ object MTManager {
                 obj
             } else {
                 if (obj == null) TextComponent.EMPTY.copy() else {
-                    RPMTWPlatformMod.LOGGER.info(obj.javaClass.name)
                     TextComponent(obj.toString())
                 }
             }
