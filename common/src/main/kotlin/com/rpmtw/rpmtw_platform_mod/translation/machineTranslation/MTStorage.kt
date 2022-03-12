@@ -32,6 +32,7 @@ class MTStorage : SimplePreparableReloadListener<Unit>() {
     }
 
     override fun prepare(manager: ResourceManager, profilerFiller: ProfilerFiller) {
+        // no-op
     }
 
     private fun load(
@@ -72,7 +73,6 @@ class MTStorage : SimplePreparableReloadListener<Unit>() {
         manager: ResourceManager,
         profilerFiller: ProfilerFiller
     ) {
-        // no-op
         Utilities.coroutineLaunch {
             RPMTWPlatformMod.LOGGER.info("Load resources for machine translation...")
             val currentLangCode: String = Utilities.languageCode

@@ -2,10 +2,9 @@ package com.rpmtw.rpmtw_platform_mod.translation.machineTranslation
 
 import com.github.kittinunf.fuel.coroutines.awaitStringResult
 import com.github.kittinunf.fuel.httpGet
-import com.google.gson.*
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonParser
 import com.google.gson.reflect.TypeToken
-import com.google.gson.stream.JsonReader
-import com.google.gson.stream.JsonWriter
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.utilities.Utilities
 import kotlinx.coroutines.Dispatchers
@@ -14,10 +13,8 @@ import net.minecraft.ChatFormatting
 import net.minecraft.client.Minecraft
 import net.minecraft.client.resources.language.I18n
 import net.minecraft.network.chat.*
-import org.apache.commons.lang3.LocaleUtils
 import org.apache.http.client.utils.URIBuilder
 import java.io.File
-import java.io.IOException
 import java.lang.reflect.Type
 import java.sql.Timestamp
 import java.util.*
@@ -25,7 +22,6 @@ import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
 
 object MTManager {
-    private val mc = Minecraft.getInstance()
     private val cache: MutableMap<String, Map<Locale, MTInfo?>> = HashMap()
     private val cacheFile: File = Utilities.getFileLocation("machine_translation_cache.json")
     private val queue: MutableList<QueueText> = ArrayList()
@@ -38,7 +34,7 @@ object MTManager {
         .registerTypeAdapter(Locale::class.java, LocaleAdapter()).create()
 
     private val translatedLanguage: Locale
-        get() = when (mc.languageManager.selected.code) {
+        get() = when (Minecraft.getInstance().languageManager.selected.code) {
             "zh_tw" -> Locale.TRADITIONAL_CHINESE
             "zh_hk" -> Locale.TRADITIONAL_CHINESE
             "zh_cn" -> Locale.SIMPLIFIED_CHINESE
@@ -259,34 +255,3 @@ object MTManager {
 }
 
 private data class QueueText(val text: String, val language: Locale)
-
-class ExceptionSerializer : JsonSerializer<Exception?> {
-    override fun serialize(src: Exception?, typeOfSrc: Type?, context: JsonSerializationContext?): JsonElement {
-        val jsonObject = JsonObject()
-        jsonObject.add("cause", JsonPrimitive(src?.cause?.toString()))
-        jsonObject.add("message", JsonPrimitive(src?.message))
-        return jsonObject
-    }
-}
-
-class TimestampAdapter : TypeAdapter<Timestamp>() {
-    @Throws(IOException::class)
-    override fun read(`in`: JsonReader): Timestamp {
-        return Timestamp(`in`.nextLong())
-    }
-
-    @Throws(IOException::class)
-    override fun write(out: JsonWriter, timestamp: Timestamp) {
-        out.value(timestamp.time)
-    }
-}
-
-class LocaleAdapter : TypeAdapter<Locale>() {
-    override fun read(`in`: JsonReader): Locale {
-        return LocaleUtils.toLocale(`in`.nextString())
-    }
-
-    override fun write(out: JsonWriter, locale: Locale) {
-        out.value(locale.toString())
-    }
-}
