@@ -1,6 +1,6 @@
 {
+  "config.rpmtw_platform_mod.category.default": "RPMW 平台MOD配置",
   "config.rpmtw_platform_mod.option.cosmicChat": "宇宙通信",
-  "config.rpmtw_platform_mod.option.translate": "RPMTW 翻译平台",
   "config.rpmtw_platform_mod.option.cosmicChat.enable": "启用宇宙通信",
   "config.rpmtw_platform_mod.option.cosmicChat.enable.@Tooltip": "若将此选项调整为禁用，会覆盖其他设置，将所有跟宇宙通信相关的功能禁用。",
   "config.rpmtw_platform_mod.option.cosmicChat.enableButton": "快捷按钮",
@@ -8,6 +8,7 @@
   "config.rpmtw_platform_mod.option.cosmicChat.enableReceiveMessage": "接收信息",
   "config.rpmtw_platform_mod.option.cosmicChat.nickname": "昵称",
   "config.rpmtw_platform_mod.option.cosmicChat.nickname.@Tooltip": "玩家在宇宙通信中的昵称。",
+  "config.rpmtw_platform_mod.option.translate": "RPMTW 翻译平台",
   "config.rpmtw_platform_mod.option.translate.autoToggleLanguage": "自动切换语言",
   "config.rpmtw_platform_mod.option.translate.autoToggleLanguage.@Tooltip": "启动游戏时自动切换游戏语言至 RPMTranslator 支持的语言。",
   "config.rpmtw_platform_mod.title": "RPMTW 平台",
