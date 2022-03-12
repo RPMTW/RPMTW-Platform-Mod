@@ -74,7 +74,7 @@ class MTStorage : SimplePreparableReloadListener<Unit>() {
         profilerFiller: ProfilerFiller
     ) {
         Utilities.coroutineLaunch {
-            RPMTWPlatformMod.LOGGER.info("Load resources for machine translation...")
+            RPMTWPlatformMod.LOGGER.info("[Machine Translation] Loading resources...")
             val currentLangCode: String = Utilities.languageCode
             unlocalizedMap.clear()
             currentLangMap.clear()
