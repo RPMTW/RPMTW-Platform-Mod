@@ -5,6 +5,7 @@ import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.gui.widgets.RPMTWCheckbox
 import com.rpmtw.rpmtw_platform_mod.gui.widgets.TranslucentButton
 import com.rpmtw.rpmtw_platform_mod.utilities.Utilities
+import dev.architectury.event.events.client.ClientGuiEvent
 import dev.architectury.hooks.client.screen.ScreenAccess
 import dev.architectury.platform.Platform
 import net.fabricmc.api.EnvType
@@ -16,8 +17,18 @@ import net.minecraft.client.resources.language.I18n
 import net.minecraft.network.chat.TranslatableComponent
 
 @Environment(EnvType.CLIENT)
-class OnGuiInitPost(screen: Screen, screenAccess: ScreenAccess) {
-    init {
+class OnGuiInitPost() : ClientGuiEvent.ScreenInitPost {
+
+    override fun init(screen: Screen?, access: ScreenAccess?) {
+        if (screen != null && access != null) {
+            addedCosmicChatButton(screen, access)
+        }
+    }
+
+    private fun addedCosmicChatButton(
+        screen: Screen,
+        access: ScreenAccess
+    ) {
         try {
             val scaledWidth = screen.width
             val scaledHeight = screen.height
@@ -65,8 +76,8 @@ class OnGuiInitPost(screen: Screen, screenAccess: ScreenAccess) {
                     I18n.get("cosmicChat.rpmtw_platform_mod.button.receive.tooltip")
                 )
 
-                screenAccess.addRenderableWidget(sendButton)
-                screenAccess.addRenderableWidget(checkbox)
+                access.addRenderableWidget(sendButton)
+                access.addRenderableWidget(checkbox)
             }
         } catch (e: Exception) {
             RPMTWPlatformMod.LOGGER.error("Adding button to the chat screen failed", e)

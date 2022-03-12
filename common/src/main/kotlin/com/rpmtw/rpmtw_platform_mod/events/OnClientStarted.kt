@@ -5,24 +5,17 @@ import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.handlers.CosmicChatHandler
 import com.rpmtw.rpmtw_platform_mod.translation.machineTranslation.MTManager
 import com.rpmtw.rpmtw_platform_mod.utilities.Utilities
+import dev.architectury.event.events.client.ClientLifecycleEvent
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.Minecraft
 import net.minecraft.client.resources.language.LanguageInfo
 
 @Environment(EnvType.CLIENT)
-class OnClientStarted(val client: Minecraft) {
-    init {
-        RPMTWConfig.register()
-        toggleLanguage()
-        CosmicChatHandler.handle()
-        MTManager.readCache()
-    }
-
-    private fun toggleLanguage() {
-        val minecraft = Minecraft.getInstance()
+class OnClientStarted() : ClientLifecycleEvent.ClientState {
+    private fun toggleLanguage(instance: Minecraft) {
         val langCode = Utilities.languageCode
-        val manager = minecraft.languageManager
+        val manager = instance.languageManager
 
         // if auto-toggle language is enabled and the user language is Chinese, set the language
         if (langCode == "zh_tw") {
@@ -35,5 +28,14 @@ class OnClientStarted(val client: Minecraft) {
 
         val info = manager.selected
         RPMTWPlatformMod.LOGGER.info("Toggled language to " + info.name + " (" + info.code + ")")
+    }
+
+    override fun stateChanged(instance: Minecraft?) {
+        if (instance != null) {
+            RPMTWConfig.register()
+            CosmicChatHandler.handle()
+            toggleLanguage(instance)
+            MTManager.readCache()
+        }
     }
 }

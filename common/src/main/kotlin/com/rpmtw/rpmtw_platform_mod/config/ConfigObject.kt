@@ -90,8 +90,11 @@ class ConfigObject : ConfigData {
 
     class KeyBindings {
         @JvmField
-        var machineTranslation: ModifierKeyCode =
-            ModifierKeyCode.of(InputConstants.Type.KEYSYM.getOrCreate(InputConstants.KEY_N), Modifier.none())
+        var machineTranslation: ModifierKeyCode = ModifierKeyCode.unknown()
+
+        @JvmField
+        var config: ModifierKeyCode =
+            ModifierKeyCode.of(InputConstants.Type.KEYSYM.getOrCreate(InputConstants.KEY_R), Modifier.none())
     }
 }
 

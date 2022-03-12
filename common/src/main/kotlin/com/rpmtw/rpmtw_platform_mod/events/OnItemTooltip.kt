@@ -5,6 +5,7 @@ import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.gui.widgets.MachineTranslationText
 import com.rpmtw.rpmtw_platform_mod.translation.machineTranslation.MTManager
 import com.rpmtw.rpmtw_platform_mod.translation.machineTranslation.MTStorage
+import dev.architectury.event.events.client.ClientTooltipEvent
 import me.shedaniel.clothconfig2.api.ModifierKeyCode
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -17,12 +18,11 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 
 @Environment(EnvType.CLIENT)
-class OnItemTooltip(private val itemStack: ItemStack, private val lines: List<Component>, flag: TooltipFlag) {
-
-    private fun machineTranslation() {
+class OnItemTooltip : ClientTooltipEvent.Item {
+    private fun machineTranslation(itemStack: ItemStack, lines: MutableList<Component>) {
         try {
             val playing = Minecraft.getInstance().player != null
-            if (playing && lines is ArrayList) {
+            if (playing) {
                 fun load(index: Int, i18nKey: String, vararg i18nArgs: Any? = arrayOf()) {
                     val key: ModifierKeyCode = RPMTWConfig.get().keyBindings.machineTranslation
                     val press: Boolean = key.matchesCurrentKey()
@@ -73,7 +73,9 @@ class OnItemTooltip(private val itemStack: ItemStack, private val lines: List<Co
         }
     }
 
-    init {
-        machineTranslation()
+    override fun append(itemStack: ItemStack?, lines: MutableList<Component>?, flag: TooltipFlag?) {
+        if (lines != null && itemStack != null) {
+            machineTranslation(itemStack, lines)
+        }
     }
 }
