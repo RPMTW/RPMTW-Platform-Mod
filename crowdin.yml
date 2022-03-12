@@ -1,4 +1,4 @@
-commit_message: "i18n: new translations %original_file_name% from Crowdin"
+commit_message: 'i18n: new translations %original_file_name% from Crowdin'
 append_commit_message: false
 files:
   - source: /common/src/main/resources/assets/rpmtw_platform_mod/lang/en_us.json
