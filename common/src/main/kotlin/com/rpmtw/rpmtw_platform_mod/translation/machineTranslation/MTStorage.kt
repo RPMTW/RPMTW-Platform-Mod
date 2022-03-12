@@ -20,14 +20,14 @@ class MTStorage : SimplePreparableReloadListener<Unit>() {
 
     companion object {
         private var unlocalizedMap: MutableMap<String, String> = HashMap()
-        private var currentLangMap: MutableMap<String, String> = HashMap()
+        private var currentLangMap: MutableList<String> = ArrayList()
 
         fun getUnlocalizedTranslate(key: String): String? {
             return unlocalizedMap[key]
         }
 
         fun isTranslate(key: String): Boolean {
-            return currentLangMap.containsKey(key)
+            return currentLangMap.contains(key)
         }
     }
 
@@ -87,8 +87,8 @@ class MTStorage : SimplePreparableReloadListener<Unit>() {
                     }, namespace, manager)
 
                     // Only load current language
-                    load(currentLangCode, { key, value ->
-                        currentLangMap[key] = value
+                    load(currentLangCode, { key, _ ->
+                        currentLangMap.add(key)
                     }, namespace, manager)
                 }
             }
