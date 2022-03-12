@@ -11,9 +11,9 @@
 
 #### 🌐 說明檔案語言
 
-- [English](https://github.com/RPMTW/RPMTW-Platform-Mod/blob/1.18.2/README.md)
+- [English](https://github.com/RPMTW/RPMTW-Platform-Mod/blob/main/README.md)
 - 繁體中文 (目前語言)
-- [简体中文](https://github.com/RPMTW/RPMTW-Platform-Mod/blob/1.18.2/README/zh_cn.md)
+- [简体中文](https://github.com/RPMTW/RPMTW-Platform-Mod/blob/main/README/zh_cn.md)
 
 ## 📚 介紹
 

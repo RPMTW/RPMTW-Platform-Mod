@@ -11,8 +11,8 @@
 #### 🌐 README Languages
 
 - English (Current Language)
-- [繁體中文](https://github.com/RPMTW/RPMTW-Platform-Mod/blob/1.18.2/README/zh_tw.md)
-- [简体中文](https://github.com/RPMTW/RPMTW-Platform-Mod/blob/1.18.2/README/zh_cn.md)
+- [繁體中文](https://github.com/RPMTW/RPMTW-Platform-Mod/blob/main/README/zh_tw.md)
+- [简体中文](https://github.com/RPMTW/RPMTW-Platform-Mod/blob/main/README/zh_cn.md)
 
 ## 📚 Introduction
 

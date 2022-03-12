@@ -11,8 +11,8 @@
 
 #### 🌐 自叙文件语言
 
-- [English](https://github.com/RPMTW/RPMTW-Platform-Mod/blob/1.18.2/README.md)
-- [繁體中文](https://github.com/RPMTW/RPMTW-Platform-Mod/blob/1.18.2/README/zh_tw.md)
+- [English](https://github.com/RPMTW/RPMTW-Platform-Mod/blob/main/README.md)
+- [繁體中文](https://github.com/RPMTW/RPMTW-Platform-Mod/blob/main/README/zh_tw.md)
 - 简体中文 (当前语言)
 
 ## 📚 介绍
