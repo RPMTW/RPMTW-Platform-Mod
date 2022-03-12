@@ -95,11 +95,7 @@ object RPMTWConfig {
 
     @Suppress("DEPRECATION", "UnstableApiUsage")
     @JvmStatic
-    fun getScreen(parent: Screen?): Screen? {
-        if (parent == null) {
-            return null
-        }
-
+    fun getScreen(parent: Screen? = null): Screen? {
         val provider = AutoConfig.getConfigScreen(ConfigObject::class.java, parent) as ConfigScreenProvider<*>
         provider.setI13nFunction { "config.rpmtw_platform_mod" }
         provider.setBuildFunction { builder: ConfigBuilder ->
