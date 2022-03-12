@@ -64,7 +64,7 @@ class OnItemTooltip(private val itemStack: ItemStack, private val lines: List<Co
                 val itemName: String = itemStack.displayName.string
                 // Check if the feature for unlocalized names is enabled and differs from translation
                 if (RPMTWConfig.get().translate.unlocalized && unlocalizedName != itemName) {
-                    lines.add(TextComponent(unlocalizedName).withStyle(ChatFormatting.GRAY))
+                    lines.add(1, TextComponent(unlocalizedName).withStyle(ChatFormatting.GRAY))
                 }
             }
 
