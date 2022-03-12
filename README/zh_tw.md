@@ -29,6 +29,19 @@
 
 在任何版本的 Minecraft 中或遊戲外聊天交流，每個玩家就像在同個世界中遊玩！
 
+- ### 設定選單
+
+內建精緻的設定選單，任何功能都可供您自由調整。
+
+- ### 原文顯示
+
+想知道物品譯名的原文嗎？用這功能就對了！  
+~~甚至還可以順便學習英文~~
+
+- ### 機器翻譯
+
+遇到沒人工翻譯的內容嗎？全部交給 AI 吧！不再被語言隔閡導致無法遊玩模組。
+
 ## ⚙️ 開發者
 
 ### 編譯
@@ -42,9 +55,14 @@
 - Fabric `fabric/build/libs/rpmtw-platform-mod-*.jar`
 - Forge  `forge/build/libs/rpmtw-platform-mod-*.jar`
 
-### 程式語言
+### ️ 使用的技術
 
-Kotlin
+- [Kotlin](https://kotlinlang.org/)
+- Java
+- JVM
+- [Architectury](https://github.com/architectury)
+- [Cloth Config](https://github.com/shedaniel/cloth-config)
+- [Socket.IO](https://github.com/socketio/socket.io-client-java)
 
 ## 🎓 許可證
 

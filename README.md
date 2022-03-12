@@ -1,8 +1,8 @@
 <img src="https://raw.githubusercontent.com/RPMTW/RPMTW-Data/main/logo/rpmtw-platform/rpmtw-platform-logo.png" align="left" width="180px"/>
 
-
 # RPMTW Platform Mod
-[![](https://img.shields.io/github/license/RPMTW/RPMTW-Platform-Mod.svg)](LICENSE) 
+
+[![](https://img.shields.io/github/license/RPMTW/RPMTW-Platform-Mod.svg)](LICENSE)
 [![](https://img.shields.io/github/release/RPMTW/RPMTW-Platform-Mod.svg)](https://github.com/RPMTW/RPMTW-Platform-Mod/releases)
 ![](http://cf.way2muchnoise.eu/versions/minecraft_rpmtw-update-mod_all.svg)
 [![](http://cf.way2muchnoise.eu/rpmtw-update-mod.svg)](https://minecraft.curseforge.com/projects/rpmtw-update-mod)
@@ -29,6 +29,19 @@ Auto-toggle game language to default language of the user's computer when launch
 
 Chat in any version of Minecraft or outside the game, every player feels like they are in the same world!
 
+- ### Settings Screen
+
+The built-in sophisticated settings screen allows you to adjust any function freely.
+
+- ### Original language display
+
+Want to know the original language of an item? Use this function!  
+~~You can even learn English at the same time!~~
+
+- ### Machine translation
+
+Don't have a human translator? Leave it all to the AI! No more language barrier that prevents you from playing the mods.
+
 ## ⚙️ Development
 
 ### Build
@@ -42,9 +55,14 @@ File location
 - Fabric `fabric/build/libs/rpmtw-platform-mod-*.jar`
 - Forge  `forge/build/libs/rpmtw-platform-mod-*.jar`
 
-### Programming language
+### ️ Technologies
 
-Kotlin
+- [Kotlin](https://kotlinlang.org/)
+- Java
+- JVM
+- [Architectury](https://github.com/architectury)
+- [Cloth Config](https://github.com/shedaniel/cloth-config)
+- [Socket.IO](https://github.com/socketio/socket.io-client-java)
 
 ## 🎓 License
 
