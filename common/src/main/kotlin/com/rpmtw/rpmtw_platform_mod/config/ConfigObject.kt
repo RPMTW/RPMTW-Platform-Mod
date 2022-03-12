@@ -51,6 +51,7 @@ class ConfigObject : ConfigData {
         var machineTranslation = true
 
         @JvmField
+        @ConfigEntry.Gui.Tooltip(count = 1)
         @ConfigEntry.Gui.RequiresRestart
         var autoMachineTranslation = false
 
