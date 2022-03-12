@@ -3,6 +3,7 @@ package com.rpmtw.rpmtw_platform_mod.translation.machineTranslation
 import com.github.kittinunf.fuel.coroutines.awaitStringResult
 import com.github.kittinunf.fuel.httpGet
 import com.google.gson.*
+import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonWriter
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
@@ -13,35 +14,39 @@ import net.minecraft.ChatFormatting
 import net.minecraft.client.Minecraft
 import net.minecraft.client.resources.language.I18n
 import net.minecraft.network.chat.*
+import org.apache.commons.lang3.LocaleUtils
 import org.apache.http.client.utils.URIBuilder
 import java.io.File
 import java.io.IOException
 import java.lang.reflect.Type
 import java.sql.Timestamp
+import java.util.*
 import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
 
 object MTManager {
     private val mc = Minecraft.getInstance()
-    private val cache: MutableMap<SourceText, MTInfo?> = LinkedHashMap()
+    private val cache: MutableMap<String, Map<Locale, MTInfo?>> = HashMap()
     private val cacheFile: File = Utilities.getFileLocation("machine_translation_cache.json")
-    private val queue: MutableList<SourceText> = ArrayList()
+    private val queue: MutableList<QueueText> = ArrayList()
     private var handleQueueing: Boolean = false
     private var translatingCount: Int = 0
     private const val maxTranslatingCount: Int = 3
     private val formatPattern = Pattern.compile("%(?:(\\d+)\\$)?([A-Za-z%]|$)")
+    private val gson = GsonBuilder().registerTypeAdapter(Exception::class.java, ExceptionSerializer())
+        .registerTypeAdapter(Timestamp::class.java, TimestampAdapter())
+        .registerTypeAdapter(Locale::class.java, LocaleAdapter()).create()
 
-    @Suppress("SpellCheckingInspection")
-    private val translatedLanguage: String
+    private val translatedLanguage: Locale
         get() = when (mc.languageManager.selected.code) {
-            "zh_tw" -> "zh_Hant"
-            "zh_hk" -> "zh_Hant"
-            "zh_cn" -> "zh_Hans"
-            else -> "zh_Hant"
+            "zh_tw" -> Locale.TRADITIONAL_CHINESE
+            "zh_hk" -> Locale.TRADITIONAL_CHINESE
+            "zh_cn" -> Locale.SIMPLIFIED_CHINESE
+            else -> Locale.TRADITIONAL_CHINESE
         }
 
     fun create(source: String, vararg i18nArgs: Any? = arrayOf()): MutableComponent {
-        val info: MTInfo? = cache[SourceText(source, translatedLanguage)]
+        val info: MTInfo? = cache[source]?.get(translatedLanguage)
 
         return if (info?.text != null && info.status == MTDataStatus.SUCCESS) {
             handleI18nComponent(info.text, *i18nArgs).withStyle {
@@ -66,7 +71,7 @@ object MTManager {
     }
 
     fun addToQueue(source: String) {
-        val sourceText = SourceText(source, translatedLanguage)
+        val sourceText = QueueText(source, translatedLanguage)
         if (!queue.contains(sourceText)) {
             queue.add(sourceText)
         }
@@ -77,10 +82,10 @@ object MTManager {
     }
 
     fun getFromCache(source: String, vararg i18nArgs: Any? = arrayOf()): MutableComponent? {
-        val info: MTInfo? = cache[SourceText(source, translatedLanguage)]
+        val info: MTInfo? = cache[source]?.get(translatedLanguage)
 
         if (info?.text == null) return null
-        return handleI18nComponent(info.text, i18nArgs).withStyle {
+        return handleI18nComponent(info.text, *i18nArgs).withStyle {
             // light blue
             it.withColor(TextColor.parseColor("#2f8eed"))
         }
@@ -91,10 +96,7 @@ object MTManager {
             cacheFile.createNewFile()
         }
 
-        val gson = GsonBuilder().registerTypeAdapter(Exception::class.java, ExceptionSerializer())
-            .registerTypeAdapter(Timestamp::class.java, TimestampAdapter()).create()
-
-        gson.toJson(cache, LinkedHashMap<SourceText, MTInfo>().javaClass).let {
+        gson.toJson(cache, HashMap<String, HashMap<Locale, MTInfo>>().javaClass).let {
             cacheFile.writeText(it)
         }
         RPMTWPlatformMod.LOGGER.info("Machine translation cache saved.")
@@ -104,7 +106,10 @@ object MTManager {
         try {
             if (cacheFile.exists()) {
                 val json = cacheFile.reader().readText()
-                cache.putAll(Gson().fromJson(json, LinkedHashMap<SourceText, MTInfo>().javaClass))
+                val type: Type = object : TypeToken<MutableMap<String, Map<Locale, MTInfo>>>() {}.type
+                gson.fromJson<MutableMap<String, Map<Locale, MTInfo>>>(json, type).let {
+                    cache.putAll(it)
+                }
             }
         } catch (e: Exception) {
             RPMTWPlatformMod.LOGGER.error("Failed to read machine translation cache file", e)
@@ -115,11 +120,14 @@ object MTManager {
 
     private fun handleI18nComponent(text: String, vararg args: Any? = arrayOf()): MutableComponent {
         fun getArgument(i: Int): Component {
-            val obj = args.getOrNull(i)
-            return if (obj is Component) {
-                obj
-            } else {
-                if (obj == null) TextComponent.EMPTY.copy() else {
+            return when (val obj = args.getOrNull(i)) {
+                null -> {
+                    TextComponent.EMPTY
+                }
+                is Component -> {
+                    obj
+                }
+                else -> {
                     TextComponent(obj.toString())
                 }
             }
@@ -195,36 +203,40 @@ object MTManager {
 
     private suspend fun translateAndCache(source: String) {
         translatingCount++
-        val sourceText = SourceText(source, translatedLanguage)
+        if (cache[source] == null) {
+            cache[source] = mapOf()
+        }
         try {
             val translatingData = MTInfo(
                 timestamp = Timestamp(System.currentTimeMillis()), status = MTDataStatus.Translating
             )
-            cache[sourceText] = translatingData
+
+            cache[source] = cache[source]!!.plus(translatedLanguage to translatingData)
 
             val result: String = translate(source)
-            val data = MTInfo(
+            val translatedData = MTInfo(
                 text = result, timestamp = Timestamp(System.currentTimeMillis()), status = MTDataStatus.SUCCESS
             )
-            cache[sourceText] = data
+            cache[source] = cache[source]!!.plus(translatedLanguage to translatedData)
 
         } catch (e: Exception) {
             RPMTWPlatformMod.LOGGER.error("Translation failed", e)
-            val data = MTInfo(
+            val failedData = MTInfo(
                 timestamp = Timestamp(System.currentTimeMillis()), error = e, status = MTDataStatus.FAILED
             )
-            cache[sourceText] = data
+            cache[source] = cache[source]!!.plus(translatedLanguage to failedData)
         } finally {
             translatingCount--
         }
     }
 
+    @Suppress("SpellCheckingInspection")
     private suspend fun translate(text: String): String {
         val builder = URIBuilder("https://translate.googleapis.com/")
         builder.path = "translate_a/single"
         builder.addParameter("client", "gtx")
         builder.addParameter("sl", "en")
-        builder.addParameter("tl", translatedLanguage)
+        builder.addParameter("tl", translatedLanguage.toString())
         builder.addParameter("dt", "t")
         builder.addParameter("q", text)
         builder.addParameter("format", "json")
@@ -246,7 +258,7 @@ object MTManager {
     }
 }
 
-data class SourceText(val text: String, val language: String)
+private data class QueueText(val text: String, val language: Locale)
 
 class ExceptionSerializer : JsonSerializer<Exception?> {
     override fun serialize(src: Exception?, typeOfSrc: Type?, context: JsonSerializationContext?): JsonElement {
@@ -266,5 +278,15 @@ class TimestampAdapter : TypeAdapter<Timestamp>() {
     @Throws(IOException::class)
     override fun write(out: JsonWriter, timestamp: Timestamp) {
         out.value(timestamp.time)
+    }
+}
+
+class LocaleAdapter : TypeAdapter<Locale>() {
+    override fun read(`in`: JsonReader): Locale {
+        return LocaleUtils.toLocale(`in`.nextString())
+    }
+
+    override fun write(out: JsonWriter, locale: Locale) {
+        out.value(locale.toString())
     }
 }
