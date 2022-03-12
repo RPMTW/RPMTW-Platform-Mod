@@ -253,5 +253,3 @@ object MTManager {
         })
     }
 }
-
-private data class QueueText(val text: String, val language: Locale)
