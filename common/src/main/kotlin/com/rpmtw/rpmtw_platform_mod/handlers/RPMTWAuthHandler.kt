@@ -9,11 +9,11 @@ import kotlinx.coroutines.withContext
 import net.minecraft.Util
 import net.minecraft.client.resources.language.I18n
 import org.apache.http.NameValuePair
+import org.apache.http.client.utils.URIBuilder
 import org.apache.http.client.utils.URLEncodedUtils
 import java.io.OutputStream
 import java.net.BindException
 import java.net.InetSocketAddress
-import java.net.URI
 import java.nio.charset.StandardCharsets
 import java.util.concurrent.CountDownLatch
 import java.util.stream.Collectors
@@ -36,10 +36,9 @@ object RPMTWAuthHandler {
                 val latch = CountDownLatch(1)
 
                 server.createContext("/callback") { handler ->
-                    val query: Map<String, String> = URLEncodedUtils
-                        .parse(handler.requestURI, StandardCharsets.UTF_8)
-                        .stream()
-                        .collect(Collectors.toMap(NameValuePair::getName, NameValuePair::getValue))
+                    val query: Map<String, String> =
+                        URLEncodedUtils.parse(handler.requestURI, StandardCharsets.UTF_8).stream()
+                            .collect(Collectors.toMap(NameValuePair::getName, NameValuePair::getValue))
 
                     val token: String? = query["access_token"]
                     handler.responseHeaders.add("Content-Type", "text/plain; charset=utf-8")
@@ -71,9 +70,11 @@ object RPMTWAuthHandler {
                 // Start http server
                 RPMTWPlatformMod.LOGGER.info("Begin listening on http://localhost:$port/callback for successful rpmtw login")
                 server.start()
-                val uri = URI("https://account.rpmtw.com?redirect_uri=http://localhost:$port/callback")
-                Util.getPlatform()
-                    .openUri(uri)
+                val uri = URIBuilder("https://account.rpmtw.com")
+                    .setParameter("redirect_uri", "http://localhost:$port/callback")
+                    .setParameter("service_name", "RPMTW Platform Mod").build()
+
+                Util.getPlatform().openUri(uri)
 
                 withContext(Dispatchers.IO) {
                     // Wait for login
