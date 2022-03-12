@@ -5,8 +5,8 @@ import com.rpmtw.rpmtw_api_client.models.cosmic_chat.CosmicChatMessage
 import com.rpmtw.rpmtw_api_client.resources.CosmicChatMessageFormat
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.config.CosmicChatAccountType
-import com.rpmtw.rpmtw_platform_mod.gui.widgets.CosmicChatComponent
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
+import com.rpmtw.rpmtw_platform_mod.gui.widgets.CosmicChatComponent
 import com.rpmtw.rpmtw_platform_mod.utilities.Utilities
 import kotlinx.coroutines.Deferred
 import net.minecraft.ChatFormatting
@@ -224,6 +224,7 @@ object CosmicChatHandler {
             RPMTWPlatformMod.LOGGER.info("Initializing cosmic chat server...")
             Utilities.coroutineLaunch {
                 init()
+                listen()
             }
 
             RPMTWPlatformMod.LOGGER.info("Cosmic chat initialized!")

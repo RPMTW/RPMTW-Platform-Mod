@@ -2,6 +2,7 @@ package com.rpmtw.rpmtw_platform_mod.events
 
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.handlers.CosmicChatHandler
+import com.rpmtw.rpmtw_platform_mod.translation.machineTranslation.MTManager
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.Minecraft
@@ -10,6 +11,7 @@ import net.minecraft.client.Minecraft
 @Environment(EnvType.CLIENT)
 class OnClientStopping(minecraft: Minecraft) {
     init {
+        MTManager.saveCache()
         // Close the cosmic chat socket to save resources.
         CosmicChatHandler.close()
         RPMTWPlatformMod.LOGGER.info("Cosmic chat socket closed.")

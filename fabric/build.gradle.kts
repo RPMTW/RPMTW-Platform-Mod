@@ -58,10 +58,22 @@ dependencies {
 
     modImplementation("com.terraformersmc:modmenu:3.1.0")
 }
+val accessWidenerFile = project(":common").file("src/main/resources/rpmtw_platform_mod.accesswidener")
+
+loom {
+    accessWidenerPath.set(accessWidenerFile)
+}
 
 tasks {
+    val resourcesPath = file("src/main/resources")
+    // The access widener file is needed in :fabric project resources when the game is run.
+    val copyAccessWidener by registering(Copy::class) {
+        from(accessWidenerFile)
+        into(resourcesPath)
+    }
 
     processResources {
+        dependsOn(copyAccessWidener)
         inputs.property("version", project.version)
 
         filesMatching("fabric.mod.json") {
@@ -89,6 +101,7 @@ tasks {
         val commonSources = project(":common").tasks.sourcesJar
         dependsOn(commonSources)
         from(commonSources.get().archiveFile.map { zipTree(it) })
+        exclude("rpmtw_platform_mod.accesswidener")
     }
 }
 

@@ -30,7 +30,7 @@ jobs:
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           files-primary: ${{ github.workspace }}/fabric/build/libs/!(*-@(dev|sources)).jar
-          version-type: release
+          version-type: alpha
           loaders: fabric
           version-resolver: latest
           version: ${{ github.event.release.tag_name }}-fabric
@@ -47,7 +47,7 @@ jobs:
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           files-primary: ${{ github.workspace }}/forge/build/libs/!(*-@(dev|sources)).jar
-          version-type: beta
+          version-type: alpha
           loaders: forge
           version-resolver: latest
           version: ${{ github.event.release.tag_name }}-forge

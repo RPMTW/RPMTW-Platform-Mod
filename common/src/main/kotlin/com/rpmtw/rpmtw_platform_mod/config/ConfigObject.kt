@@ -1,29 +1,33 @@
 package com.rpmtw.rpmtw_platform_mod.config
 
+import com.mojang.blaze3d.platform.InputConstants
 import me.shedaniel.autoconfig.ConfigData
 import me.shedaniel.autoconfig.annotation.Config
 import me.shedaniel.autoconfig.annotation.ConfigEntry
+import me.shedaniel.clothconfig2.api.Modifier
+import me.shedaniel.clothconfig2.api.ModifierKeyCode
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
+import net.minecraft.client.Minecraft
 
 @Config(name = "rpmtw_platform_mod")
 @Environment(EnvType.CLIENT)
 class ConfigObject : ConfigData {
     @JvmField
-    @ConfigEntry.Category("base")
-    @ConfigEntry.Gui.TransitiveObject
+    @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
     var base = Base()
 
     @JvmField
-    @ConfigEntry.Category("translate")
-    @ConfigEntry.Gui.TransitiveObject
+    @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
     var translate = Translate()
 
     @JvmField
-    @ConfigEntry.Category("cosmicChat")
-    @ConfigEntry.Gui.TransitiveObject
+    @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
     var cosmicChat = CosmicChat()
 
+    @JvmField
+    @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
+    val keyBindings = KeyBindings()
 
     class Base {
         @JvmField
@@ -40,6 +44,16 @@ class ConfigObject : ConfigData {
         @ConfigEntry.Gui.Tooltip(count = 1)
         @ConfigEntry.Gui.RequiresRestart
         var autoToggleLanguage = true
+
+        @JvmField
+        @ConfigEntry.Gui.Tooltip(count = 1)
+        @ConfigEntry.Gui.RequiresRestart
+        var machineTranslation = true
+
+        @JvmField
+        @ConfigEntry.Gui.Tooltip(count = 1)
+        @ConfigEntry.Gui.RequiresRestart
+        var unlocalized = Minecraft.getInstance().languageManager.selected.code == "en_us"
     }
 
     class CosmicChat {
@@ -67,6 +81,12 @@ class ConfigObject : ConfigData {
         @ConfigEntry.Gui.Tooltip(count = 1)
         @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
         var accountType: CosmicChatAccountType = CosmicChatAccountType.RPMTW
+    }
+
+    class KeyBindings {
+        @JvmField
+        var machineTranslation: ModifierKeyCode =
+            ModifierKeyCode.of(InputConstants.Type.KEYSYM.getOrCreate(InputConstants.KEY_N), Modifier.none())
     }
 }
 

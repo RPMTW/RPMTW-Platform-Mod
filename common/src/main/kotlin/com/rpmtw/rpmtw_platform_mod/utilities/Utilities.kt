@@ -8,10 +8,31 @@ import com.rpmtw.rpmtw_platform_mod.handlers.CosmicChatHandler
 import kotlinx.coroutines.*
 import net.minecraft.client.Minecraft
 import net.minecraft.network.chat.TextComponent
+import java.io.File
+import java.util.*
 import kotlin.coroutines.CoroutineContext
 
 
 object Utilities {
+    val languageCode: String
+        get() {
+            val langCode = Locale.getDefault().language
+            val mcLangCode = Minecraft.getInstance().languageManager.selected.code
+
+            return if (RPMTWConfig.get().translate.autoToggleLanguage && (langCode.contains("zh") || langCode.contains("chi"))) {
+                val countryCode = Locale.getDefault().country
+                if (countryCode.contains("TW") || countryCode.contains("HK")) {
+                    "zh_tw"
+                } else if (countryCode.contains("CN")) {
+                    "zh_cn"
+                } else {
+                    mcLangCode
+                }
+            } else {
+                mcLangCode
+            }
+        }
+
     private val coroutineScope = object : CoroutineScope {
         override val coroutineContext: CoroutineContext
             get() = Job()
@@ -44,5 +65,13 @@ object Utilities {
         return coroutineScope.async {
             block()
         }
+    }
+
+    fun getBaseDirectory(): File {
+        return File(System.getProperty("user.home")).resolve(".rpmtw")
+    }
+
+    fun getFileLocation(fileName: String): File {
+        return getBaseDirectory().resolve(fileName)
     }
 }

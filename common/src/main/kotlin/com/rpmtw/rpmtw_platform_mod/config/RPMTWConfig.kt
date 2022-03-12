@@ -8,12 +8,15 @@ import com.rpmtw.rpmtw_platform_mod.handlers.RPMTWAuthHandler
 import me.shedaniel.autoconfig.AutoConfig
 import me.shedaniel.autoconfig.ConfigHolder
 import me.shedaniel.autoconfig.annotation.Config
+import me.shedaniel.autoconfig.annotation.ConfigEntry
 import me.shedaniel.autoconfig.gui.ConfigScreenProvider
+import me.shedaniel.autoconfig.gui.registry.GuiRegistry
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer
-import me.shedaniel.clothconfig2.api.AbstractConfigEntry
-import me.shedaniel.clothconfig2.api.AbstractConfigListEntry
-import me.shedaniel.clothconfig2.api.ConfigBuilder
+import me.shedaniel.autoconfig.util.Utils.getUnsafely
+import me.shedaniel.autoconfig.util.Utils.setUnsafely
+import me.shedaniel.clothconfig2.api.*
 import me.shedaniel.clothconfig2.gui.GlobalizedClothConfigScreen
+import me.shedaniel.clothconfig2.gui.entries.KeyCodeEntry
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.components.AbstractWidget
 import net.minecraft.client.gui.components.Button
@@ -26,15 +29,33 @@ import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.world.InteractionResult
 import java.util.*
 
-
 object RPMTWConfig {
     private var config: ConfigObject? = null
+
+
     fun register() {
         RPMTWPlatformMod.LOGGER.info("Registering config")
         // register config
         AutoConfig.register(ConfigObject::class.java) { definition: Config?, configClass: Class<ConfigObject?>? ->
             JanksonConfigSerializer(definition, configClass)
         }
+        val guiRegistry: GuiRegistry = AutoConfig.getGuiRegistry(ConfigObject::class.java)
+
+        // key mapping gui
+        guiRegistry.registerPredicateProvider({ i13n, field, config, defaults, _ ->
+            if (field.isAnnotationPresent(ConfigEntry.Gui.Excluded::class.java)) return@registerPredicateProvider emptyList()
+            val entry: KeyCodeEntry = ConfigEntryBuilder.create().startModifierKeyCodeField(
+                TranslatableComponent(i13n),
+                getUnsafely(field, config, ModifierKeyCode.unknown())
+            ).setModifierDefaultValue {
+                getUnsafely(
+                    field,
+                    defaults
+                )
+            }.setModifierSaveConsumer { newValue -> setUnsafely(field, config, newValue) }.build()
+            listOf(entry)
+        }) { field -> field.type === ModifierKeyCode::class.java }
+
         val holder: ConfigHolder<ConfigObject> = AutoConfig.getConfigHolder(ConfigObject::class.java)
         config = holder.config
         listenOnSave(holder, holder.config)
@@ -83,7 +104,7 @@ object RPMTWConfig {
         provider.setI13nFunction { "config.rpmtw_platform_mod" }
         provider.setBuildFunction { builder: ConfigBuilder ->
             builder.setGlobalized(true)
-            builder.setGlobalizedExpanded(true)
+            builder.setGlobalizedExpanded(false)
             builder.setAfterInitConsumer { screen ->
                 val globalizedScreen: GlobalizedClothConfigScreen = screen as GlobalizedClothConfigScreen
 
@@ -127,7 +148,7 @@ internal class LoginButtonEntry : AbstractConfigListEntry<Any?>(TextComponent(UU
     ) {
         super.render(matrices, index, y, x, entryWidth, entryHeight, mouseX, mouseY, isHovered, delta)
         loginButton =
-            Button(entryWidth - 65, y, 65, 20, TranslatableComponent("auth.rpmtw_platform_mod.button.login"), {
+            Button(entryWidth / 2 - 30, y, 65, 20, TranslatableComponent("auth.rpmtw_platform_mod.button.login"), {
                 RPMTWAuthHandler.login()
             }, { _, matrixStack, i, j ->
                 Minecraft.getInstance().screen?.renderTooltip(
@@ -136,7 +157,7 @@ internal class LoginButtonEntry : AbstractConfigListEntry<Any?>(TextComponent(UU
             })
 
         logoutButton = Button(
-            entryWidth + 5, y, 65, 20, TranslatableComponent("auth.rpmtw_platform_mod.button.logout")
+            entryWidth / 2 + 40, y, 65, 20, TranslatableComponent("auth.rpmtw_platform_mod.button.logout")
         ) {
             RPMTWAuthHandler.logout()
         }
