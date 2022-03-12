@@ -38,7 +38,7 @@ class OnItemTooltip(private val itemStack: ItemStack, private val lines: List<Co
                             if (press) {
                                 lines.removeAt(index)
                                 lines.add(index, MachineTranslationText(unlocalizedName, *i18nArgs))
-                            } else {
+                            } else if (RPMTWConfig.get().translate.autoMachineTranslation) {
                                 MTManager.addToQueue(unlocalizedName)
                             }
                         }

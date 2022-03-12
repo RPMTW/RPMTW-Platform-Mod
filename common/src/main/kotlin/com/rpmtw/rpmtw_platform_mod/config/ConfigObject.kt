@@ -51,6 +51,10 @@ class ConfigObject : ConfigData {
         var machineTranslation = true
 
         @JvmField
+        @ConfigEntry.Gui.RequiresRestart
+        var autoMachineTranslation = false
+
+        @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
         @ConfigEntry.Gui.RequiresRestart
         var unlocalized = Minecraft.getInstance().languageManager.selected.code == "en_us"
