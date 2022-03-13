@@ -1,1 +1,11 @@
-{}
+{
+  "auth.rpmtw_platform_mod.button.login": "登入",
+  "auth.rpmtw_platform_mod.button.login.tooltip": "登入您的 RPMTW 帳號.",
+  "auth.rpmtw_platform_mod.button.logout": "登出",
+  "auth.rpmtw_platform_mod.status.logged_in": "您已經登入了！",
+  "auth.rpmtw_platform_mod.status.not_logged_in": "您未登入",
+  "config.rpmtw_platform_mod.option.base": "儲存設定",
+  "config.rpmtw_platform_mod.option.cosmicChat.accountType": "帳戶類型",
+  "cosmicChat.rpmtw_platform_mod.gui.input.null": "檔名不得空白",
+  "cosmicChat.rpmtw_platform_mod.gui.what": "這是甚麼？"
+}
