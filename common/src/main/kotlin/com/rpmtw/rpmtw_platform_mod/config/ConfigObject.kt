@@ -92,9 +92,13 @@ class ConfigObject : ConfigData {
         @JvmField
         var machineTranslation: ModifierKeyCode = ModifierKeyCode.unknown()
 
+        // Ctrl + R
         @JvmField
         var config: ModifierKeyCode =
-            ModifierKeyCode.of(InputConstants.Type.KEYSYM.getOrCreate(InputConstants.KEY_R), Modifier.none())
+            ModifierKeyCode.of(
+                InputConstants.Type.KEYSYM.getOrCreate(InputConstants.KEY_R),
+                Modifier.of(false, true, false)
+            )
     }
 }
 
