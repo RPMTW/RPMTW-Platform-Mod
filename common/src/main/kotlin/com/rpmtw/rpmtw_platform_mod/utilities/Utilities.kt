@@ -68,10 +68,15 @@ object Utilities {
     }
 
     private fun getBaseDirectory(): File {
-        return File(System.getProperty("java.io.tmpdir")).resolve(".rpmtw")
+        return File(System.getProperty("java.io.tmpdir")).resolve(".com.rpmtw.rpmtw_platform_mod")
     }
 
     fun getFileLocation(fileName: String): File {
-        return getBaseDirectory().resolve(fileName)
+        val baseDirectory: File = getBaseDirectory()
+        if (!baseDirectory.exists()) {
+            baseDirectory.mkdirs()
+        }
+
+        return baseDirectory.resolve(fileName)
     }
 }
