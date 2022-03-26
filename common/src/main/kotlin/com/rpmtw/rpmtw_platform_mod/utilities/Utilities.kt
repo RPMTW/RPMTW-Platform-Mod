@@ -67,8 +67,8 @@ object Utilities {
         }
     }
 
-    fun getBaseDirectory(): File {
-        return File(System.getProperty("user.home")).resolve(".rpmtw")
+    private fun getBaseDirectory(): File {
+        return File(System.getProperty("java.io.tmpdir")).resolve(".rpmtw")
     }
 
     fun getFileLocation(fileName: String): File {
