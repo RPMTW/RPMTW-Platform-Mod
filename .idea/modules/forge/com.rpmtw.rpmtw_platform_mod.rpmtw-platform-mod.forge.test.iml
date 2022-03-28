@@ -4,7 +4,6 @@
     <facet type="minecraft" name="Minecraft">
       <configuration>
         <autoDetectTypes>
-          <platformType>FORGE</platformType>
           <platformType>MCP</platformType>
         </autoDetectTypes>
       </configuration>

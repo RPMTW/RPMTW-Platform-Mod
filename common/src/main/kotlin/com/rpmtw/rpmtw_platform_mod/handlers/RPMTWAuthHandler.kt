@@ -46,7 +46,7 @@ object RPMTWAuthHandler {
                     if (token != null) {
                         RPMTWConfig.get().base.rpmtwAuthToken = token
                         RPMTWConfig.save()
-                        CosmicChatHandler.reset()
+                        UniverseChatHandler.reset()
 
                         val message = I18n.get("auth.rpmtw_platform_mod.status.success")
                         handler.sendResponseHeaders(200, message.toByteArray(Charsets.UTF_8).size.toLong())
@@ -94,6 +94,6 @@ object RPMTWAuthHandler {
         if (!RPMTWConfig.get().base.isLogin()) return
         RPMTWConfig.get().base.rpmtwAuthToken = null
         RPMTWConfig.save()
-        CosmicChatHandler.reset()
+        UniverseChatHandler.reset()
     }
 }

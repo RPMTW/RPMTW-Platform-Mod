@@ -3,9 +3,9 @@ package com.rpmtw.rpmtw_platform_mod.mixins;
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.rpmtw.rpmtw_api_client.models.cosmic_chat.CosmicChatMessage;
+import com.rpmtw.rpmtw_api_client.models.universe_chat.UniverseChatMessage;
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod;
-import com.rpmtw.rpmtw_platform_mod.gui.widgets.CosmicChatComponent;
+import com.rpmtw.rpmtw_platform_mod.gui.widgets.UniverseChatComponent;
 import com.rpmtw.rpmtw_platform_mod.utilities.Utilities;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -57,12 +57,12 @@ public class ChatComponentMixin {
     @Inject(method = "addMessage(Lnet/minecraft/network/chat/Component;IIZ)V", at = @At("HEAD"))
     public void addMessage(Component component, int i, int j, boolean bl, CallbackInfo ci) {
         List<Component> siblings = component.getSiblings();
-        CosmicChatComponent chatComponent = (CosmicChatComponent) siblings.stream().filter(sibling -> sibling instanceof CosmicChatComponent).findFirst().orElse(null);
+        UniverseChatComponent chatComponent = (UniverseChatComponent) siblings.stream().filter(sibling -> sibling instanceof UniverseChatComponent).findFirst().orElse(null);
 
         if (chatComponent != null) {
-            CosmicChatMessage message = chatComponent.getCosmicChatMessage();
+            UniverseChatMessage message = chatComponent.getUniverseChatMessage();
             String avatarUrl = message.getAvatarUrl();
-            Map<String, ResourceLocation> avatarMap = ChatComponentData.cosmicChatAvatarCache;
+            Map<String, ResourceLocation> avatarMap = ChatComponentData.universeChatAvatarCache;
             if (!avatarMap.containsKey(avatarUrl)) {
                 loadImage(avatarUrl);
             }
@@ -93,11 +93,11 @@ public class ChatComponentMixin {
             if (component == null) return;
 
             List<Component> siblings = component.getMessage().getSiblings();
-            CosmicChatComponent chatComponent = (CosmicChatComponent) siblings.stream().filter(sibling -> sibling instanceof CosmicChatComponent).findFirst().orElse(null);
+            UniverseChatComponent chatComponent = (UniverseChatComponent) siblings.stream().filter(sibling -> sibling instanceof UniverseChatComponent).findFirst().orElse(null);
             if (chatComponent == null) return;
 
-            CosmicChatMessage message = chatComponent.getCosmicChatMessage();
-            ResourceLocation location = ChatComponentData.cosmicChatAvatarCache.getOrDefault(message.getAvatarUrl(), null);
+            UniverseChatMessage message = chatComponent.getUniverseChatMessage();
+            ResourceLocation location = ChatComponentData.universeChatAvatarCache.getOrDefault(message.getAvatarUrl(), null);
 
             if (location == null) return;
             RenderSystem.setShaderColor(1, 1, 1, ChatComponentData.lastOpacity);
@@ -125,13 +125,13 @@ public class ChatComponentMixin {
     }
 
     private void loadImage(String url) {
-        ResourceLocation location = new ResourceLocation("rpmtw_platform_mod", "cosmic_chat_user_avatar/" + url.replace("https://", ""));
+        ResourceLocation location = new ResourceLocation("rpmtw_platform_mod", "universe_chat_user_avatar/" + url.replace("https://", ""));
         Thread thread = new Thread(null, () -> {
             @Nullable NativeImage nativeImage = null;
 
             try {
                 URL uri = new URL(url);
-                File file = Utilities.INSTANCE.getFileLocation("/.rpmtw/cosmic_chat_user_avatar/" + url.replace("https://", "") + ".png");
+                File file = Utilities.INSTANCE.getFileLocation("/.rpmtw/universe_chat_user_avatar/" + url.replace("https://", "") + ".png");
 
                 BufferedImage image = convertToBufferedImage(ImageIO.read(uri.openConnection().getInputStream()).getScaledInstance(8, 8, Image.SCALE_SMOOTH));
                 ImageIO.write(image, "png", file);
@@ -148,10 +148,10 @@ public class ChatComponentMixin {
                 TextureManager manager = Minecraft.getInstance().getTextureManager();
                 manager.register(location, new DynamicTexture(nativeImage));
 
-                ChatComponentData.cosmicChatAvatarCache.put(url, location);
+                ChatComponentData.universeChatAvatarCache.put(url, location);
                 RPMTWPlatformMod.LOGGER.info("Loaded image for " + url);
             }
-        }, "CosmicChatAvatarLoader");
+        }, "UniverseChatAvatarLoader");
         thread.start();
     }
 
@@ -169,5 +169,5 @@ class ChatComponentData {
     static int lastY = 0;
     static int lastMessageIndex = 0;
     static float lastOpacity = 0f;
-    static Map<String, ResourceLocation> cosmicChatAvatarCache = new HashMap<>();
+    static Map<String, ResourceLocation> universeChatAvatarCache = new HashMap<>();
 }

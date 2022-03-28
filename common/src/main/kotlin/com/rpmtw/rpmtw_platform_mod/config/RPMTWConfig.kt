@@ -3,7 +3,7 @@ package com.rpmtw.rpmtw_platform_mod.config
 import com.mojang.blaze3d.vertex.PoseStack
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformModPlugin
-import com.rpmtw.rpmtw_platform_mod.handlers.CosmicChatHandler
+import com.rpmtw.rpmtw_platform_mod.handlers.UniverseChatHandler
 import com.rpmtw.rpmtw_platform_mod.handlers.RPMTWAuthHandler
 import me.shedaniel.autoconfig.AutoConfig
 import me.shedaniel.autoconfig.ConfigHolder
@@ -65,21 +65,21 @@ object RPMTWConfig {
     }
 
     private fun listenOnSave(holder: ConfigHolder<ConfigObject>, beforeConfig: ConfigObject) {
-        var beforeAccountType = beforeConfig.cosmicChat.accountType
+        var beforeAccountType = beforeConfig.universeChat.accountType
 
         holder.registerSaveListener { _, edited ->
             var reset = false
-            if (edited.cosmicChat.accountType != beforeAccountType) {
-                // If change the account type to RPMTW and are not logged RPMTW account, it will not restart the cosmic chat client.
-                if (!(!edited.base.isLogin() && edited.cosmicChat.accountType.isRPMTW)) {
+            if (edited.universeChat.accountType != beforeAccountType) {
+                // If change the account type to RPMTW and are not logged RPMTW account, it will not restart the universe chat client.
+                if (!(!edited.base.isLogin() && edited.universeChat.accountType.isRPMTW)) {
                     reset = true
                 }
             }
 
             if (reset) {
-                CosmicChatHandler.reset()
+                UniverseChatHandler.reset()
             }
-            beforeAccountType = edited.cosmicChat.accountType
+            beforeAccountType = edited.universeChat.accountType
 
             return@registerSaveListener InteractionResult.SUCCESS
         }

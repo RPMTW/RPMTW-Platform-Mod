@@ -16,7 +16,7 @@
 
 ## 📚 Introduction
 
-The mod integrated with RPMTW services covers translation, wiki, cosmic chat, Chinese input optimization, and other
+The mod integrated with RPMTW services covers translation, wiki, universe chat, Chinese input optimization, and other
 features for Minecraft players to get a better gaming experience.
 
 ## 🎨 Features
@@ -25,7 +25,7 @@ features for Minecraft players to get a better gaming experience.
 
 Auto-toggle game language to default language of the user's computer when launching the game.
 
-- ### Cosmic Chat
+- ### Universe Chat
 
 Chat in any version of Minecraft or outside the game, every player feels like they are in the same world!
 

@@ -9,7 +9,7 @@ object RPMTWCommand {
     const val success: Int = Command.SINGLE_SUCCESS
 
     fun handle() {
-        ReplyCosmicMessageCommand()
+        ReplyUniverseMessageCommand()
         LoginRPMTWAccountCommand()
     }
 }
