@@ -1,7 +1,7 @@
 package com.rpmtw.rpmtw_platform_mod.gui
 
 import com.mojang.blaze3d.vertex.PoseStack
-import com.rpmtw.rpmtw_platform_mod.gui.widgets.CosmicChatWhatButton
+import com.rpmtw.rpmtw_platform_mod.gui.widgets.UniverseChatWhatButton
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.utilities.Utilities
 import net.minecraft.client.Minecraft
@@ -11,30 +11,30 @@ import net.minecraft.client.resources.language.I18n
 import net.minecraft.network.chat.TextComponent
 import net.minecraft.network.chat.TranslatableComponent
 
-class CosmicChatEULAScreen(private val initMessage: String?) : Screen(TextComponent("")) {
+class UniverseChatEULAScreen(private val initMessage: String?) : Screen(TextComponent("")) {
     override fun init() {
 
         val agreeButton = Button(
             (width - 100) / 2 - BOTTOM_BUTTON_WIDTH,
             height / 2 + 30,
             BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
-            TranslatableComponent("cosmicChat.rpmtw_platform_mod.gui.eula.agree")
+            TranslatableComponent("universeChat.rpmtw_platform_mod.gui.eula.agree")
         ) {
-            RPMTWConfig.get().cosmicChat.eula = true
+            RPMTWConfig.get().universeChat.eula = true
             RPMTWConfig.save()
-            Utilities.openCosmicChatScreen(initMessage)
+            Utilities.openUniverseChatScreen(initMessage)
         }
 
         val disagreeButton = Button(
             (width - 4) / 2 - BOTTOM_BUTTON_WIDTH + 50,
             height / 2 + 30,
             BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
-            TranslatableComponent("cosmicChat.rpmtw_platform_mod.gui.eula.disagree")
+            TranslatableComponent("universeChat.rpmtw_platform_mod.gui.eula.disagree")
         ) {
             Minecraft.getInstance().setScreen(null)
         }
 
-        val whatButton = CosmicChatWhatButton(width, height)
+        val whatButton = UniverseChatWhatButton(width, height)
 
 
         addRenderableWidget(disagreeButton)
@@ -49,12 +49,12 @@ class CosmicChatEULAScreen(private val initMessage: String?) : Screen(TextCompon
         this.renderBackground(matrixStack)
         val height = height / 2
         val textColor = 0xFFFFFF // White
-        val title = I18n.get("cosmicChat.rpmtw_platform_mod.gui.eula.title")
-        val text1 = I18n.get("cosmicChat.rpmtw_platform_mod.gui.eula.subtitle")
-        val text2 = I18n.get("cosmicChat.rpmtw_platform_mod.gui.eula.text.1")
-        val text3 = I18n.get("cosmicChat.rpmtw_platform_mod.gui.eula.text.2")
-        val text4 = I18n.get("cosmicChat.rpmtw_platform_mod.gui.eula.text.3")
-        val text5 = I18n.get("cosmicChat.rpmtw_platform_mod.gui.eula.text.4")
+        val title = I18n.get("universeChat.rpmtw_platform_mod.gui.eula.title")
+        val text1 = I18n.get("universeChat.rpmtw_platform_mod.gui.eula.subtitle")
+        val text2 = I18n.get("universeChat.rpmtw_platform_mod.gui.eula.text.1")
+        val text3 = I18n.get("universeChat.rpmtw_platform_mod.gui.eula.text.2")
+        val text4 = I18n.get("universeChat.rpmtw_platform_mod.gui.eula.text.3")
+        val text5 = I18n.get("universeChat.rpmtw_platform_mod.gui.eula.text.4")
 
 
         font.draw(matrixStack, title, width / 2f - font.width(title) / 2f, (height - 65).toFloat(), 0xFF5555)

@@ -1,10 +1,10 @@
 package com.rpmtw.rpmtw_platform_mod.utilities
 
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
-import com.rpmtw.rpmtw_platform_mod.gui.CosmicChatEULAScreen
-import com.rpmtw.rpmtw_platform_mod.gui.CosmicChatScreen
-import com.rpmtw.rpmtw_platform_mod.gui.CosmicChatScreenType
-import com.rpmtw.rpmtw_platform_mod.handlers.CosmicChatHandler
+import com.rpmtw.rpmtw_platform_mod.gui.UniverseChatEULAScreen
+import com.rpmtw.rpmtw_platform_mod.gui.UniverseChatScreen
+import com.rpmtw.rpmtw_platform_mod.gui.UniverseChatScreenType
+import com.rpmtw.rpmtw_platform_mod.handlers.UniverseChatHandler
 import kotlinx.coroutines.*
 import net.minecraft.client.Minecraft
 import net.minecraft.network.chat.TextComponent
@@ -42,16 +42,16 @@ object Utilities {
         Minecraft.getInstance().player?.displayClientMessage(TextComponent(message), overlay)
     }
 
-    fun openCosmicChatScreen(initMessage: String?) {
-        if (RPMTWConfig.get().cosmicChat.eula) {
+    fun openUniverseChatScreen(initMessage: String?) {
+        if (RPMTWConfig.get().universeChat.eula) {
             if (initMessage != null && initMessage.isNotEmpty() && !initMessage.startsWith("/")) {
-                CosmicChatHandler.send(initMessage)
+                UniverseChatHandler.send(initMessage)
                 Minecraft.getInstance().setScreen(null)
             } else {
-                Minecraft.getInstance().setScreen(CosmicChatScreen(CosmicChatScreenType.Send))
+                Minecraft.getInstance().setScreen(UniverseChatScreen(UniverseChatScreenType.Send))
             }
         } else {
-            Minecraft.getInstance().setScreen(CosmicChatEULAScreen(initMessage))
+            Minecraft.getInstance().setScreen(UniverseChatEULAScreen(initMessage))
         }
     }
 
@@ -67,11 +67,16 @@ object Utilities {
         }
     }
 
-    fun getBaseDirectory(): File {
-        return File(System.getProperty("user.home")).resolve(".rpmtw")
+    private fun getBaseDirectory(): File {
+        return File(System.getProperty("java.io.tmpdir")).resolve("com.rpmtw.rpmtw_platform_mod")
     }
 
     fun getFileLocation(fileName: String): File {
-        return getBaseDirectory().resolve(fileName)
+        val baseDirectory: File = getBaseDirectory()
+        if (!baseDirectory.exists()) {
+            baseDirectory.mkdirs()
+        }
+
+        return baseDirectory.resolve(fileName)
     }
 }

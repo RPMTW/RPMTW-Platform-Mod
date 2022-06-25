@@ -23,7 +23,7 @@ class ConfigObject : ConfigData {
 
     @JvmField
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
-    var cosmicChat = CosmicChat()
+    var universeChat = UniverseChat()
 
     @JvmField
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
@@ -61,7 +61,7 @@ class ConfigObject : ConfigData {
         var unlocalized = Minecraft.getInstance().languageManager.selected.code == "en_us"
     }
 
-    class CosmicChat {
+    class UniverseChat {
         @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
         @ConfigEntry.Gui.RequiresRestart
@@ -85,20 +85,24 @@ class ConfigObject : ConfigData {
         @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
         @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
-        var accountType: CosmicChatAccountType = CosmicChatAccountType.RPMTW
+        var accountType: UniverseChatAccountType = UniverseChatAccountType.RPMTW
     }
 
     class KeyBindings {
         @JvmField
         var machineTranslation: ModifierKeyCode = ModifierKeyCode.unknown()
 
+        // Ctrl + R
         @JvmField
         var config: ModifierKeyCode =
-            ModifierKeyCode.of(InputConstants.Type.KEYSYM.getOrCreate(InputConstants.KEY_R), Modifier.none())
+            ModifierKeyCode.of(
+                InputConstants.Type.KEYSYM.getOrCreate(InputConstants.KEY_R),
+                Modifier.of(false, true, false)
+            )
     }
 }
 
-enum class CosmicChatAccountType {
+enum class UniverseChatAccountType {
     MINECRAFT,
     RPMTW;
 

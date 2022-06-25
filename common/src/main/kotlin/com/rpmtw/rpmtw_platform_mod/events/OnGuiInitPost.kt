@@ -21,11 +21,11 @@ class OnGuiInitPost() : ClientGuiEvent.ScreenInitPost {
 
     override fun init(screen: Screen?, access: ScreenAccess?) {
         if (screen != null && access != null) {
-            addedCosmicChatButton(screen, access)
+            addedUniverseChatButton(screen, access)
         }
     }
 
-    private fun addedCosmicChatButton(
+    private fun addedUniverseChatButton(
         screen: Screen,
         access: ScreenAccess
     ) {
@@ -33,7 +33,7 @@ class OnGuiInitPost() : ClientGuiEvent.ScreenInitPost {
             val scaledWidth = screen.width
             val scaledHeight = screen.height
 
-            if (screen is ChatScreen && (RPMTWConfig.get().cosmicChat.enable && RPMTWConfig.get().cosmicChat.enableButton)) {
+            if (screen is ChatScreen && (RPMTWConfig.get().universeChat.enable && RPMTWConfig.get().universeChat.enableButton)) {
                 val textField: EditBox? = screen.input
                 val offsetX: Int
                 val hasQuarkMod = Platform.isModLoaded("quark")
@@ -49,14 +49,14 @@ class OnGuiInitPost() : ClientGuiEvent.ScreenInitPost {
                     scaledHeight - 40,
                     90,
                     20,
-                    TranslatableComponent("cosmicChat.rpmtw_platform_mod.button.send"),
+                    TranslatableComponent("universeChat.rpmtw_platform_mod.button.send"),
                     {
-                        Utilities.openCosmicChatScreen(textField?.value)
+                        Utilities.openUniverseChatScreen(textField?.value)
                     },
                     { _, matrixStack, i, j ->
                         screen.renderTooltip(
                             matrixStack,
-                            TranslatableComponent("cosmicChat.rpmtw_platform_mod.button.send.tooltip"),
+                            TranslatableComponent("universeChat.rpmtw_platform_mod.button.send.tooltip"),
                             i,
                             j
                         )
@@ -67,13 +67,13 @@ class OnGuiInitPost() : ClientGuiEvent.ScreenInitPost {
                     scaledHeight - 40,
                     20,
                     20,
-                    TranslatableComponent("cosmicChat.rpmtw_platform_mod.button.receive"),
-                    RPMTWConfig.get().cosmicChat.enableReceiveMessage,
+                    TranslatableComponent("universeChat.rpmtw_platform_mod.button.receive"),
+                    RPMTWConfig.get().universeChat.enableReceiveMessage,
                     { checked ->
-                        RPMTWConfig.get().cosmicChat.enableReceiveMessage = checked
+                        RPMTWConfig.get().universeChat.enableReceiveMessage = checked
                         RPMTWConfig.save()
                     },
-                    I18n.get("cosmicChat.rpmtw_platform_mod.button.receive.tooltip")
+                    I18n.get("universeChat.rpmtw_platform_mod.button.receive.tooltip")
                 )
 
                 access.addRenderableWidget(sendButton)

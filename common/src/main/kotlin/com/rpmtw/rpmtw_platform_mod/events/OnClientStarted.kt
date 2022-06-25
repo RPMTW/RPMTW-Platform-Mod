@@ -2,7 +2,7 @@ package com.rpmtw.rpmtw_platform_mod.events
 
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
-import com.rpmtw.rpmtw_platform_mod.handlers.CosmicChatHandler
+import com.rpmtw.rpmtw_platform_mod.handlers.UniverseChatHandler
 import com.rpmtw.rpmtw_platform_mod.translation.machineTranslation.MTManager
 import com.rpmtw.rpmtw_platform_mod.utilities.Utilities
 import dev.architectury.event.events.client.ClientLifecycleEvent
@@ -33,7 +33,7 @@ class OnClientStarted() : ClientLifecycleEvent.ClientState {
     override fun stateChanged(instance: Minecraft?) {
         if (instance != null) {
             RPMTWConfig.register()
-            CosmicChatHandler.handle()
+            UniverseChatHandler.handle()
             toggleLanguage(instance)
             MTManager.readCache()
         }

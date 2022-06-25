@@ -1,12 +1,12 @@
 package com.rpmtw.rpmtw_platform_mod.handlers
 
 import com.rpmtw.rpmtw_api_client.RPMTWApiClient
-import com.rpmtw.rpmtw_api_client.models.cosmic_chat.CosmicChatMessage
-import com.rpmtw.rpmtw_api_client.resources.CosmicChatMessageFormat
+import com.rpmtw.rpmtw_api_client.models.universe_chat.UniverseChatMessage
+import com.rpmtw.rpmtw_api_client.resources.UniverseChatMessageFormat
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
-import com.rpmtw.rpmtw_platform_mod.config.CosmicChatAccountType
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
-import com.rpmtw.rpmtw_platform_mod.gui.widgets.CosmicChatComponent
+import com.rpmtw.rpmtw_platform_mod.config.UniverseChatAccountType
+import com.rpmtw.rpmtw_platform_mod.gui.widgets.UniverseChatComponent
 import com.rpmtw.rpmtw_platform_mod.utilities.Utilities
 import kotlinx.coroutines.Deferred
 import net.minecraft.ChatFormatting
@@ -15,12 +15,12 @@ import net.minecraft.client.User
 import net.minecraft.client.resources.language.I18n
 import net.minecraft.network.chat.*
 
-object CosmicChatHandler {
+object UniverseChatHandler {
     private val client: RPMTWApiClient = RPMTWApiClient.instance
     private val nickname: String?
         get() {
-            return if (RPMTWConfig.get().cosmicChat.nickname != null && RPMTWConfig.get().cosmicChat.nickname!!.isNotEmpty()) {
-                RPMTWConfig.get().cosmicChat.nickname!!
+            return if (RPMTWConfig.get().universeChat.nickname != null && RPMTWConfig.get().universeChat.nickname!!.isNotEmpty()) {
+                RPMTWConfig.get().universeChat.nickname!!
             } else {
                 null
             }
@@ -29,10 +29,10 @@ object CosmicChatHandler {
     private suspend fun init() {
         val minecraft: Minecraft = Minecraft.getInstance()
         val user: User = minecraft.user
-        if (RPMTWConfig.get().base.isLogin() && RPMTWConfig.get().cosmicChat.accountType == CosmicChatAccountType.RPMTW) {
-            client.cosmicChatResource.connect(token = RPMTWConfig.get().base.rpmtwAuthToken!!)
+        if (RPMTWConfig.get().base.isLogin() && RPMTWConfig.get().universeChat.accountType == UniverseChatAccountType.RPMTW) {
+            client.universeChatResource.connect(token = RPMTWConfig.get().base.rpmtwAuthToken!!)
         } else {
-            client.cosmicChatResource.connect(minecraftUUID = user.uuid)
+            client.universeChatResource.connect(minecraftUUID = user.uuid)
         }
     }
 
@@ -93,19 +93,19 @@ object CosmicChatHandler {
         return newMessage
     }
 
-    private fun formatAuthorName(message: CosmicChatMessage): String {
+    private fun formatAuthorName(message: UniverseChatMessage): String {
         return if (message.nickname != null && message.nickname!!.isNotEmpty()) "${message.username} (${message.nickname})" else message.username
     }
 
     private fun listenMessages() {
-        if (client.cosmicChatResource.isConnected) {
-            client.cosmicChatResource.onMessageSent({ msg ->
-                if (RPMTWConfig.get().cosmicChat.enable && RPMTWConfig.get().cosmicChat.enableReceiveMessage) {
+        if (client.universeChatResource.isConnected) {
+            client.universeChatResource.onMessageSent({ msg ->
+                if (RPMTWConfig.get().universeChat.enable && RPMTWConfig.get().universeChat.enableReceiveMessage) {
                     Utilities.coroutineLaunch {
                         val isReply: Boolean = msg.replyMessageUUID != null
 
                         val component: MutableComponent = TextComponent.EMPTY.copy()
-                        val title = TextComponent("[${I18n.get("cosmicChat.rpmtw_platform_mod.title")}] ").setStyle(
+                        val title = TextComponent("[${I18n.get("universeChat.rpmtw_platform_mod.title")}] ").setStyle(
                             Style.EMPTY.withColor(ChatFormatting.BLUE)
                         )
                         val authorName: String = formatAuthorName(msg)
@@ -117,7 +117,7 @@ object CosmicChatHandler {
                         ).withHoverEvent(
                             HoverEvent(
                                 HoverEvent.Action.SHOW_TEXT,
-                                TextComponent(I18n.get("cosmicChat.rpmtw_platform_mod.open_avatar_url"))
+                                TextComponent(I18n.get("universeChat.rpmtw_platform_mod.open_avatar_url"))
                             )
                         )
                         val author = TextComponent("§e<§6${authorName}§e> ").setStyle(authorStyle)
@@ -128,12 +128,12 @@ object CosmicChatHandler {
                                 Style.EMPTY.withColor(ChatFormatting.GREEN).withClickEvent(
                                     ClickEvent(
                                         ClickEvent.Action.RUN_COMMAND,
-                                        "/cosmicChat reply ${msg.uuid}"
+                                        "/universeChat reply ${msg.uuid}"
                                     )
                                 ).withHoverEvent(
                                     HoverEvent(
                                         HoverEvent.Action.SHOW_TEXT,
-                                        TextComponent(I18n.get("cosmicChat.rpmtw_platform_mod.gui.reply", authorName))
+                                        TextComponent(I18n.get("universeChat.rpmtw_platform_mod.gui.reply", authorName))
                                     )
                                 )
                             )
@@ -141,7 +141,7 @@ object CosmicChatHandler {
                         val messageContent: MutableComponent = formatUrl(formatEmoji(msg.message))
                         val message: MutableComponent = TextComponent.EMPTY.copy()
                         if (isReply) {
-                            val replyMessage: CosmicChatMessage? = getMessageAsync(msg.replyMessageUUID!!)
+                            val replyMessage: UniverseChatMessage? = getMessageAsync(msg.replyMessageUUID!!)
 
                             if (replyMessage != null) {
 
@@ -163,46 +163,46 @@ object CosmicChatHandler {
                         component.append(title)
                         component.append(author)
                         component.append(message)
-                        component.append(CosmicChatComponent(msg))
+                        component.append(UniverseChatComponent(msg))
                         component.append(replyAction)
                         // Message format
-                        // [Cosmic Chat] <Steve> Hello World!  [Reply]
+                        // [Universe Chat] <Steve> Hello World!  [Reply]
                         // Reply message format
-                        // [Cosmic Chat] <Steve> Reply Alex Hi! -> Hello World!  [Reply]
+                        // [Universe Chat] <Steve> Reply Alex Hi! -> Hello World!  [Reply]
                         Minecraft.getInstance().player?.displayClientMessage(component, false)
                     }
                 }
-            }, format = CosmicChatMessageFormat.MinecraftFormatting)
+            }, format = UniverseChatMessageFormat.MinecraftFormatting)
         } else {
-            RPMTWPlatformMod.LOGGER.error("Connecting to cosmic chat server failed")
+            RPMTWPlatformMod.LOGGER.error("Connecting to universe chat server failed")
         }
 
     }
 
     private fun statusHandler(status: String) {
-        val prefix = "§9[${I18n.get("cosmicChat.rpmtw_platform_mod.title")}]§r"
+        val prefix = "§9[${I18n.get("universeChat.rpmtw_platform_mod.title")}]§r"
         when (status) {
             "success" -> {
                 Utilities.sendMessage(
-                    "$prefix ${I18n.get("cosmicChat.rpmtw_platform_mod.status.success")}",
+                    "$prefix ${I18n.get("universeChat.rpmtw_platform_mod.status.success")}",
                     overlay = true
                 )
             }
             "phishing" -> {
                 Utilities.sendMessage(
-                    "$prefix ${I18n.get("cosmicChat.rpmtw_platform_mod.status.phishing")}",
+                    "$prefix ${I18n.get("universeChat.rpmtw_platform_mod.status.phishing")}",
                     overlay = true
                 )
             }
             "banned" -> {
                 Utilities.sendMessage(
-                    "$prefix ${I18n.get("cosmicChat.rpmtw_platform_mod.status.banned")}",
+                    "$prefix ${I18n.get("universeChat.rpmtw_platform_mod.status.banned")}",
                     overlay = true
                 )
             }
             "unauthorized" -> {
                 Utilities.sendMessage(
-                    "$prefix ${I18n.get("cosmicChat.rpmtw_platform_mod.status.unauthorized")}",
+                    "$prefix ${I18n.get("universeChat.rpmtw_platform_mod.status.unauthorized")}",
                     overlay = true
                 )
             }
@@ -210,24 +210,24 @@ object CosmicChatHandler {
     }
 
     private suspend fun sendMessage(message: String) {
-        val status: String = client.cosmicChatResource.sendMessage(message, nickname = nickname)
+        val status: String = client.universeChatResource.sendMessage(message, nickname = nickname)
         statusHandler(status)
     }
 
     private suspend fun replyMessage(message: String, uuid: String) {
-        val status: String = client.cosmicChatResource.replyMessage(message = message, uuid = uuid, nickname = nickname)
+        val status: String = client.universeChatResource.replyMessage(message = message, uuid = uuid, nickname = nickname)
         statusHandler(status)
     }
 
     fun handle() {
-        if (RPMTWConfig.get().cosmicChat.enable) {
-            RPMTWPlatformMod.LOGGER.info("Initializing cosmic chat server...")
+        if (RPMTWConfig.get().universeChat.enable) {
+            RPMTWPlatformMod.LOGGER.info("Initializing universe chat server...")
             Utilities.coroutineLaunch {
                 init()
                 listen()
             }
 
-            RPMTWPlatformMod.LOGGER.info("Cosmic chat initialized!")
+            RPMTWPlatformMod.LOGGER.info("Universe chat initialized!")
         }
     }
 
@@ -241,30 +241,30 @@ object CosmicChatHandler {
     }
 
     fun send(message: String) {
-        if (client.cosmicChatResource.isConnected) {
+        if (client.universeChatResource.isConnected) {
             Utilities.coroutineLaunch {
                 sendMessage(message)
             }
         } else {
-            RPMTWPlatformMod.LOGGER.error("Connecting to cosmic chat server failed")
+            RPMTWPlatformMod.LOGGER.error("Connecting to universe chat server failed")
         }
     }
 
     fun reply(message: String, uuid: String) {
-        if (client.cosmicChatResource.isConnected) {
+        if (client.universeChatResource.isConnected) {
             Utilities.coroutineLaunch {
                 replyMessage(message, uuid)
             }
         } else {
-            RPMTWPlatformMod.LOGGER.error("Connecting to cosmic chat server failed")
+            RPMTWPlatformMod.LOGGER.error("Connecting to universe chat server failed")
         }
     }
 
-    suspend fun getMessageAsync(uuid: String): CosmicChatMessage? {
-        if (client.cosmicChatResource.isConnected) {
-            val result: Deferred<CosmicChatMessage?> = Utilities.coroutineAsync {
+    suspend fun getMessageAsync(uuid: String): UniverseChatMessage? {
+        if (client.universeChatResource.isConnected) {
+            val result: Deferred<UniverseChatMessage?> = Utilities.coroutineAsync {
                 try {
-                    return@coroutineAsync client.cosmicChatResource.getMessage(uuid)
+                    return@coroutineAsync client.universeChatResource.getMessage(uuid)
                 } catch (e: Exception) {
                     RPMTWPlatformMod.LOGGER.error("Failed to get message", e)
                     return@coroutineAsync null
@@ -273,19 +273,19 @@ object CosmicChatHandler {
 
             return result.await()
         } else {
-            RPMTWPlatformMod.LOGGER.error("Connecting to cosmic chat server failed")
+            RPMTWPlatformMod.LOGGER.error("Connecting to universe chat server failed")
             return null
         }
     }
 
     fun close() {
-        client.cosmicChatResource.disconnect()
+        client.universeChatResource.disconnect()
     }
 
     fun reset() {
-        RPMTWPlatformMod.LOGGER.info("Resetting cosmic chat...")
+        RPMTWPlatformMod.LOGGER.info("Resetting universe chat...")
         close()
         handle()
-        RPMTWPlatformMod.LOGGER.info("Cosmic chat reset!")
+        RPMTWPlatformMod.LOGGER.info("Universe chat reset!")
     }
 }

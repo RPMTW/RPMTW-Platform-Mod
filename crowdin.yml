@@ -1,5 +1,9 @@
 commit_message: 'i18n: new translations %original_file_name% from Crowdin'
 append_commit_message: false
+pull_request_title: 'i18n: New Crowdin updates'
+pull_request_labels: [
+  "i18n"
+]
 files:
   - source: /common/src/main/resources/assets/rpmtw_platform_mod/lang/en_us.json
     translation: /common/src/main/resources/assets/rpmtw_platform_mod/lang/%locale_with_underscore%.json

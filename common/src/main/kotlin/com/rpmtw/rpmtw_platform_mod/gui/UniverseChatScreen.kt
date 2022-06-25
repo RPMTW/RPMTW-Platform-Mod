@@ -1,9 +1,9 @@
 package com.rpmtw.rpmtw_platform_mod.gui
 
 import com.mojang.blaze3d.vertex.PoseStack
-import com.rpmtw.rpmtw_api_client.models.cosmic_chat.CosmicChatMessage
-import com.rpmtw.rpmtw_platform_mod.gui.widgets.CosmicChatWhatButton
-import com.rpmtw.rpmtw_platform_mod.handlers.CosmicChatHandler
+import com.rpmtw.rpmtw_api_client.models.universe_chat.UniverseChatMessage
+import com.rpmtw.rpmtw_platform_mod.gui.widgets.UniverseChatWhatButton
+import com.rpmtw.rpmtw_platform_mod.handlers.UniverseChatHandler
 import com.rpmtw.rpmtw_platform_mod.utilities.Utilities
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.components.Button
@@ -13,12 +13,12 @@ import net.minecraft.client.resources.language.I18n
 import net.minecraft.network.chat.TextComponent
 import net.minecraft.network.chat.TranslatableComponent
 
-class CosmicChatScreen(private val type: CosmicChatScreenType, private val replyMessage: CosmicChatMessage? = null) :
+class UniverseChatScreen(private val type: UniverseChatScreenType, private val replyMessage: UniverseChatMessage? = null) :
     Screen(TextComponent("")) {
     private var messageEditBox: EditBox? = null
 
     override fun init() {
-        val whatButton = CosmicChatWhatButton(width, height)
+        val whatButton = UniverseChatWhatButton(width, height)
 
         val sendButton = Button(
             (width - 4) / 2 - BOTTOM_BUTTON_WIDTH + 50,
@@ -30,22 +30,22 @@ class CosmicChatScreen(private val type: CosmicChatScreenType, private val reply
             if (messageEditBox == null) return@Button
             val message: String = messageEditBox!!.value
             if (message.isEmpty()) {
-                Utilities.sendMessage(I18n.get("cosmicChat.rpmtw_platform_mod.gui.input.null"), overlay = true)
+                Utilities.sendMessage(I18n.get("universeChat.rpmtw_platform_mod.gui.input.null"), overlay = true)
             } else {
                 Utilities.sendMessage(
-                    "[${I18n.get("cosmicChat.rpmtw_platform_mod.title")}] ${I18n.get("cosmicChat.rpmtw_platform_mod.status.sending")}",
+                    "[${I18n.get("universeChat.rpmtw_platform_mod.title")}] ${I18n.get("universeChat.rpmtw_platform_mod.status.sending")}",
                     overlay = true
                 )
 
                 if (type.isSend) {
-                    CosmicChatHandler.send(message)
+                    UniverseChatHandler.send(message)
                 }
 
                 if (type.isReply) {
                     if (replyMessage == null) {
                         throw IllegalStateException("replyMessageUUID is null")
                     }
-                    CosmicChatHandler.reply(message, replyMessage.uuid)
+                    UniverseChatHandler.reply(message, replyMessage.uuid)
                 }
 
             }
@@ -60,7 +60,7 @@ class CosmicChatScreen(private val type: CosmicChatScreenType, private val reply
             Minecraft.getInstance().setScreen(null)
         }
 
-        val suggestion: String = I18n.get("cosmicChat.rpmtw_platform_mod.gui.input.tooltip")
+        val suggestion: String = I18n.get("universeChat.rpmtw_platform_mod.gui.input.tooltip")
         messageEditBox = object : EditBox(
             font, width / 2 - 95, height / 2 - 10, 200, 20,
             TextComponent(suggestion)
@@ -98,9 +98,9 @@ class CosmicChatScreen(private val type: CosmicChatScreenType, private val reply
         lateinit var title: String
 
         if (type.isSend) {
-            title = I18n.get("cosmicChat.rpmtw_platform_mod.gui.send")
+            title = I18n.get("universeChat.rpmtw_platform_mod.gui.send")
         } else if (type.isReply) {
-            title = I18n.get("cosmicChat.rpmtw_platform_mod.gui.reply", replyMessage!!.username)
+            title = I18n.get("universeChat.rpmtw_platform_mod.gui.reply", replyMessage!!.username)
         }
 
         font.draw(
@@ -117,7 +117,7 @@ class CosmicChatScreen(private val type: CosmicChatScreenType, private val reply
     }
 }
 
-enum class CosmicChatScreenType {
+enum class UniverseChatScreenType {
     Send,
     Reply;
 
