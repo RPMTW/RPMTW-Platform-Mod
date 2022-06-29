@@ -65,7 +65,7 @@ tasks {
     }
 
     remapJar {
-        input.set(shadowJar.get().archiveFile)
+        inputFile.set(shadowJar.get().archiveFile)
         dependsOn(shadowJar)
         archiveClassifier.set(null as String?)
     }
