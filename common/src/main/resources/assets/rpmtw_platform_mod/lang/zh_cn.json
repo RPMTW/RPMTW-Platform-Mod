@@ -30,7 +30,6 @@
   "config.rpmtw_platform_mod.option.translate.machineTranslation": "机器翻译",
   "config.rpmtw_platform_mod.option.translate.machineTranslation.@Tooltip": "如果没有人工翻译，则使用机器翻译来翻译文本。",
   "config.rpmtw_platform_mod.option.translate.unlocalized": "未本地化的内容",
-  "config.rpmtw_platform_mod.option.translate.unlocalized.@Tooltip": "如果游戏语言是美国英语，额外显示未本地化内容将无法工作。",
   "config.rpmtw_platform_mod.title": "RPMTW平台配置",
   "universeChat.rpmtw_platform_mod.button.receive": "接收宇宙通信",
   "universeChat.rpmtw_platform_mod.button.receive.tooltip": "接收来自其他星球的信息。",
