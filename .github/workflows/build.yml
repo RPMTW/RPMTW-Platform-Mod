@@ -39,10 +39,10 @@ jobs:
       - name: Upload artifacts (fabric)
         uses: actions/upload-artifact@v3
         with:
-          name: 1.18.2-${{ steps.github_short_hash.outputs.result }}-fabric.zip
-          path: ${{ github.workspace }}/fabric/build/libs/rpmtw-platform-mod-1.18-2.0.0.jar
+          name: 1.19-${{ steps.github_short_hash.outputs.result }}-fabric.zip
+          path: ${{ github.workspace }}/fabric/build/libs/rpmtw-platform-mod-1.19-1.4.0.jar
       - name: Upload artifacts (forge)
         uses: actions/upload-artifact@v3
         with:
-          name: 1.18.2-${{ steps.github_short_hash.outputs.result }}-forge.zip
-          path: ${{ github.workspace }}/forge/build/libs/rpmtw-platform-mod-1.18-2.0.0.jar
+          name: 1.19-${{ steps.github_short_hash.outputs.result }}-forge.zip
+          path: ${{ github.workspace }}/forge/build/libs/rpmtw-platform-mod-1.19-1.4.0.jar

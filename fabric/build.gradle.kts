@@ -56,7 +56,7 @@ dependencies {
     }
 
 
-    modImplementation("com.terraformersmc:modmenu:3.1.0")
+    modImplementation("com.terraformersmc:modmenu:4.0.0")
 }
 val accessWidenerFile = project(":common").file("src/main/resources/rpmtw_platform_mod.accesswidener")
 

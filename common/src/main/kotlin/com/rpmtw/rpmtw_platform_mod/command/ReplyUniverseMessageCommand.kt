@@ -9,17 +9,22 @@ import com.rpmtw.rpmtw_platform_mod.gui.UniverseChatScreenType
 import com.rpmtw.rpmtw_platform_mod.handlers.UniverseChatHandler
 import com.rpmtw.rpmtw_platform_mod.utilities.Utilities
 import net.minecraft.client.Minecraft
-import net.minecraft.network.chat.TranslatableComponent
+import net.minecraft.network.chat.Component
 
 class ReplyUniverseMessageCommand {
     init {
         val argumentName = "message_uuid"
-        RPMTWPlatformModPlugin.registerClientCommand("universeChat", "reply", argumentName, StringArgumentType.string()) {
+        RPMTWPlatformModPlugin.registerClientCommand(
+            "universeChat",
+            "reply",
+            argumentName,
+            StringArgumentType.string()
+        ) {
             val uuid: String = StringArgumentType.getString(it, argumentName)
             Utilities.coroutineLaunch {
                 val message: UniverseChatMessage? = UniverseChatHandler.getMessageAsync(uuid)
                 val exception =
-                    SimpleCommandExceptionType(TranslatableComponent("command.rpmtw_platform_mod.replyUniverseMessage.getMessage.failed")).create()
+                    SimpleCommandExceptionType(Component.translatable("command.rpmtw_platform_mod.replyUniverseMessage.getMessage.failed")).create()
                 if (message == null) {
                     throw exception
                 } else {

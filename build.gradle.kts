@@ -6,7 +6,7 @@ plugins {
     java
     id("org.jetbrains.kotlin.jvm") version "1.6.10"
     id("architectury-plugin") version "3.4-SNAPSHOT"
-    id("dev.architectury.loom") version "0.11.0-SNAPSHOT" apply false
+    id("dev.architectury.loom") version "0.12.0-SNAPSHOT" apply false
 }
 
 architectury {

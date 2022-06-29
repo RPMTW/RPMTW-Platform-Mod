@@ -49,7 +49,7 @@ object MTManager {
                 it.withColor(ChatFormatting.GREEN)
             }
         } else if (info?.status == MTDataStatus.FAILED && info.error != null) {
-            TextComponent(I18n.get("machineTranslation.rpmtw_platform_mod.status.failed", info.error)).withStyle(
+            Component.literal(I18n.get("machineTranslation.rpmtw_platform_mod.status.failed", info.error)).withStyle(
                 ChatFormatting.RED
             )
         } else if (translatingCount >= maxTranslatingCount) {
@@ -118,18 +118,18 @@ object MTManager {
         fun getArgument(i: Int): Component {
             return when (val obj = args.getOrNull(i)) {
                 null -> {
-                    TextComponent.EMPTY
+                    Component.empty()
                 }
                 is Component -> {
                     obj
                 }
                 else -> {
-                    TextComponent(obj.toString())
+                    Component.literal(obj.toString())
                 }
             }
         }
 
-        val component: MutableComponent = TextComponent.EMPTY.copy()
+        val component: MutableComponent = Component.empty()
 
         val matcher = formatPattern.matcher(text)
         try {
@@ -190,7 +190,7 @@ object MTManager {
 
     private fun generateProgressText(): MutableComponent {
         val text =
-            TranslatableComponent("machineTranslation.rpmtw_platform_mod.status.translating").withStyle(ChatFormatting.GRAY)
+            Component.translatable("machineTranslation.rpmtw_platform_mod.status.translating").withStyle(ChatFormatting.GRAY)
         for (i in 0 until System.currentTimeMillis() % 400 / 100) {
             text.append(".")
         }

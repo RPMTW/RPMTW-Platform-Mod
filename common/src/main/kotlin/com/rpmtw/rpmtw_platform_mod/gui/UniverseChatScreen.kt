@@ -10,11 +10,10 @@ import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.components.EditBox
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.resources.language.I18n
-import net.minecraft.network.chat.TextComponent
-import net.minecraft.network.chat.TranslatableComponent
+import net.minecraft.network.chat.Component
 
 class UniverseChatScreen(private val type: UniverseChatScreenType, private val replyMessage: UniverseChatMessage? = null) :
-    Screen(TextComponent("")) {
+    Screen(Component.empty()) {
     private var messageEditBox: EditBox? = null
 
     override fun init() {
@@ -25,7 +24,7 @@ class UniverseChatScreen(private val type: UniverseChatScreenType, private val r
             height / 2 + 30,
             BOTTOM_BUTTON_WIDTH,
             BUTTON_HEIGHT,
-            TranslatableComponent("gui.rpmtw_platform_mod.${type.name.lowercase()}")
+            Component.translatable("gui.rpmtw_platform_mod.${type.name.lowercase()}")
         ) {
             if (messageEditBox == null) return@Button
             val message: String = messageEditBox!!.value
@@ -55,7 +54,7 @@ class UniverseChatScreen(private val type: UniverseChatScreenType, private val r
 
         val cancelButton = Button(
             (width - 100) / 2 - BOTTOM_BUTTON_WIDTH, height / 2 + 30, BOTTOM_BUTTON_WIDTH,
-            BUTTON_HEIGHT, TranslatableComponent("gui.rpmtw_platform_mod.cancel")
+            BUTTON_HEIGHT, Component.translatable("gui.rpmtw_platform_mod.cancel")
         ) {
             Minecraft.getInstance().setScreen(null)
         }
@@ -63,7 +62,7 @@ class UniverseChatScreen(private val type: UniverseChatScreenType, private val r
         val suggestion: String = I18n.get("universeChat.rpmtw_platform_mod.gui.input.tooltip")
         messageEditBox = object : EditBox(
             font, width / 2 - 95, height / 2 - 10, 200, 20,
-            TextComponent(suggestion)
+            Component.literal(suggestion)
         ) {
             init {
                 setSuggestion(suggestion)

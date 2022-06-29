@@ -37,7 +37,7 @@ object UniverseChatHandler {
     }
 
     private fun formatUrl(message: String): MutableComponent {
-        val component: MutableComponent = TextComponent.EMPTY.copy()
+        val component: MutableComponent = Component.empty()
         @Suppress("RegExpRedundantEscape") val urlRegex =
             Regex("(http|https):\\/\\/[\\w-]+(\\.[\\w-]+)+([\\w.,@?^=%&amp;:/~+#-]*[\\w@?^=%&amp;/~+#-])?")
         val urlMatchList: List<MatchResult> = urlRegex.findAll(message).toList()
@@ -46,7 +46,7 @@ object UniverseChatHandler {
             for (match in urlMatchList) {
                 component.append(message.substring(lastEnd, match.range.first))
                 val url = match.value
-                val urlComponent = TextComponent(url).setStyle(
+                val urlComponent = Component.literal(url).setStyle(
                     Style.EMPTY.withUnderlined(true).withColor(ChatFormatting.BLUE)
                         .withClickEvent(ClickEvent(ClickEvent.Action.OPEN_URL, url))
                 )
@@ -55,7 +55,7 @@ object UniverseChatHandler {
             }
             component.append(message.substring(lastEnd + 1))
         } else {
-            component.append(TextComponent(message))
+            component.append(Component.literal(message))
         }
         return component
     }
@@ -104,42 +104,44 @@ object UniverseChatHandler {
                     Utilities.coroutineLaunch {
                         val isReply: Boolean = msg.replyMessageUUID != null
 
-                        val component: MutableComponent = TextComponent.EMPTY.copy()
-                        val title = TextComponent("[${I18n.get("universeChat.rpmtw_platform_mod.title")}] ").setStyle(
-                            Style.EMPTY.withColor(ChatFormatting.BLUE)
-                        )
+                        val component: MutableComponent = Component.empty()
+                        val title =
+                            Component.literal("[${I18n.get("universeChat.rpmtw_platform_mod.title")}] ").setStyle(
+                                Style.EMPTY.withColor(ChatFormatting.BLUE)
+                            )
                         val authorName: String = formatAuthorName(msg)
                         val authorStyle: Style = Style.EMPTY.withClickEvent(
                             ClickEvent(
-                                ClickEvent.Action.OPEN_URL,
-                                msg.avatarUrl
+                                ClickEvent.Action.OPEN_URL, msg.avatarUrl
                             )
                         ).withHoverEvent(
                             HoverEvent(
                                 HoverEvent.Action.SHOW_TEXT,
-                                TextComponent(I18n.get("universeChat.rpmtw_platform_mod.open_avatar_url"))
+                                Component.translatable("universeChat.rpmtw_platform_mod.open_avatar_url")
                             )
                         )
-                        val author = TextComponent("§e<§6${authorName}§e> ").setStyle(authorStyle)
+                        val author = Component.literal("§e<§6${authorName}§e> ").setStyle(authorStyle)
 
 
                         val replyAction: MutableComponent =
-                            TextComponent("  [${I18n.get("gui.rpmtw_platform_mod.reply")}]").setStyle(
+                            Component.literal("  [${I18n.get("gui.rpmtw_platform_mod.reply")}]").setStyle(
                                 Style.EMPTY.withColor(ChatFormatting.GREEN).withClickEvent(
                                     ClickEvent(
-                                        ClickEvent.Action.RUN_COMMAND,
-                                        "/universeChat reply ${msg.uuid}"
+                                        ClickEvent.Action.RUN_COMMAND, "/universeChat reply ${msg.uuid}"
                                     )
                                 ).withHoverEvent(
                                     HoverEvent(
-                                        HoverEvent.Action.SHOW_TEXT,
-                                        TextComponent(I18n.get("universeChat.rpmtw_platform_mod.gui.reply", authorName))
+                                        HoverEvent.Action.SHOW_TEXT, Component.literal(
+                                            I18n.get(
+                                                "universeChat.rpmtw_platform_mod.gui.reply", authorName
+                                            )
+                                        )
                                     )
                                 )
                             )
 
                         val messageContent: MutableComponent = formatUrl(formatEmoji(msg.message))
-                        val message: MutableComponent = TextComponent.EMPTY.copy()
+                        val message: MutableComponent = Component.empty()
                         if (isReply) {
                             val replyMessage: UniverseChatMessage? = getMessageAsync(msg.replyMessageUUID!!)
 
@@ -184,26 +186,22 @@ object UniverseChatHandler {
         when (status) {
             "success" -> {
                 Utilities.sendMessage(
-                    "$prefix ${I18n.get("universeChat.rpmtw_platform_mod.status.success")}",
-                    overlay = true
+                    "$prefix ${I18n.get("universeChat.rpmtw_platform_mod.status.success")}", overlay = true
                 )
             }
             "phishing" -> {
                 Utilities.sendMessage(
-                    "$prefix ${I18n.get("universeChat.rpmtw_platform_mod.status.phishing")}",
-                    overlay = true
+                    "$prefix ${I18n.get("universeChat.rpmtw_platform_mod.status.phishing")}", overlay = true
                 )
             }
             "banned" -> {
                 Utilities.sendMessage(
-                    "$prefix ${I18n.get("universeChat.rpmtw_platform_mod.status.banned")}",
-                    overlay = true
+                    "$prefix ${I18n.get("universeChat.rpmtw_platform_mod.status.banned")}", overlay = true
                 )
             }
             "unauthorized" -> {
                 Utilities.sendMessage(
-                    "$prefix ${I18n.get("universeChat.rpmtw_platform_mod.status.unauthorized")}",
-                    overlay = true
+                    "$prefix ${I18n.get("universeChat.rpmtw_platform_mod.status.unauthorized")}", overlay = true
                 )
             }
         }
@@ -215,7 +213,8 @@ object UniverseChatHandler {
     }
 
     private suspend fun replyMessage(message: String, uuid: String) {
-        val status: String = client.universeChatResource.replyMessage(message = message, uuid = uuid, nickname = nickname)
+        val status: String =
+            client.universeChatResource.replyMessage(message = message, uuid = uuid, nickname = nickname)
         statusHandler(status)
     }
 

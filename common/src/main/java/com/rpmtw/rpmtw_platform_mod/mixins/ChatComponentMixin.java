@@ -121,7 +121,7 @@ public class ChatComponentMixin {
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/ChatComponent;getWidth()I"), method = "addMessage(Lnet/minecraft/network/chat/Component;IIZ)V")
     public int fixTextOverflow(ChatComponent chatHud) {
-        return ChatComponent.getWidth(minecraft.options.chatWidth) - ChatComponentData.offset;
+        return ChatComponent.getWidth(minecraft.options.chatWidth().get()) - ChatComponentData.offset;
     }
 
     private void loadImage(String url) {

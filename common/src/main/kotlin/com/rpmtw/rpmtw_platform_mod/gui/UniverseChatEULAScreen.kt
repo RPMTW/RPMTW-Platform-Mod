@@ -8,17 +8,16 @@ import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.resources.language.I18n
-import net.minecraft.network.chat.TextComponent
-import net.minecraft.network.chat.TranslatableComponent
+import net.minecraft.network.chat.Component
 
-class UniverseChatEULAScreen(private val initMessage: String?) : Screen(TextComponent("")) {
+class UniverseChatEULAScreen(private val initMessage: String?) : Screen(Component.empty()) {
     override fun init() {
 
         val agreeButton = Button(
             (width - 100) / 2 - BOTTOM_BUTTON_WIDTH,
             height / 2 + 30,
             BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
-            TranslatableComponent("universeChat.rpmtw_platform_mod.gui.eula.agree")
+            Component.translatable("universeChat.rpmtw_platform_mod.gui.eula.agree")
         ) {
             RPMTWConfig.get().universeChat.eula = true
             RPMTWConfig.save()
@@ -29,7 +28,7 @@ class UniverseChatEULAScreen(private val initMessage: String?) : Screen(TextComp
             (width - 4) / 2 - BOTTOM_BUTTON_WIDTH + 50,
             height / 2 + 30,
             BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
-            TranslatableComponent("universeChat.rpmtw_platform_mod.gui.eula.disagree")
+            Component.translatable("universeChat.rpmtw_platform_mod.gui.eula.disagree")
         ) {
             Minecraft.getInstance().setScreen(null)
         }

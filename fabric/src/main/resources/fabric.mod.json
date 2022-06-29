@@ -30,13 +30,13 @@
   },
   "depends": {
     "fabric": "*",
-    "minecraft": ">=1.18.2",
-    "architectury": ">=4.0.29",
-    "cloth-config2": ">=6.2.0",
-    "fabric-language-kotlin": "^1.7.0"
+    "minecraft": ">=1.19",
+    "architectury": ">=5.6.22",
+    "cloth-config2": ">=7.0.72",
+    "fabric-language-kotlin": "^1.8.0"
   },
   "suggests": {
-    "modmenu": ">=3.0.0"
+    "modmenu": ">=4.0.0"
   },
   "custom": {
     "modmenu": {

@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.components.Checkbox
 import net.minecraft.network.chat.Component
-import net.minecraft.network.chat.TextComponent
 
 class RPMTWCheckbox(
     x: Int,
@@ -38,7 +37,7 @@ class RPMTWCheckbox(
         super.renderButton(matrices, mouseX, mouseY, delta)
         if (this.isHovered) {
             val mc: Minecraft = Minecraft.getInstance()
-            mc.screen?.renderTooltip(matrices, TextComponent(tooltip), mouseX, mouseY)
+            mc.screen?.renderTooltip(matrices, Component.literal(tooltip), mouseX, mouseY)
         }
     }
 }

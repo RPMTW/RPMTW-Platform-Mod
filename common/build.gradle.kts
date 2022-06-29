@@ -9,7 +9,7 @@ dependencies {
 }
 
 architectury {
-    common()
+    common(project.property("enabled_platforms").toString().split(","))
 }
 
 loom {
