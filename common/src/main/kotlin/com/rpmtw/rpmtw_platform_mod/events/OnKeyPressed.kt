@@ -1,12 +1,15 @@
 package com.rpmtw.rpmtw_platform_mod.events
 
+import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.config.ConfigObject
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
+import com.rpmtw.rpmtw_platform_mod.translation.resourcepack.TranslateResourcePack
 import dev.architectury.event.EventResult
 import dev.architectury.event.events.client.ClientRawInputEvent
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.Minecraft
+import net.minecraft.client.resources.language.I18n
 
 @Environment(EnvType.CLIENT)
 class OnKeyPressed : ClientRawInputEvent.KeyPressed {

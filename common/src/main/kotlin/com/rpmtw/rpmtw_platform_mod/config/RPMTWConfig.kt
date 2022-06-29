@@ -19,7 +19,6 @@ import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Jankson
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.JsonObject
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.JsonPrimitive
 import me.shedaniel.clothconfig2.api.*
-import me.shedaniel.clothconfig2.gui.GlobalizedClothConfigScreen
 import me.shedaniel.clothconfig2.gui.entries.KeyCodeEntry
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.components.AbstractWidget
@@ -118,6 +117,10 @@ object RPMTWConfig {
             register()
         }
         return config!!
+    }
+
+    fun registered(): Boolean {
+        return config != null
     }
 
     @Suppress("DEPRECATION", "UnstableApiUsage")

@@ -27,12 +27,12 @@ object UniverseChatHandler {
         }
 
     private suspend fun init() {
-        val minecraft: Minecraft = Minecraft.getInstance()
-        val user: User = minecraft.user
+        val client: Minecraft = Minecraft.getInstance()
+        val user: User = client.user
         if (RPMTWConfig.get().base.isLogin() && RPMTWConfig.get().universeChat.accountType == UniverseChatAccountType.RPMTW) {
-            client.universeChatResource.connect(token = RPMTWConfig.get().base.rpmtwAuthToken!!)
+            this.client.universeChatResource.connect(token = RPMTWConfig.get().base.rpmtwAuthToken!!)
         } else {
-            client.universeChatResource.connect(minecraftUUID = user.uuid)
+            this.client.universeChatResource.connect(minecraftUUID = user.uuid)
         }
     }
 

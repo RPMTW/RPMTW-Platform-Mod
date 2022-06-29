@@ -131,7 +131,7 @@ public class ChatComponentMixin {
 
             try {
                 URL uri = new URL(url);
-                File file = Util.INSTANCE.getFileLocation("/.rpmtw/universe_chat_user_avatar/" + url.replace("https://", "") + ".png");
+                File file = Util.INSTANCE.getFileLocation("/universe_chat_user_avatar/" + url.replace("https://", "") + ".png");
 
                 BufferedImage image = convertToBufferedImage(ImageIO.read(uri.openConnection().getInputStream()).getScaledInstance(8, 8, Image.SCALE_SMOOTH));
                 ImageIO.write(image, "png", file);

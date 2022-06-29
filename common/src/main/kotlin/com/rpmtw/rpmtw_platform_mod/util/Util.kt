@@ -19,7 +19,10 @@ object Util {
             val langCode = Locale.getDefault().language
             val mcLangCode = Minecraft.getInstance().languageManager.selected.code
 
-            return if (RPMTWConfig.get().translate.autoToggleLanguage && (langCode.contains("zh") || langCode.contains("chi"))) {
+            return if ((!RPMTWConfig.registered() || RPMTWConfig.get().translate.autoToggleLanguage) && (langCode.contains(
+                    "zh"
+                ) || langCode.contains("chi"))
+            ) {
                 val countryCode = Locale.getDefault().country
                 if (countryCode.contains("TW") || countryCode.contains("HK")) {
                     "zh_tw"

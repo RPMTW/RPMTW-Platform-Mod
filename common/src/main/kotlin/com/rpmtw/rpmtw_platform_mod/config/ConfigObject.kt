@@ -1,6 +1,7 @@
 package com.rpmtw.rpmtw_platform_mod.config
 
 import com.mojang.blaze3d.platform.InputConstants
+import com.rpmtw.rpmtw_platform_mod.util.Util
 import me.shedaniel.autoconfig.ConfigData
 import me.shedaniel.autoconfig.annotation.Config
 import me.shedaniel.autoconfig.annotation.ConfigEntry
@@ -8,7 +9,6 @@ import me.shedaniel.clothconfig2.api.Modifier
 import me.shedaniel.clothconfig2.api.ModifierKeyCode
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
-import net.minecraft.client.Minecraft
 
 @Config(name = "rpmtw_platform_mod")
 @Environment(EnvType.CLIENT)
@@ -59,7 +59,12 @@ class ConfigObject : ConfigData {
         @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
         @ConfigEntry.Gui.RequiresRestart
-        var unlocalized = Minecraft.getInstance().languageManager.selected.code == "en_us"
+        var unlocalized = Util.languageCode == "en_us"
+
+        @JvmField
+        @ConfigEntry.Gui.Tooltip(count = 1)
+        @ConfigEntry.Gui.RequiresRestart
+        var loadTranslateResourcePack = Util.languageCode != "en_us"
     }
 
     class UniverseChat {

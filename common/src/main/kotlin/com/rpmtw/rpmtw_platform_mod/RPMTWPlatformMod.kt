@@ -3,6 +3,7 @@ package com.rpmtw.rpmtw_platform_mod
 import com.rpmtw.rpmtw_api_client.RPMTWApiClient
 import com.rpmtw.rpmtw_platform_mod.command.RPMTWCommand
 import com.rpmtw.rpmtw_platform_mod.handlers.EventHandler
+import com.rpmtw.rpmtw_platform_mod.translation.resourcepack.TranslateResourcePack
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 
@@ -16,6 +17,7 @@ object RPMTWPlatformMod {
     fun init() {
         LOGGER.info("Initializing RPMTW Platform Mod")
         RPMTWApiClient.init()
+        TranslateResourcePack.deleteResourcePack()
         RPMTWCommand.handle()
         EventHandler.handle()
     }
