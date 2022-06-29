@@ -5,7 +5,7 @@ on:
     types: [completed]
 jobs:
   pr_comment:
-    if: github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success'
+    if: ${{ github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/github-script@v3
@@ -33,7 +33,7 @@ jobs:
             if (!artifacts.length) {
               return core.error(`No artifacts found`);
             }
-            let body = `Download the artifacts for this pull request:\n下載此拉取請求的編譯檔案：\n`;
+            let body = `Download the artifacts for this pull request:\n`;
             for (const art of artifacts) {
                 body += `\n* [${art.name}](https://nightly.link/${owner}/${repo}/actions/artifacts/${art.id}.zip)`;            
             }

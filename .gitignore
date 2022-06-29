@@ -5,5 +5,8 @@ common/build
 /fabric/build/
 /forge/run/
 /forge/build/
+common/run/
 build/
+
 .architectury-transformer/
+.idea

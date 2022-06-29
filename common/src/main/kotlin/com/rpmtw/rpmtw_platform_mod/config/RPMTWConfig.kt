@@ -1,10 +1,11 @@
 package com.rpmtw.rpmtw_platform_mod.config
 
+import com.mojang.blaze3d.platform.InputConstants
 import com.mojang.blaze3d.vertex.PoseStack
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformModPlugin
-import com.rpmtw.rpmtw_platform_mod.handlers.UniverseChatHandler
 import com.rpmtw.rpmtw_platform_mod.handlers.RPMTWAuthHandler
+import com.rpmtw.rpmtw_platform_mod.handlers.UniverseChatHandler
 import me.shedaniel.autoconfig.AutoConfig
 import me.shedaniel.autoconfig.ConfigHolder
 import me.shedaniel.autoconfig.annotation.Config
@@ -14,6 +15,9 @@ import me.shedaniel.autoconfig.gui.registry.GuiRegistry
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer
 import me.shedaniel.autoconfig.util.Utils.getUnsafely
 import me.shedaniel.autoconfig.util.Utils.setUnsafely
+import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Jankson
+import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.JsonObject
+import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.JsonPrimitive
 import me.shedaniel.clothconfig2.api.*
 import me.shedaniel.clothconfig2.gui.GlobalizedClothConfigScreen
 import me.shedaniel.clothconfig2.gui.entries.KeyCodeEntry
@@ -36,7 +40,7 @@ object RPMTWConfig {
         RPMTWPlatformMod.LOGGER.info("Registering config")
         // register config
         AutoConfig.register(ConfigObject::class.java) { definition: Config?, configClass: Class<ConfigObject?>? ->
-            JanksonConfigSerializer(definition, configClass)
+            JanksonConfigSerializer(definition, configClass, buildJankson(Jankson.builder()))
         }
         val guiRegistry: GuiRegistry = AutoConfig.getGuiRegistry(ConfigObject::class.java)
 
@@ -44,12 +48,10 @@ object RPMTWConfig {
         guiRegistry.registerPredicateProvider({ i13n, field, config, defaults, _ ->
             if (field.isAnnotationPresent(ConfigEntry.Gui.Excluded::class.java)) return@registerPredicateProvider emptyList()
             val entry: KeyCodeEntry = ConfigEntryBuilder.create().startModifierKeyCodeField(
-                Component.translatable(i13n),
-                getUnsafely(field, config, ModifierKeyCode.unknown())
+                Component.translatable(i13n), getUnsafely(field, config, ModifierKeyCode.unknown())
             ).setModifierDefaultValue {
                 getUnsafely(
-                    field,
-                    defaults
+                    field, defaults
                 )
             }.setModifierSaveConsumer { newValue -> setUnsafely(field, config, newValue) }.build()
             listOf(entry)
@@ -61,6 +63,32 @@ object RPMTWConfig {
 
         RPMTWPlatformModPlugin.registerConfigScreen()
         RPMTWPlatformMod.LOGGER.info("Registered config")
+    }
+
+    private fun buildJankson(builder: Jankson.Builder): Jankson {
+        // https://github.com/shedaniel/RoughlyEnoughItems/blob/b0af2a1f18414a182ab3a8c0c8d7d97b5f56e8c9/runtime/src/main/java/me/shedaniel/rei/impl/client/config/ConfigManagerImpl.java#L166
+        // ModifierKeyCode
+        builder.registerSerializer(ModifierKeyCode::class.java) { value, _ ->
+            val `object` = JsonObject()
+            `object`["keyCode"] = JsonPrimitive(value.keyCode.name)
+            `object`["modifier"] = JsonPrimitive(value.modifier.value)
+            `object`
+        }
+
+        builder.registerDeserializer(
+            JsonObject::class.java, ModifierKeyCode::class.java
+        ) { value, _ ->
+            val code = value[String::class.java, "keyCode"]
+            if (code!!.endsWith(".unknown")) {
+                return@registerDeserializer ModifierKeyCode.unknown()
+            } else {
+                val keyCode: InputConstants.Key = InputConstants.getKey(code)
+                val modifier = Modifier.of(value.getShort("modifier", 0.toShort()))
+                return@registerDeserializer ModifierKeyCode.of(keyCode, modifier)
+            }
+        }
+
+        return builder.build()
     }
 
     private fun listenOnSave(holder: ConfigHolder<ConfigObject>, beforeConfig: ConfigObject) {
@@ -117,7 +145,8 @@ object RPMTWConfig {
     }
 }
 
-internal class LoginButtonEntry : AbstractConfigListEntry<Any?>(Component.literal(UUID.randomUUID().toString()), false) {
+internal class LoginButtonEntry :
+    AbstractConfigListEntry<Any?>(Component.literal(UUID.randomUUID().toString()), false) {
 
     private var widgets: List<AbstractWidget> = listOf()
     private lateinit var loginButton: Button
