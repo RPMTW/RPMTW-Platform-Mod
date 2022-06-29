@@ -30,7 +30,6 @@
   "config.rpmtw_platform_mod.option.translate.machineTranslation": "機械翻訳",
   "config.rpmtw_platform_mod.option.translate.machineTranslation.@Tooltip": "人間による翻訳が利用できない場合、機械翻訳を使用してテキストを翻訳します。",
   "config.rpmtw_platform_mod.option.translate.unlocalized": "ローカライズされないコンテンツ",
-  "config.rpmtw_platform_mod.option.translate.unlocalized.@Tooltip": "ゲームの言語がアメリカ英語の場合、ローカライズされていないコンテンツの追加表示は機能しません。",
   "config.rpmtw_platform_mod.title": "RPMTW Platform 設定",
   "universeChat.rpmtw_platform_mod.button.receive": "メッセージを受信",
   "universeChat.rpmtw_platform_mod.button.receive.tooltip": "他の惑星からメッセージを受信します。",
