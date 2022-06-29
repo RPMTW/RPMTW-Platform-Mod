@@ -23,10 +23,13 @@ configurations {
 
 dependencies {
     forge("net.minecraftforge:forge:${project.property("forge_version").toString()}")
-    // Remove the next line if you don't want to depend on the API
+    implementation("thedarkcolour:kotlinforforge:${project.property("kotlin_forge_version").toString()}")
+
     modApi("dev.architectury:architectury-forge:${project.property("architectury_version").toString()}")
     modApi("me.shedaniel.cloth:cloth-config-forge:${project.property("cloth_config_version").toString()}")
-    implementation("thedarkcolour:kotlinforforge:${project.property("kotlin_forge_version").toString()}")
+
+    modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version").toString()}-SNAPSHOT")
+    modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version").toString()}-SNAPSHOT:api")
 
     "shadowCommon"(
         "com.github.RPMTW:RPMTW-API-Client-Kotlin:${
@@ -101,6 +104,11 @@ repositories {
     maven {
         // Kotlin For Forge
         url = uri("https://thedarkcolour.github.io/KotlinForForge/")
+    }
+
+    maven {
+        // Patchouli
+        url = uri("https://maven.blamejared.com")
     }
 }
 

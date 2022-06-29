@@ -15,6 +15,10 @@ repositories {
             includeGroup("com.terraformersmc")
         }
     }
+    maven {
+        // Patchouli
+        url = uri("https://maven.blamejared.com")
+    }
 }
 
 val common by configurations.registering
@@ -40,6 +44,8 @@ dependencies {
         exclude(module = "fabric-api")
     }
     modApi("net.fabricmc:fabric-language-kotlin:${project.property("fabric-kotlin_version").toString()}")
+
+    modImplementation("vazkii.patchouli:Patchouli:${project.property("patchouli_version").toString()}-FABRIC-SNAPSHOT")
 
     "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
     "shadowCommon"(project(path = ":common", configuration = "transformProductionFabric")) { isTransitive = false }
@@ -120,6 +126,5 @@ publishing {
     }
 
     // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-    repositories {
-    }
+    repositories {}
 }
