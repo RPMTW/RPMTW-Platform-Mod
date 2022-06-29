@@ -25,7 +25,7 @@ features for Minecraft players to get a better gaming experience.
 
 Auto-toggle game language to default language of the user's computer when launching the game.
 
-- ### Universe Chat
+- ### Universe Chat (WIP)
 
 Chat in any version of Minecraft or outside the game, every player feels like they are in the same world!
 
