@@ -6,7 +6,7 @@ import com.rpmtw.rpmtw_platform_mod.util.Util
 import com.sun.net.httpserver.HttpServer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import net.minecraft.Util
+import net.minecraft.Util as MCUtil
 import net.minecraft.client.resources.language.I18n
 import org.apache.http.NameValuePair
 import org.apache.http.client.utils.URIBuilder
@@ -74,7 +74,7 @@ object RPMTWAuthHandler {
                     .setParameter("redirect_uri", "http://localhost:$port/callback")
                     .setParameter("service_name", "RPMTW Platform Mod").build()
 
-                Util.getPlatform().openUri(uri)
+                MCUtil.getPlatform().openUri(uri)
 
                 withContext(Dispatchers.IO) {
                     // Wait for login
