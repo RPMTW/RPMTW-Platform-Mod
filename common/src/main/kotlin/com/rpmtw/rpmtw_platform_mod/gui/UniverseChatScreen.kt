@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack
 import com.rpmtw.rpmtw_api_client.models.universe_chat.UniverseChatMessage
 import com.rpmtw.rpmtw_platform_mod.gui.widgets.UniverseChatWhatButton
 import com.rpmtw.rpmtw_platform_mod.handlers.UniverseChatHandler
-import com.rpmtw.rpmtw_platform_mod.utilities.Utilities
+import com.rpmtw.rpmtw_platform_mod.util.Util
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.components.EditBox
@@ -29,9 +29,9 @@ class UniverseChatScreen(private val type: UniverseChatScreenType, private val r
             if (messageEditBox == null) return@Button
             val message: String = messageEditBox!!.value
             if (message.isEmpty()) {
-                Utilities.sendMessage(I18n.get("universeChat.rpmtw_platform_mod.gui.input.null"), overlay = true)
+                Util.sendMessage(I18n.get("universeChat.rpmtw_platform_mod.gui.input.null"), overlay = true)
             } else {
-                Utilities.sendMessage(
+                Util.sendMessage(
                     "[${I18n.get("universeChat.rpmtw_platform_mod.title")}] ${I18n.get("universeChat.rpmtw_platform_mod.status.sending")}",
                     overlay = true
                 )

@@ -4,7 +4,7 @@ import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.gui.widgets.RPMTWCheckbox
 import com.rpmtw.rpmtw_platform_mod.gui.widgets.TranslucentButton
-import com.rpmtw.rpmtw_platform_mod.utilities.Utilities
+import com.rpmtw.rpmtw_platform_mod.util.Util
 import dev.architectury.event.events.client.ClientGuiEvent
 import dev.architectury.hooks.client.screen.ScreenAccess
 import dev.architectury.platform.Platform
@@ -51,7 +51,7 @@ class OnGuiInitPost : ClientGuiEvent.ScreenInitPost {
                     20,
                     Component.translatable("universeChat.rpmtw_platform_mod.button.send"),
                     {
-                        Utilities.openUniverseChatScreen(textField?.value)
+                        Util.openUniverseChatScreen(textField?.value)
                     },
                     { _, matrixStack, i, j ->
                         screen.renderTooltip(

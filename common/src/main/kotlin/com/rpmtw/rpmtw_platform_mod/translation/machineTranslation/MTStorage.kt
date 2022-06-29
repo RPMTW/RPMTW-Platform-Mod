@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
-import com.rpmtw.rpmtw_platform_mod.utilities.Utilities
+import com.rpmtw.rpmtw_platform_mod.util.Util
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.packs.resources.Resource
 import net.minecraft.server.packs.resources.ResourceManager
@@ -73,9 +73,9 @@ class MTStorage : SimplePreparableReloadListener<Unit>() {
         manager: ResourceManager,
         profilerFiller: ProfilerFiller
     ) {
-        Utilities.coroutineLaunch {
+        Util.coroutineLaunch {
             RPMTWPlatformMod.LOGGER.info("[Machine Translation] Loading resources...")
-            val currentLangCode: String = Utilities.languageCode
+            val currentLangCode: String = Util.languageCode
             unlocalizedMap.clear()
             currentLangMap.clear()
 

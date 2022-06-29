@@ -1,4 +1,4 @@
-package com.rpmtw.rpmtw_platform_mod.utilities
+package com.rpmtw.rpmtw_platform_mod.util
 
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.gui.UniverseChatEULAScreen
@@ -13,7 +13,7 @@ import java.util.*
 import kotlin.coroutines.CoroutineContext
 
 
-object Utilities {
+object Util {
     val languageCode: String
         get() {
             val langCode = Locale.getDefault().language

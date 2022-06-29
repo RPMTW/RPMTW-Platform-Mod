@@ -2,7 +2,7 @@ package com.rpmtw.rpmtw_platform_mod.handlers
 
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
-import com.rpmtw.rpmtw_platform_mod.utilities.Utilities
+import com.rpmtw.rpmtw_platform_mod.util.Util
 import com.sun.net.httpserver.HttpServer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -29,7 +29,7 @@ object RPMTWAuthHandler {
             return
         }
 
-        Utilities.coroutineLaunch {
+        Util.coroutineLaunch {
             var server: HttpServer? = null
             try {
                 server = HttpServer.create(InetSocketAddress(port), 0)

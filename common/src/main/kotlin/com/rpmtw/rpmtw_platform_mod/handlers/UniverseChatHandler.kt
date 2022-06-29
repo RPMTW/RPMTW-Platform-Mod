@@ -7,7 +7,7 @@ import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.config.UniverseChatAccountType
 import com.rpmtw.rpmtw_platform_mod.gui.widgets.UniverseChatComponent
-import com.rpmtw.rpmtw_platform_mod.utilities.Utilities
+import com.rpmtw.rpmtw_platform_mod.util.Util
 import kotlinx.coroutines.Deferred
 import net.minecraft.ChatFormatting
 import net.minecraft.client.Minecraft
@@ -101,7 +101,7 @@ object UniverseChatHandler {
         if (client.universeChatResource.isConnected) {
             client.universeChatResource.onMessageSent({ msg ->
                 if (RPMTWConfig.get().universeChat.enable && RPMTWConfig.get().universeChat.enableReceiveMessage) {
-                    Utilities.coroutineLaunch {
+                    Util.coroutineLaunch {
                         val isReply: Boolean = msg.replyMessageUUID != null
 
                         val component: MutableComponent = Component.empty()
@@ -185,22 +185,22 @@ object UniverseChatHandler {
         val prefix = "§9[${I18n.get("universeChat.rpmtw_platform_mod.title")}]§r"
         when (status) {
             "success" -> {
-                Utilities.sendMessage(
+                Util.sendMessage(
                     "$prefix ${I18n.get("universeChat.rpmtw_platform_mod.status.success")}", overlay = true
                 )
             }
             "phishing" -> {
-                Utilities.sendMessage(
+                Util.sendMessage(
                     "$prefix ${I18n.get("universeChat.rpmtw_platform_mod.status.phishing")}", overlay = true
                 )
             }
             "banned" -> {
-                Utilities.sendMessage(
+                Util.sendMessage(
                     "$prefix ${I18n.get("universeChat.rpmtw_platform_mod.status.banned")}", overlay = true
                 )
             }
             "unauthorized" -> {
-                Utilities.sendMessage(
+                Util.sendMessage(
                     "$prefix ${I18n.get("universeChat.rpmtw_platform_mod.status.unauthorized")}", overlay = true
                 )
             }
@@ -221,7 +221,7 @@ object UniverseChatHandler {
     fun handle() {
         if (RPMTWConfig.get().universeChat.enable) {
             RPMTWPlatformMod.LOGGER.info("Initializing universe chat server...")
-            Utilities.coroutineLaunch {
+            Util.coroutineLaunch {
                 init()
                 listen()
             }
@@ -231,17 +231,17 @@ object UniverseChatHandler {
     }
 
     private fun listen() {
-        val result: Deferred<Unit> = Utilities.coroutineAsync {
+        val result: Deferred<Unit> = Util.coroutineAsync {
             listenMessages()
         }
-        Utilities.coroutineLaunch {
+        Util.coroutineLaunch {
             result.await()
         }
     }
 
     fun send(message: String) {
         if (client.universeChatResource.isConnected) {
-            Utilities.coroutineLaunch {
+            Util.coroutineLaunch {
                 sendMessage(message)
             }
         } else {
@@ -251,7 +251,7 @@ object UniverseChatHandler {
 
     fun reply(message: String, uuid: String) {
         if (client.universeChatResource.isConnected) {
-            Utilities.coroutineLaunch {
+            Util.coroutineLaunch {
                 replyMessage(message, uuid)
             }
         } else {
@@ -261,7 +261,7 @@ object UniverseChatHandler {
 
     suspend fun getMessageAsync(uuid: String): UniverseChatMessage? {
         if (client.universeChatResource.isConnected) {
-            val result: Deferred<UniverseChatMessage?> = Utilities.coroutineAsync {
+            val result: Deferred<UniverseChatMessage?> = Util.coroutineAsync {
                 try {
                     return@coroutineAsync client.universeChatResource.getMessage(uuid)
                 } catch (e: Exception) {

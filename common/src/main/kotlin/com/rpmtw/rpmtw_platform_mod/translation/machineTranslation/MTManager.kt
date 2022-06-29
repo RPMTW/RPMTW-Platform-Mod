@@ -6,7 +6,7 @@ import com.google.gson.GsonBuilder
 import com.google.gson.JsonParser
 import com.google.gson.reflect.TypeToken
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
-import com.rpmtw.rpmtw_platform_mod.utilities.Utilities
+import com.rpmtw.rpmtw_platform_mod.util.Util
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import net.minecraft.ChatFormatting
@@ -23,7 +23,7 @@ import java.util.regex.Pattern
 
 object MTManager {
     private val cache: MutableMap<String, Map<Locale, MTInfo?>> = HashMap()
-    private val cacheFile: File = Utilities.getFileLocation("machine_translation_cache.json")
+    private val cacheFile: File = Util.getFileLocation("machine_translation_cache.json")
     private val queue: MutableList<QueueText> = ArrayList()
     private var handleQueueing: Boolean = false
     private var translatingCount: Int = 0
@@ -58,7 +58,7 @@ object MTManager {
         } else if (info?.status == MTDataStatus.Translating) {
             generateProgressText()
         } else {
-            Utilities.coroutineLaunch {
+            Util.coroutineLaunch {
                 translateAndCache(source)
             }
 
@@ -175,7 +175,7 @@ object MTManager {
 
     private fun handleQueue() {
         handleQueueing = true
-        Utilities.coroutineLaunch {
+        Util.coroutineLaunch {
             while (queue.isNotEmpty() && translatingCount < maxTranslatingCount) {
                 val sourceText = queue.removeAt(0)
                 translateAndCache(sourceText.text)

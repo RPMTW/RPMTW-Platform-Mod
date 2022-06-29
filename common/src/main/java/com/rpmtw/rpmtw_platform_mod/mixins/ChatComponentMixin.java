@@ -6,7 +6,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.rpmtw.rpmtw_api_client.models.universe_chat.UniverseChatMessage;
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod;
 import com.rpmtw.rpmtw_platform_mod.gui.widgets.UniverseChatComponent;
-import com.rpmtw.rpmtw_platform_mod.utilities.Utilities;
+import com.rpmtw.rpmtw_platform_mod.util.Util;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.GuiMessage;
@@ -131,7 +131,7 @@ public class ChatComponentMixin {
 
             try {
                 URL uri = new URL(url);
-                File file = Utilities.INSTANCE.getFileLocation("/.rpmtw/universe_chat_user_avatar/" + url.replace("https://", "") + ".png");
+                File file = Util.INSTANCE.getFileLocation("/.rpmtw/universe_chat_user_avatar/" + url.replace("https://", "") + ".png");
 
                 BufferedImage image = convertToBufferedImage(ImageIO.read(uri.openConnection().getInputStream()).getScaledInstance(8, 8, Image.SCALE_SMOOTH));
                 ImageIO.write(image, "png", file);

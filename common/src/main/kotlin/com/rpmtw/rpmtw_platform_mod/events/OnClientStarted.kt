@@ -4,7 +4,7 @@ import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.handlers.UniverseChatHandler
 import com.rpmtw.rpmtw_platform_mod.translation.machineTranslation.MTManager
-import com.rpmtw.rpmtw_platform_mod.utilities.Utilities
+import com.rpmtw.rpmtw_platform_mod.util.Util
 import dev.architectury.event.events.client.ClientLifecycleEvent
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -14,7 +14,7 @@ import net.minecraft.client.resources.language.LanguageInfo
 @Environment(EnvType.CLIENT)
 class OnClientStarted() : ClientLifecycleEvent.ClientState {
     private fun toggleLanguage(instance: Minecraft) {
-        val langCode = Utilities.languageCode
+        val langCode = Util.languageCode
         val manager = instance.languageManager
 
         // if auto-toggle language is enabled and the user language is Chinese, set the language
