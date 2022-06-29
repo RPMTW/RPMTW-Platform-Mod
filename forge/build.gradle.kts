@@ -81,6 +81,7 @@ tasks {
         val commonSources = project(":common").tasks.sourcesJar
         dependsOn(commonSources)
         from(commonSources.get().archiveFile.map { zipTree(it) })
+        exclude("rpmtw_platform_mod.mixins.json")
     }
 }
 

@@ -94,7 +94,7 @@ tasks {
     }
 
     remapJar {
-        input.set(shadowJar.get().archiveFile)
+        inputFile.set(shadowJar.get().archiveFile)
         dependsOn(shadowJar)
         archiveClassifier.set(null as String?)
     }
@@ -108,6 +108,7 @@ tasks {
         dependsOn(commonSources)
         from(commonSources.get().archiveFile.map { zipTree(it) })
         exclude("rpmtw_platform_mod.accesswidener")
+        exclude("rpmtw_platform_mod.mixins.json")
     }
 }
 
