@@ -38,6 +38,11 @@ jobs:
           java: |
             17
             18
+          dependencies: |
+            fabric-api
+            fabric-language-kotlin
+            cloth-config
+            architectury-api
       - name: Upload artifacts (forge)
         uses: Kir-Antipov/mc-publish@v3.0
         with:
@@ -54,3 +59,7 @@ jobs:
           name: ${{ github.event.release.name }} (Forge)
           java: |
             17
+          dependencies: |
+            kotlin-for-forge
+            cloth-config
+            architectury-api
