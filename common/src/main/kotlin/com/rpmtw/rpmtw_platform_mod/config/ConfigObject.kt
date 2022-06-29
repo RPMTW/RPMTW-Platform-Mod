@@ -22,6 +22,7 @@ class ConfigObject : ConfigData {
     var translate = Translate()
 
     @JvmField
+    @ConfigEntry.Gui.Excluded // This feature is not yet finished, so it is hidden for now.
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
     var universeChat = UniverseChat()
 
@@ -65,14 +66,14 @@ class ConfigObject : ConfigData {
         @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
         @ConfigEntry.Gui.RequiresRestart
-        var enable = true
+        var enable = false
 
         @JvmField
-        var enableReceiveMessage = true
+        var enableReceiveMessage = false
 
         @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
-        var enableButton = true
+        var enableButton = false
 
         @JvmField
         @ConfigEntry.Gui.Excluded
@@ -94,17 +95,14 @@ class ConfigObject : ConfigData {
 
         // Ctrl + R
         @JvmField
-        var config: ModifierKeyCode =
-            ModifierKeyCode.of(
-                InputConstants.Type.KEYSYM.getOrCreate(InputConstants.KEY_R),
-                Modifier.of(false, true, false)
-            )
+        var config: ModifierKeyCode = ModifierKeyCode.of(
+            InputConstants.Type.KEYSYM.getOrCreate(InputConstants.KEY_R), Modifier.of(false, true, false)
+        )
     }
 }
 
 enum class UniverseChatAccountType {
-    MINECRAFT,
-    RPMTW;
+    MINECRAFT, RPMTW;
 
     val isMinecraft: Boolean
         get() = this == MINECRAFT

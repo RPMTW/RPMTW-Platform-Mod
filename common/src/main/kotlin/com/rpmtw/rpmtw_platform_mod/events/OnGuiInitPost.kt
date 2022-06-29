@@ -17,7 +17,7 @@ import net.minecraft.client.resources.language.I18n
 import net.minecraft.network.chat.Component
 
 @Environment(EnvType.CLIENT)
-class OnGuiInitPost() : ClientGuiEvent.ScreenInitPost {
+class OnGuiInitPost : ClientGuiEvent.ScreenInitPost {
 
     override fun init(screen: Screen?, access: ScreenAccess?) {
         if (screen != null && access != null) {

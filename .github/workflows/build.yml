@@ -29,8 +29,6 @@ jobs:
             ~/.gradle/wrapper
             .gradle
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties', 'build.gradle.kts') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
       - name: Build with Gradle
         run: |
           cd ${{ github.workspace }}
@@ -41,9 +39,9 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: 1.19-${{ steps.github_short_hash.outputs.result }}-fabric.zip
-          path: ${{ github.workspace }}/fabric/build/libs/rpmtw-platform-mod-1.19-1.4.0.jar
+          path: ${{ github.workspace }}/fabric/build/libs
       - name: Upload artifacts (forge)
         uses: actions/upload-artifact@v3
         with:
           name: 1.19-${{ steps.github_short_hash.outputs.result }}-forge.zip
-          path: ${{ github.workspace }}/forge/build/libs/rpmtw-platform-mod-1.19-1.4.0.jar
+          path: ${{ github.workspace }}/forge/build/libs

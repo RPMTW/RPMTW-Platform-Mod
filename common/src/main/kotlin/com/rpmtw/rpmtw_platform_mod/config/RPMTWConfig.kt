@@ -128,14 +128,18 @@ object RPMTWConfig {
         provider.setBuildFunction { builder: ConfigBuilder ->
             builder.setGlobalized(true)
             builder.setGlobalizedExpanded(false)
-            builder.setAfterInitConsumer { screen ->
-                val globalizedScreen: GlobalizedClothConfigScreen = screen as GlobalizedClothConfigScreen
 
-                val entry = LoginButtonEntry()
-                entry.setScreen(screen)
-                @Suppress("UNCHECKED_CAST") globalizedScreen.listWidget.children()
-                    .add(0, entry as AbstractConfigEntry<AbstractConfigEntry<*>>)
-            }.build()
+            // This feature is not yet finished, so it is hidden for now.
+//            builder.setAfterInitConsumer { screen ->
+//                val globalizedScreen: GlobalizedClothConfigScreen = screen as GlobalizedClothConfigScreen
+//
+//                val entry = LoginButtonEntry()
+//                entry.setScreen(screen)
+//                @Suppress("UNCHECKED_CAST") globalizedScreen.listWidget.children()
+//                    .add(0, entry as AbstractConfigEntry<AbstractConfigEntry<*>>)
+//            }
+
+            builder.build()
         }
         return provider.get()
     }

@@ -230,7 +230,7 @@ object UniverseChatHandler {
         }
     }
 
-    fun listen() {
+    private fun listen() {
         val result: Deferred<Unit> = Utilities.coroutineAsync {
             listenMessages()
         }
