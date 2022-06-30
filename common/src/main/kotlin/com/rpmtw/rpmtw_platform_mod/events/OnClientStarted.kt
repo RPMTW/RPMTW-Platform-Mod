@@ -3,7 +3,7 @@ package com.rpmtw.rpmtw_platform_mod.events
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.handlers.UniverseChatHandler
-import com.rpmtw.rpmtw_platform_mod.translation.TranslateLanguage
+import com.rpmtw.rpmtw_platform_mod.translation.language.TranslateLanguage
 import com.rpmtw.rpmtw_platform_mod.translation.machineTranslation.MTManager
 import com.rpmtw.rpmtw_platform_mod.translation.resourcepack.TranslateResourcePack
 import dev.architectury.event.events.client.ClientLifecycleEvent

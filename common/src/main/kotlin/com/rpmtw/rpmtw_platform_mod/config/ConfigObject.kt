@@ -1,7 +1,7 @@
 package com.rpmtw.rpmtw_platform_mod.config
 
 import com.mojang.blaze3d.platform.InputConstants
-import com.rpmtw.rpmtw_platform_mod.translation.TranslateLanguage
+import com.rpmtw.rpmtw_platform_mod.translation.language.TranslateLanguage
 import me.shedaniel.autoconfig.ConfigData
 import me.shedaniel.autoconfig.annotation.Config
 import me.shedaniel.autoconfig.annotation.ConfigEntry

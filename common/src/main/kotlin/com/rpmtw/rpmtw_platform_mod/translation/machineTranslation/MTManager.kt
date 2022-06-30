@@ -6,11 +6,12 @@ import com.google.gson.GsonBuilder
 import com.google.gson.JsonParser
 import com.google.gson.reflect.TypeToken
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
+import com.rpmtw.rpmtw_platform_mod.translation.language.TranslateLanguage
+import com.rpmtw.rpmtw_platform_mod.translation.language.TranslateLanguageAdapter
 import com.rpmtw.rpmtw_platform_mod.util.Util
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import net.minecraft.ChatFormatting
-import net.minecraft.client.Minecraft
 import net.minecraft.client.resources.language.I18n
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.MutableComponent
@@ -19,12 +20,11 @@ import org.apache.http.client.utils.URIBuilder
 import java.io.File
 import java.lang.reflect.Type
 import java.sql.Timestamp
-import java.util.*
 import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
 
 object MTManager {
-    private val cache: MutableMap<String, Map<Locale, MTInfo?>> = HashMap()
+    private val cache: MutableMap<String, Map<TranslateLanguage, MTInfo?>> = HashMap()
     private val cacheFile: File = Util.getFileLocation("machine_translation_cache.json")
     private val queue: MutableList<QueueText> = ArrayList()
     private var handleQueueing: Boolean = false
@@ -33,15 +33,10 @@ object MTManager {
     private val formatPattern = Pattern.compile("%(?:(\\d+)\\$)?([A-Za-z%]|$)")
     private val gson = GsonBuilder().registerTypeAdapter(Exception::class.java, ExceptionSerializer())
         .registerTypeAdapter(Timestamp::class.java, TimestampAdapter())
-        .registerTypeAdapter(Locale::class.java, LocaleAdapter()).create()
+        .registerTypeAdapter(TranslateLanguage::class.java, TranslateLanguageAdapter()).create()
 
-    private val translatedLanguage: Locale
-        get() = when (Minecraft.getInstance().languageManager.selected.code) {
-            "zh_tw" -> Locale.TRADITIONAL_CHINESE
-            "zh_hk" -> Locale.TRADITIONAL_CHINESE
-            "zh_cn" -> Locale.SIMPLIFIED_CHINESE
-            else -> Locale.TRADITIONAL_CHINESE
-        }
+    private val translatedLanguage: TranslateLanguage
+        get() = TranslateLanguage.getLanguage()
 
     fun create(source: String, vararg i18nArgs: Any? = arrayOf()): MutableComponent {
         val info: MTInfo? = cache[source]?.get(translatedLanguage)
@@ -94,7 +89,7 @@ object MTManager {
             cacheFile.createNewFile()
         }
 
-        gson.toJson(cache, HashMap<String, HashMap<Locale, MTInfo>>().javaClass).let {
+        gson.toJson(cache, HashMap<String, HashMap<TranslateLanguage, MTInfo>>().javaClass).let {
             cacheFile.writeText(it)
         }
         RPMTWPlatformMod.LOGGER.info("Machine translation cache saved.")
@@ -104,8 +99,8 @@ object MTManager {
         try {
             if (cacheFile.exists()) {
                 val json = cacheFile.reader().readText()
-                val type: Type = object : TypeToken<MutableMap<String, Map<Locale, MTInfo>>>() {}.type
-                gson.fromJson<MutableMap<String, Map<Locale, MTInfo>>>(json, type).let {
+                val type: Type = object : TypeToken<MutableMap<String, Map<TranslateLanguage, MTInfo>>>() {}.type
+                gson.fromJson<MutableMap<String, Map<TranslateLanguage, MTInfo>>>(json, type).let {
                     cache.putAll(it)
                 }
             }

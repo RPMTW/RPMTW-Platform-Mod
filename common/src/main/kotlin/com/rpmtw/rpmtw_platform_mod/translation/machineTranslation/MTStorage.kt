@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
-import com.rpmtw.rpmtw_platform_mod.translation.TranslateLanguage
+import com.rpmtw.rpmtw_platform_mod.translation.language.TranslateLanguage
 import com.rpmtw.rpmtw_platform_mod.util.Util
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.packs.resources.Resource

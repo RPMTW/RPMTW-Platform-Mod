@@ -18,7 +18,6 @@ jobs:
           java-version: 17
       - name: Build with Gradle
         run: |
-          cd ${{ github.workspace }}
           chmod +x gradlew
           sh ./gradlew build
       - name: Upload mod (fabric)
@@ -29,7 +28,7 @@ jobs:
           curseforge-id: 461500
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          files-primary: ${{ github.workspace }}/fabric/build/libs/!(*-@(dev|sources)).jar
+          files-primary: fabric/build/libs/!(*-@(dev|sources)).jar
           version-type: release
           loaders: fabric
           version-resolver: latest
@@ -51,7 +50,7 @@ jobs:
           modrinth-id: ZukQzaRP
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          files-primary: ${{ github.workspace }}/forge/build/libs/!(*-@(dev|sources)).jar
+          files-primary: forge/build/libs/!(*-@(dev|sources)).jar
           version-type: release
           loaders: forge
           version-resolver: latest
