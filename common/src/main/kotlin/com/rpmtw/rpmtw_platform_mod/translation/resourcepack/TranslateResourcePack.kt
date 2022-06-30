@@ -1,7 +1,6 @@
 package com.rpmtw.rpmtw_platform_mod.translation.resourcepack
 
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
-import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.util.Util
 import net.minecraft.client.Minecraft
 import org.apache.commons.io.FileUtils

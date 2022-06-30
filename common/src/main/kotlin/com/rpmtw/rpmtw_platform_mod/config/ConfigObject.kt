@@ -2,7 +2,6 @@ package com.rpmtw.rpmtw_platform_mod.config
 
 import com.mojang.blaze3d.platform.InputConstants
 import com.rpmtw.rpmtw_platform_mod.translation.TranslateLanguage
-import com.rpmtw.rpmtw_platform_mod.util.Util
 import me.shedaniel.autoconfig.ConfigData
 import me.shedaniel.autoconfig.annotation.Config
 import me.shedaniel.autoconfig.annotation.ConfigEntry
@@ -65,7 +64,7 @@ class ConfigObject : ConfigData {
         @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
         @ConfigEntry.Gui.RequiresRestart
-        var loadTranslateResourcePack =  TranslateLanguage.getLanguage() != TranslateLanguage.English
+        var loadTranslateResourcePack = TranslateLanguage.getLanguage() != TranslateLanguage.English
     }
 
     class UniverseChat {

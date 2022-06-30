@@ -9,7 +9,6 @@ import kotlinx.coroutines.*
 import net.minecraft.client.Minecraft
 import net.minecraft.network.chat.Component
 import java.io.File
-import java.util.*
 import kotlin.coroutines.CoroutineContext
 
 

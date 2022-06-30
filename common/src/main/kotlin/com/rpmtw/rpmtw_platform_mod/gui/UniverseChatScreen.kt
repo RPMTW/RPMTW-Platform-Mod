@@ -12,7 +12,10 @@ import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.resources.language.I18n
 import net.minecraft.network.chat.Component
 
-class UniverseChatScreen(private val type: UniverseChatScreenType, private val replyMessage: UniverseChatMessage? = null) :
+class UniverseChatScreen(
+    private val type: UniverseChatScreenType,
+    private val replyMessage: UniverseChatMessage? = null
+) :
     Screen(Component.empty()) {
     private var messageEditBox: EditBox? = null
 

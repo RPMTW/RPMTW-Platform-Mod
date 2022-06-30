@@ -45,7 +45,7 @@ dependencies {
 
     forgeRuntimeLibrary("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.10")
     forgeRuntimeLibrary("org.jetbrains.kotlin:kotlin-reflect:1.6.10")
-    forgeRuntimeLibrary("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
+    forgeRuntimeLibrary("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.2")
 
     "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
     "shadowCommon"(project(path = ":common", configuration = "transformProductionForge")) { isTransitive = false }
@@ -111,6 +111,7 @@ repositories {
         // Patchouli
         url = uri("https://maven.blamejared.com")
     }
+    mavenCentral()
 }
 
 publishing {

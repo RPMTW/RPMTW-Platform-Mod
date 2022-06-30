@@ -6,7 +6,6 @@ import com.rpmtw.rpmtw_platform_mod.util.Util
 import com.sun.net.httpserver.HttpServer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import net.minecraft.Util as MCUtil
 import net.minecraft.client.resources.language.I18n
 import org.apache.http.NameValuePair
 import org.apache.http.client.utils.URIBuilder
@@ -17,6 +16,7 @@ import java.net.InetSocketAddress
 import java.nio.charset.StandardCharsets
 import java.util.concurrent.CountDownLatch
 import java.util.stream.Collectors
+import net.minecraft.Util as MCUtil
 
 
 object RPMTWAuthHandler {

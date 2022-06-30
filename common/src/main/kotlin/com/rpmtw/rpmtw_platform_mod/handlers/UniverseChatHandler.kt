@@ -127,7 +127,7 @@ object UniverseChatHandler {
                             Component.literal("  [${I18n.get("gui.rpmtw_platform_mod.reply")}]").setStyle(
                                 Style.EMPTY.withColor(ChatFormatting.GREEN).withClickEvent(
                                     ClickEvent(
-                                        ClickEvent.Action.RUN_COMMAND, "/universeChat reply ${msg.uuid}"
+                                        ClickEvent.Action.RUN_COMMAND, "/rpmtw universeChatReply ${msg.uuid}"
                                     )
                                 ).withHoverEvent(
                                     HoverEvent(

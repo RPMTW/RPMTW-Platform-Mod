@@ -15,8 +15,8 @@ class ReplyUniverseMessageCommand {
     init {
         val argumentName = "message_uuid"
         RPMTWPlatformModPlugin.registerClientCommand(
-            "universeChat",
-            "reply",
+            "rpmtw",
+            "universeChatReply",
             argumentName,
             StringArgumentType.string()
         ) {

@@ -34,11 +34,11 @@ class OnClientStarted : ClientLifecycleEvent.ClientState {
     override fun stateChanged(instance: Minecraft?) {
         if (instance != null) {
             RPMTWConfig.register()
-            UniverseChatHandler.handle()
             toggleLanguage(instance)
             if (RPMTWConfig.get().translate.loadTranslateResourcePack) {
                 TranslateResourcePack.load()
             }
+            UniverseChatHandler.handle()
             MTManager.readCache()
         }
     }

@@ -6,6 +6,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.rpmtw.rpmtw_api_client.models.universe_chat.UniverseChatMessage;
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod;
 import com.rpmtw.rpmtw_platform_mod.gui.widgets.UniverseChatComponent;
+import com.rpmtw.rpmtw_platform_mod.util.ChatComponentData;
 import com.rpmtw.rpmtw_platform_mod.util.Util;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -35,7 +36,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -62,7 +62,7 @@ public class ChatComponentMixin {
         if (chatComponent != null) {
             UniverseChatMessage message = chatComponent.getUniverseChatMessage();
             String avatarUrl = message.getAvatarUrl();
-            Map<String, ResourceLocation> avatarMap = ChatComponentData.universeChatAvatarCache;
+            Map<String, ResourceLocation> avatarMap = ChatComponentData.INSTANCE.getUniverseChatAvatarCache();
             if (!avatarMap.containsKey(avatarUrl)) {
                 loadImage(avatarUrl);
             }
@@ -72,15 +72,15 @@ public class ChatComponentMixin {
 
     @ModifyArg(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Font;drawShadow(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/util/FormattedCharSequence;FFI)I", ordinal = 0), method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;I)V", index = 2)
     public float moveTheText(PoseStack poseStack, FormattedCharSequence formattedCharSequence, float f, float y, int color) {
-        ChatComponentData.lastY = (int) y;
-        ChatComponentData.lastOpacity = (((color >> 24) + 256) % 256) / 255f; // haha yes
-        return ChatComponentData.offset;
+        ChatComponentData.INSTANCE.setLastY((int) y);
+        ChatComponentData.INSTANCE.setLastOpacity((((color >> 24) + 256) % 256) / 255f); // haha yes
+        return ChatComponentData.INSTANCE.getOffset();
     }
 
 
     @ModifyArg(at = @At(value = "INVOKE", target = "Ljava/util/List;get(I)Ljava/lang/Object;", ordinal = 0), method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;I)V", index = 0)
     public int getLastMessage(int index) {
-        ChatComponentData.lastMessageIndex = index;
+        ChatComponentData.INSTANCE.setLastMessageIndex(index);
         return index;
     }
 
@@ -88,7 +88,7 @@ public class ChatComponentMixin {
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Font;drawShadow(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/util/FormattedCharSequence;FFI)I", ordinal = 0), method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;I)V")
     public void render(PoseStack matrixStack, int i, CallbackInfo ci) {
         try {
-            GuiMessage<FormattedCharSequence> guiMessage = trimmedMessages.get(ChatComponentData.lastMessageIndex);
+            GuiMessage<FormattedCharSequence> guiMessage = trimmedMessages.get(ChatComponentData.INSTANCE.getLastMessageIndex());
             GuiMessage<Component> component = allMessages.stream().filter(msg -> msg.getId() == guiMessage.getId()).findFirst().orElse(null);
             if (component == null) return;
 
@@ -97,16 +97,16 @@ public class ChatComponentMixin {
             if (chatComponent == null) return;
 
             UniverseChatMessage message = chatComponent.getUniverseChatMessage();
-            ResourceLocation location = ChatComponentData.universeChatAvatarCache.getOrDefault(message.getAvatarUrl(), null);
+            ResourceLocation location = ChatComponentData.INSTANCE.getUniverseChatAvatarCache().getOrDefault(message.getAvatarUrl(), null);
 
             if (location == null) return;
-            RenderSystem.setShaderColor(1, 1, 1, ChatComponentData.lastOpacity);
+            RenderSystem.setShaderColor(1, 1, 1, ChatComponentData.INSTANCE.getLastOpacity());
             RenderSystem.setShaderTexture(0, location);
             RenderSystem.enableBlend();
             // Draw base layer
-            GuiComponent.blit(matrixStack, 0, ChatComponentData.lastY, 8, 8, 8.0F, 8, 8, 8, 8, 8);
+            GuiComponent.blit(matrixStack, 0, ChatComponentData.INSTANCE.getLastY(), 8, 8, 8.0F, 8, 8, 8, 8, 8);
             // Draw hat
-            GuiComponent.blit(matrixStack, 0, ChatComponentData.lastY, 8, 8, 40.0F, 8, 8, 8, 8, 8);
+            GuiComponent.blit(matrixStack, 0, ChatComponentData.INSTANCE.getLastY(), 8, 8, 40.0F, 8, 8, 8, 8, 8);
             RenderSystem.setShaderColor(1, 1, 1, 1);
             RenderSystem.disableBlend();
         } catch (Exception e) {
@@ -116,12 +116,12 @@ public class ChatComponentMixin {
 
     @ModifyArg(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/StringSplitter;componentStyleAtWidth(Lnet/minecraft/util/FormattedCharSequence;I)Lnet/minecraft/network/chat/Style;"), method = "getClickedComponentStyleAt(DD)Lnet/minecraft/network/chat/Style;", index = 1)
     public int correctClickPosition(int x) {
-        return x - ChatComponentData.offset;
+        return x - ChatComponentData.INSTANCE.getOffset();
     }
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/ChatComponent;getWidth()I"), method = "addMessage(Lnet/minecraft/network/chat/Component;IIZ)V")
     public int fixTextOverflow(ChatComponent chatHud) {
-        return ChatComponent.getWidth(minecraft.options.chatWidth().get()) - ChatComponentData.offset;
+        return ChatComponent.getWidth(minecraft.options.chatWidth().get()) - ChatComponentData.INSTANCE.getOffset();
     }
 
     private void loadImage(String url) {
@@ -148,7 +148,7 @@ public class ChatComponentMixin {
                 TextureManager manager = Minecraft.getInstance().getTextureManager();
                 manager.register(location, new DynamicTexture(nativeImage));
 
-                ChatComponentData.universeChatAvatarCache.put(url, location);
+                ChatComponentData.INSTANCE.getUniverseChatAvatarCache().put(url, location);
                 RPMTWPlatformMod.LOGGER.info("Loaded image for " + url);
             }
         }, "UniverseChatAvatarLoader");
@@ -162,12 +162,4 @@ public class ChatComponentMixin {
         g.dispose();
         return newImage;
     }
-}
-
-class ChatComponentData {
-    static int offset = 10;
-    static int lastY = 0;
-    static int lastMessageIndex = 0;
-    static float lastOpacity = 0f;
-    static Map<String, ResourceLocation> universeChatAvatarCache = new HashMap<>();
 }

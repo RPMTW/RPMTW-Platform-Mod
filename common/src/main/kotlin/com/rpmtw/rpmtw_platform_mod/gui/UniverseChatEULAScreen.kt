@@ -1,8 +1,8 @@
 package com.rpmtw.rpmtw_platform_mod.gui
 
 import com.mojang.blaze3d.vertex.PoseStack
-import com.rpmtw.rpmtw_platform_mod.gui.widgets.UniverseChatWhatButton
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
+import com.rpmtw.rpmtw_platform_mod.gui.widgets.UniverseChatWhatButton
 import com.rpmtw.rpmtw_platform_mod.util.Util
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.components.Button
