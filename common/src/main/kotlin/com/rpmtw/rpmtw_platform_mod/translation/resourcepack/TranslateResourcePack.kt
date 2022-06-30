@@ -74,7 +74,6 @@ object TranslateResourcePack {
         val packID = "file/$fileName"
         // if the pack is unselected, select it
         if (!repository.selectedIds.contains(fileName)) {
-            RPMTWPlatformMod.LOGGER.info("testing")
             // Set the pack last in the list (the highest priority)
             repository.reload()
             val selected: MutableList<String> = repository.selectedIds.toMutableList()

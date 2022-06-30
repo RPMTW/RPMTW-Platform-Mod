@@ -230,7 +230,7 @@ object MTManager {
         builder.path = "translate_a/single"
         builder.addParameter("client", "gtx")
         builder.addParameter("sl", "en")
-        builder.addParameter("tl", translatedLanguage.toString())
+        builder.addParameter("tl", translatedLanguage.code)
         builder.addParameter("dt", "t")
         builder.addParameter("q", text)
         builder.addParameter("format", "json")
