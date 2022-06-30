@@ -1,4 +1,4 @@
-package com.rpmtw.rpmtw_platform_mod.translation.language
+package com.rpmtw.rpmtw_platform_mod.translation
 
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import java.util.*

@@ -6,8 +6,7 @@ import com.google.gson.GsonBuilder
 import com.google.gson.JsonParser
 import com.google.gson.reflect.TypeToken
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
-import com.rpmtw.rpmtw_platform_mod.translation.language.TranslateLanguage
-import com.rpmtw.rpmtw_platform_mod.translation.language.TranslateLanguageAdapter
+import com.rpmtw.rpmtw_platform_mod.translation.TranslateLanguage
 import com.rpmtw.rpmtw_platform_mod.util.Util
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -32,8 +31,7 @@ object MTManager {
     private const val maxTranslatingCount: Int = 3
     private val formatPattern = Pattern.compile("%(?:(\\d+)\\$)?([A-Za-z%]|$)")
     private val gson = GsonBuilder().registerTypeAdapter(Exception::class.java, ExceptionSerializer())
-        .registerTypeAdapter(Timestamp::class.java, TimestampAdapter())
-        .registerTypeAdapter(TranslateLanguage::class.java, TranslateLanguageAdapter()).create()
+        .registerTypeAdapter(Timestamp::class.java, TimestampAdapter()).create()
 
     private val translatedLanguage: TranslateLanguage
         get() = TranslateLanguage.getLanguage()
@@ -186,9 +184,8 @@ object MTManager {
     }
 
     private fun generateProgressText(): MutableComponent {
-        val text =
-            Component.translatable("machineTranslation.rpmtw_platform_mod.status.translating")
-                .withStyle(ChatFormatting.GRAY)
+        val text = Component.translatable("machineTranslation.rpmtw_platform_mod.status.translating")
+            .withStyle(ChatFormatting.GRAY)
         for (i in 0 until System.currentTimeMillis() % 400 / 100) {
             text.append(".")
         }
