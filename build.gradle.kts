@@ -37,7 +37,6 @@ allprojects {
     apply(plugin = "architectury-plugin")
     apply(plugin = "maven-publish")
 
-    base.archivesName.set(project.property("archives_base_name").toString())
     version = project.property("mod_version").toString()
     group = project.property("maven_group").toString()
 

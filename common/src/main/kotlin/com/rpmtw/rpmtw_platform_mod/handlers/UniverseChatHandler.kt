@@ -178,7 +178,6 @@ object UniverseChatHandler {
         } else {
             RPMTWPlatformMod.LOGGER.error("Connecting to universe chat server failed")
         }
-
     }
 
     private fun statusHandler(status: String) {

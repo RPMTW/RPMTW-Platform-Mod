@@ -7,6 +7,8 @@ architectury {
     fabric()
 }
 
+base.archivesName.set("${project.property("archives_base_name")}-fabric")
+
 repositories {
     mavenCentral()
     maven {
@@ -36,23 +38,21 @@ configurations {
 }
 
 dependencies {
-    modImplementation("net.fabricmc:fabric-loader:${project.property("fabric_loader_version").toString()}")
-    modApi("net.fabricmc.fabric-api:fabric-api:${project.property("fabric_api_version").toString()}")
+    modImplementation("net.fabricmc:fabric-loader:${project.property("fabric_loader_version")}")
+    modApi("net.fabricmc.fabric-api:fabric-api:${project.property("fabric_api_version")}")
     // Remove the next line if you don't want to depend on the API
-    modApi("dev.architectury:architectury-fabric:${project.property("architectury_version").toString()}")
-    modApi("me.shedaniel.cloth:cloth-config-fabric:${project.property("cloth_config_version").toString()}") {
+    modApi("dev.architectury:architectury-fabric:${project.property("architectury_version")}")
+    modApi("me.shedaniel.cloth:cloth-config-fabric:${project.property("cloth_config_version")}") {
         exclude(module = "fabric-api")
     }
-    modApi("net.fabricmc:fabric-language-kotlin:${project.property("fabric-kotlin_version").toString()}")
+    modApi("net.fabricmc:fabric-language-kotlin:${project.property("fabric-kotlin_version")}")
 
-    modImplementation("vazkii.patchouli:Patchouli:${project.property("patchouli_version").toString()}-FABRIC-SNAPSHOT")
+    modImplementation("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-FABRIC-SNAPSHOT")
 
     "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
     "shadowCommon"(project(path = ":common", configuration = "transformProductionFabric")) { isTransitive = false }
     "shadowCommon"(
-        "com.github.RPMTW:RPMTW-API-Client-Kotlin:${
-            project.property("rpmtw_api_client_version").toString()
-        }"
+        "com.github.RPMTW:RPMTW-API-Client-Kotlin:${project.property("rpmtw_api_client_version")}"
     ) {
         exclude("com.google.code.gson")
         exclude("org.jetbrains.kotlinx")
@@ -64,6 +64,7 @@ dependencies {
 
     modImplementation("com.terraformersmc:modmenu:4.0.0")
 }
+
 val accessWidenerFile = project(":common").file("src/main/resources/rpmtw_platform_mod.accesswidener")
 
 loom {
