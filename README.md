@@ -38,6 +38,8 @@ The built-in sophisticated settings screen allows you to adjust any function fre
 Want to know the original language of an item? Use this function!  
 ~~You can even learn English at the same time!~~
 
+- ### Translate resource pack
+The latest translation resource pack is automatically loaded and translated by many enthusiastic community contributors.
 - ### Machine translation
 
 Don't have a human translator? Leave it all to the AI! No more language barrier that prevents you from playing the mods.
