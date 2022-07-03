@@ -22,7 +22,7 @@
     "license": "GPL 3",
     "icon": "rpmtw-platform-logo.png",
     "intermediate_mappings": "net.fabricmc:intermediary",
-    "environment": "*",
+    "environment": "client",
     "entrypoints": {
       "init": [
         "com.rpmtw.rpmtw_platform_mod.quilt.RPMTWPlatformModQuilt"
