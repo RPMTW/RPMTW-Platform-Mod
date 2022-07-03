@@ -63,7 +63,7 @@ object RPMTWPlatformModPluginImpl {
     }
 
     @JvmStatic
-    fun getResourcePacksDir(): File {
+    fun getResourcePacksFolder(): File {
         return FabricLoader.getInstance().gameDir.resolve("resourcepacks").toFile()
     }
 }
