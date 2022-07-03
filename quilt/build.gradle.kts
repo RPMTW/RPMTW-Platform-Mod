@@ -64,7 +64,7 @@ dependencies {
         exclude(group = "net.fabricmc")
         exclude(group = "net.fabricmc.fabric-api")
     }
-    modImplementation("com.terraformersmc:modmenu:4.0.0") {
+    modImplementation("com.terraformersmc:modmenu:${project.property("modmenu_version")}") {
         exclude(group = "net.fabricmc")
         exclude(group = "net.fabricmc.fabric-api")
     }

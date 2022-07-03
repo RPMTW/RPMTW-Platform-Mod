@@ -48,7 +48,7 @@ dependencies {
     modApi("net.fabricmc:fabric-language-kotlin:${project.property("fabric-kotlin_version")}")
 
     modImplementation("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-FABRIC-SNAPSHOT")
-    modImplementation("com.terraformersmc:modmenu:4.0.0")
+    modImplementation("com.terraformersmc:modmenu:${project.property("modmenu_version")}")
 
     "shadowCommon"(
         "com.github.RPMTW:RPMTW-API-Client-Kotlin:${project.property("rpmtw_api_client_version")}"

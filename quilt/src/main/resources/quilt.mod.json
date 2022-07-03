@@ -49,6 +49,10 @@
         "version": ">=5.6.22"
       },
       {
+        "id": "cloth-config2",
+        "version": ">=7.0.72"
+      },
+      {
         "id": "qkl",
         "versioin": "0.1.0-SNAPSHOT"
       }
