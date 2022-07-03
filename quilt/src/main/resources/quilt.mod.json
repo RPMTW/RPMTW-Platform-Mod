@@ -31,12 +31,11 @@
         "com.rpmtw.rpmtw_platform_mod.fabriclike.gui.ModMenuIntegration"
       ]
     },
-    "costum": {
+    "custom": {
         "modmenu": {
             "links": {
                 "modmenu.discord": "https://discord.com/invite/5xApZtgV2u"
             }
-          }
         }
     },
     "depends": [
