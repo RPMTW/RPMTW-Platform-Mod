@@ -4,6 +4,18 @@ architectury {
 
 base.archivesName.set("${project.property("archives_base_name")}-fabric-like")
 
+val common by configurations.registering
+val shadowCommon by configurations.registering  // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
+configurations {
+    compileClasspath {
+        extendsFrom(common.get())
+    }
+
+    runtimeClasspath {
+        extendsFrom(common.get())
+    }
+}
+
 repositories {
     mavenCentral()
     maven {
@@ -23,15 +35,11 @@ dependencies {
     modApi("net.fabricmc.fabric-api:fabric-api:${project.property("fabric_api_version")}")
     // Remove the next line if you don't want to depend on the API
     modApi("dev.architectury:architectury-fabric:${project.property("architectury_version")}")
-    modApi("me.shedaniel.cloth:cloth-config-fabric:${project.property("cloth_config_version")}") {
-        exclude(module = "fabric-api")
-    }
 
     modImplementation("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-FABRIC-SNAPSHOT")
+    modImplementation("com.terraformersmc:modmenu:4.0.0")
 
     "compileClasspath"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
-
-    modImplementation("com.terraformersmc:modmenu:4.0.0")
 }
 
 val accessWidenerFile = project(":common").file("src/main/resources/rpmtw_platform_mod.accesswidener")

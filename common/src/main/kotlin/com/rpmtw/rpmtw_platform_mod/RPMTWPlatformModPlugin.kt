@@ -6,6 +6,7 @@ import com.mojang.brigadier.arguments.ArgumentType
 import com.mojang.brigadier.context.CommandContext
 import dev.architectury.injectables.annotations.ExpectPlatform
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener
+import java.io.File
 
 @Suppress("UNUSED_PARAMETER")
 object RPMTWPlatformModPlugin {
@@ -35,4 +36,8 @@ object RPMTWPlatformModPlugin {
         // Just throw an error, the content should get replaced at runtime.
         throw AssertionError()
     }
+
+    @ExpectPlatform
+    @JvmStatic
+    fun getResourcePacksFolder(): File { throw AssertionError() }
 }

@@ -1,4 +1,4 @@
-package com.rpmtw.rpmtw_platform_mod.fabric.mixins;
+package com.rpmtw.rpmtw_platform_mod.mixins.fabriclike;
 
 import net.minecraft.resources.ResourceLocation;
 import org.spongepowered.asm.mixin.Final;

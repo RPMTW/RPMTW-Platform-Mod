@@ -5,6 +5,18 @@ plugins {
 repositories {
     maven { url = uri("https://maven.quiltmc.org/repository/release/") }
     maven { url = uri("https://maven.quiltmc.org/repository/snapshot/") } // Kotlin currently is in snapshot
+
+    mavenCentral()
+    maven {
+        url = uri("https://bai.jfrog.io/artifactory/maven") //ModMenu
+        content {
+            includeGroup("com.terraformersmc")
+        }
+    }
+    maven {
+        // Patchouli
+        url = uri("https://maven.blamejared.com")
+    }
 }
 
 architectury {
@@ -42,12 +54,20 @@ dependencies {
         exclude(group = "net.fabricmc")
         exclude(group = "net.fabricmc.fabric-api")
     }
+    modApi("me.shedaniel.cloth:cloth-config-fabric:${project.property("cloth_config_version")}") {
+        exclude(group = "net.fabricmc")
+        exclude(group = "net.fabricmc.fabric-api")
+    }
     modApi("org.quiltmc.quilt-kotlin-libraries:quilt-kotlin-libraries:${project.property("quilt_kotlin_libraries")}")
 
-    "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
-    "shadowCommon"(project(path = ":common", configuration = "transformProductionQuilt")) { isTransitive = false }
-    "common"(project(path = ":fabric-like", configuration = "namedElements")) { isTransitive = false }
-    "shadowCommon"(project(path = ":fabric-like", configuration = "transformProductionQuilt")) { isTransitive = false }
+    modImplementation("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-FABRIC-SNAPSHOT") {
+        exclude(group = "net.fabricmc")
+        exclude(group = "net.fabricmc.fabric-api")
+    }
+    modImplementation("com.terraformersmc:modmenu:4.0.0") {
+        exclude(group = "net.fabricmc")
+        exclude(group = "net.fabricmc.fabric-api")
+    }
 
     "shadowCommon"(
         "com.github.RPMTW:RPMTW-API-Client-Kotlin:${project.property("rpmtw_api_client_version")}"
@@ -58,6 +78,11 @@ dependencies {
     }.let {
         implementation(it)
     }
+
+    "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
+    "shadowCommon"(project(path = ":common", configuration = "transformProductionQuilt")) { isTransitive = false }
+    "common"(project(path = ":fabric-like", configuration = "namedElements")) { isTransitive = false }
+    "shadowCommon"(project(path = ":fabric-like", configuration = "transformProductionQuilt")) { isTransitive = false }
 }
 
 tasks {

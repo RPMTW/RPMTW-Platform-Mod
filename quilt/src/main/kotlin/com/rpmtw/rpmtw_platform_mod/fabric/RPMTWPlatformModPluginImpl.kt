@@ -4,25 +4,24 @@ import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.arguments.ArgumentType
 import com.mojang.brigadier.context.CommandContext
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.argument
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback
-import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource
+import net.fabricmc.fabric.impl.resource.loader.ResourceManagerHelperImpl
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper
-import net.fabricmc.loader.api.FabricLoader
+
 import net.minecraft.commands.CommandBuildContext
+import net.minecraft.commands.Commands
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.packs.PackType
 import net.minecraft.server.packs.resources.PreparableReloadListener
 import net.minecraft.server.packs.resources.ResourceManager
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener
 import net.minecraft.util.profiling.ProfilerFiller
+import org.quiltmc.loader.api.QuiltLoader
+import org.quiltmc.qsl.command.api.client.ClientCommandManager
+import org.quiltmc.qsl.command.api.client.ClientCommandRegistrationCallback
+import org.quiltmc.qsl.command.api.client.QuiltClientCommandSource
 import java.io.File
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.Executor
-
 
 @Suppress("unused")
 object RPMTWPlatformModPluginImpl {
@@ -39,17 +38,21 @@ object RPMTWPlatformModPluginImpl {
         argumentType: ArgumentType<*>? = null,
         executes: (CommandContext<*>) -> Int
     ) {
-        ClientCommandRegistrationCallback.EVENT.register(ClientCommandRegistrationCallback { dispatcher: CommandDispatcher<FabricClientCommandSource?>, registryAccess: CommandBuildContext? ->
+        ClientCommandRegistrationCallback.EVENT.register(ClientCommandRegistrationCallback {
+                dispatcher: CommandDispatcher<QuiltClientCommandSource>,
+                buildContext: CommandBuildContext?,
+                environment: Commands.CommandSelection ->
             if (argumentName != null && argumentType != null) {
                 dispatcher.register(
-                    literal(command).then(
-                        literal(subCommand).then(argument(argumentName, argumentType).executes {
-                            return@executes executes(it)
-                        })
+                    ClientCommandManager.literal(command).then(
+                        ClientCommandManager.literal(subCommand)
+                            .then(ClientCommandManager.argument(argumentName, argumentType).executes {
+                                return@executes executes(it)
+                            })
                     )
                 )
             } else {
-                dispatcher.register(literal(command).then(literal(subCommand).executes {
+                dispatcher.register(ClientCommandManager.literal(command).then(ClientCommandManager.literal(subCommand).executes {
                     return@executes executes(it)
                 }))
             }
@@ -58,20 +61,19 @@ object RPMTWPlatformModPluginImpl {
 
     @JvmStatic
     fun <T> registerReloadEvent(reloadListener: SimplePreparableReloadListener<T>) {
-        ResourceManagerHelper.get(PackType.CLIENT_RESOURCES)
-            .registerReloadListener(PreparableReloadListenerWrapper(reloadListener))
+        ResourceManagerHelperImpl.get(PackType.CLIENT_RESOURCES)
+            .registerReloadListener(PrepareableReloadListenerWrapper(reloadListener))
     }
 
     @JvmStatic
-    fun getResourcePacksDir(): File {
-        return FabricLoader.getInstance().gameDir.resolve("resourcepacks").toFile()
+    fun getResourcePacksFolder(): File {
+        return QuiltLoader.getGameDir().resolve("resourcepacks").toFile()
     }
 }
 
 @Suppress("SpellCheckingInspection")
-private class PreparableReloadListenerWrapper<T>(val reloadListener: SimplePreparableReloadListener<T>) :
+private class PrepareableReloadListenerWrapper<T>(val reloadListener: SimplePreparableReloadListener<T>) :
     IdentifiableResourceReloadListener {
-
     override fun reload(
         preparationBarrier: PreparableReloadListener.PreparationBarrier,
         resourceManager: ResourceManager,
@@ -86,11 +88,14 @@ private class PreparableReloadListenerWrapper<T>(val reloadListener: SimplePrepa
             profilerFiller,
             profilerFiller2,
             executor,
-            executor2
-        )
+            executor2)
+    }
+
+    override fun getQuiltId(): ResourceLocation {
+        return ResourceLocation("${RPMTWPlatformMod.MOD_ID}/reload_listener_${reloadListener.hashCode()}")
     }
 
     override fun getFabricId(): ResourceLocation {
-        return ResourceLocation("${RPMTWPlatformMod.MOD_ID}/reload_listener_${reloadListener.hashCode()}")
+        TODO("Not yet implemented")
     }
 }

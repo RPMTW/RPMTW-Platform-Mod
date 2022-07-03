@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "mixin": [
+    "rpmtw_platform_mod.mixins.json"
+  ],
+  "quilt_loader": {
+    "group": "${group}",
+    "id": "rpmtw_platform_mod",
+    "version": "${version}",
+    "name": "RPMTW Platform Mod",
+    "description": "整合了RPMTW各項服務的模組，涵蓋翻譯、百科、宇宙通訊、中文輸入優化等功能，讓 Minecraft 中文玩家獲得更好的遊戲體驗。\nThe mod integrated with RPMTW services covers translation, wiki, universe chat, Chinese input optimization, and other features for Minecraft players to get a better gaming experience.",
+    "authors": [
+      "SiongSng",
+      "watermelon_1024",
+      "Yuta Yamamoto"
+    ],
+    "contact": {
+      "homepage": "https://rpmtw.com/",
+      "sources": "https://github.com/RPMTW/RPMTW-Platform-Mod",
+      "issues": "https://github.com/RPMTW/RPMTW-Platform-Mod/issues"
+    },
+    "license": "GPL 3",
+    "icon": "rpmtw-platform-logo.png",
+    "intermediate_mappings": "net.fabricmc:intermediary",
+    "environment": "*",
+    "entrypoints": {
+      "init": [
+        "com.rpmtw.rpmtw_platform_mod.quilt.RPMTWPlatformModQuilt"
+      ],
+      "modmenu": [
+        "com.rpmtw.rpmtw_platform_mod.fabriclike.gui.ModMenuIntegration"
+      ]
+    },
+    "depends": [
+      {
+        "id": "quilt_loader",
+        "version": "*"
+      },
+      {
+        "id": "quilt_base",
+        "version": "*"
+      },
+      {
+        "id": "minecraft",
+        "version": ">=1.19"
+      },
+      {
+        "id": "architectury",
+        "version": ">=5.6.22"
+      },
+      {
+        "id": "qkl",
+        "versioin": "0.1.0-SNAPSHOT"
+      }
+    ]
+  }
+}

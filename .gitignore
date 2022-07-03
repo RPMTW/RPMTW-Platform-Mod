@@ -3,6 +3,8 @@ common/build
 /run/
 /fabric/run/
 /fabric/build/
+/quilt/run/
+quilt/build/
 /forge/run/
 /forge/build/
 common/run/

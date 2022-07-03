@@ -25,7 +25,7 @@
       }
     ],
     "modmenu": [
-      "com.rpmtw.rpmtw_platform_mod.fabric.gui.ModMenuIntegration"
+      "com.rpmtw.rpmtw_platform_mod.fabriclike.gui.ModMenuIntegration"
     ]
   },
   "depends": {

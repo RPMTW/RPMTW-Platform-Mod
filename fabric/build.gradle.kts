@@ -2,6 +2,20 @@ plugins {
     id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
+repositories {
+    mavenCentral()
+    maven {
+        url = uri("https://bai.jfrog.io/artifactory/maven") //ModMenu
+        content {
+            includeGroup("com.terraformersmc")
+        }
+    }
+    maven {
+        // Patchouli
+        url = uri("https://maven.blamejared.com")
+    }
+}
+
 architectury {
     platformSetupLoomIde()
     fabric()
@@ -33,10 +47,8 @@ dependencies {
     }
     modApi("net.fabricmc:fabric-language-kotlin:${project.property("fabric-kotlin_version")}")
 
-    "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
-    "shadowCommon"(project(path = ":common", configuration = "transformProductionFabric")) { isTransitive = false }
-    "common"(project(path = ":fabric-like", configuration = "namedElements")) { isTransitive = false }
-    "shadowCommon"(project(path = ":fabric-like", configuration = "transformProductionFabric")) { isTransitive = false }
+    modImplementation("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-FABRIC-SNAPSHOT")
+    modImplementation("com.terraformersmc:modmenu:4.0.0")
 
     "shadowCommon"(
         "com.github.RPMTW:RPMTW-API-Client-Kotlin:${project.property("rpmtw_api_client_version")}"
@@ -47,6 +59,11 @@ dependencies {
     }.let {
         implementation(it)
     }
+
+    "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
+    "shadowCommon"(project(path = ":common", configuration = "transformProductionFabric")) { isTransitive = false }
+    "common"(project(path = ":fabric-like", configuration = "namedElements")) { isTransitive = false }
+    "shadowCommon"(project(path = ":fabric-like", configuration = "transformProductionFabric")) { isTransitive = false }
 }
 
 val accessWidenerFile = project(":common").file("src/main/resources/rpmtw_platform_mod.accesswidener")

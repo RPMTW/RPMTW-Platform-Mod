@@ -1,0 +1,30 @@
+{
+	"base": {
+		"rpmtwAuthToken": null
+	},
+	"translate": {
+		"autoToggleLanguage": true,
+		"machineTranslation": true,
+		"autoMachineTranslation": false,
+		"unlocalized": false,
+		"loadTranslateResourcePack": false
+	},
+	"universeChat": {
+		"enable": false,
+		"enableReceiveMessage": false,
+		"enableButton": false,
+		"eula": false,
+		"nickname": null,
+		"accountType": "RPMTW"
+	},
+	"keyBindings": {
+		"machineTranslation": {
+			"keyCode": "key.keyboard.unknown",
+			"modifier": 0
+		},
+		"config": {
+			"keyCode": "key.keyboard.r",
+			"modifier": 2
+		}
+	}
+}

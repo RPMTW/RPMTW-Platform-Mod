@@ -1,4 +1,4 @@
-package com.rpmtw.rpmtw_platform_mod.fabric.mixins;
+package com.rpmtw.rpmtw_platform_mod.mixins.fabriclike;
 
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonElement;

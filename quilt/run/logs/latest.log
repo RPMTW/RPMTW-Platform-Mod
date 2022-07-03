@@ -1,0 +1,613 @@
+[21:18:43] [main/INFO] (Quilt Loader/GameProvider) Loading Minecraft 1.19 with Quilt Loader 0.17.1-beta.4
+[21:18:44] [main/ERROR] (Quilt Loader) Incompatible mod set!
+org.quiltmc.loader.impl.FormattedException: org.quiltmc.loader.impl.discovery.ModSolvingException: Found 40 errors while resolving mods!
+	at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:214) ~[quilt-loader-0.17.1-beta.4.jar:?]
+	at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+	at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+	at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+	at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+	at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+Caused by: org.quiltmc.loader.impl.discovery.ModSolvingException: Found 40 errors while resolving mods!
+	at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:266) ~[quilt-loader-0.17.1-beta.4.jar:?]
+	at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+	at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+	at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+	... 5 more
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Fabric Biome API (v1)' (fabric-biome-api-v1) v9.0.11+e62f51a3a9, 'Quilted Fabric API' (quilted_fabric_api) v2.0.0-beta.3+0.57.0-1.19:
+Dependency for mod 'quilted_fabric_api' on quilted_fabric_biome_api_v1 versions [*] (1 valid options, 0 invalid options)
+	+ mod 'quilted_fabric_biome_api_v1' version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-biome-api-v1\2.0.0-beta.3+0.57.0-1.19\fabric-biome-api-v1-2.0.0-beta.3+0.57.0-1.19.jar
+optional mod 'fabric-biome-api-v1' (2 sources)
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-biome-api-v1\2.0.0-beta.3+0.57.0-1.19\fabric-biome-api-v1-2.0.0-beta.3+0.57.0-1.19.jar
+	 - version 9.0.11+e62f51a3a9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-biome-api-v1\9.0.11+e62f51a3a9\fabric-biome-api-v1-9.0.11+e62f51a3a9.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Quilted Fabric Game Rule API (v1)' (quilted_fabric_game_rule_api_v1) v2.0.0-beta.3+0.57.0-1.19, 'Fabric Game Rule API (v1)' (fabric-game-rule-api-v1) v1.0.18+18990361a9:
+optional mod 'fabric-game-rule-api-v1' (2 sources)
+	 - version 1.0.18+18990361a9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-game-rule-api-v1\1.0.18+18990361a9\fabric-game-rule-api-v1-1.0.18+18990361a9.jar
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-game-rule-api-v1\2.0.0-beta.3+0.57.0-1.19\fabric-game-rule-api-v1-2.0.0-beta.3+0.57.0-1.19.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Fabric API Base' (fabric-api-base) v0.4.8+e62f51a357, 'Quilted Fabric API Base' (quilted_fabric_api_base) v2.0.0-beta.3+0.57.0-1.19:
+optional mod 'fabric-api-base' (2 sources)
+	 - version 0.4.8+e62f51a357 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-api-base\0.4.8+e62f51a357\fabric-api-base-0.4.8+e62f51a357.jar
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-api-base\2.0.0-beta.3+0.57.0-1.19\fabric-api-base-2.0.0-beta.3+0.57.0-1.19.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Fabric API Lookup API (v1)' (fabric-api-lookup-api-v1) v1.6.5+9ff28f40a9, 'Quilted Fabric API Lookup API (v1)' (quilted_fabric_api_lookup_api_v1) v2.0.0-beta.3+0.57.0-1.19:
+optional mod 'fabric-api-lookup-api-v1' (2 sources)
+	 - version 1.6.5+9ff28f40a9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-api-lookup-api-v1\1.6.5+9ff28f40a9\fabric-api-lookup-api-v1-1.6.5+9ff28f40a9.jar
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-api-lookup-api-v1\2.0.0-beta.3+0.57.0-1.19\fabric-api-lookup-api-v1-2.0.0-beta.3+0.57.0-1.19.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Fabric Dimensions API (v1)' (fabric-dimensions-v1) v2.1.26+72da3b3da9, 'Quilted Fabric API' (quilted_fabric_api) v2.0.0-beta.3+0.57.0-1.19:
+Dependency for mod 'quilted_fabric_api' on quilted_fabric_dimensions_v1 versions [*] (1 valid options, 0 invalid options)
+	+ mod 'quilted_fabric_dimensions_v1' version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-dimensions-v1\2.0.0-beta.3+0.57.0-1.19\fabric-dimensions-v1-2.0.0-beta.3+0.57.0-1.19.jar
+optional mod 'fabric-dimensions-v1' (2 sources)
+	 - version 2.1.26+72da3b3da9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-dimensions-v1\2.1.26+72da3b3da9\fabric-dimensions-v1-2.1.26+72da3b3da9.jar
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-dimensions-v1\2.0.0-beta.3+0.57.0-1.19\fabric-dimensions-v1-2.0.0-beta.3+0.57.0-1.19.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Quilted Fabric Data Generation API (v1)' (quilted_fabric_data_generation_api_v1) v2.0.0-beta.3+0.57.0-1.19, 'Fabric Data Generation API (v1)' (fabric-data-generation-api-v1) v5.0.0+2a5b9210a9:
+optional mod 'fabric-data-generation-api-v1' (2 sources)
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-data-generation-api-v1\2.0.0-beta.3+0.57.0-1.19\fabric-data-generation-api-v1-2.0.0-beta.3+0.57.0-1.19.jar
+	 - version 5.0.0+2a5b9210a9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-data-generation-api-v1\5.0.0+2a5b9210a9\fabric-data-generation-api-v1-5.0.0+2a5b9210a9.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Fabric Item API (v1)' (fabric-item-api-v1) v1.5.3+767db26ea9, 'Quilted Fabric API' (quilted_fabric_api) v2.0.0-beta.3+0.57.0-1.19:
+Dependency for mod 'quilted_fabric_api' on quilted_fabric_item_api_v1 versions [*] (1 valid options, 0 invalid options)
+	+ mod 'quilted_fabric_item_api_v1' version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-item-api-v1\2.0.0-beta.3+0.57.0-1.19\fabric-item-api-v1-2.0.0-beta.3+0.57.0-1.19.jar
+optional mod 'fabric-item-api-v1' (2 sources)
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-item-api-v1\2.0.0-beta.3+0.57.0-1.19\fabric-item-api-v1-2.0.0-beta.3+0.57.0-1.19.jar
+	 - version 1.5.3+767db26ea9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-item-api-v1\1.5.3+767db26ea9\fabric-item-api-v1-1.5.3+767db26ea9.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Fabric Command API (v2)' (fabric-command-api-v2) v2.1.0+cda9839ba9, 'Quilted Fabric API' (quilted_fabric_api) v2.0.0-beta.3+0.57.0-1.19:
+optional mod 'fabric-command-api-v2' (2 sources)
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-command-api-v2\2.0.0-beta.3+0.57.0-1.19\fabric-command-api-v2-2.0.0-beta.3+0.57.0-1.19.jar
+	 - version 2.1.0+cda9839ba9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-command-api-v2\2.1.0+cda9839ba9\fabric-command-api-v2-2.1.0+cda9839ba9.jar
+Dependency for mod 'quilted_fabric_api' on quilted_fabric_command_api_v2 versions [*] (1 valid options, 0 invalid options)
+	+ mod 'quilted_fabric_command_api_v2' version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-command-api-v2\2.0.0-beta.3+0.57.0-1.19\fabric-command-api-v2-2.0.0-beta.3+0.57.0-1.19.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Quilted Fabric Networking API (v1)' (quilted_fabric_networking_api_v1) v2.0.0-beta.3+0.57.0-1.19, 'Fabric Networking API (v1)' (fabric-networking-api-v1) v1.0.26+7fe97409a9:
+optional mod 'fabric-networking-api-v1' (2 sources)
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-networking-api-v1\2.0.0-beta.3+0.57.0-1.19\fabric-networking-api-v1-2.0.0-beta.3+0.57.0-1.19.jar
+	 - version 1.0.26+7fe97409a9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-networking-api-v1\1.0.26+7fe97409a9\fabric-networking-api-v1-1.0.26+7fe97409a9.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Fabric Textures (v0)' (fabric-textures-v0) v1.0.17+9ff28f40a9, 'Quilted Fabric API' (quilted_fabric_api) v2.0.0-beta.3+0.57.0-1.19:
+optional mod 'fabric-textures-v0' (2 sources)
+	 - version 1.0.17+9ff28f40a9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-textures-v0\1.0.17+9ff28f40a9\fabric-textures-v0-1.0.17+9ff28f40a9.jar
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-textures-v0\2.0.0-beta.3+0.57.0-1.19\fabric-textures-v0-2.0.0-beta.3+0.57.0-1.19.jar
+Dependency for mod 'quilted_fabric_api' on quilted_fabric_textures_v0 versions [*] (1 valid options, 0 invalid options)
+	+ mod 'quilted_fabric_textures_v0' version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-textures-v0\2.0.0-beta.3+0.57.0-1.19\fabric-textures-v0-2.0.0-beta.3+0.57.0-1.19.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Fabric Renderer - Indigo' (fabric-renderer-indigo) v0.6.5+9ff28f40a9, 'Quilted Fabric API' (quilted_fabric_api) v2.0.0-beta.3+0.57.0-1.19:
+optional mod 'fabric-renderer-indigo' (2 sources)
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-renderer-indigo\2.0.0-beta.3+0.57.0-1.19\fabric-renderer-indigo-2.0.0-beta.3+0.57.0-1.19.jar
+	 - version 0.6.5+9ff28f40a9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-renderer-indigo\0.6.5+9ff28f40a9\fabric-renderer-indigo-0.6.5+9ff28f40a9.jar
+Dependency for mod 'quilted_fabric_api' on quilted_fabric_renderer_indigo versions [*] (1 valid options, 0 invalid options)
+	+ mod 'quilted_fabric_renderer_indigo' version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-renderer-indigo\2.0.0-beta.3+0.57.0-1.19\fabric-renderer-indigo-2.0.0-beta.3+0.57.0-1.19.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Fabric Transfer API (v1)' (fabric-transfer-api-v1) v2.0.7+e62f51a3a9, 'Quilted Fabric API' (quilted_fabric_api) v2.0.0-beta.3+0.57.0-1.19:
+optional mod 'fabric-transfer-api-v1' (2 sources)
+	 - version 2.0.7+e62f51a3a9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-transfer-api-v1\2.0.7+e62f51a3a9\fabric-transfer-api-v1-2.0.7+e62f51a3a9.jar
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-transfer-api-v1\2.0.0-beta.3+0.57.0-1.19\fabric-transfer-api-v1-2.0.0-beta.3+0.57.0-1.19.jar
+Dependency for mod 'quilted_fabric_api' on quilted_fabric_transfer_api_v1 versions [*] (1 valid options, 0 invalid options)
+	+ mod 'quilted_fabric_transfer_api_v1' version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-transfer-api-v1\2.0.0-beta.3+0.57.0-1.19\fabric-transfer-api-v1-2.0.0-beta.3+0.57.0-1.19.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Fabric Content Registries (v0)' (fabric-content-registries-v0) v3.0.15+9ff28f40a9, 'Quilted Fabric API' (quilted_fabric_api) v2.0.0-beta.3+0.57.0-1.19:
+optional mod 'fabric-content-registries-v0' (2 sources)
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-content-registries-v0\2.0.0-beta.3+0.57.0-1.19\fabric-content-registries-v0-2.0.0-beta.3+0.57.0-1.19.jar
+	 - version 3.0.15+9ff28f40a9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-content-registries-v0\3.0.15+9ff28f40a9\fabric-content-registries-v0-3.0.15+9ff28f40a9.jar
+Dependency for mod 'quilted_fabric_api' on quilted_fabric_content_registries_v0 versions [*] (1 valid options, 0 invalid options)
+	+ mod 'quilted_fabric_content_registries_v0' version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-content-registries-v0\2.0.0-beta.3+0.57.0-1.19\fabric-content-registries-v0-2.0.0-beta.3+0.57.0-1.19.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Fabric Rendering Fluids (v1)' (fabric-rendering-fluids-v1) v3.0.4+9ff28f40a9, 'Quilted Fabric API' (quilted_fabric_api) v2.0.0-beta.3+0.57.0-1.19:
+optional mod 'fabric-rendering-fluids-v1' (2 sources)
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-rendering-fluids-v1\2.0.0-beta.3+0.57.0-1.19\fabric-rendering-fluids-v1-2.0.0-beta.3+0.57.0-1.19.jar
+	 - version 3.0.4+9ff28f40a9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-rendering-fluids-v1\3.0.4+9ff28f40a9\fabric-rendering-fluids-v1-3.0.4+9ff28f40a9.jar
+Dependency for mod 'quilted_fabric_api' on quilted_fabric_rendering_fluids_v1 versions [*] (1 valid options, 0 invalid options)
+	+ mod 'quilted_fabric_rendering_fluids_v1' version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-rendering-fluids-v1\2.0.0-beta.3+0.57.0-1.19\fabric-rendering-fluids-v1-2.0.0-beta.3+0.57.0-1.19.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Fabric Key Binding API (v1)' (fabric-key-binding-api-v1) v1.0.17+9ff28f40a9, 'Quilted Fabric Key Binding API (v1)' (quilted_fabric_key_binding_api_v1) v2.0.0-beta.3+0.57.0-1.19:
+optional mod 'fabric-key-binding-api-v1' (2 sources)
+	 - version 1.0.17+9ff28f40a9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-key-binding-api-v1\1.0.17+9ff28f40a9\fabric-key-binding-api-v1-1.0.17+9ff28f40a9.jar
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-key-binding-api-v1\2.0.0-beta.3+0.57.0-1.19\fabric-key-binding-api-v1-2.0.0-beta.3+0.57.0-1.19.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Quilted Fabric Renderer API (v1)' (quilted_fabric_renderer_api_v1) v2.0.0-beta.3+0.57.0-1.19, 'Fabric Renderer API (v1)' (fabric-renderer-api-v1) v1.0.7+9ff28f40a9:
+optional mod 'fabric-renderer-api-v1' (2 sources)
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-renderer-api-v1\2.0.0-beta.3+0.57.0-1.19\fabric-renderer-api-v1-2.0.0-beta.3+0.57.0-1.19.jar
+	 - version 1.0.7+9ff28f40a9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-renderer-api-v1\1.0.7+9ff28f40a9\fabric-renderer-api-v1-1.0.7+9ff28f40a9.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Quilted Fabric Resource Loader (v0)' (quilted_fabric_resource_loader_v0) v2.0.0-beta.3+0.57.0-1.19, 'Fabric Resource Loader (v0)' (fabric-resource-loader-v0) v0.5.2+9e7660c657:
+optional mod 'fabric-resource-loader-v0' (2 sources)
+	 - version 0.5.2+9e7660c657 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-resource-loader-v0\0.5.2+9e7660c657\fabric-resource-loader-v0-0.5.2+9e7660c657.jar
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-resource-loader-v0\2.0.0-beta.3+0.57.0-1.19\fabric-resource-loader-v0-2.0.0-beta.3+0.57.0-1.19.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Fabric Screen API (v1)' (fabric-screen-api-v1) v1.0.22+9ff28f4057, 'Quilted Fabric Screen API (v1)' (quilted_fabric_screen_api_v1) v2.0.0-beta.3+0.57.0-1.19:
+optional mod 'fabric-screen-api-v1' (2 sources)
+	 - version 1.0.22+9ff28f4057 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-screen-api-v1\1.0.22+9ff28f4057\fabric-screen-api-v1-1.0.22+9ff28f4057.jar
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-screen-api-v1\2.0.0-beta.3+0.57.0-1.19\fabric-screen-api-v1-2.0.0-beta.3+0.57.0-1.19.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Quilted Fabric Events Interaction (v0)' (quilted_fabric_events_interaction_v0) v2.0.0-beta.3+0.57.0-1.19, 'Fabric Events Interaction (v0)' (fabric-events-interaction-v0) v0.4.25+9ff28f40a9:
+optional mod 'fabric-events-interaction-v0' (2 sources)
+	 - version 0.4.25+9ff28f40a9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-events-interaction-v0\0.4.25+9ff28f40a9\fabric-events-interaction-v0-0.4.25+9ff28f40a9.jar
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-events-interaction-v0\2.0.0-beta.3+0.57.0-1.19\fabric-events-interaction-v0-2.0.0-beta.3+0.57.0-1.19.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Fabric Game Test API (v1)' (fabric-gametest-api-v1) v1.0.29+e62f51a3a9, 'Quilted Fabric Game Test API (v1)' (quilted_fabric_gametest_api_v1) v2.0.0-beta.3+0.57.0-1.19:
+optional mod 'fabric-gametest-api-v1' (2 sources)
+	 - version 1.0.29+e62f51a3a9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-gametest-api-v1\1.0.29+e62f51a3a9\fabric-gametest-api-v1-1.0.29+e62f51a3a9.jar
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-gametest-api-v1\2.0.0-beta.3+0.57.0-1.19\fabric-gametest-api-v1-2.0.0-beta.3+0.57.0-1.19.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Fabric Rendering Data Attachment (v1)' (fabric-rendering-data-attachment-v1) v0.3.11+9ff28f40a9, 'Quilted Fabric API' (quilted_fabric_api) v2.0.0-beta.3+0.57.0-1.19:
+Dependency for mod 'quilted_fabric_api' on quilted_fabric_rendering_data_attachment_v1 versions [*] (1 valid options, 0 invalid options)
+	+ mod 'quilted_fabric_rendering_data_attachment_v1' version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-rendering-data-attachment-v1\2.0.0-beta.3+0.57.0-1.19\fabric-rendering-data-attachment-v1-2.0.0-beta.3+0.57.0-1.19.jar
+optional mod 'fabric-rendering-data-attachment-v1' (2 sources)
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-rendering-data-attachment-v1\2.0.0-beta.3+0.57.0-1.19\fabric-rendering-data-attachment-v1-2.0.0-beta.3+0.57.0-1.19.jar
+	 - version 0.3.11+9ff28f40a9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-rendering-data-attachment-v1\0.3.11+9ff28f40a9\fabric-rendering-data-attachment-v1-0.3.11+9ff28f40a9.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Fabric Rendering (v1)' (fabric-rendering-v1) v1.10.13+9ff28f40a9, 'Quilted Fabric API' (quilted_fabric_api) v2.0.0-beta.3+0.57.0-1.19:
+Dependency for mod 'quilted_fabric_api' on quilted_fabric_rendering_v1 versions [*] (1 valid options, 0 invalid options)
+	+ mod 'quilted_fabric_rendering_v1' version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-rendering-v1\2.0.0-beta.3+0.57.0-1.19\fabric-rendering-v1-2.0.0-beta.3+0.57.0-1.19.jar
+optional mod 'fabric-rendering-v1' (2 sources)
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-rendering-v1\2.0.0-beta.3+0.57.0-1.19\fabric-rendering-v1-2.0.0-beta.3+0.57.0-1.19.jar
+	 - version 1.10.13+9ff28f40a9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-rendering-v1\1.10.13+9ff28f40a9\fabric-rendering-v1-1.10.13+9ff28f40a9.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Fabric Transitive Access Wideners (v1)' (fabric-transitive-access-wideners-v1) v1.1.0+9e7660c6a9, 'Quilted Fabric Transitive Access Wideners (v1)' (quilted_fabric_transitive_access_wideners_v1) v2.0.0-beta.3+0.57.0-1.19:
+optional mod 'fabric-transitive-access-wideners-v1' (2 sources)
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-transitive-access-wideners-v1\2.0.0-beta.3+0.57.0-1.19\fabric-transitive-access-wideners-v1-2.0.0-beta.3+0.57.0-1.19.jar
+	 - version 1.1.0+9e7660c6a9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-transitive-access-wideners-v1\1.1.0+9e7660c6a9\fabric-transitive-access-wideners-v1-1.1.0+9e7660c6a9.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Fabric Screen Handler API (v1)' (fabric-screen-handler-api-v1) v1.2.5+9ff28f40a9, 'Quilted Fabric API' (quilted_fabric_api) v2.0.0-beta.3+0.57.0-1.19:
+optional mod 'fabric-screen-handler-api-v1' (2 sources)
+	 - version 1.2.5+9ff28f40a9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-screen-handler-api-v1\1.2.5+9ff28f40a9\fabric-screen-handler-api-v1-1.2.5+9ff28f40a9.jar
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-screen-handler-api-v1\2.0.0-beta.3+0.57.0-1.19\fabric-screen-handler-api-v1-2.0.0-beta.3+0.57.0-1.19.jar
+Dependency for mod 'quilted_fabric_api' on quilted_fabric_screen_handler_api_v1 versions [*] (1 valid options, 0 invalid options)
+	+ mod 'quilted_fabric_screen_handler_api_v1' version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-screen-handler-api-v1\2.0.0-beta.3+0.57.0-1.19\fabric-screen-handler-api-v1-2.0.0-beta.3+0.57.0-1.19.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Fabric Lifecycle Events (v1)' (fabric-lifecycle-events-v1) v2.0.8+21a5acaaa9, 'Quilted Fabric API' (quilted_fabric_api) v2.0.0-beta.3+0.57.0-1.19:
+Dependency for mod 'quilted_fabric_api' on quilted_fabric_lifecycle_events_v1 versions [*] (1 valid options, 0 invalid options)
+	+ mod 'quilted_fabric_lifecycle_events_v1' version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-lifecycle-events-v1\2.0.0-beta.3+0.57.0-1.19\fabric-lifecycle-events-v1-2.0.0-beta.3+0.57.0-1.19.jar
+optional mod 'fabric-lifecycle-events-v1' (2 sources)
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-lifecycle-events-v1\2.0.0-beta.3+0.57.0-1.19\fabric-lifecycle-events-v1-2.0.0-beta.3+0.57.0-1.19.jar
+	 - version 2.0.8+21a5acaaa9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-lifecycle-events-v1\2.0.8+21a5acaaa9\fabric-lifecycle-events-v1-2.0.8+21a5acaaa9.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Quilted Fabric Loot API (v2)' (quilted_fabric_loot_api_v2) v2.0.0-beta.3+0.57.0-1.19, 'Fabric Loot API (v2)' (fabric-loot-api-v2) v1.0.0+9e7660c6a9:
+optional mod 'fabric-loot-api-v2' (2 sources)
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-loot-api-v2\2.0.0-beta.3+0.57.0-1.19\fabric-loot-api-v2-2.0.0-beta.3+0.57.0-1.19.jar
+	 - version 1.0.0+9e7660c6a9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-loot-api-v2\1.0.0+9e7660c6a9\fabric-loot-api-v2-1.0.0+9e7660c6a9.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Fabric Item Groups (v0)' (fabric-item-groups-v0) v0.3.22+9ff28f40a9, 'Quilted Fabric Item Groups (v0)' (quilted_fabric_item_groups_v0) v2.0.0-beta.3+0.57.0-1.19:
+optional mod 'fabric-item-groups-v0' (2 sources)
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-item-groups-v0\2.0.0-beta.3+0.57.0-1.19\fabric-item-groups-v0-2.0.0-beta.3+0.57.0-1.19.jar
+	 - version 0.3.22+9ff28f40a9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-item-groups-v0\0.3.22+9ff28f40a9\fabric-item-groups-v0-0.3.22+9ff28f40a9.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Fabric BlockRenderLayer Registration (v1)' (fabric-blockrenderlayer-v1) v1.1.17+9ff28f40a9, 'Quilted Fabric API' (quilted_fabric_api) v2.0.0-beta.3+0.57.0-1.19:
+optional mod 'fabric-blockrenderlayer-v1' (2 sources)
+	 - version 1.1.17+9ff28f40a9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-blockrenderlayer-v1\1.1.17+9ff28f40a9\fabric-blockrenderlayer-v1-1.1.17+9ff28f40a9.jar
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-blockrenderlayer-v1\2.0.0-beta.3+0.57.0-1.19\fabric-blockrenderlayer-v1-2.0.0-beta.3+0.57.0-1.19.jar
+Dependency for mod 'quilted_fabric_api' on quilted_fabric_blockrenderlayer_v1 versions [*] (1 valid options, 0 invalid options)
+	+ mod 'quilted_fabric_blockrenderlayer_v1' version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-blockrenderlayer-v1\2.0.0-beta.3+0.57.0-1.19\fabric-blockrenderlayer-v1-2.0.0-beta.3+0.57.0-1.19.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Fabric Entity Events (v1)' (fabric-entity-events-v1) v1.4.15+9ff28f40a9, 'Quilted Fabric API' (quilted_fabric_api) v2.0.0-beta.3+0.57.0-1.19:
+optional mod 'fabric-entity-events-v1' (2 sources)
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-entity-events-v1\2.0.0-beta.3+0.57.0-1.19\fabric-entity-events-v1-2.0.0-beta.3+0.57.0-1.19.jar
+	 - version 1.4.15+9ff28f40a9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-entity-events-v1\1.4.15+9ff28f40a9\fabric-entity-events-v1-1.4.15+9ff28f40a9.jar
+Dependency for mod 'quilted_fabric_api' on quilted_fabric_entity_events_v1 versions [*] (1 valid options, 0 invalid options)
+	+ mod 'quilted_fabric_entity_events_v1' version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-entity-events-v1\2.0.0-beta.3+0.57.0-1.19\fabric-entity-events-v1-2.0.0-beta.3+0.57.0-1.19.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Quilted Fabric API' (quilted_fabric_api) v2.0.0-beta.3+0.57.0-1.19, 'Fabric API' (fabric) v0.55.2+1.19:
+optional mod 'fabric' (2 sources)
+	 - version 0.55.2+1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-api\0.55.2+1.19\fabric-api-0.55.2+1.19.jar
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\quilted-fabric-api\2.0.0-beta.3+0.57.0-1.19\quilted-fabric-api-2.0.0-beta.3+0.57.0-1.19.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Fabric Loader' (fabricloader) v0.14.6, 'Quilted Fabric API' (quilted_fabric_api) v2.0.0-beta.3+0.57.0-1.19:
+Dependency for mod 'quilted_fabric_api' on quilt_loader versions [*] (1 valid options, 0 invalid options)
+	+ mod 'quilt_loader' version 0.17.1-beta.4 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilt-loader\0.17.1-beta.4\quilt-loader-0.17.1-beta.4.jar
+optional mod 'fabricloader' (2 sources)
+	 - version 0.14.6 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-loader\0.14.6\fabric-loader-0.14.6.jar
+	 - version 0.17.1-beta.4 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilt-loader\0.17.1-beta.4\quilt-loader-0.17.1-beta.4.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Fabric Crash Report Info (v1)' (fabric-crash-report-info-v1) v0.2.2+bd0a0d4aa9, 'Quilted Fabric Crash Report Info (v1)' (quilted_fabric_crash_report_info_v1) v2.0.0-beta.3+0.57.0-1.19:
+optional mod 'fabric-crash-report-info-v1' (2 sources)
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-crash-report-info-v1\2.0.0-beta.3+0.57.0-1.19\fabric-crash-report-info-v1-2.0.0-beta.3+0.57.0-1.19.jar
+	 - version 0.2.2+bd0a0d4aa9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-crash-report-info-v1\0.2.2+bd0a0d4aa9\fabric-crash-report-info-v1-0.2.2+bd0a0d4aa9.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Quilted Fabric Registry Sync (v0)' (quilted_fabric_registry_sync_v0) v2.0.0-beta.3+0.57.0-1.19, 'Fabric Registry Sync (v0)' (fabric-registry-sync-v0) v0.9.15+92cf9a3ea9:
+optional mod 'fabric-registry-sync-v0' (2 sources)
+	 - version 0.9.15+92cf9a3ea9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-registry-sync-v0\0.9.15+92cf9a3ea9\fabric-registry-sync-v0-0.9.15+92cf9a3ea9.jar
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-registry-sync-v0\2.0.0-beta.3+0.57.0-1.19\fabric-registry-sync-v0-2.0.0-beta.3+0.57.0-1.19.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Quilted Fabric Models (v0)' (quilted_fabric_models_v0) v2.0.0-beta.3+0.57.0-1.19, 'Fabric Models (v0)' (fabric-models-v0) v0.3.14+9ff28f40a9:
+optional mod 'fabric-models-v0' (2 sources)
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-models-v0\2.0.0-beta.3+0.57.0-1.19\fabric-models-v0-2.0.0-beta.3+0.57.0-1.19.jar
+	 - version 0.3.14+9ff28f40a9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-models-v0\0.3.14+9ff28f40a9\fabric-models-v0-0.3.14+9ff28f40a9.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Fabric Message API (v1)' (fabric-message-api-v1) v1.0.0+513f4a59a9, 'Quilted Fabric API' (quilted_fabric_api) v2.0.0-beta.3+0.57.0-1.19:
+Dependency for mod 'quilted_fabric_api' on quilted_fabric_message_api_v1 versions [*] (1 valid options, 0 invalid options)
+	+ mod 'quilted_fabric_message_api_v1' version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-message-api-v1\2.0.0-beta.3+0.57.0-1.19\fabric-message-api-v1-2.0.0-beta.3+0.57.0-1.19.jar
+optional mod 'fabric-message-api-v1' (2 sources)
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-message-api-v1\2.0.0-beta.3+0.57.0-1.19\fabric-message-api-v1-2.0.0-beta.3+0.57.0-1.19.jar
+	 - version 1.0.0+513f4a59a9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-message-api-v1\1.0.0+513f4a59a9\fabric-message-api-v1-1.0.0+513f4a59a9.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Fabric Mining Level API (v1)' (fabric-mining-level-api-v1) v2.1.6+9ff28f40a9, 'Quilted Fabric API' (quilted_fabric_api) v2.0.0-beta.3+0.57.0-1.19:
+Dependency for mod 'quilted_fabric_api' on quilted_fabric_mining_level_api_v1 versions [*] (1 valid options, 0 invalid options)
+	+ mod 'quilted_fabric_mining_level_api_v1' version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-mining-level-api-v1\2.0.0-beta.3+0.57.0-1.19\fabric-mining-level-api-v1-2.0.0-beta.3+0.57.0-1.19.jar
+optional mod 'fabric-mining-level-api-v1' (2 sources)
+	 - version 2.1.6+9ff28f40a9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-mining-level-api-v1\2.1.6+9ff28f40a9\fabric-mining-level-api-v1-2.1.6+9ff28f40a9.jar
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-mining-level-api-v1\2.0.0-beta.3+0.57.0-1.19\fabric-mining-level-api-v1-2.0.0-beta.3+0.57.0-1.19.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Quilted Fabric Resource Conditions API (v1)' (quilted_fabric_resource_conditions_api_v1) v2.0.0-beta.3+0.57.0-1.19, 'Fabric Resource Conditions API (v1)' (fabric-resource-conditions-api-v1) v2.0.8+e62f51a3a9:
+optional mod 'fabric-resource-conditions-api-v1' (2 sources)
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-resource-conditions-api-v1\2.0.0-beta.3+0.57.0-1.19\fabric-resource-conditions-api-v1-2.0.0-beta.3+0.57.0-1.19.jar
+	 - version 2.0.8+e62f51a3a9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-resource-conditions-api-v1\2.0.8+e62f51a3a9\fabric-resource-conditions-api-v1-2.0.8+e62f51a3a9.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Fabric Particles (v1)' (fabric-particles-v1) v1.0.7+9ff28f40a9, 'Quilted Fabric Particles (v1)' (quilted_fabric_particles_v1) v2.0.0-beta.3+0.57.0-1.19:
+optional mod 'fabric-particles-v1' (2 sources)
+	 - version 1.0.7+9ff28f40a9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-particles-v1\1.0.7+9ff28f40a9\fabric-particles-v1-1.0.7+9ff28f40a9.jar
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-particles-v1\2.0.0-beta.3+0.57.0-1.19\fabric-particles-v1-2.0.0-beta.3+0.57.0-1.19.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Quilted Fabric Convention Tags API (v1)' (quilted_fabric_convention_tags_api_v1) v2.0.0-beta.3+0.57.0-1.19, 'Fabric Convention Tags' (fabric-convention-tags-v1) v1.0.7+37622d24a9:
+optional mod 'fabric-convention-tags-v1' (2 sources)
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-convention-tags-v1\2.0.0-beta.3+0.57.0-1.19\fabric-convention-tags-v1-2.0.0-beta.3+0.57.0-1.19.jar
+	 - version 1.0.7+37622d24a9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-convention-tags-v1\1.0.7+37622d24a9\fabric-convention-tags-v1-1.0.7+37622d24a9.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]
+	Suppressed: org.quiltmc.loader.impl.discovery.ModSolvingException: Unhandled error involving mods 'Fabric Object Builder API (v1)' (fabric-object-builder-api-v1) v4.0.4+9ff28f40a9, 'Quilted Fabric API' (quilted_fabric_api) v2.0.0-beta.3+0.57.0-1.19:
+Dependency for mod 'quilted_fabric_api' on quilted_fabric_object_builder_api_v1 versions [*] (1 valid options, 0 invalid options)
+	+ mod 'quilted_fabric_object_builder_api_v1' version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-object-builder-api-v1\2.0.0-beta.3+0.57.0-1.19\fabric-object-builder-api-v1-2.0.0-beta.3+0.57.0-1.19.jar
+optional mod 'fabric-object-builder-api-v1' (2 sources)
+	 - version 2.0.0-beta.3+0.57.0-1.19 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\org\quiltmc\quilted-fabric-api\fabric-object-builder-api-v1\2.0.0-beta.3+0.57.0-1.19\fabric-object-builder-api-v1-2.0.0-beta.3+0.57.0-1.19.jar
+	 - version 4.0.4+9ff28f40a9 loaded from C:\Users\benny\IdeaProjects\RPMTW-Platform-Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_19_layered_hash_40359_v2_arch_quilt\net\fabricmc\fabric-api\fabric-object-builder-api-v1\4.0.4+9ff28f40a9\fabric-object-builder-api-v1-4.0.4+9ff28f40a9.jar
+		at org.quiltmc.loader.impl.solver.ModSolver.fallbackErrorDescription(ModSolver.java:615) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.solver.ModSolver.findCompatibleSet(ModSolver.java:244) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.discovery.ModResolver.resolve(ModResolver.java:430) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.setup(QuiltLoaderImpl.java:223) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.QuiltLoaderImpl.load(QuiltLoaderImpl.java:212) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.init(Knot.java:141) ~[quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.Knot.launch(Knot.java:70) [quilt-loader-0.17.1-beta.4.jar:?]
+		at org.quiltmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:24) [quilt-loader-0.17.1-beta.4.jar:?]
+		at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+		at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:217) [architectury-transformer-5.2.66-runtime.jar:5.2.66]

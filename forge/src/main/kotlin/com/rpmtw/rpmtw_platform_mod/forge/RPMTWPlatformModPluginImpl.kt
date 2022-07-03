@@ -10,8 +10,10 @@ import net.minecraft.commands.Commands.literal
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener
 import net.minecraftforge.client.ConfigGuiHandler.ConfigGuiFactory
 import net.minecraftforge.client.event.RegisterClientCommandsEvent
+import net.minecraftforge.common.ForgeMod
 import thedarkcolour.kotlinforforge.forge.FORGE_BUS
 import thedarkcolour.kotlinforforge.forge.LOADING_CONTEXT
+import java.io.File
 
 @Suppress("unused")
 object RPMTWPlatformModPluginImpl {
@@ -49,5 +51,10 @@ object RPMTWPlatformModPluginImpl {
     @JvmStatic
     fun <T> registerReloadEvent(reloadListener: SimplePreparableReloadListener<T>) {
         FORGE_BUS.register(reloadListener)
+    }
+
+    @JvmStatic
+    fun getResourcePacksFolder(): File {
+        return Minecraft.getInstance().gameDirectory.resolve("resourcepacks")
     }
 }
