@@ -118,7 +118,7 @@ repositories {
 
 publishing {
     publications {
-        create<MavenPublication>("mavenCommon") {
+        create<MavenPublication>("mavenForge") {
             artifactId = project.property("archives_base_name").toString()
             from(components["java"])
         }

@@ -2,12 +2,17 @@ plugins {
     id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
-architectury {
-    platformSetupLoomIde()
-    fabric()
+repositories {
+    maven { url = uri("https://maven.quiltmc.org/repository/release/") }
+    maven { url = uri("https://maven.quiltmc.org/repository/snapshot/") } // Kotlin currently is in snapshot
 }
 
-base.archivesName.set("${project.property("archives_base_name")}-fabric")
+architectury {
+    platformSetupLoomIde()
+    loader("quilt")
+}
+
+base.archivesName.set("${project.property("archives_base_name")}-quilt")
 
 val common by configurations.registering
 val shadowCommon by configurations.registering  // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
@@ -20,23 +25,29 @@ configurations {
         extendsFrom(common.get())
     }
 
-    getByName("developmentFabric").extendsFrom(common.get())
+    getByName("developmentQuilt").extendsFrom(common.get())
+}
+
+val accessWidenerFile = project(":common").file("src/main/resources/rpmtw_platform_mod.accesswidener")
+
+loom {
+    accessWidenerPath.set(accessWidenerFile)
 }
 
 dependencies {
-    modImplementation("net.fabricmc:fabric-loader:${project.property("fabric_loader_version")}")
-    modApi("net.fabricmc.fabric-api:fabric-api:${project.property("fabric_api_version")}")
-    // Remove the next line if you don't want to depend on the API
-    modApi("dev.architectury:architectury-fabric:${project.property("architectury_version")}")
-    modApi("me.shedaniel.cloth:cloth-config-fabric:${project.property("cloth_config_version")}") {
-        exclude(module = "fabric-api")
+    modImplementation("org.quiltmc:quilt-loader:${project.property("quilt_loader_version")}")
+    modApi("org.quiltmc.quilted-fabric-api:quilted-fabric-api:${project.property("quilted_fabric_api_version")}-${project.property("minecraft_version")}")
+    // Remove the next few lines if you don't want to depend on the API
+    modApi("dev.architectury:architectury-fabric:${project.property("architectury_version")}") {
+        exclude(group = "net.fabricmc")
+        exclude(group = "net.fabricmc.fabric-api")
     }
-    modApi("net.fabricmc:fabric-language-kotlin:${project.property("fabric-kotlin_version")}")
+    modApi("org.quiltmc.quilt-kotlin-libraries:quilt-kotlin-libraries:${project.property("quilt_kotlin_libraries")}")
 
     "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
-    "shadowCommon"(project(path = ":common", configuration = "transformProductionFabric")) { isTransitive = false }
+    "shadowCommon"(project(path = ":common", configuration = "transformProductionQuilt")) { isTransitive = false }
     "common"(project(path = ":fabric-like", configuration = "namedElements")) { isTransitive = false }
-    "shadowCommon"(project(path = ":fabric-like", configuration = "transformProductionFabric")) { isTransitive = false }
+    "shadowCommon"(project(path = ":fabric-like", configuration = "transformProductionQuilt")) { isTransitive = false }
 
     "shadowCommon"(
         "com.github.RPMTW:RPMTW-API-Client-Kotlin:${project.property("rpmtw_api_client_version")}"
@@ -49,12 +60,6 @@ dependencies {
     }
 }
 
-val accessWidenerFile = project(":common").file("src/main/resources/rpmtw_platform_mod.accesswidener")
-
-loom {
-    accessWidenerPath.set(accessWidenerFile)
-}
-
 tasks {
     val resourcesPath = file("src/main/resources")
     // The access widener file is needed in :fabric project resources when the game is run.
@@ -65,10 +70,11 @@ tasks {
 
     processResources {
         dependsOn(copyAccessWidener)
+        inputs.property("group", project.group)
         inputs.property("version", project.version)
 
-        filesMatching("fabric.mod.json") {
-            expand("version" to project.version)
+        filesMatching("quilt.mod.json") {
+            expand("group" to project.group, "version" to project.version)
         }
     }
 
@@ -105,7 +111,7 @@ components.getByName<AdhocComponentWithVariants>("java") {
 
 publishing {
     publications {
-        create<MavenPublication>("mavenFabric") {
+        create<MavenPublication>("mavenQuilt") {
             artifactId = project.property("archives_base_name").toString()
             from(components["java"])
         }
