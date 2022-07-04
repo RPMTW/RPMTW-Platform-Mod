@@ -63,8 +63,6 @@ object TranslateResourcePack {
             downloadUrl = "https://gh.api.99988866.xyz/${downloadUrl}"
         }
 
-        RPMTWPlatformMod.LOGGER.info(downloadUrl)
-
         FileUtils.copyURLToFile(URL(downloadUrl), cacheFile)
         if (!cacheFile.exists()) {
             throw Exception("File not found")
