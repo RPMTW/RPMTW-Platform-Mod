@@ -6,6 +6,7 @@
 [![](https://img.shields.io/github/release/RPMTW/RPMTW-Platform-Mod.svg)](https://github.com/RPMTW/RPMTW-Platform-Mod/releases)
 ![](http://cf.way2muchnoise.eu/versions/minecraft_rpmtw-update-mod_all.svg)
 [![](http://cf.way2muchnoise.eu/rpmtw-update-mod.svg)](https://minecraft.curseforge.com/projects/rpmtw-update-mod)
+[![](https://img.shields.io/modrinth/dt/ZukQzaRP?label=Modrinth%20Downloads)](https://modrinth.com/mod/ZukQzaRP)
 <p>&nbsp;</p> 
 
 #### 🌐 README Languages
