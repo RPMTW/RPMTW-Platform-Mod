@@ -8,6 +8,5 @@ import org.quiltmc.qsl.base.api.entrypoint.ModInitializer
 class RPMTWPlatformModQuilt : ModInitializer {
     override fun onInitialize(mod: ModContainer?) {
         RPMTWPlatformModFabricLike.init()
-
     }
 }
