@@ -12,17 +12,12 @@ import java.nio.file.Paths
 
 object TranslateResourcePack {
     private const val fileName = "RPMTW-Translate-Resource-Pack-1.19.zip"
-    private val downloadUrl =
-        "https://${if (TranslateLanguage.getLanguage() == TranslateLanguage.SimplifiedChinese) "github.com.cnpmjs.org" else "github.com"}/RPMTW/Translate-Resource-Pack/releases/latest/download/$fileName"
     private val resourcePackFolder: File = RPMTWPlatformModPlugin.getResourcePacksFolder()
     private val resourcePackFile = resourcePackFolder.resolve(fileName)
     private val cacheFile = Util.getFileLocation(fileName)
-
     fun load() {
         try {
-            Util.coroutineLaunch {
-                download()
-            }
+            download()
         } catch (e: Exception) {
             RPMTWPlatformMod.LOGGER.error("Failed to download translate resource pack", e)
             return
@@ -60,6 +55,11 @@ object TranslateResourcePack {
         // if cache file exists and is not older than 30 minutes, use cache file
         if (cacheFile.exists() && cacheFile.isFile && cacheFile.lastModified() > System.currentTimeMillis() - (time)) {
             return
+        }
+
+        var downloadUrl = "https://github.com/RPMTW/Translate-Resource-Pack/releases/latest/download/$fileName";
+        if (TranslateLanguage.getLanguage() == TranslateLanguage.SimplifiedChinese) {
+            downloadUrl = "https://gh.api.99988866.xyz/${downloadUrl}"
         }
 
         FileUtils.copyURLToFile(URL(downloadUrl), cacheFile)

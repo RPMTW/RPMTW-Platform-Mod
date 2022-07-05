@@ -4,7 +4,6 @@ import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.arguments.ArgumentType
 import com.mojang.brigadier.context.CommandContext
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.argument
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback
@@ -39,7 +38,7 @@ object RPMTWPlatformModPluginImpl {
         argumentType: ArgumentType<*>? = null,
         executes: (CommandContext<*>) -> Int
     ) {
-        ClientCommandRegistrationCallback.EVENT.register(ClientCommandRegistrationCallback { dispatcher: CommandDispatcher<FabricClientCommandSource?>, registryAccess: CommandBuildContext? ->
+        ClientCommandRegistrationCallback.EVENT.register(ClientCommandRegistrationCallback { dispatcher: CommandDispatcher<FabricClientCommandSource?>, _: CommandBuildContext? ->
             if (argumentName != null && argumentType != null) {
                 dispatcher.register(
                     literal(command).then(

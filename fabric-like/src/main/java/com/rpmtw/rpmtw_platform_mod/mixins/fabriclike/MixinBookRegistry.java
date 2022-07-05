@@ -1,3 +1,6 @@
+/*
+Credit: https://github.com/kappa-maintainer/PRP
+ */
 package com.rpmtw.rpmtw_platform_mod.mixins.fabriclike;
 
 import net.minecraft.resources.ResourceLocation;
