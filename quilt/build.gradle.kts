@@ -48,6 +48,7 @@ loom {
 
 dependencies {
     modImplementation("org.quiltmc:quilt-loader:${project.property("quilt_loader_version")}")
+    modImplementation("org.quiltmc:qsl:${project.property("qsl_version")}+${project.property("minecraft_version")}")
     modApi("org.quiltmc.quilted-fabric-api:quilted-fabric-api:${project.property("quilted_fabric_api_version")}-${project.property("minecraft_version")}")
     // Remove the next few lines if you don't want to depend on the API
     modApi("dev.architectury:architectury-fabric:${project.property("architectury_version")}") {
