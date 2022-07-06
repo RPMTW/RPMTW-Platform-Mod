@@ -3,9 +3,6 @@ package com.rpmtw.rpmtw_platform_mod.fabric
 import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.arguments.ArgumentType
 import com.mojang.brigadier.context.CommandContext
-import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
-import net.fabricmc.fabric.impl.resource.loader.ResourceManagerHelperImpl
-import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener
 
 import net.minecraft.commands.CommandBuildContext
 import net.minecraft.commands.Commands
@@ -15,10 +12,16 @@ import net.minecraft.server.packs.resources.PreparableReloadListener
 import net.minecraft.server.packs.resources.ResourceManager
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener
 import net.minecraft.util.profiling.ProfilerFiller
+
 import org.quiltmc.loader.api.QuiltLoader
 import org.quiltmc.qsl.command.api.client.ClientCommandManager
 import org.quiltmc.qsl.command.api.client.ClientCommandRegistrationCallback
 import org.quiltmc.qsl.command.api.client.QuiltClientCommandSource
+import org.quiltmc.qsl.resource.loader.api.ResourceLoader
+import org.quiltmc.qsl.resource.loader.api.reloader.IdentifiableResourceReloader
+
+import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
+
 import java.io.File
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.Executor
@@ -40,8 +43,8 @@ object RPMTWPlatformModPluginImpl {
     ) {
         ClientCommandRegistrationCallback.EVENT.register(ClientCommandRegistrationCallback {
                 dispatcher: CommandDispatcher<QuiltClientCommandSource>,
-                buildContext: CommandBuildContext?,
-                environment: Commands.CommandSelection ->
+                _: CommandBuildContext?,
+                _: Commands.CommandSelection ->
             if (argumentName != null && argumentType != null) {
                 dispatcher.register(
                     ClientCommandManager.literal(command).then(
@@ -61,8 +64,8 @@ object RPMTWPlatformModPluginImpl {
 
     @JvmStatic
     fun <T> registerReloadEvent(reloadListener: SimplePreparableReloadListener<T>) {
-        ResourceManagerHelperImpl.get(PackType.CLIENT_RESOURCES)
-            .registerReloadListener(PrepareableReloadListenerWrapper(reloadListener))
+        ResourceLoader.get(PackType.CLIENT_RESOURCES)
+            .registerReloader(PrepareableReloadListenerWrapper(reloadListener))
     }
 
     @JvmStatic
@@ -73,7 +76,7 @@ object RPMTWPlatformModPluginImpl {
 
 @Suppress("SpellCheckingInspection")
 private class PrepareableReloadListenerWrapper<T>(val reloadListener: SimplePreparableReloadListener<T>) :
-    IdentifiableResourceReloadListener {
+    IdentifiableResourceReloader {
     override fun reload(
         preparationBarrier: PreparableReloadListener.PreparationBarrier,
         resourceManager: ResourceManager,
@@ -93,9 +96,5 @@ private class PrepareableReloadListenerWrapper<T>(val reloadListener: SimplePrep
 
     override fun getQuiltId(): ResourceLocation {
         return ResourceLocation("${RPMTWPlatformMod.MOD_ID}/reload_listener_${reloadListener.hashCode()}")
-    }
-
-    override fun getFabricId(): ResourceLocation {
-        TODO("Not yet implemented")
     }
 }
