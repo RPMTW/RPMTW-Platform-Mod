@@ -35,7 +35,7 @@ jobs:
           cd ${{ github.workspace }}
           chmod +x gradlew
           sh ./gradlew build
-        timeout-minutes: 25
+        timeout-minutes: 15
       - name: Upload artifacts (fabric)
         uses: actions/upload-artifact@v3
         with:
