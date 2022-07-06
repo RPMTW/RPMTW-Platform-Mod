@@ -55,6 +55,6 @@ object RPMTWPlatformModPluginImpl {
 
     @JvmStatic
     fun getResourcePacksFolder(): File {
-        return Minecraft.getInstance().gameDirectory.resolve("resourcepacks")
+        return Minecraft.getInstance().gameDirectory
     }
 }

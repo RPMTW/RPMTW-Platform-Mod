@@ -39,5 +39,5 @@ object RPMTWPlatformModPlugin {
 
     @ExpectPlatform
     @JvmStatic
-    fun getResourcePacksFolder(): File { throw AssertionError() }
+    fun getGameFolder(): File { throw AssertionError() }
 }

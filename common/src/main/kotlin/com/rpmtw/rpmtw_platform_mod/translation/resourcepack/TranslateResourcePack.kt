@@ -12,7 +12,7 @@ import java.nio.file.Paths
 
 object TranslateResourcePack {
     private const val fileName = "RPMTW-Translate-Resource-Pack-1.19.zip"
-    private val resourcePackFolder: File = RPMTWPlatformModPlugin.getResourcePacksFolder()
+    private val resourcePackFolder: File = RPMTWPlatformModPlugin.getGameFolder().resolve("resourcepacks")
     private val resourcePackFile = resourcePackFolder.resolve(fileName)
     private val cacheFile = Util.getFileLocation(fileName)
     fun load() {

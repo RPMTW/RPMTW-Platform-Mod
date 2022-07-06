@@ -66,8 +66,8 @@ object RPMTWPlatformModPluginImpl {
     }
 
     @JvmStatic
-    fun getResourcePacksFolder(): File {
-        return QuiltLoader.getGameDir().resolve("resourcepacks").toFile()
+    fun getGameFolder(): File {
+        return QuiltLoader.getGameDir().toFile()
     }
 }
 
