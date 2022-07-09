@@ -1,4 +1,4 @@
-package com.rpmtw.rpmtw_platform_mod.fabric.gui
+package com.rpmtw.rpmtw_platform_mod.fabriclike.gui
 
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.terraformersmc.modmenu.api.ConfigScreenFactory

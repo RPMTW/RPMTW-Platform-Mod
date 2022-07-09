@@ -1,12 +1,12 @@
 common/build
 .gradle
 /run/
-/fabric/run/
-/fabric/build/
-/forge/run/
-/forge/build/
-common/run/
+/*/run/
+/*/build/
 build/
+
+/fabric/src/main/resources/rpmtw_platform_mod.accesswidener
+/quilt/src/main/resources/rpmtw_platform_mod.accesswidener
 
 .architectury-transformer/
 .idea

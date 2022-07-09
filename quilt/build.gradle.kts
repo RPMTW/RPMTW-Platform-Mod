@@ -3,6 +3,9 @@ plugins {
 }
 
 repositories {
+    maven { url = uri("https://maven.quiltmc.org/repository/release/") }
+    maven { url = uri("https://maven.quiltmc.org/repository/snapshot/") } // Kotlin currently is in snapshot
+
     mavenCentral()
     maven {
         url = uri("https://bai.jfrog.io/artifactory/maven") //ModMenu
@@ -18,10 +21,10 @@ repositories {
 
 architectury {
     platformSetupLoomIde()
-    fabric()
+    loader("quilt")
 }
 
-base.archivesName.set("${project.property("archives_base_name")}-fabric")
+base.archivesName.set("${project.property("archives_base_name")}-quilt")
 
 val common by configurations.registering
 val shadowCommon by configurations.registering  // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
@@ -34,21 +37,38 @@ configurations {
         extendsFrom(common.get())
     }
 
-    getByName("developmentFabric").extendsFrom(common.get())
+    getByName("developmentQuilt").extendsFrom(common.get())
+}
+
+val accessWidenerFile = project(":common").file("src/main/resources/rpmtw_platform_mod.accesswidener")
+
+loom {
+    accessWidenerPath.set(accessWidenerFile)
 }
 
 dependencies {
-    modImplementation("net.fabricmc:fabric-loader:${project.property("fabric_loader_version")}")
-    modApi("net.fabricmc.fabric-api:fabric-api:${project.property("fabric_api_version")}")
-    // Remove the next line if you don't want to depend on the API
-    modApi("dev.architectury:architectury-fabric:${project.property("architectury_version")}")
-    modApi("me.shedaniel.cloth:cloth-config-fabric:${project.property("cloth_config_version")}") {
-        exclude(module = "fabric-api")
+    modImplementation("org.quiltmc:quilt-loader:${project.property("quilt_loader_version")}")
+    modImplementation("org.quiltmc:qsl:${project.property("qsl_version")}+${project.property("minecraft_version")}")
+    modApi("org.quiltmc.quilted-fabric-api:quilted-fabric-api:${project.property("quilted_fabric_api_version")}-${project.property("minecraft_version")}")
+    // Remove the next few lines if you don't want to depend on the API
+    modApi("dev.architectury:architectury-fabric:${project.property("architectury_version")}") {
+        exclude(group = "net.fabricmc")
+        exclude(group = "net.fabricmc.fabric-api")
     }
-    modApi("net.fabricmc:fabric-language-kotlin:${project.property("fabric-kotlin_version")}")
+    modApi("me.shedaniel.cloth:cloth-config-fabric:${project.property("cloth_config_version")}") {
+        exclude(group = "net.fabricmc")
+        exclude(group = "net.fabricmc.fabric-api")
+    }
+    modApi("org.quiltmc.quilt-kotlin-libraries:quilt-kotlin-libraries:${project.property("quilt_kotlin_libraries")}")
 
-    modImplementation("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-FABRIC-SNAPSHOT")
-    modImplementation("com.terraformersmc:modmenu:${project.property("modmenu_version")}")
+    modImplementation("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-FABRIC-SNAPSHOT") {
+        exclude(group = "net.fabricmc")
+        exclude(group = "net.fabricmc.fabric-api")
+    }
+    modImplementation("com.terraformersmc:modmenu:${project.property("modmenu_version")}") {
+        exclude(group = "net.fabricmc")
+        exclude(group = "net.fabricmc.fabric-api")
+    }
 
     "shadowCommon"(
         "com.github.RPMTW:RPMTW-API-Client-Kotlin:${project.property("rpmtw_api_client_version")}"
@@ -61,15 +81,9 @@ dependencies {
     }
 
     "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
-    "shadowCommon"(project(path = ":common", configuration = "transformProductionFabric")) { isTransitive = false }
+    "shadowCommon"(project(path = ":common", configuration = "transformProductionQuilt")) { isTransitive = false }
     "common"(project(path = ":fabric-like", configuration = "namedElements")) { isTransitive = false }
-    "shadowCommon"(project(path = ":fabric-like", configuration = "transformProductionFabric")) { isTransitive = false }
-}
-
-val accessWidenerFile = project(":common").file("src/main/resources/rpmtw_platform_mod.accesswidener")
-
-loom {
-    accessWidenerPath.set(accessWidenerFile)
+    "shadowCommon"(project(path = ":fabric-like", configuration = "transformProductionQuilt")) { isTransitive = false }
 }
 
 tasks {
@@ -82,10 +96,11 @@ tasks {
 
     processResources {
         dependsOn(copyAccessWidener)
+        inputs.property("group", project.group)
         inputs.property("version", project.version)
 
-        filesMatching("fabric.mod.json") {
-            expand("version" to project.version)
+        filesMatching("quilt.mod.json") {
+            expand("group" to project.group, "version" to project.version)
         }
     }
 
@@ -122,7 +137,7 @@ components.getByName<AdhocComponentWithVariants>("java") {
 
 publishing {
     publications {
-        create<MavenPublication>("mavenFabric") {
+        create<MavenPublication>("mavenQuilt") {
             artifactId = project.property("archives_base_name").toString()
             from(components["java"])
         }

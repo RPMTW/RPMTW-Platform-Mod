@@ -1,6 +1,7 @@
 package com.rpmtw.rpmtw_platform_mod.translation.resourcepack
 
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
+import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformModPlugin
 import com.rpmtw.rpmtw_platform_mod.translation.TranslateLanguage
 import com.rpmtw.rpmtw_platform_mod.util.Util
 import net.minecraft.client.Minecraft
@@ -11,11 +12,9 @@ import java.nio.file.Paths
 
 object TranslateResourcePack {
     private const val fileName = "RPMTW-Translate-Resource-Pack-1.19.zip"
-    private val resourcePackFolder: File =
-        File(Paths.get(Minecraft.getInstance().gameDirectory.path, "resourcepacks").toUri())
+    private val resourcePackFolder: File = RPMTWPlatformModPlugin.getGameFolder().resolve("resourcepacks")
     private val resourcePackFile = resourcePackFolder.resolve(fileName)
     private val cacheFile = Util.getFileLocation(fileName)
-
     fun load() {
         try {
             download()
