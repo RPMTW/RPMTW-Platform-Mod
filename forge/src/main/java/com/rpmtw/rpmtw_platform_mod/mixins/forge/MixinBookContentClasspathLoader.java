@@ -1,7 +1,7 @@
 /*
 Credit: https://github.com/kappa-maintainer/PRP
  */
-package com.rpmtw.rpmtw_platform_mod.forge.mixins;
+package com.rpmtw.rpmtw_platform_mod.mixins.forge;
 
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonElement;
