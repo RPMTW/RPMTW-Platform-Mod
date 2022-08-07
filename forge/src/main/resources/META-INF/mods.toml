@@ -1,7 +1,7 @@
 modLoader = "kotlinforforge"
 loaderVersion = "[3,)"
 issueTrackerURL = "https://github.com/RPMTW/RPMTW-Platform-Mod/issues"
-license = "GPL 3"
+license = "GPL-3"
 
 [[mods]]
 modId = "rpmtw_platform_mod"
@@ -31,7 +31,7 @@ side = "BOTH"
 [[dependencies.rpmtw_platform_mod]]
 modId = "architectury"
 mandatory = true
-versionRange = "[5.6.22,)"
+versionRange = "[5.10.33,)"
 ordering = "AFTER"
 side = "BOTH"
 

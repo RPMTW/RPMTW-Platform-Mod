@@ -8,7 +8,7 @@ import net.minecraft.client.gui.screens.Screen
 import net.minecraft.commands.Commands.argument
 import net.minecraft.commands.Commands.literal
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener
-import net.minecraftforge.client.ConfigGuiHandler.ConfigGuiFactory
+import net.minecraftforge.client.ConfigScreenHandler.ConfigScreenFactory
 import net.minecraftforge.client.event.RegisterClientCommandsEvent
 import thedarkcolour.kotlinforforge.forge.FORGE_BUS
 import thedarkcolour.kotlinforforge.forge.LOADING_CONTEXT
@@ -17,8 +17,8 @@ import thedarkcolour.kotlinforforge.forge.LOADING_CONTEXT
 object RPMTWPlatformModPluginImpl {
     @JvmStatic
     fun registerConfigScreen() {
-        LOADING_CONTEXT.registerExtensionPoint(ConfigGuiFactory::class.java) {
-            ConfigGuiFactory { _: Minecraft?, screen: Screen? -> getScreen(screen) }
+        LOADING_CONTEXT.registerExtensionPoint(ConfigScreenFactory::class.java) {
+            ConfigScreenFactory { _: Minecraft?, screen: Screen? -> getScreen(screen) }
         }
     }
 
