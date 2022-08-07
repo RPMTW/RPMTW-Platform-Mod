@@ -31,7 +31,7 @@ side = "BOTH"
 [[dependencies.rpmtw_platform_mod]]
 modId = "architectury"
 mandatory = true
-versionRange = "[5.10.33,)"
+versionRange = "[5.0.0,)"
 ordering = "AFTER"
 side = "BOTH"
 
