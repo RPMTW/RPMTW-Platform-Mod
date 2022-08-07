@@ -30,8 +30,8 @@ dependencies {
     modApi("dev.architectury:architectury-forge:${project.property("architectury_version").toString()}")
     modApi("me.shedaniel.cloth:cloth-config-forge:${project.property("cloth_config_version").toString()}")
 
-    modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version").toString()}-SNAPSHOT")
-    modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version").toString()}-SNAPSHOT:api")
+    forgeRuntimeLibrary("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-SNAPSHOT:api")
+    modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-SNAPSHOT")
 
     "shadowCommon"(
         "com.github.RPMTW:RPMTW-API-Client-Kotlin:${
@@ -41,9 +41,7 @@ dependencies {
         exclude("com.google.code.gson")
         exclude("org.jetbrains.kotlinx")
         exclude("org.jetbrains.kotlin")
-    }.let {
-        forgeRuntimeLibrary(it)
-    }
+    }.let { forgeRuntimeLibrary(it) }
 
     forgeRuntimeLibrary("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.10")
     forgeRuntimeLibrary("org.jetbrains.kotlin:kotlin-reflect:1.6.10")

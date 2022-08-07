@@ -7,7 +7,6 @@ import com.mojang.brigadier.context.CommandContext
 import dev.architectury.injectables.annotations.ExpectPlatform
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener
 
-@Suppress("UNUSED_PARAMETER")
 object RPMTWPlatformModPlugin {
     @ExpectPlatform
     @JvmStatic
