@@ -31,12 +31,7 @@ object TranslateResourcePack {
             return
         }
 
-        try {
-            selectResourcePack()
-        } catch (e: Exception) {
-            RPMTWPlatformMod.LOGGER.error("Failed to sed translate resource pack", e)
-            return
-        }
+        RPMTWPlatformMod.LOGGER.info("Translate resource pack successful loaded")
     }
 
     fun deleteResourcePack() {
@@ -65,15 +60,14 @@ object TranslateResourcePack {
         }
     }
 
-    private fun selectResourcePack() {
+    fun selectResourcePack() {
         val client = Minecraft.getInstance()
         val repository = client.resourcePackRepository
         val packID = "file/$fileName"
         // if the pack is unselected, select it
-        if (!repository.selectedIds.contains(fileName)) {
+        if (!repository.selectedIds.contains(packID)) {
             // Set the pack last in the list (the highest priority)
-            repository.reload()
-            val selected: MutableList<String> = repository.selectedIds.toMutableList()
+            val selected = repository.selectedIds.toMutableList()
             val pack = repository.getPack(packID)
             if (pack != null) {
                 selected.add(pack.id)
@@ -81,7 +75,6 @@ object TranslateResourcePack {
                 throw Exception("Translate resource pack not found")
             }
             repository.setSelected(selected)
-            client.reloadResourcePacks()
         }
     }
 }

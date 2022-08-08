@@ -9,34 +9,50 @@ import com.rpmtw.rpmtw_platform_mod.util.Util
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.packs.resources.Resource
 import net.minecraft.server.packs.resources.ResourceManager
-import net.minecraft.server.packs.resources.SimplePreparableReloadListener
 import net.minecraft.util.GsonHelper
-import net.minecraft.util.profiling.ProfilerFiller
 import java.io.FileNotFoundException
 import java.io.InputStreamReader
 import java.nio.charset.StandardCharsets
 
-class MTStorage : SimplePreparableReloadListener<Unit>() {
+object MTStorage {
     private val unsupportedFormatRegx: Regex = Regex("%(\\d+\\$)?[\\d.]*[df]")
 
-    companion object {
-        private var unlocalizedMap: MutableMap<String, String> = HashMap()
-        private var currentLangMap: MutableList<String> = ArrayList()
+    private var unlocalizedMap: MutableMap<String, String> = HashMap()
+    private var currentLangMap: MutableList<String> = ArrayList()
 
-        fun getUnlocalizedTranslate(key: String): String? {
-            return unlocalizedMap[key]
-        }
+    fun getUnlocalizedTranslate(key: String): String? {
+        return unlocalizedMap[key]
+    }
 
-        fun isTranslate(key: String): Boolean {
-            return currentLangMap.contains(key)
+    fun isTranslate(key: String): Boolean {
+        return currentLangMap.contains(key)
+    }
+
+    fun load(manager: ResourceManager) {
+        Util.coroutineLaunch {
+            RPMTWPlatformMod.LOGGER.info("[Machine Translation] Loading resources...")
+            val currentLanguage = TranslateLanguage.getLanguage()
+            unlocalizedMap.clear()
+            currentLangMap.clear()
+
+            if (RPMTWConfig.get().translate.unlocalized || RPMTWConfig.get().translate.machineTranslation) {
+                for (namespace in manager.namespaces) {
+                    loadResource("en_us", { key, value ->
+                        unlocalizedMap[key] = value
+                    }, namespace, manager)
+
+                    if (currentLanguage != TranslateLanguage.English) {
+                        // Only load current language
+                        loadResource(currentLanguage.code, { key, _ ->
+                            currentLangMap.add(key)
+                        }, namespace, manager)
+                    }
+                }
+            }
         }
     }
 
-    override fun prepare(manager: ResourceManager, profilerFiller: ProfilerFiller) {
-        // no-op
-    }
-
-    private fun load(
+    private fun loadResource(
         lang: String,
         action: (key: String, value: String) -> Unit,
         namespace: String,
@@ -66,34 +82,6 @@ class MTStorage : SimplePreparableReloadListener<Unit>() {
                 path,
                 e.toString()
             )
-        }
-    }
-
-    override fun apply(
-        unit: Unit,
-        manager: ResourceManager,
-        profilerFiller: ProfilerFiller
-    ) {
-        Util.coroutineLaunch {
-            RPMTWPlatformMod.LOGGER.info("[Machine Translation] Loading resources...")
-            val currentLanguage = TranslateLanguage.getLanguage()
-            unlocalizedMap.clear()
-            currentLangMap.clear()
-
-            if (RPMTWConfig.get().translate.unlocalized || RPMTWConfig.get().translate.machineTranslation) {
-                for (namespace in manager.namespaces) {
-                    load("en_us", { key, value ->
-                        unlocalizedMap[key] = value
-                    }, namespace, manager)
-
-                    if (currentLanguage != TranslateLanguage.English) {
-                        // Only load current language
-                        load(currentLanguage.code, { key, _ ->
-                            currentLangMap.add(key)
-                        }, namespace, manager)
-                    }
-                }
-            }
         }
     }
 }

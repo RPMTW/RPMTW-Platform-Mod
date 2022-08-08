@@ -5,7 +5,6 @@ import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.handlers.UniverseChatHandler
 import com.rpmtw.rpmtw_platform_mod.translation.TranslateLanguage
 import com.rpmtw.rpmtw_platform_mod.translation.machineTranslation.MTManager
-import com.rpmtw.rpmtw_platform_mod.translation.resourcepack.TranslateResourcePack
 import dev.architectury.event.events.client.ClientLifecycleEvent
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -28,17 +27,13 @@ class OnClientStarted : ClientLifecycleEvent.ClientState {
         }
 
         val info = manager.selected
-        RPMTWPlatformMod.LOGGER.info("Toggled language to " + info.name + " (" + info.code + ")")
+        RPMTWPlatformMod.LOGGER.info("Auto Toggled language to " + info.name + " (" + info.code + ")")
     }
 
     override fun stateChanged(instance: Minecraft?) {
         if (instance != null) {
-            RPMTWConfig.register()
             if (RPMTWConfig.get().translate.autoToggleLanguage) {
                 toggleLanguage(instance)
-            }
-            if (RPMTWConfig.get().translate.loadTranslateResourcePack) {
-                TranslateResourcePack.load()
             }
             UniverseChatHandler.handle()
             MTManager.readCache()
