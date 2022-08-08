@@ -10,8 +10,10 @@ import net.minecraft.commands.Commands.literal
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener
 import net.minecraftforge.client.ConfigScreenHandler.ConfigScreenFactory
 import net.minecraftforge.client.event.RegisterClientCommandsEvent
+import net.minecraftforge.client.event.RegisterClientReloadListenersEvent
 import thedarkcolour.kotlinforforge.forge.FORGE_BUS
 import thedarkcolour.kotlinforforge.forge.LOADING_CONTEXT
+import thedarkcolour.kotlinforforge.forge.MOD_BUS
 
 @Suppress("unused")
 object RPMTWPlatformModPluginImpl {
@@ -48,6 +50,8 @@ object RPMTWPlatformModPluginImpl {
 
     @JvmStatic
     fun <T> registerReloadEvent(reloadListener: SimplePreparableReloadListener<T>) {
-        FORGE_BUS.register(reloadListener)
+        MOD_BUS.addListener { event: RegisterClientReloadListenersEvent ->
+            event.registerReloadListener(reloadListener)
+        }
     }
 }

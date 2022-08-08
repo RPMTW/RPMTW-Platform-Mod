@@ -9,9 +9,9 @@ import dev.architectury.event.events.client.ClientTooltipEvent
 
 object EventHandler {
     fun handle() {
+        OnClientSetup()
         ClientLifecycleEvent.CLIENT_STOPPING.register(OnClientStopping())
         ClientLifecycleEvent.CLIENT_STARTED.register(OnClientStarted())
-        ClientLifecycleEvent.CLIENT_SETUP.register(OnClientSetup())
         ClientGuiEvent.INIT_POST.register(OnGuiInitPost())
         ClientTooltipEvent.ITEM.register(OnItemTooltip())
         ClientRawInputEvent.KEY_PRESSED.register(OnKeyPressed())
