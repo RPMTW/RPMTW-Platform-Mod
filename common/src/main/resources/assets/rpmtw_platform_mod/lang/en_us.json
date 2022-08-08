@@ -22,6 +22,8 @@
   "config.rpmtw_platform_mod.option.keyBindings": "Key Bindings",
   "config.rpmtw_platform_mod.option.keyBindings.config": "Open Config Screen",
   "config.rpmtw_platform_mod.option.keyBindings.machineTranslation": "Use Machine Translation",
+  "config.rpmtw_platform_mod.option.keyBindings.reloadTranslatePack": "Reload Translate Resource Pack",
+  "config.rpmtw_platform_mod.option.keyBindings.reloadTranslatePack.@Tooltip": "Update the translate resource pack to date, then reload it.",
   "config.rpmtw_platform_mod.option.translate": "RPMTranslator",
   "config.rpmtw_platform_mod.option.translate.autoMachineTranslation": "Automatic machine translation",
   "config.rpmtw_platform_mod.option.translate.autoMachineTranslation.@Tooltip": "Automatic translation of item names and descriptions in the background using the machine translation function.",

@@ -103,6 +103,10 @@ class ConfigObject : ConfigData {
         var config: ModifierKeyCode = ModifierKeyCode.of(
             InputConstants.Type.KEYSYM.getOrCreate(InputConstants.KEY_R), Modifier.of(false, true, false)
         )
+
+        @JvmField
+        @ConfigEntry.Gui.Tooltip(count = 1)
+        var reloadTranslatePack: ModifierKeyCode = ModifierKeyCode.unknown()
     }
 }
 

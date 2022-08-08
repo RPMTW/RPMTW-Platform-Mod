@@ -34,6 +34,12 @@ object TranslateResourcePack {
         RPMTWPlatformMod.LOGGER.info("Translate resource pack successful loaded")
     }
 
+    fun reload() {
+        load()
+        Minecraft.getInstance().reloadResourcePacks()
+        RPMTWPlatformMod.LOGGER.info("Translate resource pack successful reloaded")
+    }
+
     fun deleteResourcePack() {
         if (resourcePackFile.exists()) {
             resourcePackFile.delete()
