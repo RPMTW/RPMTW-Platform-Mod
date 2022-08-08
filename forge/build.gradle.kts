@@ -44,7 +44,7 @@ dependencies {
     }.let { forgeRuntimeLibrary(it) }
 
     forgeRuntimeLibrary("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.10")
-    forgeRuntimeLibrary("org.jetbrains.kotlin:kotlin-reflect:1.6.10")
+    forgeRuntimeLibrary("org.jetbrains.kotlin:kotlin-reflect:1.7.10")
     forgeRuntimeLibrary("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.2")
 
     "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
