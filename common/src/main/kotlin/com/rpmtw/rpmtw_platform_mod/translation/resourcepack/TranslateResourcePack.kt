@@ -1,7 +1,6 @@
 package com.rpmtw.rpmtw_platform_mod.translation.resourcepack
 
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
-import com.rpmtw.rpmtw_platform_mod.translation.TranslateLanguage
 import com.rpmtw.rpmtw_platform_mod.util.Util
 import net.minecraft.client.Minecraft
 import org.apache.commons.io.FileUtils
@@ -58,10 +57,7 @@ object TranslateResourcePack {
             return
         }
 
-        var downloadUrl = "https://github.com/RPMTW/Translate-Resource-Pack/releases/latest/download/$fileName";
-        if (TranslateLanguage.getLanguage() == TranslateLanguage.SimplifiedChinese) {
-            downloadUrl = "https://gh.api.99988866.xyz/${downloadUrl}"
-        }
+        val downloadUrl = "https://github.com/RPMTW/Translate-Resource-Pack/releases/latest/download/$fileName";
 
         FileUtils.copyURLToFile(URL(downloadUrl), cacheFile)
         if (!cacheFile.exists()) {

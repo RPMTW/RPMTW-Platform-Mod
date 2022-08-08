@@ -76,19 +76,19 @@ class MTStorage : SimplePreparableReloadListener<Unit>() {
     ) {
         Util.coroutineLaunch {
             RPMTWPlatformMod.LOGGER.info("[Machine Translation] Loading resources...")
-            val currentLangCode = TranslateLanguage.getLanguage()
+            val currentLanguage = TranslateLanguage.getLanguage()
             unlocalizedMap.clear()
             currentLangMap.clear()
 
             if (RPMTWConfig.get().translate.unlocalized || RPMTWConfig.get().translate.machineTranslation) {
-
                 for (namespace in manager.namespaces) {
                     load("en_us", { key, value ->
                         unlocalizedMap[key] = value
                     }, namespace, manager)
-                    if (currentLangCode != TranslateLanguage.English) {
+
+                    if (currentLanguage != TranslateLanguage.English) {
                         // Only load current language
-                        load(currentLangCode.code, { key, _ ->
+                        load(currentLanguage.code, { key, _ ->
                             currentLangMap.add(key)
                         }, namespace, manager)
                     }

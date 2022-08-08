@@ -34,7 +34,9 @@ class OnClientStarted : ClientLifecycleEvent.ClientState {
     override fun stateChanged(instance: Minecraft?) {
         if (instance != null) {
             RPMTWConfig.register()
-            toggleLanguage(instance)
+            if (RPMTWConfig.get().translate.autoToggleLanguage) {
+                toggleLanguage(instance)
+            }
             if (RPMTWConfig.get().translate.loadTranslateResourcePack) {
                 TranslateResourcePack.load()
             }
