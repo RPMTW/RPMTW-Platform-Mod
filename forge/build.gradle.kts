@@ -18,14 +18,17 @@ configurations {
 
 dependencies {
     forge("net.minecraftforge:forge:${project.property("forge_version").toString()}")
-    implementation("thedarkcolour:kotlinforforge:${project.property("kotlin_forge_version").toString()}")
 
+    // Mod required mod dependencies
+    implementation("thedarkcolour:kotlinforforge:${project.property("kotlin_forge_version").toString()}")
     modApi("dev.architectury:architectury-forge:${project.property("architectury_version").toString()}")
     modApi("me.shedaniel.cloth:cloth-config-forge:${project.property("cloth_config_version").toString()}")
 
+    // Optional mod dependencies
     modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}:api")
     modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}")
 
+    // Dependencies for the mod
     bundle(
         "com.github.RPMTW:RPMTW-API-Client-Kotlin:${
             project.property("rpmtw_api_client_version").toString()
@@ -35,7 +38,13 @@ dependencies {
         exclude("org.jetbrains.kotlinx")
         exclude("org.jetbrains.kotlin")
     }.let { forgeRuntimeLibrary(it) }
-    forgeRuntimeLibrary(bundle(group = "io.sentry", name = "sentry", version = project.property("sentry_version").toString()))
+    bundle(
+        forgeRuntimeLibrary(
+            group = "io.sentry",
+            name = "sentry",
+            version = project.property("sentry_version").toString()
+        )
+    )
 
     forgeRuntimeLibrary("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.10")
     forgeRuntimeLibrary("org.jetbrains.kotlin:kotlin-reflect:1.6.10")
