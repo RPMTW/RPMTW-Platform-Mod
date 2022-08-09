@@ -34,7 +34,7 @@ subprojects {
         // mappings ("net.fabricmc:yarn:${rootProject.yarn_version}")
         // 使用 yarn 會導致無法編譯 forge 版本，因此暫時先用 mojang 官方映射
         implementation(group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version = "1.6.10")
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.2")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
     }
 
     // Set up platform subprojects (non-common subprojects).
@@ -43,7 +43,10 @@ subprojects {
         base.archivesName.set(project.property("archives_base_name").toString())
 
         // Define the "bundle" configuration which will be included in the shadow jar.
-        val bundle by configurations.creating
+        val bundle by configurations.creating {
+            isCanBeConsumed = false
+            isCanBeResolved = true
+        }
 
         tasks {
             "jar"(Jar::class) {
