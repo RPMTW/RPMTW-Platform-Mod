@@ -34,11 +34,5 @@ object SentryHandler {
                 )
             )
         }
-
-        try {
-            throw Exception("This is a test.")
-        } catch (e: Exception) {
-            Sentry.captureException(e)
-        }
     }
 }
