@@ -23,7 +23,7 @@ dependencies {
     modApi("dev.architectury:architectury-forge:${project.property("architectury_version").toString()}")
     modApi("me.shedaniel.cloth:cloth-config-forge:${project.property("cloth_config_version").toString()}")
 
-    forgeRuntimeLibrary("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-SNAPSHOT:api")
+    modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-SNAPSHOT:api")
     modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-SNAPSHOT")
 
     bundle(
@@ -36,9 +36,9 @@ dependencies {
         exclude("org.jetbrains.kotlin")
     }.let { forgeRuntimeLibrary(it) }
 
-    forgeRuntimeLibrary("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.10")
-    forgeRuntimeLibrary("org.jetbrains.kotlin:kotlin-reflect:1.6.10")
-    forgeRuntimeLibrary("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.2")
+    forgeRuntimeLibrary(kotlin("stdlib-jdk8", version = "1.6.10"))
+    forgeRuntimeLibrary(kotlin("reflect", version = "1.6.10"))
+    forgeRuntimeLibrary("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
 
     "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
     bundle(project(path = ":common", configuration = "transformProductionForge")) { isTransitive = false }
