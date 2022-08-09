@@ -34,7 +34,7 @@ subprojects {
         // mappings ("net.fabricmc:yarn:${rootProject.yarn_version}")
         // 使用 yarn 會導致無法編譯 forge 版本，因此暫時先用 mojang 官方映射
         implementation(group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version = "1.6.10")
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.2")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
     }
 
     // Set up platform subprojects (non-common subprojects).
