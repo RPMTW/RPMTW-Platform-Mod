@@ -1,13 +1,7 @@
-plugins {
-    id("com.github.johnrengelman.shadow") version "7.1.2"
-}
-
 architectury {
     platformSetupLoomIde()
     fabric()
 }
-
-base.archivesName.set("${project.property("archives_base_name")}-fabric")
 
 repositories {
     mavenCentral()
@@ -24,7 +18,6 @@ repositories {
 }
 
 val common by configurations.registering
-val shadowCommon by configurations.registering  // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
 configurations {
     compileClasspath {
         extendsFrom(common.get())
@@ -50,8 +43,8 @@ dependencies {
     modImplementation("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-FABRIC-SNAPSHOT")
 
     "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
-    "shadowCommon"(project(path = ":common", configuration = "transformProductionFabric")) { isTransitive = false }
-    "shadowCommon"(
+    bundle(project(path = ":common", configuration = "transformProductionFabric")) { isTransitive = false }
+    bundle(
         "com.github.RPMTW:RPMTW-API-Client-Kotlin:${project.property("rpmtw_api_client_version")}"
     ) {
         exclude("com.google.code.gson")
@@ -88,22 +81,6 @@ tasks {
         }
     }
 
-
-    shadowJar {
-        configurations = listOf(shadowCommon.get())
-        archiveClassifier.set("dev-shadow")
-    }
-
-    remapJar {
-        inputFile.set(shadowJar.get().archiveFile)
-        dependsOn(shadowJar)
-        archiveClassifier.set(null as String?)
-    }
-
-    jar {
-        archiveClassifier.set("dev")
-    }
-
     sourcesJar {
         val commonSources = project(":common").tasks.sourcesJar
         dependsOn(commonSources)
@@ -111,22 +88,4 @@ tasks {
         exclude("rpmtw_platform_mod.accesswidener")
         exclude("rpmtw_platform_mod.mixins.json")
     }
-}
-
-components.getByName<AdhocComponentWithVariants>("java") {
-    withVariantsFromConfiguration(project.configurations.shadowRuntimeElements.get()) {
-        skip()
-    }
-}
-
-publishing {
-    publications {
-        create<MavenPublication>("mavenCommon") {
-            artifactId = project.property("archives_base_name").toString()
-            from(components["java"])
-        }
-    }
-
-    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-    repositories {}
 }
