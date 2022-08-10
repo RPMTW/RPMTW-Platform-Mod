@@ -22,7 +22,7 @@
   "config.rpmtw_platform_mod.option.keyBindings": "按键绑定",
   "config.rpmtw_platform_mod.option.keyBindings.config": "打开配置屏幕",
   "config.rpmtw_platform_mod.option.keyBindings.machineTranslation": "使用机器翻译",
-  "config.rpmtw_platform_mod.option.keyBindings.reloadTranslatePack": "重新翻译资源包",
+  "config.rpmtw_platform_mod.option.keyBindings.reloadTranslatePack": "重新加载翻译资源包",
   "config.rpmtw_platform_mod.option.keyBindings.reloadTranslatePack.@Tooltip": "更新翻译资源包到最新版本并重新载入",
   "config.rpmtw_platform_mod.option.translate": "RPMTW 翻译平台",
   "config.rpmtw_platform_mod.option.translate.autoMachineTranslation": "自动机器翻译",
