@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
-import com.rpmtw.rpmtw_platform_mod.translation.TranslateLanguage
+import com.rpmtw.rpmtw_platform_mod.translation.GameLanguage
 import com.rpmtw.rpmtw_platform_mod.util.Util
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.packs.resources.Resource
@@ -31,7 +31,7 @@ object MTStorage {
     fun load(manager: ResourceManager) {
         Util.coroutineLaunch {
             RPMTWPlatformMod.LOGGER.info("[Machine Translation] Loading resources...")
-            val currentLanguage = TranslateLanguage.getLanguage()
+            val currentLanguage = GameLanguage.getMinecraft()
             unlocalizedMap.clear()
             currentLangMap.clear()
 
@@ -41,7 +41,7 @@ object MTStorage {
                         unlocalizedMap[key] = value
                     }, namespace, manager)
 
-                    if (currentLanguage != TranslateLanguage.English) {
+                    if (currentLanguage != GameLanguage.English) {
                         // Only load current language
                         loadResource(currentLanguage.code, { key, _ ->
                             currentLangMap.add(key)
