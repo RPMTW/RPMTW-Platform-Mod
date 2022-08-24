@@ -50,6 +50,8 @@ dependencies {
     modImplementation("org.quiltmc:quilt-loader:${project.property("quilt_loader_version")}")
     modImplementation("org.quiltmc:qsl:${project.property("qsl_version")}+${project.property("minecraft_version")}")
     modApi("org.quiltmc.quilted-fabric-api:quilted-fabric-api:${project.property("quilted_fabric_api_version")}-${project.property("minecraft_version")}")
+    modApi("org.quiltmc.quilt-kotlin-libraries:quilt-kotlin-libraries:${project.property("quilt_kotlin_libraries")}")
+
     // Remove the next few lines if you don't want to depend on the API
     modApi("dev.architectury:architectury-fabric:${project.property("architectury_version")}") {
         exclude(group = "net.fabricmc")
@@ -59,7 +61,6 @@ dependencies {
         exclude(group = "net.fabricmc")
         exclude(group = "net.fabricmc.fabric-api")
     }
-    modApi("org.quiltmc.quilt-kotlin-libraries:quilt-kotlin-libraries:${project.property("quilt_kotlin_libraries")}")
 
     modImplementation("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-FABRIC-SNAPSHOT") {
         exclude(group = "net.fabricmc")
