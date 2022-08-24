@@ -84,6 +84,8 @@ dependencies {
     bundle(project(path = ":common", configuration = "transformProductionQuilt")) { isTransitive = false }
     "common"(project(path = ":fabric-like", configuration = "namedElements")) { isTransitive = false }
     bundle(project(path = ":fabric-like", configuration = "transformProductionQuilt")) { isTransitive = false }
+
+    implementation(bundle(group = "io.sentry", name = "sentry", version = project.property("sentry_version").toString()))
 }
 
 tasks {
