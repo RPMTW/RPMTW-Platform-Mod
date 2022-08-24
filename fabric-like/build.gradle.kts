@@ -5,7 +5,6 @@ architectury {
 base.archivesName.set("${project.property("archives_base_name")}-fabric-like")
 
 val common by configurations.registering
-val shadowCommon by configurations.registering  // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
 configurations {
     compileClasspath {
         extendsFrom(common.get())

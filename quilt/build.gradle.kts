@@ -27,7 +27,6 @@ architectury {
 base.archivesName.set("${project.property("archives_base_name")}-quilt")
 
 val common by configurations.registering
-val shadowCommon by configurations.registering  // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
 configurations {
     compileClasspath {
         extendsFrom(common.get())
@@ -71,7 +70,7 @@ dependencies {
         exclude(group = "net.fabricmc.fabric-api")
     }
 
-    "shadowCommon"(
+    bundle(
         "com.github.RPMTW:RPMTW-API-Client-Kotlin:${project.property("rpmtw_api_client_version")}"
     ) {
         exclude("com.google.code.gson")
@@ -82,9 +81,9 @@ dependencies {
     }
 
     "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
-    "shadowCommon"(project(path = ":common", configuration = "transformProductionQuilt")) { isTransitive = false }
+    bundle(project(path = ":common", configuration = "transformProductionQuilt")) { isTransitive = false }
     "common"(project(path = ":fabric-like", configuration = "namedElements")) { isTransitive = false }
-    "shadowCommon"(project(path = ":fabric-like", configuration = "transformProductionQuilt")) { isTransitive = false }
+    bundle(project(path = ":fabric-like", configuration = "transformProductionQuilt")) { isTransitive = false }
 }
 
 tasks {
@@ -103,22 +102,6 @@ tasks {
         filesMatching("quilt.mod.json") {
             expand("group" to project.group, "version" to project.version)
         }
-    }
-
-
-    shadowJar {
-        configurations = listOf(shadowCommon.get())
-        archiveClassifier.set("dev-shadow")
-    }
-
-    remapJar {
-        inputFile.set(shadowJar.get().archiveFile)
-        dependsOn(shadowJar)
-        archiveClassifier.set(null as String?)
-    }
-
-    jar {
-        archiveClassifier.set("dev")
     }
 
     sourcesJar {
