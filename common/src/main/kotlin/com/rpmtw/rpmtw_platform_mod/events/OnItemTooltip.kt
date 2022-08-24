@@ -23,6 +23,8 @@ class OnItemTooltip : ClientTooltipEvent.Item {
             val playing = Minecraft.getInstance().player != null
             if (playing) {
                 fun load(index: Int, i18nKey: String, vararg i18nArgs: Any? = arrayOf()) {
+                    if (index == -1) return
+
                     val key: ModifierKeyCode = RPMTWConfig.get().keyBindings.machineTranslation
                     val press: Boolean = key.matchesCurrentKey()
 
@@ -48,19 +50,24 @@ class OnItemTooltip : ClientTooltipEvent.Item {
                 val unlocalizedName: String = MTStorage.getUnlocalizedTranslate(itemKey) ?: return
 
                 if (RPMTWConfig.get().translate.machineTranslation) {
-                    // Item name
-                    load(0, itemKey)
+                    val unModifyLines = mutableListOf<Component>()
+                    unModifyLines.addAll(lines)
 
-                    for (i in 1 until lines.size) {
-                        val line: Component = lines.getOrNull(i) ?: continue
+                    for (line in unModifyLines) {
+                        val index = unModifyLines.indexOf(line);
+
+                        if (index == 0) {
+                            load(0, itemKey)
+                        }
+
                         val contents = line.contents
                         if (contents is TranslatableContents) {
-                            load(i, contents.key, *contents.args)
+                            load(index, contents.key, *contents.args)
                         }
                     }
                 }
 
-                val itemName: String = itemStack.displayName.string
+                val itemName: String = lines.first().string
                 // Check if the feature for unlocalized names is enabled and differs from translation
                 if (RPMTWConfig.get().translate.unlocalized && unlocalizedName != itemName) {
                     lines.add(1, Component.literal(unlocalizedName).withStyle(ChatFormatting.GRAY))
@@ -73,7 +80,7 @@ class OnItemTooltip : ClientTooltipEvent.Item {
     }
 
     override fun append(itemStack: ItemStack?, lines: MutableList<Component>?, flag: TooltipFlag?) {
-        if (lines != null && itemStack != null) {
+        if (lines != null && itemStack != null && lines.isNotEmpty()) {
             machineTranslation(itemStack, lines)
         }
     }

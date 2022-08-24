@@ -20,11 +20,12 @@ import java.util.Map;
 
 @Mixin(value = BookRegistry.class, remap = false)
 public class MixinBookRegistry {
+    @Shadow
     @Final
+    public Map<ResourceLocation, Book> books;
+
     @Shadow
-    public final Map<ResourceLocation, Book> books = new HashMap<>();
-    @Shadow
-    private boolean loaded = false;
+    private boolean loaded;
 
     @Inject(method = "reloadContents", at = @At("HEAD"), cancellable = true)
     public void reloadContents(boolean resourcePackBooksOnly, CallbackInfo ci) {

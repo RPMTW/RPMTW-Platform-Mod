@@ -8,12 +8,12 @@ import java.sql.Timestamp
 
 class TimestampAdapter : TypeAdapter<Timestamp>() {
     @Throws(IOException::class)
-    override fun read(`in`: JsonReader): Timestamp {
-        return Timestamp(`in`.nextLong())
+    override fun read(reader: JsonReader): Timestamp {
+        return Timestamp(reader.nextLong())
     }
 
     @Throws(IOException::class)
-    override fun write(out: JsonWriter, timestamp: Timestamp) {
-        out.value(timestamp.time)
+    override fun write(writer: JsonWriter, timestamp: Timestamp) {
+        writer.value(timestamp.time)
     }
 }

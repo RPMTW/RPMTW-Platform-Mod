@@ -49,13 +49,13 @@ public class ChatComponentMixin {
 
     @Shadow
     @Final
-    private List<GuiMessage<FormattedCharSequence>> trimmedMessages;
+    private List<GuiMessage.Line> trimmedMessages;
     @Shadow
     @Final
-    private List<GuiMessage<Component>> allMessages;
+    private List<GuiMessage> allMessages;
 
-    @Inject(method = "addMessage(Lnet/minecraft/network/chat/Component;IIZ)V", at = @At("HEAD"))
-    public void addMessage(Component component, int i, int j, boolean bl, CallbackInfo ci) {
+    @Inject(method = "addMessage(Lnet/minecraft/network/chat/Component;)V", at = @At("HEAD"))
+    public void addMessage(Component component, CallbackInfo ci) {
         List<Component> siblings = component.getSiblings();
         UniverseChatComponent chatComponent = (UniverseChatComponent) siblings.stream().filter(sibling -> sibling instanceof UniverseChatComponent).findFirst().orElse(null);
 
@@ -88,11 +88,11 @@ public class ChatComponentMixin {
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Font;drawShadow(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/util/FormattedCharSequence;FFI)I", ordinal = 0), method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;I)V")
     public void render(PoseStack matrixStack, int i, CallbackInfo ci) {
         try {
-            GuiMessage<FormattedCharSequence> guiMessage = trimmedMessages.get(ChatComponentData.INSTANCE.getLastMessageIndex());
-            GuiMessage<Component> component = allMessages.stream().filter(msg -> msg.getId() == guiMessage.getId()).findFirst().orElse(null);
-            if (component == null) return;
+            GuiMessage.Line line = trimmedMessages.get(ChatComponentData.INSTANCE.getLastMessageIndex());
+            GuiMessage guiMessage = allMessages.stream().filter(msg -> msg.tag() == line.tag()).findFirst().orElse(null);
+            if (guiMessage == null) return;
 
-            List<Component> siblings = component.getMessage().getSiblings();
+            List<Component> siblings = guiMessage.content().getSiblings();
             UniverseChatComponent chatComponent = (UniverseChatComponent) siblings.stream().filter(sibling -> sibling instanceof UniverseChatComponent).findFirst().orElse(null);
             if (chatComponent == null) return;
 
@@ -119,7 +119,7 @@ public class ChatComponentMixin {
         return x - ChatComponentData.INSTANCE.getOffset();
     }
 
-    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/ChatComponent;getWidth()I"), method = "addMessage(Lnet/minecraft/network/chat/Component;IIZ)V")
+    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/ChatComponent;getWidth()I"), method = "addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;ILnet/minecraft/client/GuiMessageTag;Z)V")
     public int fixTextOverflow(ChatComponent chatHud) {
         return ChatComponent.getWidth(minecraft.options.chatWidth().get()) - ChatComponentData.INSTANCE.getOffset();
     }

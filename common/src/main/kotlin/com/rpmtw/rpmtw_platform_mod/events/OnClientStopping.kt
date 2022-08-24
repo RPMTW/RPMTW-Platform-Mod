@@ -8,7 +8,6 @@ import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.Minecraft
 
-@Suppress("UNUSED_PARAMETER")
 @Environment(EnvType.CLIENT)
 class OnClientStopping : ClientLifecycleEvent.ClientState {
     override fun stateChanged(instance: Minecraft?) {

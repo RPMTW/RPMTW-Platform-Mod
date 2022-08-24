@@ -1,16 +1,9 @@
-plugins {
-    id("com.github.johnrengelman.shadow") version "7.1.2"
-}
-
 architectury {
     platformSetupLoomIde()
     forge()
 }
 
-base.archivesName.set("${project.property("archives_base_name")}-forge")
-
 val common by configurations.registering
-val shadowCommon by configurations.registering  // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
 configurations {
     compileClasspath {
         extendsFrom(common.get())
@@ -25,15 +18,18 @@ configurations {
 
 dependencies {
     forge("net.minecraftforge:forge:${project.property("forge_version").toString()}")
-    implementation("thedarkcolour:kotlinforforge:${project.property("kotlin_forge_version").toString()}")
 
+    // Mod required mod dependencies
+    implementation("thedarkcolour:kotlinforforge:${project.property("kotlin_forge_version").toString()}")
     modApi("dev.architectury:architectury-forge:${project.property("architectury_version").toString()}")
     modApi("me.shedaniel.cloth:cloth-config-forge:${project.property("cloth_config_version").toString()}")
 
-    modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version").toString()}-SNAPSHOT")
-    modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version").toString()}-SNAPSHOT:api")
+    // Optional mod dependencies
+    modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}:api")
+    modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}")
 
-    "shadowCommon"(
+    // Dependencies for the mod
+    bundle(
         "com.github.RPMTW:RPMTW-API-Client-Kotlin:${
             project.property("rpmtw_api_client_version").toString()
         }"
@@ -41,16 +37,21 @@ dependencies {
         exclude("com.google.code.gson")
         exclude("org.jetbrains.kotlinx")
         exclude("org.jetbrains.kotlin")
-    }.let {
-        forgeRuntimeLibrary(it)
-    }
+    }.let { forgeRuntimeLibrary(it) }
+    bundle(
+        forgeRuntimeLibrary(
+            group = "io.sentry",
+            name = "sentry",
+            version = project.property("sentry_version").toString()
+        )
+    )
 
-    forgeRuntimeLibrary("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.10")
-    forgeRuntimeLibrary("org.jetbrains.kotlin:kotlin-reflect:1.6.10")
-    forgeRuntimeLibrary("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.2")
+    forgeRuntimeLibrary(kotlin("stdlib-jdk8", version = "1.6.10"))
+    forgeRuntimeLibrary(kotlin("reflect", version = "1.6.10"))
+    forgeRuntimeLibrary("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
 
     "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
-    "shadowCommon"(project(path = ":common", configuration = "transformProductionForge")) { isTransitive = false }
+    bundle(project(path = ":common", configuration = "transformProductionForge")) { isTransitive = false }
 }
 
 tasks {
@@ -62,34 +63,11 @@ tasks {
         }
     }
 
-    shadowJar {
-        exclude("fabric.mod.json")
-
-        configurations = listOf(shadowCommon.get())
-        archiveClassifier.set("dev-shadow")
-    }
-
-    remapJar {
-        inputFile.set(shadowJar.get().archiveFile)
-        dependsOn(shadowJar)
-        archiveClassifier.set(null as String?)
-    }
-
-    jar {
-        archiveClassifier.set("dev")
-    }
-
     sourcesJar {
         val commonSources = project(":common").tasks.sourcesJar
         dependsOn(commonSources)
         from(commonSources.get().archiveFile.map { zipTree(it) })
         exclude("rpmtw_platform_mod.mixins.json")
-    }
-}
-
-components.getByName<AdhocComponentWithVariants>("java") {
-    withVariantsFromConfiguration(project.configurations.shadowRuntimeElements.get()) {
-        skip()
     }
 }
 
@@ -114,16 +92,4 @@ repositories {
         url = uri("https://maven.blamejared.com")
     }
     mavenCentral()
-}
-
-publishing {
-    publications {
-        create<MavenPublication>("mavenForge") {
-            artifactId = project.property("archives_base_name").toString()
-            from(components["java"])
-        }
-    }
-
-    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-    repositories {}
 }

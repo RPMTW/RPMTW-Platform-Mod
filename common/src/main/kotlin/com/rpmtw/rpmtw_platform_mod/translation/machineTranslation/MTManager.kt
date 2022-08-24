@@ -6,7 +6,7 @@ import com.google.gson.GsonBuilder
 import com.google.gson.JsonParser
 import com.google.gson.reflect.TypeToken
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
-import com.rpmtw.rpmtw_platform_mod.translation.TranslateLanguage
+import com.rpmtw.rpmtw_platform_mod.translation.GameLanguage
 import com.rpmtw.rpmtw_platform_mod.util.Util
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -23,18 +23,19 @@ import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
 
 object MTManager {
-    private val cache: MutableMap<String, Map<TranslateLanguage, MTInfo?>> = HashMap()
+    private val cache: MutableMap<String, Map<GameLanguage, MTInfo>> = mutableMapOf()
     private val cacheFile: File = Util.getFileLocation("machine_translation_cache.json")
-    private val queue: MutableList<QueueText> = ArrayList()
+    private val queue: MutableList<QueueText> = mutableListOf()
     private var handleQueueing: Boolean = false
     private var translatingCount: Int = 0
     private const val maxTranslatingCount: Int = 3
     private val formatPattern = Pattern.compile("%(?:(\\d+)\\$)?([A-Za-z%]|$)")
     private val gson = GsonBuilder().registerTypeAdapter(Exception::class.java, ExceptionSerializer())
-        .registerTypeAdapter(Timestamp::class.java, TimestampAdapter()).create()
+        .registerTypeAdapter(Timestamp::class.java, TimestampAdapter())
+        .create()
 
-    private val translatedLanguage: TranslateLanguage
-        get() = TranslateLanguage.getLanguage()
+    private val translatedLanguage: GameLanguage
+        get() = GameLanguage.getMinecraft()
 
     fun create(source: String, vararg i18nArgs: Any? = arrayOf()): MutableComponent {
         val info: MTInfo? = cache[source]?.get(translatedLanguage)
@@ -87,7 +88,7 @@ object MTManager {
             cacheFile.createNewFile()
         }
 
-        gson.toJson(cache, HashMap<String, HashMap<TranslateLanguage, MTInfo>>().javaClass).let {
+        gson.toJson(cache).let {
             cacheFile.writeText(it)
         }
         RPMTWPlatformMod.LOGGER.info("Machine translation cache saved.")
@@ -96,11 +97,11 @@ object MTManager {
     fun readCache() {
         try {
             if (cacheFile.exists()) {
-                val json = cacheFile.reader().readText()
-                val type: Type = object : TypeToken<MutableMap<String, Map<TranslateLanguage, MTInfo>>>() {}.type
-                gson.fromJson<MutableMap<String, Map<TranslateLanguage, MTInfo>>>(json, type).let {
+                val type: Type = object : TypeToken<MutableMap<String, Map<GameLanguage, MTInfo>>>() {}.type
+                gson.fromJson<MutableMap<String, Map<GameLanguage, MTInfo>>>(cacheFile.reader(), type).let {
                     cache.putAll(it)
                 }
+                RPMTWPlatformMod.LOGGER.info("Successful read machine translation cache")
             }
         } catch (e: Exception) {
             RPMTWPlatformMod.LOGGER.error("Failed to read machine translation cache file", e)
@@ -115,9 +116,11 @@ object MTManager {
                 null -> {
                     Component.empty()
                 }
+
                 is Component -> {
                     obj
                 }
+
                 else -> {
                     Component.literal(obj.toString())
                 }

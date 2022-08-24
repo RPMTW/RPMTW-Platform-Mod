@@ -1,12 +1,14 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import net.fabricmc.loom.task.RemapJarTask
 import net.fabricmc.loom.api.LoomGradleExtensionAPI
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     base
-    java
     id("org.jetbrains.kotlin.jvm") version "1.6.10"
     id("architectury-plugin") version "3.4-SNAPSHOT"
-    id("dev.architectury.loom") version "0.12.0-SNAPSHOT" apply false
+    id("dev.architectury.loom") version "0.12.0.297" apply false
+    id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
 architectury {
@@ -20,6 +22,10 @@ subprojects {
     val loom = extensions.getByType(LoomGradleExtensionAPI::class)
     loom.silentMojangMappingsLicense()
 
+    repositories {
+        mavenCentral()
+    }
+
     dependencies {
         "minecraft"("com.mojang:minecraft:${project.property("minecraft_version").toString()}")
         // The following line declares the mojmap mappings, you may use other mappings as well
@@ -28,7 +34,40 @@ subprojects {
         // mappings ("net.fabricmc:yarn:${rootProject.yarn_version}")
         // 使用 yarn 會導致無法編譯 forge 版本，因此暫時先用 mojang 官方映射
         implementation(group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version = "1.6.10")
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.2")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    }
+
+    // Set up platform subprojects (non-common subprojects).
+    if (path != ":common") {
+        apply(plugin = "com.github.johnrengelman.shadow")
+        base.archivesName.set(project.property("archives_base_name").toString())
+
+        // Define the "bundle" configuration which will be included in the shadow jar.
+        val bundle by configurations.creating {
+            isCanBeConsumed = false
+            isCanBeResolved = true
+        }
+
+        tasks {
+            "jar"(Jar::class) {
+                archiveClassifier.set("dev")
+            }
+
+            "shadowJar"(ShadowJar::class) {
+                archiveClassifier.set("dev-shadow")
+                // Include our bundle configuration in the shadow jar.
+                configurations = listOf(bundle)
+            }
+
+            "remapJar"(RemapJarTask::class) {
+                dependsOn("shadowJar")
+                // Replace the remap jar task's input with the shadow jar containing the common classes.
+                inputFile.set(named<ShadowJar>("shadowJar").flatMap { it.archiveFile })
+                // The project name will be "fabric" or "forge", so this will become the classifier/suffix
+                // for the jar. For example: rpmtw-platform-mod-1.19-<version>-<platform>.jar
+                archiveClassifier.set(project.name)
+            }
+        }
     }
 }
 

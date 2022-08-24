@@ -1,5 +1,6 @@
-plugins {
-    id("com.github.johnrengelman.shadow") version "7.1.2"
+architectury {
+    platformSetupLoomIde()
+    fabric()
 }
 
 repositories {
@@ -16,15 +17,7 @@ repositories {
     }
 }
 
-architectury {
-    platformSetupLoomIde()
-    fabric()
-}
-
-base.archivesName.set("${project.property("archives_base_name")}-fabric")
-
 val common by configurations.registering
-val shadowCommon by configurations.registering  // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
 configurations {
     compileClasspath {
         extendsFrom(common.get())
@@ -47,23 +40,20 @@ dependencies {
     }
     modApi("net.fabricmc:fabric-language-kotlin:${project.property("fabric-kotlin_version")}")
 
-    modImplementation("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-FABRIC-SNAPSHOT")
-    modImplementation("com.terraformersmc:modmenu:${project.property("modmenu_version")}")
+    modImplementation("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-FABRIC")
 
-    "shadowCommon"(
+    "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
+    bundle(project(path = ":common", configuration = "transformProductionFabric")) { isTransitive = false }
+    bundle(
         "com.github.RPMTW:RPMTW-API-Client-Kotlin:${project.property("rpmtw_api_client_version")}"
     ) {
         exclude("com.google.code.gson")
         exclude("org.jetbrains.kotlinx")
         exclude("org.jetbrains.kotlin")
-    }.let {
-        implementation(it)
-    }
+    }.let { implementation(it) }
+    implementation(bundle(group = "io.sentry", name = "sentry", version = project.property("sentry_version").toString()))
 
-    "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
-    "shadowCommon"(project(path = ":common", configuration = "transformProductionFabric")) { isTransitive = false }
-    "common"(project(path = ":fabric-like", configuration = "namedElements")) { isTransitive = false }
-    "shadowCommon"(project(path = ":fabric-like", configuration = "transformProductionFabric")) { isTransitive = false }
+    modImplementation("com.terraformersmc:modmenu:${project.property("modmenu_version")}")
 }
 
 val accessWidenerFile = project(":common").file("src/main/resources/rpmtw_platform_mod.accesswidener")
@@ -89,22 +79,6 @@ tasks {
         }
     }
 
-
-    shadowJar {
-        configurations = listOf(shadowCommon.get())
-        archiveClassifier.set("dev-shadow")
-    }
-
-    remapJar {
-        inputFile.set(shadowJar.get().archiveFile)
-        dependsOn(shadowJar)
-        archiveClassifier.set(null as String?)
-    }
-
-    jar {
-        archiveClassifier.set("dev")
-    }
-
     sourcesJar {
         val commonSources = project(":common").tasks.sourcesJar
         dependsOn(commonSources)
@@ -112,22 +86,4 @@ tasks {
         exclude("rpmtw_platform_mod.accesswidener")
         exclude("rpmtw_platform_mod.mixins.json")
     }
-}
-
-components.getByName<AdhocComponentWithVariants>("java") {
-    withVariantsFromConfiguration(project.configurations.shadowRuntimeElements.get()) {
-        skip()
-    }
-}
-
-publishing {
-    publications {
-        create<MavenPublication>("mavenFabric") {
-            artifactId = project.property("archives_base_name").toString()
-            from(components["java"])
-        }
-    }
-
-    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-    repositories {}
 }

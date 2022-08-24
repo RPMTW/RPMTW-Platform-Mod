@@ -119,10 +119,6 @@ object RPMTWConfig {
         return config!!
     }
 
-    fun registered(): Boolean {
-        return config != null
-    }
-
     @Suppress("DEPRECATION", "UnstableApiUsage")
     @JvmStatic
     fun getScreen(parent: Screen? = null): Screen? {

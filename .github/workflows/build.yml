@@ -32,10 +32,9 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties', 'build.gradle.kts') }}
       - name: Build with Gradle
         run: |
-          cd ${{ github.workspace }}
           chmod +x gradlew
-          sh ./gradlew build
-        timeout-minutes: 15
+          ./gradlew build
+        timeout-minutes: 20
       - name: Upload artifacts (fabric)
         uses: actions/upload-artifact@v3
         with:
@@ -46,8 +45,3 @@ jobs:
         with:
           name: 1.19-${{ steps.github_short_hash.outputs.result }}-forge
           path: ${{ github.workspace }}/forge/build/libs
-      - name: Upload artifacts (quilt)
-        uses: actions/upload-artifact@v3
-        with:
-          name: 1.19-${{ steps.github_short_hash.outputs.result }}-quilt
-          path: ${{ github.workspace }}/quilt/build/libs
