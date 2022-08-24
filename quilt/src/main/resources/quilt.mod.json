@@ -34,12 +34,11 @@
     "intermediate_mappings": "net.fabricmc:intermediary",
     "environment": "client",
     "entrypoints": {
-      "init": [
-        "com.rpmtw.rpmtw_platform_mod.quilt.RPMTWPlatformModQuilt"
-      ],
-      "modmenu": [
-        "com.rpmtw.rpmtw_platform_mod.fabriclike.gui.ModMenuIntegration"
-      ]
+      "init": [{
+        "adapter": "kotlin",
+        "value": "com.rpmtw.rpmtw_platform_mod.quilt.RPMTWPlatformModQuilt"
+      }],
+      "modmenu": "com.rpmtw.rpmtw_platform_mod.fabriclike.gui.ModMenuIntegration"
     },
     "depends": [
       {
