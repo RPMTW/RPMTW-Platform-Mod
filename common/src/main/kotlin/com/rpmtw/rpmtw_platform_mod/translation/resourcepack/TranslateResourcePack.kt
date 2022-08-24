@@ -2,13 +2,11 @@ package com.rpmtw.rpmtw_platform_mod.translation.resourcepack
 
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformModPlugin
-import com.rpmtw.rpmtw_platform_mod.translation.TranslateLanguage
 import com.rpmtw.rpmtw_platform_mod.util.Util
 import net.minecraft.client.Minecraft
 import org.apache.commons.io.FileUtils
 import java.io.File
 import java.net.URL
-import java.nio.file.Paths
 
 object TranslateResourcePack {
     private const val fileName = "RPMTW-Translate-Resource-Pack-1.19.zip"
@@ -59,7 +57,7 @@ object TranslateResourcePack {
             return
         }
 
-        val downloadUrl = "https://github.com/RPMTW/Translate-Resource-Pack/releases/latest/download/$fileName";
+        val downloadUrl = "https://github.com/RPMTW/Translate-Resource-Pack/releases/latest/download/$fileName"
 
         FileUtils.copyURLToFile(URL(downloadUrl), cacheFile)
         if (!cacheFile.exists()) {
