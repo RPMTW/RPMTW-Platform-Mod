@@ -20,5 +20,12 @@
   "config.rpmtw_platform_mod.option.universeChat.nickname": "Прозвище",
   "config.rpmtw_platform_mod.option.universeChat.nickname.@Tooltip": "Прозвище игрока во вселенском чате.",
   "config.rpmtw_platform_mod.option.keyBindings": "Крепления для очков",
-  "config.rpmtw_platform_mod.option.keyBindings.config": "Открыть экран конфигурации"
+  "config.rpmtw_platform_mod.option.keyBindings.config": "Открыть экран конфигурации",
+  "config.rpmtw_platform_mod.option.keyBindings.machineTranslation": "Используйте машинный перевод",
+  "config.rpmtw_platform_mod.option.keyBindings.reloadTranslatePack": "Перезагрузка Перевод ресурсного пакета",
+  "config.rpmtw_platform_mod.option.keyBindings.reloadTranslatePack.@Tooltip": "Обновите пакет ресурсов перевода до актуального состояния, а затем перезагрузите его.",
+  "config.rpmtw_platform_mod.option.translate": "RPMПереводчик",
+  "config.rpmtw_platform_mod.option.translate.autoMachineTranslation": "Автоматический машинный перевод",
+  "config.rpmtw_platform_mod.option.translate.autoMachineTranslation.@Tooltip": "Автоматический перевод названий и описаний товаров в фоновом режиме с помощью функции машинного перевода.",
+  "config.rpmtw_platform_mod.option.translate.autoToggleLanguage": "Автоматическое переключение языка"
 }
