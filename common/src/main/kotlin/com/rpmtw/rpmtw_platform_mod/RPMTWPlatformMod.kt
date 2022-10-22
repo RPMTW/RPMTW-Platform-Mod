@@ -2,6 +2,7 @@ package com.rpmtw.rpmtw_platform_mod
 
 import com.rpmtw.rpmtw_api_client.RPMTWApiClient
 import com.rpmtw.rpmtw_platform_mod.command.RPMTWCommand
+import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.handlers.EventHandler
 import com.rpmtw.rpmtw_platform_mod.handlers.SentryHandler
 import com.rpmtw.rpmtw_platform_mod.translation.resourcepack.TranslateResourcePack
@@ -19,7 +20,10 @@ object RPMTWPlatformMod {
     @JvmStatic
     fun init() {
         LOGGER.info("Initializing RPMTW Platform Mod")
-        SentryHandler.init()
+        RPMTWConfig.register()
+        if (RPMTWConfig.get().advanced.sendExceptionToSentry) {
+            SentryHandler.init()
+        }
         RPMTWApiClient.init()
         TranslateResourcePack.deleteResourcePack()
         RPMTWCommand.handle()
