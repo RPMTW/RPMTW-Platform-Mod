@@ -37,6 +37,7 @@ dependencies {
         exclude("com.google.code.gson")
         exclude("org.jetbrains.kotlinx")
         exclude("org.jetbrains.kotlin")
+        exclude("com.squareup.okhttp3")
     }.let { forgeRuntimeLibrary(it) }
     bundle(
         forgeRuntimeLibrary(
