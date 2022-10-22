@@ -22,6 +22,8 @@
   "config.rpmtw_platform_mod.option.keyBindings": "快捷鍵",
   "config.rpmtw_platform_mod.option.keyBindings.config": "打開設定選單",
   "config.rpmtw_platform_mod.option.keyBindings.machineTranslation": "使用機器翻譯",
+  "config.rpmtw_platform_mod.option.keyBindings.reloadTranslatePack": "重新載入翻譯資源包",
+  "config.rpmtw_platform_mod.option.keyBindings.reloadTranslatePack.@Tooltip": "更新翻譯資源包到最新版本後重新加載",
   "config.rpmtw_platform_mod.option.translate": "RPMTW 翻譯平台",
   "config.rpmtw_platform_mod.option.translate.autoMachineTranslation": "自動機器翻譯",
   "config.rpmtw_platform_mod.option.translate.autoMachineTranslation.@Tooltip": "自動在背景使用機器翻譯功能將物品嘅名稱與描述進行翻譯。",
