@@ -22,7 +22,6 @@ object SentryHandler {
 
         Sentry.configureScope {
             it.user = User().apply {
-                username = Minecraft.getInstance().user.name
                 ipAddress = "{{auto}}"
             }
 
