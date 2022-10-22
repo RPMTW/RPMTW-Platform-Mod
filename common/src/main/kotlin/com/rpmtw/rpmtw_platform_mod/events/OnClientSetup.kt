@@ -8,7 +8,6 @@ import net.fabricmc.api.Environment
 @Environment(EnvType.CLIENT)
 class OnClientSetup {
     init {
-        RPMTWConfig.register()
         if (RPMTWConfig.get().translate.loadTranslateResourcePack) {
             TranslateResourcePack.load()
         }
