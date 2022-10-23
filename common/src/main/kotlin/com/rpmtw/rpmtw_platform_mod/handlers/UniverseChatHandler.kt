@@ -111,9 +111,11 @@ object UniverseChatHandler {
                             )
                         val authorName: String = formatAuthorName(msg)
                         val authorStyle: Style = Style.EMPTY.withClickEvent(
-                            ClickEvent(
-                                ClickEvent.Action.OPEN_URL, msg.avatarUrl
-                            )
+                            msg.avatarUrl?.let {
+                                ClickEvent(
+                                    ClickEvent.Action.OPEN_URL, it
+                                )
+                            }
                         ).withHoverEvent(
                             HoverEvent(
                                 HoverEvent.Action.SHOW_TEXT,
@@ -146,17 +148,18 @@ object UniverseChatHandler {
                             val replyMessage: UniverseChatMessage? = getMessageAsync(msg.replyMessageUUID!!)
 
                             if (replyMessage != null) {
-
                                 val replyAuthorName: String = if (msg.avatarUrl == replyMessage.avatarUrl) {
                                     I18n.get("gui.rpmtw_platform_mod.self")
                                 } else {
                                     formatAuthorName(replyMessage)
                                 }
+
                                 message.append(
                                     "§a${I18n.get("gui.rpmtw_platform_mod.reply")} §6${
                                         replyAuthorName
-                                    } §b${replyMessage.message} §a-> §f${messageContent}"
+                                    } §b${replyMessage.message} §a-> "
                                 )
+                                message.append(messageContent)
                             }
                         } else {
                             message.append(messageContent)

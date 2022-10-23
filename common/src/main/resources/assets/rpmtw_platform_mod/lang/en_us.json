@@ -1,4 +1,5 @@
 {
+  "auth.rpmtw_platform_mod.title": "RPMTW Account",
   "auth.rpmtw_platform_mod.button.login": "Login",
   "auth.rpmtw_platform_mod.button.login.tooltip": "Login with RPMTW account.",
   "auth.rpmtw_platform_mod.button.logout": "Logout",

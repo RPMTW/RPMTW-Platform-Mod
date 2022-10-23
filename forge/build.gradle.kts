@@ -69,7 +69,6 @@ tasks {
         val commonSources = project(":common").tasks.sourcesJar
         dependsOn(commonSources)
         from(commonSources.get().archiveFile.map { zipTree(it) })
-        exclude("rpmtw_platform_mod.mixins.json")
     }
 }
 
@@ -80,6 +79,7 @@ loom {
         convertAccessWideners.set(true)
         extraAccessWideners.add("rpmtw_platform_mod.accesswidener")
         mixinConfig("rpmtw_platform_mod.mixins.json")
+        mixinConfig("rpmtw_platform_mod.forge.mixins.json")
     }
 }
 

@@ -2,6 +2,7 @@ package com.rpmtw.rpmtw_platform_mod.gui
 
 import com.mojang.blaze3d.vertex.PoseStack
 import com.rpmtw.rpmtw_api_client.models.universe_chat.UniverseChatMessage
+import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.gui.widgets.UniverseChatWhatButton
 import com.rpmtw.rpmtw_platform_mod.handlers.UniverseChatHandler
 import com.rpmtw.rpmtw_platform_mod.util.Util
@@ -14,7 +15,7 @@ import net.minecraft.network.chat.Component
 
 class UniverseChatScreen(
     private val type: UniverseChatScreenType,
-    private val replyMessage: UniverseChatMessage? = null
+    private val toReply: UniverseChatMessage? = null
 ) :
     Screen(Component.empty()) {
     private var messageEditBox: EditBox? = null
@@ -44,10 +45,10 @@ class UniverseChatScreen(
                 }
 
                 if (type.isReply) {
-                    if (replyMessage == null) {
-                        throw IllegalStateException("replyMessageUUID is null")
+                    if (toReply == null) {
+                        throw IllegalStateException("toReply is null")
                     }
-                    UniverseChatHandler.reply(message, replyMessage.uuid)
+                    UniverseChatHandler.reply(message, toReply.uuid)
                 }
 
             }
@@ -102,7 +103,11 @@ class UniverseChatScreen(
         if (type.isSend) {
             title = I18n.get("universeChat.rpmtw_platform_mod.gui.send")
         } else if (type.isReply) {
-            title = I18n.get("universeChat.rpmtw_platform_mod.gui.reply", replyMessage!!.username)
+            if (toReply == null) {
+                throw IllegalStateException("toReply is null")
+            }
+
+            title = I18n.get("universeChat.rpmtw_platform_mod.gui.reply", toReply.username)
         }
 
         font.draw(

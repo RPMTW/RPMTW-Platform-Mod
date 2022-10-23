@@ -109,7 +109,3 @@ allprojects {
         withSourcesJar()
     }
 }
-
-configurations.all {
-    resolutionStrategy.cacheChangingModulesFor(0, "seconds")
-}
