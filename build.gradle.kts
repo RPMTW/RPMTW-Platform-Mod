@@ -1,6 +1,7 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ConfigureShadowRelocation
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import net.fabricmc.loom.task.RemapJarTask
 import net.fabricmc.loom.api.LoomGradleExtensionAPI
+import net.fabricmc.loom.task.RemapJarTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -48,12 +49,20 @@ subprojects {
             isCanBeResolved = true
         }
 
+        // Auto relocate all dependencies to avoid conflicts.
+        tasks.create<ConfigureShadowRelocation>("relocateShadowJar") {
+            target = tasks.named<ShadowJar>("shadowJar").get()
+            prefix = "shadow.com.rpmtw.rpmtw_platform_mod"
+        }
+
         tasks {
             "jar"(Jar::class) {
                 archiveClassifier.set("dev")
             }
 
             "shadowJar"(ShadowJar::class) {
+                dependsOn("relocateShadowJar")
+
                 archiveClassifier.set("dev-shadow")
                 // Include our bundle configuration in the shadow jar.
                 configurations = listOf(bundle)

@@ -25,7 +25,7 @@ dependencies {
     modApi("me.shedaniel.cloth:cloth-config-forge:${project.property("cloth_config_version").toString()}")
 
     // Optional mod dependencies
-    modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}:api")
+    forgeRuntimeLibrary("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}:api")
     modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}")
 
     // Dependencies for the mod
@@ -37,9 +37,9 @@ dependencies {
         exclude("com.google.code.gson")
         exclude("org.jetbrains.kotlinx")
         exclude("org.jetbrains.kotlin")
-        exclude("com.squareup.okhttp3")
-        exclude("org.json")
-    }.let { forgeRuntimeLibrary(it) }
+    }.let {
+        forgeRuntimeLibrary(it)
+    }
     bundle(
         forgeRuntimeLibrary(
             group = "io.sentry",
