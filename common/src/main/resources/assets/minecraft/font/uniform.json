@@ -1,15 +1,15 @@
 {
-  "providers": [
-    {
-      "type": "bitmap",
-      "file": "minecraft:font/emoji.png",
-      "ascent": 8,
-      "height": 8,
-      "chars": [
-        "\uF001\uF002\uF003\uF004\uF005\uF006\uF007\uF008\uF009\uF010",
-        "\uF011\uF012\uF013\uF014\uF015\uF016\uF017\uF018\uF019\uF020",
-        "\uF021\uF022\uF023\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
-      ]
-    }
-  ]
+    "providers": [
+        {
+			"type": "bitmap",
+			"file": "minecraft:font/emoji.png",
+			"ascent": 8,
+			"height": 8,
+			"chars": [
+				"\uF001\uF002\uF003\uF004\uF005\uF006\uF007\uF008\uF009\uF010",
+				"\uF011\uF012\uF013\uF014\uF015\uF016\uF017\uF018\uF019\uF020",
+				"\uF021\uF022\uF023\uF024\uF025\u0000\u0000\u0000\u0000\u0000"
+			]
+		}
+    ]
 }

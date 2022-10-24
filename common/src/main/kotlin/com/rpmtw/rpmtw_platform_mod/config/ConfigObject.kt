@@ -94,7 +94,7 @@ class ConfigObject : ConfigData {
         @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
         @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
-        var accountType: UniverseChatAccountType = UniverseChatAccountType.RPMTW
+        var accountType: UniverseChatAccountType = UniverseChatAccountType.MINECRAFT
     }
 
     class KeyBindings {

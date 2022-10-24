@@ -2,7 +2,7 @@ package com.rpmtw.rpmtw_platform_mod.handlers
 
 import com.rpmtw.rpmtw_api_client.RPMTWApiClient
 import com.rpmtw.rpmtw_api_client.models.universe_chat.UniverseChatMessage
-import com.rpmtw.rpmtw_api_client.resources.UniverseChatMessageFormat
+import com.rpmtw.rpmtw_api_client.utilities.Utilities
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.config.UniverseChatAccountType
@@ -27,11 +27,10 @@ object UniverseChatHandler {
         }
 
     private suspend fun init() {
-        val client: Minecraft = Minecraft.getInstance()
-        val user: User = client.user
         if (RPMTWConfig.get().base.isLogin() && RPMTWConfig.get().universeChat.accountType == UniverseChatAccountType.RPMTW) {
             this.client.universeChatResource.connect(token = RPMTWConfig.get().base.rpmtwAuthToken!!)
         } else {
+            val user: User = Minecraft.getInstance().user
             this.client.universeChatResource.connect(minecraftUUID = user.uuid)
         }
     }
@@ -61,36 +60,44 @@ object UniverseChatHandler {
     }
 
     private fun formatEmoji(message: String): String {
-        var newMessage = message
+        var result = message
+
         val emojiMap: Map<String, String> = mapOf(
             Pair(":big:", "\uF001"),
             Pair(":master_old:", "\uF002"),
             Pair(":can:", "\uF003"),
             Pair(":cannot:", "\uF004"),
             Pair(":eem:", "\uF005"),
-            Pair(":Fabric:", "\uF006"),
-            Pair(":Forge:", "\uF007"),
+            Pair(":fabric:", "\uF006"),
+            Pair(":forge:", "\uF007"),
             Pair(":Forgeisgarbage:", "\uF008"),
             Pair(":LUL1:", "\uF009"),
             Pair(":LUL2:", "\uF010"),
             Pair(":not_know:", "\uF011"),
             Pair(":oao_light:", "\uF012"),
+            Pair(":oao_dark:", "\uF013"),
             Pair(":black_question:", "\uF014"),
             Pair(":rpmtw_team_logo:", "\uF015"),
+            Pair(":RPMTW_logo_gif:", "\uF015"),
             Pair(":RPMLauncher:", "\uF016"),
             Pair(":dangerous:", "\uF017"),
             Pair(":fear:", "\uF018"),
             Pair(":check_star:", "\uF019"),
-            Pair(":oao_dark:", "\uF013"),
             Pair(":yellow_thinking:", "\uF020"),
             Pair(":SiongSng:", "\uF021"),
             Pair(":rpmwiki_logo:", "\uF022"),
             Pair(":rpmwiki_logo_complex:", "\uF023"),
+            Pair(":rpmtw_platform_mod:", "\uF024"),
+            Pair(":quilt:", "\uF025"),
         )
         emojiMap.forEach {
-            newMessage = message.replace(it.key, it.value)
+            result = result.replace(it.key, it.value)
         }
-        return newMessage
+        return result
+    }
+
+    private fun formatMessage(message: String): MutableComponent {
+        return formatUrl(Utilities.markdownToMinecraftFormatting(formatEmoji(message)))
     }
 
     private fun formatAuthorName(message: UniverseChatMessage): String {
@@ -142,7 +149,7 @@ object UniverseChatHandler {
                                 )
                             )
 
-                        val messageContent: MutableComponent = formatUrl(formatEmoji(msg.message))
+                        val messageContent = formatMessage(msg.message)
                         val message: MutableComponent = Component.empty()
                         if (isReply) {
                             val replyMessage: UniverseChatMessage? = getMessageAsync(msg.replyMessageUUID!!)
@@ -154,11 +161,15 @@ object UniverseChatHandler {
                                     formatAuthorName(replyMessage)
                                 }
 
+                                val replyMessageContent = formatMessage(replyMessage.message)
+
                                 message.append(
                                     "§a${I18n.get("gui.rpmtw_platform_mod.reply")} §6${
                                         replyAuthorName
-                                    } §b${replyMessage.message} §a-> "
+                                    } §b"
                                 )
+                                message.append(replyMessageContent)
+                                message.append(" §a-> ")
                                 message.append(messageContent)
                             }
                         } else {
@@ -177,7 +188,7 @@ object UniverseChatHandler {
                         Minecraft.getInstance().player?.displayClientMessage(component, false)
                     }
                 }
-            }, format = UniverseChatMessageFormat.MinecraftFormatting)
+            })
         } else {
             RPMTWPlatformMod.LOGGER.error("Connecting to universe chat server failed")
         }
@@ -191,16 +202,19 @@ object UniverseChatHandler {
                     "$prefix ${I18n.get("universeChat.rpmtw_platform_mod.status.success")}", overlay = true
                 )
             }
+
             "phishing" -> {
                 Util.sendMessage(
                     "$prefix ${I18n.get("universeChat.rpmtw_platform_mod.status.phishing")}", overlay = true
                 )
             }
+
             "banned" -> {
                 Util.sendMessage(
                     "$prefix ${I18n.get("universeChat.rpmtw_platform_mod.status.banned")}", overlay = true
                 )
             }
+
             "unauthorized" -> {
                 Util.sendMessage(
                     "$prefix ${I18n.get("universeChat.rpmtw_platform_mod.status.unauthorized")}", overlay = true
