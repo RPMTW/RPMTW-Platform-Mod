@@ -1,7 +1,7 @@
 package com.rpmtw.rpmtw_platform_mod
 
 import com.rpmtw.rpmtw_api_client.RPMTWApiClient
-import com.rpmtw.rpmtw_platform_mod.command.RPMTWCommand
+import com.rpmtw.rpmtw_platform_mod.command.CommandHandler
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.handlers.EventHandler
 import com.rpmtw.rpmtw_platform_mod.handlers.SentryHandler
@@ -26,7 +26,7 @@ object RPMTWPlatformMod {
         }
         RPMTWApiClient.init()
         TranslateResourcePack.deleteResourcePack()
-        RPMTWCommand.handle()
+        CommandHandler.init()
         EventHandler.handle()
     }
 }

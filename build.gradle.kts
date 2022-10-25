@@ -1,4 +1,3 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ConfigureShadowRelocation
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import net.fabricmc.loom.api.LoomGradleExtensionAPI
 import net.fabricmc.loom.task.RemapJarTask
@@ -7,8 +6,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     base
     id("org.jetbrains.kotlin.jvm") version "1.6.10"
-    id("architectury-plugin") version "3.4-SNAPSHOT"
-    id("dev.architectury.loom") version "0.12.0.297" apply false
+    id("architectury-plugin") version "3.4.143"
+    id("dev.architectury.loom") version "0.12.0.301" apply false
     id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
@@ -49,23 +48,22 @@ subprojects {
             isCanBeResolved = true
         }
 
-        // Auto relocate all dependencies to avoid conflicts.
-        tasks.create<ConfigureShadowRelocation>("relocateShadowJar") {
-            target = tasks.named<ShadowJar>("shadowJar").get()
-            prefix = "shadow.com.rpmtw.rpmtw_platform_mod"
-        }
-
         tasks {
             "jar"(Jar::class) {
                 archiveClassifier.set("dev")
             }
 
             "shadowJar"(ShadowJar::class) {
-                dependsOn("relocateShadowJar")
-
                 archiveClassifier.set("dev-shadow")
                 // Include our bundle configuration in the shadow jar.
                 configurations = listOf(bundle)
+
+                relocate("okhttp3", "com.rpmtw.rpmtw_platform_mod.shadow.okhttp3")
+                relocate("okio", "com.rpmtw.rpmtw_platform_mod.shadow.okio")
+                relocate("org.json", "com.rpmtw.rpmtw_platform_mod.shadow.org.json")
+                relocate("io.sentry", "com.rpmtw.rpmtw_platform_mod.shadow.io.sentry")
+                relocate("io.socket", "com.rpmtw.rpmtw_platform_mod.shadow.io.socket")
+                relocate("com.github.kittinunf", "com.rpmtw.rpmtw_platform_mod.shadow.com.github.kittinunf")
             }
 
             "remapJar"(RemapJarTask::class) {
