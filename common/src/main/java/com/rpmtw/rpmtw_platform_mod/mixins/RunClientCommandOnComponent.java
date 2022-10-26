@@ -1,6 +1,5 @@
 package com.rpmtw.rpmtw_platform_mod.mixins;
 
-import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod;
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformModPlugin;
 import dev.architectury.platform.Platform;
 import net.fabricmc.api.EnvType;
