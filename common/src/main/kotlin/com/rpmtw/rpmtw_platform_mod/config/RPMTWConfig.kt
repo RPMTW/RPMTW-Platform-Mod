@@ -19,6 +19,7 @@ import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Jankson
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.JsonObject
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.JsonPrimitive
 import me.shedaniel.clothconfig2.api.*
+import me.shedaniel.clothconfig2.gui.GlobalizedClothConfigScreen
 import me.shedaniel.clothconfig2.gui.entries.KeyCodeEntry
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.components.AbstractWidget
@@ -128,15 +129,14 @@ object RPMTWConfig {
             builder.setGlobalized(true)
             builder.setGlobalizedExpanded(false)
 
-            // This feature is not yet finished, so it is hidden for now.
-//            builder.setAfterInitConsumer { screen ->
-//                val globalizedScreen: GlobalizedClothConfigScreen = screen as GlobalizedClothConfigScreen
-//
-//                val entry = LoginButtonEntry()
-//                entry.setScreen(screen)
-//                @Suppress("UNCHECKED_CAST") globalizedScreen.listWidget.children()
-//                    .add(0, entry as AbstractConfigEntry<AbstractConfigEntry<*>>)
-//            }
+            builder.setAfterInitConsumer { screen ->
+                val globalizedScreen: GlobalizedClothConfigScreen = screen as GlobalizedClothConfigScreen
+
+                val entry = LoginButtonEntry()
+                entry.setScreen(screen)
+                @Suppress("UNCHECKED_CAST") globalizedScreen.listWidget.children()
+                    .add(0, entry as AbstractConfigEntry<AbstractConfigEntry<*>>)
+            }
 
             builder.build()
         }
@@ -174,17 +174,32 @@ internal class LoginButtonEntry :
         delta: Float
     ) {
         super.render(matrices, index, y, x, entryWidth, entryHeight, mouseX, mouseY, isHovered, delta)
+
+        val title = Component.translatable("auth.rpmtw_platform_mod.title")
+        val authStatus: String = if (RPMTWConfig.get().base.isLogin()) {
+            I18n.get("auth.rpmtw_platform_mod.status.logged_in")
+        } else {
+            I18n.get("auth.rpmtw_platform_mod.status.not_logged_in")
+        }
+
         loginButton =
-            Button(entryWidth / 2 - 30, y, 65, 20, Component.translatable("auth.rpmtw_platform_mod.button.login"), {
-                RPMTWAuthHandler.login()
-            }, { _, matrixStack, i, j ->
-                Minecraft.getInstance().screen?.renderTooltip(
-                    matrixStack, Component.translatable("auth.rpmtw_platform_mod.button.login.tooltip"), i, j
-                )
-            })
+            Button(
+                entryWidth / 2 - 20,
+                y + 10,
+                65,
+                20,
+                Component.translatable("auth.rpmtw_platform_mod.button.login"),
+                {
+                    RPMTWAuthHandler.login()
+                },
+                { _, matrixStack, i, j ->
+                    Minecraft.getInstance().screen?.renderTooltip(
+                        matrixStack, Component.translatable("auth.rpmtw_platform_mod.button.login.tooltip"), i, j
+                    )
+                })
 
         logoutButton = Button(
-            entryWidth / 2 + 40, y, 65, 20, Component.translatable("auth.rpmtw_platform_mod.button.logout")
+            entryWidth / 2 + 50, y + 10, 65, 20, Component.translatable("auth.rpmtw_platform_mod.button.logout")
         ) {
             RPMTWAuthHandler.logout()
         }
@@ -193,14 +208,19 @@ internal class LoginButtonEntry :
         loginButton.render(matrices, mouseX, mouseY, delta)
         logoutButton.render(matrices, mouseX, mouseY, delta)
 
-        val text =
-            I18n.get(if (RPMTWConfig.get().base.isLogin()) "auth.rpmtw_platform_mod.status.logged_in" else "auth.rpmtw_platform_mod.status.not_logged_in")
+        Minecraft.getInstance().font.drawShadow(
+            matrices,
+            title,
+            (x - 4 + entryWidth / 2 - Minecraft.getInstance().font.width(title) / 2).toFloat(),
+            (y).toFloat(),
+            -1
+        )
 
         Minecraft.getInstance().font.drawShadow(
             matrices,
-            text,
-            (x - 4 + entryWidth / 2 - Minecraft.getInstance().font.width(text) / 2).toFloat(),
-            (y + 28).toFloat(),
+            authStatus,
+            (x - 4 + entryWidth / 2 - Minecraft.getInstance().font.width(authStatus) / 2).toFloat(),
+            (y + 33).toFloat(),
             -1
         )
     }
@@ -223,6 +243,6 @@ internal class LoginButtonEntry :
     }
 
     override fun getItemHeight(): Int {
-        return 35
+        return 45
     }
 }

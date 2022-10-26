@@ -37,9 +37,9 @@ dependencies {
         exclude("com.google.code.gson")
         exclude("org.jetbrains.kotlinx")
         exclude("org.jetbrains.kotlin")
-        exclude("com.squareup.okhttp3")
-        exclude("org.json")
-    }.let { forgeRuntimeLibrary(it) }
+    }.let {
+        forgeRuntimeLibrary(it)
+    }
     bundle(
         forgeRuntimeLibrary(
             group = "io.sentry",
@@ -69,7 +69,6 @@ tasks {
         val commonSources = project(":common").tasks.sourcesJar
         dependsOn(commonSources)
         from(commonSources.get().archiveFile.map { zipTree(it) })
-        exclude("rpmtw_platform_mod.mixins.json")
     }
 }
 
@@ -80,6 +79,7 @@ loom {
         convertAccessWideners.set(true)
         extraAccessWideners.add("rpmtw_platform_mod.accesswidener")
         mixinConfig("rpmtw_platform_mod.mixins.json")
+        mixinConfig("rpmtw_platform_mod.forge.mixins.json")
     }
 }
 

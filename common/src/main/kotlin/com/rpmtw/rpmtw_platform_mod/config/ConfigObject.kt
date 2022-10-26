@@ -22,7 +22,6 @@ class ConfigObject : ConfigData {
     var translate = Translate()
 
     @JvmField
-    @ConfigEntry.Gui.Excluded // This feature is not yet finished, so it is hidden for now.
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = false)
     var universeChat = UniverseChat()
 
@@ -75,14 +74,14 @@ class ConfigObject : ConfigData {
         @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
         @ConfigEntry.Gui.RequiresRestart
-        var enable = false
+        var enable = true
 
         @JvmField
-        var enableReceiveMessage = false
+        var enableReceiveMessage = true
 
         @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
-        var enableButton = false
+        var enableButton = true
 
         @JvmField
         @ConfigEntry.Gui.Excluded
@@ -95,7 +94,7 @@ class ConfigObject : ConfigData {
         @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
         @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
-        var accountType: UniverseChatAccountType = UniverseChatAccountType.RPMTW
+        var accountType: UniverseChatAccountType = UniverseChatAccountType.MINECRAFT
     }
 
     class KeyBindings {

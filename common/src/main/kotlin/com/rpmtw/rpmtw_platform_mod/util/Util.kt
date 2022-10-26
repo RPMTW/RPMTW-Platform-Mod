@@ -59,4 +59,13 @@ object Util {
 
         return baseDirectory.resolve(fileName)
     }
+
+    fun getUniverseChatAvatarLocation(hash: String): File {
+        val directory = getBaseDirectory().resolve("universe_chat_avatars")
+        if (!directory.exists()) {
+            directory.mkdirs()
+        }
+
+        return directory.resolve(hash)
+    }
 }

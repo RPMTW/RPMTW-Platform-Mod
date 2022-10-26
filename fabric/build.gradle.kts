@@ -84,6 +84,5 @@ tasks {
         dependsOn(commonSources)
         from(commonSources.get().archiveFile.map { zipTree(it) })
         exclude("rpmtw_platform_mod.accesswidener")
-        exclude("rpmtw_platform_mod.mixins.json")
     }
 }

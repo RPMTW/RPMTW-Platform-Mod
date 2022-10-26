@@ -7,7 +7,7 @@ license = "GPL-3"
 modId = "rpmtw_platform_mod"
 version = "${version}"
 displayName = "RPMTW Platform Mod"
-authors = "SiongSng, watermelon_1024, Yuta Yamamoto"
+authors = "SiongSng (菘菘), watermelon_1024 (西瓜), Yuta Yamamoto (裕太)"
 description = '''
 整合了RPMTW各項服務的模組，涵蓋翻譯、百科、宇宙通訊、中文輸入優化等功能，讓 Minecraft 中文玩家獲得更好的遊戲體驗。
 

@@ -1,13 +1,13 @@
 package com.rpmtw.rpmtw_platform_mod.forge
 
-import com.mojang.brigadier.arguments.ArgumentType
-import com.mojang.brigadier.context.CommandContext
+import com.mojang.brigadier.CommandDispatcher
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig.getScreen
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.screens.Screen
-import net.minecraft.commands.Commands.argument
-import net.minecraft.commands.Commands.literal
+import net.minecraft.commands.CommandBuildContext
+import net.minecraft.commands.SharedSuggestionProvider
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener
+import net.minecraftforge.client.ClientCommandHandler
 import net.minecraftforge.client.ConfigScreenHandler.ConfigScreenFactory
 import net.minecraftforge.client.event.RegisterClientCommandsEvent
 import net.minecraftforge.client.event.RegisterClientReloadListenersEvent
@@ -25,33 +25,22 @@ object RPMTWPlatformModPluginImpl {
     }
 
     @JvmStatic
-    fun registerClientCommand(
-        command: String,
-        subCommand: String,
-        argumentName: String? = null,
-        argumentType: ArgumentType<*>? = null,
-        executes: (CommandContext<*>) -> Int
-    ) {
+    fun dispatchClientCommand(callback: (dispatcher: CommandDispatcher<SharedSuggestionProvider>, buildContext: CommandBuildContext) -> Unit) {
         FORGE_BUS.addListener { event: RegisterClientCommandsEvent ->
-            if (argumentName != null && argumentType != null) {
-                event.dispatcher.register(
-                    literal(command).then(
-                        literal(subCommand).then(argument(argumentName, argumentType).executes { executes(it) })
-                    )
-                )
-            } else {
-                event.dispatcher.register(
-                    literal(command).then(literal(subCommand).executes { executes(it) })
-                )
-            }
+            @Suppress("UNCHECKED_CAST")
+            callback(event.dispatcher as CommandDispatcher<SharedSuggestionProvider>, event.buildContext)
         }
     }
-
 
     @JvmStatic
     fun <T> registerReloadEvent(reloadListener: SimplePreparableReloadListener<T>) {
         MOD_BUS.addListener { event: RegisterClientReloadListenersEvent ->
             event.registerReloadListener(reloadListener)
         }
+    }
+
+    @JvmStatic
+    fun executeClientCommand(command: String): Boolean {
+        return ClientCommandHandler.runCommand(command)
     }
 }

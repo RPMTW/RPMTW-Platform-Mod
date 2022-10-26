@@ -19,6 +19,7 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -37,7 +38,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.util.List;
-import java.util.Map;
 
 @SuppressWarnings("SpellCheckingInspection")
 @Mixin(ChatComponent.class)
@@ -60,11 +60,10 @@ public class ChatComponentMixin {
         UniverseChatComponent chatComponent = (UniverseChatComponent) siblings.stream().filter(sibling -> sibling instanceof UniverseChatComponent).findFirst().orElse(null);
 
         if (chatComponent != null) {
-            UniverseChatMessage message = chatComponent.getUniverseChatMessage();
-            String avatarUrl = message.getAvatarUrl();
-            Map<String, ResourceLocation> avatarMap = ChatComponentData.INSTANCE.getUniverseChatAvatarCache();
-            if (!avatarMap.containsKey(avatarUrl)) {
-                loadImage(avatarUrl);
+            String avatarUrl = chatComponent.getUniverseChatMessage().getAvatarUrl();
+
+            if (avatarUrl != null && !ChatComponentData.INSTANCE.isAvatarCached(avatarUrl)) {
+                loadAvatar(avatarUrl);
             }
         }
     }
@@ -74,7 +73,7 @@ public class ChatComponentMixin {
     public float moveTheText(PoseStack poseStack, FormattedCharSequence formattedCharSequence, float f, float y, int color) {
         ChatComponentData.INSTANCE.setLastY((int) y);
         ChatComponentData.INSTANCE.setLastOpacity((((color >> 24) + 256) % 256) / 255f); // haha yes
-        return ChatComponentData.INSTANCE.getOffset();
+        return ChatComponentData.offset;
     }
 
 
@@ -97,7 +96,7 @@ public class ChatComponentMixin {
             if (chatComponent == null) return;
 
             UniverseChatMessage message = chatComponent.getUniverseChatMessage();
-            ResourceLocation location = ChatComponentData.INSTANCE.getUniverseChatAvatarCache().getOrDefault(message.getAvatarUrl(), null);
+            ResourceLocation location = ChatComponentData.INSTANCE.getAvatarCache().getOrDefault(message.getAvatarUrl(), null);
 
             if (location == null) return;
             RenderSystem.setShaderColor(1, 1, 1, ChatComponentData.INSTANCE.getLastOpacity());
@@ -110,46 +109,48 @@ public class ChatComponentMixin {
             RenderSystem.setShaderColor(1, 1, 1, 1);
             RenderSystem.disableBlend();
         } catch (Exception e) {
-            RPMTWPlatformMod.LOGGER.info("Rending chat component failed\n" + e);
+            RPMTWPlatformMod.LOGGER.warn("Rending universe chat component failed\n" + e);
         }
     }
 
     @ModifyArg(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/StringSplitter;componentStyleAtWidth(Lnet/minecraft/util/FormattedCharSequence;I)Lnet/minecraft/network/chat/Style;"), method = "getClickedComponentStyleAt(DD)Lnet/minecraft/network/chat/Style;", index = 1)
     public int correctClickPosition(int x) {
-        return x - ChatComponentData.INSTANCE.getOffset();
+        return x - ChatComponentData.offset;
     }
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/ChatComponent;getWidth()I"), method = "addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;ILnet/minecraft/client/GuiMessageTag;Z)V")
     public int fixTextOverflow(ChatComponent chatHud) {
-        return ChatComponent.getWidth(minecraft.options.chatWidth().get()) - ChatComponentData.INSTANCE.getOffset();
+        return ChatComponent.getWidth(minecraft.options.chatWidth().get()) - ChatComponentData.offset;
     }
 
-    private void loadImage(String url) {
-        ResourceLocation location = new ResourceLocation("rpmtw_platform_mod", "universe_chat_user_avatar/" + url.replace("https://", ""));
+    private void loadAvatar(String url) {
+        String urlHash = DigestUtils.md5Hex(url);
+
+        ResourceLocation location = new ResourceLocation("rpmtw_platform_mod", "universe_chat_avatars_" + urlHash);
         Thread thread = new Thread(null, () -> {
             @Nullable NativeImage nativeImage = null;
 
             try {
                 URL uri = new URL(url);
-                File file = Util.INSTANCE.getFileLocation("/universe_chat_user_avatar/" + url.replace("https://", "") + ".png");
+                File file = Util.INSTANCE.getUniverseChatAvatarLocation(urlHash);
 
                 BufferedImage image = convertToBufferedImage(ImageIO.read(uri.openConnection().getInputStream()).getScaledInstance(8, 8, Image.SCALE_SMOOTH));
                 ImageIO.write(image, "png", file);
                 file.deleteOnExit();
 
-                RPMTWPlatformMod.LOGGER.info("Loading image from " + file.getAbsolutePath());
+                RPMTWPlatformMod.LOGGER.info("Loading universe chat avatar from " + file.getAbsolutePath());
 
                 nativeImage = NativeImage.read(Files.newInputStream(file.toPath()));
             } catch (IOException e) {
-                RPMTWPlatformMod.LOGGER.error("Exception reading image", e);
+                RPMTWPlatformMod.LOGGER.error("Exception downloading universe chat avatar", e);
             }
 
             if (nativeImage != null) {
                 TextureManager manager = Minecraft.getInstance().getTextureManager();
                 manager.register(location, new DynamicTexture(nativeImage));
 
-                ChatComponentData.INSTANCE.getUniverseChatAvatarCache().put(url, location);
-                RPMTWPlatformMod.LOGGER.info("Loaded image for " + url);
+                ChatComponentData.INSTANCE.getAvatarCache().put(url, location);
+                RPMTWPlatformMod.LOGGER.info("Loaded universe chat avatar for " + url);
             }
         }, "UniverseChatAvatarLoader");
         thread.start();

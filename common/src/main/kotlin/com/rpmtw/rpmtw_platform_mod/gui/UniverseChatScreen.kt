@@ -14,10 +14,10 @@ import net.minecraft.network.chat.Component
 
 class UniverseChatScreen(
     private val type: UniverseChatScreenType,
-    private val replyMessage: UniverseChatMessage? = null
+    private val toReply: UniverseChatMessage? = null
 ) :
     Screen(Component.empty()) {
-    private var messageEditBox: EditBox? = null
+    private lateinit var messageEditBox: EditBox
 
     override fun init() {
         val whatButton = UniverseChatWhatButton(width, height)
@@ -29,8 +29,7 @@ class UniverseChatScreen(
             BUTTON_HEIGHT,
             Component.translatable("gui.rpmtw_platform_mod.${type.name.lowercase()}")
         ) {
-            if (messageEditBox == null) return@Button
-            val message: String = messageEditBox!!.value
+            val message: String = messageEditBox.value
             if (message.isEmpty()) {
                 Util.sendMessage(I18n.get("universeChat.rpmtw_platform_mod.gui.input.null"), overlay = true)
             } else {
@@ -44,10 +43,10 @@ class UniverseChatScreen(
                 }
 
                 if (type.isReply) {
-                    if (replyMessage == null) {
-                        throw IllegalStateException("replyMessageUUID is null")
+                    if (toReply == null) {
+                        throw IllegalStateException("toReply is null")
                     }
-                    UniverseChatHandler.reply(message, replyMessage.uuid)
+                    UniverseChatHandler.reply(message, toReply.uuid)
                 }
 
             }
@@ -63,9 +62,15 @@ class UniverseChatScreen(
         }
 
         val suggestion: String = I18n.get("universeChat.rpmtw_platform_mod.gui.input.tooltip")
+        val messageEditBoxWidth = (font.width(suggestion) * 1.5).toInt()
+
         messageEditBox = object : EditBox(
-            font, width / 2 - 95, height / 2 - 10, 200, 20,
-            Component.literal(suggestion)
+            font,
+            (width - messageEditBoxWidth) / 2,
+            height / 2 - 10,
+            messageEditBoxWidth,
+            20,
+            Component.literal(suggestion),
         ) {
             init {
                 setSuggestion(suggestion)
@@ -81,12 +86,12 @@ class UniverseChatScreen(
                 if (value.isEmpty()) setSuggestion(suggestion) else setSuggestion(null)
             }
         }
-        messageEditBox!!.setMaxLength(150)
+        messageEditBox.setMaxLength(150)
 
         addRenderableWidget(whatButton)
         addRenderableWidget(sendButton)
         addRenderableWidget(cancelButton)
-        addWidget(messageEditBox!!)
+        addWidget(messageEditBox)
     }
 
     override fun render(
@@ -102,14 +107,18 @@ class UniverseChatScreen(
         if (type.isSend) {
             title = I18n.get("universeChat.rpmtw_platform_mod.gui.send")
         } else if (type.isReply) {
-            title = I18n.get("universeChat.rpmtw_platform_mod.gui.reply", replyMessage!!.username)
+            if (toReply == null) {
+                throw IllegalStateException("toReply is null")
+            }
+
+            title = I18n.get("universeChat.rpmtw_platform_mod.gui.reply", toReply.username)
         }
 
         font.draw(
             matrixStack, title, width / 2f - font.width(title) / 2f, (height - 35).toFloat(),
             0xFF5555
         )
-        messageEditBox!!.render(matrixStack, mouseX, mouseY, partialTicks)
+        messageEditBox.render(matrixStack, mouseX, mouseY, partialTicks)
         super.render(matrixStack, mouseX, mouseY, partialTicks)
     }
 
