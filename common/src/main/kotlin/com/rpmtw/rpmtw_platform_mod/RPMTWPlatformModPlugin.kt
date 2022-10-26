@@ -8,6 +8,7 @@ import net.minecraft.commands.CommandBuildContext
 import net.minecraft.commands.SharedSuggestionProvider
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener
 
+@Suppress("UNUSED_PARAMETER")
 object RPMTWPlatformModPlugin {
     @ExpectPlatform
     @JvmStatic

@@ -53,7 +53,7 @@
   "universeChat.rpmtw_platform_mod.gui.eula.text.4": "- We may change these terms and conditions at any time (to view the latest version, please go to the RPMTW official website).",
   "universeChat.rpmtw_platform_mod.gui.eula.title": "《RPMTW Universe chat system end-user license agreement》",
   "universeChat.rpmtw_platform_mod.gui.input.null": "Message cannot be empty.",
-  "universeChat.rpmtw_platform_mod.gui.input.tooltip": "Please enter the message you want to send.",
+  "universeChat.rpmtw_platform_mod.gui.input.tooltip": "Want to say something?",
   "universeChat.rpmtw_platform_mod.gui.reply": "Reply message to %s",
   "universeChat.rpmtw_platform_mod.gui.send": "Send message to universe chat system",
   "universeChat.rpmtw_platform_mod.gui.what": "What is this?",
