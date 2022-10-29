@@ -1,15 +1,8 @@
 package com.rpmtw.rpmtw_platform_mod.command
 
-import com.mojang.brigadier.Command
-import net.fabricmc.api.EnvType
-import net.fabricmc.api.Environment
+import com.mojang.brigadier.builder.LiteralArgumentBuilder
+import net.minecraft.commands.SharedSuggestionProvider
 
-@Environment(EnvType.CLIENT)
-object RPMTWCommand {
-    const val success: Int = Command.SINGLE_SUCCESS
-
-    fun handle() {
-        ReplyUniverseMessageCommand()
-        LoginRPMTWAccountCommand()
-    }
+abstract class RPMTWCommand {
+    abstract fun register(): LiteralArgumentBuilder<SharedSuggestionProvider>
 }

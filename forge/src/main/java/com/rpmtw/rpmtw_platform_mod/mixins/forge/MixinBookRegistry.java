@@ -15,7 +15,6 @@ import vazkii.patchouli.common.base.PatchouliConfig;
 import vazkii.patchouli.common.book.Book;
 import vazkii.patchouli.common.book.BookRegistry;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @Mixin(value = BookRegistry.class, remap = false)

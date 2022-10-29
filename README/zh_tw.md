@@ -5,8 +5,9 @@
 [![](https://img.shields.io/github/license/RPMTW/RPMTW-Platform-Mod.svg)](LICENSE)
 [![](https://img.shields.io/github/release/RPMTW/RPMTW-Platform-Mod.svg)](https://github.com/RPMTW/RPMTW-Platform-Mod/releases)
 ![](http://cf.way2muchnoise.eu/versions/minecraft_rpmtw-update-mod_all.svg)
-[![](http://cf.way2muchnoise.eu/rpmtw-update-mod.svg)](https://minecraft.curseforge.com/projects/rpmtw-update-mod)
-<p>&nbsp;</p>
+[![](http://cf.way2muchnoise.eu/rpmtw-update-mod.svg)](https://www.curseforge.com/minecraft/mc-mods/rpmtw-update-mod)
+[![](https://img.shields.io/modrinth/dt/ZukQzaRP?label=Modrinth%20Downloads)](https://modrinth.com/mod/ZukQzaRP)
+<p></p>
 <p>&nbsp;</p>
 
 #### 🌐 說明檔案語言

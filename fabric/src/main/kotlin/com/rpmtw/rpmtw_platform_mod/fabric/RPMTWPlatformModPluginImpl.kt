@@ -1,17 +1,15 @@
 package com.rpmtw.rpmtw_platform_mod.fabric
 
 import com.mojang.brigadier.CommandDispatcher
-import com.mojang.brigadier.arguments.ArgumentType
-import com.mojang.brigadier.context.CommandContext
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.argument
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper
+import net.fabricmc.fabric.impl.command.client.ClientCommandInternals
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.commands.CommandBuildContext
+import net.minecraft.commands.SharedSuggestionProvider
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.packs.PackType
 import net.minecraft.server.packs.resources.PreparableReloadListener
@@ -31,27 +29,10 @@ object RPMTWPlatformModPluginImpl {
     }
 
     @JvmStatic
-    fun registerClientCommand(
-        command: String,
-        subCommand: String,
-        argumentName: String? = null,
-        argumentType: ArgumentType<*>? = null,
-        executes: (CommandContext<*>) -> Int
-    ) {
-        ClientCommandRegistrationCallback.EVENT.register(ClientCommandRegistrationCallback { dispatcher: CommandDispatcher<FabricClientCommandSource?>, _: CommandBuildContext? ->
-            if (argumentName != null && argumentType != null) {
-                dispatcher.register(
-                    literal(command).then(
-                        literal(subCommand).then(argument(argumentName, argumentType).executes {
-                            return@executes executes(it)
-                        })
-                    )
-                )
-            } else {
-                dispatcher.register(literal(command).then(literal(subCommand).executes {
-                    return@executes executes(it)
-                }))
-            }
+    fun dispatchClientCommand(callback: (dispatcher: CommandDispatcher<SharedSuggestionProvider>, buildContext: CommandBuildContext) -> Unit) {
+        ClientCommandRegistrationCallback.EVENT.register(ClientCommandRegistrationCallback { dispatcher: CommandDispatcher<FabricClientCommandSource?>, buildContext: CommandBuildContext ->
+            @Suppress("UNCHECKED_CAST")
+            callback(dispatcher as CommandDispatcher<SharedSuggestionProvider>, buildContext)
         })
     }
 
@@ -59,6 +40,11 @@ object RPMTWPlatformModPluginImpl {
     fun <T> registerReloadEvent(reloadListener: SimplePreparableReloadListener<T>) {
         ResourceManagerHelper.get(PackType.CLIENT_RESOURCES)
             .registerReloadListener(PreparableReloadListenerWrapper(reloadListener))
+    }
+
+    @JvmStatic
+    fun executeClientCommand(command: String): Boolean {
+        return ClientCommandInternals.executeCommand(command)
     }
 
     @JvmStatic
