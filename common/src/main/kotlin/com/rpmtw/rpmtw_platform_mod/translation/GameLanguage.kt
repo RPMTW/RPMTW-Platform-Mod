@@ -1,11 +1,12 @@
 package com.rpmtw.rpmtw_platform_mod.translation
 
+import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import net.minecraft.client.Minecraft
 import java.util.*
 
 enum class GameLanguage(val code: String, val region: String, val codeList: List<String>) {
     English("en_us", "US", arrayListOf("US", "en")),
-    TraditionalChinese("zh_tw", "TW", arrayListOf("TW", "HK")),
+    TraditionalChinese("zh_tw", "TW", arrayListOf("TW", "TWN", "HK", "HKG")),
     SimplifiedChinese("zh_cn", "CN", arrayListOf("CN"));
 
     companion object {
@@ -16,6 +17,8 @@ enum class GameLanguage(val code: String, val region: String, val codeList: List
             val locale = Locale.getDefault()
             val countryCode = locale.country
             val languageCode = locale.language
+
+            RPMTWPlatformMod.LOGGER.debug("System language: $languageCode-$countryCode")
 
             return findLanguage(countryCode) ?: findLanguage(languageCode) ?: English
         }
