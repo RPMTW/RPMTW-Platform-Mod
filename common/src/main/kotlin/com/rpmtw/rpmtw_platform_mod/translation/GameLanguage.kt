@@ -4,10 +4,10 @@ import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import net.minecraft.client.Minecraft
 import java.util.*
 
-enum class GameLanguage(val code: String, val region: String, val codeList: List<String>) {
-    English("en_us", "US", arrayListOf("US", "en")),
-    TraditionalChinese("zh_tw", "TW", arrayListOf("TW", "TWN", "HK", "HKG")),
-    SimplifiedChinese("zh_cn", "CN", arrayListOf("CN"));
+enum class GameLanguage(val code: String, val region: String, val tags: List<String>) {
+    English("en_us", "US", arrayListOf("en-US")),
+    TraditionalChinese("zh_tw", "TW", arrayListOf("zh-TW", "zh-HK")),
+    SimplifiedChinese("zh_cn", "CN", arrayListOf("zh-CN", "zh-SG"));
 
     companion object {
         /*
@@ -15,12 +15,16 @@ enum class GameLanguage(val code: String, val region: String, val codeList: List
          */
         fun getSystem(): GameLanguage {
             val locale = Locale.getDefault()
-            val countryCode = locale.country
-            val languageCode = locale.language
+            val tag = locale.toLanguageTag()
 
-            RPMTWPlatformMod.LOGGER.debug("System language: $languageCode-$countryCode")
+            RPMTWPlatformMod.LOGGER.debug("Language tag: $tag")
 
-            return findLanguage(countryCode) ?: findLanguage(languageCode) ?: English
+            return when {
+                English.tags.contains(tag) -> English
+                TraditionalChinese.tags.contains(tag) -> TraditionalChinese
+                SimplifiedChinese.tags.contains(tag) -> SimplifiedChinese
+                else -> English
+            }
         }
 
         /**
@@ -47,16 +51,6 @@ enum class GameLanguage(val code: String, val region: String, val codeList: List
             }
 
             return result ?: English
-        }
-
-        private fun findLanguage(code: String): GameLanguage? {
-            val languages = values()
-            for (language in languages) {
-                if (language.codeList.contains(code) && language != English) {
-                    return language
-                }
-            }
-            return null
         }
     }
 }
