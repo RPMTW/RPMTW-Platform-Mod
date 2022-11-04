@@ -93,24 +93,16 @@ object RPMTWConfig {
 
     private fun listenOnSave(holder: ConfigHolder<ConfigObject>, oldConfig: ConfigObject) {
         var oldAccountType = oldConfig.universeChat.accountType
+        var oldRPMTWAuthToken = oldConfig.base.rpmtwAuthToken
 
         holder.registerSaveListener { _, edited ->
-            var restart = false
-            if (edited.universeChat.accountType != oldAccountType) {
-                // If change the account type to RPMTW and is logged RPMTW account, it will restart the universe chat client.
-                if (edited.base.isLogin() && edited.universeChat.accountType.isRPMTW) {
-                    restart = true
-                } else if (edited.universeChat.accountType.isMinecraft) {
-                    restart = true
-                }
-            }
-
-            if (restart) {
+            if (edited.universeChat.accountType != oldAccountType || edited.base.rpmtwAuthToken != oldRPMTWAuthToken) {
                 UniverseChatHandler.restart()
             }
 
-            // Save the new account type
+            // Save the new configs
             oldAccountType = edited.universeChat.accountType
+            oldRPMTWAuthToken = edited.base.rpmtwAuthToken
 
             return@registerSaveListener InteractionResult.SUCCESS
         }
