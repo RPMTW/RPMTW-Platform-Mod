@@ -10,6 +10,9 @@ import net.minecraft.util.profiling.ProfilerFiller
 
 class OnReloadResource : SimplePreparableReloadListener<Unit>() {
     override fun prepare(resourceManager: ResourceManager, profilerFiller: ProfilerFiller) {
+    }
+
+    override fun apply(unit: Unit, resourceManager: ResourceManager, profilerFiller: ProfilerFiller) {
         profilerFiller.startTick()
         if (RPMTWConfig.get().translate.loadTranslateResourcePack) {
             try {
@@ -22,10 +25,7 @@ class OnReloadResource : SimplePreparableReloadListener<Unit>() {
                 return
             }
         }
-        profilerFiller.endTick()
-    }
-
-    override fun apply(unit: Unit, resourceManager: ResourceManager, profilerFiller: ProfilerFiller) {
         MTStorage.load(resourceManager)
+        profilerFiller.endTick()
     }
 }
