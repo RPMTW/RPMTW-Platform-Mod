@@ -296,10 +296,10 @@ object UniverseChatHandler {
         client.universeChatResource.disconnect()
     }
 
-    fun reset() {
-        RPMTWPlatformMod.LOGGER.info("Resetting universe chat...")
+    fun restart() {
+        RPMTWPlatformMod.LOGGER.info("Restarting universe chat...")
         close()
         handle()
-        RPMTWPlatformMod.LOGGER.info("Universe chat reset!")
+        RPMTWPlatformMod.LOGGER.info("Universe chat restart!")
     }
 }

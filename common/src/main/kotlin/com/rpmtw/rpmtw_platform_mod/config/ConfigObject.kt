@@ -47,11 +47,6 @@ class ConfigObject : ConfigData {
         @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
         @ConfigEntry.Gui.RequiresRestart
-        var autoToggleLanguage = true
-
-        @JvmField
-        @ConfigEntry.Gui.Tooltip(count = 1)
-        @ConfigEntry.Gui.RequiresRestart
         var machineTranslation = true
 
         @JvmField
@@ -59,15 +54,27 @@ class ConfigObject : ConfigData {
         @ConfigEntry.Gui.RequiresRestart
         var autoMachineTranslation = false
 
-        @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
         @ConfigEntry.Gui.RequiresRestart
-        var unlocalized = GameLanguage.getSystem() != GameLanguage.English
+        var unlocalized = true
+            get() {
+                return if (GameLanguage.getMinecraft() == GameLanguage.English) {
+                    false
+                } else {
+                    field
+                }
+            }
 
-        @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
         @ConfigEntry.Gui.RequiresRestart
-        var loadTranslateResourcePack = GameLanguage.getSystem() != GameLanguage.English
+        var loadTranslateResourcePack = true
+            get() {
+                return if (GameLanguage.getMinecraft() == GameLanguage.English) {
+                    false
+                } else {
+                    field
+                }
+            }
     }
 
     class UniverseChat {

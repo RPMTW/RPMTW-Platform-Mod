@@ -91,22 +91,26 @@ object RPMTWConfig {
         return builder.build()
     }
 
-    private fun listenOnSave(holder: ConfigHolder<ConfigObject>, beforeConfig: ConfigObject) {
-        var beforeAccountType = beforeConfig.universeChat.accountType
+    private fun listenOnSave(holder: ConfigHolder<ConfigObject>, oldConfig: ConfigObject) {
+        var oldAccountType = oldConfig.universeChat.accountType
 
         holder.registerSaveListener { _, edited ->
-            var reset = false
-            if (edited.universeChat.accountType != beforeAccountType) {
-                // If change the account type to RPMTW and are not logged RPMTW account, it will not restart the universe chat client.
-                if (!(!edited.base.isLogin() && edited.universeChat.accountType.isRPMTW)) {
-                    reset = true
+            var restart = false
+            if (edited.universeChat.accountType != oldAccountType) {
+                // If change the account type to RPMTW and is logged RPMTW account, it will restart the universe chat client.
+                if (edited.base.isLogin() && edited.universeChat.accountType.isRPMTW) {
+                    restart = true
+                } else if (edited.universeChat.accountType.isMinecraft) {
+                    restart = true
                 }
             }
 
-            if (reset) {
-                UniverseChatHandler.reset()
+            if (restart) {
+                UniverseChatHandler.restart()
             }
-            beforeAccountType = edited.universeChat.accountType
+
+            // Save the new account type
+            oldAccountType = edited.universeChat.accountType
 
             return@registerSaveListener InteractionResult.SUCCESS
         }

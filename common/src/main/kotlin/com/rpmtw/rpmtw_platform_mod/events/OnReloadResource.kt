@@ -10,14 +10,19 @@ import net.minecraft.util.profiling.ProfilerFiller
 
 class OnReloadResource : SimplePreparableReloadListener<Unit>() {
     override fun prepare(resourceManager: ResourceManager, profilerFiller: ProfilerFiller) {
+        profilerFiller.startTick()
         if (RPMTWConfig.get().translate.loadTranslateResourcePack) {
             try {
-                TranslateResourcePack.selectResourcePack()
+                // If the resource pack is not loaded, it will be loaded.
+                if (!TranslateResourcePack.loaded) {
+                    TranslateResourcePack.load()
+                }
             } catch (e: Exception) {
                 RPMTWPlatformMod.LOGGER.error("Failed to set translate resource pack", e)
                 return
             }
         }
+        profilerFiller.endTick()
     }
 
     override fun apply(unit: Unit, resourceManager: ResourceManager, profilerFiller: ProfilerFiller) {
