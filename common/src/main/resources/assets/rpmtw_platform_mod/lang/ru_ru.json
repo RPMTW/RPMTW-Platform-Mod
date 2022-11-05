@@ -24,6 +24,5 @@
   "config.rpmtw_platform_mod.option.keyBindings.reloadTranslatePack": "Перезагрузка Перевод ресурсного пакета",
   "config.rpmtw_platform_mod.option.keyBindings.reloadTranslatePack.@Tooltip": "Обновите пакет ресурсов перевода до актуального состояния, а затем перезагрузите его.",
   "config.rpmtw_platform_mod.option.translate": "RPMПереводчик",
-  "config.rpmtw_platform_mod.option.translate.autoMachineTranslation": "Автоматический машинный перевод",
-  "config.rpmtw_platform_mod.option.translate.autoToggleLanguage": "Автоматическое переключение языка"
+  "config.rpmtw_platform_mod.option.translate.autoMachineTranslation": "Автоматический машинный перевод"
 }
