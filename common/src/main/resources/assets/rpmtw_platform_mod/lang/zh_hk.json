@@ -25,8 +25,6 @@
   "config.rpmtw_platform_mod.option.keyBindings.reloadTranslatePack.@Tooltip": "更新翻譯資源包到最新版本後重新加載",
   "config.rpmtw_platform_mod.option.translate": "RPMTW 翻譯平台",
   "config.rpmtw_platform_mod.option.translate.autoMachineTranslation": "自動機器翻譯",
-  "config.rpmtw_platform_mod.option.translate.autoToggleLanguage": "自動切換語言",
-  "config.rpmtw_platform_mod.option.translate.autoToggleLanguage.@Tooltip": "啟動遊戲時自動切換遊戲語言至 RPMTranslator 支援嘅語言。",
   "config.rpmtw_platform_mod.option.translate.machineTranslation": "機器翻譯",
   "config.rpmtw_platform_mod.option.translate.machineTranslation.@Tooltip": "若無人工翻譯則使用機器翻譯以翻譯文字。",
   "config.rpmtw_platform_mod.option.translate.unlocalized": "打開原文顯示",
