@@ -118,7 +118,7 @@ public class ChatComponentMixin {
         return x - ChatComponentData.offset;
     }
 
-    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/ChatComponent;getWidth()I"), method = "addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;ILnet/minecraft/client/GuiMessageTag;Z)V")
+    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/ChatComponent;getWidth()I"), method = "addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;ILnet/minecraft/client/GuiMessageTag;Z)V", require = 0)
     public int fixTextOverflow(ChatComponent chatHud) {
         return ChatComponent.getWidth(minecraft.options.chatWidth().get()) - ChatComponentData.offset;
     }
