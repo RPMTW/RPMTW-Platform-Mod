@@ -117,6 +117,10 @@ class ConfigObject : ConfigData {
         @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
         var reloadTranslatePack: ModifierKeyCode = ModifierKeyCode.unknown()
+
+        @JvmField
+        @ConfigEntry.Gui.Tooltip(count = 1)
+        var openCrowdinPage: ModifierKeyCode = ModifierKeyCode.unknown()
     }
 
     class Advanced {

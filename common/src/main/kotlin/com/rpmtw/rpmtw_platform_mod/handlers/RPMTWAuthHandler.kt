@@ -16,7 +16,6 @@ import java.net.InetSocketAddress
 import java.nio.charset.StandardCharsets
 import java.util.concurrent.CountDownLatch
 import java.util.stream.Collectors
-import net.minecraft.Util as MCUtil
 
 
 object RPMTWAuthHandler {
@@ -74,7 +73,7 @@ object RPMTWAuthHandler {
                     .setParameter("redirect_uri", "http://localhost:$port/callback")
                     .setParameter("service_name", "RPMTW Platform Mod").build()
 
-                MCUtil.getPlatform().openUri(uri)
+                Util.openLink(uri.toString())
 
                 withContext(Dispatchers.IO) {
                     // Wait for login
