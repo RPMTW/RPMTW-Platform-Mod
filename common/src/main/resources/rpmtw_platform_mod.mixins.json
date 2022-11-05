@@ -6,6 +6,7 @@
   "injectors": {
     "defaultRequire": 1
   },
+  "plugin": "com.rpmtw.rpmtw_platform_mod.config.MixinConfigPlugin",
   "client": [
     "ChatComponentMixin",
     "LanguageManagerMixin",
