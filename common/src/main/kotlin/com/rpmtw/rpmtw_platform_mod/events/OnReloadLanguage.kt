@@ -5,15 +5,10 @@ import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.translation.machineTranslation.MTStorage
 import com.rpmtw.rpmtw_platform_mod.translation.resourcepack.TranslateResourcePack
 import net.minecraft.server.packs.resources.ResourceManager
-import net.minecraft.server.packs.resources.SimplePreparableReloadListener
-import net.minecraft.util.profiling.ProfilerFiller
 
-class OnReloadResource : SimplePreparableReloadListener<Unit>() {
-    override fun prepare(resourceManager: ResourceManager, profilerFiller: ProfilerFiller) {
-    }
-
-    override fun apply(unit: Unit, resourceManager: ResourceManager, profilerFiller: ProfilerFiller) {
-        profilerFiller.startTick()
+object OnReloadLanguage {
+    fun onReload(resourceManager: ResourceManager) {
+        RPMTWPlatformMod.LOGGER.info("Reloading language...")
         if (RPMTWConfig.get().translate.loadTranslateResourcePack) {
             try {
                 // If the resource pack is not loaded, it will be loaded.
@@ -26,6 +21,5 @@ class OnReloadResource : SimplePreparableReloadListener<Unit>() {
             }
         }
         MTStorage.load(resourceManager)
-        profilerFiller.endTick()
     }
 }

@@ -7,7 +7,8 @@
     "defaultRequire": 1
   },
   "client": [
-    "RunClientCommandOnComponent",
-    "ChatComponentMixin"
+    "ChatComponentMixin",
+    "LanguageManagerMixin",
+    "RunClientCommandOnComponent"
   ]
 }

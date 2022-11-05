@@ -1,6 +1,5 @@
 package com.rpmtw.rpmtw_platform_mod.handlers
 
-import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformModPlugin
 import com.rpmtw.rpmtw_platform_mod.events.*
 import dev.architectury.event.events.client.ClientGuiEvent
 import dev.architectury.event.events.client.ClientLifecycleEvent
@@ -14,6 +13,5 @@ object EventHandler {
         ClientGuiEvent.INIT_POST.register(OnGuiInitPost())
         ClientTooltipEvent.ITEM.register(OnItemTooltip())
         ClientRawInputEvent.KEY_PRESSED.register(OnKeyPressed())
-        RPMTWPlatformModPlugin.registerReloadEvent(OnReloadResource())
     }
 }
