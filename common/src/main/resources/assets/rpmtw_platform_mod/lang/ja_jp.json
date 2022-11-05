@@ -23,8 +23,6 @@
   "config.rpmtw_platform_mod.option.keyBindings.machineTranslation": "機械翻訳を使用",
   "config.rpmtw_platform_mod.option.translate": "RPMTranslator",
   "config.rpmtw_platform_mod.option.translate.autoMachineTranslation": "自動機械翻訳",
-  "config.rpmtw_platform_mod.option.translate.autoToggleLanguage": "言語の自動切り替え",
-  "config.rpmtw_platform_mod.option.translate.autoToggleLanguage.@Tooltip": "ゲーム開始時に RPMTranslator でサポートされている言語に自動的に切り替えます。",
   "config.rpmtw_platform_mod.option.translate.machineTranslation": "機械翻訳",
   "config.rpmtw_platform_mod.option.translate.machineTranslation.@Tooltip": "人間による翻訳が利用できない場合、機械翻訳を使用してテキストを翻訳します。",
   "config.rpmtw_platform_mod.option.translate.unlocalized": "ローカライズされないコンテンツ",
