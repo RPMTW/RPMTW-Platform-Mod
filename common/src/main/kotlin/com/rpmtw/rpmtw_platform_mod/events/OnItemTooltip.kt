@@ -54,7 +54,7 @@ class OnItemTooltip : ClientTooltipEvent.Item {
                     unModifyLines.addAll(lines)
 
                     for (line in unModifyLines) {
-                        val index = unModifyLines.indexOf(line);
+                        val index = unModifyLines.indexOf(line)
 
                         if (index == 0) {
                             load(0, itemKey)
@@ -67,9 +67,8 @@ class OnItemTooltip : ClientTooltipEvent.Item {
                     }
                 }
 
-                val itemName: String = lines.first().string
                 // Check if the feature for unlocalized names is enabled and differs from translation
-                if (RPMTWConfig.get().translate.unlocalized && unlocalizedName != itemName) {
+                if (RPMTWConfig.get().translate.unlocalized && unlocalizedName != itemStack.displayName.string) {
                     lines.add(1, Component.literal(unlocalizedName).withStyle(ChatFormatting.GRAY))
                 }
             }

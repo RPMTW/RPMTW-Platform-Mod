@@ -1,5 +1,6 @@
 package com.rpmtw.rpmtw_platform_mod.events
 
+import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.config.ConfigObject
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.translation.resourcepack.TranslateResourcePack
@@ -18,13 +19,18 @@ class OnKeyPressed : ClientRawInputEvent.KeyPressed {
         action: Int,
         modifiers: Int
     ): EventResult? {
-        if (keyCode == -1 || scanCode == -1) return EventResult.pass();
+        if (keyCode == -1 || scanCode == -1) return EventResult.pass()
 
         val bindings: ConfigObject.KeyBindings = RPMTWConfig.get().keyBindings
         if (bindings.config.matchesKey(keyCode, scanCode)) {
             client?.setScreen(RPMTWConfig.getScreen())
         } else if (bindings.reloadTranslatePack.matchesKey(keyCode, scanCode)) {
-            TranslateResourcePack.reload()
+            try {
+                TranslateResourcePack.load()
+                RPMTWPlatformMod.LOGGER.info("Translate resource pack successful reloaded")
+            } catch (e: Exception) {
+                RPMTWPlatformMod.LOGGER.error("Failed to reload translate resource pack", e)
+            }
         }
 
         return EventResult.pass()

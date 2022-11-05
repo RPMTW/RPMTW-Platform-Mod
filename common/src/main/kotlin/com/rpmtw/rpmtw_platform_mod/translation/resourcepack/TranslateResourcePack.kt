@@ -3,6 +3,7 @@ package com.rpmtw.rpmtw_platform_mod.translation.resourcepack
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.util.Util
 import net.minecraft.client.Minecraft
+import net.minecraft.server.packs.repository.Pack
 import org.apache.commons.io.FileUtils
 import java.io.File
 import java.net.URL
@@ -14,6 +15,8 @@ object TranslateResourcePack {
         File(Paths.get(Minecraft.getInstance().gameDirectory.path, "resourcepacks").toUri())
     private val resourcePackFile = resourcePackFolder.resolve(fileName)
     private val cacheFile = Util.getFileLocation(fileName)
+    var loaded = false
+        private set
 
     fun load() {
         try {
@@ -31,13 +34,10 @@ object TranslateResourcePack {
             return
         }
 
-        RPMTWPlatformMod.LOGGER.info("Translate resource pack successful loaded")
-    }
+        selectResourcePack()
 
-    fun reload() {
-        load()
-        Minecraft.getInstance().reloadResourcePacks()
-        RPMTWPlatformMod.LOGGER.info("Translate resource pack successful reloaded")
+        loaded = true
+        RPMTWPlatformMod.LOGGER.info("Translate resource pack successful loaded")
     }
 
     fun deleteResourcePack() {
@@ -58,7 +58,7 @@ object TranslateResourcePack {
             return
         }
 
-        val downloadUrl = "https://github.com/RPMTW/Translate-Resource-Pack/releases/latest/download/$fileName";
+        val downloadUrl = "https://github.com/RPMTW/Translate-Resource-Pack/releases/latest/download/$fileName"
 
         FileUtils.copyURLToFile(URL(downloadUrl), cacheFile)
         if (!cacheFile.exists()) {
@@ -66,21 +66,39 @@ object TranslateResourcePack {
         }
     }
 
-    fun selectResourcePack() {
+    private fun selectResourcePack() {
+        val pack = getPack()
+
         val client = Minecraft.getInstance()
         val repository = client.resourcePackRepository
-        val packID = "file/$fileName"
-        // if the pack is unselected, select it
-        if (!repository.selectedIds.contains(packID)) {
-            // Set the pack last in the list (the highest priority)
-            val selected = repository.selectedIds.toMutableList()
-            val pack = repository.getPack(packID)
-            if (pack != null) {
+        val selected = repository.selectedIds.toMutableList()
+        if (pack != null) {
+            // if the pack is unselected, select it
+            if (!selected.contains(pack.id)) {
+                // Set the pack last in the list (the highest priority)
                 selected.add(pack.id)
-            } else {
-                throw Exception("Translate resource pack not found")
             }
-            repository.setSelected(selected)
+        } else {
+            throw Exception("Translate resource pack not found")
         }
+        repository.setSelected(selected)
+
+        Minecraft.getInstance().reloadResourcePacks()
+    }
+
+    /**
+     * Get the resource pack from the repository
+     */
+    private fun getPack(): Pack? {
+        val repository = Minecraft.getInstance().resourcePackRepository
+        // Update the resource pack list
+        repository.reload()
+        val packID = "file/$fileName"
+        val pack = repository.getPack(packID)
+        if (pack != null) {
+            return pack
+        }
+
+        return null
     }
 }
