@@ -5,7 +5,6 @@
   "auth.rpmtw_platform_mod.status.failed": "Вход не удался, попробуйте еще раз!\nЕсли все равно не получается, пожалуйста, зайдите в RPMTW Discord и спросите\nhttps://discord.gg/5xApZtgV2u",
   "auth.rpmtw_platform_mod.status.logged_in": "Вы уже вошли в систему.",
   "auth.rpmtw_platform_mod.status.not_logged_in": "Вы не вошли в систему.",
-  "auth.rpmtw_platform_mod.status.success": "Вход в систему прошел успешно, теперь вы можете закрыть этот экран, вернуться в игру и наслаждаться игрой!",
   "command.rpmtw_platform_mod.replyUniverseMessage.getMessage.failed": "Не удалось получить сообщение вселенского чата.",
   "config.rpmtw_platform_mod.category.default": "RPMTW Platform Mod конфигурация",
   "config.rpmtw_platform_mod.option.base": "Базовая конфигурация",
@@ -25,7 +24,5 @@
   "config.rpmtw_platform_mod.option.keyBindings.reloadTranslatePack": "Перезагрузка Перевод ресурсного пакета",
   "config.rpmtw_platform_mod.option.keyBindings.reloadTranslatePack.@Tooltip": "Обновите пакет ресурсов перевода до актуального состояния, а затем перезагрузите его.",
   "config.rpmtw_platform_mod.option.translate": "RPMПереводчик",
-  "config.rpmtw_platform_mod.option.translate.autoMachineTranslation": "Автоматический машинный перевод",
-  "config.rpmtw_platform_mod.option.translate.autoMachineTranslation.@Tooltip": "Автоматический перевод названий и описаний товаров в фоновом режиме с помощью функции машинного перевода.",
-  "config.rpmtw_platform_mod.option.translate.autoToggleLanguage": "Автоматическое переключение языка"
+  "config.rpmtw_platform_mod.option.translate.autoMachineTranslation": "Автоматический машинный перевод"
 }
