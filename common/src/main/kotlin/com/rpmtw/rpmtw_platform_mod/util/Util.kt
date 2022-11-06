@@ -10,6 +10,7 @@ import net.minecraft.client.Minecraft
 import net.minecraft.network.chat.Component
 import java.io.File
 import kotlin.coroutines.CoroutineContext
+import net.minecraft.Util as MCUtil
 
 
 object Util {
@@ -24,7 +25,7 @@ object Util {
 
     fun openUniverseChatScreen(initMessage: String?) {
         if (RPMTWConfig.get().universeChat.eula) {
-            if (initMessage != null && initMessage.isNotEmpty() && !initMessage.startsWith("/")) {
+            if (!initMessage.isNullOrEmpty() && !initMessage.startsWith("/")) {
                 UniverseChatHandler.send(initMessage)
                 Minecraft.getInstance().setScreen(null)
             } else {
@@ -67,5 +68,9 @@ object Util {
         }
 
         return directory.resolve(hash)
+    }
+
+    fun openLink(link: String) {
+        MCUtil.getPlatform().openUri(link)
     }
 }
