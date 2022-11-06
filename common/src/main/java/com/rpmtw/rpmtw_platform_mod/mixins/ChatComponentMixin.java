@@ -45,10 +45,6 @@ import java.util.List;
 public class ChatComponentMixin {
     @Shadow
     @Final
-    private Minecraft minecraft;
-
-    @Shadow
-    @Final
     private List<GuiMessage.Line> trimmedMessages;
     @Shadow
     @Final
@@ -71,8 +67,12 @@ public class ChatComponentMixin {
 
     @ModifyArg(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Font;drawShadow(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/util/FormattedCharSequence;FFI)I", ordinal = 0), method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;I)V", index = 2)
     public float moveTheText(PoseStack poseStack, FormattedCharSequence formattedCharSequence, float f, float y, int color) {
+        UniverseChatComponent chatComponent = getLastComponent();
+        if (chatComponent == null) return 0.0F;
+
         ChatComponentData.INSTANCE.setLastY((int) y);
-        ChatComponentData.INSTANCE.setLastOpacity((((color >> 24) + 256) % 256) / 255f); // haha yes
+        ChatComponentData.INSTANCE.setLastOpacity((((color >> 24) + 256) % 256) / 255f);
+
         return ChatComponentData.offset;
     }
 
@@ -87,12 +87,7 @@ public class ChatComponentMixin {
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Font;drawShadow(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/util/FormattedCharSequence;FFI)I", ordinal = 0), method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;I)V")
     public void render(PoseStack matrixStack, int i, CallbackInfo ci) {
         try {
-            GuiMessage.Line line = trimmedMessages.get(ChatComponentData.INSTANCE.getLastMessageIndex());
-            GuiMessage guiMessage = allMessages.stream().filter(msg -> msg.tag() == line.tag()).findFirst().orElse(null);
-            if (guiMessage == null) return;
-
-            List<Component> siblings = guiMessage.content().getSiblings();
-            UniverseChatComponent chatComponent = (UniverseChatComponent) siblings.stream().filter(sibling -> sibling instanceof UniverseChatComponent).findFirst().orElse(null);
+            UniverseChatComponent chatComponent = getLastComponent();
             if (chatComponent == null) return;
 
             UniverseChatMessage message = chatComponent.getUniverseChatMessage();
@@ -115,12 +110,18 @@ public class ChatComponentMixin {
 
     @ModifyArg(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/StringSplitter;componentStyleAtWidth(Lnet/minecraft/util/FormattedCharSequence;I)Lnet/minecraft/network/chat/Style;"), method = "getClickedComponentStyleAt(DD)Lnet/minecraft/network/chat/Style;", index = 1)
     public int correctClickPosition(int x) {
+        UniverseChatComponent chatComponent = getLastComponent();
+        if (chatComponent == null) return x;
+
         return x - ChatComponentData.offset;
     }
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/ChatComponent;getWidth()I"), method = "addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;ILnet/minecraft/client/GuiMessageTag;Z)V")
     public int fixTextOverflow(ChatComponent chatHud) {
-        return ChatComponent.getWidth(minecraft.options.chatWidth().get()) - ChatComponentData.offset;
+        UniverseChatComponent chatComponent = getLastComponent();
+        if (chatComponent == null) return chatHud.getWidth();
+
+        return chatHud.getWidth() - ChatComponentData.offset;
     }
 
     private void loadAvatar(String url) {
@@ -156,11 +157,26 @@ public class ChatComponentMixin {
         thread.start();
     }
 
-    private static BufferedImage convertToBufferedImage(Image image) {
+    private BufferedImage convertToBufferedImage(Image image) {
         BufferedImage newImage = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_4BYTE_ABGR);
         Graphics2D g = newImage.createGraphics();
         g.drawImage(image, 0, 0, null);
         g.dispose();
         return newImage;
+    }
+
+    @Nullable
+    private UniverseChatComponent getLastComponent() {
+        try {
+            GuiMessage.Line line = trimmedMessages.get(ChatComponentData.INSTANCE.getLastMessageIndex());
+            GuiMessage guiMessage = allMessages.stream().filter(msg -> msg.tag() == line.tag()).findFirst().orElse(null);
+            if (guiMessage == null) return null;
+
+            List<Component> siblings = guiMessage.content().getSiblings();
+
+            return (UniverseChatComponent) siblings.stream().filter(sibling -> sibling instanceof UniverseChatComponent).findFirst().orElse(null);
+        } catch (Exception e) {
+            return null;
+        }
     }
 }
