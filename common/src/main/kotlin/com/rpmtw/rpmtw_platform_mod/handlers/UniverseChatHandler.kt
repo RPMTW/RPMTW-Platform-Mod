@@ -2,7 +2,6 @@ package com.rpmtw.rpmtw_platform_mod.handlers
 
 import com.rpmtw.rpmtw_api_client.RPMTWApiClient
 import com.rpmtw.rpmtw_api_client.models.universe_chat.UniverseChatMessage
-import com.rpmtw.rpmtw_api_client.utilities.Utilities
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.config.UniverseChatAccountType
@@ -14,6 +13,7 @@ import net.minecraft.client.Minecraft
 import net.minecraft.client.User
 import net.minecraft.client.resources.language.I18n
 import net.minecraft.network.chat.*
+import com.rpmtw.rpmtw_api_client.util.Util as ApiClientUtil
 
 object UniverseChatHandler {
     private val client: RPMTWApiClient = RPMTWApiClient.instance
@@ -97,7 +97,7 @@ object UniverseChatHandler {
     }
 
     private fun formatMessage(message: String): MutableComponent {
-        return formatUrl(Utilities.markdownToMinecraftFormatting(formatEmoji(message)))
+        return formatUrl(ApiClientUtil.markdownToMinecraftFormatting(formatEmoji(message)))
     }
 
     private fun formatAuthorName(message: UniverseChatMessage): String {
@@ -109,6 +109,10 @@ object UniverseChatHandler {
             client.universeChatResource.onMessageSent({ msg ->
                 if (RPMTWConfig.get().universeChat.enable && RPMTWConfig.get().universeChat.enableReceiveMessage) {
                     Util.coroutineLaunch {
+                        val isBlocked = msg.userIdentifier in RPMTWConfig.get().universeChat.blockUsers
+
+                        if (isBlocked) return@coroutineLaunch
+
                         val isReply: Boolean = msg.replyMessageUUID != null
 
                         val component: MutableComponent = Component.empty()
@@ -131,19 +135,17 @@ object UniverseChatHandler {
                         )
                         val author = Component.literal("§e<§6${authorName}§e> ").setStyle(authorStyle)
 
-                        val replyAction: MutableComponent =
-                            Component.literal("  [${I18n.get("gui.rpmtw_platform_mod.reply")}]")
+                        val messageAction: MutableComponent =
+                            Component.literal("  [-]")
 
-                        replyAction.style = replyAction.style.withColor(ChatFormatting.GREEN).withClickEvent(
+                        messageAction.style = messageAction.style.withColor(ChatFormatting.GREEN).withClickEvent(
                             ClickEvent(
-                                ClickEvent.Action.RUN_COMMAND, "/rpmtw universeChatReply ${msg.uuid}"
+                                ClickEvent.Action.RUN_COMMAND, "/rpmtw universeChatAction ${msg.uuid}"
                             )
                         ).withHoverEvent(
                             HoverEvent(
                                 HoverEvent.Action.SHOW_TEXT, Component.literal(
-                                    I18n.get(
-                                        "universeChat.rpmtw_platform_mod.gui.reply", authorName
-                                    )
+                                    I18n.get("universeChat.rpmtw_platform_mod.gui.action")
                                 )
                             )
                         )
@@ -179,7 +181,7 @@ object UniverseChatHandler {
                         component.append(author)
                         component.append(message)
                         component.append(UniverseChatComponent(msg))
-                        component.append(replyAction)
+                        component.append(messageAction)
                         // Message format
                         // [Universe Chat] <Steve> Hello World!  [Reply]
                         // Reply message format

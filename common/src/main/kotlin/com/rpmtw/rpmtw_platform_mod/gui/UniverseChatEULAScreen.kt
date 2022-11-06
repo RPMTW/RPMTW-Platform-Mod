@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.gui.widgets.UniverseChatWhatButton
 import com.rpmtw.rpmtw_platform_mod.util.Util
-import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.resources.language.I18n
@@ -14,9 +13,9 @@ class UniverseChatEULAScreen(private val initMessage: String?) : Screen(Componen
     override fun init() {
 
         val agreeButton = Button(
-            (width - 100) / 2 - BOTTOM_BUTTON_WIDTH,
+            (width - 100) / 2 - GuiUtil.buttonWidth,
             height / 2 + 30,
-            BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
+            GuiUtil.buttonWidth, GuiUtil.buttonHeight,
             Component.translatable("universeChat.rpmtw_platform_mod.gui.eula.agree")
         ) {
             RPMTWConfig.get().universeChat.eula = true
@@ -25,16 +24,15 @@ class UniverseChatEULAScreen(private val initMessage: String?) : Screen(Componen
         }
 
         val disagreeButton = Button(
-            (width - 4) / 2 - BOTTOM_BUTTON_WIDTH + 50,
+            (width - 4) / 2 - GuiUtil.buttonWidth + 50,
             height / 2 + 30,
-            BOTTOM_BUTTON_WIDTH, BUTTON_HEIGHT,
+            GuiUtil.buttonWidth, GuiUtil.buttonHeight,
             Component.translatable("universeChat.rpmtw_platform_mod.gui.eula.disagree")
         ) {
-            Minecraft.getInstance().setScreen(null)
+            GuiUtil.closeScreen()
         }
 
         val whatButton = UniverseChatWhatButton(width, height)
-
 
         addRenderableWidget(disagreeButton)
         addRenderableWidget(agreeButton)
@@ -67,10 +65,5 @@ class UniverseChatEULAScreen(private val initMessage: String?) : Screen(Componen
         font.draw(matrixStack, text5, width / 2f - fontWidth / 2f, (height - 10).toFloat(), textColor)
 
         super.render(matrixStack, mouseX, mouseY, partialTicks)
-    }
-
-    companion object {
-        const val BUTTON_HEIGHT = 20
-        private const val BOTTOM_BUTTON_WIDTH = 95
     }
 }

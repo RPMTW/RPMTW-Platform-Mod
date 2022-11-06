@@ -74,7 +74,7 @@ object TranslateResourcePack {
         val selected = repository.selectedIds.toMutableList()
         if (pack != null) {
             // if the pack is unselected, select it
-            if (!selected.contains(pack.id)) {
+            if (pack.id !in selected) {
                 // Set the pack last in the list (the highest priority)
                 selected.add(pack.id)
             }

@@ -102,6 +102,10 @@ class ConfigObject : ConfigData {
         @ConfigEntry.Gui.Tooltip(count = 1)
         @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
         var accountType: UniverseChatAccountType = UniverseChatAccountType.MINECRAFT
+
+        @JvmField
+        @ConfigEntry.Gui.Tooltip(count = 1)
+        var blockUsers: MutableList<String> = mutableListOf()
     }
 
     class KeyBindings {
@@ -132,11 +136,6 @@ class ConfigObject : ConfigData {
 }
 
 enum class UniverseChatAccountType {
-    MINECRAFT, RPMTW;
-
-    val isMinecraft: Boolean
-        get() = this == MINECRAFT
-
-    val isRPMTW: Boolean
-        get() = this == RPMTW
+    MINECRAFT,
+    RPMTW
 }

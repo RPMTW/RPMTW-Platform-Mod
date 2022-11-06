@@ -19,7 +19,7 @@ enum class GameLanguage(val code: String, val allowCodes: List<String>) {
             val mcLanguage = Minecraft.getInstance().options.languageCode
 
             for (language in languages) {
-                if (language.allowCodes.contains(mcLanguage)) {
+                if (mcLanguage in language.allowCodes) {
                     return language
                 }
             }

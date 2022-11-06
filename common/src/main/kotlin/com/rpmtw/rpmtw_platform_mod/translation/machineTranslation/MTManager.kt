@@ -64,7 +64,7 @@ object MTManager {
 
     fun addToQueue(source: String) {
         val sourceText = QueueText(source, translatedLanguage)
-        if (!queue.contains(sourceText)) {
+        if (sourceText !in queue) {
             queue.add(sourceText)
         }
 
