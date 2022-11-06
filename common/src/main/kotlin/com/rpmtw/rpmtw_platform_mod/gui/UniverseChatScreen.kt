@@ -110,7 +110,7 @@ class UniverseChatScreen(
                 throw IllegalStateException("toReply is null")
             }
 
-            title = I18n.get("universeChat.rpmtw_platform_mod.gui.reply", toReply.username)
+            title = I18n.get("universeChat.rpmtw_platform_mod.gui.action.reply.tooltip", toReply.username)
         }
 
         font.draw(
