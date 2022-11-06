@@ -1,6 +1,7 @@
 package com.rpmtw.rpmtw_platform_mod.util
 
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
+import com.rpmtw.rpmtw_platform_mod.gui.GuiUtil
 import com.rpmtw.rpmtw_platform_mod.gui.UniverseChatEULAScreen
 import com.rpmtw.rpmtw_platform_mod.gui.UniverseChatScreen
 import com.rpmtw.rpmtw_platform_mod.gui.UniverseChatScreenType
@@ -27,7 +28,7 @@ object Util {
         if (RPMTWConfig.get().universeChat.eula) {
             if (!initMessage.isNullOrEmpty() && !initMessage.startsWith("/")) {
                 UniverseChatHandler.send(initMessage)
-                Minecraft.getInstance().setScreen(null)
+                GuiUtil.closeScreen()
             } else {
                 Minecraft.getInstance().setScreen(UniverseChatScreen(UniverseChatScreenType.Send))
             }

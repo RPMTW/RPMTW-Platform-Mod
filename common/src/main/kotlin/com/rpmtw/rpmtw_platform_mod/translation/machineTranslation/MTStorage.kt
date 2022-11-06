@@ -18,14 +18,14 @@ object MTStorage {
     private val unsupportedFormatRegx: Regex = Regex("%(\\d+\\$)?[\\d.]*[df]")
 
     private var unlocalizedMap: MutableMap<String, String> = HashMap()
-    private var currentLangMap: MutableList<String> = ArrayList()
+    private var currentLanguageKeys: MutableList<String> = ArrayList()
 
     fun getUnlocalizedTranslate(key: String): String? {
         return unlocalizedMap[key]
     }
 
     fun isTranslate(key: String): Boolean {
-        return currentLangMap.contains(key)
+        return key in currentLanguageKeys
     }
 
     fun load(manager: ResourceManager) {
@@ -33,7 +33,7 @@ object MTStorage {
             RPMTWPlatformMod.LOGGER.info("[Machine Translation] Loading resources...")
             val currentLanguage = GameLanguage.getMinecraft()
             unlocalizedMap.clear()
-            currentLangMap.clear()
+            currentLanguageKeys.clear()
 
             if (RPMTWConfig.get().translate.unlocalized || RPMTWConfig.get().translate.machineTranslation) {
                 for (namespace in manager.namespaces) {
@@ -44,7 +44,7 @@ object MTStorage {
                     if (currentLanguage != GameLanguage.English) {
                         // Only load current language
                         loadResource(currentLanguage.code, { key, _ ->
-                            currentLangMap.add(key)
+                            currentLanguageKeys.add(key)
                         }, namespace, manager)
                     }
                 }

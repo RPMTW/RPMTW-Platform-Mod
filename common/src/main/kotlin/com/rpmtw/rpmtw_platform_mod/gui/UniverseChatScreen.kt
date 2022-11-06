@@ -5,7 +5,6 @@ import com.rpmtw.rpmtw_api_client.models.universe_chat.UniverseChatMessage
 import com.rpmtw.rpmtw_platform_mod.gui.widgets.UniverseChatWhatButton
 import com.rpmtw.rpmtw_platform_mod.handlers.UniverseChatHandler
 import com.rpmtw.rpmtw_platform_mod.util.Util
-import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.components.EditBox
 import net.minecraft.client.gui.screens.Screen
@@ -23,10 +22,10 @@ class UniverseChatScreen(
         val whatButton = UniverseChatWhatButton(width, height)
 
         val sendButton = Button(
-            (width - 4) / 2 - BOTTOM_BUTTON_WIDTH + 50,
+            (width - 4) / 2 - GuiUtil.buttonWidth + 50,
             height / 2 + 30,
-            BOTTOM_BUTTON_WIDTH,
-            BUTTON_HEIGHT,
+            GuiUtil.buttonWidth,
+            GuiUtil.buttonHeight,
             Component.translatable("gui.rpmtw_platform_mod.${type.name.lowercase()}")
         ) {
             val message: String = messageEditBox.value
@@ -50,15 +49,15 @@ class UniverseChatScreen(
                 }
 
             }
-            Minecraft.getInstance().setScreen(null)
+            GuiUtil.closeScreen()
         }
 
 
         val cancelButton = Button(
-            (width - 100) / 2 - BOTTOM_BUTTON_WIDTH, height / 2 + 30, BOTTOM_BUTTON_WIDTH,
-            BUTTON_HEIGHT, Component.translatable("gui.rpmtw_platform_mod.cancel")
+            (width - 100) / 2 - GuiUtil.buttonWidth, height / 2 + 30, GuiUtil.buttonWidth,
+            GuiUtil.buttonHeight, Component.translatable("gui.rpmtw_platform_mod.cancel")
         ) {
-            Minecraft.getInstance().setScreen(null)
+            GuiUtil.closeScreen()
         }
 
         val suggestion: String = I18n.get("universeChat.rpmtw_platform_mod.gui.input.tooltip")
@@ -95,12 +94,12 @@ class UniverseChatScreen(
     }
 
     override fun render(
-        matrixStack: PoseStack,
+        poseStack: PoseStack,
         mouseX: Int,
         mouseY: Int,
         partialTicks: Float
     ) {
-        this.renderBackground(matrixStack)
+        this.renderBackground(poseStack)
         val height = height / 2
         lateinit var title: String
 
@@ -115,16 +114,11 @@ class UniverseChatScreen(
         }
 
         font.draw(
-            matrixStack, title, width / 2f - font.width(title) / 2f, (height - 35).toFloat(),
+            poseStack, title, width / 2f - font.width(title) / 2f, (height - 35).toFloat(),
             0xFF5555
         )
-        messageEditBox.render(matrixStack, mouseX, mouseY, partialTicks)
-        super.render(matrixStack, mouseX, mouseY, partialTicks)
-    }
-
-    companion object {
-        const val BUTTON_HEIGHT = 20
-        private const val BOTTOM_BUTTON_WIDTH = 95
+        messageEditBox.render(poseStack, mouseX, mouseY, partialTicks)
+        super.render(poseStack, mouseX, mouseY, partialTicks)
     }
 }
 

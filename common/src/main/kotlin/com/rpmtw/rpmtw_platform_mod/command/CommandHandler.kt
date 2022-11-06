@@ -15,7 +15,7 @@ object CommandHandler {
 
     fun init() {
         val mainCommand = literal("rpmtw")
-        val commandList = listOf(ReplyUniverseMessageCommand(), LoginRPMTWAccountCommand())
+        val commandList = listOf(UniverseMessageActionCommand(), LoginRPMTWAccountCommand())
 
         commandList.forEach {
             mainCommand.then(it.register())
