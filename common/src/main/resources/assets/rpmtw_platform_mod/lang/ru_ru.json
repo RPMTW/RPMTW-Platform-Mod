@@ -5,7 +5,6 @@
   "auth.rpmtw_platform_mod.status.failed": "Вход не удался, попробуйте еще раз!\nЕсли все равно не получается, пожалуйста, зайдите в RPMTW Discord и спросите\nhttps://discord.gg/5xApZtgV2u",
   "auth.rpmtw_platform_mod.status.logged_in": "Вы уже вошли в систему.",
   "auth.rpmtw_platform_mod.status.not_logged_in": "Вы не вошли в систему.",
-  "command.rpmtw_platform_mod.replyUniverseMessage.getMessage.failed": "Не удалось получить сообщение вселенского чата.",
   "config.rpmtw_platform_mod.category.default": "RPMTW Platform Mod конфигурация",
   "config.rpmtw_platform_mod.option.base": "Базовая конфигурация",
   "config.rpmtw_platform_mod.option.universeChat": "Вселенский чат",
