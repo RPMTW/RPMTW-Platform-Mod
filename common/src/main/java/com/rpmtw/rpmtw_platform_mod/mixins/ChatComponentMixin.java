@@ -169,7 +169,7 @@ public class ChatComponentMixin {
     private UniverseChatComponent getLastComponent() {
         try {
             GuiMessage.Line line = trimmedMessages.get(ChatComponentData.INSTANCE.getLastMessageIndex());
-            GuiMessage guiMessage = allMessages.stream().filter(msg -> msg.tag() == line.tag()).findFirst().orElse(null);
+            GuiMessage guiMessage = allMessages.stream().filter(msg -> msg.addedTime() == line.addedTime()).findFirst().orElse(null);
             if (guiMessage == null) return null;
 
             List<Component> siblings = guiMessage.content().getSiblings();
