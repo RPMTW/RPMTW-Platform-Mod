@@ -10,7 +10,7 @@ import java.net.URL
 import java.nio.file.Paths
 
 object TranslateResourcePack {
-    private const val fileName = "RPMTW-Translate-Resource-Pack-1.19.zip"
+    private const val fileName = "RPMTW-Translate-Resource-Pack-1.18.zip"
     private val resourcePackFolder: File =
         File(Paths.get(Minecraft.getInstance().gameDirectory.path, "resourcepacks").toUri())
     private val resourcePackFile = resourcePackFolder.resolve(fileName)
@@ -58,7 +58,7 @@ object TranslateResourcePack {
             return
         }
 
-        val downloadUrl = "https://github.com/RPMTW/Translate-Resource-Pack/releases/latest/download/$fileName"
+        val downloadUrl = "https://github.com/RPMTW/ResourcePack-Mod-zh_tw/raw/Translated-1.18/RPMTW-1.18.zip"
 
         FileUtils.copyURLToFile(URL(downloadUrl), cacheFile)
         if (!cacheFile.exists()) {

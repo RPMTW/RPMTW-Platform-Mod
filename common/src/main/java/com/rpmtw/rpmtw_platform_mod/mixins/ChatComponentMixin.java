@@ -43,12 +43,14 @@ import java.util.List;
 @Mixin(ChatComponent.class)
 @Environment(EnvType.CLIENT)
 public class ChatComponentMixin {
+
     @Shadow
     @Final
-    private List<GuiMessage.Line> trimmedMessages;
+    private List<GuiMessage<FormattedCharSequence>> trimmedMessages;
+
     @Shadow
     @Final
-    private List<GuiMessage> allMessages;
+    private List<GuiMessage<Component>> allMessages;
 
     @Inject(method = "addMessage(Lnet/minecraft/network/chat/Component;)V", at = @At("HEAD"))
     public void addMessage(Component component, CallbackInfo ci) {
@@ -116,7 +118,7 @@ public class ChatComponentMixin {
         return x - ChatComponentData.offset;
     }
 
-    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/ChatComponent;getWidth()I"), method = "addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;ILnet/minecraft/client/GuiMessageTag;Z)V")
+    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/ChatComponent;getWidth()I"), method = "addMessage(Lnet/minecraft/network/chat/Component;IIZ)V")
     public int fixTextOverflow(ChatComponent chatHud) {
         UniverseChatComponent chatComponent = getLastComponent();
         if (chatComponent == null) return chatHud.getWidth();
@@ -168,11 +170,11 @@ public class ChatComponentMixin {
     @Nullable
     private UniverseChatComponent getLastComponent() {
         try {
-            GuiMessage.Line line = trimmedMessages.get(ChatComponentData.INSTANCE.getLastMessageIndex());
-            GuiMessage guiMessage = allMessages.stream().filter(msg -> msg.addedTime() == line.addedTime()).findFirst().orElse(null);
+            GuiMessage<FormattedCharSequence> line = trimmedMessages.get(ChatComponentData.INSTANCE.getLastMessageIndex());
+            GuiMessage<Component> guiMessage = allMessages.stream().filter(msg -> msg.getAddedTime() == line.getAddedTime()).findFirst().orElse(null);
             if (guiMessage == null) return null;
 
-            List<Component> siblings = guiMessage.content().getSiblings();
+            List<Component> siblings = guiMessage.getMessage().getSiblings();
 
             return (UniverseChatComponent) siblings.stream().filter(sibling -> sibling instanceof UniverseChatComponent).findFirst().orElse(null);
         } catch (Exception e) {

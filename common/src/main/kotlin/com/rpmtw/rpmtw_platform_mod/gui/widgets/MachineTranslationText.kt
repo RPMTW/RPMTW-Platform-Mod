@@ -2,7 +2,6 @@ package com.rpmtw.rpmtw_platform_mod.gui.widgets
 
 import com.rpmtw.rpmtw_platform_mod.translation.machineTranslation.MTManager
 import net.minecraft.network.chat.Component
-import net.minecraft.network.chat.ComponentContents
 import net.minecraft.network.chat.MutableComponent
 import net.minecraft.network.chat.Style
 import net.minecraft.util.FormattedCharSequence
@@ -18,7 +17,7 @@ class MachineTranslationText(source: String, vararg i18nArgs: Any? = arrayOf()) 
         return text.style
     }
 
-    override fun getContents(): ComponentContents {
+    override fun getContents(): String {
         return text.contents
     }
 

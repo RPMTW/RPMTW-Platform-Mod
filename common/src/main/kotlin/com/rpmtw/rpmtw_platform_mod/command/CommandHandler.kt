@@ -21,7 +21,7 @@ object CommandHandler {
             mainCommand.then(it.register())
         }
 
-        RPMTWPlatformModPlugin.dispatchClientCommand { dispatcher, _ ->
+        RPMTWPlatformModPlugin.dispatchClientCommand { dispatcher ->
             dispatcher.register(mainCommand)
         }
     }

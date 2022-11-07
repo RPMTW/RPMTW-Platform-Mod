@@ -9,7 +9,7 @@ import com.rpmtw.rpmtw_platform_mod.handlers.UniverseChatHandler
 import com.rpmtw.rpmtw_platform_mod.util.Util
 import net.minecraft.client.Minecraft
 import net.minecraft.commands.SharedSuggestionProvider
-import net.minecraft.network.chat.Component
+import net.minecraft.network.chat.TranslatableComponent
 
 class UniverseMessageActionCommand : RPMTWCommand() {
     override fun register(): LiteralArgumentBuilder<SharedSuggestionProvider> {
@@ -21,7 +21,7 @@ class UniverseMessageActionCommand : RPMTWCommand() {
             Util.coroutineLaunch {
                 val message: UniverseChatMessage? = UniverseChatHandler.getMessageAsync(uuid)
                 val exception =
-                    SimpleCommandExceptionType(Component.translatable("command.rpmtw_platform_mod.universeChatAction.getMessage.failed")).create()
+                    SimpleCommandExceptionType(TranslatableComponent("command.rpmtw_platform_mod.universeChatAction.getMessage.failed")).create()
                 if (message == null) {
                     throw exception
                 } else {

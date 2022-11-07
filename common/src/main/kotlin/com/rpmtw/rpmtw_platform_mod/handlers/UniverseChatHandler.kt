@@ -36,7 +36,7 @@ object UniverseChatHandler {
     }
 
     private fun formatUrl(message: String): MutableComponent {
-        val component: MutableComponent = Component.empty()
+        val component: MutableComponent = TextComponent.EMPTY.copy()
         @Suppress("RegExpRedundantEscape") val urlRegex =
             Regex("(http|https):\\/\\/[\\w-]+(\\.[\\w-]+)+([\\w.,@?^=%&amp;:/~+#-]*[\\w@?^=%&amp;/~+#-])?")
         val urlMatchList: List<MatchResult> = urlRegex.findAll(message).toList()
@@ -45,7 +45,7 @@ object UniverseChatHandler {
             for (match in urlMatchList) {
                 component.append(message.substring(lastEnd, match.range.first))
                 val url = match.value
-                val urlComponent = Component.literal(url).setStyle(
+                val urlComponent = TextComponent(url).setStyle(
                     Style.EMPTY.withUnderlined(true).withColor(ChatFormatting.BLUE)
                         .withClickEvent(ClickEvent(ClickEvent.Action.OPEN_URL, url))
                 )
@@ -54,7 +54,7 @@ object UniverseChatHandler {
             }
             component.append(message.substring(lastEnd + 1))
         } else {
-            component.append(Component.literal(message))
+            component.append(TextComponent(message))
         }
         return component
     }
@@ -115,9 +115,9 @@ object UniverseChatHandler {
 
                         val isReply: Boolean = msg.replyMessageUUID != null
 
-                        val component: MutableComponent = Component.empty()
+                        val component: MutableComponent = TextComponent.EMPTY.copy()
                         val title =
-                            Component.literal("[${I18n.get("universeChat.rpmtw_platform_mod.title")}] ").setStyle(
+                            TextComponent("[${I18n.get("universeChat.rpmtw_platform_mod.title")}] ").setStyle(
                                 Style.EMPTY.withColor(ChatFormatting.BLUE)
                             )
                         val authorName: String = formatAuthorName(msg)
@@ -130,13 +130,13 @@ object UniverseChatHandler {
                         ).withHoverEvent(
                             HoverEvent(
                                 HoverEvent.Action.SHOW_TEXT,
-                                Component.translatable("universeChat.rpmtw_platform_mod.open_avatar_url")
+                                TranslatableComponent("universeChat.rpmtw_platform_mod.open_avatar_url")
                             )
                         )
-                        val author = Component.literal("§e<§6${authorName}§e> ").setStyle(authorStyle)
+                        val author = TextComponent("§e<§6${authorName}§e> ").setStyle(authorStyle)
 
                         val messageAction: MutableComponent =
-                            Component.literal("  [-]")
+                            TextComponent("  [-]")
 
                         messageAction.style = messageAction.style.withColor(ChatFormatting.GREEN).withClickEvent(
                             ClickEvent(
@@ -144,14 +144,14 @@ object UniverseChatHandler {
                             )
                         ).withHoverEvent(
                             HoverEvent(
-                                HoverEvent.Action.SHOW_TEXT, Component.literal(
+                                HoverEvent.Action.SHOW_TEXT, TextComponent(
                                     I18n.get("universeChat.rpmtw_platform_mod.gui.action")
                                 )
                             )
                         )
 
                         val messageContent = formatMessage(msg.message)
-                        val message: MutableComponent = Component.empty()
+                        val message: MutableComponent = TextComponent.EMPTY.copy()
                         if (isReply) {
                             val replyMessage: UniverseChatMessage? = getMessageAsync(msg.replyMessageUUID!!)
 

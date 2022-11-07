@@ -24,18 +24,17 @@ import vazkii.patchouli.common.book.BookRegistry;
 import javax.annotation.Nullable;
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @Mixin(value = BookContentClasspathLoader.class, remap = false)
 public class MixinBookContentClasspathLoader {
     @Inject(at = @At("HEAD"), method = "findFiles")
     private void findFiles(Book book, String dir, List<ResourceLocation> list, CallbackInfo ci) {
         String prefix = String.format("%s/%s/%s/%s", BookRegistry.BOOKS_LOCATION, book.id.getPath(), BookContentsBuilder.DEFAULT_LANG, dir);
-        Map<ResourceLocation, Resource> files = Minecraft.getInstance().getResourceManager().listResources(prefix, p -> p.getPath().endsWith(".json"));
+        Collection<ResourceLocation> files = Minecraft.getInstance().getResourceManager().listResources(prefix, p -> p.endsWith(".json"));
 
-        files.keySet().stream()
+        files.stream()
                 .distinct()
                 .filter(file -> file.getNamespace().equals(book.id.getNamespace()))
                 .map(file -> {
@@ -60,13 +59,14 @@ public class MixinBookContentClasspathLoader {
         RPMTWPlatformMod.LOGGER.debug("[Patchouli] Loading {}", location);
         ResourceManager manager = Minecraft.getInstance().getResourceManager();
         try {
-            Optional<Resource> resource = manager.getResource(location);
-            Optional<Resource> fallbackResource = manager.getResource(location);
+            Resource resource = manager.getResource(location);
 
-            if (resource.isPresent()) {
-                callback.setReturnValue(BookContentLoader.streamToJson(resource.get().open()));
-            } else if (fallbackResource.isPresent()) {
-                callback.setReturnValue(BookContentLoader.streamToJson(fallbackResource.get().open()));
+            //noinspection ConstantConditions
+            if (resource != null) {
+                callback.setReturnValue(BookContentLoader.streamToJson(resource.getInputStream()));
+            } else if (fallback != null) {
+                Resource fallbackResource = manager.getResource(fallback);
+                callback.setReturnValue(BookContentLoader.streamToJson(fallbackResource.getInputStream()));
             }
         } catch (IOException ex) {
             throw new UncheckedIOException(ex);
