@@ -39,8 +39,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.util.List;
 
-@SuppressWarnings("SpellCheckingInspection")
-@Mixin(ChatComponent.class)
+@Mixin(value = ChatComponent.class, priority = 100)
 @Environment(EnvType.CLIENT)
 public class ChatComponentMixin {
 
@@ -118,7 +117,8 @@ public class ChatComponentMixin {
         return x - ChatComponentData.offset;
     }
 
-    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/ChatComponent;getWidth()I"), method = "addMessage(Lnet/minecraft/network/chat/Component;IIZ)V")
+
+    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/ChatComponent;getWidth()I"), method = "addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;ILnet/minecraft/client/GuiMessageTag;Z)V", require = 0)
     public int fixTextOverflow(ChatComponent chatHud) {
         UniverseChatComponent chatComponent = getLastComponent();
         if (chatComponent == null) return chatHud.getWidth();
