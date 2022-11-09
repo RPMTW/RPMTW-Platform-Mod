@@ -9,13 +9,14 @@ import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.components.EditBox
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.resources.language.I18n
-import net.minecraft.network.chat.Component
+import net.minecraft.network.chat.TextComponent
+import net.minecraft.network.chat.TranslatableComponent
 
 class UniverseChatScreen(
     private val type: UniverseChatScreenType,
     private val toReply: UniverseChatMessage? = null
 ) :
-    Screen(Component.empty()) {
+    Screen(TextComponent.EMPTY) {
     private lateinit var messageEditBox: EditBox
 
     override fun init() {
@@ -26,7 +27,7 @@ class UniverseChatScreen(
             height / 2 + 30,
             GuiUtil.buttonWidth,
             GuiUtil.buttonHeight,
-            Component.translatable("gui.rpmtw_platform_mod.${type.name.lowercase()}")
+            TranslatableComponent("gui.rpmtw_platform_mod.${type.name.lowercase()}")
         ) {
             val message: String = messageEditBox.value
             if (message.isEmpty()) {
@@ -55,7 +56,7 @@ class UniverseChatScreen(
 
         val cancelButton = Button(
             (width - 100) / 2 - GuiUtil.buttonWidth, height / 2 + 30, GuiUtil.buttonWidth,
-            GuiUtil.buttonHeight, Component.translatable("gui.rpmtw_platform_mod.cancel")
+            GuiUtil.buttonHeight, TranslatableComponent("gui.rpmtw_platform_mod.cancel")
         ) {
             GuiUtil.closeScreen()
         }
@@ -69,7 +70,7 @@ class UniverseChatScreen(
             height / 2 - 10,
             messageEditBoxWidth,
             20,
-            Component.literal(suggestion),
+            TextComponent(suggestion),
         ) {
             init {
                 setSuggestion(suggestion)

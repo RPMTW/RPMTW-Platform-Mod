@@ -8,7 +8,7 @@ import com.rpmtw.rpmtw_platform_mod.gui.UniverseChatScreenType
 import com.rpmtw.rpmtw_platform_mod.handlers.UniverseChatHandler
 import kotlinx.coroutines.*
 import net.minecraft.client.Minecraft
-import net.minecraft.network.chat.Component
+import net.minecraft.network.chat.TextComponent
 import java.io.File
 import kotlin.coroutines.CoroutineContext
 import net.minecraft.Util as MCUtil
@@ -21,7 +21,7 @@ object Util {
     }
 
     fun sendMessage(message: String, overlay: Boolean = false) {
-        Minecraft.getInstance().player?.displayClientMessage(Component.literal(message), overlay)
+        Minecraft.getInstance().player?.displayClientMessage(TextComponent(message), overlay)
     }
 
     fun openUniverseChatScreen(initMessage: String?) {

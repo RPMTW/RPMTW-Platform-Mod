@@ -28,7 +28,8 @@ import net.minecraft.client.gui.components.events.GuiEventListener
 import net.minecraft.client.gui.narration.NarratableEntry
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.resources.language.I18n
-import net.minecraft.network.chat.Component
+import net.minecraft.network.chat.TextComponent
+import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.world.InteractionResult
 import java.util.*
 
@@ -48,7 +49,7 @@ object RPMTWConfig {
         guiRegistry.registerPredicateProvider({ i13n, field, config, defaults, _ ->
             if (field.isAnnotationPresent(ConfigEntry.Gui.Excluded::class.java)) return@registerPredicateProvider emptyList()
             val entry: KeyCodeEntry = ConfigEntryBuilder.create().startModifierKeyCodeField(
-                Component.translatable(i13n), getUnsafely(field, config, ModifierKeyCode.unknown())
+                TranslatableComponent(i13n), getUnsafely(field, config, ModifierKeyCode.unknown())
             ).setModifierDefaultValue {
                 getUnsafely(
                     field, defaults
@@ -145,7 +146,7 @@ object RPMTWConfig {
 }
 
 internal class LoginButtonEntry :
-    AbstractConfigListEntry<Any?>(Component.literal(UUID.randomUUID().toString()), false) {
+    AbstractConfigListEntry<Any?>(TextComponent(UUID.randomUUID().toString()), false) {
 
     private var widgets: List<AbstractWidget> = listOf()
     private lateinit var loginButton: Button
@@ -171,7 +172,7 @@ internal class LoginButtonEntry :
     ) {
         super.render(matrices, index, y, x, entryWidth, entryHeight, mouseX, mouseY, isHovered, delta)
 
-        val title = Component.translatable("auth.rpmtw_platform_mod.title")
+        val title = TranslatableComponent("auth.rpmtw_platform_mod.title")
         val authStatus: String = if (RPMTWConfig.get().base.isLogin()) {
             I18n.get("auth.rpmtw_platform_mod.status.logged_in")
         } else {
@@ -184,18 +185,18 @@ internal class LoginButtonEntry :
                 y + 10,
                 65,
                 20,
-                Component.translatable("auth.rpmtw_platform_mod.button.login"),
+                TranslatableComponent("auth.rpmtw_platform_mod.button.login"),
                 {
                     RPMTWAuthHandler.login()
                 },
                 { _, matrixStack, i, j ->
                     Minecraft.getInstance().screen?.renderTooltip(
-                        matrixStack, Component.translatable("auth.rpmtw_platform_mod.button.login.tooltip"), i, j
+                        matrixStack, TranslatableComponent("auth.rpmtw_platform_mod.button.login.tooltip"), i, j
                     )
                 })
 
         logoutButton = Button(
-            entryWidth / 2 + 50, y + 10, 65, 20, Component.translatable("auth.rpmtw_platform_mod.button.logout")
+            entryWidth / 2 + 50, y + 10, 65, 20, TranslatableComponent("auth.rpmtw_platform_mod.button.logout")
         ) {
             RPMTWAuthHandler.logout()
         }
