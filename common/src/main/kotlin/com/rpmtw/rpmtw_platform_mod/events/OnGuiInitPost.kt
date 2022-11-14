@@ -45,7 +45,8 @@ class OnGuiInitPost : ClientGuiEvent.ScreenInitPost {
                     0
                 }
 
-                val sendButton = TranslucentButton(scaledWidth - 185 + offsetX,
+                val sendButton = TranslucentButton(
+                    scaledWidth - 185 + offsetX,
                     scaledHeight - 40,
                     90,
                     20,
@@ -53,14 +54,8 @@ class OnGuiInitPost : ClientGuiEvent.ScreenInitPost {
                     {
                         Util.openUniverseChatScreen(textField?.value)
                     },
-                    { _, matrixStack, i, j ->
-                        screen.renderTooltip(
-                            matrixStack,
-                            Component.translatable("universeChat.rpmtw_platform_mod.button.send.tooltip"),
-                            i,
-                            j
-                        )
-                    })
+                    Component.translatable("universeChat.rpmtw_platform_mod.button.send.tooltip")
+                )
 
                 val checkbox = RPMTWCheckbox(
                     scaledWidth - 90 + offsetX,

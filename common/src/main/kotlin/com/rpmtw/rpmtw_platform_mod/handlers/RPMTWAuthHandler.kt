@@ -16,7 +16,6 @@ import java.net.InetSocketAddress
 import java.nio.charset.StandardCharsets
 import java.util.concurrent.CountDownLatch
 import java.util.stream.Collectors
-import net.minecraft.Util as MCUtil
 
 
 object RPMTWAuthHandler {
@@ -46,7 +45,7 @@ object RPMTWAuthHandler {
                     if (token != null) {
                         RPMTWConfig.get().base.rpmtwAuthToken = token
                         RPMTWConfig.save()
-                        UniverseChatHandler.reset()
+                        UniverseChatHandler.restart()
 
                         val message = I18n.get("auth.rpmtw_platform_mod.status.success")
                         handler.sendResponseHeaders(200, message.toByteArray(Charsets.UTF_8).size.toLong())
@@ -74,7 +73,7 @@ object RPMTWAuthHandler {
                     .setParameter("redirect_uri", "http://localhost:$port/callback")
                     .setParameter("service_name", "RPMTW Platform Mod").build()
 
-                MCUtil.getPlatform().openUri(uri)
+                Util.openLink(uri.toString())
 
                 withContext(Dispatchers.IO) {
                     // Wait for login
@@ -94,6 +93,6 @@ object RPMTWAuthHandler {
         if (!RPMTWConfig.get().base.isLogin()) return
         RPMTWConfig.get().base.rpmtwAuthToken = null
         RPMTWConfig.save()
-        UniverseChatHandler.reset()
+        UniverseChatHandler.restart()
     }
 }

@@ -1,6 +1,7 @@
 package com.rpmtw.rpmtw_platform_mod.util
 
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
+import com.rpmtw.rpmtw_platform_mod.gui.GuiUtil
 import com.rpmtw.rpmtw_platform_mod.gui.UniverseChatEULAScreen
 import com.rpmtw.rpmtw_platform_mod.gui.UniverseChatScreen
 import com.rpmtw.rpmtw_platform_mod.gui.UniverseChatScreenType
@@ -10,6 +11,7 @@ import net.minecraft.client.Minecraft
 import net.minecraft.network.chat.Component
 import java.io.File
 import kotlin.coroutines.CoroutineContext
+import net.minecraft.Util as MCUtil
 
 
 object Util {
@@ -24,9 +26,9 @@ object Util {
 
     fun openUniverseChatScreen(initMessage: String?) {
         if (RPMTWConfig.get().universeChat.eula) {
-            if (initMessage != null && initMessage.isNotEmpty() && !initMessage.startsWith("/")) {
+            if (!initMessage.isNullOrEmpty() && !initMessage.startsWith("/")) {
                 UniverseChatHandler.send(initMessage)
-                Minecraft.getInstance().setScreen(null)
+                GuiUtil.closeScreen()
             } else {
                 Minecraft.getInstance().setScreen(UniverseChatScreen(UniverseChatScreenType.Send))
             }
@@ -67,5 +69,9 @@ object Util {
         }
 
         return directory.resolve(hash)
+    }
+
+    fun openLink(link: String) {
+        MCUtil.getPlatform().openUri(link)
     }
 }

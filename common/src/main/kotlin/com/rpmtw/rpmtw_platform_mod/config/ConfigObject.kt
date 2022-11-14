@@ -47,11 +47,6 @@ class ConfigObject : ConfigData {
         @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
         @ConfigEntry.Gui.RequiresRestart
-        var autoToggleLanguage = true
-
-        @JvmField
-        @ConfigEntry.Gui.Tooltip(count = 1)
-        @ConfigEntry.Gui.RequiresRestart
         var machineTranslation = true
 
         @JvmField
@@ -59,15 +54,27 @@ class ConfigObject : ConfigData {
         @ConfigEntry.Gui.RequiresRestart
         var autoMachineTranslation = false
 
-        @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
         @ConfigEntry.Gui.RequiresRestart
-        var unlocalized = GameLanguage.getSystem() != GameLanguage.English
+        var unlocalized = true
+            get() {
+                return if (GameLanguage.getMinecraft() == GameLanguage.English) {
+                    false
+                } else {
+                    field
+                }
+            }
 
-        @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
         @ConfigEntry.Gui.RequiresRestart
-        var loadTranslateResourcePack = GameLanguage.getSystem() != GameLanguage.English
+        var loadTranslateResourcePack = true
+            get() {
+                return if (GameLanguage.getMinecraft() == GameLanguage.English) {
+                    false
+                } else {
+                    field
+                }
+            }
     }
 
     class UniverseChat {
@@ -95,6 +102,10 @@ class ConfigObject : ConfigData {
         @ConfigEntry.Gui.Tooltip(count = 1)
         @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
         var accountType: UniverseChatAccountType = UniverseChatAccountType.MINECRAFT
+
+        @JvmField
+        @ConfigEntry.Gui.Tooltip(count = 1)
+        var blockUsers: MutableList<String> = mutableListOf()
     }
 
     class KeyBindings {
@@ -110,6 +121,10 @@ class ConfigObject : ConfigData {
         @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
         var reloadTranslatePack: ModifierKeyCode = ModifierKeyCode.unknown()
+
+        @JvmField
+        @ConfigEntry.Gui.Tooltip(count = 1)
+        var openCrowdinPage: ModifierKeyCode = ModifierKeyCode.unknown()
     }
 
     class Advanced {
@@ -121,11 +136,6 @@ class ConfigObject : ConfigData {
 }
 
 enum class UniverseChatAccountType {
-    MINECRAFT, RPMTW;
-
-    val isMinecraft: Boolean
-        get() = this == MINECRAFT
-
-    val isRPMTW: Boolean
-        get() = this == RPMTW
+    MINECRAFT,
+    RPMTW
 }

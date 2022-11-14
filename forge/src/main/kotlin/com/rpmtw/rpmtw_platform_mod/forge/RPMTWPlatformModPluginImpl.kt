@@ -6,11 +6,9 @@ import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.commands.CommandBuildContext
 import net.minecraft.commands.SharedSuggestionProvider
-import net.minecraft.server.packs.resources.SimplePreparableReloadListener
 import net.minecraftforge.client.ClientCommandHandler
 import net.minecraftforge.client.ConfigScreenHandler.ConfigScreenFactory
 import net.minecraftforge.client.event.RegisterClientCommandsEvent
-import net.minecraftforge.client.event.RegisterClientReloadListenersEvent
 import thedarkcolour.kotlinforforge.forge.FORGE_BUS
 import thedarkcolour.kotlinforforge.forge.LOADING_CONTEXT
 import thedarkcolour.kotlinforforge.forge.MOD_BUS
@@ -30,13 +28,6 @@ object RPMTWPlatformModPluginImpl {
         FORGE_BUS.addListener { event: RegisterClientCommandsEvent ->
             @Suppress("UNCHECKED_CAST")
             callback(event.dispatcher as CommandDispatcher<SharedSuggestionProvider>, event.buildContext)
-        }
-    }
-
-    @JvmStatic
-    fun <T> registerReloadEvent(reloadListener: SimplePreparableReloadListener<T>) {
-        MOD_BUS.addListener { event: RegisterClientReloadListenersEvent ->
-            event.registerReloadListener(reloadListener)
         }
     }
 

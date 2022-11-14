@@ -22,17 +22,13 @@ features for Minecraft players to get a better gaming experience.
 
 ## 🎨 Features
 
-- ### Auto-toggle language
-
-Auto-toggle game language to default language of the user's computer when launching the game.
-
-- ### Universe Chat (WIP)
+- ### Universe chat
 
 Chat in any version of Minecraft or outside the game, every player feels like they are in the same world!
 
-- ### Settings Screen
+- ### Settings menu
 
-The built-in sophisticated settings screen allows you to adjust any function freely.
+The built-in sophisticated settings menu allows you to adjust any function freely.
 
 - ### Original language display
 
@@ -40,10 +36,17 @@ Want to know the original language of an item? Use this function!
 ~~You can even learn English at the same time!~~
 
 - ### Translate resource pack
+
 The latest translation resource pack is automatically loaded and translated by many enthusiastic community contributors.
+
 - ### Machine translation
 
 Don't have a human translator? Leave it all to the AI! No more language barrier that prevents you from playing the mods.
+
+- ### Open Crowdin page
+
+Want to help translate an item in your hand or a block or entity you are looking at?  
+Just use this function, and remember to change the shortcut keys for this function in the settings menu
 
 ## ⚙️ Development
 
