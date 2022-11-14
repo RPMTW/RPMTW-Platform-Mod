@@ -62,8 +62,8 @@
         "version": ">=7.0.0"
       },
       {
-        "id": "qkl",
-        "version": ">=0.1.0-SNAPSHOT"
+        "id": "fabric-language-kotlin",
+        "version": ">=1.8.0"
       },
       {
         "id": "modmenu",

@@ -4,7 +4,6 @@ plugins {
 
 repositories {
     maven { url = uri("https://maven.quiltmc.org/repository/release/") }
-    maven { url = uri("https://maven.quiltmc.org/repository/snapshot/") } // Kotlin currently is in snapshot
 
     mavenCentral()
     maven {
@@ -49,7 +48,12 @@ dependencies {
     modImplementation("org.quiltmc:quilt-loader:${project.property("quilt_loader_version")}")
     modImplementation("org.quiltmc:qsl:${project.property("qsl_version")}+${project.property("minecraft_version")}")
     modApi("org.quiltmc.quilted-fabric-api:quilted-fabric-api:${project.property("quilted_fabric_api_version")}-${project.property("minecraft_version")}")
-    modApi("org.quiltmc.quilt-kotlin-libraries:quilt-kotlin-libraries:${project.property("quilt_kotlin_libraries")}")
+
+    // Change the kotlin adapter back to Fabric Language Kotlin due to the expected breaking changes on QKL
+    modApi("net.fabricmc:fabric-language-kotlin:${project.property("fabric-kotlin_version")}") {
+        exclude(group = "net.fabricmc")
+        exclude(group = "net.fabricmc.fabric-api")
+    }
 
     // Remove the next few lines if you don't want to depend on the API
     modApi("dev.architectury:architectury-fabric:${project.property("architectury_version")}") {

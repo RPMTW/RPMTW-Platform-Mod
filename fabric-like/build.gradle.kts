@@ -32,6 +32,7 @@ repositories {
 dependencies {
     modImplementation("net.fabricmc:fabric-loader:${project.property("fabric_loader_version")}")
     modApi("net.fabricmc.fabric-api:fabric-api:${project.property("fabric_api_version")}")
+    modApi("net.fabricmc:fabric-language-kotlin:${project.property("fabric-kotlin_version")}")
     // Remove the next line if you don't want to depend on the API
     modApi("dev.architectury:architectury-fabric:${project.property("architectury_version")}")
 
