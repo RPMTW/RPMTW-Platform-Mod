@@ -1,4 +1,5 @@
 {
+  "auth.rpmtw_platform_mod.title": "RPMTWアカウント",
   "auth.rpmtw_platform_mod.button.login": "ログイン",
   "auth.rpmtw_platform_mod.button.login.tooltip": "RPMTWアカウントでログインする。",
   "auth.rpmtw_platform_mod.button.logout": "ログアウト",
