@@ -47,7 +47,13 @@ loom {
 dependencies {
     modImplementation("org.quiltmc:quilt-loader:${project.property("quilt_loader_version")}")
     modImplementation("org.quiltmc:qsl:${project.property("qsl_version")}+${project.property("minecraft_version")}")
-    modApi("org.quiltmc.quilted-fabric-api:quilted-fabric-api:${project.property("quilted_fabric_api_version")}-${project.property("minecraft_version")}")
+    modApi(
+        "org.quiltmc.quilted-fabric-api:quilted-fabric-api:${project.property("quilted_fabric_api_version")}-${
+            project.property(
+                "minecraft_version"
+            )
+        }"
+    )
 
     // Change the kotlin adapter back to Fabric Language Kotlin due to the expected breaking changes on QKL
     modApi("net.fabricmc:fabric-language-kotlin:${project.property("fabric-kotlin_version")}") {
@@ -89,7 +95,13 @@ dependencies {
     "common"(project(path = ":fabric-like", configuration = "namedElements")) { isTransitive = false }
     bundle(project(path = ":fabric-like", configuration = "transformProductionQuilt")) { isTransitive = false }
 
-    implementation(bundle(group = "io.sentry", name = "sentry", version = project.property("sentry_version").toString()))
+    implementation(
+        bundle(
+            group = "io.sentry",
+            name = "sentry",
+            version = project.property("sentry_version").toString()
+        )
+    )
 }
 
 tasks {
@@ -122,16 +134,4 @@ components.getByName<AdhocComponentWithVariants>("java") {
     withVariantsFromConfiguration(project.configurations.shadowRuntimeElements.get()) {
         skip()
     }
-}
-
-publishing {
-    publications {
-        create<MavenPublication>("mavenQuilt") {
-            artifactId = project.property("archives_base_name").toString()
-            from(components["java"])
-        }
-    }
-
-    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-    repositories {}
 }
