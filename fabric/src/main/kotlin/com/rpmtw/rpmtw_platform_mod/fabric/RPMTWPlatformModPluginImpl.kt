@@ -4,8 +4,10 @@ import com.mojang.brigadier.CommandDispatcher
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource
 import net.fabricmc.fabric.impl.command.client.ClientCommandInternals
+import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.commands.CommandBuildContext
 import net.minecraft.commands.SharedSuggestionProvider
+import java.io.File
 
 
 @Suppress("unused")
@@ -26,5 +28,10 @@ object RPMTWPlatformModPluginImpl {
     @JvmStatic
     fun executeClientCommand(command: String): Boolean {
         return ClientCommandInternals.executeCommand(command)
+    }
+
+    @JvmStatic
+    fun getGameFolder(): File {
+        return FabricLoader.getInstance().gameDir.toFile()
     }
 }
