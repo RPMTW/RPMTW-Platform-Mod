@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "quilt_loader": {
+    "group": "${group}",
+    "id": "rpmtw_platform_mod",
+    "version": "${version}",
+    "metadata": {
+      "name": "RPMTW Platform Mod",
+      "description": "整合了RPMTW各項服務的模組，涵蓋翻譯、百科、宇宙通訊、中文輸入優化等功能，讓 Minecraft 中文玩家獲得更好的遊戲體驗。\nThe mod integrated with RPMTW services covers translation, wiki, universe chat, Chinese input optimization, and other features for Minecraft players to get a better gaming experience.",
+      "contributors": {
+        "SiongSng (菘菘)": "Owner",
+        "watermelon_1024 (西瓜)": "Contributor",
+        "Yuta Yamamoto (裕太)": "Contributor",
+        "BennyDioxide": "Contributor"
+      },
+      "contact": {
+        "homepage": "https://rpmtw.com/",
+        "sources": "https://github.com/RPMTW/RPMTW-Platform-Mod",
+        "issues": "https://github.com/RPMTW/RPMTW-Platform-Mod/issues"
+      },
+      "license": "GPL-3.0-only",
+      "icon": "rpmtw-platform-logo.png",
+      "custom": {
+        "modmenu": {
+          "links": {
+            "modmenu.discord": "https://discord.com/invite/5xApZtgV2u"
+          }
+        }
+      }
+    },
+    "intermediate_mappings": "net.fabricmc:intermediary",
+    "environment": "client",
+    "entrypoints": {
+      "init": [{
+        "adapter": "kotlin",
+        "value": "com.rpmtw.rpmtw_platform_mod.quilt.RPMTWPlatformModQuilt"
+      }],
+      "modmenu": "com.rpmtw.rpmtw_platform_mod.fabriclike.gui.ModMenuIntegration"
+    },
+    "depends": [
+      {
+        "id": "quilt_loader",
+        "version": "*"
+      },
+      {
+        "id": "quilt_base",
+        "version": "*"
+      },
+      {
+        "id": "minecraft",
+        "version": ">=1.19.1"
+      },
+      {
+        "id": "architectury",
+        "version": ">=5.0.0"
+      },
+      {
+        "id": "cloth-config2",
+        "version": ">=7.0.0"
+      },
+      {
+        "id": "fabric-language-kotlin",
+        "version": ">=1.8.0"
+      },
+      {
+        "id": "modmenu",
+        "version": ">=4.0.0",
+        "optional": true
+      }
+    ]
+  },
+  "mixin": "rpmtw_platform_mod.mixins.json",
+  "access_widener": "rpmtw_platform_mod.accesswidener"
+}

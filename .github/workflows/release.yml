@@ -29,7 +29,7 @@ jobs:
           chmod +x gradlew
           ./gradlew build
       - name: Upload mod (fabric)
-        uses: Kir-Antipov/mc-publish@v3.0
+        uses: Kir-Antipov/mc-publish@v3.2
         with:
           modrinth-id: ZukQzaRP
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
@@ -40,7 +40,6 @@ jobs:
           version-type: release
           loaders: fabric
           game-versions: |
-            1.19
             1.19.1
             1.19.2
           version-resolver: latest
@@ -54,8 +53,33 @@ jobs:
             fabric-language-kotlin
             cloth-config
             architectury-api
+      - name: Upload mod (quilt)
+        uses: Kir-Antipov/mc-publish@v3.2
+        with:
+          modrinth-id: ZukQzaRP
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          curseforge-id: 461500
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          files-primary: quilt/build/libs/!(*-@(dev|sources|shadow)).jar
+          version-type: release
+          loaders: quilt
+          game-versions: |
+            1.19.1
+            1.19.2
+          version-resolver: latest
+          version: ${{ github.event.release.tag_name }}-quilt
+          name: ${{ github.event.release.name }} (Quilt)
+          java: |
+            17
+            18
+          dependencies: |
+            qsl
+            fabric-language-kotlin
+            cloth-config
+            architectury-api
       - name: Upload mod (forge)
-        uses: Kir-Antipov/mc-publish@v3.0
+        uses: Kir-Antipov/mc-publish@v3.2
         with:
           curseforge-id: 461500
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
@@ -66,7 +90,6 @@ jobs:
           version-type: release
           loaders: forge
           game-versions: |
-            1.19
             1.19.1
             1.19.2
           version-resolver: latest

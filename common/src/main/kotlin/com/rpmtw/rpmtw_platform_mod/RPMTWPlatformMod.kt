@@ -15,7 +15,7 @@ object RPMTWPlatformMod {
     val VERSION: String = Platform.getMod(MOD_ID).version
 
     @JvmField
-    val LOGGER: Logger = LogManager.getLogger(MOD_ID) // register logger
+    val LOGGER: Logger = LogManager.getLogger(MOD_ID)
 
     @JvmStatic
     fun init() {
