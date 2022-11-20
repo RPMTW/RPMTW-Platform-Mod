@@ -2,8 +2,6 @@ architectury {
     common(project.property("enabled_platforms").toString().split(","))
 }
 
-base.archivesName.set("${project.property("archives_base_name")}-fabric-like")
-
 val common by configurations.registering
 configurations {
     compileClasspath {
