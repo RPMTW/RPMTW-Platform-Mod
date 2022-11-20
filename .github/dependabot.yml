@@ -7,6 +7,18 @@ updates:
       time: "21:00"
     open-pull-requests-limit: 5
   - package-ecosystem: gradle
+    directory: "/quilt"
+    schedule:
+      interval: daily
+      time: "21:00"
+    open-pull-requests-limit: 5
+  - package-ecosystem: gradle
+    directory: "/fabric-like"
+    schedule:
+      interval: daily
+      time: "21:00"
+    open-pull-requests-limit: 5
+  - package-ecosystem: gradle
     directory: "/forge"
     schedule:
       interval: daily
