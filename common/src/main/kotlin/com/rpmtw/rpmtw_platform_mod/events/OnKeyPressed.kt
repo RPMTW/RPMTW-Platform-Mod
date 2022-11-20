@@ -14,17 +14,22 @@ import net.minecraft.client.resources.language.I18n
 import net.minecraft.world.item.SpawnEggItem
 import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.EntityHitResult
+import org.lwjgl.glfw.GLFW
 
 @Environment(EnvType.CLIENT)
 class OnKeyPressed : ClientRawInputEvent.KeyPressed {
     override fun keyPressed(
-        client: Minecraft?,
+        client: Minecraft,
         keyCode: Int,
         scanCode: Int,
         action: Int,
         modifiers: Int
     ): EventResult? {
-        if (keyCode == -1 || scanCode == -1 || client == null) return EventResult.pass()
+        // Ignore unknown keys.
+        if (keyCode == -1 || scanCode == -1) return EventResult.pass()
+
+        // Check whether the key is pressed to prevent multiple calls.
+        if (action != GLFW.GLFW_PRESS) return EventResult.pass()
 
         val bindings: ConfigObject.KeyBindings = RPMTWConfig.get().keyBindings
         if (bindings.config.matchesKey(keyCode, scanCode)) {
@@ -55,6 +60,8 @@ class OnKeyPressed : ClientRawInputEvent.KeyPressed {
         try {
             val player = client.player
             val world = client.level
+
+            // To check whether the player is in the world.
             if (player != null && world != null) {
                 val item = player.mainHandItem.item
                 var i18nKey: String = item.descriptionId

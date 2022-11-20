@@ -129,7 +129,7 @@ object RPMTWConfig {
             builder.setAfterInitConsumer { screen ->
                 val globalizedScreen: GlobalizedClothConfigScreen = screen as GlobalizedClothConfigScreen
 
-                val entry = LoginButtonEntry()
+                val entry = RPMTWAccountEntry()
                 entry.setScreen(screen)
                 @Suppress("UNCHECKED_CAST") globalizedScreen.listWidget.children()
                     .add(0, entry as AbstractConfigEntry<AbstractConfigEntry<*>>)
@@ -145,12 +145,9 @@ object RPMTWConfig {
     }
 }
 
-internal class LoginButtonEntry :
-    AbstractConfigListEntry<Any?>(TextComponent(UUID.randomUUID().toString()), false) {
+internal class RPMTWAccountEntry : AbstractConfigListEntry<Any?>(TextComponent("rpmtw_account"), false) {
 
     private var widgets: List<AbstractWidget> = listOf()
-    private lateinit var loginButton: Button
-    private lateinit var logoutButton: Button
 
     override fun save() {}
 
@@ -173,15 +170,15 @@ internal class LoginButtonEntry :
         super.render(matrices, index, y, x, entryWidth, entryHeight, mouseX, mouseY, isHovered, delta)
 
         val title = TranslatableComponent("auth.rpmtw_platform_mod.title")
-        val authStatus: String = if (RPMTWConfig.get().base.isLogin()) {
+        val isLogin = RPMTWConfig.get().base.isLogin()
+        val authStatus: String = if (isLogin) {
             I18n.get("auth.rpmtw_platform_mod.status.logged_in")
         } else {
             I18n.get("auth.rpmtw_platform_mod.status.not_logged_in")
         }
 
-        loginButton =
-            Button(
-                entryWidth / 2 - 20,
+        if (!isLogin) {
+            val loginButton = Button(entryWidth / 2 + 20,
                 y + 10,
                 65,
                 20,
@@ -195,17 +192,22 @@ internal class LoginButtonEntry :
                     )
                 })
 
-        logoutButton = Button(
-            entryWidth / 2 + 50, y + 10, 65, 20, TranslatableComponent("auth.rpmtw_platform_mod.button.logout")
-        ) {
-            RPMTWAuthHandler.logout()
+            widgets = listOf(loginButton)
+            loginButton.render(matrices, mouseX, mouseY, delta)
+        } else {
+            val logoutButton = Button(
+                entryWidth / 2 + 20, y + 10, 65, 20, TranslatableComponent("auth.rpmtw_platform_mod.button.logout")
+            ) {
+                RPMTWAuthHandler.logout()
+            }
+
+            widgets = listOf(logoutButton)
+            logoutButton.render(matrices, mouseX, mouseY, delta)
         }
 
-        widgets = listOf<AbstractWidget>(loginButton, logoutButton)
-        loginButton.render(matrices, mouseX, mouseY, delta)
-        logoutButton.render(matrices, mouseX, mouseY, delta)
+        val font = Minecraft.getInstance().font
 
-        Minecraft.getInstance().font.drawShadow(
+        font.drawShadow(
             matrices,
             title,
             (x - 4 + entryWidth / 2 - Minecraft.getInstance().font.width(title) / 2).toFloat(),
@@ -213,7 +215,7 @@ internal class LoginButtonEntry :
             -1
         )
 
-        Minecraft.getInstance().font.drawShadow(
+        font.drawShadow(
             matrices,
             authStatus,
             (x - 4 + entryWidth / 2 - Minecraft.getInstance().font.width(authStatus) / 2).toFloat(),

@@ -7,7 +7,8 @@
   "authors": [
     "SiongSng (菘菘)",
     "watermelon_1024 (西瓜)",
-    "Yuta Yamamoto (裕太)"
+    "Yuta Yamamoto (裕太)",
+    "BennyDioxide"
   ],
   "contact": {
     "homepage": "https://rpmtw.com/",
@@ -25,18 +26,18 @@
       }
     ],
     "modmenu": [
-      "com.rpmtw.rpmtw_platform_mod.fabric.gui.ModMenuIntegration"
+      "com.rpmtw.rpmtw_platform_mod.fabriclike.gui.ModMenuIntegration"
     ]
   },
   "depends": {
     "fabric": "*",
-    "minecraft": ">=1.18",
+    "minecraft": ">=1.18.2",
     "architectury": ">=4.0.0",
     "cloth-config2": ">=6.0.0",
     "fabric-language-kotlin": "^1.8.0"
   },
   "suggests": {
-    "modmenu": ">=4.0.0"
+    "modmenu": ">=3.0.0"
   },
   "custom": {
     "modmenu": {

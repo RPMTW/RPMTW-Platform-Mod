@@ -1,7 +1,7 @@
 /*
 Credit: https://github.com/kappa-maintainer/PRP
  */
-package com.rpmtw.rpmtw_platform_mod.fabric.mixins;
+package com.rpmtw.rpmtw_platform_mod.mixins.forge;
 
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonElement;
@@ -61,6 +61,7 @@ public class MixinBookContentClasspathLoader {
         try {
             Resource resource = manager.getResource(location);
 
+            //noinspection ConstantConditions
             if (resource != null) {
                 callback.setReturnValue(BookContentLoader.streamToJson(resource.getInputStream()));
             } else if (fallback != null) {

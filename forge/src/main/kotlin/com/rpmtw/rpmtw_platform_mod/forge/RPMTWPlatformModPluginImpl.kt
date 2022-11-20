@@ -10,6 +10,8 @@ import net.minecraftforge.client.ConfigGuiHandler.ConfigGuiFactory
 import net.minecraftforge.client.event.RegisterClientCommandsEvent
 import thedarkcolour.kotlinforforge.forge.FORGE_BUS
 import thedarkcolour.kotlinforforge.forge.LOADING_CONTEXT
+import thedarkcolour.kotlinforforge.forge.MOD_BUS
+import java.io.File
 
 @Suppress("unused")
 object RPMTWPlatformModPluginImpl {
@@ -35,5 +37,10 @@ object RPMTWPlatformModPluginImpl {
     @JvmStatic
     fun executeClientCommand(command: String): Boolean {
         return ClientCommandHandler.sendMessage(command)
+    }
+
+    @JvmStatic
+    fun getGameFolder(): File {
+        return Minecraft.getInstance().gameDirectory
     }
 }
