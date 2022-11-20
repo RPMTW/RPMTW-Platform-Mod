@@ -60,6 +60,7 @@
 
 - Fabric `fabric/build/libs/rpmtw-platform-mod-*.jar`
 - Forge  `forge/build/libs/rpmtw-platform-mod-*.jar`
+- Quilt `quilt/build/libs/rpmtw-platform-mod-*.jar`
 
 ### ️ 使用的技術
 
