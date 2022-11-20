@@ -23,8 +23,6 @@ architectury {
     loader("quilt")
 }
 
-base.archivesName.set("${project.property("archives_base_name")}-quilt")
-
 val common by configurations.registering
 configurations {
     compileClasspath {
