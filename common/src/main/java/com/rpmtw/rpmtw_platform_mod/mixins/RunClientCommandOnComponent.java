@@ -13,15 +13,19 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(Screen.class)
 @Environment(EnvType.CLIENT)
 public class RunClientCommandOnComponent {
-    @Redirect(method = "handleComponentClicked", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;commandUnsigned(Ljava/lang/String;)Z"))
-    public boolean handleComponentClick(LocalPlayer player, String command) {
+    @Redirect(method = "handleComponentClicked", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;command(Ljava/lang/String;)V"))
+    public void handleComponentClick(LocalPlayer player, String command) {
         // Because Forge doesn't support click event on text component to run the client command.
         // So we have to implement it by ourselves.
         if (Platform.isForge() && command.startsWith("rpmtw")) {
             RPMTWPlatformModPlugin.executeClientCommand(command);
-            return true;
+            return;
         }
 
-        return player.commandUnsigned(command);
+        if (command.startsWith("/")) {
+            player.command(command.substring(1));
+        } else {
+            player.command(command);
+        }
     }
 }
