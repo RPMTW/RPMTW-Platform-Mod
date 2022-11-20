@@ -106,7 +106,7 @@ dependencies {
 
 tasks {
     val resourcesPath = file("src/main/resources")
-    // The access widener file is needed in :fabric project resources when the game is run.
+    // The access widener file is needed in :quilt project resources when the game is run.
     val copyAccessWidener by registering(Copy::class) {
         from(accessWidenerFile)
         into(resourcesPath)
