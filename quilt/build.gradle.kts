@@ -130,9 +130,3 @@ tasks {
         exclude("rpmtw_platform_mod.mixins.json")
     }
 }
-
-components.getByName<AdhocComponentWithVariants>("java") {
-    withVariantsFromConfiguration(project.configurations.shadowRuntimeElements.get()) {
-        skip()
-    }
-}
