@@ -1,8 +1,5 @@
 {
   "schema_version": 1,
-  "mixin": [
-    "rpmtw_platform_mod.mixins.json"
-  ],
   "quilt_loader": {
     "group": "${group}",
     "id": "rpmtw_platform_mod",
@@ -71,5 +68,7 @@
         "optional": true
       }
     ]
-  }
+  },
+  "mixin": "rpmtw_platform_mod.mixins.json",
+  "access_widener": "rpmtw_platform_mod.accesswidener"
 }
