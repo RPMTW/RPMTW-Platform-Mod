@@ -102,11 +102,10 @@ tasks {
 
     processResources {
         dependsOn(copyAccessWidener)
-        inputs.property("group", project.group)
         inputs.property("version", project.version)
 
         filesMatching("quilt.mod.json") {
-            expand("group" to project.group, "version" to project.version)
+            expand("version" to project.version)
         }
     }
 
