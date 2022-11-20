@@ -10,7 +10,6 @@ pluginManagement {
 include("common")
 include("fabric-like")
 include("fabric")
-include("quilt")
 include("forge")
 
 rootProject.name = "rpmtw-platform-mod"

@@ -17,21 +17,21 @@ logoFile = "rpmtw-platform-logo.png"
 [[dependencies.rpmtw_platform_mod]]
 modId = "forge"
 mandatory = true
-versionRange = "[40,)"
+versionRange = "[39,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.rpmtw_platform_mod]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.18.2,1.19)"
+versionRange = "[1.18.1,1.19)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.rpmtw_platform_mod]]
 modId = "architectury"
 mandatory = true
-versionRange = "[4.0.0,)"
+versionRange = "[3.0.0,)"
 ordering = "AFTER"
 side = "BOTH"
 
