@@ -5,7 +5,6 @@ import com.rpmtw.rpmtw_api_client.models.universe_chat.UniverseChatMessage
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.config.UniverseChatAccountType
-import com.rpmtw.rpmtw_platform_mod.gui.widgets.UniverseChatComponent
 import com.rpmtw.rpmtw_platform_mod.util.Util
 import kotlinx.coroutines.Deferred
 import net.minecraft.ChatFormatting
@@ -180,7 +179,16 @@ object UniverseChatHandler {
                         component.append(title)
                         component.append(author)
                         component.append(message)
-                        component.append(UniverseChatComponent(msg))
+                        component.append(
+                            Component.empty().setStyle(
+                                Style.EMPTY.withClickEvent(
+                                    ClickEvent(
+                                        ClickEvent.Action.OPEN_URL,
+                                        "rpmtw_universe_chat_avatar_url:${msg.avatarUrl}"
+                                    )
+                                )
+                            )
+                        )
                         component.append(messageAction)
                         // Message format
                         // [Universe Chat] <Steve> Hello World!  [Reply]
