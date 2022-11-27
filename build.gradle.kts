@@ -104,11 +104,11 @@ allprojects {
     tasks {
         withType<JavaCompile> {
             options.encoding = "UTF-8"
-            options.release.set(17)
+            options.release.set(16)
         }
 
         withType<KotlinCompile> {
-            kotlinOptions.jvmTarget = "17"
+            kotlinOptions.jvmTarget = "16"
         }
 
         "jar"(Jar::class) {
