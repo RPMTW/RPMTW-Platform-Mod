@@ -47,9 +47,6 @@ jobs:
           name: ${{ github.event.release.name }} (Fabric)
           java: |
             8
-            16
-            17
-            18
           dependencies: |
             fabric-api
             fabric-language-kotlin
@@ -74,8 +71,6 @@ jobs:
           name: ${{ github.event.release.name }} (Forge)
           java: |
             8
-            16
-            17
           dependencies: |
             kotlin-for-forge
             cloth-config
