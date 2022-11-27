@@ -36,7 +36,7 @@ ordering = "AFTER"
 side = "BOTH"
 
 [[dependencies.rpmtw_platform_mod]]
-modId = "cloth_config"
+modId = "cloth-config"
 mandatory = true
 versionRange = "[4.0,)"
 ordering = "NONE"
