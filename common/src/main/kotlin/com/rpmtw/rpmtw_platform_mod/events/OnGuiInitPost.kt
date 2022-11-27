@@ -22,12 +22,11 @@ import net.minecraft.network.chat.TranslatableComponent
 class OnGuiInitPost : GuiEvent.ScreenInitPost {
 
     override fun init(screen: Screen, widgets: List<AbstractWidget>, children: List<GuiEventListener>) {
-        addedUniverseChatButton(screen, children)
+        addedUniverseChatButton(screen)
     }
 
     private fun addedUniverseChatButton(
         screen: Screen,
-        children: List<GuiEventListener>
     ) {
         try {
             val scaledWidth = screen.width
