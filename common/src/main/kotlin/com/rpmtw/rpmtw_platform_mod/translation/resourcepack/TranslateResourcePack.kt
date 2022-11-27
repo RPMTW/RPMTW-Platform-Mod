@@ -10,7 +10,7 @@ import java.io.File
 import java.net.URL
 
 object TranslateResourcePack {
-    private const val fileName = "RPMTW-Translate-Resource-Pack-1.18.zip"
+    private const val fileName = "RPMTW-Translate-Resource-Pack-1.17.zip"
     private val resourcePackFolder: File = RPMTWPlatformModPlugin.getGameFolder().resolve("resourcepacks")
     private val resourcePackFile = resourcePackFolder.resolve(fileName)
     private val cacheFile = Util.getFileLocation(fileName)
@@ -57,7 +57,7 @@ object TranslateResourcePack {
             return
         }
 
-        val downloadUrl = "https://github.com/RPMTW/ResourcePack-Mod-zh_tw/raw/Translated-1.18/RPMTW-1.18.zip"
+        val downloadUrl = "https://github.com/RPMTW/ResourcePack-Mod-zh_tw/raw/Translated-1.17/RPMTW-1.17.zip"
 
         FileUtils.copyURLToFile(URL(downloadUrl), cacheFile)
         if (!cacheFile.exists()) {

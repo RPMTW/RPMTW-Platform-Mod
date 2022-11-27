@@ -5,7 +5,6 @@ import dev.architectury.injectables.targets.ArchitecturyTarget
 import dev.architectury.platform.Platform
 import io.sentry.Sentry
 import io.sentry.protocol.User
-import net.minecraft.client.Minecraft
 
 object SentryHandler {
     fun init() {

@@ -21,7 +21,7 @@ class TranslucentButton(
 
     override fun renderButton(poseStack: PoseStack, i: Int, j: Int, f: Float) {
         super.renderButton(poseStack, i, j, f)
-        if (this.isHoveredOrFocused && tooltip != null) {
+        if (this.isHovered && tooltip != null) {
             Minecraft.getInstance().screen?.renderTooltip(
                 poseStack,
                 tooltip,

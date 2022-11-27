@@ -4,7 +4,6 @@ Credit: https://github.com/kappa-maintainer/PRP
 package com.rpmtw.rpmtw_platform_mod.mixins.forge;
 
 import com.google.common.base.Preconditions;
-import com.google.gson.JsonElement;
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
@@ -16,13 +15,13 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import vazkii.patchouli.client.book.BookContentClasspathLoader;
-import vazkii.patchouli.client.book.BookContentLoader;
 import vazkii.patchouli.client.book.BookContentsBuilder;
 import vazkii.patchouli.common.book.Book;
 import vazkii.patchouli.common.book.BookRegistry;
 
 import javax.annotation.Nullable;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UncheckedIOException;
 import java.util.Collection;
 import java.util.List;
@@ -55,7 +54,7 @@ public class MixinBookContentClasspathLoader {
     }
 
     @Inject(at = @At("HEAD"), method = "loadJson", cancellable = true, remap = false)
-    private void loadJson(Book book, ResourceLocation location, @Nullable ResourceLocation fallback, CallbackInfoReturnable<JsonElement> callback) {
+    private void loadJson(Book book, ResourceLocation location, @Nullable ResourceLocation fallback, CallbackInfoReturnable<InputStream> callback) {
         RPMTWPlatformMod.LOGGER.debug("[Patchouli] Loading {}", location);
         ResourceManager manager = Minecraft.getInstance().getResourceManager();
         try {
@@ -63,10 +62,10 @@ public class MixinBookContentClasspathLoader {
 
             //noinspection ConstantConditions
             if (resource != null) {
-                callback.setReturnValue(BookContentLoader.streamToJson(resource.getInputStream()));
+                callback.setReturnValue(resource.getInputStream());
             } else if (fallback != null) {
                 Resource fallbackResource = manager.getResource(fallback);
-                callback.setReturnValue(BookContentLoader.streamToJson(fallbackResource.getInputStream()));
+                callback.setReturnValue(fallbackResource.getInputStream());
             }
         } catch (IOException ex) {
             throw new UncheckedIOException(ex);
