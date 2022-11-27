@@ -8,20 +8,19 @@ import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.commands.SharedSuggestionProvider
-import net.minecraftforge.fmlclient.ConfigGuiHandler
+import net.minecraftforge.fml.ExtensionPoint
 import thedarkcolour.kotlinforforge.forge.LOADING_CONTEXT
 import java.io.File
+import java.util.function.BiFunction
 
 @Suppress("unused")
 object RPMTWPlatformModPluginImpl {
     @JvmStatic
     fun registerConfigScreen() {
         LOADING_CONTEXT.registerExtensionPoint(
-            ConfigGuiHandler.ConfigGuiFactory::class.java
+            ExtensionPoint.CONFIGGUIFACTORY
         ) {
-            ConfigGuiHandler.ConfigGuiFactory { _: Minecraft?, parent: Screen? ->
-                RPMTWConfig.getScreen(parent)
-            }
+            BiFunction { _: Minecraft, parent: Screen? -> RPMTWConfig.getScreen(parent) }
         }
     }
 

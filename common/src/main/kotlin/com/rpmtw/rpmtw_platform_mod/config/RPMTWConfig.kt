@@ -25,7 +25,6 @@ import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.components.AbstractWidget
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.components.events.GuiEventListener
-import net.minecraft.client.gui.narration.NarratableEntry
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.resources.language.I18n
 import net.minecraft.network.chat.TextComponent
@@ -225,10 +224,6 @@ internal class RPMTWAccountEntry : AbstractConfigListEntry<Any?>(TextComponent("
     }
 
     override fun children(): List<GuiEventListener?> {
-        return widgets
-    }
-
-    override fun narratables(): List<NarratableEntry?> {
         return widgets
     }
 

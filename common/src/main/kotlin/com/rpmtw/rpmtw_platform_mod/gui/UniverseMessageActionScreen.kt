@@ -48,9 +48,9 @@ class UniverseMessageActionScreen(val message: UniverseChatMessage) :
             }, null
         )
 
-        addRenderableWidget(replyButton)
-        addRenderableWidget(blockUserButton)
-        addRenderableWidget(closeScreenButton)
+        addButton(replyButton)
+        addButton(blockUserButton)
+        addButton(closeScreenButton)
 
         super.init()
     }

@@ -6,7 +6,7 @@ import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.handlers.EventHandler
 import com.rpmtw.rpmtw_platform_mod.handlers.SentryHandler
 import com.rpmtw.rpmtw_platform_mod.translation.resourcepack.TranslateResourcePack
-import dev.architectury.platform.Platform
+import me.shedaniel.architectury.platform.Platform
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 

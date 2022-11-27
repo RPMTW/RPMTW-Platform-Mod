@@ -35,9 +35,9 @@ class UniverseChatEULAScreen(private val initMessage: String?) : Screen(TextComp
 
         val whatButton = UniverseChatWhatButton(width, height)
 
-        addRenderableWidget(disagreeButton)
-        addRenderableWidget(agreeButton)
-        addRenderableWidget(whatButton)
+        addButton(disagreeButton)
+        addButton(agreeButton)
+        addButton(whatButton)
     }
 
     override fun render(

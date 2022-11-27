@@ -88,9 +88,9 @@ class UniverseChatScreen(
         }
         messageEditBox.setMaxLength(150)
 
-        addRenderableWidget(whatButton)
-        addRenderableWidget(sendButton)
-        addRenderableWidget(cancelButton)
+        addButton(whatButton)
+        addButton(sendButton)
+        addButton(cancelButton)
         addWidget(messageEditBox)
     }
 

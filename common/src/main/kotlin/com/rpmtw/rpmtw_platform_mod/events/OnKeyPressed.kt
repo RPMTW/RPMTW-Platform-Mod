@@ -5,12 +5,12 @@ import com.rpmtw.rpmtw_platform_mod.config.ConfigObject
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.translation.resourcepack.TranslateResourcePack
 import com.rpmtw.rpmtw_platform_mod.util.Util
-import dev.architectury.event.EventResult
-import dev.architectury.event.events.client.ClientRawInputEvent
+import me.shedaniel.architectury.event.events.client.ClientRawInputEvent
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.Minecraft
 import net.minecraft.client.resources.language.I18n
+import net.minecraft.world.InteractionResult
 import net.minecraft.world.item.SpawnEggItem
 import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.EntityHitResult
@@ -24,12 +24,12 @@ class OnKeyPressed : ClientRawInputEvent.KeyPressed {
         scanCode: Int,
         action: Int,
         modifiers: Int
-    ): EventResult? {
+    ): InteractionResult? {
         // Ignore unknown keys.
-        if (keyCode == -1 || scanCode == -1) return EventResult.pass()
+        if (keyCode == -1 || scanCode == -1) return InteractionResult.PASS
 
         // Check whether the key is pressed to prevent multiple calls.
-        if (action != GLFW.GLFW_PRESS) return EventResult.pass()
+        if (action != GLFW.GLFW_PRESS) return InteractionResult.PASS
 
         val bindings: ConfigObject.KeyBindings = RPMTWConfig.get().keyBindings
         if (bindings.config.matchesKey(keyCode, scanCode)) {
@@ -40,7 +40,7 @@ class OnKeyPressed : ClientRawInputEvent.KeyPressed {
             openCrowdinPage(client)
         }
 
-        return EventResult.pass()
+        return InteractionResult.PASS
     }
 
     private fun openConfigScreen(client: Minecraft) {
