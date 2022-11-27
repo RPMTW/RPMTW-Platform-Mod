@@ -3,7 +3,7 @@ dependencies {
     // Do NOT use other classes from fabric loader
     modImplementation("net.fabricmc:fabric-loader:${project.property("fabric_loader_version").toString()}")
     // Remove the next line if you don't want to depend on the API
-    modApi("dev.architectury:architectury:${project.property("architectury_version").toString()}")
+    modApi("me.shedaniel:architectury:${project.property("architectury_version").toString()}")
     modApi("me.shedaniel.cloth:cloth-config:${project.property("cloth_config_version").toString()}")
     modApi(
         group = "com.github.RPMTW",
