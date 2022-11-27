@@ -36,7 +36,7 @@ object RPMTWAuthHandler {
 
                 server.createContext("/callback") { handler ->
                     val query: Map<String, String> =
-                        URLEncodedUtils.parse(handler.requestURI, StandardCharsets.UTF_8).stream()
+                        URLEncodedUtils.parse(handler.requestURI.toString(), StandardCharsets.UTF_8).stream()
                             .collect(Collectors.toMap(NameValuePair::getName, NameValuePair::getValue))
 
                     val token: String? = query["access_token"]

@@ -34,7 +34,6 @@ dependencies {
             project.property("rpmtw_api_client_version").toString()
         }"
     ) {
-        exclude("com.google.code.gson")
         exclude("org.jetbrains.kotlinx")
         exclude("org.jetbrains.kotlin")
     }.let {

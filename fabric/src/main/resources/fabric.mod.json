@@ -31,13 +31,13 @@
   },
   "depends": {
     "fabric": "*",
-    "minecraft": ">=1.18.1",
-    "architectury": ">=3.0.0",
-    "cloth-config2": ">=6.0.0",
+    "minecraft": ">=1.17.1",
+    "architectury": ">=2.0.0",
+    "cloth-config2": ">=5.0.0",
     "fabric-language-kotlin": "^1.8.0"
   },
   "suggests": {
-    "modmenu": ">=3.0.0"
+    "modmenu": ">=2.0.0"
   },
   "custom": {
     "modmenu": {

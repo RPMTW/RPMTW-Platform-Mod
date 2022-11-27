@@ -30,7 +30,7 @@ public class MixinBookRegistry {
     public void reloadContents(boolean resourcePackBooksOnly, CallbackInfo ci) {
         PatchouliConfig.reloadBuiltinFlags();
         for (Book book : books.values()) {
-            book.reloadContents(false);
+            book.reloadContents();
         }
         ClientBookRegistry.INSTANCE.reloadLocks(false);
         loaded = true;

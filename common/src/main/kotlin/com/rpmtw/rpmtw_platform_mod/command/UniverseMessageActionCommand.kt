@@ -6,7 +6,7 @@ import com.mojang.brigadier.exceptions.SimpleCommandExceptionType
 import com.rpmtw.rpmtw_api_client.models.universe_chat.UniverseChatMessage
 import com.rpmtw.rpmtw_platform_mod.gui.UniverseMessageActionScreen
 import com.rpmtw.rpmtw_platform_mod.handlers.UniverseChatHandler
-import com.rpmtw.rpmtw_platform_mod.util.Util
+import kotlinx.coroutines.runBlocking
 import net.minecraft.client.Minecraft
 import net.minecraft.commands.SharedSuggestionProvider
 import net.minecraft.network.chat.TranslatableComponent
@@ -17,8 +17,17 @@ class UniverseMessageActionCommand : RPMTWCommand() {
 
         val command = literal("universeChatAction").then(argument(argumentName, StringArgumentType.string()).executes {
             val uuid: String = StringArgumentType.getString(it, argumentName)
+            execute(uuid)
 
-            Util.coroutineLaunch {
+            return@executes CommandHandler.success
+        })
+
+        return command
+    }
+
+    companion object {
+        fun execute(uuid: String) {
+            runBlocking {
                 val message: UniverseChatMessage? = UniverseChatHandler.getMessageAsync(uuid)
                 val exception =
                     SimpleCommandExceptionType(TranslatableComponent("command.rpmtw_platform_mod.universeChatAction.getMessage.failed")).create()
@@ -30,9 +39,6 @@ class UniverseMessageActionCommand : RPMTWCommand() {
                     }
                 }
             }
-            return@executes CommandHandler.success
-        })
-
-        return command
+        }
     }
 }

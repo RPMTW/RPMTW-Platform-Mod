@@ -64,6 +64,10 @@ subprojects {
                 relocate("io.sentry", "com.rpmtw.rpmtw_platform_mod.shadow.io.sentry")
                 relocate("io.socket", "com.rpmtw.rpmtw_platform_mod.shadow.io.socket")
                 relocate("com.github.kittinunf", "com.rpmtw.rpmtw_platform_mod.shadow.com.github.kittinunf")
+
+                // Relocate the gson package to avoid conflicts with minecraft.
+                // Because Minecraft uses the gson package older than we do, we need to relocate it.
+                relocate("com.google.gson", "com.rpmtw.rpmtw_platform_mod.shadow.com.google.gson")
             }
 
             "remapJar"(RemapJarTask::class) {

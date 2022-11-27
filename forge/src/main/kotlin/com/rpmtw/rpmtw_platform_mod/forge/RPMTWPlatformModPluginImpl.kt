@@ -1,16 +1,15 @@
 package com.rpmtw.rpmtw_platform_mod.forge
 
 import com.mojang.brigadier.CommandDispatcher
+import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
+import com.rpmtw.rpmtw_platform_mod.command.LoginRPMTWAccountCommand
+import com.rpmtw.rpmtw_platform_mod.command.UniverseMessageActionCommand
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.commands.SharedSuggestionProvider
-import net.minecraftforge.client.ClientCommandHandler
-import net.minecraftforge.client.ConfigGuiHandler.ConfigGuiFactory
-import net.minecraftforge.client.event.RegisterClientCommandsEvent
-import thedarkcolour.kotlinforforge.forge.FORGE_BUS
+import net.minecraftforge.fmlclient.ConfigGuiHandler
 import thedarkcolour.kotlinforforge.forge.LOADING_CONTEXT
-import thedarkcolour.kotlinforforge.forge.MOD_BUS
 import java.io.File
 
 @Suppress("unused")
@@ -18,9 +17,9 @@ object RPMTWPlatformModPluginImpl {
     @JvmStatic
     fun registerConfigScreen() {
         LOADING_CONTEXT.registerExtensionPoint(
-            ConfigGuiFactory::class.java
+            ConfigGuiHandler.ConfigGuiFactory::class.java
         ) {
-            ConfigGuiFactory { _: Minecraft?, parent: Screen? ->
+            ConfigGuiHandler.ConfigGuiFactory { _: Minecraft?, parent: Screen? ->
                 RPMTWConfig.getScreen(parent)
             }
         }
@@ -28,15 +27,20 @@ object RPMTWPlatformModPluginImpl {
 
     @JvmStatic
     fun dispatchClientCommand(callback: (dispatcher: CommandDispatcher<SharedSuggestionProvider>) -> Unit) {
-        FORGE_BUS.addListener { event: RegisterClientCommandsEvent ->
-            @Suppress("UNCHECKED_CAST")
-            callback(event.dispatcher as CommandDispatcher<SharedSuggestionProvider>)
-        }
+        TODO("Forge not support client command")
     }
 
     @JvmStatic
     fun executeClientCommand(command: String): Boolean {
-        return ClientCommandHandler.sendMessage(command)
+        RPMTWPlatformMod.LOGGER.info("Command: $command")
+        if (command.startsWith("/rpmtw login")) {
+            LoginRPMTWAccountCommand.execute()
+        } else if (command.startsWith("/rpmtw universeChatAction")) {
+            val uuid = command.substring("/rpmtw universeChatAction ".length)
+            UniverseMessageActionCommand.execute(uuid)
+        }
+
+        return true
     }
 
     @JvmStatic

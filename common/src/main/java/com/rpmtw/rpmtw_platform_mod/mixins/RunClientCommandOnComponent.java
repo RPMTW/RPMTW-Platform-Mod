@@ -16,7 +16,7 @@ public class RunClientCommandOnComponent {
     public void handleComponentClick(Screen instance, String command, boolean bl) {
         // Because Forge doesn't support click event on text component to run the client command.
         // So we have to implement it by ourselves.
-        if (Platform.isForge() && command.startsWith("rpmtw")) {
+        if (Platform.isForge() && command.startsWith("/rpmtw")) {
             RPMTWPlatformModPlugin.executeClientCommand(command);
             return;
         }

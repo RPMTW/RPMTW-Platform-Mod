@@ -7,11 +7,17 @@ import net.minecraft.commands.SharedSuggestionProvider
 class LoginRPMTWAccountCommand : RPMTWCommand() {
     override fun register(): LiteralArgumentBuilder<SharedSuggestionProvider> {
         val command = literal("login").executes {
-            RPMTWAuthHandler.login()
+            execute()
 
             return@executes CommandHandler.success
         }
 
         return command
+    }
+
+    companion object {
+        fun execute() {
+            RPMTWAuthHandler.login()
+        }
     }
 }

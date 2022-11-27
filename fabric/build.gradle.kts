@@ -47,7 +47,6 @@ dependencies {
     bundle(
         "com.github.RPMTW:RPMTW-API-Client-Kotlin:${project.property("rpmtw_api_client_version")}"
     ) {
-        exclude("com.google.code.gson")
         exclude("org.jetbrains.kotlinx")
         exclude("org.jetbrains.kotlin")
     }.let { implementation(it) }
