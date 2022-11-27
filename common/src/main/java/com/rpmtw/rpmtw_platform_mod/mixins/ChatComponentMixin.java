@@ -50,6 +50,10 @@ public class ChatComponentMixin {
     @Final
     private List<GuiMessage<Component>> allMessages;
 
+    @Shadow
+    @Final
+    private Minecraft minecraft;
+
     @Inject(method = "addMessage(Lnet/minecraft/network/chat/Component;)V", at = @At("HEAD"))
     public void addMessage(Component component, CallbackInfo ci) {
         List<Component> siblings = component.getSiblings();
@@ -93,14 +97,14 @@ public class ChatComponentMixin {
             ResourceLocation location = ChatComponentData.INSTANCE.getAvatarCache().getOrDefault(getAvatarUrl(chatComponent), null);
 
             if (location == null) return;
-            RenderSystem.setShaderColor(1, 1, 1, ChatComponentData.INSTANCE.getLastOpacity());
-            RenderSystem.setShaderTexture(0, location);
+            RenderSystem.color4f(1, 1, 1, ChatComponentData.INSTANCE.getLastOpacity());
+            minecraft.getTextureManager().bind(location);
             RenderSystem.enableBlend();
             // Draw base layer
             GuiComponent.blit(matrixStack, 0, ChatComponentData.INSTANCE.getLastY(), 8, 8, 8.0F, 8, 8, 8, 8, 8);
             // Draw hat
             GuiComponent.blit(matrixStack, 0, ChatComponentData.INSTANCE.getLastY(), 8, 8, 40.0F, 8, 8, 8, 8, 8);
-            RenderSystem.setShaderColor(1, 1, 1, 1);
+            RenderSystem.color4f(1, 1, 1, 1);
             RenderSystem.disableBlend();
         } catch (Exception e) {
             RPMTWPlatformMod.LOGGER.warn("Rending universe chat component failed\n" + e);

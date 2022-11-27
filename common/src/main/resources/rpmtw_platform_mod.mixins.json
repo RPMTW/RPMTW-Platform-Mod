@@ -2,7 +2,7 @@
   "required": true,
   "minVersion": "0.8",
   "package": "com.rpmtw.rpmtw_platform_mod.mixins",
-  "compatibilityLevel": "JAVA_17",
+  "compatibilityLevel": "JAVA_8",
   "injectors": {
     "defaultRequire": 1
   },

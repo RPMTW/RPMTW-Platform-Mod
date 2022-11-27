@@ -5,29 +5,28 @@ import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.gui.widgets.RPMTWCheckbox
 import com.rpmtw.rpmtw_platform_mod.gui.widgets.TranslucentButton
 import com.rpmtw.rpmtw_platform_mod.util.Util
-import dev.architectury.event.events.client.ClientGuiEvent
-import dev.architectury.hooks.client.screen.ScreenAccess
-import dev.architectury.platform.Platform
+import me.shedaniel.architectury.event.events.GuiEvent
+import me.shedaniel.architectury.hooks.ScreenHooks
+import me.shedaniel.architectury.platform.Platform
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
+import net.minecraft.client.gui.components.AbstractWidget
 import net.minecraft.client.gui.components.EditBox
+import net.minecraft.client.gui.components.events.GuiEventListener
 import net.minecraft.client.gui.screens.ChatScreen
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.resources.language.I18n
 import net.minecraft.network.chat.TranslatableComponent
 
 @Environment(EnvType.CLIENT)
-class OnGuiInitPost : ClientGuiEvent.ScreenInitPost {
+class OnGuiInitPost : GuiEvent.ScreenInitPost {
 
-    override fun init(screen: Screen?, access: ScreenAccess?) {
-        if (screen != null && access != null) {
-            addedUniverseChatButton(screen, access)
-        }
+    override fun init(screen: Screen, widgets: List<AbstractWidget>, children: List<GuiEventListener>) {
+        addedUniverseChatButton(screen)
     }
 
     private fun addedUniverseChatButton(
         screen: Screen,
-        access: ScreenAccess
     ) {
         try {
             val scaledWidth = screen.width
@@ -71,8 +70,8 @@ class OnGuiInitPost : ClientGuiEvent.ScreenInitPost {
                     I18n.get("universeChat.rpmtw_platform_mod.button.receive.tooltip")
                 )
 
-                access.addRenderableWidget(sendButton)
-                access.addRenderableWidget(checkbox)
+                ScreenHooks.addButton(screen, sendButton)
+                ScreenHooks.addButton(screen, checkbox)
             }
         } catch (e: Exception) {
             RPMTWPlatformMod.LOGGER.error("Adding button to the chat screen failed", e)

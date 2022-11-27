@@ -5,7 +5,7 @@ import com.mojang.brigadier.arguments.ArgumentType
 import com.mojang.brigadier.builder.LiteralArgumentBuilder
 import com.mojang.brigadier.builder.RequiredArgumentBuilder
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformModPlugin
-import dev.architectury.platform.Platform
+import me.shedaniel.architectury.platform.Platform
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.commands.SharedSuggestionProvider

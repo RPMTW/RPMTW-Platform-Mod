@@ -2,9 +2,9 @@ package com.rpmtw.rpmtw_platform_mod.handlers
 
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import dev.architectury.injectables.targets.ArchitecturyTarget
-import dev.architectury.platform.Platform
 import io.sentry.Sentry
 import io.sentry.protocol.User
+import me.shedaniel.architectury.platform.Platform
 
 object SentryHandler {
     fun init() {

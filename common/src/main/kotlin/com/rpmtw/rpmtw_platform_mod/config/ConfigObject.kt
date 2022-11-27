@@ -9,6 +9,7 @@ import me.shedaniel.clothconfig2.api.Modifier
 import me.shedaniel.clothconfig2.api.ModifierKeyCode
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
+import org.lwjgl.glfw.GLFW
 
 @Config(name = "rpmtw_platform_mod")
 @Environment(EnvType.CLIENT)
@@ -115,7 +116,7 @@ class ConfigObject : ConfigData {
         // Ctrl + R
         @JvmField
         var config: ModifierKeyCode = ModifierKeyCode.of(
-            InputConstants.Type.KEYSYM.getOrCreate(InputConstants.KEY_R), Modifier.of(false, true, false)
+            InputConstants.Type.KEYSYM.getOrCreate(GLFW.GLFW_KEY_R), Modifier.of(false, true, false)
         )
 
         @JvmField

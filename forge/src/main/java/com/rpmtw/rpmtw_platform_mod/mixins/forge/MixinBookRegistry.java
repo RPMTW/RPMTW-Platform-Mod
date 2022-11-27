@@ -27,7 +27,7 @@ public class MixinBookRegistry {
     private boolean loaded;
 
     @Inject(method = "reloadContents", at = @At("HEAD"), cancellable = true)
-    public void reloadContents(boolean resourcePackBooksOnly, CallbackInfo ci) {
+    public void reloadContents(CallbackInfo ci) {
         PatchouliConfig.reloadBuiltinFlags();
         for (Book book : books.values()) {
             book.reloadContents();

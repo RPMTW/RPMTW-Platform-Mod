@@ -9,28 +9,36 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import vazkii.patchouli.client.book.BookContentClasspathLoader;
-import vazkii.patchouli.client.book.BookContentsBuilder;
+import vazkii.patchouli.client.book.BookContents;
 import vazkii.patchouli.common.book.Book;
 import vazkii.patchouli.common.book.BookRegistry;
 
-import javax.annotation.Nullable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
 import java.util.Collection;
 import java.util.List;
 
-@Mixin(value = BookContentClasspathLoader.class, remap = false)
+@Mixin(value = BookContents.class, remap = false)
 public class MixinBookContentClasspathLoader {
+    @Shadow
+    @Final
+    protected static String DEFAULT_LANG;
+
+    @Shadow
+    @Final
+    public Book book;
+
     @Inject(at = @At("HEAD"), method = "findFiles")
-    private void findFiles(Book book, String dir, List<ResourceLocation> list, CallbackInfo ci) {
-        String prefix = String.format("%s/%s/%s/%s", BookRegistry.BOOKS_LOCATION, book.id.getPath(), BookContentsBuilder.DEFAULT_LANG, dir);
+    private void findFiles(String dir, List<ResourceLocation> list, CallbackInfo ci) {
+        String prefix = String.format("%s/%s/%s/%s", BookRegistry.BOOKS_LOCATION, book.id.getPath(), DEFAULT_LANG, dir);
         Collection<ResourceLocation> files = Minecraft.getInstance().getResourceManager().listResources(prefix, p -> p.endsWith(".json"));
 
         files.stream()
@@ -53,14 +61,13 @@ public class MixinBookContentClasspathLoader {
 
     }
 
-    @Inject(at = @At("HEAD"), method = "loadJson", cancellable = true, remap = false)
-    private void loadJson(Book book, ResourceLocation location, @Nullable ResourceLocation fallback, CallbackInfoReturnable<InputStream> callback) {
+    @Inject(at = @At("HEAD"), method = "loadJson", remap = false, cancellable = true)
+    private void loadJson(ResourceLocation location, ResourceLocation fallback, CallbackInfoReturnable<InputStream> callback) {
         RPMTWPlatformMod.LOGGER.debug("[Patchouli] Loading {}", location);
         ResourceManager manager = Minecraft.getInstance().getResourceManager();
         try {
             Resource resource = manager.getResource(location);
 
-            //noinspection ConstantConditions
             if (resource != null) {
                 callback.setReturnValue(resource.getInputStream());
             } else if (fallback != null) {

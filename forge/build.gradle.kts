@@ -21,7 +21,7 @@ dependencies {
 
     // Mod required mod dependencies
     implementation("thedarkcolour:kotlinforforge:${project.property("kotlin_forge_version").toString()}")
-    modApi("dev.architectury:architectury-forge:${project.property("architectury_version").toString()}")
+    modApi("me.shedaniel:architectury-forge:${project.property("architectury_version").toString()}")
     modApi("me.shedaniel.cloth:cloth-config-forge:${project.property("cloth_config_version").toString()}")
 
     // Optional mod dependencies

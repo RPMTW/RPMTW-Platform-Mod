@@ -1,7 +1,7 @@
 package com.rpmtw.rpmtw_platform_mod.mixins;
 
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformModPlugin;
-import dev.architectury.platform.Platform;
+import me.shedaniel.architectury.platform.Platform;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screens.Screen;
