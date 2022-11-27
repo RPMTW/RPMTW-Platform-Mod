@@ -41,11 +41,12 @@ jobs:
           version-type: release
           loaders: fabric
           game-versions: |
-            1.18.1
+            1.17.1
           version-resolver: exact
           version: ${{ github.event.release.tag_name }}-fabric
           name: ${{ github.event.release.name }} (Fabric)
           java: |
+            16
             17
             18
           dependencies: |
@@ -66,13 +67,13 @@ jobs:
           version-type: release
           loaders: forge
           game-versions: |
-            1.18.1
+            1.17.1
           version-resolver: exact
           version: ${{ github.event.release.tag_name }}-forge
           name: ${{ github.event.release.name }} (Forge)
           java: |
+            16
             17
-            18
           dependencies: |
             kotlin-for-forge
             cloth-config
