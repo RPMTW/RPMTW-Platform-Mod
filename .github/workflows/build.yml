@@ -36,15 +36,15 @@ jobs:
       - name: Upload artifacts (fabric)
         uses: actions/upload-artifact@v3
         with:
-          name: 1.18-${{ steps.github_short_hash.outputs.result }}-fabric
+          name: 1.18.2-${{ steps.github_short_hash.outputs.result }}-fabric
           path: ${{ github.workspace }}/fabric/build/libs
       - name: Upload artifacts (quilt)
         uses: actions/upload-artifact@v3
         with:
-          name: 1.18-${{ steps.github_short_hash.outputs.result }}-quilt
+          name: 1.18.2-${{ steps.github_short_hash.outputs.result }}-quilt
           path: ${{ github.workspace }}/quilt/build/libs
       - name: Upload artifacts (forge)
         uses: actions/upload-artifact@v3
         with:
-          name: 1.18-${{ steps.github_short_hash.outputs.result }}-forge
+          name: 1.18.2-${{ steps.github_short_hash.outputs.result }}-forge
           path: ${{ github.workspace }}/forge/build/libs
