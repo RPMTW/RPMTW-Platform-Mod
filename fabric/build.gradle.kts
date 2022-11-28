@@ -54,7 +54,13 @@ dependencies {
     "common"(project(path = ":fabric-like", configuration = "namedElements")) { isTransitive = false }
     bundle(project(path = ":fabric-like", configuration = "transformProductionFabric")) { isTransitive = false }
 
-    implementation(bundle(group = "io.sentry", name = "sentry", version = project.property("sentry_version").toString()))
+    implementation(
+        bundle(
+            group = "io.sentry",
+            name = "sentry",
+            version = project.property("sentry_version").toString()
+        )
+    )
 
     modImplementation("com.terraformersmc:modmenu:${project.property("modmenu_version")}")
 }
