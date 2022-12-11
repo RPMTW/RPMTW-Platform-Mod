@@ -63,7 +63,7 @@ public class ChatComponentMixin {
     }
 
 
-    @ModifyArg(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Font;drawShadow(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/util/FormattedCharSequence;FFI)I", ordinal = 0), method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;I)V", index = 2)
+    @ModifyArg(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Font;drawShadow(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/util/FormattedCharSequence;FFI)I", ordinal = 0), method = "render", index = 2)
     public float moveTheText(PoseStack poseStack, FormattedCharSequence formattedCharSequence, float f, float y, int color) {
         Component chatComponent = getLastComponent();
         if (chatComponent == null) return 0.0F;
@@ -75,15 +75,15 @@ public class ChatComponentMixin {
     }
 
 
-    @ModifyArg(at = @At(value = "INVOKE", target = "Ljava/util/List;get(I)Ljava/lang/Object;", ordinal = 0), method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;I)V", index = 0)
+    @ModifyArg(at = @At(value = "INVOKE", target = "Ljava/util/List;get(I)Ljava/lang/Object;", ordinal = 0), method = "render", index = 0)
     public int getLastMessage(int index) {
         ChatComponentData.INSTANCE.setLastMessageIndex(index);
         return index;
     }
 
 
-    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Font;drawShadow(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/util/FormattedCharSequence;FFI)I", ordinal = 0), method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;I)V")
-    public void render(PoseStack matrixStack, int i, CallbackInfo ci) {
+    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Font;drawShadow(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/util/FormattedCharSequence;FFI)I", ordinal = 0), method = "render")
+    public void render(PoseStack poseStack, int i, int j, int k, CallbackInfo ci) {
         try {
             Component chatComponent = getLastComponent();
             if (chatComponent == null) return;
@@ -95,9 +95,9 @@ public class ChatComponentMixin {
             RenderSystem.setShaderTexture(0, location);
             RenderSystem.enableBlend();
             // Draw base layer
-            GuiComponent.blit(matrixStack, 0, ChatComponentData.INSTANCE.getLastY(), 8, 8, 8.0F, 8, 8, 8, 8, 8);
+            GuiComponent.blit(poseStack, 0, ChatComponentData.INSTANCE.getLastY(), 8, 8, 8.0F, 8, 8, 8, 8, 8);
             // Draw hat
-            GuiComponent.blit(matrixStack, 0, ChatComponentData.INSTANCE.getLastY(), 8, 8, 40.0F, 8, 8, 8, 8, 8);
+            GuiComponent.blit(poseStack, 0, ChatComponentData.INSTANCE.getLastY(), 8, 8, 40.0F, 8, 8, 8, 8, 8);
             RenderSystem.setShaderColor(1, 1, 1, 1);
             RenderSystem.disableBlend();
         } catch (Exception e) {
