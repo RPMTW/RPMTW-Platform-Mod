@@ -12,8 +12,8 @@ class TranslucentButton(
     height: Int,
     message: Component,
     onPress: OnPress,
-    val tooltip: Component?
-) : Button(x, y, width, height, message, onPress) {
+    val tooltip: Component?,
+) : Button(x, y, width, height, message, onPress, DEFAULT_NARRATION) {
 
     override fun blit(stack: PoseStack, x: Int, y: Int, textureX: Int, textureY: Int, width: Int, height: Int) {
         fill(stack, x, y, x + width, y + height, Int.MIN_VALUE)

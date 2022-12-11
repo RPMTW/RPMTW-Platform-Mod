@@ -10,4 +10,5 @@ class UniverseChatWhatButton(width: Int, height: Int) : Button(
     GuiUtil.buttonHeight, Component.translatable("universeChat.rpmtw_platform_mod.gui.what"), {
         // TODO: rename `cosmic` to `universe`
         Util.openLink("https://www.rpmtw.com/Wiki/ModInfo#what-is-cosmic-system")
-    })
+    }, DEFAULT_NARRATION
+)
