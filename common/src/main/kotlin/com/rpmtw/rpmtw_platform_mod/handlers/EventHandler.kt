@@ -8,6 +8,7 @@ import dev.architectury.event.events.client.ClientTooltipEvent
 
 object EventHandler {
     fun handle() {
+        ClientLifecycleEvent.CLIENT_SETUP.register(OnClientSetup())
         ClientLifecycleEvent.CLIENT_STOPPING.register(OnClientStopping())
         ClientLifecycleEvent.CLIENT_STARTED.register(OnClientStarted())
         ClientGuiEvent.INIT_POST.register(OnGuiInitPost())

@@ -39,13 +39,13 @@ object RPMTWConfig {
 
     fun register() {
         RPMTWPlatformMod.LOGGER.info("Registering config")
-        // register config
+        // Register config
         AutoConfig.register(ConfigObject::class.java) { definition: Config?, configClass: Class<ConfigObject?>? ->
             JanksonConfigSerializer(definition, configClass, buildJankson(Jankson.builder()))
         }
         val guiRegistry: GuiRegistry = AutoConfig.getGuiRegistry(ConfigObject::class.java)
 
-        // key mapping gui
+        // Key mapping gui
         guiRegistry.registerPredicateProvider({ i13n, field, config, defaults, _ ->
             if (field.isAnnotationPresent(ConfigEntry.Gui.Excluded::class.java)) return@registerPredicateProvider emptyList()
             val entry: KeyCodeEntry = ConfigEntryBuilder.create().startModifierKeyCodeField(

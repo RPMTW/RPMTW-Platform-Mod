@@ -82,7 +82,8 @@ object TranslateResourcePack {
         }
         repository.setSelected(selected)
 
-        Minecraft.getInstance().reloadResourcePacks()
+        // TODO
+        // Minecraft.getInstance().reloadResourcePacks()
     }
 
     /**
