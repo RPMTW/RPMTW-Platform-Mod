@@ -61,8 +61,8 @@ class ConfigObject : ConfigData {
         @ConfigEntry.Gui.RequiresRestart
         var loadTranslateResourcePack = true
             get() {
-                return if (GameLanguage.getMinecraft() == GameLanguage.English) {
-                    false
+                return if (GameLanguage.getMinecraft() == GameLanguage.TraditionalChinese) {
+                    true
                 } else {
                     field
                 }
