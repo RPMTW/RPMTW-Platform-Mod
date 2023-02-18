@@ -59,7 +59,7 @@ class ConfigObject : ConfigData {
 
         @ConfigEntry.Gui.Tooltip(count = 1)
         @ConfigEntry.Gui.RequiresRestart
-        var loadTranslateResourcePack = true
+        var loadTranslateResourcePack = false
             get() {
                 return if (GameLanguage.getMinecraft() == GameLanguage.TraditionalChinese) {
                     true
