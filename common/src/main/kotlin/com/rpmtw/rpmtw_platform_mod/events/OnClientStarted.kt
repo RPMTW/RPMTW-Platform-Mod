@@ -15,12 +15,12 @@ import java.util.*
 @Environment(EnvType.CLIENT)
 class OnClientStarted : ClientLifecycleEvent.ClientState {
     override fun stateChanged(instance: Minecraft?) {
-        if (instance != null) {
-            toggleLanguage(instance)
-            loadTranslationPack()
-            UniverseChatHandler.handle()
-            MTManager.readCache()
-        }
+        if (instance == null) return
+
+        toggleLanguage(instance)
+        loadTranslationPack()
+        UniverseChatHandler.handle()
+        MTManager.readCache()
     }
 
     private fun toggleLanguage(instance: Minecraft) {
@@ -33,7 +33,7 @@ class OnClientStarted : ClientLifecycleEvent.ClientState {
             Pair("CHN", "zh_cn"),
             Pair("HKG", "zh_hk"),
         )
-        val languageCode = countryToLanguageMap["TWN"] ?: return
+        val languageCode = countryToLanguageMap[country] ?: return
         manger.selected = LanguageInfo(languageCode, country, "", false)
 
         RPMTWPlatformMod.LOGGER.info("Auto toggle language to $languageCode($country)")
@@ -41,11 +41,10 @@ class OnClientStarted : ClientLifecycleEvent.ClientState {
 
     private fun loadTranslationPack() {
         if (!RPMTWConfig.get().translate.loadTranslateResourcePack) return
+        if (TranslateResourcePack.loaded) return
 
         try {
-            if (!TranslateResourcePack.loaded) {
-                TranslateResourcePack.load()
-            }
+            TranslateResourcePack.load()
         } catch (e: Exception) {
             RPMTWPlatformMod.LOGGER.error("Failed to set translate resource pack", e)
             return
