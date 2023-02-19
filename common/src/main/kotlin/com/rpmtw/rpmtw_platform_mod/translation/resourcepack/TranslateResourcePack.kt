@@ -81,9 +81,6 @@ object TranslateResourcePack {
             throw Exception("Translate resource pack not found")
         }
         repository.setSelected(selected)
-
-        // TODO
-        // Minecraft.getInstance().reloadResourcePacks()
     }
 
     /**
