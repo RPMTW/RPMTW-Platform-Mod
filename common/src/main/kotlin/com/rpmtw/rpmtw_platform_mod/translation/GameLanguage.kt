@@ -1,30 +1,24 @@
 package com.rpmtw.rpmtw_platform_mod.translation
 
 import net.minecraft.client.Minecraft
+import java.util.*
 
-enum class GameLanguage(val code: String, val allowCodes: List<String>) {
-    English("en_us", arrayListOf("en_us")),
-    TraditionalChinese(
-        "zh_tw",
-        arrayListOf("zh_tw", "zh_hk", "lzh")
-    ),
-    SimplifiedChinese("zh_cn", arrayListOf("zh_cn"));
+enum class GameLanguage(val code: String, val isO3Code: Set<String>) {
+    English("en_us", setOf("ENG")),
+    TraditionalChinese("zh_tw", setOf("TWN", "HKG")),
+    SimplifiedChinese("zh_cn", setOf("CHN"));
 
     companion object {
-        /**
-         * Get the game language.
-         */
         fun getMinecraft(): GameLanguage {
-            val languages = values()
-            val mcLanguage = Minecraft.getInstance().options.languageCode
+            val minecraftLanguage = Minecraft.getInstance().options.languageCode
 
-            for (language in languages) {
-                if (mcLanguage in language.allowCodes) {
-                    return language
-                }
-            }
+            return values().firstOrNull { it.code == minecraftLanguage } ?: English
+        }
 
-            return English
+        fun getSystem(): GameLanguage? {
+            val systemLanguage = Locale.getDefault().isO3Language
+
+            return values().firstOrNull { it.isO3Code.contains(systemLanguage) }
         }
     }
 }
