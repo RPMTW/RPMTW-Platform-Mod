@@ -5,7 +5,6 @@ import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.handlers.UniverseChatHandler
 import com.rpmtw.rpmtw_platform_mod.translation.GameLanguage
 import com.rpmtw.rpmtw_platform_mod.translation.machineTranslation.MTManager
-import com.rpmtw.rpmtw_platform_mod.translation.resourcepack.TranslateResourcePack
 import dev.architectury.event.events.client.ClientLifecycleEvent
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -15,11 +14,8 @@ import java.util.*
 
 @Environment(EnvType.CLIENT)
 class OnClientStarted : ClientLifecycleEvent.ClientState {
-    override fun stateChanged(instance: Minecraft?) {
-        if (instance == null) return
-
+    override fun stateChanged(instance: Minecraft) {
         toggleLanguage(instance)
-        loadTranslationPack()
         UniverseChatHandler.handle()
         MTManager.readCache()
     }
@@ -34,17 +30,5 @@ class OnClientStarted : ClientLifecycleEvent.ClientState {
 
         manger.selected = LanguageInfo(language.code, "", "", false)
         RPMTWPlatformMod.LOGGER.info("Auto toggle language to ${language.code}(${language.isO3Code})")
-    }
-
-    private fun loadTranslationPack() {
-        if (!RPMTWConfig.get().translate.loadTranslateResourcePack) return
-        if (TranslateResourcePack.loaded) return
-
-        try {
-            TranslateResourcePack.load()
-        } catch (e: Exception) {
-            RPMTWPlatformMod.LOGGER.error("Failed to set translate resource pack", e)
-            return
-        }
     }
 }

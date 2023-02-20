@@ -28,5 +28,6 @@ object RPMTWPlatformMod {
         TranslateResourcePack.deleteResourcePack()
         CommandHandler.init()
         EventHandler.handle()
+        TranslateResourcePack.init()
     }
 }
