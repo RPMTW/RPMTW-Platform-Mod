@@ -3,7 +3,6 @@ package com.rpmtw.rpmtw_platform_mod.config
 import com.mojang.blaze3d.platform.InputConstants
 import com.mojang.blaze3d.vertex.PoseStack
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
-import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformModPlugin
 import com.rpmtw.rpmtw_platform_mod.handlers.RPMTWAuthHandler
 import com.rpmtw.rpmtw_platform_mod.handlers.UniverseChatHandler
 import me.shedaniel.autoconfig.AutoConfig
@@ -37,7 +36,7 @@ object RPMTWConfig {
     private var config: ConfigObject? = null
 
 
-    fun register() {
+    private fun register() {
         RPMTWPlatformMod.LOGGER.info("Registering config")
         // Register config
         AutoConfig.register(ConfigObject::class.java) { definition: Config?, configClass: Class<ConfigObject?>? ->
@@ -58,11 +57,10 @@ object RPMTWConfig {
             listOf(entry)
         }) { field -> field.type === ModifierKeyCode::class.java }
 
-        val holder: ConfigHolder<ConfigObject> = AutoConfig.getConfigHolder(ConfigObject::class.java)
+        val holder = AutoConfig.getConfigHolder(ConfigObject::class.java)
         config = holder.config
         listenOnSave(holder, holder.config)
 
-        RPMTWPlatformModPlugin.registerConfigScreen()
         RPMTWPlatformMod.LOGGER.info("Registered config")
     }
 

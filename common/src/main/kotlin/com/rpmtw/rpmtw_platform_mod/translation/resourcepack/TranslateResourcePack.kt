@@ -19,6 +19,7 @@ object TranslateResourcePack {
     private var loaded = false
 
     fun init() {
+        deleteResourcePack()
         if (!RPMTWConfig.get().translate.loadTranslateResourcePack || loaded) return
 
         try {
@@ -56,7 +57,7 @@ object TranslateResourcePack {
         RPMTWPlatformMod.LOGGER.info("Translate resource pack successful loaded")
     }
 
-    fun deleteResourcePack() {
+    private fun deleteResourcePack() {
         if (resourcePackFile.exists()) {
             resourcePackFile.delete()
         }
@@ -83,7 +84,8 @@ object TranslateResourcePack {
     }
 
     private fun selectResourcePack() {
-        val optionsFile = Minecraft.getInstance().gameDirectory.resolve("options.txt")
+        val client = Minecraft.getInstance()
+        val optionsFile = client.gameDirectory.resolve("options.txt")
         val options = mutableMapOf<String, String>()
 
         if (optionsFile.exists()) {
