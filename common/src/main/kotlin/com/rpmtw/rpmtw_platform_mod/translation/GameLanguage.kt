@@ -16,9 +16,9 @@ enum class GameLanguage(val code: String, val isO3Code: Set<String>) {
         }
 
         fun getSystem(): GameLanguage? {
-            val systemLanguage = Locale.getDefault().isO3Language
+            val systemCountry = Locale.getDefault().isO3Country
 
-            return values().firstOrNull { it.isO3Code.contains(systemLanguage) }
+            return values().firstOrNull { it.isO3Code.contains(systemCountry) }
         }
     }
 }
