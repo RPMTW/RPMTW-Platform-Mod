@@ -86,10 +86,14 @@ object TranslateResourcePack {
         val optionsFile = Minecraft.getInstance().gameDirectory.resolve("options.txt")
         val options = mutableMapOf<String, String>()
 
-        FileUtils.readLines(optionsFile, StandardCharsets.UTF_8)
-            .map { it.split(Regex(":"), 2) }
-            .filter { it.size == 2 }
-            .forEach { options[it[0]] = it[1] }
+        if (optionsFile.exists()) {
+            runCatching {
+                FileUtils.readLines(optionsFile, StandardCharsets.UTF_8)
+                    .map { it.split(Regex(":"), 2) }
+                    .filter { it.size == 2 }
+                    .forEach { options[it[0]] = it[1] }
+            }
+        }
 
         val selected = Gson().fromJson(options["resourcePacks"] ?: "[]", Array<String>::class.java).toMutableList()
         val packId = "file/$fileName"
