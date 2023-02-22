@@ -38,7 +38,6 @@
   "config.rpmtw_platform_mod.option.translate.unlocalized": "未本地化的内容",
   "config.rpmtw_platform_mod.option.translate.unlocalized.@Tooltip": "额外显示未本地化的内容，若游戏语言为美国英语将不会起作用。",
   "config.rpmtw_platform_mod.option.translate.loadTranslateResourcePack": "加载翻译资源包",
-  "config.rpmtw_platform_mod.option.translate.loadTranslateResourcePack.@Tooltip": "加载翻译资源包翻译模组和其他内容，若游戏语言是美国英语将不起作用。",
   "config.rpmtw_platform_mod.option.advanced": "高级设置",
   "config.rpmtw_platform_mod.option.advanced.sendExceptionToSentry": "發送本模組的例外錯誤至 Sentry",
   "config.rpmtw_platform_mod.option.advanced.sendExceptionToSentry.@Tooltip": "发送本模组的例外错误至 Sentry 以协助我们改善本模组。（所有资料将会被去识别化并且我们不会将其用于其他用途。）",
