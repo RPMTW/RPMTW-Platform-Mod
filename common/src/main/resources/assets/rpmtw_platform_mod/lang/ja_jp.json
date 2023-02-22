@@ -28,7 +28,6 @@
   "config.rpmtw_platform_mod.option.translate.unlocalized": "ローカライズされないコンテンツ",
   "config.rpmtw_platform_mod.option.translate.unlocalized.@Tooltip": "ローカライズされていないコンテンツの追加表示。ゲーム言語がアメリカ英語の場合は機能しません。",
   "config.rpmtw_platform_mod.option.translate.loadTranslateResourcePack": "翻訳リソースパックをロード",
-  "config.rpmtw_platform_mod.option.translate.loadTranslateResourcePack.@Tooltip": "翻訳リソースパックをロードして、Modやその他のコンテンツを翻訳します。ゲーム言語がアメリカ英語の場合は機能しません。",
   "config.rpmtw_platform_mod.title": "RPMTW Platform 設定",
   "universeChat.rpmtw_platform_mod.button.receive": "メッセージを受信",
   "universeChat.rpmtw_platform_mod.button.receive.tooltip": "他の惑星からメッセージを受信します。",
