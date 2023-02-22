@@ -38,7 +38,6 @@
   "config.rpmtw_platform_mod.option.translate.unlocalized": "Нелокализованный контент",
   "config.rpmtw_platform_mod.option.translate.unlocalized.@Tooltip": "Дополнительное отображение нелокализованного контента, не работает, если язык игры - американский английский.",
   "config.rpmtw_platform_mod.option.translate.loadTranslateResourcePack": "Ресурсный пакет Load Translate",
-  "config.rpmtw_platform_mod.option.translate.loadTranslateResourcePack.@Tooltip": "Загрузите пакет ресурсов translate для перевода модов и другого содержимого, не работает по умолчанию, если язык игры - американский английский.",
   "config.rpmtw_platform_mod.option.advanced": "Расширенная конфигурация",
   "config.rpmtw_platform_mod.option.advanced.sendExceptionToSentry": "Отправьте исключения для mod в Sentry",
   "config.rpmtw_platform_mod.option.advanced.sendExceptionToSentry.@Tooltip": "Отправьте исключения из mod в Sentry, чтобы помочь нам улучшить мод. (Все данные будут де идентифицированы, и мы не будем использовать их для других целей)",
