@@ -34,7 +34,7 @@ dependencies {
     // Remove the next line if you don't want to depend on the API
     modApi("dev.architectury:architectury-fabric:${project.property("architectury_version")}")
 
-//    modImplementation("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-FABRIC-SNAPSHOT")
+    modImplementation("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-FABRIC")
     modImplementation("com.terraformersmc:modmenu:${project.property("modmenu_version")}")
 
     "compileClasspath"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
