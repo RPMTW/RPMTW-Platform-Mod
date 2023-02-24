@@ -92,16 +92,16 @@ object RPMTWConfig {
 
     private fun listenOnSave(holder: ConfigHolder<ConfigObject>, oldConfig: ConfigObject) {
         var oldAccountType = oldConfig.universeChat.accountType
-        var oldRPMTWAuthToken = oldConfig.base.rpmtwAuthToken
+        var oldRPMTWAuthToken = oldConfig.rpmtwAuthToken
 
         holder.registerSaveListener { _, edited ->
-            if (edited.universeChat.accountType != oldAccountType || edited.base.rpmtwAuthToken != oldRPMTWAuthToken) {
+            if (edited.universeChat.accountType != oldAccountType || edited.rpmtwAuthToken != oldRPMTWAuthToken) {
                 UniverseChatHandler.restart()
             }
 
             // Save the new configs
             oldAccountType = edited.universeChat.accountType
-            oldRPMTWAuthToken = edited.base.rpmtwAuthToken
+            oldRPMTWAuthToken = edited.rpmtwAuthToken
 
             return@registerSaveListener InteractionResult.SUCCESS
         }
@@ -168,7 +168,7 @@ internal class RPMTWAccountEntry : AbstractConfigListEntry<Any?>(Component.liter
         super.render(matrices, index, y, x, entryWidth, entryHeight, mouseX, mouseY, isHovered, delta)
 
         val title = Component.translatable("auth.rpmtw_platform_mod.title")
-        val isLogin = RPMTWConfig.get().base.isLogin()
+        val isLogin = RPMTWConfig.get().isLogin()
         val authStatus: String = if (isLogin) {
             I18n.get("auth.rpmtw_platform_mod.status.logged_in")
         } else {

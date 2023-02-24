@@ -13,9 +13,6 @@ import net.fabricmc.api.Environment
 @Config(name = "rpmtw_platform_mod")
 @Environment(EnvType.CLIENT)
 class ConfigObject : ConfigData {
-    @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
-    var base = Base()
-
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = false)
     var translate = Translate()
 
@@ -27,15 +24,6 @@ class ConfigObject : ConfigData {
 
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = false)
     val advanced = Advanced()
-
-    class Base {
-        @ConfigEntry.Gui.Excluded
-        var rpmtwAuthToken: String? = null
-
-        fun isLogin(): Boolean {
-            return rpmtwAuthToken != null && rpmtwAuthToken!!.isNotEmpty()
-        }
-    }
 
     class Translate {
         @ConfigEntry.Gui.Tooltip(count = 1)
@@ -116,6 +104,17 @@ class ConfigObject : ConfigData {
         @ConfigEntry.Gui.Tooltip(count = 1)
         @ConfigEntry.Gui.RequiresRestart
         var sendExceptionToSentry = true
+    }
+
+
+    @ConfigEntry.Gui.Excluded
+    var rpmtwAuthToken: String? = null
+
+    @ConfigEntry.Gui.Excluded
+    var firstJoinLevel: Boolean = true
+
+    fun isLogin(): Boolean {
+        return rpmtwAuthToken != null && rpmtwAuthToken!!.isNotEmpty()
     }
 }
 
