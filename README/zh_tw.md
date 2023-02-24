@@ -60,6 +60,7 @@
 
 - Fabric `fabric/build/libs/rpmtw-platform-mod-*.jar`
 - Forge  `forge/build/libs/rpmtw-platform-mod-*.jar`
+- Quilt `quilt/build/libs/rpmtw-platform-mod-*.jar`
 
 ### ️ 使用的技術
 
@@ -70,6 +71,6 @@
 - [Cloth Config](https://github.com/shedaniel/cloth-config)
 - [Socket.IO](https://github.com/socketio/socket.io-client-java)
 
-## 🎓 許可證
+## 🎓 授權條款
 
 [GNU 通用公眾授權條款 3.0 版 (GPL3)](https://www.gnu.org/licenses/gpl-3.0.html)

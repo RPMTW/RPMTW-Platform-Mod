@@ -26,8 +26,8 @@ object UniverseChatHandler {
         }
 
     private suspend fun init() {
-        if (RPMTWConfig.get().base.isLogin() && RPMTWConfig.get().universeChat.accountType == UniverseChatAccountType.RPMTW) {
-            this.client.universeChatResource.connect(token = RPMTWConfig.get().base.rpmtwAuthToken!!)
+        if (RPMTWConfig.get().isLogin() && RPMTWConfig.get().universeChat.accountType == UniverseChatAccountType.RPMTW) {
+            this.client.universeChatResource.connect(token = RPMTWConfig.get().rpmtwAuthToken!!)
         } else {
             val user: User = Minecraft.getInstance().user
             this.client.universeChatResource.connect(minecraftUUID = user.uuid)

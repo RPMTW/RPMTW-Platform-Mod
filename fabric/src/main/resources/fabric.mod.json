@@ -7,7 +7,8 @@
   "authors": [
     "SiongSng (菘菘)",
     "watermelon_1024 (西瓜)",
-    "Yuta Yamamoto (裕太)"
+    "Yuta Yamamoto (裕太)",
+    "BennyDioxide"
   ],
   "contact": {
     "homepage": "https://rpmtw.com/",
@@ -25,15 +26,15 @@
       }
     ],
     "modmenu": [
-      "com.rpmtw.rpmtw_platform_mod.fabric.gui.ModMenuIntegration"
+      "com.rpmtw.rpmtw_platform_mod.fabriclike.gui.ModMenuIntegration"
     ]
   },
   "depends": {
-    "fabric": "*",
-    "minecraft": ">=1.19",
-    "architectury": ">=5.0.0",
-    "cloth-config2": ">=7.0.0",
-    "fabric-language-kotlin": "^1.8.0"
+    "fabric-api": "*",
+    "minecraft": ">=1.19.3",
+    "architectury": ">=7.0.0",
+    "cloth-config2": ">=9.0.0",
+    "fabric-language-kotlin": "^1.8.7"
   },
   "suggests": {
     "modmenu": ">=4.0.0"
@@ -47,7 +48,7 @@
   },
   "mixins": [
     "rpmtw_platform_mod.mixins.json",
-    "rpmtw_platform_mod.fabric.mixins.json"
+    "rpmtw_platform_mod.fabric_like.mixins.json"
   ],
   "accessWidener": "rpmtw_platform_mod.accesswidener"
 }

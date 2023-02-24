@@ -6,6 +6,7 @@ import com.mojang.brigadier.CommandDispatcher
 import dev.architectury.injectables.annotations.ExpectPlatform
 import net.minecraft.commands.CommandBuildContext
 import net.minecraft.commands.SharedSuggestionProvider
+import java.io.File
 
 @Suppress("UNUSED_PARAMETER")
 object RPMTWPlatformModPlugin {
@@ -29,4 +30,8 @@ object RPMTWPlatformModPlugin {
         // Just throw an error, the content should get replaced at runtime.
         throw AssertionError()
     }
+
+    @ExpectPlatform
+    @JvmStatic
+    fun getGameFolder(): File { throw AssertionError() }
 }
