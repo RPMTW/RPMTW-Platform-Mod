@@ -78,8 +78,10 @@
     "gui.rpmtw_platform_mod.self": "自己",
     "gui.rpmtw_platform_mod.send": "發送",
     "gui.rpmtw_platform_mod.close": "關閉",
+    "gui.rpmtw_platform_mod_open_link": "開啟連結",
     "machineTranslation.rpmtw_platform_mod.status.exception": "發生未知錯誤，狀態碼： %d，請稍後再試.",
     "machineTranslation.rpmtw_platform_mod.status.failed": "翻譯失敗： %s",
     "machineTranslation.rpmtw_platform_mod.status.rate_limit": "連線 Google 翻譯伺服器超出速率限制 (429)，請稍後再試。",
-    "machineTranslation.rpmtw_platform_mod.status.translating": "翻譯中..."
+    "machineTranslation.rpmtw_platform_mod.status.translating": "翻譯中...",
+    "messages.rpmtw_platform_mod.thanks": "§7-----------------------------------------------------\n§f感謝您使用 RPMTW Platform Mod，若有任何問題或想與大家一起聊天歡迎到我們的 Discord 社群伺服器。\n\n§f官方網站：%s\n§f官方 Discord 社群：%s\n\n§f此外，如要調整本模組的設定，可按下 %s 鍵來開啟。\n§7-----------------------------------------------------"
 }
