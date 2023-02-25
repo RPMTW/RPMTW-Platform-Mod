@@ -12,31 +12,25 @@ import net.minecraft.network.chat.Component
 class UniverseChatEULAScreen(private val initMessage: String?) : Screen(Component.empty()) {
     override fun init() {
 
-        val agreeButton = Button.builder(
+        val agreeButton = Button(
+            (width - 100) / 2 - GuiUtil.buttonWidth,
+            height / 2 + 30,
+            GuiUtil.buttonWidth, GuiUtil.buttonHeight,
             Component.translatable("universeChat.rpmtw_platform_mod.gui.eula.agree")
         ) {
             RPMTWConfig.get().universeChat.eula = true
             RPMTWConfig.save()
             Util.openUniverseChatScreen(initMessage)
-        }.bounds(
-            (width - 100) / 2 - GuiUtil.buttonWidth,
+        }
+
+        val disagreeButton = Button(
+            (width - 4) / 2 - GuiUtil.buttonWidth + 50,
             height / 2 + 30,
-            GuiUtil.buttonWidth, GuiUtil.buttonHeight
-        ).build()
-
-        val disagreeButton = Button.builder(
-
+            GuiUtil.buttonWidth, GuiUtil.buttonHeight,
             Component.translatable("universeChat.rpmtw_platform_mod.gui.eula.disagree")
         ) {
             GuiUtil.closeScreen()
         }
-            .bounds(
-                (width - 4) / 2 - GuiUtil.buttonWidth + 50,
-                height / 2 + 30,
-                GuiUtil.buttonWidth,
-                GuiUtil.buttonHeight
-            )
-            .build()
 
         val whatButton = UniverseChatWhatButton(width, height)
 

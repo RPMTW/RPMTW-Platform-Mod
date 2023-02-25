@@ -23,7 +23,6 @@ import me.shedaniel.clothconfig2.gui.entries.KeyCodeEntry
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.components.AbstractWidget
 import net.minecraft.client.gui.components.Button
-import net.minecraft.client.gui.components.Tooltip
 import net.minecraft.client.gui.components.events.GuiEventListener
 import net.minecraft.client.gui.narration.NarratableEntry
 import net.minecraft.client.gui.screens.Screen
@@ -176,23 +175,28 @@ internal class RPMTWAccountEntry : AbstractConfigListEntry<Any?>(Component.liter
         }
 
         if (!isLogin) {
-            val loginButton = Button.Builder(Component.translatable("auth.rpmtw_platform_mod.button.login")) {
-                RPMTWAuthHandler.login()
-            }
-                .bounds(entryWidth / 2 + 20, y + 10, 65, 20)
-                .tooltip(Tooltip.create(Component.translatable("auth.rpmtw_platform_mod.button.login.tooltip")))
-                .build()
+            val loginButton = Button(entryWidth / 2 + 20,
+                y + 10,
+                65,
+                20,
+                Component.translatable("auth.rpmtw_platform_mod.button.login"),
+                {
+                    RPMTWAuthHandler.login()
+                },
+                { _, matrixStack, i, j ->
+                    Minecraft.getInstance().screen?.renderTooltip(
+                        matrixStack, Component.translatable("auth.rpmtw_platform_mod.button.login.tooltip"), i, j
+                    )
+                })
 
             widgets = listOf(loginButton)
             loginButton.render(matrices, mouseX, mouseY, delta)
         } else {
-            val logoutButton = Button.builder(
-                Component.translatable("auth.rpmtw_platform_mod.button.logout")
+            val logoutButton = Button(
+                entryWidth / 2 + 20, y + 10, 65, 20, Component.translatable("auth.rpmtw_platform_mod.button.logout")
             ) {
                 RPMTWAuthHandler.logout()
             }
-                .bounds(entryWidth / 2 + 20, y + 10, 65, 20)
-                .build()
 
             widgets = listOf(logoutButton)
             logoutButton.render(matrices, mouseX, mouseY, delta)
