@@ -52,14 +52,14 @@ public class MixinBookContentClasspathLoader {
     }
 
     @Inject(at = @At("HEAD"), method = "loadJson", cancellable = true, remap = false)
-    private void loadJson(Book book, ResourceLocation file, @Nullable ResourceLocation fallback, CallbackInfoReturnable<JsonElement> callback) {
+    private void loadJson(Book book, ResourceLocation file, @Nullable ResourceLocation fallback, CallbackInfoReturnable<InputStream> callback) {
         RPMTWPlatformMod.LOGGER.debug("[Patchouli] Loading {}", file);
         ResourceManager manager = Minecraft.getInstance().getResourceManager();
         try {
             if (manager.hasResource(file)) {
-                callback.setReturnValue(BookContentLoader.streamToJson(manager.getResource(file).getInputStream()));
+                callback.setReturnValue(manager.getResource(file).getInputStream());
             } else if (fallback != null && manager.hasResource(fallback)) {
-                callback.setReturnValue(BookContentLoader.streamToJson(manager.getResource(fallback).getInputStream()));
+                callback.setReturnValue(manager.getResource(fallback).getInputStream());
             }
         } catch (IOException ex) {
             throw new UncheckedIOException(ex);
