@@ -3,7 +3,6 @@ package com.rpmtw.rpmtw_platform_mod.config
 import com.mojang.blaze3d.platform.InputConstants
 import com.mojang.blaze3d.vertex.PoseStack
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
-import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformModPlugin
 import com.rpmtw.rpmtw_platform_mod.handlers.RPMTWAuthHandler
 import com.rpmtw.rpmtw_platform_mod.handlers.UniverseChatHandler
 import me.shedaniel.autoconfig.AutoConfig
@@ -37,15 +36,15 @@ object RPMTWConfig {
     private var config: ConfigObject? = null
 
 
-    fun register() {
+    private fun register() {
         RPMTWPlatformMod.LOGGER.info("Registering config")
-        // register config
+        // Register config
         AutoConfig.register(ConfigObject::class.java) { definition: Config?, configClass: Class<ConfigObject?>? ->
             JanksonConfigSerializer(definition, configClass, buildJankson(Jankson.builder()))
         }
         val guiRegistry: GuiRegistry = AutoConfig.getGuiRegistry(ConfigObject::class.java)
 
-        // key mapping gui
+        // Key mapping gui
         guiRegistry.registerPredicateProvider({ i13n, field, config, defaults, _ ->
             if (field.isAnnotationPresent(ConfigEntry.Gui.Excluded::class.java)) return@registerPredicateProvider emptyList()
             val entry: KeyCodeEntry = ConfigEntryBuilder.create().startModifierKeyCodeField(
@@ -58,11 +57,10 @@ object RPMTWConfig {
             listOf(entry)
         }) { field -> field.type === ModifierKeyCode::class.java }
 
-        val holder: ConfigHolder<ConfigObject> = AutoConfig.getConfigHolder(ConfigObject::class.java)
+        val holder = AutoConfig.getConfigHolder(ConfigObject::class.java)
         config = holder.config
         listenOnSave(holder, holder.config)
 
-        RPMTWPlatformModPlugin.registerConfigScreen()
         RPMTWPlatformMod.LOGGER.info("Registered config")
     }
 
@@ -94,16 +92,16 @@ object RPMTWConfig {
 
     private fun listenOnSave(holder: ConfigHolder<ConfigObject>, oldConfig: ConfigObject) {
         var oldAccountType = oldConfig.universeChat.accountType
-        var oldRPMTWAuthToken = oldConfig.base.rpmtwAuthToken
+        var oldRPMTWAuthToken = oldConfig.rpmtwAuthToken
 
         holder.registerSaveListener { _, edited ->
-            if (edited.universeChat.accountType != oldAccountType || edited.base.rpmtwAuthToken != oldRPMTWAuthToken) {
+            if (edited.universeChat.accountType != oldAccountType || edited.rpmtwAuthToken != oldRPMTWAuthToken) {
                 UniverseChatHandler.restart()
             }
 
             // Save the new configs
             oldAccountType = edited.universeChat.accountType
-            oldRPMTWAuthToken = edited.base.rpmtwAuthToken
+            oldRPMTWAuthToken = edited.rpmtwAuthToken
 
             return@registerSaveListener InteractionResult.SUCCESS
         }
@@ -169,8 +167,8 @@ internal class RPMTWAccountEntry : AbstractConfigListEntry<Any?>(TextComponent("
     ) {
         super.render(matrices, index, y, x, entryWidth, entryHeight, mouseX, mouseY, isHovered, delta)
 
-        val title = TranslatableComponent("auth.rpmtw_platform_mod.title")
-        val isLogin = RPMTWConfig.get().base.isLogin()
+        val title = Component.translatable("auth.rpmtw_platform_mod.title")
+        val isLogin = RPMTWConfig.get().isLogin()
         val authStatus: String = if (isLogin) {
             I18n.get("auth.rpmtw_platform_mod.status.logged_in")
         } else {
