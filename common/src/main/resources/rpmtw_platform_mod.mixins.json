@@ -8,7 +8,9 @@
   },
   "client": [
     "ChatComponentMixin",
+    "FixPackCompatibility",
     "LanguageManagerMixin",
+    "LoadGameOptions",
     "RunClientCommandOnComponent"
   ]
 }
