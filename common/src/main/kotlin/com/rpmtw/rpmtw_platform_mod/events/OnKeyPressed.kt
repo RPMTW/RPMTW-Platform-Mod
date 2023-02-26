@@ -49,7 +49,7 @@ class OnKeyPressed : ClientRawInputEvent.KeyPressed {
 
     private fun reloadTranslatePack() {
         try {
-            TranslateResourcePack.load()
+            TranslateResourcePack.reload()
             RPMTWPlatformMod.LOGGER.info("Translate resource pack successful reloaded")
         } catch (e: Exception) {
             RPMTWPlatformMod.LOGGER.error("Failed to reload translate resource pack", e)
