@@ -62,11 +62,11 @@ object MTStorage {
         val path = "lang/$lang.json"
         try {
             val identifier = ResourceLocation(namespace, path)
-            val resourceList: List<Resource> = manager.getResourceStack(identifier)
+            val resourceList: List<Resource> = manager.getResources(identifier)
             for (resource in resourceList) {
                 val gson = Gson()
                 val jsonObject: JsonObject = gson.fromJson(
-                    InputStreamReader(resource.open(), StandardCharsets.UTF_8),
+                    InputStreamReader(resource.inputStream, StandardCharsets.UTF_8),
                     JsonObject::class.java
                 )
                 for ((key, value1) in jsonObject.entrySet()) {

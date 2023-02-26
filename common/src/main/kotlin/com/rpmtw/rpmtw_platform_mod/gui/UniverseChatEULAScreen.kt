@@ -7,36 +7,31 @@ import com.rpmtw.rpmtw_platform_mod.util.Util
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.resources.language.I18n
-import net.minecraft.network.chat.Component
+import net.minecraft.network.chat.TextComponent
+import net.minecraft.network.chat.TranslatableComponent
 
-class UniverseChatEULAScreen(private val initMessage: String?) : Screen(Component.empty()) {
+class UniverseChatEULAScreen(private val initMessage: String?) : Screen(TextComponent.EMPTY) {
     override fun init() {
 
-        val agreeButton = Button.builder(
-            Component.translatable("universeChat.rpmtw_platform_mod.gui.eula.agree")
+        val agreeButton = Button(
+            (width - 100) / 2 - GuiUtil.buttonWidth,
+            height / 2 + 30,
+            GuiUtil.buttonWidth, GuiUtil.buttonHeight,
+            TranslatableComponent("universeChat.rpmtw_platform_mod.gui.eula.agree")
         ) {
             RPMTWConfig.get().universeChat.eula = true
             RPMTWConfig.save()
             Util.openUniverseChatScreen(initMessage)
-        }.bounds(
-            (width - 100) / 2 - GuiUtil.buttonWidth,
+        }
+
+        val disagreeButton = Button(
+            (width - 4) / 2 - GuiUtil.buttonWidth + 50,
             height / 2 + 30,
-            GuiUtil.buttonWidth, GuiUtil.buttonHeight
-        ).build()
-
-        val disagreeButton = Button.builder(
-
-            Component.translatable("universeChat.rpmtw_platform_mod.gui.eula.disagree")
+            GuiUtil.buttonWidth, GuiUtil.buttonHeight,
+            TranslatableComponent("universeChat.rpmtw_platform_mod.gui.eula.disagree")
         ) {
             GuiUtil.closeScreen()
         }
-            .bounds(
-                (width - 4) / 2 - GuiUtil.buttonWidth + 50,
-                height / 2 + 30,
-                GuiUtil.buttonWidth,
-                GuiUtil.buttonHeight
-            )
-            .build()
 
         val whatButton = UniverseChatWhatButton(width, height)
 

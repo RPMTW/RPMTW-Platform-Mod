@@ -9,7 +9,7 @@
   "client": [
     "ChatComponentMixin",
     "LanguageManagerMixin",
-    "RunClientCommandOnComponent",
-    "LoadGameOptions"
+    "LoadGameOptions",
+    "RunClientCommandOnComponent"
   ]
 }

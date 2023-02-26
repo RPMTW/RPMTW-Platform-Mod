@@ -4,7 +4,6 @@ package com.rpmtw.rpmtw_platform_mod
 
 import com.mojang.brigadier.CommandDispatcher
 import dev.architectury.injectables.annotations.ExpectPlatform
-import net.minecraft.commands.CommandBuildContext
 import net.minecraft.commands.SharedSuggestionProvider
 import java.io.File
 
@@ -19,7 +18,7 @@ object RPMTWPlatformModPlugin {
 
     @JvmStatic
     @ExpectPlatform
-    fun dispatchClientCommand(callback: (dispatcher: CommandDispatcher<SharedSuggestionProvider>, buildContext: CommandBuildContext) -> Unit) {
+    fun dispatchClientCommand(callback: (dispatcher: CommandDispatcher<SharedSuggestionProvider>) -> Unit) {
         // Just throw an error, the content should get replaced at runtime.
         throw AssertionError()
     }

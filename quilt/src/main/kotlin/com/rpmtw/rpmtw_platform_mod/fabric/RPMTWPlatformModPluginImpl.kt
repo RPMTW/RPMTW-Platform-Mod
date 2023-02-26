@@ -1,7 +1,6 @@
 package com.rpmtw.rpmtw_platform_mod.fabric
 
 import com.mojang.brigadier.CommandDispatcher
-import net.minecraft.commands.CommandBuildContext
 import net.minecraft.commands.SharedSuggestionProvider
 import org.quiltmc.loader.api.QuiltLoader
 import org.quiltmc.qsl.command.api.client.ClientCommandRegistrationCallback
@@ -17,16 +16,16 @@ object RPMTWPlatformModPluginImpl {
     }
 
     @JvmStatic
-    fun dispatchClientCommand(callback: (CommandDispatcher<SharedSuggestionProvider>, buildContext: CommandBuildContext) -> Unit) {
-        ClientCommandRegistrationCallback.EVENT.register(ClientCommandRegistrationCallback { dispatcher: CommandDispatcher<QuiltClientCommandSource?>, buildContext: CommandBuildContext, _ ->
+    fun dispatchClientCommand(callback: (CommandDispatcher<SharedSuggestionProvider>) -> Unit) {
+        ClientCommandRegistrationCallback.EVENT.register(ClientCommandRegistrationCallback { dispatcher: CommandDispatcher<QuiltClientCommandSource?> ->
             @Suppress("UNCHECKED_CAST")
-            callback(dispatcher as CommandDispatcher<SharedSuggestionProvider>, buildContext)
+            callback(dispatcher as CommandDispatcher<SharedSuggestionProvider>)
         })
     }
 
     @JvmStatic
     fun executeClientCommand(command: String): Boolean {
-        return ClientCommandInternals.executeCommand(command, false)
+        return ClientCommandInternals.executeCommand(command)
     }
 
     @JvmStatic

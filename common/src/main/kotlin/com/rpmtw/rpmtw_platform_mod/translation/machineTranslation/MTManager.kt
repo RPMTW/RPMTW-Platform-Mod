@@ -12,9 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import net.minecraft.ChatFormatting
 import net.minecraft.client.resources.language.I18n
-import net.minecraft.network.chat.Component
-import net.minecraft.network.chat.MutableComponent
-import net.minecraft.network.chat.TextColor
+import net.minecraft.network.chat.*
 import org.apache.http.client.utils.URIBuilder
 import java.io.File
 import java.lang.reflect.Type
@@ -45,7 +43,7 @@ object MTManager {
                 it.withColor(ChatFormatting.GREEN)
             }
         } else if (info?.status == MTDataStatus.FAILED && info.error != null) {
-            Component.literal(I18n.get("machineTranslation.rpmtw_platform_mod.status.failed", info.error)).withStyle(
+            TextComponent(I18n.get("machineTranslation.rpmtw_platform_mod.status.failed", info.error)).withStyle(
                 ChatFormatting.RED
             )
         } else if (translatingCount >= maxTranslatingCount) {
@@ -114,7 +112,7 @@ object MTManager {
         fun getArgument(i: Int): Component {
             return when (val obj = args.getOrNull(i)) {
                 null -> {
-                    Component.empty()
+                    TextComponent.EMPTY
                 }
 
                 is Component -> {
@@ -122,12 +120,12 @@ object MTManager {
                 }
 
                 else -> {
-                    Component.literal(obj.toString())
+                    TextComponent(obj.toString())
                 }
             }
         }
 
-        val component: MutableComponent = Component.empty()
+        val component: MutableComponent = TextComponent.EMPTY.copy()
 
         val matcher = formatPattern.matcher(text)
         try {
@@ -187,7 +185,7 @@ object MTManager {
     }
 
     private fun generateProgressText(): MutableComponent {
-        val text = Component.translatable("machineTranslation.rpmtw_platform_mod.status.translating")
+        val text = TranslatableComponent("machineTranslation.rpmtw_platform_mod.status.translating")
             .withStyle(ChatFormatting.GRAY)
         for (i in 0 until System.currentTimeMillis() % 400 / 100) {
             text.append(".")

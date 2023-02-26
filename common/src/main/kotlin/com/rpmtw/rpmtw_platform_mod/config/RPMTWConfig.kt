@@ -23,12 +23,12 @@ import me.shedaniel.clothconfig2.gui.entries.KeyCodeEntry
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.components.AbstractWidget
 import net.minecraft.client.gui.components.Button
-import net.minecraft.client.gui.components.Tooltip
 import net.minecraft.client.gui.components.events.GuiEventListener
 import net.minecraft.client.gui.narration.NarratableEntry
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.resources.language.I18n
-import net.minecraft.network.chat.Component
+import net.minecraft.network.chat.TextComponent
+import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.world.InteractionResult
 import java.util.*
 
@@ -48,7 +48,7 @@ object RPMTWConfig {
         guiRegistry.registerPredicateProvider({ i13n, field, config, defaults, _ ->
             if (field.isAnnotationPresent(ConfigEntry.Gui.Excluded::class.java)) return@registerPredicateProvider emptyList()
             val entry: KeyCodeEntry = ConfigEntryBuilder.create().startModifierKeyCodeField(
-                Component.translatable(i13n), getUnsafely(field, config, ModifierKeyCode.unknown())
+                TranslatableComponent(i13n), getUnsafely(field, config, ModifierKeyCode.unknown())
             ).setModifierDefaultValue {
                 getUnsafely(
                     field, defaults
@@ -143,7 +143,7 @@ object RPMTWConfig {
     }
 }
 
-internal class RPMTWAccountEntry : AbstractConfigListEntry<Any?>(Component.literal("rpmtw_account"), false) {
+internal class RPMTWAccountEntry : AbstractConfigListEntry<Any?>(TextComponent("rpmtw_account"), false) {
 
     private var widgets: List<AbstractWidget> = listOf()
 
@@ -167,7 +167,7 @@ internal class RPMTWAccountEntry : AbstractConfigListEntry<Any?>(Component.liter
     ) {
         super.render(matrices, index, y, x, entryWidth, entryHeight, mouseX, mouseY, isHovered, delta)
 
-        val title = Component.translatable("auth.rpmtw_platform_mod.title")
+        val title = TranslatableComponent("auth.rpmtw_platform_mod.title")
         val isLogin = RPMTWConfig.get().isLogin()
         val authStatus: String = if (isLogin) {
             I18n.get("auth.rpmtw_platform_mod.status.logged_in")
@@ -176,23 +176,28 @@ internal class RPMTWAccountEntry : AbstractConfigListEntry<Any?>(Component.liter
         }
 
         if (!isLogin) {
-            val loginButton = Button.Builder(Component.translatable("auth.rpmtw_platform_mod.button.login")) {
-                RPMTWAuthHandler.login()
-            }
-                .bounds(entryWidth / 2 + 20, y + 10, 65, 20)
-                .tooltip(Tooltip.create(Component.translatable("auth.rpmtw_platform_mod.button.login.tooltip")))
-                .build()
+            val loginButton = Button(entryWidth / 2 + 20,
+                y + 10,
+                65,
+                20,
+                TranslatableComponent("auth.rpmtw_platform_mod.button.login"),
+                {
+                    RPMTWAuthHandler.login()
+                },
+                { _, matrixStack, i, j ->
+                    Minecraft.getInstance().screen?.renderTooltip(
+                        matrixStack, TranslatableComponent("auth.rpmtw_platform_mod.button.login.tooltip"), i, j
+                    )
+                })
 
             widgets = listOf(loginButton)
             loginButton.render(matrices, mouseX, mouseY, delta)
         } else {
-            val logoutButton = Button.builder(
-                Component.translatable("auth.rpmtw_platform_mod.button.logout")
+            val logoutButton = Button(
+                entryWidth / 2 + 20, y + 10, 65, 20, TranslatableComponent("auth.rpmtw_platform_mod.button.logout")
             ) {
                 RPMTWAuthHandler.logout()
             }
-                .bounds(entryWidth / 2 + 20, y + 10, 65, 20)
-                .build()
 
             widgets = listOf(logoutButton)
             logoutButton.render(matrices, mouseX, mouseY, delta)
