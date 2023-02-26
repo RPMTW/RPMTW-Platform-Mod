@@ -43,7 +43,7 @@ object RPMTWAuthHandler {
                     handler.responseHeaders.add("Content-Type", "text/plain; charset=utf-8")
 
                     if (token != null) {
-                        RPMTWConfig.get().base.rpmtwAuthToken = token
+                        RPMTWConfig.get().rpmtwAuthToken = token
                         RPMTWConfig.save()
                         UniverseChatHandler.restart()
 
@@ -90,8 +90,8 @@ object RPMTWAuthHandler {
     }
 
     fun logout() {
-        if (!RPMTWConfig.get().base.isLogin()) return
-        RPMTWConfig.get().base.rpmtwAuthToken = null
+        if (!RPMTWConfig.get().isLogin()) return
+        RPMTWConfig.get().rpmtwAuthToken = null
         RPMTWConfig.save()
         UniverseChatHandler.restart()
     }
