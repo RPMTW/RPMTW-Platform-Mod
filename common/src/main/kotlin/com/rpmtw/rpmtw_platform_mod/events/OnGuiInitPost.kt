@@ -14,7 +14,7 @@ import net.minecraft.client.gui.components.EditBox
 import net.minecraft.client.gui.screens.ChatScreen
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.resources.language.I18n
-import net.minecraft.network.chat.TranslatableComponent
+import net.minecraft.network.chat.Component
 
 @Environment(EnvType.CLIENT)
 class OnGuiInitPost : ClientGuiEvent.ScreenInitPost {
@@ -50,11 +50,11 @@ class OnGuiInitPost : ClientGuiEvent.ScreenInitPost {
                     scaledHeight - 40,
                     90,
                     20,
-                    TranslatableComponent("universeChat.rpmtw_platform_mod.button.send"),
+                    Component.translatable("universeChat.rpmtw_platform_mod.button.send"),
                     {
                         Util.openUniverseChatScreen(textField?.value)
                     },
-                    TranslatableComponent("universeChat.rpmtw_platform_mod.button.send.tooltip")
+                    Component.translatable("universeChat.rpmtw_platform_mod.button.send.tooltip")
                 )
 
                 val checkbox = RPMTWCheckbox(
@@ -62,7 +62,7 @@ class OnGuiInitPost : ClientGuiEvent.ScreenInitPost {
                     scaledHeight - 40,
                     20,
                     20,
-                    TranslatableComponent("universeChat.rpmtw_platform_mod.button.receive"),
+                    Component.translatable("universeChat.rpmtw_platform_mod.button.receive"),
                     RPMTWConfig.get().universeChat.enableReceiveMessage,
                     { checked ->
                         RPMTWConfig.get().universeChat.enableReceiveMessage = checked

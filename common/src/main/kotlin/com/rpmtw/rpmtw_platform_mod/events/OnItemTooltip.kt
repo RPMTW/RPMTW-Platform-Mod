@@ -12,7 +12,7 @@ import net.fabricmc.api.Environment
 import net.minecraft.ChatFormatting
 import net.minecraft.client.Minecraft
 import net.minecraft.network.chat.Component
-import net.minecraft.network.chat.TranslatableComponent
+import net.minecraft.network.chat.contents.TranslatableContents
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 
@@ -60,8 +60,8 @@ class OnItemTooltip : ClientTooltipEvent.Item {
                             load(0, itemKey)
                         }
 
-                        val contents = line.siblings
-                        if (contents is TranslatableComponent) {
+                        val contents = line.contents
+                        if (contents is TranslatableContents) {
                             load(index, contents.key, *contents.args)
                         }
                     }
@@ -69,7 +69,7 @@ class OnItemTooltip : ClientTooltipEvent.Item {
 
                 // Check if the feature for unlocalized names is enabled and differs from translation
                 if (RPMTWConfig.get().translate.unlocalized && unlocalizedName != itemStack.displayName.string) {
-                    lines.add(1, TranslatableComponent(unlocalizedName).withStyle(ChatFormatting.GRAY))
+                    lines.add(1, Component.literal(unlocalizedName).withStyle(ChatFormatting.GRAY))
                 }
             }
 

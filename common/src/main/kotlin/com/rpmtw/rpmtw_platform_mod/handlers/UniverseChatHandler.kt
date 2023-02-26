@@ -35,7 +35,7 @@ object UniverseChatHandler {
     }
 
     private fun formatUrl(message: String): MutableComponent {
-        val component: MutableComponent = TextComponent.EMPTY.copy()
+        val component: MutableComponent = Component.empty()
         @Suppress("RegExpRedundantEscape") val urlRegex =
             Regex("(http|https):\\/\\/[\\w-]+(\\.[\\w-]+)+([\\w.,@?^=%&amp;:/~+#-]*[\\w@?^=%&amp;/~+#-])?")
         val urlMatchList: List<MatchResult> = urlRegex.findAll(message).toList()
@@ -44,7 +44,7 @@ object UniverseChatHandler {
             for (match in urlMatchList) {
                 component.append(message.substring(lastEnd, match.range.first))
                 val url = match.value
-                val urlComponent = TextComponent(url).setStyle(
+                val urlComponent = Component.literal(url).setStyle(
                     Style.EMPTY.withUnderlined(true).withColor(ChatFormatting.BLUE)
                         .withClickEvent(ClickEvent(ClickEvent.Action.OPEN_URL, url))
                 )
@@ -53,7 +53,7 @@ object UniverseChatHandler {
             }
             component.append(message.substring(lastEnd + 1))
         } else {
-            component.append(TextComponent(message))
+            component.append(Component.literal(message))
         }
         return component
     }
@@ -114,9 +114,9 @@ object UniverseChatHandler {
 
                         val isReply: Boolean = msg.replyMessageUUID != null
 
-                        val component: MutableComponent = TextComponent.EMPTY.copy()
+                        val component: MutableComponent = Component.empty()
                         val title =
-                            TextComponent("[${I18n.get("universeChat.rpmtw_platform_mod.title")}] ").setStyle(
+                            Component.literal("[${I18n.get("universeChat.rpmtw_platform_mod.title")}] ").setStyle(
                                 Style.EMPTY.withColor(ChatFormatting.BLUE)
                             )
                         val authorName: String = formatAuthorName(msg)
@@ -129,13 +129,13 @@ object UniverseChatHandler {
                         ).withHoverEvent(
                             HoverEvent(
                                 HoverEvent.Action.SHOW_TEXT,
-                                TranslatableComponent("universeChat.rpmtw_platform_mod.open_avatar_url")
+                                Component.translatable("universeChat.rpmtw_platform_mod.open_avatar_url")
                             )
                         )
-                        val author = TextComponent("§e<§6${authorName}§e> ").setStyle(authorStyle)
+                        val author = Component.literal("§e<§6${authorName}§e> ").setStyle(authorStyle)
 
                         val messageAction: MutableComponent =
-                            TextComponent("  [-]")
+                            Component.literal("  [-]")
 
                         messageAction.style = messageAction.style.withColor(ChatFormatting.GREEN).withClickEvent(
                             ClickEvent(
@@ -143,14 +143,14 @@ object UniverseChatHandler {
                             )
                         ).withHoverEvent(
                             HoverEvent(
-                                HoverEvent.Action.SHOW_TEXT, TextComponent(
+                                HoverEvent.Action.SHOW_TEXT, Component.literal(
                                     I18n.get("universeChat.rpmtw_platform_mod.gui.action")
                                 )
                             )
                         )
 
                         val messageContent = formatMessage(msg.message)
-                        val message: MutableComponent = TextComponent.EMPTY.copy()
+                        val message: MutableComponent = Component.empty()
                         if (isReply) {
                             val replyMessage: UniverseChatMessage? = getMessageAsync(msg.replyMessageUUID!!)
 
@@ -180,7 +180,7 @@ object UniverseChatHandler {
                         component.append(author)
                         component.append(message)
                         component.append(
-                            TextComponent.EMPTY.copy().setStyle(
+                            Component.empty().setStyle(
                                 Style.EMPTY.withClickEvent(
                                     ClickEvent(
                                         ClickEvent.Action.OPEN_URL,
