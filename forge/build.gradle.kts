@@ -25,8 +25,8 @@ dependencies {
     modApi("me.shedaniel.cloth:cloth-config-forge:${project.property("cloth_config_version").toString()}")
 
     // Optional mod dependencies
-    modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}:api")
-    modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}")
+     modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}:api")
+     modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}")
 
     // Dependencies for the mod
     bundle(
@@ -48,8 +48,8 @@ dependencies {
         )
     )
 
-    forgeRuntimeLibrary(kotlin("stdlib-jdk8", version = "1.6.10"))
-    forgeRuntimeLibrary(kotlin("reflect", version = "1.6.10"))
+    forgeRuntimeLibrary(kotlin("stdlib-jdk8", version = "1.7.22"))
+    forgeRuntimeLibrary(kotlin("reflect", version = "1.7.22"))
     forgeRuntimeLibrary("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
 
     "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }

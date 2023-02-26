@@ -41,13 +41,12 @@ import java.util.Objects;
 @Mixin(value = ChatComponent.class, priority = 100)
 @Environment(EnvType.CLIENT)
 public class ChatComponentMixin {
-
     @Shadow
     @Final
-    private List<GuiMessage<FormattedCharSequence>> trimmedMessages;
+    private List<GuiMessage.Line> trimmedMessages;
     @Shadow
     @Final
-    private List<GuiMessage<Component>> allMessages;
+    private List<GuiMessage> allMessages;
 
     @Inject(method = "addMessage(Lnet/minecraft/network/chat/Component;)V", at = @At("HEAD"))
     public void addMessage(Component component, CallbackInfo ci) {
@@ -64,7 +63,7 @@ public class ChatComponentMixin {
     }
 
 
-    @ModifyArg(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Font;drawShadow(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/util/FormattedCharSequence;FFI)I", ordinal = 0), method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;I)V", index = 2)
+    @ModifyArg(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Font;drawShadow(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/util/FormattedCharSequence;FFI)I", ordinal = 0), method = "render", index = 2)
     public float moveTheText(PoseStack poseStack, FormattedCharSequence formattedCharSequence, float f, float y, int color) {
         Component chatComponent = getLastComponent();
         if (chatComponent == null) return 0.0F;
@@ -76,15 +75,15 @@ public class ChatComponentMixin {
     }
 
 
-    @ModifyArg(at = @At(value = "INVOKE", target = "Ljava/util/List;get(I)Ljava/lang/Object;", ordinal = 0), method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;I)V", index = 0)
+    @ModifyArg(at = @At(value = "INVOKE", target = "Ljava/util/List;get(I)Ljava/lang/Object;", ordinal = 0), method = "render", index = 0)
     public int getLastMessage(int index) {
         ChatComponentData.INSTANCE.setLastMessageIndex(index);
         return index;
     }
 
 
-    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Font;drawShadow(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/util/FormattedCharSequence;FFI)I", ordinal = 0), method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;I)V")
-    public void render(PoseStack matrixStack, int i, CallbackInfo ci) {
+    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Font;drawShadow(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/util/FormattedCharSequence;FFI)I", ordinal = 0), method = "render")
+    public void render(PoseStack poseStack, int i, int j, int k, CallbackInfo ci) {
         try {
             Component chatComponent = getLastComponent();
             if (chatComponent == null) return;
@@ -96,9 +95,9 @@ public class ChatComponentMixin {
             RenderSystem.setShaderTexture(0, location);
             RenderSystem.enableBlend();
             // Draw base layer
-            GuiComponent.blit(matrixStack, 0, ChatComponentData.INSTANCE.getLastY(), 8, 8, 8.0F, 8, 8, 8, 8, 8);
+            GuiComponent.blit(poseStack, 0, ChatComponentData.INSTANCE.getLastY(), 8, 8, 8.0F, 8, 8, 8, 8, 8);
             // Draw hat
-            GuiComponent.blit(matrixStack, 0, ChatComponentData.INSTANCE.getLastY(), 8, 8, 40.0F, 8, 8, 8, 8, 8);
+            GuiComponent.blit(poseStack, 0, ChatComponentData.INSTANCE.getLastY(), 8, 8, 40.0F, 8, 8, 8, 8, 8);
             RenderSystem.setShaderColor(1, 1, 1, 1);
             RenderSystem.disableBlend();
         } catch (Exception e) {
@@ -114,7 +113,7 @@ public class ChatComponentMixin {
         return x - ChatComponentData.offset;
     }
 
-    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/ChatComponent;getWidth()I"), method = "addMessage(Lnet/minecraft/network/chat/Component;IIZ)V", require = 0)
+    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/ChatComponent;getWidth()I"), method = "addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;ILnet/minecraft/client/GuiMessageTag;Z)V", require = 0)
     public int fixTextOverflow(ChatComponent chatHud) {
         Component chatComponent = getLastComponent();
         if (chatComponent == null) return chatHud.getWidth();
@@ -166,11 +165,11 @@ public class ChatComponentMixin {
     @Nullable
     private Component getLastComponent() {
         try {
-            GuiMessage<FormattedCharSequence> line = trimmedMessages.get(ChatComponentData.INSTANCE.getLastMessageIndex());
-            GuiMessage<Component> guiMessage = allMessages.stream().filter(msg -> msg.getAddedTime() == line.getAddedTime()).findFirst().orElse(null);
+            GuiMessage.Line line = trimmedMessages.get(ChatComponentData.INSTANCE.getLastMessageIndex());
+            GuiMessage guiMessage = allMessages.stream().filter(msg -> msg.addedTime() == line.addedTime()).findFirst().orElse(null);
             if (guiMessage == null) return null;
 
-            List<Component> siblings = guiMessage.getMessage().getSiblings();
+            List<Component> siblings = guiMessage.content().getSiblings();
 
             return siblings.stream().filter(sibling -> getAvatarUrl(sibling) != null).findFirst().orElse(null);
         } catch (Exception e) {

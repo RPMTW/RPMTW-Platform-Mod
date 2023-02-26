@@ -9,25 +9,21 @@ import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.components.EditBox
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.resources.language.I18n
-import net.minecraft.network.chat.TextComponent
-import net.minecraft.network.chat.TranslatableComponent
+import net.minecraft.network.chat.Component
 
 class UniverseChatScreen(
     private val type: UniverseChatScreenType,
     private val toReply: UniverseChatMessage? = null
 ) :
-    Screen(TextComponent.EMPTY) {
+    Screen(Component.empty()) {
     private lateinit var messageEditBox: EditBox
 
     override fun init() {
         val whatButton = UniverseChatWhatButton(width, height)
 
-        val sendButton = Button(
-            (width - 4) / 2 - GuiUtil.buttonWidth + 50,
-            height / 2 + 30,
-            GuiUtil.buttonWidth,
-            GuiUtil.buttonHeight,
-            TranslatableComponent("gui.rpmtw_platform_mod.${type.name.lowercase()}")
+        val sendButton = Button.builder(
+
+            Component.translatable("gui.rpmtw_platform_mod.${type.name.lowercase()}")
         ) {
             val message: String = messageEditBox.value
             if (message.isEmpty()) {
@@ -51,15 +47,22 @@ class UniverseChatScreen(
 
             }
             GuiUtil.closeScreen()
-        }
+        }.bounds(
+            (width - 4) / 2 - GuiUtil.buttonWidth + 50,
+            height / 2 + 30,
+            GuiUtil.buttonWidth,
+            GuiUtil.buttonHeight
+        ).build()
 
 
-        val cancelButton = Button(
-            (width - 100) / 2 - GuiUtil.buttonWidth, height / 2 + 30, GuiUtil.buttonWidth,
-            GuiUtil.buttonHeight, TranslatableComponent("gui.rpmtw_platform_mod.cancel")
+        val cancelButton = Button.builder(
+            Component.translatable("gui.rpmtw_platform_mod.cancel")
         ) {
             GuiUtil.closeScreen()
-        }
+        }.bounds(
+            (width - 100) / 2 - GuiUtil.buttonWidth, height / 2 + 30, GuiUtil.buttonWidth,
+            GuiUtil.buttonHeight
+        ).build()
 
         val suggestion: String = I18n.get("universeChat.rpmtw_platform_mod.gui.input.tooltip")
         val messageEditBoxWidth = (font.width(suggestion) * 1.5).toInt()
@@ -70,7 +73,7 @@ class UniverseChatScreen(
             height / 2 - 10,
             messageEditBoxWidth,
             20,
-            TextComponent(suggestion),
+            Component.literal(suggestion),
         ) {
             init {
                 setSuggestion(suggestion)
