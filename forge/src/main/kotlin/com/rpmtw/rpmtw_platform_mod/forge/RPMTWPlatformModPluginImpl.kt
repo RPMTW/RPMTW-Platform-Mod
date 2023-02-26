@@ -43,9 +43,4 @@ object RPMTWPlatformModPluginImpl {
     fun getGameFolder(): File {
         return Minecraft.getInstance().gameDirectory
     }
-
-    @JvmStatic
-    fun getGameFolder(): File {
-        return Minecraft.getInstance().gameDirectory
-    }
 }

@@ -31,7 +31,7 @@ public class MixinBookContentClasspathLoader {
     @Inject(at = @At("HEAD"), method = "findFiles")
     private void findFiles(Book book, String dir, List<ResourceLocation> list, CallbackInfo ci) {
         String prefix = String.format("%s/%s/%s/%s", BookRegistry.BOOKS_LOCATION, book.id.getPath(), BookContentsBuilder.DEFAULT_LANG, dir);
-        Collection<ResourceLocation> files = Minecraft.getInstance().getResourceManager().listResources(prefix, p -> p.getPath().endsWith(".json")).keySet();
+        Collection<ResourceLocation> files = Minecraft.getInstance().getResourceManager().listResources(prefix, p -> p.endsWith(".json"));
 
         files.stream()
             .distinct()
@@ -57,11 +57,10 @@ public class MixinBookContentClasspathLoader {
         RPMTWPlatformMod.LOGGER.debug("[Patchouli] Loading {}", file);
         ResourceManager manager = Minecraft.getInstance().getResourceManager();
         try {
-            var resource = manager.getResource(file);
-            if (resource.isPresent()) {
-                callback.setReturnValue(BookContentLoader.streamToJson(resource.get().open()));
-            } else if (fallback != null && (resource = manager.getResource(fallback)).isPresent()) {
-                callback.setReturnValue(BookContentLoader.streamToJson(resource.get().open()));
+            if (manager.hasResource(file)) {
+                callback.setReturnValue(BookContentLoader.streamToJson(manager.getResource(file).getInputStream()));
+            } else if (fallback != null && manager.hasResource(fallback)) {
+                callback.setReturnValue(BookContentLoader.streamToJson(manager.getResource(fallback).getInputStream()));
             }
         } catch (IOException ex) {
             throw new UncheckedIOException(ex);

@@ -167,7 +167,7 @@ internal class RPMTWAccountEntry : AbstractConfigListEntry<Any?>(TextComponent("
     ) {
         super.render(matrices, index, y, x, entryWidth, entryHeight, mouseX, mouseY, isHovered, delta)
 
-        val title = Component.translatable("auth.rpmtw_platform_mod.title")
+        val title = TranslatableComponent("auth.rpmtw_platform_mod.title")
         val isLogin = RPMTWConfig.get().isLogin()
         val authStatus: String = if (isLogin) {
             I18n.get("auth.rpmtw_platform_mod.status.logged_in")

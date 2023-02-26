@@ -3,11 +3,13 @@ package com.rpmtw.rpmtw_platform_mod.translation.resourcepack
 import com.google.gson.Gson
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformModPlugin
+import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.util.Util
 import net.minecraft.client.Minecraft
 import org.apache.commons.io.FileUtils
 import java.io.File
 import java.net.URL
+import java.nio.charset.StandardCharsets
 
 object TranslateResourcePack {
     private const val fileName = "RPMTW-Translate-Resource-Pack-1.18.zip"

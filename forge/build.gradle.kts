@@ -25,8 +25,8 @@ dependencies {
     modApi("me.shedaniel.cloth:cloth-config-forge:${project.property("cloth_config_version").toString()}")
 
     // Optional mod dependencies
-    modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-SNAPSHOT:api")
-    modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-SNAPSHOT")
+    modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}:api")
+    modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}")
 
     // Dependencies for the mod
     bundle(
