@@ -69,7 +69,7 @@ dependencies {
         exclude(group = "net.fabricmc.fabric-api")
     }
 
-    modImplementation("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-FABRIC-SNAPSHOT") {
+    modImplementation("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-FABRIC") {
         exclude(group = "net.fabricmc")
         exclude(group = "net.fabricmc.fabric-api")
     }

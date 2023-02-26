@@ -30,23 +30,24 @@ object MTStorage {
 
     fun load(manager: ResourceManager) {
         Util.coroutineLaunch {
+            val needLoad = RPMTWConfig.get().translate.unlocalized || RPMTWConfig.get().translate.machineTranslation
+            if (!needLoad) return@coroutineLaunch
+
             RPMTWPlatformMod.LOGGER.info("[Machine Translation] Loading resources...")
             val currentLanguage = GameLanguage.getMinecraft()
             unlocalizedMap.clear()
             currentLanguageKeys.clear()
 
-            if (RPMTWConfig.get().translate.unlocalized || RPMTWConfig.get().translate.machineTranslation) {
-                for (namespace in manager.namespaces) {
-                    loadResource("en_us", { key, value ->
-                        unlocalizedMap[key] = value
-                    }, namespace, manager)
+            for (namespace in manager.namespaces) {
+                loadResource("en_us", { key, value ->
+                    unlocalizedMap[key] = value
+                }, namespace, manager)
 
-                    if (currentLanguage != GameLanguage.English) {
-                        // Only load current language
-                        loadResource(currentLanguage.code, { key, _ ->
-                            currentLanguageKeys.add(key)
-                        }, namespace, manager)
-                    }
+                if (currentLanguage != GameLanguage.English) {
+                    // Only load the language file of the current language.
+                    loadResource(currentLanguage.code, { key, _ ->
+                        currentLanguageKeys.add(key)
+                    }, namespace, manager)
                 }
             }
         }
