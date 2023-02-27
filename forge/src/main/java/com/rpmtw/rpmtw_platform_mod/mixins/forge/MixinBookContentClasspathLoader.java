@@ -7,8 +7,8 @@ import com.google.common.base.Preconditions;
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -58,21 +58,17 @@ public class MixinBookContentClasspathLoader {
                     return new ResourceLocation(file.getNamespace(), newPath);
                 })
                 .forEach(list::add);
-
     }
 
-    @Inject(at = @At("HEAD"), method = "loadJson", remap = false, cancellable = true)
-    private void loadJson(ResourceLocation location, ResourceLocation fallback, CallbackInfoReturnable<InputStream> callback) {
-        RPMTWPlatformMod.LOGGER.debug("[Patchouli] Loading {}", location);
+    @Inject(at = @At("HEAD"), method = "loadJson", cancellable = true, remap = false)
+    private void loadJson(Book book, ResourceLocation file, @Nullable ResourceLocation fallback, CallbackInfoReturnable<InputStream> callback) {
+        RPMTWPlatformMod.LOGGER.debug("[Patchouli] Loading {}", file);
         ResourceManager manager = Minecraft.getInstance().getResourceManager();
         try {
-            Resource resource = manager.getResource(location);
-
-            if (resource != null) {
-                callback.setReturnValue(resource.getInputStream());
-            } else if (fallback != null) {
-                Resource fallbackResource = manager.getResource(fallback);
-                callback.setReturnValue(fallbackResource.getInputStream());
+            if (manager.hasResource(file)) {
+                callback.setReturnValue(manager.getResource(file).getInputStream());
+            } else if (fallback != null && manager.hasResource(fallback)) {
+                callback.setReturnValue(manager.getResource(fallback).getInputStream());
             }
         } catch (IOException ex) {
             throw new UncheckedIOException(ex);

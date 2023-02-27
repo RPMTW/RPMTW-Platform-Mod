@@ -45,7 +45,6 @@ public class ChatComponentMixin {
     @Shadow
     @Final
     private List<GuiMessage<FormattedCharSequence>> trimmedMessages;
-
     @Shadow
     @Final
     private List<GuiMessage<Component>> allMessages;
@@ -97,14 +96,14 @@ public class ChatComponentMixin {
             ResourceLocation location = ChatComponentData.INSTANCE.getAvatarCache().getOrDefault(getAvatarUrl(chatComponent), null);
 
             if (location == null) return;
-            RenderSystem.color4f(1, 1, 1, ChatComponentData.INSTANCE.getLastOpacity());
+            RenderSystem.blendColor(1, 1, 1, ChatComponentData.INSTANCE.getLastOpacity());
             minecraft.getTextureManager().bind(location);
             RenderSystem.enableBlend();
             // Draw base layer
             GuiComponent.blit(matrixStack, 0, ChatComponentData.INSTANCE.getLastY(), 8, 8, 8.0F, 8, 8, 8, 8, 8);
             // Draw hat
             GuiComponent.blit(matrixStack, 0, ChatComponentData.INSTANCE.getLastY(), 8, 8, 40.0F, 8, 8, 8, 8, 8);
-            RenderSystem.color4f(1, 1, 1, 1);
+            RenderSystem.blendColor(1, 1, 1, 1);
             RenderSystem.disableBlend();
         } catch (Exception e) {
             RPMTWPlatformMod.LOGGER.warn("Rending universe chat component failed\n" + e);
@@ -118,7 +117,6 @@ public class ChatComponentMixin {
 
         return x - ChatComponentData.offset;
     }
-
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/ChatComponent;getWidth()I"), method = "addMessage(Lnet/minecraft/network/chat/Component;IIZ)V", require = 0)
     public int fixTextOverflow(ChatComponent chatHud) {

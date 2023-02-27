@@ -14,43 +14,23 @@ import org.lwjgl.glfw.GLFW
 @Config(name = "rpmtw_platform_mod")
 @Environment(EnvType.CLIENT)
 class ConfigObject : ConfigData {
-    @JvmField
-    @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
-    var base = Base()
-
-    @JvmField
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = false)
     var translate = Translate()
 
-    @JvmField
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = false)
     var universeChat = UniverseChat()
 
-    @JvmField
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = false)
     val keyBindings = KeyBindings()
 
-    @JvmField
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = false)
     val advanced = Advanced()
 
-    class Base {
-        @JvmField
-        @ConfigEntry.Gui.Excluded
-        var rpmtwAuthToken: String? = null
-
-        fun isLogin(): Boolean {
-            return rpmtwAuthToken != null && rpmtwAuthToken!!.isNotEmpty()
-        }
-    }
-
     class Translate {
-        @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
         @ConfigEntry.Gui.RequiresRestart
         var machineTranslation = true
 
-        @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
         @ConfigEntry.Gui.RequiresRestart
         var autoMachineTranslation = false
@@ -68,71 +48,74 @@ class ConfigObject : ConfigData {
 
         @ConfigEntry.Gui.Tooltip(count = 1)
         @ConfigEntry.Gui.RequiresRestart
-        var loadTranslateResourcePack = true
+        var loadTranslateResourcePack = false
             get() {
-                return if (GameLanguage.getMinecraft() == GameLanguage.English) {
-                    false
+                return if (GameLanguage.getSystem() == GameLanguage.TraditionalChinese) {
+                    true
                 } else {
                     field
                 }
             }
+
+        @ConfigEntry.Gui.Tooltip(count = 1)
+        @ConfigEntry.Gui.RequiresRestart
+        var autoToggleLanguage = true
     }
 
     class UniverseChat {
-        @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
         @ConfigEntry.Gui.RequiresRestart
         var enable = true
 
-        @JvmField
         var enableReceiveMessage = true
 
-        @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
         var enableButton = true
 
-        @JvmField
         @ConfigEntry.Gui.Excluded
         var eula = false
 
-        @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
         var nickname: String? = null
 
-        @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
         @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
         var accountType: UniverseChatAccountType = UniverseChatAccountType.MINECRAFT
 
-        @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
         var blockUsers: MutableList<String> = mutableListOf()
     }
 
     class KeyBindings {
-        @JvmField
         var machineTranslation: ModifierKeyCode = ModifierKeyCode.unknown()
 
         // Ctrl + R
-        @JvmField
         var config: ModifierKeyCode = ModifierKeyCode.of(
             InputConstants.Type.KEYSYM.getOrCreate(GLFW.GLFW_KEY_R), Modifier.of(false, true, false)
         )
 
-        @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
         var reloadTranslatePack: ModifierKeyCode = ModifierKeyCode.unknown()
 
-        @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
         var openCrowdinPage: ModifierKeyCode = ModifierKeyCode.unknown()
     }
 
     class Advanced {
-        @JvmField
         @ConfigEntry.Gui.Tooltip(count = 1)
         @ConfigEntry.Gui.RequiresRestart
         var sendExceptionToSentry = true
+    }
+
+
+    @ConfigEntry.Gui.Excluded
+    var rpmtwAuthToken: String? = null
+
+    @ConfigEntry.Gui.Excluded
+    var firstJoinLevel: Boolean = true
+
+    fun isLogin(): Boolean {
+        return rpmtwAuthToken != null && rpmtwAuthToken!!.isNotEmpty()
     }
 }
 
