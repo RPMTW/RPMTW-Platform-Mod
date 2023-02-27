@@ -61,7 +61,7 @@ public class MixinBookContentClasspathLoader {
     }
 
     @Inject(at = @At("HEAD"), method = "loadJson", cancellable = true, remap = false)
-    private void loadJson(Book book, ResourceLocation file, @Nullable ResourceLocation fallback, CallbackInfoReturnable<InputStream> callback) {
+    private void loadJson(ResourceLocation file, @Nullable ResourceLocation fallback, CallbackInfoReturnable<InputStream> callback) {
         RPMTWPlatformMod.LOGGER.debug("[Patchouli] Loading {}", file);
         ResourceManager manager = Minecraft.getInstance().getResourceManager();
         try {
