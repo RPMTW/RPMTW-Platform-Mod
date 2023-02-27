@@ -9,6 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -41,22 +42,22 @@ public class MixinBookContentClasspathLoader {
         Collection<ResourceLocation> files = Minecraft.getInstance().getResourceManager().listResources(prefix, p -> p.endsWith(".json"));
 
         files.stream()
-            .distinct()
-            .filter(file -> file.getNamespace().equals(book.id.getNamespace()))
-            .map(file -> {
-                // caller expects list to contain logical id's, not file paths.
-                // we end up going from path -> id -> back to path, but it's okay as a transitional measure
-                Preconditions.checkArgument(file.getPath().startsWith(prefix));
-                Preconditions.checkArgument(file.getPath().endsWith(".json"));
-                String newPath = file.getPath().substring(prefix.length(), file.getPath().length() - ".json".length());
-                // Vanilla expects `prefix` above to not have a trailing slash, so we
-                // have to remove it ourselves from the path
-                if (newPath.startsWith("/")) {
-                    newPath = newPath.substring(1);
-                }
-                return new ResourceLocation(file.getNamespace(), newPath);
-            })
-            .forEach(list::add);
+                .distinct()
+                .filter(file -> file.getNamespace().equals(book.id.getNamespace()))
+                .map(file -> {
+                    // caller expects list to contain logical id's, not file paths.
+                    // we end up going from path -> id -> back to path, but it's okay as a transitional measure
+                    Preconditions.checkArgument(file.getPath().startsWith(prefix));
+                    Preconditions.checkArgument(file.getPath().endsWith(".json"));
+                    String newPath = file.getPath().substring(prefix.length(), file.getPath().length() - ".json".length());
+                    // Vanilla expects `prefix` above to not have a trailing slash, so we
+                    // have to remove it ourselves from the path
+                    if (newPath.startsWith("/")) {
+                        newPath = newPath.substring(1);
+                    }
+                    return new ResourceLocation(file.getNamespace(), newPath);
+                })
+                .forEach(list::add);
     }
 
     @Inject(at = @At("HEAD"), method = "loadJson", cancellable = true, remap = false)

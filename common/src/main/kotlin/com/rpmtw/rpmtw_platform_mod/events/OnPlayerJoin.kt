@@ -1,10 +1,9 @@
 package com.rpmtw.rpmtw_platform_mod.events
 
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
-import dev.architectury.event.events.common.PlayerEvent
+import me.shedaniel.architectury.event.events.PlayerEvent
 import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.ClickEvent
-import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.HoverEvent
 import net.minecraft.network.chat.TextComponent
 import net.minecraft.network.chat.TranslatableComponent

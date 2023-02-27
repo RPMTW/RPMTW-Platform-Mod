@@ -8,7 +8,7 @@ import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -60,7 +60,7 @@ public class MixinBookContentClasspathLoader {
     }
 
     @Inject(at = @At("HEAD"), method = "loadJson", cancellable = true, remap = false)
-    private void loadJson(Book book, ResourceLocation file, @Nullable ResourceLocation fallback, CallbackInfoReturnable<InputStream> callback) {
+    private void loadJson(ResourceLocation file, ResourceLocation fallback, CallbackInfoReturnable<InputStream> callback) {
         RPMTWPlatformMod.LOGGER.debug("[Patchouli] Loading {}", file);
         ResourceManager manager = Minecraft.getInstance().getResourceManager();
         try {
