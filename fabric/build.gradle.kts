@@ -40,7 +40,7 @@ dependencies {
     }
     modApi("net.fabricmc:fabric-language-kotlin:${project.property("fabric-kotlin_version")}")
 
-    modImplementation("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-FABRIC-SNAPSHOT")
+    modImplementation("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-FABRIC")
 
     "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
     bundle(project(path = ":common", configuration = "transformProductionFabric")) { isTransitive = false }
@@ -53,7 +53,13 @@ dependencies {
     "common"(project(path = ":fabric-like", configuration = "namedElements")) { isTransitive = false }
     bundle(project(path = ":fabric-like", configuration = "transformProductionFabric")) { isTransitive = false }
 
-    implementation(bundle(group = "io.sentry", name = "sentry", version = project.property("sentry_version").toString()))
+    implementation(
+        bundle(
+            group = "io.sentry",
+            name = "sentry",
+            version = project.property("sentry_version").toString()
+        )
+    )
 
     modImplementation("com.terraformersmc:modmenu:${project.property("modmenu_version")}")
 }

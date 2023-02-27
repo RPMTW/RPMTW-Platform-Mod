@@ -13,5 +13,6 @@ object EventHandler {
         GuiEvent.INIT_POST.register(OnGuiInitPost())
         TooltipEvent.ITEM.register(OnItemTooltip())
         ClientRawInputEvent.KEY_PRESSED.register(OnKeyPressed())
+        PlayerEvent.PLAYER_JOIN.register(OnPlayerJoin())
     }
 }

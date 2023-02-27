@@ -1,6 +1,7 @@
 package com.rpmtw.rpmtw_platform_mod.mixins;
 
-import com.rpmtw.rpmtw_platform_mod.events.OnReloadLanguage;
+import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod;
+import com.rpmtw.rpmtw_platform_mod.translation.machineTranslation.MTStorage;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.resources.language.LanguageManager;
@@ -15,6 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class LanguageManagerMixin {
     @Inject(method = "onResourceManagerReload", at = @At("HEAD"))
     void onReloadLanguage(ResourceManager resourceManager, CallbackInfo ci) {
-        OnReloadLanguage.INSTANCE.onReload(resourceManager);
+        RPMTWPlatformMod.LOGGER.info("Reloading language...");
+        MTStorage.INSTANCE.load(resourceManager);
     }
 }

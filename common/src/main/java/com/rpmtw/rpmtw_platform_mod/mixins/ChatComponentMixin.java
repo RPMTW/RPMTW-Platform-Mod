@@ -45,7 +45,6 @@ public class ChatComponentMixin {
     @Shadow
     @Final
     private List<GuiMessage<FormattedCharSequence>> trimmedMessages;
-
     @Shadow
     @Final
     private List<GuiMessage<Component>> allMessages;
@@ -118,7 +117,6 @@ public class ChatComponentMixin {
 
         return x - ChatComponentData.offset;
     }
-
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/ChatComponent;getWidth()I"), method = "addMessage(Lnet/minecraft/network/chat/Component;IIZ)V", require = 0)
     public int fixTextOverflow(ChatComponent chatHud) {
