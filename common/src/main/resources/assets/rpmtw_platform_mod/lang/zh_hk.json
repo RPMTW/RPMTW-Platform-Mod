@@ -38,7 +38,7 @@
     "config.rpmtw_platform_mod.option.translate.unlocalized": "打開原文顯示",
     "config.rpmtw_platform_mod.option.translate.unlocalized.@Tooltip": "額外顯示未本地化嘅內容，若遊戲語言為美國英語將不會起作用",
     "config.rpmtw_platform_mod.option.translate.loadTranslateResourcePack": "載入翻譯資源包",
-    "config.rpmtw_platform_mod.option.translate.loadTranslateResourcePack.@Tooltip": "加載翻譯資源包翻譯模組和其他內容，只有在遊戲語言是繁體中文時才會啟用。",
+    "config.rpmtw_platform_mod.option.translate.loadTranslateResourcePack.@Tooltip": "加載翻譯資源包翻譯模組同埋其他內容，只有在遊戲語言是繁體中文時先會啟用。",
     "config.rpmtw_platform_mod.option.translate.autoToggleLanguage": "自動切換語言",
     "config.rpmtw_platform_mod.option.translate.autoToggleLanguage.@Tooltip": "自動切換遊戲語言到電腦系統使用嘅語言",
     "config.rpmtw_platform_mod.option.advanced": "進階設定",
@@ -78,8 +78,10 @@
     "gui.rpmtw_platform_mod.self": "自己",
     "gui.rpmtw_platform_mod.send": "發送",
     "gui.rpmtw_platform_mod.close": "關閉",
+    "gui.rpmtw_platform_mod_open_link": "開啓鏈結",
     "machineTranslation.rpmtw_platform_mod.status.exception": "發生例外錯誤，狀態碼：%d，請稍候再試。",
     "machineTranslation.rpmtw_platform_mod.status.failed": "翻譯失敗：%s",
     "machineTranslation.rpmtw_platform_mod.status.rate_limit": "與 Google 翻譯伺服器嘅連接已超過速率限制（429）。請稍後再試。",
-    "machineTranslation.rpmtw_platform_mod.status.translating": "翻譯中..."
+    "machineTranslation.rpmtw_platform_mod.status.translating": "翻譯中...",
+    "messages.rpmtw_platform_mod.thanks": "§7-----------------------------------------------------\n§f感謝使用 RPMTW Platform Mod，如果你有任何問題，歡迎加入我地個 Discord 社群伺服器。\n\n§f官方網址：%s\n§f官方 Discord 社群：%s\n\n§f此外，如果你想要調整本模組的設定，按 %s 鍵能夠將其開啓。\n§7-----------------------------------------------------"
 }
