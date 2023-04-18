@@ -1,5 +1,6 @@
 package com.rpmtw.rpmtw_platform_mod.translation
 
+import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod
 import net.minecraft.client.Minecraft
 import java.util.*
 
@@ -9,14 +10,25 @@ enum class GameLanguage(val code: String, val isO3Code: Set<String>) {
     SimplifiedChinese("zh_cn", setOf("CHN"));
 
     companion object {
+        private var systemLanguage: GameLanguage? = null
+
+        fun initialize() {
+            systemLanguage = getSystem()
+        }
+
         fun getMinecraft(): GameLanguage {
             val minecraftLanguage = Minecraft.getInstance().options.languageCode
 
             return values().firstOrNull { it.code == minecraftLanguage } ?: English
         }
 
+
         fun getSystem(): GameLanguage? {
+            if (systemLanguage != null) return systemLanguage
+
             val systemCountry = Locale.getDefault().isO3Country
+
+            RPMTWPlatformMod.LOGGER.info("System country code: $systemCountry")
 
             return values().firstOrNull { it.isO3Code.contains(systemCountry) }
         }
