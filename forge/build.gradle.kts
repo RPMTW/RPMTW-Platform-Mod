@@ -48,8 +48,8 @@ dependencies {
         )
     )
 
-    forgeRuntimeLibrary(kotlin("stdlib-jdk8", version = "1.7.22"))
-    forgeRuntimeLibrary(kotlin("reflect", version = "1.7.22"))
+    forgeRuntimeLibrary(kotlin("stdlib-jdk8", version = "1.8.10"))
+    forgeRuntimeLibrary(kotlin("reflect", version = "1.8.10"))
     forgeRuntimeLibrary("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
 
     "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
