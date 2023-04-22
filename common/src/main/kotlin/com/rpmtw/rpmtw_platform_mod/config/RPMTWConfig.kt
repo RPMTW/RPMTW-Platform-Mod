@@ -34,6 +34,7 @@ import java.util.*
 
 object RPMTWConfig {
     private var config: ConfigObject? = null
+    private const val PROTOCOL_VERSION = 1
 
 
     private fun register() {
@@ -59,6 +60,8 @@ object RPMTWConfig {
 
         val holder = AutoConfig.getConfigHolder(ConfigObject::class.java)
         config = holder.config
+
+        checkProtocolVersion(holder, holder.config)
         listenOnSave(holder, holder.config)
 
         RPMTWPlatformMod.LOGGER.info("Registered config")
@@ -104,6 +107,18 @@ object RPMTWConfig {
             oldRPMTWAuthToken = edited.rpmtwAuthToken
 
             return@registerSaveListener InteractionResult.SUCCESS
+        }
+    }
+
+    private fun checkProtocolVersion(holder: ConfigHolder<ConfigObject>, config: ConfigObject) {
+        if (config.protocolVersion == null) {
+            config.protocolVersion = PROTOCOL_VERSION
+
+            if (!config.firstJoinLevel) {
+                holder.resetToDefault()
+            }
+
+            holder.save()
         }
     }
 
