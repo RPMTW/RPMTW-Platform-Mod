@@ -112,7 +112,7 @@ object RPMTWConfig {
 
     private fun checkProtocolVersion(holder: ConfigHolder<ConfigObject>, config: ConfigObject) {
         if (config.protocolVersion == null) {
-            config.protocolVersion = PROTOCOL_VERSION
+            holder.config.protocolVersion = PROTOCOL_VERSION
 
             if (!config.firstJoinLevel) {
                 holder.resetToDefault()

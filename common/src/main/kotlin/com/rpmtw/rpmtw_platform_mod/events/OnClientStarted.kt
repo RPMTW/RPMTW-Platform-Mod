@@ -9,7 +9,6 @@ import dev.architectury.event.events.client.ClientLifecycleEvent
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.Minecraft
-import net.minecraft.client.resources.language.LanguageInfo
 import java.util.*
 
 @Environment(EnvType.CLIENT)
@@ -28,7 +27,7 @@ class OnClientStarted : ClientLifecycleEvent.ClientState {
 
         if (language == null || language == GameLanguage.English) return
 
-        manger.selected = LanguageInfo(language.code, "", "", false)
+        manger.selected = language.code
         RPMTWPlatformMod.LOGGER.info("Auto toggle language to ${language.code}(${language.isO3Code})")
     }
 }

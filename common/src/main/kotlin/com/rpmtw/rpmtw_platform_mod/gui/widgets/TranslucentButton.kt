@@ -14,19 +14,16 @@ class TranslucentButton(
     onPress: OnPress,
     val tooltip: Component?,
 ) : Button(x, y, width, height, message, onPress, DEFAULT_NARRATION) {
+    override fun renderWidget(poseStack: PoseStack, i: Int, j: Int, f: Float) {
+        val minecraft = Minecraft.getInstance()
+        setAlpha(0.5f)
 
-    override fun blit(stack: PoseStack, x: Int, y: Int, textureX: Int, textureY: Int, width: Int, height: Int) {
-        fill(stack, x, y, x + width, y + height, Int.MIN_VALUE)
-    }
+        fill(poseStack, x, y, x + width, y + height, -0x80000000 or (Math.round(alpha * 255) shl 16 shl 8))
+        renderString(poseStack, minecraft.font, 0XFFFFFF)
 
-    override fun renderButton(poseStack: PoseStack, i: Int, j: Int, f: Float) {
-        super.renderButton(poseStack, i, j, f)
         if (this.isHoveredOrFocused && tooltip != null) {
-            Minecraft.getInstance().screen?.renderTooltip(
-                poseStack,
-                tooltip,
-                i,
-                j
+            minecraft.screen?.renderTooltip(
+                poseStack, tooltip, i, j
             )
         }
     }
