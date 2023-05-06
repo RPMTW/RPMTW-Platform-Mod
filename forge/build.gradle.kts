@@ -20,9 +20,8 @@ dependencies {
     forge("net.minecraftforge:forge:${project.property("forge_version").toString()}")
 
     // Mod required mod dependencies
-    implementation("thedarkcolour:kotlinforforge:${project.property("kotlin_forge_version").toString()}")
-    modApi("dev.architectury:architectury-forge:${project.property("architectury_version").toString()}")
-    modApi("me.shedaniel.cloth:cloth-config-forge:${project.property("cloth_config_version").toString()}")
+    modLocalRuntime("dev.architectury:architectury-forge:${project.property("architectury_version").toString()}")
+    modLocalRuntime("me.shedaniel.cloth:cloth-config-forge:${project.property("cloth_config_version").toString()}")
 
     // Optional mod dependencies
 // Patchouli currently doesn't support Minecraft 1.19.4
@@ -30,11 +29,7 @@ dependencies {
 //     modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}")
 
     // Dependencies for the mod
-    bundle(
-        "com.github.RPMTW:RPMTW-API-Client-Kotlin:${
-            project.property("rpmtw_api_client_version").toString()
-        }"
-    ) {
+    bundle("com.github.RPMTW:RPMTW-API-Client-Kotlin:${project.property("rpmtw_api_client_version").toString()}") {
         exclude("com.google.code.gson")
         exclude("org.jetbrains.kotlinx")
         exclude("org.jetbrains.kotlin")
@@ -42,12 +37,16 @@ dependencies {
         forgeRuntimeLibrary(it)
     }
     bundle(
-        forgeRuntimeLibrary(
-            group = "io.sentry",
-            name = "sentry",
-            version = project.property("sentry_version").toString()
-        )
+            forgeRuntimeLibrary(
+                    group = "io.sentry",
+                    name = "sentry",
+                    version = project.property("sentry_version").toString()
+            )
     )
+
+    forgeRuntimeLibrary(bundle(kotlin("stdlib-jdk8", "1.8.21"))!!)
+    forgeRuntimeLibrary(bundle(kotlin("reflect", "1.8.21"))!!)
+    forgeRuntimeLibrary(bundle("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")!!)
 
     "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
     bundle(project(path = ":common", configuration = "transformProductionForge")) { isTransitive = false }
