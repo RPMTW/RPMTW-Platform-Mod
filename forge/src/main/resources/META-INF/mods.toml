@@ -1,5 +1,5 @@
-modLoader = "javafml"
-loaderVersion = "[45,)"
+modLoader = "kotlinforforge"
+loaderVersion = "[4,)"
 issueTrackerURL = "https://github.com/RPMTW/RPMTW-Platform-Mod/issues"
 license = "GPL-3"
 
