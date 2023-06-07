@@ -20,6 +20,7 @@ dependencies {
     forge("net.minecraftforge:forge:${project.property("forge_version").toString()}")
 
     // Mod required mod dependencies
+    implementation("thedarkcolour:kotlinforforge:${project.property("kotlin_forge_version").toString()}")
     modLocalRuntime("dev.architectury:architectury-forge:${project.property("architectury_version").toString()}")
     modLocalRuntime("me.shedaniel.cloth:cloth-config-forge:${project.property("cloth_config_version").toString()}")
 
@@ -37,15 +38,15 @@ dependencies {
         forgeRuntimeLibrary(it)
     }
     bundle(
-            forgeRuntimeLibrary(
-                    group = "io.sentry",
-                    name = "sentry",
-                    version = project.property("sentry_version").toString()
-            )
+        forgeRuntimeLibrary(
+            group = "io.sentry",
+            name = "sentry",
+            version = project.property("sentry_version").toString()
+        )
     )
 
-    forgeRuntimeLibrary(bundle(kotlin("stdlib-jdk8", "1.8.21"))!!)
-    forgeRuntimeLibrary(bundle(kotlin("reflect", "1.8.21"))!!)
+    forgeRuntimeLibrary(kotlin("stdlib-jdk8", "1.8.21"))
+    forgeRuntimeLibrary(kotlin("reflect", "1.8.21"))
     forgeRuntimeLibrary(bundle("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")!!)
 
     "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
