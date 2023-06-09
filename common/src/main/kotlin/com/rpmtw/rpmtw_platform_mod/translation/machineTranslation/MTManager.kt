@@ -28,7 +28,7 @@ object MTManager {
     private val queue: MutableList<QueueText> = mutableListOf()
     private var handleQueueing: Boolean = false
     private var translatingCount: Int = 0
-    private const val maxTranslatingCount: Int = 3
+    private const val MAX_TRANSLATING_COUNT: Int = 3
     private val formatPattern = Pattern.compile("%(?:(\\d+)\\$)?([A-Za-z%]|$)")
     private val gson = GsonBuilder().registerTypeAdapter(Exception::class.java, ExceptionSerializer())
         .registerTypeAdapter(Timestamp::class.java, TimestampAdapter())
@@ -48,7 +48,7 @@ object MTManager {
             Component.literal(I18n.get("machineTranslation.rpmtw_platform_mod.status.failed", info.error)).withStyle(
                 ChatFormatting.RED
             )
-        } else if (translatingCount >= maxTranslatingCount) {
+        } else if (translatingCount >= MAX_TRANSLATING_COUNT) {
             // If there are too many things to translate at the same time, the translation will be skipped to avoid sending too many requests to the server
             generateProgressText()
         } else if (info?.status == MTDataStatus.Translating) {
@@ -68,7 +68,7 @@ object MTManager {
             queue.add(sourceText)
         }
 
-        if (!handleQueueing && queue.isNotEmpty() && translatingCount < maxTranslatingCount) {
+        if (!handleQueueing && queue.isNotEmpty() && translatingCount < MAX_TRANSLATING_COUNT) {
             handleQueue()
         }
     }
@@ -174,7 +174,7 @@ object MTManager {
     private fun handleQueue() {
         handleQueueing = true
         Util.coroutineLaunch {
-            while (queue.isNotEmpty() && translatingCount < maxTranslatingCount) {
+            while (queue.isNotEmpty() && translatingCount < MAX_TRANSLATING_COUNT) {
                 val sourceText = queue.removeAt(0)
                 translateAndCache(sourceText.text)
                 withContext(Dispatchers.IO) {
