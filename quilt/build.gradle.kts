@@ -69,10 +69,11 @@ dependencies {
         exclude(group = "net.fabricmc.fabric-api")
     }
 
-    modImplementation("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-FABRIC") {
-        exclude(group = "net.fabricmc")
-        exclude(group = "net.fabricmc.fabric-api")
-    }
+// Patchouli currently doesn't support Minecraft 1.19.4
+//    modImplementation("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-FABRIC") {
+//        exclude(group = "net.fabricmc")
+//        exclude(group = "net.fabricmc.fabric-api")
+//    }
     modImplementation("com.terraformersmc:modmenu:${project.property("modmenu_version")}") {
         exclude(group = "net.fabricmc")
         exclude(group = "net.fabricmc.fabric-api")

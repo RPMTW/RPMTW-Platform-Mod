@@ -33,8 +33,8 @@ class RPMTWCheckbox(
         onPress(this.selected())
     }
 
-    override fun renderButton(matrices: PoseStack, mouseX: Int, mouseY: Int, delta: Float) {
-        super.renderButton(matrices, mouseX, mouseY, delta)
+    override fun renderWidget(matrices: PoseStack, mouseX: Int, mouseY: Int, delta: Float) {
+        super.renderWidget(matrices, mouseX, mouseY, delta)
         if (this.isHovered) {
             val client: Minecraft = Minecraft.getInstance()
             client.screen?.renderTooltip(matrices, Component.literal(tooltip), mouseX, mouseY)

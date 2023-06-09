@@ -21,19 +21,16 @@ dependencies {
 
     // Mod required mod dependencies
     implementation("thedarkcolour:kotlinforforge:${project.property("kotlin_forge_version").toString()}")
-    modApi("dev.architectury:architectury-forge:${project.property("architectury_version").toString()}")
-    modApi("me.shedaniel.cloth:cloth-config-forge:${project.property("cloth_config_version").toString()}")
+    modLocalRuntime("dev.architectury:architectury-forge:${project.property("architectury_version").toString()}")
+    modLocalRuntime("me.shedaniel.cloth:cloth-config-forge:${project.property("cloth_config_version").toString()}")
 
     // Optional mod dependencies
-     modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}:api")
-     modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}")
+// Patchouli currently doesn't support Minecraft 1.19.4
+//     modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}:api")
+//     modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}")
 
     // Dependencies for the mod
-    bundle(
-        "com.github.RPMTW:RPMTW-API-Client-Kotlin:${
-            project.property("rpmtw_api_client_version").toString()
-        }"
-    ) {
+    bundle("com.github.RPMTW:RPMTW-API-Client-Kotlin:${project.property("rpmtw_api_client_version").toString()}") {
         exclude("com.google.code.gson")
         exclude("org.jetbrains.kotlinx")
         exclude("org.jetbrains.kotlin")
@@ -48,8 +45,8 @@ dependencies {
         )
     )
 
-    forgeRuntimeLibrary(kotlin("stdlib-jdk8", version = "1.7.22"))
-    forgeRuntimeLibrary(kotlin("reflect", version = "1.7.22"))
+    forgeRuntimeLibrary(kotlin("stdlib-jdk8", "1.8.21"))
+    forgeRuntimeLibrary(kotlin("reflect", "1.8.21"))
     forgeRuntimeLibrary("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
 
     "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }

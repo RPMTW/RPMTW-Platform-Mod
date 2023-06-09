@@ -10,6 +10,7 @@
     "ChatComponentMixin",
     "LanguageManagerMixin",
     "RunClientCommandOnComponent",
-    "LoadGameOptions"
+    "LoadGameOptions",
+    "FixPackCompatibility"
   ]
 }
