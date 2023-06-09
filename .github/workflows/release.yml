@@ -99,5 +99,6 @@ jobs:
             17
             18
           dependencies: |
+            kotlin-for-forge
             cloth-config
             architectury-api
