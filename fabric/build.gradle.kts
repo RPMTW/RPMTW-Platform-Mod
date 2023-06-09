@@ -17,19 +17,6 @@ repositories {
     }
 }
 
-val common by configurations.registering
-configurations {
-    compileClasspath {
-        extendsFrom(common.get())
-    }
-
-    runtimeClasspath {
-        extendsFrom(common.get())
-    }
-
-    getByName("developmentFabric").extendsFrom(common.get())
-}
-
 dependencies {
     modImplementation("net.fabricmc:fabric-loader:${project.property("fabric_loader_version")}")
     modApi("net.fabricmc.fabric-api:fabric-api:${project.property("fabric_api_version")}")
@@ -43,7 +30,7 @@ dependencies {
 // Patchouli currently doesn't support Minecraft 1.19.4
 //    modImplementation("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-FABRIC")
 
-    "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
+    implementation(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
     bundle(project(path = ":common", configuration = "transformProductionFabric")) { isTransitive = false }
     bundle(
         "com.github.RPMTW:RPMTW-API-Client-Kotlin:${project.property("rpmtw_api_client_version")}"
@@ -52,7 +39,7 @@ dependencies {
         exclude("org.jetbrains.kotlinx")
         exclude("org.jetbrains.kotlin")
     }.let { implementation(it) }
-    "common"(project(path = ":fabric-like", configuration = "namedElements")) { isTransitive = false }
+    implementation(project(path = ":fabric-like", configuration = "namedElements")) { isTransitive = false }
     bundle(project(path = ":fabric-like", configuration = "transformProductionFabric")) { isTransitive = false }
 
     implementation(

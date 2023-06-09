@@ -7,7 +7,7 @@ plugins {
     base
     id("org.jetbrains.kotlin.jvm") version "1.8.21"
     id("architectury-plugin") version "3.4.143"
-    id("dev.architectury.loom") version "1.0.+" apply false
+    id("dev.architectury.loom") version "1.2.+" apply false
     id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 

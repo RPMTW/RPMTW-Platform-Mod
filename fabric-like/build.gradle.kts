@@ -2,17 +2,6 @@ architectury {
     common(project.property("enabled_platforms").toString().split(","))
 }
 
-val common by configurations.registering
-configurations {
-    compileClasspath {
-        extendsFrom(common.get())
-    }
-
-    runtimeClasspath {
-        extendsFrom(common.get())
-    }
-}
-
 repositories {
     mavenCentral()
     maven {
@@ -38,7 +27,7 @@ dependencies {
 //    modImplementation("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-FABRIC")
     modImplementation("com.terraformersmc:modmenu:${project.property("modmenu_version")}")
 
-    "compileClasspath"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
+    implementation(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
 }
 
 val accessWidenerFile = project(":common").file("src/main/resources/rpmtw_platform_mod.accesswidener")

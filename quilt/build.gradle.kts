@@ -23,19 +23,6 @@ architectury {
     loader("quilt")
 }
 
-val common by configurations.registering
-configurations {
-    compileClasspath {
-        extendsFrom(common.get())
-    }
-
-    runtimeClasspath {
-        extendsFrom(common.get())
-    }
-
-    getByName("developmentQuilt").extendsFrom(common.get())
-}
-
 val accessWidenerFile = project(":common").file("src/main/resources/rpmtw_platform_mod.accesswidener")
 
 loom {
@@ -89,9 +76,9 @@ dependencies {
         implementation(it)
     }
 
-    "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
+    implementation(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
     bundle(project(path = ":common", configuration = "transformProductionQuilt")) { isTransitive = false }
-    "common"(project(path = ":fabric-like", configuration = "namedElements")) { isTransitive = false }
+    implementation(project(path = ":fabric-like", configuration = "namedElements")) { isTransitive = false }
     bundle(project(path = ":fabric-like", configuration = "transformProductionQuilt")) { isTransitive = false }
 
     implementation(

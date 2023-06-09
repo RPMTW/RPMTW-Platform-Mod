@@ -3,19 +3,6 @@ architectury {
     forge()
 }
 
-val common by configurations.registering
-configurations {
-    compileClasspath {
-        extendsFrom(common.get())
-    }
-
-    runtimeClasspath {
-        extendsFrom(common.get())
-    }
-
-    getByName("developmentForge").extendsFrom(common.get())
-}
-
 dependencies {
     forge("net.minecraftforge:forge:${project.property("forge_version").toString()}")
 
@@ -49,7 +36,7 @@ dependencies {
     forgeRuntimeLibrary(kotlin("reflect", "1.8.21"))
     forgeRuntimeLibrary("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
 
-    "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
+    implementation(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
     bundle(project(path = ":common", configuration = "transformProductionForge")) { isTransitive = false }
 }
 
