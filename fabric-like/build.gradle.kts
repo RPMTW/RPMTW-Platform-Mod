@@ -23,7 +23,7 @@ dependencies {
     // Remove the next line if you don't want to depend on the API
     modApi("dev.architectury:architectury-fabric:${project.property("architectury_version")}")
 
-// Patchouli currently doesn't support Minecraft 1.19.4
+// Patchouli currently doesn't support Minecraft 1.20
 //    modImplementation("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-FABRIC")
     modImplementation("com.terraformersmc:modmenu:${project.property("modmenu_version")}")
 

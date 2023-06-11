@@ -1,4 +1,4 @@
-// Patchouli currently doesn't support Minecraft 1.19.4
+// Patchouli currently doesn't support Minecraft 1.20
 ///*
 //Credit: https://github.com/kappa-maintainer/PRP
 // */
