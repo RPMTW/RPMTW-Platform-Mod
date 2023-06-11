@@ -29,6 +29,19 @@ loom {
     accessWidenerPath.set(accessWidenerFile)
 }
 
+val common by configurations.registering
+configurations {
+    compileClasspath {
+        extendsFrom(common.get())
+    }
+
+    runtimeClasspath {
+        extendsFrom(common.get())
+    }
+
+    getByName("developmentQuilt").extendsFrom(common.get())
+}
+
 dependencies {
     modImplementation("org.quiltmc:quilt-loader:${project.property("quilt_loader_version")}")
     modImplementation("org.quiltmc:qsl:${project.property("qsl_version")}+${project.property("minecraft_version")}")
@@ -76,9 +89,9 @@ dependencies {
         implementation(it)
     }
 
-    implementation(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
+    "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
     bundle(project(path = ":common", configuration = "transformProductionQuilt")) { isTransitive = false }
-    implementation(project(path = ":fabric-like", configuration = "namedElements")) { isTransitive = false }
+    "common"(project(path = ":fabric-like", configuration = "namedElements")) { isTransitive = false }
     bundle(project(path = ":fabric-like", configuration = "transformProductionQuilt")) { isTransitive = false }
 
     implementation(
@@ -91,11 +104,11 @@ dependencies {
 }
 
 tasks {
-    val resourcesPath = file("src/main/resources")
+    val generatedResourcesPath = file("src/generated/resources")
     // The access widener file is needed in :quilt project resources when the game is run.
     val copyAccessWidener by registering(Copy::class) {
         from(accessWidenerFile)
-        into(resourcesPath)
+        into(generatedResourcesPath)
     }
 
     processResources {
