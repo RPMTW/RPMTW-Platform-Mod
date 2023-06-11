@@ -1,11 +1,11 @@
 package com.rpmtw.rpmtw_platform_mod.gui
 
-import com.mojang.blaze3d.vertex.PoseStack
 import com.rpmtw.rpmtw_api_client.models.universe_chat.UniverseChatMessage
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.gui.widgets.TranslucentButton
 import net.minecraft.ChatFormatting
 import net.minecraft.client.Minecraft
+import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.Style
@@ -55,16 +55,16 @@ class UniverseMessageActionScreen(val message: UniverseChatMessage) :
     }
 
     override fun render(
-        poseStack: PoseStack,
+        guiGraphics: GuiGraphics,
         mouseX: Int,
         mouseY: Int,
         partialTicks: Float
     ) {
-        this.renderBackground(poseStack)
+        this.renderBackground(guiGraphics)
 
         val title = Component.translatable("universeChat.rpmtw_platform_mod.gui.action")
-        font.draw(poseStack, title, width / 2f - font.width(title) / 2f, 20f, 0xFFFFFF)
+        guiGraphics.drawString(font, title, width / 2 - font.width(title) / 2, 20, 0xFFFFFF)
 
-        super.render(poseStack, mouseX, mouseY, partialTicks)
+        super.render(guiGraphics, mouseX, mouseY, partialTicks)
     }
 }

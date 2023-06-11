@@ -25,7 +25,7 @@ dependencies {
     modLocalRuntime("me.shedaniel.cloth:cloth-config-forge:${project.property("cloth_config_version").toString()}")
 
     // Optional mod dependencies
-// Patchouli currently doesn't support Minecraft 1.19.4
+// Patchouli currently doesn't support Minecraft 1.20
 //     modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}:api")
 //     modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}")
 

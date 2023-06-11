@@ -23,6 +23,12 @@ architectury {
     loader("quilt")
 }
 
+val accessWidenerFile = project(":common").file("src/main/resources/rpmtw_platform_mod.accesswidener")
+
+loom {
+    accessWidenerPath.set(accessWidenerFile)
+}
+
 val common by configurations.registering
 configurations {
     compileClasspath {
@@ -34,12 +40,6 @@ configurations {
     }
 
     getByName("developmentQuilt").extendsFrom(common.get())
-}
-
-val accessWidenerFile = project(":common").file("src/main/resources/rpmtw_platform_mod.accesswidener")
-
-loom {
-    accessWidenerPath.set(accessWidenerFile)
 }
 
 dependencies {
@@ -104,11 +104,11 @@ dependencies {
 }
 
 tasks {
-    val resourcesPath = file("src/main/resources")
+    val generatedResourcesPath = file("src/generated/resources")
     // The access widener file is needed in :quilt project resources when the game is run.
     val copyAccessWidener by registering(Copy::class) {
         from(accessWidenerFile)
-        into(resourcesPath)
+        into(generatedResourcesPath)
     }
 
     processResources {

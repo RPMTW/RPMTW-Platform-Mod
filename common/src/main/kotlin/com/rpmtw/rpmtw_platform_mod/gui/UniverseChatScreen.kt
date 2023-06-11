@@ -1,10 +1,10 @@
 package com.rpmtw.rpmtw_platform_mod.gui
 
-import com.mojang.blaze3d.vertex.PoseStack
 import com.rpmtw.rpmtw_api_client.models.universe_chat.UniverseChatMessage
 import com.rpmtw.rpmtw_platform_mod.gui.widgets.UniverseChatWhatButton
 import com.rpmtw.rpmtw_platform_mod.handlers.UniverseChatHandler
 import com.rpmtw.rpmtw_platform_mod.util.Util
+import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.components.EditBox
 import net.minecraft.client.gui.screens.Screen
@@ -98,12 +98,12 @@ class UniverseChatScreen(
     }
 
     override fun render(
-        poseStack: PoseStack,
+        guiGraphics: GuiGraphics,
         mouseX: Int,
         mouseY: Int,
         partialTicks: Float
     ) {
-        this.renderBackground(poseStack)
+        this.renderBackground(guiGraphics)
         val height = height / 2
         lateinit var title: String
 
@@ -117,12 +117,9 @@ class UniverseChatScreen(
             title = I18n.get("universeChat.rpmtw_platform_mod.gui.action.reply.tooltip", toReply.username)
         }
 
-        font.draw(
-            poseStack, title, width / 2f - font.width(title) / 2f, (height - 35).toFloat(),
-            0xFF5555
-        )
-        messageEditBox.render(poseStack, mouseX, mouseY, partialTicks)
-        super.render(poseStack, mouseX, mouseY, partialTicks)
+        guiGraphics.drawString(font, title, width / 2 - font.width(title) / 2, height - 35, 0xFF5555)
+        messageEditBox.render(guiGraphics, mouseX, mouseY, partialTicks)
+        super.render(guiGraphics, mouseX, mouseY, partialTicks)
     }
 }
 

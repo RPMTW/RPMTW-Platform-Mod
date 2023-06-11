@@ -40,7 +40,7 @@ dependencies {
     }
     modApi("net.fabricmc:fabric-language-kotlin:${project.property("fabric-kotlin_version")}")
 
-// Patchouli currently doesn't support Minecraft 1.19.4
+// Patchouli currently doesn't support Minecraft 1.20
 //    modImplementation("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-FABRIC")
 
     "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
@@ -66,18 +66,18 @@ dependencies {
     modImplementation("com.terraformersmc:modmenu:${project.property("modmenu_version")}")
 }
 
-val accessWidenerFile = project(":common").file("src/main/resources/rpmtw_platform_mod.accesswidener")
+val accessWidenerFile: File = project(":common").file("src/main/resources/rpmtw_platform_mod.accesswidener")
 
 loom {
     accessWidenerPath.set(accessWidenerFile)
 }
 
 tasks {
-    val resourcesPath = file("src/main/resources")
+    val generatedResourcesPath = file("src/generated/resources")
     // The access widener file is needed in :fabric project resources when the game is run.
     val copyAccessWidener by registering(Copy::class) {
         from(accessWidenerFile)
-        into(resourcesPath)
+        into(generatedResourcesPath)
     }
 
     processResources {
