@@ -3,7 +3,7 @@
 # RPMTW 平台
 
 [![](https://img.shields.io/github/license/RPMTW/RPMTW-Platform-Mod.svg)](../LICENSE)
-[![](https://img.shields.io/github/release/RPMTW/RPMTW-Platform-Mod.svg)](../../releases)
+[![](https://img.shields.io/github/release/RPMTW/RPMTW-Platform-Mod.svg)](../../../releases)
 ![](https://cf.way2muchnoise.eu/versions/rpmtw-platform.svg)
 [![](https://cf.way2muchnoise.eu/rpmtw-platform.svg)](https://www.curseforge.com/minecraft/mc-mods/rpmtw-update-mod)
 [![](https://img.shields.io/modrinth/dt/ZukQzaRP?label=Modrinth%20Downloads)](https://modrinth.com/mod/ZukQzaRP)
