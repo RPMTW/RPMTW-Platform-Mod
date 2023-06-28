@@ -2,6 +2,7 @@ package com.rpmtw.rpmtw_platform_mod.mixins;
 
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.rpmtw.rpmtw_platform_mod.RPMTWPlatformMod;
 import com.rpmtw.rpmtw_platform_mod.util.ChatComponentData;
 import com.rpmtw.rpmtw_platform_mod.util.Util;
@@ -9,8 +10,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.GuiMessage;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.components.ChatComponent;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.texture.TextureManager;
@@ -62,16 +62,18 @@ public class ChatComponentMixin {
         }
     }
 
-    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;drawString(Lnet/minecraft/client/gui/Font;Lnet/minecraft/util/FormattedCharSequence;III)I", ordinal = 0), method = "render")
-    public int moveTheText(GuiGraphics guiGraphics, Font font, FormattedCharSequence formattedCharSequence, int x, int y, int color) {
-        Component chatComponent = getLastComponent();
-        if (chatComponent == null) return guiGraphics.drawString(font, formattedCharSequence, 0, y, color);
 
-        ChatComponentData.INSTANCE.setLastY(y);
+    @ModifyArg(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Font;drawShadow(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/util/FormattedCharSequence;FFI)I", ordinal = 0), method = "render", index = 2)
+    public float moveTheText(PoseStack poseStack, FormattedCharSequence formattedCharSequence, float f, float y, int color) {
+        Component chatComponent = getLastComponent();
+        if (chatComponent == null) return 0.0F;
+
+        ChatComponentData.INSTANCE.setLastY((int) y);
         ChatComponentData.INSTANCE.setLastOpacity((((color >> 24) + 256) % 256) / 255f);
 
-        return guiGraphics.drawString(font, formattedCharSequence, ChatComponentData.offset, y, color);
+        return ChatComponentData.offset;
     }
+
 
     @ModifyArg(at = @At(value = "INVOKE", target = "Ljava/util/List;get(I)Ljava/lang/Object;", ordinal = 0), method = "render", index = 0)
     public int getLastMessage(int index) {
@@ -80,8 +82,8 @@ public class ChatComponentMixin {
     }
 
 
-    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;drawString(Lnet/minecraft/client/gui/Font;Lnet/minecraft/util/FormattedCharSequence;III)I", ordinal = 0), method = "render")
-    public void render(GuiGraphics guiGraphics, int i, int j, int k, CallbackInfo ci) {
+    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Font;drawShadow(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/util/FormattedCharSequence;FFI)I", ordinal = 0), method = "render")
+    public void render(PoseStack poseStack, int i, int j, int k, CallbackInfo ci) {
         try {
             Component chatComponent = getLastComponent();
             if (chatComponent == null) return;
@@ -93,9 +95,9 @@ public class ChatComponentMixin {
             RenderSystem.setShaderTexture(0, location);
             RenderSystem.enableBlend();
             // Draw base layer
-            guiGraphics.blit(location, 0, ChatComponentData.INSTANCE.getLastY(), 8, 8, 8.0F, 8, 8, 8, 8, 8);
+            GuiComponent.blit(poseStack, 0, ChatComponentData.INSTANCE.getLastY(), 8, 8, 8.0F, 8, 8, 8, 8, 8);
             // Draw hat
-            guiGraphics.blit(location, 0, ChatComponentData.INSTANCE.getLastY(), 8, 8, 40.0F, 8, 8, 8, 8, 8);
+            GuiComponent.blit(poseStack, 0, ChatComponentData.INSTANCE.getLastY(), 8, 8, 40.0F, 8, 8, 8, 8, 8);
             RenderSystem.setShaderColor(1, 1, 1, 1);
             RenderSystem.disableBlend();
         } catch (Exception e) {

@@ -1,10 +1,8 @@
 package com.rpmtw.rpmtw_platform_mod.gui.widgets
 
+import com.mojang.blaze3d.vertex.PoseStack
 import net.minecraft.client.Minecraft
-import net.minecraft.client.gui.ComponentPath
-import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Checkbox
-import net.minecraft.client.gui.navigation.FocusNavigationEvent
 import net.minecraft.network.chat.Component
 
 class RPMTWCheckbox(
@@ -17,7 +15,8 @@ class RPMTWCheckbox(
     showMessage: Boolean,
     private val onPress: (checked: Boolean) -> Unit,
     private val tooltip: String
-) : Checkbox(x, y, width, height, message, checked, showMessage) {
+) :
+    Checkbox(x, y, width, height, message, checked, showMessage) {
     constructor(
         x: Int,
         y: Int,
@@ -34,19 +33,11 @@ class RPMTWCheckbox(
         onPress(this.selected())
     }
 
-    override fun renderWidget(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, delta: Float) {
-        super.renderWidget(guiGraphics, mouseX, mouseY, delta)
+    override fun renderWidget(matrices: PoseStack, mouseX: Int, mouseY: Int, delta: Float) {
+        super.renderWidget(matrices, mouseX, mouseY, delta)
         if (this.isHovered) {
-            guiGraphics.renderTooltip(Minecraft.getInstance().font, Component.literal(tooltip), mouseX, mouseY)
+            val client: Minecraft = Minecraft.getInstance()
+            client.screen?.renderTooltip(matrices, Component.literal(tooltip), mouseX, mouseY)
         }
-    }
-
-    override fun nextFocusPath(focusNavigationEvent: FocusNavigationEvent): ComponentPath? {
-        // To prevent the user from being unable to execute the previous commands, disable arrow navigation for this button.
-        if (focusNavigationEvent is FocusNavigationEvent.ArrowNavigation) {
-            return null
-        }
-
-        return super.nextFocusPath(focusNavigationEvent)
     }
 }

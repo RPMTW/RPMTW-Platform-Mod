@@ -1,9 +1,9 @@
 package com.rpmtw.rpmtw_platform_mod.gui
 
+import com.mojang.blaze3d.vertex.PoseStack
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.gui.widgets.UniverseChatWhatButton
 import com.rpmtw.rpmtw_platform_mod.util.Util
-import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.resources.language.I18n
@@ -46,10 +46,10 @@ class UniverseChatEULAScreen(private val initMessage: String?) : Screen(Componen
     }
 
     override fun render(
-        guiGraphices: GuiGraphics,
+        matrixStack: PoseStack,
         mouseX: Int, mouseY: Int, partialTicks: Float
     ) {
-        this.renderBackground(guiGraphices)
+        this.renderBackground(matrixStack)
         val height = height / 2
         val textColor = 0xFFFFFF // White
         val title = I18n.get("universeChat.rpmtw_platform_mod.gui.eula.title")
@@ -60,16 +60,16 @@ class UniverseChatEULAScreen(private val initMessage: String?) : Screen(Componen
         val text5 = I18n.get("universeChat.rpmtw_platform_mod.gui.eula.text.4")
 
 
-        guiGraphices.drawString(font, title, width / 2 - font.width(title) / 2, height - 65, 0xFF5555)
-        guiGraphices.drawString(font, text1, width / 2 - font.width(text1) / 2, height - 50, textColor)
+        font.draw(matrixStack, title, width / 2f - font.width(title) / 2f, (height - 65).toFloat(), 0xFF5555)
+        font.draw(matrixStack, text1, width / 2f - font.width(text1) / 2f, (height - 50).toFloat(), textColor)
 
         val fontWidth: Int = font.width(text2)
 
-        guiGraphices.drawString(font, text2, width / 2 - fontWidth / 2, height - 40, textColor)
-        guiGraphices.drawString(font, text3, width / 2 - fontWidth / 2, height - 30, textColor)
-        guiGraphices.drawString(font, text4, width / 2 - fontWidth / 2, height - 20, textColor)
-        guiGraphices.drawString(font, text5, width / 2 - fontWidth / 2, height - 10, textColor)
+        font.draw(matrixStack, text2, width / 2f - fontWidth / 2f, (height - 40).toFloat(), textColor)
+        font.draw(matrixStack, text3, width / 2f - fontWidth / 2f, (height - 30).toFloat(), textColor)
+        font.draw(matrixStack, text4, width / 2f - fontWidth / 2f, (height - 20).toFloat(), textColor)
+        font.draw(matrixStack, text5, width / 2f - fontWidth / 2f, (height - 10).toFloat(), textColor)
 
-        super.render(guiGraphices, mouseX, mouseY, partialTicks)
+        super.render(matrixStack, mouseX, mouseY, partialTicks)
     }
 }

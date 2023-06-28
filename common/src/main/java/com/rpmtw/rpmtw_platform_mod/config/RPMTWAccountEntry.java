@@ -1,11 +1,11 @@
 package com.rpmtw.rpmtw_platform_mod.config;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.rpmtw.rpmtw_platform_mod.handlers.RPMTWAuthHandler;
 import me.shedaniel.clothconfig2.api.AbstractConfigListEntry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ComponentPath;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Tooltip;
@@ -62,8 +62,8 @@ public class RPMTWAccountEntry extends AbstractConfigListEntry<Object> {
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean isHovered, float delta) {
-        super.render(guiGraphics, index, y, x, entryWidth, entryHeight, mouseX, mouseY, isHovered, delta);
+    public void render(PoseStack matrices, int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean isHovered, float delta) {
+        super.render(matrices, index, y, x, entryWidth, entryHeight, mouseX, mouseY, isHovered, delta);
 
         boolean isLogin = RPMTWConfig.get().isLogin();
         String authStatus;
@@ -79,7 +79,7 @@ public class RPMTWAccountEntry extends AbstractConfigListEntry<Object> {
                     .tooltip(Tooltip.create(Component.translatable("auth.rpmtw_platform_mod.button.login.tooltip")))
                     .build();
 
-            loginButton.render(guiGraphics, mouseX, mouseY, delta);
+            loginButton.render(matrices, mouseX, mouseY, delta);
             widgets.add(loginButton);
         } else {
             Button logoutButton = Button.builder(
@@ -88,16 +88,16 @@ public class RPMTWAccountEntry extends AbstractConfigListEntry<Object> {
                     .bounds(entryWidth / 2 + 20, y + 15, 65, 20)
                     .build();
 
-            logoutButton.render(guiGraphics, mouseX, mouseY, delta);
+            logoutButton.render(matrices, mouseX, mouseY, delta);
             widgets.add(logoutButton);
         }
 
         Font font = Minecraft.getInstance().font;
-        guiGraphics.drawString(
-                font,
+        font.drawShadow(
+                matrices,
                 authStatus,
-                x - 4 + entryWidth / 2 - Minecraft.getInstance().font.width(authStatus) / 2,
-                y,
+                (float) (x - 4 + entryWidth / 2 - Minecraft.getInstance().font.width(authStatus) / 2),
+                (float) y,
                 -1
         );
     }
