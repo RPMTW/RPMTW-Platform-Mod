@@ -42,6 +42,7 @@ jobs:
           loaders: fabric
           game-versions: |
             1.20
+            1.20.1
           version-resolver: exact
           version: ${{ github.event.release.tag_name }}-fabric
           name: ${{ github.event.release.name }} (Fabric)
@@ -67,6 +68,7 @@ jobs:
           loaders: quilt
           game-versions: |
             1.20
+            1.20.1
           version-resolver: exact
           version: ${{ github.event.release.tag_name }}-quilt
           name: ${{ github.event.release.name }} (Quilt)
@@ -92,6 +94,7 @@ jobs:
           loaders: forge
           game-versions: |
             1.20
+            1.20.1
           version-resolver: exact
           version: ${{ github.event.release.tag_name }}-forge
           name: ${{ github.event.release.name }} (Forge)
