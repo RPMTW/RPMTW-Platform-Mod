@@ -1,8 +1,10 @@
 package com.rpmtw.rpmtw_platform_mod.gui.widgets
 
 import net.minecraft.client.Minecraft
+import net.minecraft.client.gui.ComponentPath
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Checkbox
+import net.minecraft.client.gui.navigation.FocusNavigationEvent
 import net.minecraft.network.chat.Component
 
 class RPMTWCheckbox(
@@ -37,5 +39,14 @@ class RPMTWCheckbox(
         if (this.isHovered) {
             guiGraphics.renderTooltip(Minecraft.getInstance().font, Component.literal(tooltip), mouseX, mouseY)
         }
+    }
+
+    override fun nextFocusPath(focusNavigationEvent: FocusNavigationEvent): ComponentPath? {
+        // To prevent the user from being unable to execute the previous commands, disable arrow navigation for this button.
+        if (focusNavigationEvent is FocusNavigationEvent.ArrowNavigation) {
+            return null
+        }
+
+        return super.nextFocusPath(focusNavigationEvent)
     }
 }
