@@ -22,7 +22,7 @@ import me.shedaniel.clothconfig2.api.Modifier
 import me.shedaniel.clothconfig2.api.ModifierKeyCode
 import me.shedaniel.clothconfig2.gui.entries.KeyCodeEntry
 import net.minecraft.client.gui.screens.Screen
-import net.minecraft.network.chat.Component
+import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.world.InteractionResult
 
 
@@ -43,7 +43,7 @@ object RPMTWConfig {
         guiRegistry.registerPredicateProvider({ i13n, field, config, defaults, _ ->
             if (field.isAnnotationPresent(ConfigEntry.Gui.Excluded::class.java)) return@registerPredicateProvider emptyList()
             val entry: KeyCodeEntry = ConfigEntryBuilder.create().startModifierKeyCodeField(
-                Component.translatable(i13n), getUnsafely(field, config, ModifierKeyCode.unknown())
+                TranslatableComponent(i13n), getUnsafely(field, config, ModifierKeyCode.unknown())
             ).setModifierDefaultValue {
                 getUnsafely(
                     field, defaults
@@ -135,7 +135,7 @@ object RPMTWConfig {
 
             if (!Platform.isForge()) {
                 val category =
-                    builder.getOrCreateCategory(Component.translatable("auth.rpmtw_platform_mod.title"))
+                    builder.getOrCreateCategory(TranslatableComponent("auth.rpmtw_platform_mod.title"))
                 category.addEntry(RPMTWAccountEntry())
             }
 

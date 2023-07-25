@@ -12,7 +12,7 @@ import java.net.URL
 import java.nio.charset.StandardCharsets
 
 object TranslateResourcePack {
-    private const val fileName = "RPMTW-Translate-Resource-Pack-1.18.zip"
+    private const val FILE_NAME = "RPMTW-Translate-Resource-Pack-1.18.zip"
     private val resourcePackFolder: File = RPMTWPlatformModPlugin.getGameFolder().resolve("resourcepacks")
     private val resourcePackFile = resourcePackFolder.resolve(FILE_NAME)
     private val cacheFile = Util.getFileLocation(FILE_NAME)

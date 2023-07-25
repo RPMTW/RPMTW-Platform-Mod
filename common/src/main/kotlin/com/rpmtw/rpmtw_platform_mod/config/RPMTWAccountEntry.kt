@@ -9,12 +9,13 @@ import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.components.events.GuiEventListener
 import net.minecraft.client.gui.narration.NarratableEntry
 import net.minecraft.client.resources.language.I18n
-import net.minecraft.network.chat.Component
+import net.minecraft.network.chat.TextComponent
+import net.minecraft.network.chat.TranslatableComponent
 import java.util.*
 
 
 class RPMTWAccountEntry : AbstractConfigListEntry<Any?>(
-    Component.literal(
+    TextComponent(
         UUID.randomUUID().toString()
     ), false
 ) {
@@ -58,7 +59,7 @@ class RPMTWAccountEntry : AbstractConfigListEntry<Any?>(
     ) {
         super.render(matrices, index, y, x, entryWidth, entryHeight, mouseX, mouseY, isHovered, delta)
 
-        val title = Component.translatable("auth.rpmtw_platform_mod.title")
+        val title = TranslatableComponent("auth.rpmtw_platform_mod.title")
         val isLogin = RPMTWConfig.get().isLogin()
         val authStatus: String = if (isLogin) {
             I18n.get("auth.rpmtw_platform_mod.status.logged_in")
@@ -71,13 +72,13 @@ class RPMTWAccountEntry : AbstractConfigListEntry<Any?>(
                 y + 10,
                 65,
                 20,
-                Component.translatable("auth.rpmtw_platform_mod.button.login"),
+                TranslatableComponent("auth.rpmtw_platform_mod.button.login"),
                 {
                     RPMTWAuthHandler.login()
                 },
                 { _, matrixStack, i, j ->
                     Minecraft.getInstance().screen?.renderTooltip(
-                        matrixStack, Component.translatable("auth.rpmtw_platform_mod.button.login.tooltip"), i, j
+                        matrixStack, TranslatableComponent("auth.rpmtw_platform_mod.button.login.tooltip"), i, j
                     )
                 })
 
@@ -85,7 +86,7 @@ class RPMTWAccountEntry : AbstractConfigListEntry<Any?>(
             loginButton.render(matrices, mouseX, mouseY, delta)
         } else {
             val logoutButton = Button(
-                entryWidth / 2 + 20, y + 10, 65, 20, Component.translatable("auth.rpmtw_platform_mod.button.logout")
+                entryWidth / 2 + 20, y + 10, 65, 20, TranslatableComponent("auth.rpmtw_platform_mod.button.logout")
             ) {
                 RPMTWAuthHandler.logout()
             }
