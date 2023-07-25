@@ -1,5 +1,6 @@
 package com.rpmtw.rpmtw_platform_mod.config
 
+import com.mojang.blaze3d.vertex.PoseStack
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig.get
 import com.rpmtw.rpmtw_platform_mod.handlers.RPMTWAuthHandler
 import com.rpmtw.rpmtw_platform_mod.handlers.RPMTWAuthHandler.login
@@ -7,7 +8,6 @@ import com.rpmtw.rpmtw_platform_mod.handlers.RPMTWAuthHandler.logout
 import me.shedaniel.clothconfig2.api.AbstractConfigListEntry
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.ComponentPath
-import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.AbstractWidget
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.components.Tooltip
@@ -55,7 +55,7 @@ class RPMTWAccountEntry : AbstractConfigListEntry<Any?>(
     }
 
     override fun render(
-        guiGraphics: GuiGraphics,
+        matrices: PoseStack,
         index: Int,
         y: Int,
         x: Int,
@@ -66,7 +66,7 @@ class RPMTWAccountEntry : AbstractConfigListEntry<Any?>(
         isHovered: Boolean,
         delta: Float
     ) {
-        super.render(guiGraphics, index, y, x, entryWidth, entryHeight, mouseX, mouseY, isHovered, delta)
+        super.render(matrices, index, y, x, entryWidth, entryHeight, mouseX, mouseY, isHovered, delta)
         val isLogin = get().isLogin()
         val authStatus: String = if (isLogin) {
             I18n.get("auth.rpmtw_platform_mod.status.logged_in")
@@ -83,19 +83,23 @@ class RPMTWAccountEntry : AbstractConfigListEntry<Any?>(
                 )
             }.bounds(entryWidth / 2 + 20, y + 15, 65, 20)
                 .tooltip(Tooltip.create(Component.translatable("auth.rpmtw_platform_mod.button.login.tooltip"))).build()
-            loginButton.render(guiGraphics, mouseX, mouseY, delta)
+            loginButton.render(matrices, mouseX, mouseY, delta)
             widgets.add(loginButton)
         } else {
             val logoutButton = Button.builder(
                 Component.translatable("auth.rpmtw_platform_mod.button.logout")
             ) { _ -> logout() }.bounds(entryWidth / 2 + 20, y + 15, 65, 20).build()
-            logoutButton.render(guiGraphics, mouseX, mouseY, delta)
+            logoutButton.render(matrices, mouseX, mouseY, delta)
             widgets.add(logoutButton)
         }
 
         val font = Minecraft.getInstance().font
-        guiGraphics.drawString(
-            font, authStatus, x - 4 + entryWidth / 2 - Minecraft.getInstance().font.width(authStatus) / 2, y, -1
+        font.drawShadow(
+            matrices,
+            authStatus,
+            (x - 4 + entryWidth / 2 - Minecraft.getInstance().font.width(authStatus) / 2).toFloat(),
+            y.toFloat(),
+            -1
         )
     }
 
