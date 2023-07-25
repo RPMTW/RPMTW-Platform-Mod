@@ -47,8 +47,7 @@
     }
   },
   "mixins": [
-    "rpmtw_platform_mod.mixins.json",
-    "rpmtw_platform_mod.fabric_like.mixins.json"
+    "rpmtw_platform_mod.mixins.json"
   ],
   "accessWidener": "rpmtw_platform_mod.accesswidener"
 }
