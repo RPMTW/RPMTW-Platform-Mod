@@ -7,7 +7,7 @@ repositories {
 
     mavenCentral()
     maven {
-        url = uri("https://bai.jfrog.io/artifactory/maven") //ModMenu
+        url = uri("https://maven.terraformersmc.com") //ModMenu
         content {
             includeGroup("com.terraformersmc")
         }
