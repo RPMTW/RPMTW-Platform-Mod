@@ -62,15 +62,23 @@ public class ChatComponentMixin {
         }
     }
 
-    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;drawString(Lnet/minecraft/client/gui/Font;Lnet/minecraft/util/FormattedCharSequence;III)I", ordinal = 0), method = "render")
-    public int moveTheText(GuiGraphics guiGraphics, Font font, FormattedCharSequence formattedCharSequence, int x, int y, int color) {
+    @ModifyArg(
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/gui/GuiGraphics;drawString(Lnet/minecraft/client/gui/Font;Lnet/minecraft/util/FormattedCharSequence;III)I",
+                    ordinal = 0
+            ),
+            method = "render",
+            index = 2
+    )
+    public int moveTheText(Font font, FormattedCharSequence formattedCharSequence, int x, int y, int color) {
         Component chatComponent = getLastComponent();
-        if (chatComponent == null) return guiGraphics.drawString(font, formattedCharSequence, 0, y, color);
+        if (chatComponent == null) return 0;
 
         ChatComponentData.INSTANCE.setLastY(y);
         ChatComponentData.INSTANCE.setLastOpacity((((color >> 24) + 256) % 256) / 255f);
 
-        return guiGraphics.drawString(font, formattedCharSequence, ChatComponentData.offset, y, color);
+        return ChatComponentData.offset;
     }
 
     @ModifyArg(at = @At(value = "INVOKE", target = "Ljava/util/List;get(I)Ljava/lang/Object;", ordinal = 0), method = "render", index = 0)
