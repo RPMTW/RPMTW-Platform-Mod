@@ -28,6 +28,10 @@ class ConfigObject : ConfigData {
     class Translate {
         @ConfigEntry.Gui.Tooltip(count = 1)
         @ConfigEntry.Gui.RequiresRestart
+        var loadTranslateResourcePack = GameLanguage.getSystem() == GameLanguage.TraditionalChinese
+
+        @ConfigEntry.Gui.Tooltip(count = 1)
+        @ConfigEntry.Gui.RequiresRestart
         var machineTranslation = true
 
         @ConfigEntry.Gui.Tooltip(count = 1)
@@ -45,16 +49,6 @@ class ConfigObject : ConfigData {
                 }
             }
 
-        @ConfigEntry.Gui.Tooltip(count = 1)
-        @ConfigEntry.Gui.RequiresRestart
-        var loadTranslateResourcePack = false
-            get() {
-                return if (GameLanguage.getSystem() == GameLanguage.TraditionalChinese) {
-                    true
-                } else {
-                    field
-                }
-            }
 
         @ConfigEntry.Gui.Tooltip(count = 1)
         @ConfigEntry.Gui.RequiresRestart
@@ -106,6 +100,8 @@ class ConfigObject : ConfigData {
         var sendExceptionToSentry = true
     }
 
+    @ConfigEntry.Gui.Excluded
+    var protocolVersion : Int? = null
 
     @ConfigEntry.Gui.Excluded
     var rpmtwAuthToken: String? = null

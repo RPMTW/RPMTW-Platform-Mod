@@ -21,19 +21,16 @@ dependencies {
 
     // Mod required mod dependencies
     implementation("thedarkcolour:kotlinforforge:${project.property("kotlin_forge_version").toString()}")
-    modApi("dev.architectury:architectury-forge:${project.property("architectury_version").toString()}")
-    modApi("me.shedaniel.cloth:cloth-config-forge:${project.property("cloth_config_version").toString()}")
+    modLocalRuntime("dev.architectury:architectury-forge:${project.property("architectury_version").toString()}")
+    modLocalRuntime("me.shedaniel.cloth:cloth-config-forge:${project.property("cloth_config_version").toString()}")
 
     // Optional mod dependencies
     modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-SNAPSHOT:api")
     modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-SNAPSHOT")
 
     // Dependencies for the mod
-    bundle(
-        "com.github.RPMTW:RPMTW-API-Client-Kotlin:${
-            project.property("rpmtw_api_client_version").toString()
-        }"
-    ) {
+    bundle("com.github.RPMTW:RPMTW-API-Client-Kotlin:${project.property("rpmtw_api_client_version").toString()}") {
+        exclude("com.google.code.gson")
         exclude("org.jetbrains.kotlinx")
         exclude("org.jetbrains.kotlin")
     }.let {
@@ -47,8 +44,8 @@ dependencies {
         )
     )
 
-    forgeRuntimeLibrary(kotlin("stdlib-jdk8", version = "1.6.10"))
-    forgeRuntimeLibrary(kotlin("reflect", version = "1.6.10"))
+    forgeRuntimeLibrary(kotlin("stdlib-jdk8", version = "1.7.22"))
+    forgeRuntimeLibrary(kotlin("reflect", version = "1.7.22"))
     forgeRuntimeLibrary("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
 
     "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }

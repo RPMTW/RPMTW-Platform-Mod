@@ -19,7 +19,7 @@ import java.util.stream.Collectors
 
 
 object RPMTWAuthHandler {
-    private const val port: Int = 37953
+    const val port: Int = 37953
     private var tryCount: Int = 0
 
     fun login(port: Int = this.port) {
