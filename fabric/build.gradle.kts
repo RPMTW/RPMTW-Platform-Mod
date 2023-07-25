@@ -11,10 +11,6 @@ repositories {
             includeGroup("com.terraformersmc")
         }
     }
-    maven {
-        // Patchouli
-        url = uri("https://maven.blamejared.com")
-    }
 }
 
 val common by configurations.registering
@@ -39,9 +35,6 @@ dependencies {
         exclude(module = "fabric-api")
     }
     modApi("net.fabricmc:fabric-language-kotlin:${project.property("fabric-kotlin_version")}")
-
-// Patchouli currently doesn't support Minecraft 1.20
-//    modImplementation("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-FABRIC")
 
     "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
     bundle(project(path = ":common", configuration = "transformProductionFabric")) { isTransitive = false }

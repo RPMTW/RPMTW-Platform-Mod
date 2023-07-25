@@ -24,11 +24,6 @@ dependencies {
     modLocalRuntime("dev.architectury:architectury-forge:${project.property("architectury_version").toString()}")
     modLocalRuntime("me.shedaniel.cloth:cloth-config-forge:${project.property("cloth_config_version").toString()}")
 
-    // Optional mod dependencies
-// Patchouli currently doesn't support Minecraft 1.20
-//     modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}:api")
-//     modApi("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}")
-
     // Dependencies for the mod
     bundle("com.github.RPMTW:RPMTW-API-Client-Kotlin:${project.property("rpmtw_api_client_version").toString()}") {
         exclude("com.google.code.gson")
@@ -86,9 +81,5 @@ repositories {
         url = uri("https://thedarkcolour.github.io/KotlinForForge/")
     }
 
-    maven {
-        // Patchouli
-        url = uri("https://maven.blamejared.com")
-    }
     mavenCentral()
 }

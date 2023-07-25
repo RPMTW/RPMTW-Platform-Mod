@@ -6,9 +6,5 @@
     "injectors": {
         "defaultRequire": 1
     },
-    "mixins": [
-// Patchouli currently doesn't support Minecraft 1.19.4
-//        "MixinBookContentClasspathLoader",
-//        "MixinBookRegistry"
-    ]
+    "mixins": []
 }
