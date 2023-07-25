@@ -24,6 +24,9 @@ public class MixinBookRegistry {
     @Shadow
     public final Map<ResourceLocation, Book> books = new HashMap<>();
 
+    @Shadow
+    private boolean loaded = false;
+
     @Inject(method = "reloadContents", at = @At("HEAD"), cancellable = true)
     public void reloadContents(boolean resourcePackBooksOnly, CallbackInfo ci) {
         PatchouliConfig.reloadBuiltinFlags();
@@ -31,6 +34,7 @@ public class MixinBookRegistry {
             book.reloadContents();
         }
         ClientBookRegistry.INSTANCE.reloadLocks(false);
+        loaded = true;
         ci.cancel();
     }
 }
