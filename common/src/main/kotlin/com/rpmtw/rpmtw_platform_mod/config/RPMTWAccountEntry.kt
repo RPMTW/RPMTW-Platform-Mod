@@ -1,15 +1,11 @@
 package com.rpmtw.rpmtw_platform_mod.config
 
 import com.mojang.blaze3d.vertex.PoseStack
-import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig.get
 import com.rpmtw.rpmtw_platform_mod.handlers.RPMTWAuthHandler
-import com.rpmtw.rpmtw_platform_mod.handlers.RPMTWAuthHandler.login
-import com.rpmtw.rpmtw_platform_mod.handlers.RPMTWAuthHandler.logout
 import me.shedaniel.clothconfig2.api.AbstractConfigListEntry
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.components.AbstractWidget
 import net.minecraft.client.gui.components.Button
-import net.minecraft.client.gui.components.Tooltip
 import net.minecraft.client.gui.components.events.GuiEventListener
 import net.minecraft.client.gui.narration.NarratableEntry
 import net.minecraft.client.resources.language.I18n
@@ -31,10 +27,6 @@ class RPMTWAccountEntry : AbstractConfigListEntry<Any?>(
         return widgets
     }
 
-    override fun getSearchTags(): Iterator<String> {
-        return Collections.emptyIterator()
-    }
-
     override fun getValue(): Any {
         return Any()
     }
@@ -42,6 +34,10 @@ class RPMTWAccountEntry : AbstractConfigListEntry<Any?>(
     @Suppress("UNCHECKED_CAST")
     override fun getDefaultValue(): Optional<Any?> {
         return Optional.of(Any()) as Optional<Any?>
+    }
+
+    override fun save() {
+
     }
 
     override fun isMouseInside(mouseX: Int, mouseY: Int, x: Int, y: Int, entryWidth: Int, entryHeight: Int): Boolean {
@@ -61,7 +57,9 @@ class RPMTWAccountEntry : AbstractConfigListEntry<Any?>(
         delta: Float
     ) {
         super.render(matrices, index, y, x, entryWidth, entryHeight, mouseX, mouseY, isHovered, delta)
-        val isLogin = get().isLogin()
+
+        val title = Component.translatable("auth.rpmtw_platform_mod.title")
+        val isLogin = RPMTWConfig.get().isLogin()
         val authStatus: String = if (isLogin) {
             I18n.get("auth.rpmtw_platform_mod.status.logged_in")
         } else {
@@ -69,30 +67,48 @@ class RPMTWAccountEntry : AbstractConfigListEntry<Any?>(
         }
 
         if (!isLogin) {
-            val loginButton = Button.Builder(
-                Component.translatable("auth.rpmtw_platform_mod.button.login")
-            ) { _ ->
-                login(
-                    RPMTWAuthHandler.port
-                )
-            }.bounds(entryWidth / 2 + 20, y + 15, 65, 20)
-                .tooltip(Tooltip.create(Component.translatable("auth.rpmtw_platform_mod.button.login.tooltip"))).build()
-            loginButton.render(matrices, mouseX, mouseY, delta)
+            val loginButton = Button(entryWidth / 2 + 20,
+                y + 10,
+                65,
+                20,
+                Component.translatable("auth.rpmtw_platform_mod.button.login"),
+                {
+                    RPMTWAuthHandler.login()
+                },
+                { _, matrixStack, i, j ->
+                    Minecraft.getInstance().screen?.renderTooltip(
+                        matrixStack, Component.translatable("auth.rpmtw_platform_mod.button.login.tooltip"), i, j
+                    )
+                })
+
             widgets.add(loginButton)
+            loginButton.render(matrices, mouseX, mouseY, delta)
         } else {
-            val logoutButton = Button.builder(
-                Component.translatable("auth.rpmtw_platform_mod.button.logout")
-            ) { _ -> logout() }.bounds(entryWidth / 2 + 20, y + 15, 65, 20).build()
-            logoutButton.render(matrices, mouseX, mouseY, delta)
+            val logoutButton = Button(
+                entryWidth / 2 + 20, y + 10, 65, 20, Component.translatable("auth.rpmtw_platform_mod.button.logout")
+            ) {
+                RPMTWAuthHandler.logout()
+            }
+
             widgets.add(logoutButton)
+            logoutButton.render(matrices, mouseX, mouseY, delta)
         }
 
         val font = Minecraft.getInstance().font
+
+        font.drawShadow(
+            matrices,
+            title,
+            (x - 4 + entryWidth / 2 - Minecraft.getInstance().font.width(title) / 2).toFloat(),
+            (y).toFloat(),
+            -1
+        )
+
         font.drawShadow(
             matrices,
             authStatus,
             (x - 4 + entryWidth / 2 - Minecraft.getInstance().font.width(authStatus) / 2).toFloat(),
-            y.toFloat(),
+            (y + 33).toFloat(),
             -1
         )
     }

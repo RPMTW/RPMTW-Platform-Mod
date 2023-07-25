@@ -21,8 +21,11 @@ class UniverseChatScreen(
     override fun init() {
         val whatButton = UniverseChatWhatButton(width, height)
 
-        val sendButton = Button.builder(
-
+        val sendButton = Button(
+            (width - 4) / 2 - GuiUtil.buttonWidth + 50,
+            height / 2 + 30,
+            GuiUtil.buttonWidth,
+            GuiUtil.buttonHeight,
             Component.translatable("gui.rpmtw_platform_mod.${type.name.lowercase()}")
         ) {
             val message: String = messageEditBox.value
@@ -47,22 +50,15 @@ class UniverseChatScreen(
 
             }
             GuiUtil.closeScreen()
-        }.bounds(
-            (width - 4) / 2 - GuiUtil.buttonWidth + 50,
-            height / 2 + 30,
-            GuiUtil.buttonWidth,
-            GuiUtil.buttonHeight
-        ).build()
+        }
 
 
-        val cancelButton = Button.builder(
-            Component.translatable("gui.rpmtw_platform_mod.cancel")
+        val cancelButton = Button(
+            (width - 100) / 2 - GuiUtil.buttonWidth, height / 2 + 30, GuiUtil.buttonWidth,
+            GuiUtil.buttonHeight, Component.translatable("gui.rpmtw_platform_mod.cancel")
         ) {
             GuiUtil.closeScreen()
-        }.bounds(
-            (width - 100) / 2 - GuiUtil.buttonWidth, height / 2 + 30, GuiUtil.buttonWidth,
-            GuiUtil.buttonHeight
-        ).build()
+        }
 
         val suggestion: String = I18n.get("universeChat.rpmtw_platform_mod.gui.input.tooltip")
         val messageEditBoxWidth = (font.width(suggestion) * 1.5).toInt()

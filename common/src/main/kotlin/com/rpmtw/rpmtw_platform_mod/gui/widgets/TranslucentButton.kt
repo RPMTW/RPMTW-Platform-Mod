@@ -13,7 +13,7 @@ class TranslucentButton(
     message: Component,
     onPress: OnPress,
     val tooltip: Component?,
-) : Button(x, y, width, height, message, onPress, DEFAULT_NARRATION) {
+) : Button(x, y, width, height, message, onPress) {
     override fun renderButton(poseStack: PoseStack, i: Int, j: Int, f: Float) {
         super.renderButton(poseStack, i, j, f)
         if (this.isHoveredOrFocused && tooltip != null) {
