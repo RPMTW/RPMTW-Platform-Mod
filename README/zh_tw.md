@@ -2,23 +2,23 @@
 
 # RPMTW 平台
 
-[![](https://img.shields.io/github/license/RPMTW/RPMTW-Platform-Mod.svg)](LICENSE)
-[![](https://img.shields.io/github/release/RPMTW/RPMTW-Platform-Mod.svg)](https://github.com/RPMTW/RPMTW-Platform-Mod/releases)
-![](http://cf.way2muchnoise.eu/versions/minecraft_rpmtw-update-mod_all.svg)
-[![](http://cf.way2muchnoise.eu/rpmtw-update-mod.svg)](https://www.curseforge.com/minecraft/mc-mods/rpmtw-update-mod)
+[![](https://img.shields.io/github/license/RPMTW/RPMTW-Platform-Mod.svg)](../LICENSE)
+[![](https://img.shields.io/github/release/RPMTW/RPMTW-Platform-Mod.svg)](../../../releases)
+![](https://cf.way2muchnoise.eu/versions/rpmtw-platform.svg)
+[![](https://cf.way2muchnoise.eu/rpmtw-platform.svg)](https://www.curseforge.com/minecraft/mc-mods/rpmtw-update-mod)
 [![](https://img.shields.io/modrinth/dt/ZukQzaRP?label=Modrinth%20Downloads)](https://modrinth.com/mod/ZukQzaRP)
 <p></p>
 <p>&nbsp;</p>
 
 #### 🌐 說明檔案語言
 
-- [English](https://github.com/RPMTW/RPMTW-Platform-Mod/blob/main/README.md)
-- 繁體中文 (目前語言)
-- [简体中文](https://github.com/RPMTW/RPMTW-Platform-Mod/blob/main/README/zh_cn.md)
+- [English](../README.md)
+- 繁體中文（目前語言）
+- [简体中文](zh_cn.md)
 
 ## 📚 介紹
 
-整合了RPMTW各項服務的模組，涵蓋翻譯、百科、宇宙通訊、中文輸入優化等功能，讓 Minecraft 中文玩家獲得更好的遊戲體驗。
+整合了 RPMTW 各項服務的模組，涵蓋翻譯、百科、宇宙通訊、中文輸入優化等功能，讓 Minecraft 中文玩家獲得更好的遊戲體驗。
 
 ## 🎨 特色功能
 
@@ -64,7 +64,7 @@
 
 ### ️ 使用的技術
 
-- [Kotlin](https://kotlinlang.org/)
+- [Kotlin](https://kotlinlang.org)
 - Java
 - JVM
 - [Architectury](https://github.com/architectury)
@@ -73,4 +73,4 @@
 
 ## 🎓 授權條款
 
-[GNU 通用公眾授權條款 3.0 版 (GPL3)](https://www.gnu.org/licenses/gpl-3.0.html)
+[GNU 通用公眾授權條款 3.0 版（GPL3）](https://www.gnu.org/licenses/gpl-3.0.html)

@@ -12,10 +12,10 @@ import java.net.URL
 import java.nio.charset.StandardCharsets
 
 object TranslateResourcePack {
-    private const val fileName = "RPMTW-Translate-Resource-Pack-1.19.zip"
+    private const val FILE_NAME = "RPMTW-Translate-Resource-Pack-1.19.zip"
     private val resourcePackFolder: File = RPMTWPlatformModPlugin.getGameFolder().resolve("resourcepacks")
-    private val resourcePackFile = resourcePackFolder.resolve(fileName)
-    private val cacheFile = Util.getFileLocation(fileName)
+    private val resourcePackFile = resourcePackFolder.resolve(FILE_NAME)
+    private val cacheFile = Util.getFileLocation(FILE_NAME)
     private var loaded = false
 
     fun init() {
@@ -75,7 +75,7 @@ object TranslateResourcePack {
             return
         }
 
-        val downloadUrl = "https://github.com/RPMTW/Translate-Resource-Pack/releases/latest/download/$fileName"
+        val downloadUrl = "https://github.com/RPMTW/Translate-Resource-Pack/releases/latest/download/$FILE_NAME"
 
         FileUtils.copyURLToFile(URL(downloadUrl), cacheFile)
         if (!cacheFile.exists()) {
@@ -98,7 +98,7 @@ object TranslateResourcePack {
         }
 
         val selected = Gson().fromJson(options["resourcePacks"] ?: "[]", Array<String>::class.java).toMutableList()
-        val packId = "file/$fileName"
+        val packId = getPackId()
 
         // If the pack is unselected, select it
         if (packId !in selected) {
@@ -108,5 +108,9 @@ object TranslateResourcePack {
 
         options["resourcePacks"] = Gson().toJson(selected)
         FileUtils.writeLines(optionsFile, options.map { "${it.key}:${it.value}" })
+    }
+
+    fun getPackId(): String {
+        return "file/$FILE_NAME"
     }
 }

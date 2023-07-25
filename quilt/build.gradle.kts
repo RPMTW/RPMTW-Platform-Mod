@@ -7,20 +7,22 @@ repositories {
 
     mavenCentral()
     maven {
-        url = uri("https://bai.jfrog.io/artifactory/maven") //ModMenu
+        url = uri("https://maven.terraformersmc.com") //ModMenu
         content {
             includeGroup("com.terraformersmc")
         }
-    }
-    maven {
-        // Patchouli
-        url = uri("https://maven.blamejared.com")
     }
 }
 
 architectury {
     platformSetupLoomIde()
     loader("quilt")
+}
+
+val accessWidenerFile = project(":common").file("src/main/resources/rpmtw_platform_mod.accesswidener")
+
+loom {
+    accessWidenerPath.set(accessWidenerFile)
 }
 
 val common by configurations.registering
@@ -34,12 +36,6 @@ configurations {
     }
 
     getByName("developmentQuilt").extendsFrom(common.get())
-}
-
-val accessWidenerFile = project(":common").file("src/main/resources/rpmtw_platform_mod.accesswidener")
-
-loom {
-    accessWidenerPath.set(accessWidenerFile)
 }
 
 dependencies {
@@ -69,10 +65,6 @@ dependencies {
         exclude(group = "net.fabricmc.fabric-api")
     }
 
-    modImplementation("vazkii.patchouli:Patchouli:${project.property("patchouli_version")}-FABRIC") {
-        exclude(group = "net.fabricmc")
-        exclude(group = "net.fabricmc.fabric-api")
-    }
     modImplementation("com.terraformersmc:modmenu:${project.property("modmenu_version")}") {
         exclude(group = "net.fabricmc")
         exclude(group = "net.fabricmc.fabric-api")
@@ -103,11 +95,11 @@ dependencies {
 }
 
 tasks {
-    val resourcesPath = file("src/main/resources")
+    val generatedResourcesPath = file("src/generated/resources")
     // The access widener file is needed in :quilt project resources when the game is run.
     val copyAccessWidener by registering(Copy::class) {
         from(accessWidenerFile)
-        into(resourcesPath)
+        into(generatedResourcesPath)
     }
 
     processResources {
