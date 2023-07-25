@@ -6,8 +6,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     base
     id("org.jetbrains.kotlin.jvm") version "1.6.10"
-    id("architectury-plugin") version "3.4.143"
-    id("dev.architectury.loom") version "0.12.0.301" apply false
+    id("architectury-plugin") version "3.4.146"
+    id("dev.architectury.loom") version "1.2.+" apply false
     id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
