@@ -12,7 +12,7 @@ import java.net.URL
 import java.nio.charset.StandardCharsets
 
 object TranslateResourcePack {
-    private const val FILE_NAME = "RPMTW-Translate-Resource-Pack-1.18.zip"
+    private const val FILE_NAME = "RPMTW-1.18.zip"
     private val resourcePackFolder: File = RPMTWPlatformModPlugin.getGameFolder().resolve("resourcepacks")
     private val resourcePackFile = resourcePackFolder.resolve(FILE_NAME)
     private val cacheFile = Util.getFileLocation(FILE_NAME)
@@ -75,7 +75,7 @@ object TranslateResourcePack {
             return
         }
 
-        val downloadUrl = "https://github.com/RPMTW/Translate-Resource-Pack/releases/latest/download/$FILE_NAME"
+        val downloadUrl = "https://github.com/RPMTW/ResourcePack-Mod-zh_tw/raw/Translated-1.18/$FILE_NAME"
 
         FileUtils.copyURLToFile(URL(downloadUrl), cacheFile)
         if (!cacheFile.exists()) {
