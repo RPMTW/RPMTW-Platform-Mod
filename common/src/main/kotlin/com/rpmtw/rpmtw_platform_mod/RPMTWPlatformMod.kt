@@ -5,6 +5,7 @@ import com.rpmtw.rpmtw_platform_mod.command.CommandHandler
 import com.rpmtw.rpmtw_platform_mod.config.RPMTWConfig
 import com.rpmtw.rpmtw_platform_mod.handlers.EventHandler
 import com.rpmtw.rpmtw_platform_mod.handlers.SentryHandler
+import com.rpmtw.rpmtw_platform_mod.translation.GameLanguage
 import dev.architectury.platform.Platform
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
@@ -21,6 +22,7 @@ object RPMTWPlatformMod {
     @JvmStatic
     fun init() {
         LOGGER.info("Initializing RPMTW Platform Mod")
+        GameLanguage.initialize()
         if (RPMTWConfig.get().advanced.sendExceptionToSentry) {
             SentryHandler.init()
         }
