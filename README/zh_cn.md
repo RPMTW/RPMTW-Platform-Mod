@@ -2,18 +2,19 @@
 
 # RPMTW 平台
 
-[![](https://img.shields.io/github/license/RPMTW/RPMTW-Platform-Mod.svg)](../LICENSE)
-[![](https://img.shields.io/github/release/RPMTW/RPMTW-Platform-Mod.svg)](../../../releases)
-![](https://cf.way2muchnoise.eu/versions/rpmtw-platform.svg)
-[![](https://cf.way2muchnoise.eu/rpmtw-platform.svg)](https://www.curseforge.com/minecraft/mc-mods/rpmtw-update-mod)
-[![](https://img.shields.io/modrinth/dt/ZukQzaRP?label=Modrinth%20Downloads)](https://modrinth.com/mod/ZukQzaRP)
+[![适用于](https://img.shields.io/badge/dynamic/json?style=for-the-badge&color=34aa2f&query=$[:]&url=https://gist.githubusercontent.com/notlin4/b3a7c0a6530d7d6ed19e063d903952bc/raw&label=适用于)](https://modrinth.com/mod/ZukQzaRP/versions)
+[![发布版](https://img.shields.io/github/v/release/RPMTW/RPMTW-Platform-Mod.svg?style=for-the-badge&include_prereleases&sort=semver&label=发布版)](../../../releases)
+[![许可证](https://img.shields.io/github/license/RPMTW/RPMTW-Platform-Mod.svg?style=for-the-badge&label=许可证)](../LICENSE)
+
+[![Modrinth 下载数](https://img.shields.io/modrinth/dt/ZukQzaRP?&style=for-the-badge&logo=modrinth&label=Modrinth%20下载数)](https://modrinth.com/mod/ZukQzaRP/versions)
+[![CuserForge 下载数](https://img.shields.io/badge/dynamic/json?color=f16436&style=for-the-badge&query=downloadCount&url=https://www.fibermc.com/api/v1.0/ForeignMods/461500&logo=CurseForge&label=CurseForge%20下载数)](https://www.curseforge.com/minecraft/mc-mods/rpmtw-platform/files)
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
 #### 🌐 自叙文件语言
 
 - [English](../../README.md)
-- [繁體中文](zh_tw.md)
+- [正體中文](zh_tw.md)
 - 简体中文（当前语言）
 
 ## 📚 介绍
