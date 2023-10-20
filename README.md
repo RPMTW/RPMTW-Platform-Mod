@@ -7,7 +7,7 @@
 [![LICENSE](https://img.shields.io/github/license/RPMTW/RPMTW-Platform-Mod.svg?style=for-the-badge)](LICENSE)
 
 [![Modrinth Downloads](https://img.shields.io/modrinth/dt/ZukQzaRP?&style=for-the-badge&logo=modrinth&label=Modrinth%20Downloads)](https://modrinth.com/mod/ZukQzaRP/versions)
-[![CuserForge Downloads](https://img.shields.io/badge/dynamic/json?color=f16436&style=for-the-badge&query=downloadCount&url=https://www.fibermc.com/api/v1.0/ForeignMods/461500&logo=CurseForge&label=CurseForge%20Downloads)](https://www.curseforge.com/minecraft/mc-mods/rpmtw-platform/files)
+[![CuserForge Downloads](https://img.shields.io/badge/dynamic/json?color=f16436&style=for-the-badge&query=downloadCount&url=https://www.fibermc.com/api/v1.0/ForeignMods/461500&logo=CurseForge&label=CurseForge%20Downloads)](https://www.curseforge.com/minecraft/mc-mods/461500/files)
 <p>&nbsp;</p> 
 
 #### 🌐 README Languages

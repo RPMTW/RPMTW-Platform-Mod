@@ -7,7 +7,7 @@
 [![许可证](https://img.shields.io/github/license/RPMTW/RPMTW-Platform-Mod.svg?style=for-the-badge&label=许可证)](../LICENSE)
 
 [![Modrinth 下载数](https://img.shields.io/modrinth/dt/ZukQzaRP?&style=for-the-badge&logo=modrinth&label=Modrinth%20下载数)](https://modrinth.com/mod/ZukQzaRP/versions)
-[![CuserForge 下载数](https://img.shields.io/badge/dynamic/json?color=f16436&style=for-the-badge&query=downloadCount&url=https://www.fibermc.com/api/v1.0/ForeignMods/461500&logo=CurseForge&label=CurseForge%20下载数)](https://www.curseforge.com/minecraft/mc-mods/rpmtw-platform/files)
+[![CuserForge 下载数](https://img.shields.io/badge/dynamic/json?color=f16436&style=for-the-badge&query=downloadCount&url=https://www.fibermc.com/api/v1.0/ForeignMods/461500&logo=CurseForge&label=CurseForge%20下载数)](https://www.curseforge.com/minecraft/mc-mods/461500/files)
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
