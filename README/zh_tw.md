@@ -2,23 +2,24 @@
 
 # RPMTW 平台
 
-[![](https://img.shields.io/github/license/RPMTW/RPMTW-Platform-Mod.svg)](../LICENSE)
-[![](https://img.shields.io/github/release/RPMTW/RPMTW-Platform-Mod.svg)](../../../releases)
-![](https://cf.way2muchnoise.eu/versions/rpmtw-platform.svg)
-[![](https://cf.way2muchnoise.eu/rpmtw-platform.svg)](https://www.curseforge.com/minecraft/mc-mods/rpmtw-update-mod)
-[![](https://img.shields.io/modrinth/dt/ZukQzaRP?label=Modrinth%20Downloads)](https://modrinth.com/mod/ZukQzaRP)
+[![可用於](https://img.shields.io/badge/dynamic/json?style=for-the-badge&color=34aa2f&query=$[:]&url=https://gist.githubusercontent.com/notlin4/b3a7c0a6530d7d6ed19e063d903952bc/raw&label=可用於)](https://modrinth.com/mod/ZukQzaRP/versions)
+[![發布版](https://img.shields.io/github/v/release/RPMTW/RPMTW-Platform-Mod.svg?style=for-the-badge&include_prereleases&sort=semver&label=發布版)](../../../releases)
+[![授權條款](https://img.shields.io/github/license/RPMTW/RPMTW-Platform-Mod.svg?style=for-the-badge&label=授權條款)](../LICENSE)
+
+[![Modrinth 下載數](https://img.shields.io/modrinth/dt/ZukQzaRP?&style=for-the-badge&logo=modrinth&label=Modrinth%20下載數)](https://modrinth.com/mod/ZukQzaRP/versions)
+[![CuserForge 下載數](https://img.shields.io/badge/dynamic/json?color=f16436&style=for-the-badge&query=downloadCount&url=https://www.fibermc.com/api/v1.0/ForeignMods/461500&logo=CurseForge&label=CurseForge%20下載數)](https://www.curseforge.com/minecraft/mc-mods/rpmtw-platform/files)
 <p></p>
 <p>&nbsp;</p>
 
 #### 🌐 說明檔案語言
 
 - [English](../README.md)
-- 繁體中文（目前語言）
+- 正體中文（目前語言）
 - [简体中文](zh_cn.md)
 
 ## 📚 介紹
 
-整合了 RPMTW 各項服務的模組，涵蓋翻譯、百科、宇宙通訊、中文輸入優化等功能，讓 Minecraft 中文玩家獲得更好的遊戲體驗。
+整合了 RPMTW 各項服務的模組，涵蓋翻譯、百科、宇宙通訊、中文輸入最佳化等功能，讓 Minecraft 中文玩家獲得更好的遊戲體驗。
 
 ## 🎨 特色功能
 
